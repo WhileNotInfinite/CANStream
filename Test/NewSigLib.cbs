@@ -1,0 +1,23 @@
+<CS_BuiltInSignalsLibrary Name="NewLib" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Signals>
+    <Signal Name="NewSig" Type="Sinusoid" Unit="" Decimal="2">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>1</Frequency>
+        <Magnitude>1</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>0</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>0</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+  </Signals>
+</CS_BuiltInSignalsLibrary>

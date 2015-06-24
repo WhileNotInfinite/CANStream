@@ -1,0 +1,325 @@
+<CycleConfiguration>
+  <CANConfiguration MessageLength="64" CAN_Rate="1000" CAN_ConfigName="CanConfig">
+    <CANMessage Name="Msg1" Identifier="200">
+      <MsgComment>ID 0x200 200 Hz [5ms]</MsgComment>
+      <RxTx>Tx</RxTx>
+      <Period>5</Period>
+      <Multiplexer>
+      </Multiplexer>
+      <Parameters>
+        <CANParameter ParameterName="rev">
+          <ParameterComment>Engine speed</ParameterComment>
+          <Unit>rpm</Unit>
+          <StartBit>0</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="barrel">
+          <ParameterComment>Gearbox barrel position</ParameterComment>
+          <Unit>mV</Unit>
+          <StartBit>16</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Sinuosoid">
+          <ParameterComment>Sinousoid +/- 2V 5 Hz</ParameterComment>
+          <Unit>V</Unit>
+          <StartBit>32</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1000</LinearizationGain>
+          <LinearizationZero>2000</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="ShaftRev">
+          <ParameterComment>Gearbox shaft rev</ParameterComment>
+          <Unit>rpm</Unit>
+          <StartBit>48</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+      </Parameters>
+    </CANMessage>
+  </CANConfiguration>
+  <CS_VirtualChannelsLibrary Name="LibTest" ReadOnly="False">
+    <LibraryComment>
+    </LibraryComment>
+    <Channels>
+      <Channel Name="MyVirtual" Unit="" Decimal="0" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>Param1 *10+3</Expression>
+      </Channel>
+      <Channel Name="Half_Param2" Unit="" Decimal="0" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>Param2 /2</Expression>
+      </Channel>
+      <Channel Name="Virtual3" Unit="" Decimal="0" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>Param3 *3</Expression>
+      </Channel>
+      <Channel Name="Virtual4" Unit="" Decimal="0" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>Param4 *2</Expression>
+      </Channel>
+    </Channels>
+  </CS_VirtualChannelsLibrary>
+  <CS_VirtualChannelsLibrary Name="Cycle_VirtualChannels" ReadOnly="False">
+    <LibraryComment>Virtual channels used for cycle creation</LibraryComment>
+    <Channels>
+      <Channel Name="ShaftRev" Unit="rpm" Decimal="2" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>rev * 2</Expression>
+      </Channel>
+    </Channels>
+  </CS_VirtualChannelsLibrary>
+  <CS_VirtualChannelsLibrary Name="NewLib" ReadOnly="False">
+    <LibraryComment>
+    </LibraryComment>
+    <Channels>
+      <Channel Name="NewChan" Unit="" Decimal="2" Enabled="True">
+        <Comment>0</Comment>
+        <TxDefaultValue />
+        <Expression>2+2</Expression>
+      </Channel>
+    </Channels>
+  </CS_VirtualChannelsLibrary>
+  <CS_BuiltInSignalsLibrary Name="SignalTest" ReadOnly="False">
+    <LibraryComment>
+    </LibraryComment>
+    <Signals>
+      <Signal Name="SinusSig" Type="Sinusoid" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>5</Frequency>
+          <Magnitude>2</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="PulseSig" Type="Pulse" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>1</Frequency>
+          <Magnitude>1</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0.25</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="TriangleSig" Type="Triangle" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>10</Frequency>
+          <Magnitude>100</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="SlopeSig" Type="Slopes" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>1</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>1</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="RampSig" Type="Ramp" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>0</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>2</Slope>
+          <StartTime>5</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="StepSig" Type="Step" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>0</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>20</EndValue>
+          <Slope>0</Slope>
+          <StartTime>3</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="RandSig" Type="Random" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>0</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>200</MaxValue>
+        </Properties>
+      </Signal>
+    </Signals>
+  </CS_BuiltInSignalsLibrary>
+  <CS_BuiltInSignalsLibrary Name="Cycle_BuiltInSignals" ReadOnly="False">
+    <LibraryComment>Built-in signals used for cycle creation</LibraryComment>
+    <Signals>
+      <Signal Name="VMot" Type="Sinusoid" Unit="V" Decimal="3">
+        <Description>Motor phase voltage</Description>
+        <Properties>
+          <Frequency>5</Frequency>
+          <Magnitude>2</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="RevRampUp" Type="Ramp" Unit="rpm" Decimal="0">
+        <Description>Engine rev ramp up from 0 </Description>
+        <Properties>
+          <Frequency>0</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>4000</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+      <Signal Name="RevRampDown" Type="Ramp" Unit="rpm" Decimal="0">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>0</Frequency>
+          <Magnitude>0</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>5500</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>-1000</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+    </Signals>
+  </CS_BuiltInSignalsLibrary>
+  <CS_BuiltInSignalsLibrary Name="NewLib" ReadOnly="False">
+    <LibraryComment>
+    </LibraryComment>
+    <Signals>
+      <Signal Name="NewSig" Type="Sinusoid" Unit="" Decimal="2">
+        <Description>
+        </Description>
+        <Properties>
+          <Frequency>1</Frequency>
+          <Magnitude>1</Magnitude>
+          <Offset>0</Offset>
+          <Phase>0</Phase>
+          <Width>0</Width>
+          <StartValue>0</StartValue>
+          <EndValue>0</EndValue>
+          <Slope>0</Slope>
+          <StartTime>0</StartTime>
+          <MinValue>0</MinValue>
+          <MaxValue>0</MaxValue>
+        </Properties>
+      </Signal>
+    </Signals>
+  </CS_BuiltInSignalsLibrary>
+  <CyclePartsProperties>
+    <PreCycleProperties TimeLength="0" DataFile="None" />
+    <InCycleProperties TimeLength="2" DataFile="None" />
+    <PostCycleProperties TimeLength="0" DataFile="None" />
+  </CyclePartsProperties>
+  <CycleParameters>
+    <Parameter Name="rev" MessageId="200">
+      <PreCycleData Source="None" Data="0" Library="None" />
+      <InCycleData Source="BuiltSignal" Data="VMot" Library="Cycle_BuiltInSignals" />
+      <PostCycleData Source="None" Data="0" Library="None" />
+    </Parameter>
+    <Parameter Name="barrel" MessageId="200">
+      <PreCycleData Source="None" Data="0" Library="None" />
+      <InCycleData Source="VirtualChannel" Data="ShaftRev" Library="Cycle_VirtualChannels" />
+      <PostCycleData Source="None" Data="0" Library="None" />
+    </Parameter>
+    <Parameter Name="Sinuosoid" MessageId="200">
+      <PreCycleData Source="None" Data="0" Library="None" />
+      <InCycleData Source="BuiltSignal" Data="RevRampUp" Library="Cycle_BuiltInSignals" />
+      <PostCycleData Source="None" Data="0" Library="None" />
+    </Parameter>
+    <Parameter Name="ShaftRev" MessageId="200">
+      <PreCycleData Source="None" Data="0" Library="None" />
+      <InCycleData Source="VirtualChannel" Data="Virtual3" Library="LibTest" />
+      <PostCycleData Source="None" Data="0" Library="None" />
+    </Parameter>
+  </CycleParameters>
+</CycleConfiguration>

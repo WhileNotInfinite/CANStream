@@ -1,0 +1,201 @@
+VERSION ""
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: ES CHARGER DISCHARGER
+
+
+BO_ 1824 ES_CHARGER_DEMAND: 8 ES
+ SG_ VESChargerSetpoint : 7|16@0+ (0.02,0) [0|900] "V" CHARGER,DISCHARGER
+ SG_ IESChargerSetpoint : 23|16@0- (0.0001,0) [0|3] "A" CHARGER
+ SG_ BESChargerCommand : 39|1@0+ (1,0) [0|1] "-" CHARGER
+ SG_ BERSClearErrors : 38|1@0+ (1,0) [0|1] "-" CHARGER,DISCHARGER
+ SG_ BEPICLedESFlash : 37|1@0+ (1,0) [0|1] "-" CHARGER,DISCHARGER
+ SG_ BEPICLedCmdFlash : 36|1@0+ (1,0) [0|1] "-" CHARGER,DISCHARGER
+ SG_ BESDischargerCommand : 35|1@0+ (1,0) [0|1] "-" DISCHARGER
+ SG_ BESDischargerPrecharge : 34|1@0+ (1,0) [0|1] "-" DISCHARGER
+
+BO_ 1809 ES_CHARGER_FEEDBACK: 8 CHARGER
+ SG_ VESMeasuredCharger : 7|16@0+ (0.02,0) [0|1310.7] "V" ES
+ SG_ IESMeasuredCharger : 23|16@0- (0.0001,0) [0|10] "A" ES
+ SG_ NESChargerMode : 39|2@0+ (1,0) [0|3] "-" ES
+ SG_ NESChargerStatus : 47|8@0+ (1,0) [0|255] "-" ES
+ SG_ VESMeasuredChargerDC : 55|16@0+ (0.02992,-980.41856) [-980.41856|980.38864] "V" ES
+
+BO_ 1810 ES_CHARGER_INPUTS: 8 CHARGER
+ SG_ VEPICSupplyES : 7|10@0+ (0.015625,0) [0|16] "V" ES
+ SG_ VEPICSupply : 13|10@0+ (0.015625,0) [0|16] "V" ES
+ SG_ VEPICContactorPos : 25|10@0+ (1.58019822006473E-02,0) [0|16.1812297734628] "V" ES
+ SG_ VEPICContactorNeg : 47|10@0+ (1.58019822006473E-02,0) [0|16.1812297734628] "V" ES
+ SG_ BEPICStopStatus : 53|1@0+ (1,0) [0|1] "-" ES
+
+BO_ 1811 ES_CHARGER_TEMPERATUIRE: 8 CHARGER
+ SG_ TEPICBoard : 7|8@0+ (1,-40) [-40|210] "degreesC" ES
+
+BO_ 1812 ES_CHARGER_PSU_MEASURED: 8 CHARGER
+ SG_ VEPICMeasuredPSU1 : 7|16@0+ (0.01,0) [0|600] "V" ES
+ SG_ IEPICMeasuredPSU1 : 23|16@0+ (0.0001,0) [0|6] "A" ES
+ SG_ VEPICMeasuredPSU2 : 39|16@0+ (0.01,0) [0|600] "V" ES
+ SG_ IEPICMeasuredPSU2 : 55|16@0+ (0.0001,0) [0|6] "A" ES
+
+BO_ 1813 ES_CHARGER_STATUS: 8 CHARGER
+ SG_ EPIC_PSU_Status_Mux M : 7|8@0+ (1,0) [0|8] "-" ES
+ SG_ NEPICStatusPSU1 m0 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICFaultPSU1 m1 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICStatePSU1 m2 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICStatusPSU2 m3 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICFaultPSU2 m4 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICStatePSU2 m5 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICResetCount m7 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICTaskOverruns m8 : 15|8@0+ (1,0) [0|255] "-" ES
+ SG_ VEPICSetpointPSU1 m0 : 23|16@0+ (0.01,0) [0|600] "V" ES
+ SG_ IEPICSetpointPSU1 m1 : 23|16@0+ (0.0001,0) [0|6] "A" ES
+ SG_ NEPICModelPSU1 m2 : 23|8@0+ (1,0) [0|255] "-" ES
+ SG_ VEPICSetpointPSU2 m3 : 23|16@0+ (0.01,0) [0|600] "V" ES
+ SG_ IEPICSetpointPSU2 m4 : 23|16@0+ (0.0001,0) [0|6] "A" ES
+ SG_ NEPICModelPSU2 m5 : 23|8@0+ (1,0) [0|255] "-" ES
+ SG_ NEPICSerialNumber m6 : 23|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPICHardwareVersion m7 : 23|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPICCanBusOffCnt m8 : 23|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPICSerial1PSU1 m0 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSerial2PSU1 m1 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSerial3PSU1 m2 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSerial1PSU2 m3 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSerial2PSU2 m4 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSerial3PSU2 m5 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICSoftwareVersion m6 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICResetReason m7 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPICCanErrorCnt m8 : 39|16@0+ (1,0) [0|65535] "-" ES
+
+BO_ 1814 ES_DISCHARGER_FEEDBACK: 8 DISCHARGER
+ SG_ NESDischargerStatus : 7|8@0+ (1,0) [0|255] "-" ES
+ SG_ VESMeasuredDischargerDC : 15|16@0+ (0.02992,-980.41856) [-980.41856|980.38864] "V" ES
+ SG_ VEPIDSupplyES : 31|10@0+ (0.015625,0) [0|16] "V" ES
+ SG_ VEPIDSupply : 37|10@0+ (0.015625,0) [0|16] "V" ES
+ SG_ VEPIDContactorPos : 43|10@0+ (1.58019822006473E-02,0) [0|16.1812297734628] "V" ES
+ SG_ VEPIDContactorNeg : 49|10@0+ (1.58019822006473E-02,0) [0|16.1812297734628] "V" ES
+
+BO_ 1815 ES_DISCHARGER_STATUS: 8 DISCHARGER
+ SG_ EPIC_PSU_Status_Mux M : 7|8@0+ (1,0) [0|8] "-" ES
+ SG_ BEPIDStopStatus : 15|1@0+ (1,0) [0|1] "-" ES
+ SG_ NEPIDSerialNumber m0 : 23|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPIDHardwareVersion m1 : 23|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPIDResetCount m2 : 23|8@0+ (1,0) [0|255] "-" ES
+ SG_ TEPIDDischarger m3 : 23|8@0+ (1,-40) [-40|210] "degreesC" ES
+ SG_ TEPIDBoard m2 : 31|8@0+ (1,-40) [-40|210] "degreesC" ES
+ SG_ NEPIDSoftwareVersion m0 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPIDResetReason m1 : 39|32@0+ (1,0) [0|4294967295] "-" ES
+ SG_ NEPIDCanBusOffCnt m2 : 39|16@0+ (1,0) [0|65535] "-" ES
+ SG_ NEPIDCanErrorCnt m2 : 55|16@0+ (1,0) [0|65535] "-" ES
+
+
+
+CM_ SG_ 1824 VESChargerSetpoint "Off car charger voltage set point ";
+CM_ SG_ 1824 IESChargerSetpoint "Off car charger current set point ";
+CM_ SG_ 1824 BESChargerCommand "Command to turn on the off-car charger";
+CM_ SG_ 1824 BERSClearErrors "Command to clear all latched errors in the system";
+CM_ SG_ 1824 BEPICLedESFlash "Command to flash the ES LED on the plug in charger";
+CM_ SG_ 1824 BEPICLedCmdFlash "Command to flash the command LED on the plug in charger";
+CM_ SG_ 1824 BESDischargerCommand "Command to turn on the off-car discharger";
+CM_ SG_ 1824 BESDischargerPrecharge "Command to turn on the off-car discharger precharge";
+CM_ SG_ 1809 VESMeasuredCharger "Energy store voltage as measured by the off-car charger";
+CM_ SG_ 1809 IESMeasuredCharger "Energy store current as measured by the off-car charger";
+CM_ SG_ 1809 NESChargerMode "Off-car charger mode (0 off, 1 constant voltage, 2 constant current, 3 discharger)";
+CM_ SG_ 1809 NESChargerStatus "Status of the charger (0 Startup, 1 Ok, 2+ Error states)";
+CM_ SG_ 1809 VESMeasuredChargerDC "Secondary energy store voltage as measured by the plug in charger";
+CM_ SG_ 1810 VEPICSupplyES "Plug in charger 12V supply voltage";
+CM_ SG_ 1810 VEPICSupply "Plug in charger 12V supply to ES voltage";
+CM_ SG_ 1810 VEPICContactorPos "Voltage across the positive contactor coil";
+CM_ SG_ 1810 VEPICContactorNeg "Voltage across the negative contactor coil ";
+CM_ SG_ 1810 BEPICStopStatus "State of the plug in charger's stop switch";
+CM_ SG_ 1811 TEPICBoard "Plug in charger board temperature";
+CM_ SG_ 1812 VEPICMeasuredPSU1 "Measured voltage reported by charger PSU 1";
+CM_ SG_ 1812 IEPICMeasuredPSU1 "Measured current reported by charger PSU 1";
+CM_ SG_ 1812 VEPICMeasuredPSU2 "Measured voltage reported by charger PSU 2";
+CM_ SG_ 1812 IEPICMeasuredPSU2 "Measured current reported by charger PSU 2";
+CM_ SG_ 1813 EPIC_PSU_Status_Mux "";
+CM_ SG_ 1813 NEPICStatusPSU1 "Charger PSU 1 status register";
+CM_ SG_ 1813 VEPICSetpointPSU1 "Voltage set point for charger PSU 1";
+CM_ SG_ 1813 NEPICSerial1PSU1 "Charger PSU 1 serial number digits 1 to 4";
+CM_ SG_ 1813 NEPICFaultPSU1 "Charger PSU 1 fault register";
+CM_ SG_ 1813 IEPICSetpointPSU1 "Current set point for charger PSU 1";
+CM_ SG_ 1813 NEPICSerial2PSU1 "Charger PSU 1 serial number digits 5 to 8";
+CM_ SG_ 1813 NEPICStatePSU1 "Charger PSU 1 state";
+CM_ SG_ 1813 NEPICModelPSU1 "Charger PSU 1 model number.";
+CM_ SG_ 1813 NEPICSerial3PSU1 "Charger PSU 1 serial number digits 9 to 12";
+CM_ SG_ 1813 NEPICStatusPSU2 "Charger PSU 2 status register";
+CM_ SG_ 1813 VEPICSetpointPSU2 "Voltage set point for charger PSU 2";
+CM_ SG_ 1813 NEPICSerial1PSU2 "Charger PSU 2 serial number digits 1 to 4";
+CM_ SG_ 1813 NEPICFaultPSU2 "Charger PSU 2 fault register";
+CM_ SG_ 1813 IEPICSetpointPSU2 "Current set point for charger PSU 2";
+CM_ SG_ 1813 NEPICSerial2PSU2 "Charger PSU 2 serial number digits 5 to 8";
+CM_ SG_ 1813 NEPICStatePSU2 "Charger PSU 2 state";
+CM_ SG_ 1813 NEPICModelPSU2 "Charger PSU 2 model number";
+CM_ SG_ 1813 NEPICSerial3PSU2 "Charger PSU 2 serial number digits 9 to 22";
+CM_ SG_ 1813 NEPICSerialNumber "Serial number of the plug in charger";
+CM_ SG_ 1813 NEPICSoftwareVersion "Software version of  plug in charger";
+CM_ SG_ 1813 NEPICResetCount "Number of processor resets on  plug in charger";
+CM_ SG_ 1813 NEPICHardwareVersion "Hardware version of plug in charger";
+CM_ SG_ 1813 NEPICResetReason "Code indicating the reason for the last processor reset";
+CM_ SG_ 1813 NEPICTaskOverruns "Number of task overruns on the plug in charger";
+CM_ SG_ 1813 NEPICCanBusOffCnt "Count of the number of CAN bus off conditions that have occurred";
+CM_ SG_ 1813 NEPICCanErrorCnt "Count of the number of CAN error conditions that have occurred";
+CM_ SG_ 1814 NESDischargerStatus "Status of the charger (0 Startup, 1 Ok, 2+ Error states)";
+CM_ SG_ 1814 VESMeasuredDischargerDC "Secondary energy store voltage as measured by the plug in discharger";
+CM_ SG_ 1814 VEPIDSupplyES "Plug in charger 12V supply voltage";
+CM_ SG_ 1814 VEPIDSupply "Plug in charger 12V supply to ES voltage";
+CM_ SG_ 1814 VEPIDContactorPos "Voltage across the positive contactor coil";
+CM_ SG_ 1814 VEPIDContactorNeg "Voltage across the negative contactor coil ";
+CM_ SG_ 1815 EPIC_PSU_Status_Mux "";
+CM_ SG_ 1815 BEPIDStopStatus "State of the plug in charger's stop switch";
+CM_ SG_ 1815 NEPIDSerialNumber "Serial number of the plug in charger";
+CM_ SG_ 1815 NEPIDSoftwareVersion "Software version of  plug in charger";
+CM_ SG_ 1815 NEPIDHardwareVersion "Hardware version of plug in charger";
+CM_ SG_ 1815 NEPIDResetReason "Code indicating the reason for the last processor reset";
+CM_ SG_ 1815 NEPIDResetCount "Number of processor resets on  plug in charger";
+CM_ SG_ 1815 TEPIDBoard "Plug in charger board temperature";
+CM_ SG_ 1815 NEPIDCanBusOffCnt "Count of the number of CAN bus off conditions that have occurred";
+CM_ SG_ 1815 NEPIDCanErrorCnt "Count of the number of CAN error conditions that have occurred";
+CM_ SG_ 1815 TEPIDDischarger "Plug in charger external temperature";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 1 1001;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgCycleTime" 1000;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 1824 100;
+BA_ "GenMsgCycleTime" BO_ 1809 10;
+BA_ "GenMsgCycleTime" BO_ 1810 100;
+BA_ "GenMsgCycleTime" BO_ 1811 1000;
+BA_ "GenMsgCycleTime" BO_ 1812 100;
+BA_ "GenMsgCycleTime" BO_ 1813 100;
+BA_ "GenMsgCycleTime" BO_ 1814 10;
+BA_ "GenMsgCycleTime" BO_ 1815 250;

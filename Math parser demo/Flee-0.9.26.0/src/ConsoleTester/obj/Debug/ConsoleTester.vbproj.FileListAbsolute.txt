@@ -1,0 +1,10 @@
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\ConsoleTester.exe.config
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\ConsoleTester.exe
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\ConsoleTester.pdb
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\Ciloci.Flee.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\FleeCaseTester.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\Ciloci.Flee.pdb
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\bin\Debug\Ciloci.Flee.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\obj\Debug\ResolveAssemblyReference.cache
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\obj\Debug\ConsoleTester.exe
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\ConsoleTester\obj\Debug\ConsoleTester.pdb

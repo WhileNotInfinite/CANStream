@@ -1,0 +1,131 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Demands" Identifier="200">
+    <MsgComment>Power, torque &amp; speed target
+Comand flag &amp; EDM</MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>1</Period>
+    <Parameters>
+      <CANParameter ParameterName="PowerDem">
+        <ParameterComment>Power demand</ParameterComment>
+        <Unit>kW</Unit>
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>100</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="EDM_Req">
+        <ParameterComment>EDM factor request</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>16</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>250</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Command_Flag">
+        <ParameterComment>Command flag</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="TorqueDem">
+        <ParameterComment>Cranck torque demand</ParameterComment>
+        <Unit>Nm</Unit>
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>127</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="SpeedTgt">
+        <ParameterComment>Speed control target</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="DataIn" Identifier="204">
+    <MsgComment>Control input data</MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>5</Period>
+    <Parameters>
+      <CANParameter ParameterName="Calib_Req">
+        <ParameterComment>Calibration request</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="HighSide_Cmd">
+        <ParameterComment>High &amp; Low sides ouput command</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="EngineSpd">
+        <ParameterComment>Engine speed</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="LapN">
+        <ParameterComment>Current lap number</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>32</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="VBatt">
+        <ParameterComment>Battery pack voltage</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="TBatt">
+        <ParameterComment>Battery pack temperature</ParameterComment>
+        <Unit>DegC</Unit>
+        <StartBit>48</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Ofs_Dem">
+        <ParameterComment>Auto offset request</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>56</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

@@ -1,0 +1,110 @@
+﻿<html>
+	
+<head>
+	<title>Graphic layout</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="graphic, data viewer, chart, plot, layout, overlay, parallel, custom">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Graphiclayout");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Graphic layout</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Dataanalysis.html">Data analysis</a> &rsaquo;&rsaquo; <a href="Graphicwindow.html">Graphic window</a> &rsaquo;&rsaquo; <a href="Graphicwindowsettings.html">Graphic window settings</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Graphicwindowsettings.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Channellist.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Graphicconfiguration.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">Term 'graphic layout' means the way graphic series (or traces) are set into the graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">There are three possible layouts:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Overlay</span><span class="rvts6">: All series are overlaying each other on the full graphic area height.</span></li>
+</ul></ul>
+<p class="rvps8"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Parallel</span><span class="rvts6">: Series are evenly arranged onto the graphic area.</span></li>
+</ul></ul>
+<p class="rvps8"><span class="rvts6"><br/></span></p>
+<p class="rvps8"><span class="rvts6">If there are four series to plot, each serie will be plotted over 25% of the whole graphic area height. If there are five series, each serie will use 20% of the graphic height, 10% for ten series, so forth and so on...</span></p>
+<p class="rvps8"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Custom</span><span class="rvts6">: Series top and bottom position are defined by the user.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps8"><span class="rvts6">Series are not necessarily evenly set, a serie can fully or partially overlap one or more series.</span></p>
+<p class="rvps8"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Click the 'Graphic layout mode' </span><img alt="" style="padding : 1px;" src="lib/Graphic_Layout_16.png"><span class="rvts6"> button of the tool bar to change the current layout. This command is also available through the 'Graph layout' </span><img alt="" style="padding : 1px;" src="lib/Graphic_Layout_16.png"><span class="rvts6"> item of the graphic contextual menu.</span></p>
+<p class="rvps2"><span class="rvts6">Layout mode can also be changed using 'O', 'P' and 'C' shortcut keys for 'Overlay', 'Parallel' and 'Custom' modes.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Graphic in 'Overlay' layout mode:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Config_04.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Graphic in 'Parallel' layout mode:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Config_05.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Graphic in 'Custom' layout mode:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Config_06.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Easy CHM and documentation editor</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

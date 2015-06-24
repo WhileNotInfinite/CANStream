@@ -1,0 +1,180 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: IVT_K KCU_CANA SECU KCU_CANB
+
+
+BO_ 1318 IVT_K_0526: 8 IVT_K
+ SG_ PMGUKMeasuredDC : 39|16@0- (-0.01,0) [-327.67|327.68] "kW"  KCU_CANA
+ SG_ VMGUKMeasuredDC : 23|16@0- (-0.036,0) [-1179.648|1179.612] "V"  KCU_CANA
+ SG_ IMGUKMeasuredDC : 7|16@0- (0.01,0) [-327.68|327.67] "A"  KCU_CANA
+
+BO_ 512 TX_CAN_0200: 8 KCU_CANB
+ SG_ aERSKSensorless : 23|16@0+ (0.0001,0) [0|6.5535] "rad"  SECU
+ SG_ aERSKResolver : 7|16@0+ (0.0001,0) [0|6.5535] "rad"  SECU
+
+BO_ 329 TX_CAN_0149: 8 KCU_CANB
+ SG_ VERSKDC12V : 55|8@0+ (0.1,0) [0|25.5] "°C"  SECU
+ SG_ TERSKDCLink : 47|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKDriver1 : 39|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKModule1 : 31|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKStator2 : 23|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKStator1 : 15|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKBox1 : 7|8@0+ (1,0) [0|255] "°C"  SECU
+
+BO_ 336 TX_CAN_0150: 8 KCU_CANB
+ SG_ BERSKMGUState : 63|8@0+ (1,0) [0|255] ""  SECU
+ SG_ BERSKState : 55|8@0+ (1,0) [0|255] ""  SECU
+ SG_ BERSKDiagLatch02 : 39|16@0+ (1,0) [0|65535] "HEX"  SECU
+ SG_ BERSKDiagLatch01 : 7|32@0+ (1,0) [0|4294967295] "HEX"  SECU
+
+BO_ 344 TX_CAN_0158: 8 KCU_CANB
+ SG_ BERSKDiagBaseSW : 39|32@0+ (1,0) [0|4294967295] "HEX"  SECU
+ SG_ BERSKDiagSensor : 7|32@0+ (1,0) [0|4294967295] "HEX"  SECU
+
+BO_ 332 TX_CAN_014C: 8 KCU_CANB
+ SG_ BERSKDiagUser : 39|32@0+ (1,0) [0|4294967295] "HEX"  SECU
+ SG_ BERSKDiagBaseHW : 7|32@0+ (1,0) [0|4294967295] "HEX"  SECU
+
+BO_ 324 TX_CAN_0144: 8 KCU_CANB
+ SG_ PERSKRequest m1 : 23|16@0+ (0.01,-327.67) [-327.67|327.68] "kW" Vector__XXX
+ SG_ nERSKRequest m2 : 23|16@0+ (2,-65534) [-65534|65536] "rpm" Vector__XXX
+ SG_ aERSKRequest m3 : 23|16@0+ (0.001,-32.767) [-32.767|32.768] "rad" Vector__XXX
+ SG_ PERSKDCRequest m4 : 23|16@0+ (0.01,-327.67) [-327.67|327.68] "kW" Vector__XXX
+ SG_ MERSKRequest m0 : 23|16@0+ (0.002,-65.534) [-65.534|65.536] "Nm" Vector__XXX
+ SG_ BERSKCommandEcho M : 39|16@0+ (1,0) [0|65535] "HEX"  SECU
+ SG_ IERSKDC : 15|8@0+ (2,-254) [-254|256] "A"  SECU
+ SG_ VERSKDC : 7|8@0+ (5,0) [0|1275] "V"  SECU
+
+BO_ 328 TX_CAN_0148: 8 KCU_CANB
+ SG_ nERSKSensorless : 55|16@0+ (0.1,0) [0|6553.5] "rad/s" Vector__XXX
+ SG_ nERSKResolver : 39|16@0+ (0.1,0) [0|6553.5] "rad/s" Vector__XXX
+ SG_ nERSKSL : 23|16@0+ (1,0) [0|65535] "rpm"  SECU
+
+BO_ 773 TX_CAN_0305: 7 KCU_CANA
+ SG_ rERSKDegradation : 55|8@0+ (0.005,0) [0|1.275] "" Vector__XXX
+ SG_ nERSK : 23|16@0+ (1,0) [0|65535] "rpm" Vector__XXX
+ SG_ MERSKMeasured : 39|16@0+ (0.002,-65.534) [-65.534|65.536] "Nm"  SECU
+ SG_ PERSKFeedback : 7|16@0+ (0.01,-327.67) [-327.67|327.68] "kW"  SECU
+
+BO_ 580 TX_CAN_0244: 8 KCU_CANB
+ SG_ TERSKSpare2 : 47|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKSpare1 : 39|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKSpare4 : 63|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKSpare3 : 55|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKDriver2 : 31|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKModule2 : 23|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKBox2 : 15|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKStator3 : 7|8@0+ (1,0) [0|255] "°C"  SECU
+
+BO_ 771 RX_CAN_0303: 4 SECU
+ SG_ PERSKDCDemand m32 : 7|16@0+ (0.01,-327.67) [-327.67|327.68] "kW"  KCU_CANA
+ SG_ nERSKDemand m8 : 7|16@0+ (2,-65534) [-65534|65536] "rpm"  KCU_CANA
+ SG_ aERSKDemand m16 : 7|16@0+ (0.001,-32.767) [-32.767|32.768] "rad"  KCU_CANA
+ SG_ MERSKDemand m4 : 7|16@0+ (0.002,-65.534) [-65.534|65.536] "Nm"  KCU_CANA
+ SG_ PERSKDemand m2 : 7|16@0+ (0.01,-327.67) [-327.67|327.68] "kW"  KCU_CANA
+ SG_ BERSKCommand M : 23|16@0+ (1,0) [0|65535] "HEX"  KCU_CANA
+
+BO_ 572 TX_CAN_023C: 8 KCU_CANB
+ SG_ VERSKDCbuf : 55|16@0+ (0.025,0) [0|1638.375] "V"  SECU
+ SG_ IERSKWPhase : 39|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+ SG_ IERSKVPhase : 23|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+ SG_ IERSKUPhase : 7|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+
+BO_ 576 TX_CAN_0240: 8 KCU_CANB
+ SG_ TERSKBRG1 : 55|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ TERSKBRG2 : 63|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ VERSKSE3 : 23|8@0+ (0.025,0) [0|6.375] "V"  SECU
+ SG_ VERSKSE2 : 15|8@0+ (0.025,0) [0|6.375] "V"  SECU
+ SG_ TERSKRotor : 47|8@0+ (1,0) [0|255] "°C"  SECU
+ SG_ BERSKFlags : 39|8@0+ (1,0) [0|255] ""  SECU
+ SG_ VERSKSE1 : 7|8@0+ (0.025,0) [0|6.375] "V"  SECU
+
+BO_ 564 TX_CAN_0234: 8 KCU_CANB
+ SG_ rERSKKe : 63|8@0+ (5E-005,0.00813) [0.00813|0.02088] "V/rpm"  SECU
+ SG_ VERSKVWLine : 47|16@0+ (0.03,-983.01) [-983.01|983.04] "V"  SECU
+ SG_ VERSKUVLine : 31|16@0+ (0.03,-983.01) [-983.01|983.04] "V"  SECU
+ SG_ rERSKWDuty : 23|8@0+ (0.005,0) [0|1.275] ""  SECU
+ SG_ rERSKVDuty : 15|8@0+ (0.005,0) [0|1.275] ""  SECU
+ SG_ rERSKUDuty : 7|8@0+ (0.005,0) [0|1.275] ""  SECU
+
+BO_ 560 TX_CAN_0230: 8 KCU_CANB
+ SG_ gERSKAbs : 63|8@0+ (40,0) [0|10200] "rad/s2" Vector__XXX
+ SG_ rERSKSwFreq : 55|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ VERSKQCtrlInteg : 47|8@0+ (1,-127) [-127|128] "V"  SECU
+ SG_ VERSKDCtrlInteg : 39|8@0+ (1,-127) [-127|128] "V"  SECU
+ SG_ VERSKQCtrlComp : 31|8@0+ (10,-1270) [-1270|1280] "V"  SECU
+ SG_ VERSKDCtrlComp : 23|8@0+ (10,-1270) [-1270|1280] "V"  SECU
+ SG_ VERSKQCtrlProp : 15|8@0+ (0.5,-63.5) [-63.5|64] "V"  SECU
+ SG_ VERSKDCtrlProp : 7|8@0+ (0.5,-63.5) [-63.5|64] "V"  SECU
+
+BO_ 548 TX_CAN_0224: 8 KCU_CANB
+ SG_ MERSKTorsion : 55|8@0+ (0.2857143,-36.2857161) [-36.2857161|36.5714304] "Nm" Vector__XXX
+ SG_ aERSKTorsion2 : 63|8@0+ (1,-127) [-127|128] "deg" Vector__XXX
+ SG_ rERSKResFaultCnt : 39|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ BERSKDiagResolver : 47|8@0+ (1,0) [0|255] "HEX" Vector__XXX
+ SG_ aERSKTorsion : 31|8@0+ (1,-127) [-127|128] "deg" Vector__XXX
+ SG_ VERSKError : 23|8@0+ (0.1667,-21.1667) [-21.1667|21.3418] "V"  SECU
+ SG_ rERSKSpeedCtrlInt : 15|8@0+ (0.4,-50.8) [-50.8|51.2] "Nm"  SECU
+ SG_ rERSKSpeedCtrlProp : 7|8@0+ (0.4,-50.8) [-50.8|51.2] "Nm"  SECU
+
+BO_ 532 TX_CAN_0214: 8 KCU_CANB
+ SG_ IERSKQMeasured : 55|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+ SG_ IERSKDMeasured : 39|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+ SG_ IERSKQDemand : 23|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+ SG_ IERSKDDemand : 7|16@0+ (0.05,-1638.35) [-1638.35|1638.4] "A"  SECU
+
+
+
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 1318 2;
+BA_ "GenMsgCycleTime" BO_ 512 5;
+BA_ "GenMsgCycleTime" BO_ 329 100;
+BA_ "GenMsgCycleTime" BO_ 336 10;
+BA_ "GenMsgCycleTime" BO_ 344 5;
+BA_ "GenMsgCycleTime" BO_ 332 5;
+BA_ "GenMsgCycleTime" BO_ 324 2;
+BA_ "GenMsgCycleTime" BO_ 328 5;
+BA_ "GenMsgCycleTime" BO_ 773 1;
+BA_ "GenMsgCycleTime" BO_ 580 100;
+BA_ "GenMsgCycleTime" BO_ 771 1;
+BA_ "GenMsgCycleTime" BO_ 572 5;
+BA_ "GenMsgCycleTime" BO_ 576 50;
+BA_ "GenMsgCycleTime" BO_ 564 5;
+BA_ "GenMsgCycleTime" BO_ 560 5;
+BA_ "GenMsgCycleTime" BO_ 548 5;
+BA_ "GenMsgCycleTime" BO_ 532 2;

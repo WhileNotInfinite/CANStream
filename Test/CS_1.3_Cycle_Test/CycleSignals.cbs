@@ -1,0 +1,54 @@
+<CS_BuiltInSignalsLibrary Name="Cycle_BuiltInSignals" ReadOnly="False">
+  <LibraryComment>Built-in signals used for cycle creation</LibraryComment>
+  <Signals>
+    <Signal Name="VMot" Type="Sinusoid" Unit="V" Decimal="3">
+      <Description>Motor phase voltage</Description>
+      <Properties>
+        <Frequency>5</Frequency>
+        <Magnitude>2</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>0</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>0</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+    <Signal Name="RevRampUp" Type="Ramp" Unit="rpm" Decimal="0">
+      <Description>Engine rev ramp up from 0 </Description>
+      <Properties>
+        <Frequency>0</Frequency>
+        <Magnitude>0</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>0</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>4000</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+    <Signal Name="RevRampDown" Type="Ramp" Unit="rpm" Decimal="0">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>0</Frequency>
+        <Magnitude>0</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>5500</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>-1000</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+  </Signals>
+</CS_BuiltInSignalsLibrary>

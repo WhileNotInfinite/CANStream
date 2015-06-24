@@ -1,0 +1,65 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Message 1" Identifier="200">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>10</Period>
+    <Parameters>
+      <CANParameter ParameterName="Parameter_MSB_1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter_LSB_1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter_LSB_2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>50</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter_MSB_2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>48</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter_LSB_3">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>56</StartBit>
+        <Length>8</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

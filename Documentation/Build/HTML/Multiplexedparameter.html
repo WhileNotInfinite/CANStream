@@ -1,0 +1,91 @@
+﻿<html>
+	
+<head>
+	<title>Multiplexed parameter</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, frame, message, parameter, multiplex, mux, multiplexer, configuration">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Multiplexedparameter");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Multiplexed parameter</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="CANFramesconfiguration.html">CAN Frames configuration</a> &rsaquo;&rsaquo; <a href="Singlebusconfiguration.html">Single bus configuration</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Singlebusconfiguration.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="CANConfigurationtreeview.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Messagemap.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts14">Once you have at least two parameters in a message, one of those parameters, the multiplexer, can be used to multiplex other parameters of the message.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">As we saw in the </span><span class="rvts25">‘</span><a class="rvts27" href="CANsignalproperties.html">CAN signal properties'</a><span class="rvts14"> section, each parameter uses a range of bits inside the message frame. In a multiplexed message, the same bit range of the frame, or a part of it, can be shared between multiple parameters. In other words, a single message can have different parameters arrangements, current arrangement being defined by the current value of the multiplexer.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">The multiplexer must be unique within a message while there could be bunches of multiplexed and fixed parameters.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_06.png"></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts11">On the example above, parameters </span><span class="rvts19">‘</span><span class="rvts28">Multiplexed parameter X</span><span class="rvts11">' are sharing the same range of bits within the message </span><span class="rvts19">‘</span><span class="rvts28">Multiplexed message</span><span class="rvts11">', multiplexer of this message being the </span><span class="rvts19">‘</span><span class="rvts11">Multiplexer' parameter.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">To create multiplexed parameters inside a message, in first create a fixed parameter (a parameter which is not multiplexed and which will be present in all arrangements of the message). Then create a second parameter. In the properties of your second parameter, tick the </span><span class="rvts19">‘</span><span class="rvts11">Multiplexed parameter' box. Lists </span><span class="rvts19">‘</span><span class="rvts11">Multiplexer parameter' and </span><span class="rvts19">‘</span><span class="rvts11">Multiplexer value' are now active.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Select the multiplexer parameter in the </span><span class="rvts19">‘</span><span class="rvts11">Multiplexer parameter' list and then select which of its value is making your parameter active in the </span><span class="rvts19">‘</span><span class="rvts11">Multiplexer value' list.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_07.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts11"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/create-epub-ebooks">Produce electronic books easily</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

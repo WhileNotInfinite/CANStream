@@ -1,0 +1,106 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Request" Identifier="200">
+    <RxTx>Tx</RxTx>
+    <Period>1</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="PowerDemand">
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="rEDMFRequest">
+        <StartBit>16</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>250</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="CommandFlag">
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TorqueDemand">
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SpeedTarget">
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="BMS_Data" Identifier="204">
+    <RxTx>Tx</RxTx>
+    <Period>5</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="CalibStateDem">
+        <StartBit>0</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Command_High_Low_Side">
+        <StartBit>8</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="nEngine">
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="nLap">
+        <StartBit>32</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VHVBPack">
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TBattery">
+        <StartBit>48</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="AutoOffsetDemand">
+        <StartBit>56</StartBit>
+        <Length>8</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

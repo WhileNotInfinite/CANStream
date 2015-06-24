@@ -1,0 +1,177 @@
+<CycleConfiguration>
+  <CANConfiguration MessageLength="64" CAN_Rate="1000" CAN_ConfigName="">
+    <CANMessage Name="Msg200" Identifier="200">
+      <MsgComment>
+      </MsgComment>
+      <RxTx>Tx</RxTx>
+      <Period>10</Period>
+      <Multiplexer>
+      </Multiplexer>
+      <Parameters>
+        <CANParameter ParameterName="Rpm">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>0</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Const1">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>16</StartBit>
+          <Length>8</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="RandNum">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>24</StartBit>
+          <Length>8</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Sinus">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>32</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>10000</LinearizationGain>
+          <LinearizationZero>32768</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Pulse">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>48</StartBit>
+          <Length>8</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Step">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>56</StartBit>
+          <Length>8</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+      </Parameters>
+    </CANMessage>
+    <CANMessage Name="Msg204" Identifier="204">
+      <MsgComment>
+      </MsgComment>
+      <RxTx>Tx</RxTx>
+      <Period>10</Period>
+      <Multiplexer>
+      </Multiplexer>
+      <Parameters>
+        <CANParameter ParameterName="Triangle">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>0</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>100</LinearizationGain>
+          <LinearizationZero>32768</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Slopes">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>16</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1000</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Ramp">
+          <ParameterComment>
+          </ParameterComment>
+          <Unit>
+          </Unit>
+          <StartBit>32</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+      </Parameters>
+    </CANMessage>
+  </CANConfiguration>
+  <VirtualChannelLibrary />
+  <BuiltInSignalLibrary />
+  <CyclePartsProperties>
+    <PreCycleProperties TimeLength="1" DataFile="None" />
+    <InCycleProperties TimeLength="1.495" DataFile="D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Test\Gbx_DBG_Cycle_Base_test.xlsx" />
+    <PostCycleProperties TimeLength="0.5" DataFile="None" />
+  </CyclePartsProperties>
+  <CycleParameters>
+    <Parameter Name="Rpm" MessageId="200">
+      <PreCycleData Source="Constant" Data="100" Library="None" />
+      <InCycleData Source="AcqData" Data="rev" Library="File" />
+      <PostCycleData Source="Constant" Data="100" Library="None" />
+    </Parameter>
+    <Parameter Name="Const1" MessageId="200">
+      <PreCycleData Source="Constant" Data="10" Library="None" />
+      <InCycleData Source="Constant" Data="10" Library="None" />
+      <PostCycleData Source="Constant" Data="10" Library="None" />
+    </Parameter>
+    <Parameter Name="RandNum" MessageId="200">
+      <PreCycleData Source="BuiltSignal" Data="RandSig" Library="SignalTest" />
+      <InCycleData Source="BuiltSignal" Data="RandSig" Library="SignalTest" />
+      <PostCycleData Source="BuiltSignal" Data="RandSig" Library="SignalTest" />
+    </Parameter>
+    <Parameter Name="Sinus" MessageId="200">
+      <PreCycleData Source="BuiltSignal" Data="SinusSig" Library="SignalTest" />
+      <InCycleData Source="VirtualChannel" Data="MyVirtual" Library="LibTest" />
+      <PostCycleData Source="BuiltSignal" Data="SinusSig" Library="SignalTest" />
+    </Parameter>
+    <Parameter Name="Pulse" MessageId="200">
+      <PreCycleData Source="BuiltSignal" Data="PulseSig" Library="SignalTest" />
+      <InCycleData Source="AcqData" Data="Gear_IN_Barrel" Library="File" />
+      <PostCycleData Source="BuiltSignal" Data="PulseSig" Library="SignalTest" />
+    </Parameter>
+    <Parameter Name="Step" MessageId="200">
+      <PreCycleData Source="None" Data="0" Library="None" />
+      <InCycleData Source="None" Data="0" Library="None" />
+      <PostCycleData Source="None" Data="0" Library="None" />
+    </Parameter>
+    <Parameter Name="Triangle" MessageId="204">
+      <PreCycleData Source="Constant" Data="100.25" Library="None" />
+      <InCycleData Source="BuiltSignal" Data="TriangleSig" Library="SignalTest" />
+      <PostCycleData Source="Constant" Data="100.25" Library="None" />
+    </Parameter>
+    <Parameter Name="Slopes" MessageId="204">
+      <PreCycleData Source="BuiltSignal" Data="SlopeSig" Library="SignalTest" />
+      <InCycleData Source="AcqData" Data="ShaftPos" Library="File" />
+      <PostCycleData Source="VirtualChannel" Data="Virtual3" Library="LibTest" />
+    </Parameter>
+    <Parameter Name="Ramp" MessageId="204">
+      <PreCycleData Source="VirtualChannel" Data="Virtual4" Library="LibTest" />
+      <InCycleData Source="AcqData" Data="P_Hydr" Library="File" />
+      <PostCycleData Source="BuiltSignal" Data="StepSig" Library="SignalTest" />
+    </Parameter>
+  </CycleParameters>
+</CycleConfiguration>

@@ -1,0 +1,104 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Message 1" Identifier="200">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>10</Period>
+    <Parameters>
+      <CANParameter ParameterName="MuxId">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>4</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="PMux_0_1_MSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="0" />
+      </CANParameter>
+      <CANParameter ParameterName="PMux_0_2_LSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="0" />
+      </CANParameter>
+      <CANParameter ParameterName="PMux_0_3_MSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>40</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>100</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="0" />
+      </CANParameter>
+      <CANParameter ParameterName="PMux_1_1_LSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>16</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="1" />
+      </CANParameter>
+      <CANParameter ParameterName="PMux_1_2_MSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>100</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="1" />
+      </CANParameter>
+      <CANParameter ParameterName="PMux_1_3_LSB">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>40</StartBit>
+        <Length>16</Length>
+        <Endianess>LSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+        <Multiplexer MuxParamName="MuxId" MuxValue="1" />
+      </CANParameter>
+      <CANParameter ParameterName="Perm1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>56</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

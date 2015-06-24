@@ -1,0 +1,190 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Msg_400" Identifier="400">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>2</Period>
+    <Multiplexer>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Barrel">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>mV</Unit>
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Rpm">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Speed">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>kph</Unit>
+        <StartBit>32</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Throttle">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Shaft">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>mm</Unit>
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1000</LinearizationGain>
+        <LinearizationZero>32768</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="Msg_404" Identifier="404">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>2</Period>
+    <Multiplexer>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="SwUp">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="SwDown">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="SwReverse">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>16</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="SwClutch">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="GearCut">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>32</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="PHyd">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>bar</Unit>
+        <StartBit>40</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="VBatt">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>48</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>10</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="Bosch_779" Identifier="779">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>5</Period>
+    <Multiplexer>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Bosch_Throttle">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Bosch_VBatt">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>48</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>14.2007632910269</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Bosch_NLap">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>56</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

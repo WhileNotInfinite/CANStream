@@ -1,0 +1,16 @@
+<CS_RecordUserInfoCollection>
+  <Informations>
+    <UserInformation>
+      <Title>Track</Title>
+      <Value>Monza</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Driver</Title>
+      <Value>Vettel</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Car</Title>
+      <Value>RB10-04</Value>
+    </UserInformation>
+  </Informations>
+</CS_RecordUserInfoCollection>

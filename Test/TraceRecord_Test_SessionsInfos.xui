@@ -1,0 +1,16 @@
+<CS_RecordUserInfoCollection>
+  <Informations>
+    <UserInformation>
+      <Title>Location</Title>
+      <Value>AH Office</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Time</Title>
+      <Value>3:04 PM</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Goal</Title>
+      <Value>Make a record and store it with its event and sesssion infos</Value>
+    </UserInformation>
+  </Informations>
+</CS_RecordUserInfoCollection>

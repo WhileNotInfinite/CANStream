@@ -1,0 +1,998 @@
+VERSION ""
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: SECU ES
+
+
+BO_ 256 ES_CELLS_01: 8 ES
+ SG_ muxEsCells01 M : 7|4@0+ (1,0) [0|15] "-" SECU
+ SG_ VESCell001 m0 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell006 m1 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell011 m2 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell016 m3 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell021 m4 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell026 m5 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell031 m6 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell036 m7 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell041 m8 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell046 m9 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell051 m10 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell056 m11 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell061 m12 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell066 m13 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell071 m14 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell076 m15 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell002 m0 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell007 m1 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell012 m2 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell017 m3 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell022 m4 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell027 m5 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell032 m6 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell037 m7 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell042 m8 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell047 m9 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell052 m10 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell057 m11 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell062 m12 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell067 m13 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell072 m14 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell077 m15 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell003 m0 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell008 m1 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell013 m2 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell018 m3 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell023 m4 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell028 m5 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell033 m6 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell038 m7 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell043 m8 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell048 m9 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell053 m10 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell058 m11 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell063 m12 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell068 m13 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell073 m14 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell078 m15 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell004 m0 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell009 m1 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell014 m2 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell019 m3 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell024 m4 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell029 m5 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell034 m6 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell039 m7 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell044 m8 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell049 m9 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell054 m10 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell059 m11 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell064 m12 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell069 m13 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell074 m14 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell079 m15 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell005 m0 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell010 m1 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell015 m2 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell020 m3 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell025 m4 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell030 m5 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell035 m6 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell040 m7 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell045 m8 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell050 m9 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell055 m10 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell060 m11 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell065 m12 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell070 m13 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell075 m14 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell080 m15 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+
+BO_ 257 ES_CELLS_02: 8 ES
+ SG_ muxEsCells02 M : 7|4@0+ (1,0) [0|15] "-" SECU
+ SG_ VESCell081 m0 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell086 m1 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell091 m2 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell096 m3 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell101 m4 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell106 m5 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell111 m6 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell116 m7 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell121 m8 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell126 m9 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell131 m10 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell136 m11 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell141 m12 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell146 m13 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell151 m14 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell156 m15 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell082 m0 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell087 m1 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell092 m2 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell097 m3 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell102 m4 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell107 m5 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell112 m6 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell117 m7 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell122 m8 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell127 m9 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell132 m10 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell137 m11 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell142 m12 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell147 m13 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell152 m14 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell157 m15 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell083 m0 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell088 m1 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell093 m2 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell098 m3 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell103 m4 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell108 m5 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell113 m6 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell118 m7 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell123 m8 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell128 m9 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell133 m10 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell138 m11 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell143 m12 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell148 m13 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell153 m14 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell158 m15 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell084 m0 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell089 m1 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell094 m2 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell099 m3 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell104 m4 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell109 m5 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell114 m6 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell119 m7 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell124 m8 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell129 m9 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell134 m10 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell139 m11 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell144 m12 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell149 m13 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell154 m14 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell159 m15 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell085 m0 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell090 m1 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell095 m2 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell100 m3 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell105 m4 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell110 m5 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell115 m6 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell120 m7 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell125 m8 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell130 m9 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell135 m10 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell140 m11 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell145 m12 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell150 m13 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell155 m14 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell160 m15 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+
+BO_ 258 ES_CELLS_03: 8 ES
+ SG_ muxEsCells03 M : 7|4@0+ (1,0) [0|15] "-" SECU
+ SG_ VESCell161 m0 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell166 m1 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell171 m2 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell176 m3 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell181 m4 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell186 m5 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell191 m6 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell196 m7 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell201 m8 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell206 m9 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell211 m10 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell216 m11 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell221 m12 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell226 m13 : 3|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell231 m14 : 3|14@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell236 m15 : 3|19@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell162 m0 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell167 m1 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell172 m2 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell177 m3 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell182 m4 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell187 m5 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell192 m6 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell197 m7 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell202 m8 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell207 m9 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell212 m10 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell217 m11 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell222 m12 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell227 m13 : 23|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell232 m14 : 23|15@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell237 m15 : 23|20@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell163 m0 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell168 m1 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell173 m2 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell178 m3 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell183 m4 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell188 m5 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell193 m6 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell198 m7 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell203 m8 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell208 m9 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell213 m10 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell218 m11 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell223 m12 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell228 m13 : 27|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell233 m14 : 27|16@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell238 m15 : 27|21@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell164 m0 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell169 m1 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell174 m2 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell179 m3 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell184 m4 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell189 m5 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell194 m6 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell199 m7 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell204 m8 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell209 m9 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell214 m10 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell219 m11 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell224 m12 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell229 m13 : 47|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell234 m14 : 47|17@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell239 m15 : 47|22@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell165 m0 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell170 m1 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell175 m2 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell180 m3 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell185 m4 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell190 m5 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell195 m6 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell200 m7 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell205 m8 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell210 m9 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell215 m10 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell220 m11 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell225 m12 : 51|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell230 m13 : 51|13@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell235 m14 : 51|18@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCell240 m15 : 51|23@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+
+BO_ 261 ES_MODULE_VOLTAGES: 8 ES
+ SG_ muxEsModuleVoltages M : 7|4@0+ (1,0) [0|3] "-" SECU
+ SG_ VESModule01 m0 : 3|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule06 m1 : 3|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule11 m2 : 3|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule16 m3 : 3|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule02 m0 : 23|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule07 m1 : 23|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule12 m2 : 23|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule17 m3 : 23|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule03 m0 : 27|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule08 m1 : 27|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule13 m2 : 27|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule18 m3 : 27|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule04 m0 : 47|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule09 m1 : 47|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule14 m2 : 47|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule19 m3 : 47|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule05 m0 : 51|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule10 m1 : 51|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule15 m2 : 51|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+ SG_ VESModule20 m3 : 51|12@0+ (1.98412698412698E-02,-10.1587301587302) [-10.1587301587302|71.1111111111111] "V" SECU
+
+BO_ 512 ES_CELLS_TEMP: 8 ES
+ SG_ muxEsCellTemps M : 7|5@0+ (1,0) [0|19] "-" SECU
+ SG_ TESCell01 m0 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell08 m1 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell15 m2 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell22 m3 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell29 m4 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell36 m5 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell43 m6 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell50 m7 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell57 m8 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell64 m9 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell71 m10 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell78 m11 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule01 m12 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule08 m13 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule15 m14 : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell02 m0 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell09 m1 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell16 m2 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell23 m3 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell30 m4 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell37 m5 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell44 m6 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell51 m7 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell58 m8 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell65 m9 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell72 m10 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell79 m11 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule02 m12 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule09 m13 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule16 m14 : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell03 m0 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell10 m1 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell17 m2 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell24 m3 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell31 m4 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell38 m5 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell45 m6 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell52 m7 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell59 m8 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell66 m9 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell73 m10 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell80 m11 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule03 m12 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule10 m13 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule17 m14 : 31|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell04 m0 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell11 m1 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell18 m2 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell25 m3 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell32 m4 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell39 m5 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell46 m6 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell53 m7 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell60 m8 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell67 m9 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell74 m10 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule04 m12 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule11 m13 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule18 m14 : 39|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell05 m0 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell12 m1 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell19 m2 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell26 m3 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell33 m4 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell40 m5 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell47 m6 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell54 m7 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell61 m8 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell68 m9 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell75 m10 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule05 m12 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule12 m13 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule19 m14 : 47|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell06 m0 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell13 m1 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell20 m2 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell27 m3 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell34 m4 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell41 m5 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell48 m6 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell55 m7 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell62 m8 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell69 m9 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell76 m10 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule06 m12 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule13 m13 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule20 m14 : 55|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell07 m0 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell14 m1 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell21 m2 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell28 m3 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell35 m4 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell42 m5 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell49 m6 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell56 m7 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell63 m8 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell70 m9 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCell77 m10 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule07 m12 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESModule14 m13 : 63|8@0+ (1,-40) [-40|210] "degreesC" SECU
+
+BO_ 1280 ES_MODULE_STATUS: 8 ES
+ SG_ muxEsModuleStatus M : 7|5@0+ (1,0) [0|19] "-" SECU
+ SG_ NESModuleFaultCounter01 m0 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason04 m1 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter08 m2 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason11 m3 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter15 m4 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason18 m5 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason01 m0 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter05 m1 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason08 m2 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter12 m3 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason15 m4 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter19 m5 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter02 m0 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason05 m1 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter09 m2 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason12 m3 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter16 m4 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason19 m5 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason02 m0 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter06 m1 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason09 m2 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter13 m3 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason16 m4 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter20 m5 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter03 m0 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason06 m1 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter10 m2 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason13 m3 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter17 m4 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason20 m5 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason03 m0 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter07 m1 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason10 m2 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter14 m3 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason17 m4 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter04 m0 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason07 m1 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter11 m2 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultReason14 m3 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleFaultCounter18 m4 : 63|8@0+ (1,0) [0|255] "-" SECU
+
+BO_ 1281 ES_MODULE_STATUS_2: 8 ES
+ SG_ muxEsModuleStatus2 M : 7|8@0+ (1,0) [0|12] "-" SECU
+ SG_ NESModuleCommsErrors01 m0 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors03 m1 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors05 m2 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors07 m3 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors09 m4 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors11 m5 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors13 m6 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors15 m7 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors17 m8 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors19 m9 : 15|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESOpenWire01 m10 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire08 m11 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire15 m12 : 15|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire02 m10 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire09 m11 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire16 m12 : 23|8@0+ (1,0) [0|255] "-" SECU
+ SG_ VESModuleRef01 m0 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef03 m1 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef05 m2 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef07 m3 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef09 m4 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef11 m5 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef13 m6 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef15 m7 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef17 m8 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef19 m9 : 31|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ NESOpenWire03 m10 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire10 m11 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire17 m12 : 31|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire04 m10 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire11 m11 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire18 m12 : 39|8@0+ (1,0) [0|255] "-" SECU
+ SG_ VESModuleRef02 m0 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef04 m1 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef06 m2 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef08 m3 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef10 m4 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef12 m5 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef14 m6 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef16 m7 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ VESModuleRef18 m8 : 35|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ NESModuleCommsErrors20 m9 : 35|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESOpenWire05 m10 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire12 m11 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire19 m12 : 47|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESModuleCommsErrors02 m0 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors04 m1 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors06 m2 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors08 m3 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors10 m4 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors12 m5 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors14 m6 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors16 m7 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ NESModuleCommsErrors18 m8 : 55|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ VESModuleRef20 m9 : 55|12@0+ (1.5,-768) [-768|5376] "mV" SECU
+ SG_ NESOpenWire06 m10 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire13 m11 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire20 m12 : 55|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire07 m10 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NESOpenWire14 m11 : 63|8@0+ (1,0) [0|255] "-" SECU
+
+
+
+CM_ SG_ 256 muxEsCells01 "";
+CM_ SG_ 256 VESCell001 "Energy store cell voltage";
+CM_ SG_ 256 VESCell002 "Energy store cell voltage";
+CM_ SG_ 256 VESCell003 "Energy store cell voltage";
+CM_ SG_ 256 VESCell004 "Energy store cell voltage";
+CM_ SG_ 256 VESCell005 "Energy store cell voltage";
+CM_ SG_ 256 VESCell006 "Energy store cell voltage";
+CM_ SG_ 256 VESCell007 "Energy store cell voltage";
+CM_ SG_ 256 VESCell008 "Energy store cell voltage";
+CM_ SG_ 256 VESCell009 "Energy store cell voltage";
+CM_ SG_ 256 VESCell010 "Energy store cell voltage";
+CM_ SG_ 256 VESCell011 "Energy store cell voltage";
+CM_ SG_ 256 VESCell012 "Energy store cell voltage";
+CM_ SG_ 256 VESCell013 "Energy store cell voltage";
+CM_ SG_ 256 VESCell014 "Energy store cell voltage";
+CM_ SG_ 256 VESCell015 "Energy store cell voltage";
+CM_ SG_ 256 VESCell016 "Energy store cell voltage";
+CM_ SG_ 256 VESCell017 "Energy store cell voltage";
+CM_ SG_ 256 VESCell018 "Energy store cell voltage";
+CM_ SG_ 256 VESCell019 "Energy store cell voltage";
+CM_ SG_ 256 VESCell020 "Energy store cell voltage";
+CM_ SG_ 256 VESCell021 "Energy store cell voltage";
+CM_ SG_ 256 VESCell022 "Energy store cell voltage";
+CM_ SG_ 256 VESCell023 "Energy store cell voltage";
+CM_ SG_ 256 VESCell024 "Energy store cell voltage";
+CM_ SG_ 256 VESCell025 "Energy store cell voltage";
+CM_ SG_ 256 VESCell026 "Energy store cell voltage";
+CM_ SG_ 256 VESCell027 "Energy store cell voltage";
+CM_ SG_ 256 VESCell028 "Energy store cell voltage";
+CM_ SG_ 256 VESCell029 "Energy store cell voltage";
+CM_ SG_ 256 VESCell030 "Energy store cell voltage";
+CM_ SG_ 256 VESCell031 "Energy store cell voltage";
+CM_ SG_ 256 VESCell032 "Energy store cell voltage";
+CM_ SG_ 256 VESCell033 "Energy store cell voltage";
+CM_ SG_ 256 VESCell034 "Energy store cell voltage";
+CM_ SG_ 256 VESCell035 "Energy store cell voltage";
+CM_ SG_ 256 VESCell036 "Energy store cell voltage";
+CM_ SG_ 256 VESCell037 "Energy store cell voltage";
+CM_ SG_ 256 VESCell038 "Energy store cell voltage";
+CM_ SG_ 256 VESCell039 "Energy store cell voltage";
+CM_ SG_ 256 VESCell040 "Energy store cell voltage";
+CM_ SG_ 256 VESCell041 "Energy store cell voltage";
+CM_ SG_ 256 VESCell042 "Energy store cell voltage";
+CM_ SG_ 256 VESCell043 "Energy store cell voltage";
+CM_ SG_ 256 VESCell044 "Energy store cell voltage";
+CM_ SG_ 256 VESCell045 "Energy store cell voltage";
+CM_ SG_ 256 VESCell046 "Energy store cell voltage";
+CM_ SG_ 256 VESCell047 "Energy store cell voltage";
+CM_ SG_ 256 VESCell048 "Energy store cell voltage";
+CM_ SG_ 256 VESCell049 "Energy store cell voltage";
+CM_ SG_ 256 VESCell050 "Energy store cell voltage";
+CM_ SG_ 256 VESCell051 "Energy store cell voltage";
+CM_ SG_ 256 VESCell052 "Energy store cell voltage";
+CM_ SG_ 256 VESCell053 "Energy store cell voltage";
+CM_ SG_ 256 VESCell054 "Energy store cell voltage";
+CM_ SG_ 256 VESCell055 "Energy store cell voltage";
+CM_ SG_ 256 VESCell056 "Energy store cell voltage";
+CM_ SG_ 256 VESCell057 "Energy store cell voltage";
+CM_ SG_ 256 VESCell058 "Energy store cell voltage";
+CM_ SG_ 256 VESCell059 "Energy store cell voltage";
+CM_ SG_ 256 VESCell060 "Energy store cell voltage";
+CM_ SG_ 256 VESCell061 "Energy store cell voltage";
+CM_ SG_ 256 VESCell062 "Energy store cell voltage";
+CM_ SG_ 256 VESCell063 "Energy store cell voltage";
+CM_ SG_ 256 VESCell064 "Energy store cell voltage";
+CM_ SG_ 256 VESCell065 "Energy store cell voltage";
+CM_ SG_ 256 VESCell066 "Energy store cell voltage";
+CM_ SG_ 256 VESCell067 "Energy store cell voltage";
+CM_ SG_ 256 VESCell068 "Energy store cell voltage";
+CM_ SG_ 256 VESCell069 "Energy store cell voltage";
+CM_ SG_ 256 VESCell070 "Energy store cell voltage";
+CM_ SG_ 256 VESCell071 "Energy store cell voltage";
+CM_ SG_ 256 VESCell072 "Energy store cell voltage";
+CM_ SG_ 256 VESCell073 "Energy store cell voltage";
+CM_ SG_ 256 VESCell074 "Energy store cell voltage";
+CM_ SG_ 256 VESCell075 "Energy store cell voltage";
+CM_ SG_ 256 VESCell076 "Energy store cell voltage";
+CM_ SG_ 256 VESCell077 "Energy store cell voltage";
+CM_ SG_ 256 VESCell078 "Energy store cell voltage";
+CM_ SG_ 256 VESCell079 "Energy store cell voltage";
+CM_ SG_ 256 VESCell080 "Energy store cell voltage";
+CM_ SG_ 257 muxEsCells02 "";
+CM_ SG_ 257 VESCell081 "Energy store cell voltage";
+CM_ SG_ 257 VESCell082 "Energy store cell voltage";
+CM_ SG_ 257 VESCell083 "Energy store cell voltage";
+CM_ SG_ 257 VESCell084 "Energy store cell voltage";
+CM_ SG_ 257 VESCell085 "Energy store cell voltage";
+CM_ SG_ 257 VESCell086 "Energy store cell voltage";
+CM_ SG_ 257 VESCell087 "Energy store cell voltage";
+CM_ SG_ 257 VESCell088 "Energy store cell voltage";
+CM_ SG_ 257 VESCell089 "Energy store cell voltage";
+CM_ SG_ 257 VESCell090 "Energy store cell voltage";
+CM_ SG_ 257 VESCell091 "Energy store cell voltage";
+CM_ SG_ 257 VESCell092 "Energy store cell voltage";
+CM_ SG_ 257 VESCell093 "Energy store cell voltage";
+CM_ SG_ 257 VESCell094 "Energy store cell voltage";
+CM_ SG_ 257 VESCell095 "Energy store cell voltage";
+CM_ SG_ 257 VESCell096 "Energy store cell voltage";
+CM_ SG_ 257 VESCell097 "Energy store cell voltage";
+CM_ SG_ 257 VESCell098 "Energy store cell voltage";
+CM_ SG_ 257 VESCell099 "Energy store cell voltage";
+CM_ SG_ 257 VESCell100 "Energy store cell voltage";
+CM_ SG_ 257 VESCell101 "Energy store cell voltage";
+CM_ SG_ 257 VESCell102 "Energy store cell voltage";
+CM_ SG_ 257 VESCell103 "Energy store cell voltage";
+CM_ SG_ 257 VESCell104 "Energy store cell voltage";
+CM_ SG_ 257 VESCell105 "Energy store cell voltage";
+CM_ SG_ 257 VESCell106 "Energy store cell voltage";
+CM_ SG_ 257 VESCell107 "Energy store cell voltage";
+CM_ SG_ 257 VESCell108 "Energy store cell voltage";
+CM_ SG_ 257 VESCell109 "Energy store cell voltage";
+CM_ SG_ 257 VESCell110 "Energy store cell voltage";
+CM_ SG_ 257 VESCell111 "Energy store cell voltage";
+CM_ SG_ 257 VESCell112 "Energy store cell voltage";
+CM_ SG_ 257 VESCell113 "Energy store cell voltage";
+CM_ SG_ 257 VESCell114 "Energy store cell voltage";
+CM_ SG_ 257 VESCell115 "Energy store cell voltage";
+CM_ SG_ 257 VESCell116 "Energy store cell voltage";
+CM_ SG_ 257 VESCell117 "Energy store cell voltage";
+CM_ SG_ 257 VESCell118 "Energy store cell voltage";
+CM_ SG_ 257 VESCell119 "Energy store cell voltage";
+CM_ SG_ 257 VESCell120 "Energy store cell voltage";
+CM_ SG_ 257 VESCell121 "Energy store cell voltage";
+CM_ SG_ 257 VESCell122 "Energy store cell voltage";
+CM_ SG_ 257 VESCell123 "Energy store cell voltage";
+CM_ SG_ 257 VESCell124 "Energy store cell voltage";
+CM_ SG_ 257 VESCell125 "Energy store cell voltage";
+CM_ SG_ 257 VESCell126 "Energy store cell voltage";
+CM_ SG_ 257 VESCell127 "Energy store cell voltage";
+CM_ SG_ 257 VESCell128 "Energy store cell voltage";
+CM_ SG_ 257 VESCell129 "Energy store cell voltage";
+CM_ SG_ 257 VESCell130 "Energy store cell voltage";
+CM_ SG_ 257 VESCell131 "Energy store cell voltage";
+CM_ SG_ 257 VESCell132 "Energy store cell voltage";
+CM_ SG_ 257 VESCell133 "Energy store cell voltage";
+CM_ SG_ 257 VESCell134 "Energy store cell voltage";
+CM_ SG_ 257 VESCell135 "Energy store cell voltage";
+CM_ SG_ 257 VESCell136 "Energy store cell voltage";
+CM_ SG_ 257 VESCell137 "Energy store cell voltage";
+CM_ SG_ 257 VESCell138 "Energy store cell voltage";
+CM_ SG_ 257 VESCell139 "Energy store cell voltage";
+CM_ SG_ 257 VESCell140 "Energy store cell voltage";
+CM_ SG_ 257 VESCell141 "Energy store cell voltage";
+CM_ SG_ 257 VESCell142 "Energy store cell voltage";
+CM_ SG_ 257 VESCell143 "Energy store cell voltage";
+CM_ SG_ 257 VESCell144 "Energy store cell voltage";
+CM_ SG_ 257 VESCell145 "Energy store cell voltage";
+CM_ SG_ 257 VESCell146 "Energy store cell voltage";
+CM_ SG_ 257 VESCell147 "Energy store cell voltage";
+CM_ SG_ 257 VESCell148 "Energy store cell voltage";
+CM_ SG_ 257 VESCell149 "Energy store cell voltage";
+CM_ SG_ 257 VESCell150 "Energy store cell voltage";
+CM_ SG_ 257 VESCell151 "Energy store cell voltage";
+CM_ SG_ 257 VESCell152 "Energy store cell voltage";
+CM_ SG_ 257 VESCell153 "Energy store cell voltage";
+CM_ SG_ 257 VESCell154 "Energy store cell voltage";
+CM_ SG_ 257 VESCell155 "Energy store cell voltage";
+CM_ SG_ 257 VESCell156 "Energy store cell voltage";
+CM_ SG_ 257 VESCell157 "Energy store cell voltage";
+CM_ SG_ 257 VESCell158 "Energy store cell voltage";
+CM_ SG_ 257 VESCell159 "Energy store cell voltage";
+CM_ SG_ 257 VESCell160 "Energy store cell voltage";
+CM_ SG_ 258 muxEsCells03 "";
+CM_ SG_ 258 VESCell161 "Energy store cell voltage";
+CM_ SG_ 258 VESCell162 "Energy store cell voltage";
+CM_ SG_ 258 VESCell163 "Energy store cell voltage";
+CM_ SG_ 258 VESCell164 "Energy store cell voltage";
+CM_ SG_ 258 VESCell165 "Energy store cell voltage";
+CM_ SG_ 258 VESCell166 "Energy store cell voltage";
+CM_ SG_ 258 VESCell167 "Energy store cell voltage";
+CM_ SG_ 258 VESCell168 "Energy store cell voltage";
+CM_ SG_ 258 VESCell169 "Energy store cell voltage";
+CM_ SG_ 258 VESCell170 "Energy store cell voltage";
+CM_ SG_ 258 VESCell171 "Energy store cell voltage";
+CM_ SG_ 258 VESCell172 "Energy store cell voltage";
+CM_ SG_ 258 VESCell173 "Energy store cell voltage";
+CM_ SG_ 258 VESCell174 "Energy store cell voltage";
+CM_ SG_ 258 VESCell175 "Energy store cell voltage";
+CM_ SG_ 258 VESCell176 "Energy store cell voltage";
+CM_ SG_ 258 VESCell177 "Energy store cell voltage";
+CM_ SG_ 258 VESCell178 "Energy store cell voltage";
+CM_ SG_ 258 VESCell179 "Energy store cell voltage";
+CM_ SG_ 258 VESCell180 "Energy store cell voltage";
+CM_ SG_ 258 VESCell181 "Energy store cell voltage";
+CM_ SG_ 258 VESCell182 "Energy store cell voltage";
+CM_ SG_ 258 VESCell183 "Energy store cell voltage";
+CM_ SG_ 258 VESCell184 "Energy store cell voltage";
+CM_ SG_ 258 VESCell185 "Energy store cell voltage";
+CM_ SG_ 258 VESCell186 "Energy store cell voltage";
+CM_ SG_ 258 VESCell187 "Energy store cell voltage";
+CM_ SG_ 258 VESCell188 "Energy store cell voltage";
+CM_ SG_ 258 VESCell189 "Energy store cell voltage";
+CM_ SG_ 258 VESCell190 "Energy store cell voltage";
+CM_ SG_ 258 VESCell191 "Energy store cell voltage";
+CM_ SG_ 258 VESCell192 "Energy store cell voltage";
+CM_ SG_ 258 VESCell193 "Energy store cell voltage";
+CM_ SG_ 258 VESCell194 "Energy store cell voltage";
+CM_ SG_ 258 VESCell195 "Energy store cell voltage";
+CM_ SG_ 258 VESCell196 "Energy store cell voltage";
+CM_ SG_ 258 VESCell197 "Energy store cell voltage";
+CM_ SG_ 258 VESCell198 "Energy store cell voltage";
+CM_ SG_ 258 VESCell199 "Energy store cell voltage";
+CM_ SG_ 258 VESCell200 "Energy store cell voltage";
+CM_ SG_ 258 VESCell201 "Energy store cell voltage";
+CM_ SG_ 258 VESCell202 "Energy store cell voltage";
+CM_ SG_ 258 VESCell203 "Energy store cell voltage";
+CM_ SG_ 258 VESCell204 "Energy store cell voltage";
+CM_ SG_ 258 VESCell205 "Energy store cell voltage";
+CM_ SG_ 258 VESCell206 "Energy store cell voltage";
+CM_ SG_ 258 VESCell207 "Energy store cell voltage";
+CM_ SG_ 258 VESCell208 "Energy store cell voltage";
+CM_ SG_ 258 VESCell209 "Energy store cell voltage";
+CM_ SG_ 258 VESCell210 "Energy store cell voltage";
+CM_ SG_ 258 VESCell211 "Energy store cell voltage";
+CM_ SG_ 258 VESCell212 "Energy store cell voltage";
+CM_ SG_ 258 VESCell213 "Energy store cell voltage";
+CM_ SG_ 258 VESCell214 "Energy store cell voltage";
+CM_ SG_ 258 VESCell215 "Energy store cell voltage";
+CM_ SG_ 258 VESCell216 "Energy store cell voltage";
+CM_ SG_ 258 VESCell217 "Energy store cell voltage";
+CM_ SG_ 258 VESCell218 "Energy store cell voltage";
+CM_ SG_ 258 VESCell219 "Energy store cell voltage";
+CM_ SG_ 258 VESCell220 "Energy store cell voltage";
+CM_ SG_ 258 VESCell221 "Energy store cell voltage";
+CM_ SG_ 258 VESCell222 "Energy store cell voltage";
+CM_ SG_ 258 VESCell223 "Energy store cell voltage";
+CM_ SG_ 258 VESCell224 "Energy store cell voltage";
+CM_ SG_ 258 VESCell225 "Energy store cell voltage";
+CM_ SG_ 258 VESCell226 "Energy store cell voltage";
+CM_ SG_ 258 VESCell227 "Energy store cell voltage";
+CM_ SG_ 258 VESCell228 "Energy store cell voltage";
+CM_ SG_ 258 VESCell229 "Energy store cell voltage";
+CM_ SG_ 258 VESCell230 "Energy store cell voltage";
+CM_ SG_ 258 VESCell231 "Energy store cell voltage";
+CM_ SG_ 258 VESCell232 "Energy store cell voltage";
+CM_ SG_ 258 VESCell233 "Energy store cell voltage";
+CM_ SG_ 258 VESCell234 "Energy store cell voltage";
+CM_ SG_ 258 VESCell235 "Energy store cell voltage";
+CM_ SG_ 258 VESCell236 "Energy store cell voltage";
+CM_ SG_ 258 VESCell237 "Energy store cell voltage";
+CM_ SG_ 258 VESCell238 "Energy store cell voltage";
+CM_ SG_ 258 VESCell239 "Energy store cell voltage";
+CM_ SG_ 258 VESCell240 "Energy store cell voltage";
+CM_ SG_ 261 muxEsModuleVoltages "";
+CM_ SG_ 261 VESModule01 "Energy store module voltage";
+CM_ SG_ 261 VESModule02 "Energy store module voltage";
+CM_ SG_ 261 VESModule03 "Energy store module voltage";
+CM_ SG_ 261 VESModule04 "Energy store module voltage";
+CM_ SG_ 261 VESModule05 "Energy store module voltage";
+CM_ SG_ 261 VESModule06 "Energy store module voltage";
+CM_ SG_ 261 VESModule07 "Energy store module voltage";
+CM_ SG_ 261 VESModule08 "Energy store module voltage";
+CM_ SG_ 261 VESModule09 "Energy store module voltage";
+CM_ SG_ 261 VESModule10 "Energy store module voltage";
+CM_ SG_ 261 VESModule11 "Energy store module voltage";
+CM_ SG_ 261 VESModule12 "Energy store module voltage";
+CM_ SG_ 261 VESModule13 "Energy store module voltage";
+CM_ SG_ 261 VESModule14 "Energy store module voltage";
+CM_ SG_ 261 VESModule15 "Energy store module voltage";
+CM_ SG_ 261 VESModule16 "Energy store module voltage";
+CM_ SG_ 261 VESModule17 "Energy store module voltage";
+CM_ SG_ 261 VESModule18 "Energy store module voltage";
+CM_ SG_ 261 VESModule19 "Energy store module voltage";
+CM_ SG_ 261 VESModule20 "Energy store module voltage";
+CM_ SG_ 512 muxEsCellTemps "";
+CM_ SG_ 512 TESCell01 "Energy store cell temperature";
+CM_ SG_ 512 TESCell02 "Energy store cell temperature";
+CM_ SG_ 512 TESCell03 "Energy store cell temperature";
+CM_ SG_ 512 TESCell04 "Energy store cell temperature";
+CM_ SG_ 512 TESCell05 "Energy store cell temperature";
+CM_ SG_ 512 TESCell06 "Energy store cell temperature";
+CM_ SG_ 512 TESCell07 "Energy store cell temperature";
+CM_ SG_ 512 TESCell08 "Energy store cell temperature";
+CM_ SG_ 512 TESCell09 "Energy store cell temperature";
+CM_ SG_ 512 TESCell10 "Energy store cell temperature";
+CM_ SG_ 512 TESCell11 "Energy store cell temperature";
+CM_ SG_ 512 TESCell12 "Energy store cell temperature";
+CM_ SG_ 512 TESCell13 "Energy store cell temperature";
+CM_ SG_ 512 TESCell14 "Energy store cell temperature";
+CM_ SG_ 512 TESCell15 "Energy store cell temperature";
+CM_ SG_ 512 TESCell16 "Energy store cell temperature";
+CM_ SG_ 512 TESCell17 "Energy store cell temperature";
+CM_ SG_ 512 TESCell18 "Energy store cell temperature";
+CM_ SG_ 512 TESCell19 "Energy store cell temperature";
+CM_ SG_ 512 TESCell20 "Energy store cell temperature";
+CM_ SG_ 512 TESCell21 "Energy store cell temperature";
+CM_ SG_ 512 TESCell22 "Energy store cell temperature";
+CM_ SG_ 512 TESCell23 "Energy store cell temperature";
+CM_ SG_ 512 TESCell24 "Energy store cell temperature";
+CM_ SG_ 512 TESCell25 "Energy store cell temperature";
+CM_ SG_ 512 TESCell26 "Energy store cell temperature";
+CM_ SG_ 512 TESCell27 "Energy store cell temperature";
+CM_ SG_ 512 TESCell28 "Energy store cell temperature";
+CM_ SG_ 512 TESCell29 "Energy store cell temperature";
+CM_ SG_ 512 TESCell30 "Energy store cell temperature";
+CM_ SG_ 512 TESCell31 "Energy store cell temperature";
+CM_ SG_ 512 TESCell32 "Energy store cell temperature";
+CM_ SG_ 512 TESCell33 "Energy store cell temperature";
+CM_ SG_ 512 TESCell34 "Energy store cell temperature";
+CM_ SG_ 512 TESCell35 "Energy store cell temperature";
+CM_ SG_ 512 TESCell36 "Energy store cell temperature";
+CM_ SG_ 512 TESCell37 "Energy store cell temperature";
+CM_ SG_ 512 TESCell38 "Energy store cell temperature";
+CM_ SG_ 512 TESCell39 "Energy store cell temperature";
+CM_ SG_ 512 TESCell40 "Energy store cell temperature";
+CM_ SG_ 512 TESCell41 "Energy store cell temperature";
+CM_ SG_ 512 TESCell42 "Energy store cell temperature";
+CM_ SG_ 512 TESCell43 "Energy store cell temperature";
+CM_ SG_ 512 TESCell44 "Energy store cell temperature";
+CM_ SG_ 512 TESCell45 "Energy store cell temperature";
+CM_ SG_ 512 TESCell46 "Energy store cell temperature";
+CM_ SG_ 512 TESCell47 "Energy store cell temperature";
+CM_ SG_ 512 TESCell48 "Energy store cell temperature";
+CM_ SG_ 512 TESCell49 "Energy store cell temperature";
+CM_ SG_ 512 TESCell50 "Energy store cell temperature";
+CM_ SG_ 512 TESCell51 "Energy store cell temperature";
+CM_ SG_ 512 TESCell52 "Energy store cell temperature";
+CM_ SG_ 512 TESCell53 "Energy store cell temperature";
+CM_ SG_ 512 TESCell54 "Energy store cell temperature";
+CM_ SG_ 512 TESCell55 "Energy store cell temperature";
+CM_ SG_ 512 TESCell56 "Energy store cell temperature";
+CM_ SG_ 512 TESCell57 "Energy store cell temperature";
+CM_ SG_ 512 TESCell58 "Energy store cell temperature";
+CM_ SG_ 512 TESCell59 "Energy store cell temperature";
+CM_ SG_ 512 TESCell60 "Energy store cell temperature";
+CM_ SG_ 512 TESCell61 "Energy store cell temperature";
+CM_ SG_ 512 TESCell62 "Energy store cell temperature";
+CM_ SG_ 512 TESCell63 "Energy store cell temperature";
+CM_ SG_ 512 TESCell64 "Energy store cell temperature";
+CM_ SG_ 512 TESCell65 "Energy store cell temperature";
+CM_ SG_ 512 TESCell66 "Energy store cell temperature";
+CM_ SG_ 512 TESCell67 "Energy store cell temperature";
+CM_ SG_ 512 TESCell68 "Energy store cell temperature";
+CM_ SG_ 512 TESCell69 "Energy store cell temperature";
+CM_ SG_ 512 TESCell70 "Energy store cell temperature";
+CM_ SG_ 512 TESCell71 "Energy store cell temperature";
+CM_ SG_ 512 TESCell72 "Energy store cell temperature";
+CM_ SG_ 512 TESCell73 "Energy store cell temperature";
+CM_ SG_ 512 TESCell74 "Energy store cell temperature";
+CM_ SG_ 512 TESCell75 "Energy store cell temperature";
+CM_ SG_ 512 TESCell76 "Energy store cell temperature";
+CM_ SG_ 512 TESCell77 "Energy store cell temperature";
+CM_ SG_ 512 TESCell78 "Energy store cell temperature";
+CM_ SG_ 512 TESCell79 "Energy store cell temperature";
+CM_ SG_ 512 TESCell80 "Energy store cell temperature";
+CM_ SG_ 512 TESModule01 "ES module board temperature";
+CM_ SG_ 512 TESModule02 "ES module board temperature";
+CM_ SG_ 512 TESModule03 "ES module board temperature";
+CM_ SG_ 512 TESModule04 "ES module board temperature";
+CM_ SG_ 512 TESModule05 "ES module board temperature";
+CM_ SG_ 512 TESModule06 "ES module board temperature";
+CM_ SG_ 512 TESModule07 "ES module board temperature";
+CM_ SG_ 512 TESModule08 "ES module board temperature";
+CM_ SG_ 512 TESModule09 "ES module board temperature";
+CM_ SG_ 512 TESModule10 "ES module board temperature";
+CM_ SG_ 512 TESModule11 "ES module board temperature";
+CM_ SG_ 512 TESModule12 "ES module board temperature";
+CM_ SG_ 512 TESModule13 "ES module board temperature";
+CM_ SG_ 512 TESModule14 "ES module board temperature";
+CM_ SG_ 512 TESModule15 "ES module board temperature";
+CM_ SG_ 512 TESModule16 "ES module board temperature";
+CM_ SG_ 512 TESModule17 "ES module board temperature";
+CM_ SG_ 512 TESModule18 "ES module board temperature";
+CM_ SG_ 512 TESModule19 "ES module board temperature";
+CM_ SG_ 512 TESModule20 "ES module board temperature";
+CM_ SG_ 1280 muxEsModuleStatus "";
+CM_ SG_ 1280 NESModuleFaultCounter01 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason01 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter02 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason02 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter03 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason03 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter04 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason04 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter05 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason05 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter06 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason06 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter07 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason07 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter08 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason08 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter09 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason09 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter10 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason10 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter11 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason11 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter12 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason12 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter13 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason13 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter14 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason14 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter15 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason15 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter16 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason16 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter17 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason17 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter18 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason18 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter19 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason19 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1280 NESModuleFaultCounter20 "Number of self test failures on front end IC";
+CM_ SG_ 1280 NESModuleFaultReason20 "Reason the last self test failed (0 Ok, 1 Mux failure, 2 Reference OOR, 3 Register Error)";
+CM_ SG_ 1281 muxEsModuleStatus2 "";
+CM_ SG_ 1281 NESModuleCommsErrors01 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef01 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef02 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors02 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors03 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef03 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef04 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors04 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors05 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef05 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef06 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors06 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors07 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef07 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef08 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors08 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors09 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef09 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef10 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors10 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors11 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef11 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef12 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors12 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors13 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef13 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef14 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors14 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors15 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef15 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef16 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors16 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors17 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef17 "ES module reference voltage";
+CM_ SG_ 1281 VESModuleRef18 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors18 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 NESModuleCommsErrors19 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef19 "ES module reference voltage";
+CM_ SG_ 1281 NESModuleCommsErrors20 "Number of invalid communications with the front end IC";
+CM_ SG_ 1281 VESModuleRef20 "ES module reference voltage";
+CM_ SG_ 1281 NESOpenWire01 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire02 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire03 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire04 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire05 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire06 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire07 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire08 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire09 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire10 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire11 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire12 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire13 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire14 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire15 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire16 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire17 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire18 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire19 "Count of the number of open wire detections";
+CM_ SG_ 1281 NESOpenWire20 "Count of the number of open wire detections";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 1 1001;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgCycleTime" 1000;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 256 5;
+BA_ "GenMsgCycleTime" BO_ 257 5;
+BA_ "GenMsgCycleTime" BO_ 258 5;
+BA_ "GenMsgCycleTime" BO_ 261 25;
+BA_ "GenMsgCycleTime" BO_ 512 50;
+BA_ "GenMsgCycleTime" BO_ 1280 1000;
+BA_ "GenMsgCycleTime" BO_ 1281 1000;

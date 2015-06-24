@@ -1,0 +1,15 @@
+Signature line: 1
+Host ref line: 7
+Ref date line: 2
+Start date line: 9
+Duration line: 12
+
+Signature: 33554580
+
+HDD Serial: PDVVD008J5RE2B
+
+Reference date: 09/03/1993
+
+Starting date: 7951
+
+Duration: 99451

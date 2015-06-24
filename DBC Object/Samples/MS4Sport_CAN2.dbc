@@ -1,0 +1,230 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ABS_M4 Megaline_Gearbox MS4_ENGINE_ECU
+
+
+BO_ 256 AGS1_gearbox_control_unit: 8 Megaline_Gearbox
+ SG_ activate_cut : 61|1@1+ (1,0) [0|1] "flag" Vector__XXX
+ SG_ activate_blip : 60|1@1- (1,0) [0|1] "flag" Vector__XXX
+ SG_ state_cut : 56|4@1+ (1,0) [0|2] "" Vector__XXX
+ SG_ cut_level_gcu : 48|8@1+ (0.01960784,0) [0|4.9999992] "" Vector__XXX
+ SG_ target_engine_speed : 32|14@1+ (1,0) [0|16383] "rpm" Vector__XXX
+ SG_ blip_state : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ shift_state : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ gearpot : 8|10@1+ (4.888,0) [0|5000] "mV" Vector__XXX
+ SG_ engaged_gear : 0|8@1+ (0.5,-1.5) [-1.5|126] "" Vector__XXX
+
+BO_ 1472 ABS_switch_state_slip_and_speed: 8 ABS_M4
+ SG_ ay1_Bremse60ABS : 48|16@1+ (0.00012742,-4.1768) [-4.7168|4.7167] "g" Vector__XXX
+ SG_ ax1_Bremse60ABS : 32|16@1+ (0.00012742,-4.1768) [-4.7168|4.7167] "g" Vector__XXX
+ SG_ blsABS : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ p_HzABS : 8|16@1- (0.0153,0) [-42.5|425] "bar" Vector__XXX
+ SG_ switchstateABS : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 586 ABS_wheelspeeds: 8 ABS_M4
+ SG_ speedABSrr : 48|16@1+ (0.015625,0) [0|100] "m/s" Vector__XXX
+ SG_ speedABSrl : 32|16@1+ (0.015625,0) [0|100] "m/s" Vector__XXX
+ SG_ speedABSfr : 16|16@1+ (0.015625,0) [0|100] "m/s" Vector__XXX
+ SG_ speedABSfl : 0|16@1+ (0.015625,0) [0|100] "m/s" Vector__XXX
+
+BO_ 1916 Boost_Pressures_Wastegate: 8 MS4_ENGINE_ECU
+ SG_ pwg_sp : 40|8@1+ (25.7,0) [0|0] "mBar" Vector__XXX
+ SG_ wgdc_2_wgdchold : 56|8@1+ (0.392156862,0) [0|0] "%" Vector__XXX
+ SG_ wgdc_wgdcvent : 48|8@1+ (0.392156862,0) [0|0] "%" Vector__XXX
+ SG_ p22_sp : 32|8@1+ (25.7,0) [0|0] "mBar" Vector__XXX
+ SG_ p22_m : 7|16@0+ (0.1,0) [0|0] "mBar" Vector__XXX
+ SG_ p22_2m_pwg_m : 23|16@0+ (0.1,0) [0|0] "mBar" Vector__XXX
+
+BO_ 1914 States_Temp_Press: 8 MS4_ENGINE_ECU
+ SG_ speedlimitreq_b : 24|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ oillamp_b m5 : 62|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ battlow_b m5 : 61|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ shled5_b m5 : 60|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ shled4_b m5 : 59|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ shled3_b m5 : 58|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ shled2_b m5 : 57|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ shled1_b m5 : 56|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ tex_2 m5 : 48|8@1+ (5,-40) [0|0] "°C" Vector__XXX
+ SG_ tex m5 : 40|8@1+ (5,-40) [0|0] "°C" Vector__XXX
+ SG_ tmot m5 : 32|8@1+ (1,-40) [0|0] "°C" Vector__XXX
+ SG_ tlam_2 m4 : 56|8@1+ (5,-40) [0|0] "°C" Vector__XXX
+ SG_ tlam m4 : 48|8@1+ (5,-40) [0|0] "°C" Vector__XXX
+ SG_ toil m4 : 40|8@1+ (1,-40) [0|0] "°C" Vector__XXX
+ SG_ tfuel m4 : 32|8@1+ (1,-40) [0|0] "°C" Vector__XXX
+ SG_ fueltank m3 : 55|16@0- (0.005726562,0) [0|0] "L" Vector__XXX
+ SG_ fuellap m3 : 39|16@0+ (0.00035791,0) [0|0] "L" Vector__XXX
+ SG_ tair m2 : 56|8@1+ (1,-40) [0|0] "°C" Vector__XXX
+ SG_ mappos m2 : 48|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ pamb m2 : 39|16@0+ (0.1,0) [0|0] "mBar" Vector__XXX
+ SG_ pfuel m1 : 56|8@1+ (0.0514,0) [0|0] "bar" Vector__XXX
+ SG_ poil m1 : 40|8@1+ (0.0514,0) [0|0] "bar" Vector__XXX
+ SG_ pcrank m1 : 32|8@1+ (5,0) [0|0] "mbar" Vector__XXX
+ SG_ pwat m1 : 48|8@1+ (0.0514,0) [0|0] "bar" Vector__XXX
+ SG_ etbsys_e : 25|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ knockenable_b : 26|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ knockadaptenable_b : 27|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ startend_b : 28|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ revlimit_b : 29|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ rev_b : 30|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ ignoff_b : 31|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ speedlimit_b : 16|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ phsokset_b : 17|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ phsok_b : 18|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ oillamp_b : 19|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ mil_b : 20|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ laptrig_b : 21|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ lap_b : 22|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ idle_b : 23|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ tc_b : 8|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ gearcut_b : 9|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ lamctrl_2b : 10|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ lamctrl_b : 11|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ injstartphase_b : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ injenrich_b : 13|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ injcutin_b : 14|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ injcut_b : 15|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ rowcounter_0x77A M : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1913 Electronic_Throttle_Control: 8 MS4_ENGINE_ECU
+ SG_ lap_c : 56|8@1+ (1,0) [0|0] "laps" Vector__XXX
+ SG_ batt_u : 48|8@1+ (0.070694901961,0) [0|0] "V" Vector__XXX
+ SG_ camshaftpos : 40|8@1+ (0.5,0) [0|0] "°KW" Vector__XXX
+ SG_ p1 : 31|16@0+ (0.1,0) [0|0] "mBar" Vector__XXX
+ SG_ aps : 16|8@1+ (0.5,0) [0|0] "%" Vector__XXX
+ SG_ etb_sp : 8|8@1+ (0.5,0) [0|0] "%" Vector__XXX
+ SG_ etb : 0|8@1+ (0.5,0) [0|0] "%" Vector__XXX
+
+BO_ 1912 Traction_Control: 8 MS4_ENGINE_ECU
+ SG_ vref : 55|16@0+ (0.0078125,0) [0|0] "kph" Vector__XXX
+ SG_ vdraxle : 39|16@0+ (0.0078125,0) [0|0] "kph" Vector__XXX
+ SG_ slra : 24|8@1+ (0.078125,0) [0|0] "%" Vector__XXX
+ SG_ slipsp : 16|8@1+ (0.078125,0) [0|0] "%" Vector__XXX
+ SG_ tcsw : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ tcpfac : 0|8@1- (0.78125,0) [0|0] "%" Vector__XXX
+
+BO_ 1911 Gear_Dashboard_Acceleration: 8 MS4_ENGINE_ECU
+ SG_ accz : 56|8@1- (0.03125,0) [0|0] "g" Vector__XXX
+ SG_ accy : 48|8@1- (0.03125,0) [0|0] "g" Vector__XXX
+ SG_ accx : 40|8@1- (0.03125,0) [0|0] "g" Vector__XXX
+ SG_ ddugear : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ gearcut_u : 24|8@1+ (0.019607843,0) [0|0] "V" Vector__XXX
+ SG_ gearratio : 16|8@1+ (0.0625,0) [0|0] "" Vector__XXX
+ SG_ gcstate : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ gear : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1910 Lapfunc: 8 MS4_ENGINE_ECU
+ SG_ laptimefast : 55|16@0+ (0.01,0) [0|0] "s" Vector__XXX
+ SG_ laptimediff : 39|16@0+ (0.01,0) [0|0] "s" Vector__XXX
+ SG_ laptime : 23|16@0+ (0.01,0) [0|0] "s" Vector__XXX
+ SG_ lapdist : 7|16@0+ (1,0) [0|0] "m" Vector__XXX
+
+BO_ 1909 Speed: 8 MS4_ENGINE_ECU
+ SG_ speedrr : 40|8@1+ (2,0) [0|0] "kph" Vector__XXX
+ SG_ speedrl : 32|8@1+ (2,0) [0|0] "kph" Vector__XXX
+ SG_ speedfr : 24|8@1+ (2,0) [0|0] "kph" Vector__XXX
+ SG_ speedfl : 16|8@1+ (2,0) [0|0] "kph" Vector__XXX
+ SG_ speed : 7|16@0+ (0.0078125,0) [0|0] "kph" Vector__XXX
+
+BO_ 1908 Lambda: 8 MS4_ENGINE_ECU
+ SG_ lammap_2 : 56|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ lammap : 48|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ lam_2 : 40|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ lam : 32|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ lamp_2 : 24|8@1- (0.25,0) [0|0] "%" Vector__XXX
+ SG_ lamp : 16|8@1- (0.25,0) [0|0] "%" Vector__XXX
+ SG_ lami_2 : 8|8@1- (0.25,0) [0|0] "%" Vector__XXX
+ SG_ lami : 0|8@1- (0.25,0) [0|0] "%" Vector__XXX
+
+BO_ 1907 Ignition_Rev_Ath: 8 MS4_ENGINE_ECU
+ SG_ dath : 48|8@1- (12,0) [0|0] "%/s" Vector__XXX
+ SG_ ath : 40|8@1+ (0.390625,0) [0|0] "%" Vector__XXX
+ SG_ rev : 31|16@0+ (0.5,0) [0|0] "1/min" Vector__XXX
+ SG_ tdwell : 16|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ignmap : 8|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ignbase : 0|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+
+BO_ 1906 Ignition: 8 MS4_ENGINE_ECU
+ SG_ ign_8 : 56|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_7 : 48|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_6 : 40|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_5 : 32|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_4 : 24|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_3 : 16|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_2 : 8|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+ SG_ ign_1 : 0|8@1- (0.75,0) [0|0] "°KW" Vector__XXX
+
+BO_ 1905 Injection_2: 8 MS4_ENGINE_ECU
+ SG_ lamctrl_2k : 48|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ lamctrl_k : 40|8@1+ (0.0078125,0) [0|0] "" Vector__XXX
+ SG_ injoff : 32|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ injang : 24|8@1+ (2.8125,0) [0|0] "°KW" Vector__XXX
+ SG_ timap : 16|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ tibatt_o : 8|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ tibase : 0|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+
+BO_ 1904 Injection_1: 8 MS4_ENGINE_ECU
+ SG_ ti_8 : 56|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_7 : 48|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_6 : 40|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_5 : 32|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_4 : 24|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_3 : 16|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_2 : 8|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+ SG_ ti_1 : 0|8@1+ (0.1,0) [0|0] "ms" Vector__XXX
+
+
+
+CM_ SG_ 256 activate_cut "Aktiviert die Cut Funktion in der Motor ECU";
+CM_ SG_ 256 activate_blip "Aktiviert das E-Gas für Blipfunktion";
+CM_ SG_ 256 state_cut "If an shift is requested and will be done the bit up or down will be set until the shift is complete ready. These Bit also works like a trigger for the data aquisition system.";
+CM_ SG_ 256 cut_level_gcu "simulated voltage of gearpoti from the GCU, used to trigger the gear cut / blipper functionality in the ECU";
+CM_ SG_ 256 target_engine_speed "When a shift is requested, the target engine speed is the calculated value of the engine rpm after the succeded shift. If no shift is requested targed engine speed is the same as engine speed.";
+CM_ SG_ 256 blip_state "information byte which gives an overview of the blip and engine cut progress";
+CM_ SG_ 256 shift_state "information byte which gives an overview of the shift progress";
+CM_ SG_ 256 gearpot "Voltage of barrel possition sensor. Main sensor for AGS system";
+CM_ SG_ 256 engaged_gear "engaged gear detected from the AGS sytem";
+CM_ SG_ 1916 pwg_sp "Signal nur  mit boost2license_b verfügbar";
+CM_ SG_ 1916 wgdc_2_wgdchold "Signal beinhaltet abhängig von boost2license_b entweder wgdc_2  oder wgdchold
+";
+CM_ SG_ 1916 wgdc_wgdcvent "Signal beinhaltet abhängig von boost2license_b entweder wgdc  oder wgdcvent
+";
+CM_ SG_ 1916 p22_2m_pwg_m "Signal beinhaltet abhängig von boost2license_b entweder p22_2m oder pwg_m
+";
+BA_DEF_ BO_  "Quantisierung" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "Quantisierung" "CAN";
+BA_DEF_DEF_  "BusType" "CAN";
+

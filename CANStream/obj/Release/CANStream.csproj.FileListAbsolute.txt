@@ -1,0 +1,196 @@
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\CANStream.exe
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\ResolveAssemblyReference.cache
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleDataAssociation.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleCreation.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.MainForm.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Properties.Resources.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\GenerateResource.read.1.tlog
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\GenerateResource.write.1.tlog
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.exe
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\netchartdir.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\netchartdir.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_About.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_ContextualList.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_TrcFileSelection.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannel.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannelTest.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordUserInformations.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_BuiltInSignal.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleEdition.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataBrowser.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventEdition.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionEdition.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow Release note.txt
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\CANStream Release notes.txt
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordEventInformation.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordSessionInfo.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_EventDetails.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionSelection.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer_EventSession_Info.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_CS_CAN_Bus.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleRecordImport.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow Release note.txt
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\CANStream Release notes.txt
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\CANStream.exe
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.dll
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.dll
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.xml
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.xml
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\bin\Release\netchartdir.xml
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.csprojResolveAssemblyReference.cache
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_CS_CAN_Bus.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordEventInformation.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordSessionInfo.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordUserInformations.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_About.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_BuiltInSignal.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_ContextualList.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleDataAssociation.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleCreation.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleEdition.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleRecordImport.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataBrowser.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer_EventSession_Info.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_EventDetails.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventEdition.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionEdition.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventSessionSelection.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_TrcFileSelection.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannel.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannelTest.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Icones.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.MainForm.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Properties.Resources.resources
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.csproj.GenerateResource.Cache
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.exe
+G:\MMM USA\Documents\Tools\Visual Studio 2010\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_SpyDataViewer.resources
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow Release note.txt
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\CANStream Release notes.txt
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\CANStream.exe
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.dll
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.dll
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.xml
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.xml
+H:\Visual Studio\Projects\CANStream\CANStream\bin\Release\netchartdir.xml
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.csprojResolveAssemblyReference.cache
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_CS_CAN_Bus.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordEventInformation.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordSessionInfo.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordUserInformations.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_SpyDataViewer.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_About.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_BuiltInSignal.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_ContextualList.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleDataAssociation.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleCreation.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleEdition.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleRecordImport.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataBrowser.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer_EventSession_Info.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_EventDetails.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventEdition.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionEdition.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventSessionSelection.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_TrcFileSelection.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannel.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannelTest.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Icones.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.MainForm.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Properties.Resources.resources
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.csproj.GenerateResource.Cache
+H:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.exe
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow Release note.txt
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\CANStream Release notes.txt
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\CANStream.exe
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.dll
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.dll
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Microsoft.Office.Interop.Excel.dll
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\netchartdir_cp.dll
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\SD_AppLicence.dll
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.xml
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.xml
+G:\Visual Studio\Projects\CANStream\CANStream\bin\Release\netchartdir_cp.xml
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.csprojResolveAssemblyReference.cache
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_CS_CAN_Bus.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordEventInformation.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordSessionInfo.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordUserInformations.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_SpyDataViewer.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_About.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_BuiltInSignal.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_ContextualList.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleDataAssociation.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleCreation.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleEdition.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleRecordImport.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataBrowser.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer_EventSession_Info.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_EventDetails.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventEdition.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionEdition.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventSessionSelection.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_TrcFileSelection.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannel.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannelTest.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Icones.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.MainForm.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.Properties.Resources.resources
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.csproj.GenerateResource.Cache
+G:\Visual Studio\Projects\CANStream\CANStream\obj\Release\CANStream.exe
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow Release note.txt
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\CANStream Release notes.txt
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\CANStream.exe
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Microsoft.Office.Interop.Excel.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\netchartdir_cp.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\SD_AppLicence.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Ctrl_GraphWindow.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release\netchartdir_cp.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.csprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_CS_CAN_Bus.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordEventInformation.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordSessionInfo.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_RecordUserInformations.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Ctrl_SpyDataViewer.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_About.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_BuiltInSignal.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_ContextualList.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleDataAssociation.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleCreation.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleEdition.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_CycleRecordImport.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataBrowser.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_DataViewer_EventSession_Info.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_EventDetails.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventEdition.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordSessionEdition.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_RecordEventSessionSelection.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_TrcFileSelection.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannel.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Frm_VirtualChannelTest.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Icones.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.MainForm.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.Properties.Resources.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.csproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\obj\Release\CANStream.exe

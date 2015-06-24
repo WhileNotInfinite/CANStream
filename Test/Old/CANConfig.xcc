@@ -1,0 +1,102 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Commandes" Identifier="200">
+    <RxTx>Tx</RxTx>
+    <Period>1000</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Speed">
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Power">
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Torque">
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Flag">
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="Data" Identifier="204">
+    <RxTx>Tx</RxTx>
+    <Period>1000</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Iq_Ref">
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_Ref">
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Iq_Meas">
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_Meas">
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="Diag" Identifier="208">
+    <RxTx>Tx</RxTx>
+    <Period>1000</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Hardware">
+        <StartBit>0</StartBit>
+        <Length>32</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="User">
+        <StartBit>32</StartBit>
+        <Length>32</Length>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

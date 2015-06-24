@@ -1,0 +1,133 @@
+﻿<html>
+	
+<head>
+	<title>Reference cursor</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="value, graphic, cursor, reference, difference, gradient, percentage, coordinates, clear, set, lock, mode, legend, line, horizontal, vertical">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Referencecursor");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Reference cursor</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Dataanalysis.html">Data analysis</a> &rsaquo;&rsaquo; <a href="Graphicwindow.html">Graphic window</a> &rsaquo;&rsaquo; <a href="Analysisfunctions.html">Analysis functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Analysisfunctions.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Maincursor.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Zoom.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">The reference cursor is an extension of the </span><a class="rvts22" href="Maincursor.html">'Main cursor'</a><span class="rvts6"> function. It permits to compare values of all traces between two particular points in the graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_07.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Click on the 'Reference cursor </span><img alt="" style="padding : 1px;" src="lib/Reference_Cursor_16.png"><span class="rvts6"> \ Set' menu of tool bar to set the reference cursor position. This function is also accessible in the 'Reference Cursor\Set' command of the graphic window contextual menu, or by pressing the 'R' key of the keyboard.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_08.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Place the reference at the position of your choice and then click the 'Reference cursor </span><img alt="" style="padding : 1px;" src="lib/Reference_Cursor_16.png"><span class="rvts6"> \ Lock' command of the tool bar or the 'Reference Cursor\Lock' command of the graphic window contextual menu, or by press the 'Enter' to lock the reference cursor position and get the main cursor back on.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_09.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Main cursor being back, it can be place anywhere in the graph in order to compare the main cursor value and the reference cursor value.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Finally, once done with the comparison, click the 'Reference cursor </span><img alt="" style="padding : 1px;" src="lib/Reference_Cursor_16.png"><span class="rvts6"> \ Clear' command of the tool bar or the 'Reference Cursor\Clear' command of the graphic window contextual menu, or by press the 'Escape' to clear the reference cursor.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The biggest benefit of the reference cursor is that it shows both reference and main cursor values in the </span><a class="rvts22" href="Legend.html">legend</a><span class="rvts6">, leading to have a direct cursors value comparison.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_06.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">When the reference cursor is active, four statistics are added to the legend:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Reference cursor value</span><span class="rvts6">: The actual value of the trace at the reference cursor position.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Reference cursor value difference</span><span class="rvts6">: The difference in value between the main and the reference cursor.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Reference cursor value difference percentage</span><span class="rvts6">: The difference in percentage of the reference value between the main and the reference cursors values.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Reference cursor gradient</span><span class="rvts6">: Value the gradient between the main and the reference cursor values. Gradient being defined as the difference in value over cursors X axis values difference.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">There are three kinds of reference cursor:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">None</span><span class="rvts6">: Reference cursor is disabled.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Vertical</span><span class="rvts6">: Reference cursor is a vertical line. This mode is intended to be used with any main cursor type except the 'Horizontal line' main cursor type.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Horizontal</span><span class="rvts6">: Reference cursor is a horizontal line. This mode is intended to be used with any main cursor type except the 'Vertical line' main cursor type.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Use the 'Reference cursor </span><img alt="" style="padding : 1px;" src="lib/Reference_Cursor_16.png"><span class="rvts6"> \ Mode' command of the tool bar or the 'Reference Cursor\Mode' command of the graphic window contextual menu to change the current reference cursor type.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_10.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">As per the main cursor, the reference cursor aspect can be customized in the graphic configuration form. Please check the </span><a class="rvts22" href="Cursorsproperties.html">'Cursors properties</a><span class="rvts6">' section for more details.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/help-authoring-tool">Free help authoring tool</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

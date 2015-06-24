@@ -1,0 +1,123 @@
+﻿<html>
+	
+<head>
+	<title>Serie format</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="serie, graphic, chart, window, format, decimal, hexadecimal, binary, enum, text, value, add, clear, delete, tool bar">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Serieformat");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Serie format</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Dataanalysis.html">Data analysis</a> &rsaquo;&rsaquo; <a href="Graphicwindow.html">Graphic window</a> &rsaquo;&rsaquo; <a href="Graphicwindowsettings.html">Graphic window settings</a> &rsaquo;&rsaquo; <a href="Graphicseriedetailedconfiguratio.html">Graphic serie detailed configuration window</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Graphicseriedetailedconfiguratio.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Seriegeneralproperties.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="SerieYAxis.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">The 'Format' tab contains serie value format properties</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Config_22.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The serie's format describes how physical values of the serie are formated.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">For example, if a the value of a serie is 21.47895526 in the data file, using the format property this value can be shown in the graphic as 21.5 or 21.48.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Five formats are available:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Auto</span><span class="rvts6">: Value is shown as a decimal value and number of decimal digits is a function of the span of plotted samples.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Decimal</span><span class="rvts6">: Value is shown as a decimal value and number of decimal digits is set by the user.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Hexadecimal</span><span class="rvts6">: Value is shown as an hexadecimal value, decimal part of the value being skipped.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Binary</span><span class="rvts6">: Value is shown as a binary value, decimal part of the value being skipped.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Enum</span><span class="rvts6">: A text is set for every possible value and this text is shown in the legend.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<h3 class="rvps17"><span class="rvts0"><span class="rvts35">Enum format</span></span></h3>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><span class="rvts6">To configure an enumeration for a serie, first select 'Enum' in the 'Format' list. Once 'Enum' selected, the enumeration configuration grid becomes active.</span></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Graph_Config_23.png"></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><span class="rvts6">The 'Enum' panel is composed by a tool bar, containing enumeration control commands, and a grid containing every possible values of the serie and their corresponding text.</span></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Graph_Add_Item_16.png"><span class="rvts6"> </span><span class="rvts24">Add enum</span><span class="rvts6">: Add a value into the enumeration. Set a value into the 'Value' cell and the corresponding text into the 'Text' cell.</span></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Graph_Del_Items_16.png"><span class="rvts6"> </span><span class="rvts24">Delete enum</span><span class="rvts6">: Delete a value from the enumeration.</span></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Graph_Clear_Items_16.png"><span class="rvts6"> </span><span class="rvts24">Clear enums</span><span class="rvts6">: Remove all values of the enumeration.</span></p>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Example of graphic using enum format.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Config_24.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour">Easily create Web Help sites</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

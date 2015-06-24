@@ -1,0 +1,24 @@
+<CS_RecordUserInfoCollection>
+  <Informations>
+    <UserInformation>
+      <Title>Version</Title>
+      <Value>1.3</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Cycle</Title>
+      <Value>Gbx_DBG_Cyle_Base.csc</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>CAN Config</Title>
+      <Value>Gbx_VinceDebug_CAN.xcc</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Source</Title>
+      <Value>CANSteam station</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Version station</Title>
+      <Value>CANStream 1.1</Value>
+    </UserInformation>
+  </Informations>
+</CS_RecordUserInfoCollection>

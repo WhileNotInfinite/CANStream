@@ -1,0 +1,70 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000" CAN_ConfigName="CS_1.3_MuxTest">
+  <CANMessage Name="MsgTest" Identifier="200">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>1000</Period>
+    <Multiplexer>Mux</Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="iMux">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>4</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter 2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerValue>0</MultiplexerValue>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter 3">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerValue>0</MultiplexerValue>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter 4">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>8</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerValue>1</MultiplexerValue>
+      </CANParameter>
+      <CANParameter ParameterName="Parameter 5">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>24</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerValue>1</MultiplexerValue>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

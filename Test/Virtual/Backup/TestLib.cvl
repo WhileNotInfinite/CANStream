@@ -1,0 +1,11 @@
+<CS_VirtualChannelsLibrary Name="LibTest" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="MyChannel" Unit="" Decimal="2">
+      <Comment>
+      </Comment>
+      <Expression>Var1*2</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

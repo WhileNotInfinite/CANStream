@@ -1,0 +1,93 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000">
+  <CANMessage Name="Message 1" Identifier="200">
+    <MsgComment>Message 200 multiplexed</MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>1000</Period>
+    <Parameters>
+      <CANParameter ParameterName="Mux">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>0</StartBit>
+        <Length>4</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Param_1A">
+        <ParameterComment>Tension</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>4</StartBit>
+        <Length>12</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="0" />
+      </CANParameter>
+      <CANParameter ParameterName="Param_1B">
+        <ParameterComment>Ampere</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>4</StartBit>
+        <Length>12</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="1" />
+      </CANParameter>
+      <CANParameter ParameterName="Param_1C">
+        <ParameterComment>Watt</ParameterComment>
+        <Unit>W</Unit>
+        <StartBit>4</StartBit>
+        <Length>12</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="2" />
+      </CANParameter>
+      <CANParameter ParameterName="Param_1D">
+        <ParameterComment>degre</ParameterComment>
+        <Unit>Deg</Unit>
+        <StartBit>4</StartBit>
+        <Length>12</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="3" />
+      </CANParameter>
+      <CANParameter ParameterName="Param_2">
+        <ParameterComment>Patate</ParameterComment>
+        <Unit>P</Unit>
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Param_3A">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="0" />
+      </CANParameter>
+      <CANParameter ParameterName="Param_3B">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <Multiplexer MuxParamName="Mux" MuxValue="1" />
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

@@ -1,0 +1,47 @@
+<CANConfiguration MessageLength="64" CAN_Rate="1000" CAN_ConfigName="CanConfig">
+  <CANMessage Name="Msg1" Identifier="200">
+    <MsgComment>ID 0x200 200 Hz [5ms]</MsgComment>
+    <RxTx>Tx</RxTx>
+    <Period>5</Period>
+    <Multiplexer>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="rev">
+        <ParameterComment>Engine speed</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>0</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="barrel">
+        <ParameterComment>Gearbox barrel position</ParameterComment>
+        <Unit>mV</Unit>
+        <StartBit>16</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="Sinuosoid">
+        <ParameterComment>Sinousoid +/- 2V 5 Hz</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>32</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1000</LinearizationGain>
+        <LinearizationZero>2000</LinearizationZero>
+      </CANParameter>
+      <CANParameter ParameterName="ShaftRev">
+        <ParameterComment>Gearbox shaft rev</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>48</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

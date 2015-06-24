@@ -1,0 +1,10 @@
+<CS_VirtualChannelsLibrary Name="Cycle_VirtualChannels" ReadOnly="False">
+  <LibraryComment>Virtual channels used for cycle creation</LibraryComment>
+  <Channels>
+    <Channel Name="ShaftRev" Unit="rpm" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>rev * 2</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

@@ -1,0 +1,12 @@
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\bin\Debug\Ciloci.Flee.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\bin\Debug\Ciloci.Flee.pdb
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\bin\Debug\Ciloci.Flee.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\ResolveAssemblyReference.cache
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.CompileErrors.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.ElementNames.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.GeneralErrors.resources
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\GenerateResource.read.1.tlog
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\GenerateResource.write.1.tlog
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.dll
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.xml
+D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\Flee-0.9.26.0\src\Lib\obj\Debug\Ciloci.Flee.pdb

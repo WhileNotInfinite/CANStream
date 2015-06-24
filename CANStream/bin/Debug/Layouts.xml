@@ -1,0 +1,70 @@
+<ControllerLayouts>
+  <Layout ControllerId="0">
+    <TxPanelVisible>True</TxPanelVisible>
+    <EngDataTxPanelVisible>True</EngDataTxPanelVisible>
+    <RawDataTxPanelVisible>False</RawDataTxPanelVisible>
+    <eEngDataTxColumns>Default</eEngDataTxColumns>
+    <RxPanelVisible>True</RxPanelVisible>
+    <GraphRxPanelVisible>False</GraphRxPanelVisible>
+    <DataRxPanelVisible>True</DataRxPanelVisible>
+    <EngDataRxPanelVisible>True</EngDataRxPanelVisible>
+    <RawDataRxPanelVisible>False</RawDataRxPanelVisible>
+    <eRawDataRxColumns>All</eRawDataRxColumns>
+    <eEngDataRxColumns>Default</eEngDataRxColumns>
+    <Pos_Split_RxTx>659</Pos_Split_RxTx>
+    <Pos_Split_Tx_EngRaw>411</Pos_Split_Tx_EngRaw>
+    <Pos_Split_Rx_DataGraph>277</Pos_Split_Rx_DataGraph>
+    <Pos_Split_RxData_RawEng>233</Pos_Split_RxData_RawEng>
+  </Layout>
+  <Layout ControllerId="1">
+    <TxPanelVisible>True</TxPanelVisible>
+    <EngDataTxPanelVisible>True</EngDataTxPanelVisible>
+    <RawDataTxPanelVisible>False</RawDataTxPanelVisible>
+    <eEngDataTxColumns>Default</eEngDataTxColumns>
+    <RxPanelVisible>True</RxPanelVisible>
+    <GraphRxPanelVisible>False</GraphRxPanelVisible>
+    <DataRxPanelVisible>True</DataRxPanelVisible>
+    <EngDataRxPanelVisible>True</EngDataRxPanelVisible>
+    <RawDataRxPanelVisible>False</RawDataRxPanelVisible>
+    <eRawDataRxColumns>All</eRawDataRxColumns>
+    <eEngDataRxColumns>Default</eEngDataRxColumns>
+    <Pos_Split_RxTx>612</Pos_Split_RxTx>
+    <Pos_Split_Tx_EngRaw>411</Pos_Split_Tx_EngRaw>
+    <Pos_Split_Rx_DataGraph>277</Pos_Split_Rx_DataGraph>
+    <Pos_Split_RxData_RawEng>233</Pos_Split_RxData_RawEng>
+  </Layout>
+  <Layout ControllerId="2">
+    <TxPanelVisible>True</TxPanelVisible>
+    <EngDataTxPanelVisible>False</EngDataTxPanelVisible>
+    <RawDataTxPanelVisible>True</RawDataTxPanelVisible>
+    <eEngDataTxColumns>Default</eEngDataTxColumns>
+    <RxPanelVisible>True</RxPanelVisible>
+    <GraphRxPanelVisible>False</GraphRxPanelVisible>
+    <DataRxPanelVisible>True</DataRxPanelVisible>
+    <EngDataRxPanelVisible>False</EngDataRxPanelVisible>
+    <RawDataRxPanelVisible>True</RawDataRxPanelVisible>
+    <eRawDataRxColumns>All</eRawDataRxColumns>
+    <eEngDataRxColumns>Default</eEngDataRxColumns>
+    <Pos_Split_RxTx>660</Pos_Split_RxTx>
+    <Pos_Split_Tx_EngRaw>396</Pos_Split_Tx_EngRaw>
+    <Pos_Split_Rx_DataGraph>267</Pos_Split_Rx_DataGraph>
+    <Pos_Split_RxData_RawEng>323</Pos_Split_RxData_RawEng>
+  </Layout>
+  <Layout ControllerId="3">
+    <TxPanelVisible>False</TxPanelVisible>
+    <EngDataTxPanelVisible>True</EngDataTxPanelVisible>
+    <RawDataTxPanelVisible>True</RawDataTxPanelVisible>
+    <eEngDataTxColumns>Default</eEngDataTxColumns>
+    <RxPanelVisible>True</RxPanelVisible>
+    <GraphRxPanelVisible>True</GraphRxPanelVisible>
+    <DataRxPanelVisible>False</DataRxPanelVisible>
+    <EngDataRxPanelVisible>True</EngDataRxPanelVisible>
+    <RawDataRxPanelVisible>True</RawDataRxPanelVisible>
+    <eRawDataRxColumns>All</eRawDataRxColumns>
+    <eEngDataRxColumns>Default</eEngDataRxColumns>
+    <Pos_Split_RxTx>398</Pos_Split_RxTx>
+    <Pos_Split_Tx_EngRaw>396</Pos_Split_Tx_EngRaw>
+    <Pos_Split_Rx_DataGraph>267</Pos_Split_Rx_DataGraph>
+    <Pos_Split_RxData_RawEng>463</Pos_Split_RxData_RawEng>
+  </Layout>
+</ControllerLayouts>

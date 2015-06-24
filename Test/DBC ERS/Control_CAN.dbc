@@ -1,0 +1,211 @@
+VERSION ""
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+
+BS_:
+
+BU_: SECU IVT_K IVT_ES ES CUK DEBUG
+
+
+BO_ 771 ERS_COMMAND: 8 SECU
+ SG_ NERSKDemand : 7|16@0+ (1,0) [0|65535] "-" CUK
+ SG_ BERSKCommand : 23|16@0+ (1,0) [0|65535] "-" CUK
+ SG_ VERSDCCorrected : 39|16@0- (0.036,0) [-1179.648|1179.63] "V" ES
+ SG_ NERSCounter : 55|8@0+ (1,0) [0|255] "-" ES
+ SG_ BESActivate : 63|1@0+ (1,0) [0|1] "-" ES
+ SG_ BERSClearErrors : 62|1@0+ (1,0) [0|1] "-" ES
+
+BO_ 848 ES_COMMAND_2: 8 SECU
+ SG_ BESSingleContactor : 7|1@0+ (1,0) [0|1] "-" ES
+ SG_ BESBalance : 6|1@0+ (1,0) [0|1] "-" ES
+ SG_ BESCharge : 5|1@0+ (1,0) [0|1] "-" ES
+ SG_ BESResetSOC : 4|1@0+ (1,0) [0|1] "-" ES
+ SG_ BESStopChargeBalance : 3|1@0+ (1,0) [0|1] "-" ES
+ SG_ BESDefaultEthernet : 2|1@0+ (1,0) [0|1] "-" ES
+ SG_ rESChargeTarget : 15|8@0+ (1,0) [0|100] "%" ES
+
+BO_ 1318 IVT_K_RESULT: 8 IVT_K
+ SG_ IMGUKMeasuredDC : 7|16@0- (-0.01,0) [-327.68|327.675] "A" ES,SECU
+ SG_ VMGUKMeasuredDC : 23|16@0- (-0.036,0) [-1179.648|1179.63] "V" ES,SECU
+ SG_ PMGUKMeasuredDC : 39|16@0- (10,0) [-327680|327675] "W" ES,SECU
+ SG_ muxIVTMGUK M : 55|4@0+ (1,0) [0|8] "-" ES,SECU
+ SG_ NIVTMGUKCodeCRC m5 : 51|12@0+ (1,0) [0|4095] "-" SECU
+ SG_ NIVTMGUKParameterCRC m6 : 51|12@0+ (1,0) [0|4095] "-" SECU
+ SG_ NIVTMGUKStatus1 m1 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTMGUKStatus2 m2 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTMGUKStatus3 m3 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTMGUKStatus4 m4 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTMGUKCurrentResolution m7 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NIVTMGUKTransmitErrorCount m8 : 63|8@0+ (1,0) [0|255] "-" SECU
+
+BO_ 1319 IVT_K_RESPONSE: 8 IVT_K
+
+BO_ 1313 IVT_ES_RESULT: 8 IVT_ES
+ SG_ IESMeasuredDC : 7|16@0- (-0.01,0) [-327.68|327.675] "A" ES,SECU
+ SG_ VESMeasuredDC : 23|16@0- (0.036,0) [-1179.648|1179.63] "V" ES,SECU
+ SG_ PESMeasuredDC : 39|16@0- (-10,0) [-327680|327675] "W" ES,SECU
+ SG_ muxIVTES M : 55|4@0+ (1,0) [0|8] "-" ES,SECU
+ SG_ NIVTESCodeCRC m5 : 51|12@0+ (1,0) [0|4095] "-" SECU
+ SG_ NIVTESParameterCRC m6 : 51|12@0+ (1,0) [0|4095] "-" SECU
+ SG_ NIVTESStatus1 m1 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTESStatus2 m2 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTESStatus3 m3 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTESStatus4 m4 : 63|8@0+ (1,0) [0|255] "-" ES,SECU
+ SG_ NIVTESCurrentResolution m7 : 63|8@0+ (1,0) [0|255] "-" SECU
+ SG_ NIVTESTransmitErrorCount m8 : 63|8@0+ (1,0) [0|255] "-" SECU
+
+BO_ 1314 IVT_ES_RESPONSE: 8 IVT_ES
+
+BO_ 768 ES_STATE: 8 ES
+ SG_ NESState : 7|4@0+ (1,0) [0|15] "-" SECU
+ SG_ NESActivateState : 3|4@0+ (1,0) [0|15] "-" SECU
+ SG_ NVESCellValid : 15|8@0+ (1,0) [0|240] "-" SECU
+ SG_ NESFaultReason : 23|16@0+ (1,0) [0|65535] "-" SECU
+ SG_ rESStateOfCharge : 39|16@0- (0.01,0) [-327.68|327.67] "%" SECU
+
+BO_ 772 ES_CELLS: 8 ES
+ SG_ VESCellLowQuarter : 7|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCellMax : 11|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCellMedian : 31|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCellMin : 35|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ VESCellTopQuarter : 55|12@0+ (0.0015,-0.768) [-0.768|5.376] "V" SECU
+ SG_ BMGUHInterlock : 59|1@0+ (1,0) [0|1] "-" SECU
+ SG_ BMGUKInterlock : 58|1@0+ (1,0) [0|1] "-" SECU
+ SG_ BESContactorSupply : 56|1@0+ (1,0) [0|1] "-" SECU
+
+BO_ 783 ES_TEMPERATURE: 8 ES
+ SG_ TESCellMax : 7|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCellMedian : 15|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ TESCellMin : 23|8@0+ (1,-40) [-40|210] "degreesC" SECU
+ SG_ NTESCellValid : 31|8@0+ (1,0) [0|80] "-" SECU
+ SG_ RERSInsulation : 39|16@0+ (1,0) [0|65535] "kOhms" SECU
+ SG_ NESIR155State : 55|8@0+ (1,0) [0|255] "-" SECU
+
+BO_ 700 KCMP_MCA_MSGID: 8 DEBUG
+
+BO_ 716 KCMP_TWA_MSGID: 8 DEBUG
+
+BO_ 724 KCMP_TRA_MSGID: 8 DEBUG
+
+BO_ 708 KCMP_MRA_MSGID: 8 DEBUG
+
+BO_ 601 HEARTBEAT_MSGID: 8 DEBUG
+
+BO_ 1312 IVT_1_COMMAND: 8 DEBUG
+ SG_ NIVTCommandID : 7|8@0+ (1,0) [0|255] "-" IVT_ES
+ SG_ NIVTCommandParameter : 15|8@0+ (1,0) [0|255] "-" IVT_ES
+
+BO_ 1317 IVT_2_COMMAND: 8 DEBUG
+ SG_ NIVTCommandID : 7|8@0+ (1,0) [0|255] "-" IVT_K
+ SG_ NIVTCommandParameter : 15|8@0+ (1,0) [0|255] "-" IVT_K
+
+
+
+CM_ SG_ 771 NERSKDemand "ERS K Command";
+CM_ SG_ 771 BERSKCommand "ERS K Command";
+CM_ SG_ 771 VERSDCCorrected "DC bus voltage from the SECU";
+CM_ SG_ 771 NERSCounter "ERS watchdog counter, increments every 100ms";
+CM_ SG_ 771 BESActivate "Command to switch on the energy store main HV rail";
+CM_ SG_ 771 BERSClearErrors "Command to clear all latched errors in the system";
+CM_ SG_ 848 BESSingleContactor "Command to close a single contactor";
+CM_ SG_ 848 BESBalance "Command to balance the cells in the energy store";
+CM_ SG_ 848 BESCharge "Command to charge the energy store from the off-car charger";
+CM_ SG_ 848 BESResetSOC "Command to reset the SOC of the ES to 100%";
+CM_ SG_ 848 BESStopChargeBalance "Command to stop charging or balancing";
+CM_ SG_ 848 BESDefaultEthernet " Command to force the EMU to use a default TCP config";
+CM_ SG_ 848 rESChargeTarget "Target state of charge for off-car charger";
+CM_ SG_ 1318 IMGUKMeasuredDC "MGU‐K current measured using signals from a FIA DC sensor";
+CM_ SG_ 1318 VMGUKMeasuredDC "MGU‐K voltage measured using signals from a FIA DC sensor";
+CM_ SG_ 1318 PMGUKMeasuredDC "MGU‐K power measured using signals from a FIA DC sensor";
+CM_ SG_ 1318 muxIVTMGUK "MGUK FIA DC sensor status word mux";
+CM_ SG_ 1318 NIVTMGUKStatus1 "MGUK FIA DC sensor status word 1";
+CM_ SG_ 1318 NIVTMGUKStatus2 "MGUK FIA DC sensor status word 2";
+CM_ SG_ 1318 NIVTMGUKStatus3 "MGUK FIA DC sensor status word 3";
+CM_ SG_ 1318 NIVTMGUKStatus4 "MGUK FIA DC sensor status word 4";
+CM_ SG_ 1318 NIVTMGUKCodeCRC "MGUK IVT code CRC";
+CM_ SG_ 1318 NIVTMGUKParameterCRC "MGUK IVT parameters CRC";
+CM_ SG_ 1318 NIVTMGUKCurrentResolution "MGUK IVT current resolution in mA/bit";
+CM_ SG_ 1318 NIVTMGUKTransmitErrorCount "MGUK IVT transmission error count";
+CM_ SG_ 1313 IESMeasuredDC "ES current measured using signals from a FIA DC sensor";
+CM_ SG_ 1313 VESMeasuredDC "ES voltage measured using signals from a FIA DC sensor";
+CM_ SG_ 1313 PESMeasuredDC "ES power measured using signals from a FIA DC sensor";
+CM_ SG_ 1313 muxIVTES "ES FIA DC sensor status word mux";
+CM_ SG_ 1313 NIVTESStatus1 "ES FIA DC sensor status word 1";
+CM_ SG_ 1313 NIVTESStatus2 "ES FIA DC sensor status word 2";
+CM_ SG_ 1313 NIVTESStatus3 "ES FIA DC sensor status word 3";
+CM_ SG_ 1313 NIVTESStatus4 "ES FIA DC sensor status word 4";
+CM_ SG_ 1313 NIVTESCodeCRC "ES IVT code CRC";
+CM_ SG_ 1313 NIVTESParameterCRC "ES IVT parameters CRC";
+CM_ SG_ 1313 NIVTESCurrentResolution "ES IVT current resolution in mA/bit";
+CM_ SG_ 1313 NIVTESTransmitErrorCount "ES IVT transmission error count";
+CM_ SG_ 768 NESState "ES system state (Off, Idle, Switch On, Active, Switch Off, Post Run, Error, Balance, Charge)";
+CM_ SG_ 768 NESActivateState "ES activation state (Idle, Precharge, Contactor 1, Contactor 2, Open Precharge, Done, Error)";
+CM_ SG_ 768 NVESCellValid "Number of valid cell voltage readings";
+CM_ SG_ 768 NESFaultReason "Fault that tripped the energy store into error";
+CM_ SG_ 768 rESStateOfCharge "ES state of charge";
+CM_ SG_ 772 VESCellLowQuarter "Bottom quartile ES cell voltage";
+CM_ SG_ 772 VESCellMax "Max ES cell voltage";
+CM_ SG_ 772 VESCellMedian "Median ES cell voltage";
+CM_ SG_ 772 VESCellMin "Min ES cell voltage";
+CM_ SG_ 772 VESCellTopQuarter "Top quartile ES cell voltage";
+CM_ SG_ 772 BMGUHInterlock "Status of the MGU-H interlock";
+CM_ SG_ 772 BMGUKInterlock "Status of the MGU-K interlock";
+CM_ SG_ 772 BESContactorSupply "Set when the VESContactorSupply is present";
+CM_ SG_ 783 TESCellMax "Max ES cell temperature";
+CM_ SG_ 783 TESCellMedian "Median ES cell temperature";
+CM_ SG_ 783 TESCellMin "Min ES cell temperature";
+CM_ SG_ 783 NTESCellValid "Number of valid cell temperature readings";
+CM_ SG_ 783 RERSInsulation "Measured ERS insulation resistance";
+CM_ SG_ 783 NESIR155State "Status of the ERS insulation measurement (Off, Normal, Under voltage, Start Ok, Start NOk, Error, Gnd Error, Fault)";
+CM_ SG_ 1312 NIVTCommandID "Command ID for the IVT sensors";
+CM_ SG_ 1312 NIVTCommandParameter "Command parameter for the IVT sensors";
+CM_ SG_ 1317 NIVTCommandID "Command ID for the IVT sensors";
+CM_ SG_ 1317 NIVTCommandParameter "Command parameter for the IVT sensors";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 1 1001;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenMsgCycleTime" 1000;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 771 1;
+BA_ "GenMsgCycleTime" BO_ 848 1000;
+BA_ "GenMsgCycleTime" BO_ 1318 2;
+BA_ "GenMsgCycleTime" BO_ 1319 1000;
+BA_ "GenMsgCycleTime" BO_ 1313 2;
+BA_ "GenMsgCycleTime" BO_ 1314 1000;
+BA_ "GenMsgCycleTime" BO_ 768 2;
+BA_ "GenMsgCycleTime" BO_ 772 100;
+BA_ "GenMsgCycleTime" BO_ 783 1000;
+BA_ "GenMsgCycleTime" BO_ 700 1000;
+BA_ "GenMsgCycleTime" BO_ 716 1000;
+BA_ "GenMsgCycleTime" BO_ 724 1000;
+BA_ "GenMsgCycleTime" BO_ 708 1000;
+BA_ "GenMsgCycleTime" BO_ 601 1000;
+BA_ "GenMsgCycleTime" BO_ 1312 1000;
+BA_ "GenMsgCycleTime" BO_ 1317 1000;

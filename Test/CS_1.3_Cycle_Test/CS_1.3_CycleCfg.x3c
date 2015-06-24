@@ -1,0 +1,80 @@
+<CycleConfiguration>
+  <CANConfiguration MessageLength="64" CAN_Rate="1000" CAN_ConfigName="CanConfig">
+    <CANMessage Name="Msg1" Identifier="200">
+      <MsgComment>ID 0x200 200 Hz [5ms]</MsgComment>
+      <RxTx>Tx</RxTx>
+      <Period>5</Period>
+      <Multiplexer>
+      </Multiplexer>
+      <Parameters>
+        <CANParameter ParameterName="rev">
+          <ParameterComment>Engine speed</ParameterComment>
+          <Unit>rpm</Unit>
+          <StartBit>0</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="barrel">
+          <ParameterComment>Gearbox barrel position</ParameterComment>
+          <Unit>mV</Unit>
+          <StartBit>16</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="Sinuosoid">
+          <ParameterComment>Sinousoid +/- 2V 5 Hz</ParameterComment>
+          <Unit>V</Unit>
+          <StartBit>32</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1000</LinearizationGain>
+          <LinearizationZero>2000</LinearizationZero>
+        </CANParameter>
+        <CANParameter ParameterName="ShaftRev">
+          <ParameterComment>Gearbox shaft rev</ParameterComment>
+          <Unit>rpm</Unit>
+          <StartBit>48</StartBit>
+          <Length>16</Length>
+          <Endianess>MSBFirst</Endianess>
+          <LinearizationGain>1</LinearizationGain>
+          <LinearizationZero>0</LinearizationZero>
+        </CANParameter>
+      </Parameters>
+    </CANMessage>
+  </CANConfiguration>
+  <VirtualChannelLibrary />
+  <VirtualChannelLibrary />
+  <BuiltInSignalLibrary />
+  <BuiltInSignalLibrary />
+  <CyclePartsProperties>
+    <PreCycleProperties TimeLength="1.185" DataFile="None" />
+    <InCycleProperties TimeLength="1.495" DataFile="D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Test\CS_1.3_Cycle_Test\Gbx_DBG_Cycle_Base_test2.xlsx" />
+    <PostCycleProperties TimeLength="1" DataFile="None" />
+  </CyclePartsProperties>
+  <CycleParameters>
+    <Parameter Name="rev" MessageId="200">
+      <PreCycleData Source="BuiltSignal" Data="RevRampUp" Library="Cycle_BuiltInSignals" />
+      <InCycleData Source="AcqData" Data="rev" Library="File" />
+      <PostCycleData Source="BuiltSignal" Data="RevRampDown" Library="Cycle_BuiltInSignals" />
+    </Parameter>
+    <Parameter Name="barrel" MessageId="200">
+      <PreCycleData Source="Constant" Data="1414" Library="None" />
+      <InCycleData Source="AcqData" Data="Gear_IN_Barrel" Library="File" />
+      <PostCycleData Source="Constant" Data="2600" Library="None" />
+    </Parameter>
+    <Parameter Name="Sinuosoid" MessageId="200">
+      <PreCycleData Source="BuiltSignal" Data="VMot" Library="Cycle_BuiltInSignals" />
+      <InCycleData Source="BuiltSignal" Data="VMot" Library="Cycle_BuiltInSignals" />
+      <PostCycleData Source="BuiltSignal" Data="VMot" Library="Cycle_BuiltInSignals" />
+    </Parameter>
+    <Parameter Name="ShaftRev" MessageId="200">
+      <PreCycleData Source="Constant" Data="100" Library="None" />
+      <InCycleData Source="VirtualChannel" Data="ShaftRev" Library="Cycle_VirtualChannels" />
+      <PostCycleData Source="Constant" Data="5000" Library="None" />
+    </Parameter>
+  </CycleParameters>
+</CycleConfiguration>

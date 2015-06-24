@@ -1,0 +1,11 @@
+<CS_VirtualChannelsLibrary Name="NewLib" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="NewChan" Unit="" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>2+2</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{2A669821-D5C3-4A52-9C7B-64F4A1B9CAB4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CANStream</RootNamespace>
+    <AssemblyName>CANStream</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ApplicationIcon>..\Ressources\Icones\CANConfiguration_xcc.ico</ApplicationIcon>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Demo_Dbg' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE;DEMO</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Demo' ">
+    <OutputPath>bin\Demo\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE;DEMO</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug_NoLicense' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE;NO_LIC</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel">
+      <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="netchartdir_cp">
+      <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\chartdir_net\ChartDirector\NetWinCharts\bin\netchartdir_cp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\CanDBCFile.cs" />
+    <Compile Include="Class\CANStreamCycle.cs" />
+    <Compile Include="Class\CANMessagesConfiguration.cs" />
+    <Compile Include="Class\CS_AcquisitionTrigger.cs" />
+    <Compile Include="Class\CS_BuiltInSignals.cs" />
+    <Compile Include="Class\CS_DataViewerBook.cs" />
+    <Compile Include="Class\CS_RecordSessionInfos.cs" />
+    <Compile Include="Class\CS_VirtualChannels.cs" />
+    <Compile Include="Class\CycleDataAssociation.cs" />
+    <Compile Include="Class\CycleEditionConfiguration.cs" />
+    <Compile Include="Class\GraphicSeries.cs" />
+    <Compile Include="Class\PcanTrcFile.cs" />
+    <Compile Include="Class\RecordDataFile.cs" />
+    <Compile Include="Controls\Ctrl_CS_CAN_Bus.cs" />
+    <Compile Include="Controls\Ctrl_CS_CAN_Bus.Designer.cs">
+      <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ctrl_RecordEventInformation.cs" />
+    <Compile Include="Controls\Ctrl_RecordEventInformation.Designer.cs">
+      <DependentUpon>Ctrl_RecordEventInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ctrl_RecordSessionInfo.cs" />
+    <Compile Include="Controls\Ctrl_RecordSessionInfo.Designer.cs">
+      <DependentUpon>Ctrl_RecordSessionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ctrl_RecordUserInformations.cs" />
+    <Compile Include="Controls\Ctrl_RecordUserInformations.Designer.cs">
+      <DependentUpon>Ctrl_RecordUserInformations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Ctrl_SpyDataViewer.cs" />
+    <Compile Include="Controls\Ctrl_SpyDataViewer.Designer.cs">
+      <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs" />
+    <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.Designer.cs">
+      <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_About.cs" />
+    <Compile Include="Forms\Frm_About.Designer.cs">
+      <DependentUpon>Frm_About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_BuiltInSignal.cs" />
+    <Compile Include="Forms\Frm_BuiltInSignal.Designer.cs">
+      <DependentUpon>Frm_BuiltInSignal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_CANConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_CANConfiguration.Designer.cs">
+      <DependentUpon>Frm_CANConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\ImportDataFile.cs" />
+    <Compile Include="Forms\Frm_CANConfiguration.Designer1.cs">
+      <DependentUpon>Frm_CANConfiguration.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.cs" />
+    <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.Designer.cs">
+      <DependentUpon>Frm_CANConfiguration_VirtualChannelReference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_ContextualList.cs" />
+    <Compile Include="Forms\Frm_ContextualList.Designer.cs">
+      <DependentUpon>Frm_ContextualList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleDataAssociation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleDataAssociation.Designer.cs">
+      <DependentUpon>Frm_CycleDataAssociation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleCreation.Designer.cs">
+      <DependentUpon>Frm_CycleCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleEdition.cs" />
+    <Compile Include="Forms\Frm_CycleEdition.Designer.cs">
+      <DependentUpon>Frm_CycleEdition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_CycleRecordImport.cs" />
+    <Compile Include="Forms\Frm_CycleRecordImport.Designer.cs">
+      <DependentUpon>Frm_CycleRecordImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_DataBrowser.cs" />
+    <Compile Include="Forms\Frm_DataBrowser.Designer.cs">
+      <DependentUpon>Frm_DataBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_DataViewer.cs" />
+    <Compile Include="Forms\Frm_DataViewer.Designer.cs">
+      <DependentUpon>Frm_DataViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_DataViewer_EventSession_Info.cs" />
+    <Compile Include="Forms\Frm_DataViewer_EventSession_Info.Designer.cs">
+      <DependentUpon>Frm_DataViewer_EventSession_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_EventDetails.cs" />
+    <Compile Include="Forms\Frm_EventDetails.Designer.cs">
+      <DependentUpon>Frm_EventDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_RecordEventEdition.cs" />
+    <Compile Include="Forms\Frm_RecordEventEdition.Designer.cs">
+      <DependentUpon>Frm_RecordEventEdition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_RecordSessionEdition.cs" />
+    <Compile Include="Forms\Frm_RecordSessionEdition.Designer.cs">
+      <DependentUpon>Frm_RecordSessionEdition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_RecordEventSessionSelection.cs" />
+    <Compile Include="Forms\Frm_RecordEventSessionSelection.Designer.cs">
+      <DependentUpon>Frm_RecordEventSessionSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_TrcFileSelection.cs" />
+    <Compile Include="Forms\Frm_TrcFileSelection.Designer.cs">
+      <DependentUpon>Frm_TrcFileSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_VirtualChannel.cs" />
+    <Compile Include="Forms\Frm_VirtualChannel.Designer.cs">
+      <DependentUpon>Frm_VirtualChannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_VirtualChannelTest.cs" />
+    <Compile Include="Forms\Frm_VirtualChannelTest.Designer.cs">
+      <DependentUpon>Frm_VirtualChannelTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalConst.cs" />
+    <Compile Include="Icones.Designer.cs">
+      <DependentUpon>Icones.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PCANBasic\PCANBasic.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CANStreamTools.cs" />
+    <Compile Include="Tools\NumberBaseConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Ctrl_CS_CAN_Bus.resx">
+      <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ctrl_RecordEventInformation.resx">
+      <DependentUpon>Ctrl_RecordEventInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ctrl_RecordSessionInfo.resx">
+      <DependentUpon>Ctrl_RecordSessionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ctrl_RecordUserInformations.resx">
+      <DependentUpon>Ctrl_RecordUserInformations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ctrl_SpyDataViewer.resx">
+      <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Dlg_DBCTransmitterSelection.resx">
+      <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_About.resx">
+      <DependentUpon>Frm_About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_BuiltInSignal.resx">
+      <DependentUpon>Frm_BuiltInSignal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CANConfiguration.resx">
+      <DependentUpon>Frm_CANConfiguration.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Frm_CANConfiguration.Designer1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CANConfiguration_VirtualChannelReference.resx">
+      <DependentUpon>Frm_CANConfiguration_VirtualChannelReference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_ContextualList.resx">
+      <DependentUpon>Frm_ContextualList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CycleDataAssociation.resx">
+      <DependentUpon>Frm_CycleDataAssociation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CycleCreation.resx">
+      <DependentUpon>Frm_CycleCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CycleEdition.resx">
+      <DependentUpon>Frm_CycleEdition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CycleRecordImport.resx">
+      <DependentUpon>Frm_CycleRecordImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_DataBrowser.resx">
+      <DependentUpon>Frm_DataBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_DataViewer.resx">
+      <DependentUpon>Frm_DataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_DataViewer_EventSession_Info.resx">
+      <DependentUpon>Frm_DataViewer_EventSession_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_EventDetails.resx">
+      <DependentUpon>Frm_EventDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_RecordEventEdition.resx">
+      <DependentUpon>Frm_RecordEventEdition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_RecordSessionEdition.resx">
+      <DependentUpon>Frm_RecordSessionEdition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_RecordEventSessionSelection.resx">
+      <DependentUpon>Frm_RecordEventSessionSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_TrcFileSelection.resx">
+      <DependentUpon>Frm_TrcFileSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_VirtualChannel.resx">
+      <DependentUpon>Frm_VirtualChannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_VirtualChannelTest.resx">
+      <DependentUpon>Frm_VirtualChannelTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icones.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icones.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls" />
+    <Folder Include="Dialogs" />
+    <Folder Include="Tools" />
+    <Folder Include="PCANBasic" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
+    <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CANStream Release notes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SD_AppLicence\SD_AppLicence\SD_AppLicence.csproj">
+      <Project>{043AD182-2573-4289-8860-DFE9E3101074}</Project>
+      <Name>SD_AppLicence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SD_Ctrl_GraphWindow\Ctrl_GraphWindow\Ctrl_GraphWindow.csproj">
+      <Project>{23726D07-E40C-42E4-B676-24837B2D8896}</Project>
+      <Name>Ctrl_GraphWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Flee_Lib\FLEE_Lib.vbproj">
+      <Project>{28334152-7FB7-46A5-8639-68EB84A99BE0}</Project>
+      <Name>FLEE_Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

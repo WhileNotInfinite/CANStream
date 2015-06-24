@@ -1,0 +1,26 @@
+<CS_VirtualChannelsLibrary Name="Lib3" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="Chan1" Unit="" Decimal="0">
+      <Comment>
+      </Comment>
+      <Expression>toto</Expression>
+    </Channel>
+    <Channel Name="Chan2" Unit="" Decimal="0">
+      <Comment>
+      </Comment>
+      <Expression>tata</Expression>
+    </Channel>
+    <Channel Name="Chan3" Unit="" Decimal="0">
+      <Comment>
+      </Comment>
+      <Expression>titi</Expression>
+    </Channel>
+    <Channel Name="Chan4b" Unit="" Decimal="0">
+      <Comment>
+      </Comment>
+      <Expression>1+3</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

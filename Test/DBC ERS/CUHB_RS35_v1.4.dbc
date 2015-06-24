@@ -1,0 +1,397 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: CU_H TAG320
+VAL_TABLE_ MotorAState10 1 "MotorAState 10" 0 "MotorAState 0-9" ;
+VAL_TABLE_ MotorAState0 1 "MotorAState 0" 0 "MotorAState 1-10" ;
+VAL_TABLE_ VmuRequestId 0 "VmuBootNumber" ;
+VAL_TABLE_ event_id 1 "no" 0 "yes" ;
+VAL_TABLE_ Status_Active 1 "Active" 0 "Inactive" ;
+VAL_TABLE_ TorqueRequestForfeited 1 "Torque Forfeited" 0 "Torque Not Forfeited" ;
+VAL_TABLE_ McuRequestId 7 "spare" 6 "McuTotalMotorRotationUsingMcu" 5 "McuTotalMotorRotation" 4 "McuSwVersion2" 3 "McuSwVersion1" 2 "McuMaxMotorSpeed" 1 "McuMaxMotorTorque" 0 "McuProtocolVersion" ;
+VAL_TABLE_ Status_Fault 1 "Fault" 0 "No Fault" ;
+VAL_TABLE_ EmergencyStop 1 "Emergency stop requested" 0 "System OK" ;
+VAL_TABLE_ Status_Valid 1 "Invalid" 0 "Valid" ;
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ NERSHSWVers : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ NERSHState : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ NERSHSerial : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ NERSHSecsSinceReset : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ NERSHCmd : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ aERSH : 0|16@0+ (0.00548,0) [0|359.1318] "" Vector__XXX
+ SG_ BERSHDiagCritical2Spare3 : 0|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare : 0|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHBridgeNotReady : 0|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ Log5Spare : 0|16@0+ (0.02,-655) [-655|655.7] "V" Vector__XXX
+
+BO_ 370 ERSHRX3: 8 CU_H
+ SG_ TERSHMicro : 31|8@0- (1,0) [0|255] "°C"  TAG320
+ SG_ TERSHSupervisBoard : 23|8@0+ (1,0) [0|255] "°C"  TAG320
+ SG_ TERSHDriverBoard : 15|8@0+ (1,0) [0|255] "°C"  TAG320
+ SG_ TERSHMOS : 7|8@0+ (1,0) [0|255] "°C"  TAG320
+ SG_ TERSHEndWindingCoupling : 39|8@0+ (1.5,0) [0|382.5] "°C"  TAG320
+ SG_ TERSHEndWindingAntiCoupling : 47|8@0+ (1.5,0) [0|382.5] "°C"  TAG320
+ SG_ TERSHBearingCoupling : 55|8@0+ (1.5,0) [0|382.5] "°C"  TAG320
+ SG_ TERSHBearingAntiCoupling : 63|8@0+ (1.5,0) [0|382.5] "°C"  TAG320
+
+BO_ 360 ERSHRX2: 8 CU_H
+ SG_ BERSHDiagAlarmSpare1 : 31|1@0+ (1,0) [0|1] "0" Vector__XXX
+ SG_ BERSHDriverBoardOverTempWarning : 23|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHSupervisorBoardOverTempWarn : 22|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHCANCommandFault : 47|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHPWMStartupInProgress : 44|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHDriverBoardOverTemp : 7|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHSupervisorBoardOverTemp : 6|1@0+ (1,0) [0|1] "0\1" Vector__XXX
+ SG_ BERSHDiagCriticalSpare4 : 5|1@0+ (1,0) [0|1] "0" Vector__XXX
+ SG_ BERSHDiagCriticalSpare3 : 4|1@0+ (1,0) [0|1] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare1 : 45|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare9 : 53|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare8 : 52|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare7 : 51|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare6 : 50|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare5 : 49|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare4 : 48|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare3 : 63|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare2 : 62|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare11 : 55|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare10 : 54|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare1 : 61|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagAlarm2Spare : 60|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCriticalSpare2 : 3|1@0+ (1,0) [0|1] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare11 : 39|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare10 : 38|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare9 : 37|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare8 : 36|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare7 : 35|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare6 : 34|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare5 : 33|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare4 : 32|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHDiagCritical2Spare2 : 46|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHOverTempEndWindingCoupWarn : 58|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempEndWindingAntiCWarn : 59|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempBearingCouplingWarn : 56|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempBearingAntiCoupWarn : 57|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempEndWindingCoupling : 42|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempEndWindingAntiCoupl : 43|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempBearingCoupling : 40|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverTempBearingAntiCoupling : 41|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMotorOverTempWarning : 17|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHLossOfFeedbackWarning : 28|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMOSOverTempWarning : 18|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMicroOverTempWarning : 16|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVelocityTrackingWarning : 30|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVBusUndervoltageWarning : 27|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVBusOvervoltageWarning : 26|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverspeedWarning : 29|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOvercurrentWarning : 25|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHDiagAlarmSpareF : 21|3@0+ (1,0) [0|7] "0"  TAG320
+ SG_ BERSHDiagAlarmSpare0 : 24|1@0+ (1,0) [0|1] "0"  TAG320
+ SG_ BERSHBridgeFault : 8|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMotorOverTemp : 1|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMicroOverTemp : 0|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOverspeed : 13|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVelocityTracking : 14|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHLossOfFeedback : 12|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVBusUndervoltage : 11|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHVBusOvervoltage : 10|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHOvercurrent : 9|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHMOSOverTemp : 2|1@0+ (1,0) [0|1] "0\1"  TAG320
+ SG_ BERSHDiagCriticalSpare : 15|1@0+ (1,0) [0|1] "0"  TAG320
+
+BO_ 356 ERSHRX1: 8 CU_H
+ SG_ BERSHStateSpare6 : 32|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHUnderpeedActive : 34|1@0+ (1,0) [0|1] "On\Off" Vector__XXX
+ SG_ BERSHStateSpare5 : 39|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHStateSpare4 : 38|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHStateSpare3 : 37|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHStateSpare2 : 36|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHStateSpare1 : 35|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHStateSpare : 47|1@0+ (1,0) [0|0] "0" Vector__XXX
+ SG_ BERSHOverspeedActive : 33|1@0+ (1,0) [0|1] "On\Off"  TAG320
+ SG_ BERSHErrorState : 46|1@0+ (1,0) [0|1] "Disable/Enable"  TAG320
+ SG_ BERSHCUState : 45|1@0+ (1,0) [0|1] "Disable/Enable"  TAG320
+ SG_ BERSHSensorlessMode : 44|1@0+ (1,0) [0|1] "Resolver/Sensorless"  TAG320
+ SG_ BERSHClearErrorsAck : 43|1@0+ (1,0) [0|1] "On\Off"  TAG320
+ SG_ BERSHMotorEnableAck : 42|1@0+ (1,0) [0|1] "On\Off"  TAG320
+ SG_ nERSH : 23|16@0+ (2,0) [0|131070] "rpm"  TAG320
+ SG_ PERSH : 55|16@0+ (0.004,-131) [-131|131.14] "kW"  TAG320
+ SG_ PERSHTargetEcho m0 : 7|16@0+ (0.004,-131) [-131|131.14] "kW"  TAG320
+ SG_ nERSHTargetEcho m1 : 7|16@0+ (2,0) [0|131070] "rpm"  TAG320
+ SG_ BERSHTargetTypeApplied M : 41|2@0+ (1,0) [0|3] "00/01/10"  TAG320
+ SG_ MERSHTargetEcho m2 : 7|16@0+ (0.001,-32.5) [-32.5|33.035] "Nm"  TAG320
+
+BO_ 352 ERSHTX1: 3 TAG320
+ SG_ BERSHUnderspeedProtectionEnable : 23|1@0+ (1,0) [0|1] "On\Off" Vector__XXX
+ SG_ BERSHCmdSpare : 22|1@0+ (1,0) [0|1] "0"  CU_H
+ SG_ BERSHOverSpeedProtectionOff : 21|1@0+ (1,0) [0|1] "On\Off"  CU_H
+ SG_ BERSHTargetTypeCmd M : 17|2@0+ (1,0) [0|3] "00/01/10"  CU_H
+ SG_ BERSHClearErrorsCmd : 19|1@0+ (1,0) [0|1] "On\Off"  CU_H
+ SG_ BERSHSensorlessModeCmd : 20|1@0+ (1,0) [0|1] "Resolver/Sensorless"  CU_H
+ SG_ BERSHMotorEnableCmd : 18|1@0+ (1,0) [0|1] "Disable/Enable"  CU_H
+ SG_ MERSHTarget m2 : 7|16@0+ (0.001,-32.5) [-32.5|33] "Nm"  CU_H
+ SG_ nERSHTarget m1 : 7|16@0+ (2,0) [0|131070] "rpm"  CU_H
+ SG_ PERSHTarget m0 : 7|16@0+ (0.004,-131) [-131|131.1] "kW"  CU_H
+
+BO_ 1068 ERSHBuf2: 8 CU_H
+ SG_ aERSHSensorless : 55|16@0+ (0.00548,0) [0|359.1318] ""  TAG320
+ SG_ VERSHPhaseW : 39|16@0+ (0.02,0) [0|1310.7] ""  TAG320
+ SG_ VERSHPhaseV : 23|16@0+ (0.02,0) [0|1310.7] ""  TAG320
+ SG_ VERSHPhaseU : 7|16@0+ (0.02,0) [0|1310.7] ""  TAG320
+
+BO_ 1064 ERSHBuf1: 8 CU_H
+ SG_ IERSHPhaseW : 55|16@0+ (1,0) [0|0] ""  TAG320
+ SG_ IERSHPhaseV : 39|16@0+ (1,0) [0|0] ""  TAG320
+ SG_ IERSHPhaseU : 23|16@0+ (1,0) [0|0] ""  TAG320
+ SG_ aERSHResolver : 7|16@0+ (0.00548,0) [0|359.1318] ""  TAG320
+
+BO_ 1062 ERSHLOG5: 8 CU_H
+ SG_ PERSHDCElec : 7|16@0+ (0.004,-131) [-131|131.14] "kW" Vector__XXX
+ SG_ VERSHDCBus : 55|16@0+ (0.04,0) [0|2621.4] "V"  TAG320
+ SG_ ERSHLog5Spare : 39|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ IERSHQCmd : 23|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+
+BO_ 1060 ERSHLOG4: 8 CU_H
+ SG_ VERSHQPIDOut : 55|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ nERSHVelocityCmd : 39|16@0+ (2,0) [0|131070] "rpm"  TAG320
+ SG_ nERSHResolver : 23|16@0+ (2,0) [0|131070] "rpm"  TAG320
+ SG_ nERSHSensorless : 7|16@0+ (2,0) [0|131070] "rpm"  TAG320
+
+BO_ 1044 ERSHLOG2: 8 CU_H
+ SG_ ERSHLog2Spare1 : 55|16@0+ (0.02,0) [0|1310.7] "V"  TAG320
+ SG_ ERSHLog2Spare0 : 39|16@0+ (0.02,0) [0|1310.7] "V"  TAG320
+ SG_ IERSHQErr : 23|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ IERSHQPIDOut : 7|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+
+BO_ 1040 ERSHLOG1: 8 CU_H
+ SG_ IERSHQErrIntegral : 55|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ UERSHD : 39|16@0+ (0.02,-655) [-655|655.7] "V"  TAG320
+ SG_ ERSHLogSpare : 23|16@0+ (0.02,0) [0|1310.7] "V"  TAG320
+ SG_ BERSHLastDiagCrit : 7|16@0+ (0.001,0) [0|65.535] "V/rpm"  TAG320
+
+BO_ 1052 ERSHLOG3: 8 CU_H
+ SG_ IERSHWErrIntegral : 55|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ IERSHDFeedback : 39|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+ SG_ UERSHQ : 23|16@0+ (0.02,-655) [-655|655.7] "V"  TAG320
+ SG_ IERSHQFeedback : 7|16@0+ (0.02,-655) [-655|655.7] "A"  TAG320
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 NERSHSWVers "Software Version of the ERSH firmware";
+CM_ SG_ 3221225472 NERSHState "State bits from CU-H";
+CM_ SG_ 3221225472 NERSHSerial "Serial Number of the CU-H  - format supplied by RSF1 and programmed into unit by ESI – SLOWROW 
+MSG ID 0x554";
+CM_ SG_ 3221225472 NERSHSecsSinceReset "The number of seconds the CUH has had logic power applied.";
+CM_ SG_ 3221225472 NERSHCmd "Command bits from the TAG320";
+CM_ SG_ 3221225472 aERSH "Resolver Angle In Use (Composite of sensor and sensorless)";
+CM_ SG_ 3221225472 BERSHDiagCritical2Spare3 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 3221225472 BERSHDiagCritical2Spare "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 3221225472 BERSHBridgeNotReady "One or more IGBT not ready errors";
+CM_ SG_ 370 TERSHMicro "DSP temperature";
+CM_ SG_ 370 TERSHSupervisBoard "IGBT temperature";
+CM_ SG_ 370 TERSHDriverBoard "Tricore temperature";
+CM_ SG_ 370 TERSHMOS "MOSFET temperature";
+CM_ SG_ 370 TERSHEndWindingCoupling "Stator  temperature => Turbo Coupling End Winding (chignon)";
+CM_ SG_ 370 TERSHEndWindingAntiCoupling "Aux  temperature => Resolver Side End Winding Temp";
+CM_ SG_ 370 TERSHBearingCoupling "Spline-Bearing temperature => Turbo Coupling Side Bearing";
+CM_ SG_ 370 TERSHBearingAntiCoupling "Back-Bearing temperature  => Resolver Side Bearing";
+CM_ BO_ 360 "NERSHDiagCritical, NERSHDiagAlarm, TERSHEndWindingCoupling, TERSHEndWindingAntiCoupling, TERSHBearingCoupling, TERSHBearingAntiCoupling";
+CM_ SG_ 360 BERSHDiagAlarmSpare1 "BERSHDiagAlarm Unused Bits";
+CM_ SG_ 360 BERSHDriverBoardOverTempWarning "BERSHDiagCritical bits definition = driver board is overtemp";
+CM_ SG_ 360 BERSHSupervisorBoardOverTempWarn "BERSHDiagCritical bits definition = supervisor board is  Over Temp";
+CM_ SG_ 360 BERSHCANCommandFault "BERSHDiagCritical bits definition = CAN message not recieved before timeout";
+CM_ SG_ 360 BERSHPWMStartupInProgress "BERSHDiagCritical bits definition = PWM not yet ready, no power available";
+CM_ SG_ 360 BERSHDriverBoardOverTemp "BERSHDiagCritical bits definition = driverboard is overtemp";
+CM_ SG_ 360 BERSHSupervisorBoardOverTemp "BERSHDiagCritical bits definition = supervisor board is  Over Temp";
+CM_ SG_ 360 BERSHDiagCriticalSpare4 "Critical Diagnostics Unused Bits";
+CM_ SG_ 360 BERSHDiagCriticalSpare3 "Critical Diagnostics Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare1 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare9 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare8 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare7 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare6 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare5 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare4 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare3 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare2 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare11 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare10 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare1 "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarm2Spare "BERSDiagAlarm2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCriticalSpare2 "Critical Diagnostics Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare11 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare10 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare9 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare8 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare7 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare6 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare5 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare4 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHDiagCritical2Spare2 "Critical Diagnostics 2 Unused Bits";
+CM_ SG_ 360 BERSHOverTempEndWindingCoupWarn "BERSHDiagWarning2 bits definition";
+CM_ SG_ 360 BERSHOverTempEndWindingAntiCWarn "BERSHDiagWarning2 bits definition";
+CM_ SG_ 360 BERSHOverTempBearingCouplingWarn "BERSHDiagWarning2 bits definition";
+CM_ SG_ 360 BERSHOverTempBearingAntiCoupWarn "BERSHDiagWarning2 bits definition";
+CM_ SG_ 360 BERSHOverTempEndWindingCoupling "BERSHDiagCritical2 bits definition";
+CM_ SG_ 360 BERSHOverTempEndWindingAntiCoupl "BERSHDiagCritical2 bits definition";
+CM_ SG_ 360 BERSHOverTempBearingCoupling "BERSHDiagCritical2 bits definition";
+CM_ SG_ 360 BERSHOverTempBearingAntiCoupling "BERSHDiagCritical2 bits definition";
+CM_ SG_ 360 BERSHMotorOverTempWarning "BERSHDiagWarning bits definition = MotorOverTemp";
+CM_ SG_ 360 BERSHLossOfFeedbackWarning "BERSHDiagWarning bits definition = LossOfFeedback";
+CM_ SG_ 360 BERSHMOSOverTempWarning "BERSHDiagWarning bits definition = One of All MOSFets is Over Temp Warning";
+CM_ SG_ 360 BERSHMicroOverTempWarning "BERSHDiagWarning bits definition = MicroOverTemp (Tricore)";
+CM_ SG_ 360 BERSHVelocityTrackingWarning "BERSHDiagWarning bits definition = VelocityTracking";
+CM_ SG_ 360 BERSHVBusUndervoltageWarning "BERSHDiagWarning bits definition = VbusUndervoltage";
+CM_ SG_ 360 BERSHVBusOvervoltageWarning "BERSHDiagWarning bits definition = BVbusOvervoltage";
+CM_ SG_ 360 BERSHOverspeedWarning "BERSHDiagWarning bits definition = Overspeed";
+CM_ SG_ 360 BERSHOvercurrentWarning "BERSHDiagWarning bits definition = Overcurrent";
+CM_ SG_ 360 BERSHDiagAlarmSpareF "BERSHDiagAlarm Unused Bits";
+CM_ SG_ 360 BERSHDiagAlarmSpare0 "BERSHDiagAlarm Unused Bits";
+CM_ SG_ 360 BERSHBridgeFault "Bridge Fault";
+CM_ SG_ 360 BERSHMotorOverTemp "BERSHDiagCritical bits definition = MotorOverTemp";
+CM_ SG_ 360 BERSHMicroOverTemp "BERSHDiagCritical bits definition = MicroOverTemp (Tricore)";
+CM_ SG_ 360 BERSHOverspeed "BERSHDiagCritical bits definition = Overspeed";
+CM_ SG_ 360 BERSHVelocityTracking "BERSHDiagCritical bits definition = VelocityTracking";
+CM_ SG_ 360 BERSHLossOfFeedback "BERSHDiagCritical bits definition = LossOfFeedback";
+CM_ SG_ 360 BERSHVBusUndervoltage "BERSHDiagCritical bits definition = VbusUndervoltage";
+CM_ SG_ 360 BERSHVBusOvervoltage "BERSHDiagCritical bits definition = BVbusOvervoltage";
+CM_ SG_ 360 BERSHOvercurrent "BERSHDiagCritical bits definition = Overcurrent";
+CM_ SG_ 360 BERSHMOSOverTemp "BERSHDiagCritical bits definition = One of All MOSFets is Over Temp";
+CM_ SG_ 360 BERSHDiagCriticalSpare "Critical Diagnostics Unused Bits";
+CM_ BO_ 356 "rERSHTargetEcho, nERSH, NERSHState, PERSH";
+CM_ SG_ 356 BERSHUnderpeedActive "0 = Underspeed not engaged
+1 = Underspeed protection active";
+CM_ SG_ 356 BERSHOverspeedActive "0 = Overspeed not engaged
+1 = Overspeed protection active";
+CM_ SG_ 356 BERSHErrorState "SystemFaultState OR of all other fault bits :  Intended for use in triggering";
+CM_ SG_ 356 BERSHCUState "PWMs Enabled (0=PWMs Disabled, 1=Enabled)";
+CM_ SG_ 356 BERSHSensorlessMode "Sensorless Mode 0 = Resolver Mode, 1 = Sensorless Mode";
+CM_ SG_ 356 BERSHClearErrorsAck "Clear Error State Request Acknowlege 0 = No Ack, 1 = Errors Cleared";
+CM_ SG_ 356 BERSHMotorEnableAck "Last motor enable/disable flag request 0 = Disable Motor, 1=Enable Motor";
+CM_ SG_ 356 nERSH "Resolver Speed in Use for Calculation = nERSHSensorless OR nERSHResolver";
+CM_ SG_ 356 PERSH "Real Power, information for FIA";
+CM_ SG_ 356 PERSHTargetEcho "Power target feedback";
+CM_ SG_ 356 nERSHTargetEcho "Speed target feedback";
+CM_ SG_ 356 BERSHTargetTypeApplied "Current ERSH Target Request Applied 00=Power, 01=Speed, 10=Torque";
+CM_ SG_ 356 MERSHTargetEcho "Torque target request feedback";
+CM_ BO_ 352 "rERSHTarget, NERSHCmd";
+CM_ SG_ 352 BERSHUnderspeedProtectionEnable "1 - overspeed strategy enabled
+0, or CAN lost - underspeed protection off";
+CM_ SG_ 352 BERSHCmdSpare "BERSCmd Unused Bits";
+CM_ SG_ 352 BERSHOverSpeedProtectionOff "Clear Errors Request from TAG320";
+CM_ SG_ 352 BERSHTargetTypeCmd "Current ERSH Target Request Requested 00=Power, 01=Speed, 10=Torque";
+CM_ SG_ 352 BERSHClearErrorsCmd "Clear Errors Request from TAG320";
+CM_ SG_ 352 BERSHSensorlessModeCmd "Speed mode command (resolver or sensorless)";
+CM_ SG_ 352 BERSHMotorEnableCmd "Motor command";
+CM_ SG_ 352 MERSHTarget "Torque target request";
+CM_ SG_ 352 nERSHTarget "Speed target request";
+CM_ SG_ 352 PERSHTarget "Power target request";
+CM_ BO_ 1068 "Buffered Data Configurable in CUH 2";
+CM_ SG_ 1068 aERSHSensorless "Configurable Buffered Data";
+CM_ SG_ 1068 VERSHPhaseW "Configurable Buffered Data";
+CM_ SG_ 1068 VERSHPhaseV "Configurable Buffered Data";
+CM_ SG_ 1068 VERSHPhaseU "Configurable Buffered Data";
+CM_ BO_ 1064 "Buffered Data Configurable in CUH";
+CM_ SG_ 1064 IERSHPhaseW "Configurable Buffered Data";
+CM_ SG_ 1064 IERSHPhaseV "Configurable Buffered Data";
+CM_ SG_ 1064 IERSHPhaseU "Configurable Buffered Data";
+CM_ SG_ 1064 aERSHResolver "Configurable Buffered Data
+Alternate Resolver Angle Parameter, Electrical";
+CM_ BO_ 1062 "IERSHQFeedback, UERSHQ, IERSHQTorqueCmd, IERSHQCmd";
+CM_ SG_ 1062 PERSHDCElec "Real Power, information for FIA";
+CM_ SG_ 1062 VERSHDCBus "Bus voltage feeding IGBTs (DC)";
+CM_ SG_ 1062 IERSHQCmd "The Iq command before compensation and after limiting.";
+CM_ BO_ 1060 "IERSHQFeedback, UERSHQ, IERSHQTorqueCmd, IERSHQCmd";
+CM_ SG_ 1060 VERSHQPIDOut "Output of the D current PID block";
+CM_ SG_ 1060 nERSHVelocityCmd "Velocity demanded by automatic control in velocity command";
+CM_ SG_ 1060 nERSHResolver "Resolver Speed in mechanical degrees
+";
+CM_ SG_ 1060 nERSHSensorless "Sensorless Resolver Speed Calculation";
+CM_ BO_ 1044 "IERSHQFeedback, UERSHQ, IERSHQTorqueCmd, IERSHQCmd";
+CM_ SG_ 1044 ERSHLog2Spare1 "EMF Feedforward component of Q";
+CM_ SG_ 1044 ERSHLog2Spare0 "IR FeedForward component of Q";
+CM_ SG_ 1044 IERSHQErr "Iq PID Error Term";
+CM_ SG_ 1044 IERSHQPIDOut "Output of the Q current PID block";
+CM_ BO_ 1040 "IERSHQFeedback, UERSHQ, IERSHQTorqueCmd, IERSHQCmd";
+CM_ SG_ 1040 IERSHQErrIntegral "Integral Error term for Id of the PI loop";
+CM_ SG_ 1040 UERSHD "D component of U voltage input to Inverse Park";
+CM_ SG_ 1040 ERSHLogSpare "Voltage between IGBT levels";
+CM_ SG_ 1040 BERSHLastDiagCrit "Ke Constant Measured in Run Time";
+CM_ BO_ 1052 "IERSHQFeedback, UERSHQ, IERSHQTorqueCmd, IERSHQCmd";
+CM_ SG_ 1052 IERSHWErrIntegral "Id PID Error Term";
+CM_ SG_ 1052 IERSHDFeedback "The torque component of the Park transform from the measured Mx.Ia and Mx.Ib currents and the feedback (resolver, sensor-less) angle « Measured in KERS terms »";
+CM_ SG_ 1052 UERSHQ "Ouput of the PI control loop for Iq";
+CM_ SG_ 1052 IERSHQFeedback "The torque component of the Park transform from the measured Mx.Ia and Mx.Ib currents and the feedback";
+BA_DEF_ EV_  "Can1_db_Release" INT 0 1000;
+BA_DEF_ EV_  "Author" STRING ;
+BA_DEF_ EV_  "CU_H_Evolution" STRING ;
+BA_DEF_ EV_  "CU_H_RevisionDoc" STRING ;
+BA_DEF_ EV_  "CU_H_Version" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 2000;
+BA_DEF_ EV_  "Version" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "Can1_db_Release" 1;
+BA_DEF_DEF_  "Author" "D. Hanisko";
+BA_DEF_DEF_  "CU_H_Evolution" "";
+BA_DEF_DEF_  "CU_H_RevisionDoc" "Dictionary A2P_V2.2.xlsx, RS35_CUH_CAN_Spec_V1.4.docx, - Add PERSHDCElec - 04/02/15. - D. Hanisko";
+BA_DEF_DEF_  "CU_H_Version" "RSF1 ERS CU-H CAN Specification for RS35";
+BA_DEF_DEF_  "GenMsgCycleTime" 20;
+BA_DEF_DEF_  "Version" "CAN Communications Protocol, revision v3.0";
+BA_DEF_DEF_  "BusType" "";
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 370 100;
+BA_ "GenMsgCycleTime" BO_ 360 10;
+BA_ "GenMsgCycleTime" BO_ 356 1;
+BA_ "GenMsgCycleTime" BO_ 352 1;
+BA_ "GenMsgCycleTime" BO_ 1068 5;
+BA_ "GenMsgCycleTime" BO_ 1064 5;
+BA_ "GenMsgCycleTime" BO_ 1062 5;
+BA_ "GenMsgCycleTime" BO_ 1060 5;
+BA_ "GenMsgCycleTime" BO_ 1044 5;
+BA_ "GenMsgCycleTime" BO_ 1040 5;
+BA_ "GenMsgCycleTime" BO_ 1052 5;
+VAL_ 356 BERSHErrorState 1 "Motor Enabled" 0 "Motor Disabled" ;
+VAL_ 356 BERSHCUState 1 "Motor Enabled" 0 "Motor Disabled" ;
+VAL_ 356 BERSHSensorlessMode 1 "Sensorless Mode" 0 "Resolver Mode" ;
+VAL_ 356 BERSHClearErrorsAck 1 "Error Cleared" 0 "No Ack" ;
+VAL_ 356 BERSHMotorEnableAck 1 "Enable Motor" 0 "Disable Motor" ;
+VAL_ 356 BERSHTargetTypeApplied 3 "spare" 2 "Torque" 1 "Speed" 0 "Power" ;
+VAL_ 352 BERSHTargetTypeCmd 3 "spare" 2 "Torque" 1 "Speed" 0 "Power" ;
+VAL_ 352 BERSHClearErrorsCmd 1 "Clear Error Condtions" 0 "Unused" ;
+VAL_ 352 BERSHSensorlessModeCmd 1 "Sensorless Mode" 0 "Resolver Mode" ;
+VAL_ 352 BERSHMotorEnableCmd 1 "Enable Motor" 0 "Disable Motor" ;
+

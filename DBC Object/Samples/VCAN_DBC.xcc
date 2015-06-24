@@ -1,0 +1,1184 @@
+<CANConfiguration MessageLength="8" CAN_Rate="1000">
+  <CANMessage Name="KCU_TX_0100" Identifier="100">
+    <MsgComment>The following packet is transmitted only if the programmable parameter e2__Usr.e2_enable_HRDL is set.</MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>1</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="diag_usr">
+        <ParameterComment>Diagnostic mask Kers_diag_user</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>39</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="lap_numb_test">
+        <ParameterComment>Test lap</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="lap_numb_hrdl">
+        <ParameterComment>Lap number</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="test_acq">
+        <ParameterComment>Flag for test acq</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_024C" Identifier="24C">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>5</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Vq_ctrl">
+        <ParameterComment>Vq value after Vq check</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Vd_ctrl">
+        <ParameterComment>Vd value after Vq check</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Iq_error">
+        <ParameterComment>Iq error (PI regulator input)</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_error">
+        <ParameterComment>Id_error (PI regulator input)</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0244" Identifier="244">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>5</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="TMGUKRotorVirt">
+        <ParameterComment>Rotor temp</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="RIsolation">
+        <ParameterComment>R insulation</ParameterComment>
+        <Unit>kOhm</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VSE2">
+        <ParameterComment>Single ended 2</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.001</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VSE1">
+        <ParameterComment>Single ended 1</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.001</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0240" Identifier="240">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="rCUKDriverW">
+        <ParameterComment>Duty control for phase W</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="rCUKDriverV">
+        <ParameterComment>Duty control for phase V</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="rCUKDriverU">
+        <ParameterComment>Duty control for phase V</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.5</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="KeMGUK">
+        <ParameterComment>Ke measured</ParameterComment>
+        <Unit>V/rpm</Unit>
+        <StartBit>39</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2.5E-05</LinearizationGain>
+        <LinearizationZero>0.002</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VCUKDCLink">
+        <ParameterComment>DC link voltage</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VMGUKPhaseU">
+        <ParameterComment>Phase voltage U</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_023C" Identifier="23c">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="aMGUKRotor">
+        <ParameterComment>Absolute angle</ParameterComment>
+        <Unit>deg</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="ICUKPhaseW">
+        <ParameterComment>Phase current W</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="ICUKPhaseV">
+        <ParameterComment>Phase current V</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="ICUKPhaseU">
+        <ParameterComment>Phase current U</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0230" Identifier="230">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="DiagTriggerTable">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_FW_prop">
+        <ParameterComment>Field weakening Id proportional component</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2.5</LinearizationGain>
+        <LinearizationZero>-587.5</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_comp_q">
+        <ParameterComment>Comp. compens. ctrl Iq</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_comp_d">
+        <ParameterComment>Comp. compens. ctrl Id</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>39</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_integ_q">
+        <ParameterComment>Comp. integ. Ctrl Iq</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>31</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_integ_d">
+        <ParameterComment>Comp. integ. Ctrl Id</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>23</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_prop_q">
+        <ParameterComment>Comp. prop ctrl Iq</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Ctrl_prop_d">
+        <ParameterComment>Comp. prop ctrl Id</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_022C" Identifier="22c">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="TMGUKWindingW">
+        <ParameterComment>Spare temp 2</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TMGUKBearingOutput">
+        <ParameterComment>Spare temp 1</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TMGUKBearingResolver">
+        <ParameterComment>Spare temp 0</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TCUKIGBT">
+        <ParameterComment>Power electronics temp</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>31</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TCUKDriver">
+        <ParameterComment>Driver temp</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>23</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TMGUKWindingV">
+        <ParameterComment>Motorgenerator temp</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>39</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>25</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TMGUKWindingU">
+        <ParameterComment>Motorgenerator temp</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>25</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="TCUKLogic">
+        <ParameterComment>Logic temperature</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0228" Identifier="228">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="diag_s">
+        <ParameterComment>Diagnostic sensors</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>7</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="diag_base_Sw">
+        <ParameterComment>Diagnostic base SW</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>39</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0224" Identifier="224">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="PDemandEcho">
+        <ParameterComment>Power demand echo</ParameterComment>
+        <Unit>kW</Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="BCUKEDMOn">
+        <ParameterComment>Power output status</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>58</StartBit>
+        <Length>1</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VCUKLogic">
+        <ParameterComment>ECU voltage</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="NCUKState">
+        <ParameterComment>Car state</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="NCUKDiagnosticIGBT">
+        <ParameterComment>Diagnostic latch 2</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>15</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="ICUKDCBus">
+        <ParameterComment>DC current</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>31</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="BCUKInverterOn">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>56</StartBit>
+        <Length>1</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="BCUKPhaseAdvOn">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>57</StartBit>
+        <Length>1</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0220" Identifier="220">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Torque_comp_motor">
+        <ParameterComment>Compensation torque (2D map)</ParameterComment>
+        <Unit>Nm</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.0003125</LinearizationGain>
+        <LinearizationZero>-10.24</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_MTPA">
+        <ParameterComment>Id current from MTPA</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_FW">
+        <ParameterComment>Id current from FW (offset referred to Id_MTPA)</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2.5</LinearizationGain>
+        <LinearizationZero>-587.5</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_EDM">
+        <ParameterComment>Id current from EDM (offset referred to Id_MTPA)</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2.5</LinearizationGain>
+        <LinearizationZero>-587.5</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="MMGUDemandFinal">
+        <ParameterComment>Final torque demand</ParameterComment>
+        <Unit>Nm</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.001</LinearizationGain>
+        <LinearizationZero>-32.768</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_021C" Identifier="21c">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="diag_latch">
+        <ParameterComment>Diagnostic latch</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>39</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="diag_base_Hw">
+        <ParameterComment>Diagnostic base Hw</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>7</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0218" Identifier="218">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Iq_dem">
+        <ParameterComment>Iq target</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_dem">
+        <ParameterComment>Id target</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="VCUKDCBus">
+        <ParameterComment>DC voltage</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="nMGUKResolver">
+        <ParameterComment>KERS speed</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0214" Identifier="214">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="Iq_meas">
+        <ParameterComment>Iq from control</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>47</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="Id_meas">
+        <ParameterComment>Id from control</ParameterComment>
+        <Unit>A</Unit>
+        <StartBit>31</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>-3276.8</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="EDMF_feed">
+        <ParameterComment>EDM_Factor feedback</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>23</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.4</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="NCUKState">
+        <ParameterComment>KERS state</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="deg_fct">
+        <ParameterComment>Degradation factor</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.4</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="V_err">
+        <ParameterComment>Voltage Error BEMF-DCBus</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.166</LinearizationGain>
+        <LinearizationZero>-21.1667</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_TX_0210" Identifier="210">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="torque">
+        <ParameterComment>Torque measured</ParameterComment>
+        <Unit>Nm</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="diag_usr">
+        <ParameterComment>Diagnostic mask Kers_diag_user</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>23</StartBit>
+        <Length>32</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="FIA_power_feed">
+        <ParameterComment>Power feedback from FIA_BASE_MAP (new torque model)</ParameterComment>
+        <Unit>kW</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_RX_0204" Identifier="204">
+    <MsgComment>200 Hz</MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="auto_ofs_state_dem">
+        <ParameterComment>Resolver Offset</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>63</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="batt_temp">
+        <ParameterComment>BMS Battery Temperature</ParameterComment>
+        <Unit>�C</Unit>
+        <StartBit>55</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="batt_volt">
+        <ParameterComment>BMS Battery Voltage</ParameterComment>
+        <Unit>V</Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>2</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="lap_numb">
+        <ParameterComment>Lap number</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>39</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="engine_s">
+        <ParameterComment>Engine speed</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="cmd_high_low_side">
+        <ParameterComment>Low side 0, 1, 2 cmd &amp; High side 1, 2</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="calib_state_dem">
+        <ParameterComment>Enable calibration, according to type selected in PTA</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>7</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_RX_0200" Identifier="200">
+    <MsgComment>1 kHz</MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="False">
+      <MultiplexerStart>0</MultiplexerStart>
+      <MultiplexerLength>0</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="nMGUKTarget">
+        <ParameterComment>Speed target</ParameterComment>
+        <Unit>rpm</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="MMGUKDemand">
+        <ParameterComment>Torque dem</ParameterComment>
+        <Unit>Nm</Unit>
+        <StartBit>47</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>-127</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="NDiagnostic">
+        <ParameterComment>Diagnostic flag</ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>31</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="rEDMDemand">
+        <ParameterComment>Select EDM level</ParameterComment>
+        <Unit>%</Unit>
+        <StartBit>23</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.4</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="PMGUKDemand">
+        <ParameterComment>Power demand</ParameterComment>
+        <Unit>kW</Unit>
+        <StartBit>7</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+  <CANMessage Name="KCU_RX_0208" Identifier="208">
+    <MsgComment>
+    </MsgComment>
+    <RxTx>Rx</RxTx>
+    <Period>0</Period>
+    <Multiplexer Multiplexed="True">
+      <MultiplexerStart>4</MultiplexerStart>
+      <MultiplexerLength>4</MultiplexerLength>
+    </Multiplexer>
+    <Parameters>
+      <CANParameter ParameterName="MuxId208">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>4</StartBit>
+        <Length>4</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigA">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>
+        </Unit>
+        <StartBit>15</StartBit>
+        <Length>8</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigB1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>bar</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigB2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>deg</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>1</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigB3">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>mm</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>3</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigB4">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>sec</Unit>
+        <StartBit>23</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>4</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigC1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>bar</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigC2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>deg</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>1</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigC3">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>mm</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>3</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigC4">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>sec</Unit>
+        <StartBit>39</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.1</LinearizationGain>
+        <LinearizationZero>0</LinearizationZero>
+        <MultiplexerId>4</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigD1">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>bar</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>0</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigD2">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>deg</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>1</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigD3">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>mm</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>3</MultiplexerId>
+      </CANParameter>
+      <CANParameter ParameterName="SigD4">
+        <ParameterComment>
+        </ParameterComment>
+        <Unit>sec</Unit>
+        <StartBit>55</StartBit>
+        <Length>16</Length>
+        <Endianess>MSBFirst</Endianess>
+        <LinearizationGain>0.01</LinearizationGain>
+        <LinearizationZero>-327.68</LinearizationZero>
+        <MultiplexerId>4</MultiplexerId>
+      </CANParameter>
+    </Parameters>
+  </CANMessage>
+</CANConfiguration>

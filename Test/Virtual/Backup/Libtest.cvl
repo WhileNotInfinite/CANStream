@@ -1,0 +1,26 @@
+<CS_VirtualChannelsLibrary Name="LibTest" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="MyVirtual" Unit="" Decimal="0" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param1 *10+3</Expression>
+    </Channel>
+    <Channel Name="Half_Param2" Unit="" Decimal="0" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param2 /2</Expression>
+    </Channel>
+    <Channel Name="Virtual3" Unit="" Decimal="0" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param3 *3</Expression>
+    </Channel>
+    <Channel Name="Virtual4" Unit="" Decimal="0" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param4 *2</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

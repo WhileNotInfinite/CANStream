@@ -1,0 +1,122 @@
+﻿<html>
+	
+<head>
+	<title>Statistics</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="data viewer, graphic, analysis, viewer, window, statistic, min, max, avg, abs, std dev, sample, minimum, maximum, average, absolute, standard, deviation, X, Y, data">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Statistics");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Statistics</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Dataanalysis.html">Data analysis</a> &rsaquo;&rsaquo; <a href="Graphicwindow.html">Graphic window</a> &rsaquo;&rsaquo; <a href="Analysisfunctions.html">Analysis functions</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Analysisfunctions.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Zoom.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Legend.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">Another useful feature of the analysis window is statistics computation.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">As per the zoom function, right click is graphic area and drag the zoom box up to end of area in which you want compute statistics. Release the mouse right button and click the 'Statistics' command of the contextual menu that has popped up. Prior to do that, make sure the zoom mode is not 'Zoom disabled', otherwise the zoom box will not appear.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_17.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The statistics window appears.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Graph_Window_18.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">In this statistics windows we can find different statistics about plotted data</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Min X</span><span class="rvts6">: X axis value at the minimum trace value.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Min</span><span class="rvts6">: Minimum value of the trace inside the zoom box.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Max</span><span class="rvts6">: Maximum value of the trace inside the zoom box.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Max X</span><span class="rvts6">: X axis value at the maximum trace value.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Avg</span><span class="rvts6">: Average of all trace values inside the zoom box.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Avg abs</span><span class="rvts6">: Average of all trace absolute values inside the zoom box.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Std dev</span><span class="rvts6">: Standard deviation of all trace values inside the zoom box.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Samples</span><span class="rvts6">: Trace samples count used for statistics computation.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Those statistics can even be copied into the Windows clipboard in order to be pasted into an external application such as Microsoft Excel.</span></p>
+<p class="rvps2"><span class="rvts6">Select all cells of the statistics grid that are of your interest and press Ctrl+C on your keyboard. All selected cells values are now in the Windows clipboard and are ready to be used in any application accessing the clipboard.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Full-featured Documentation generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

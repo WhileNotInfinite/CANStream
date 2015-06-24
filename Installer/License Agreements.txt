@@ -1,0 +1,54 @@
+DEFINITIONS
+
+"Software" means CANStream and its components. "User" means the Software customer or end user.
+
+OWNERSHIP
+
+Cobalt Solutions is the owner of the Software and of its copyright.
+
+LICENSE
+
+The Software ownership is not transferred to the User. Cobalt Solutions grant the User a simple, not-exclusive license to use the Software only on limited numbers of workstations as defined in the appendix to the present agreement, for a period of time depending of type of license. During this period the User is entitled to receive services as described in appendix to the present agreement. When the license will expire, licensed features will be automatically disabled. If the license is not renewed the User may continue to use the Software under terms and conditions set forth in this "LICENSE AGREEMENT", but is not entitled to receive any services of any kind. If the license is not renewed within four (4) months from the expiry date, then the renewal option will be lost and the User needs to order a brand new license.
+
+COPY RESTRICTIONS
+
+The User is allowed to make one (1) backup or archive copy only for reserve. All copyright notices and any other proprietary legends on the original Software shall be reproduced on such copy. Both the original and the reserve copy of the Software are subject to the restrictions set forth in this license agreement and they shall be destroyed in case of license termination.
+
+RESTRICTIONS 
+
+The User shall not rent or loan, distribute or sublicense the original or the backup copy of the Software and the manuals. User may not modify, translate, edit, decompile, reverse engineer, disassemble the Software or create derivative utilities based upon it. User may not edit the structure of the Software, nor ask to any other person to do so in order to modify its structure, dimensions, etc. THE USER SHALL NOT COPY THE MANUALS OR THE RELATED DOCUMENTATION, unless Cobalt Solutions gives written authorization. The license will immediately terminate without notice if the User fails to comply with any provision set forth herein.
+
+DISCLAIMER OF RESPONSABILITY
+
+The Software is provided "AS IS" and without warranty of any kind.
+
+LIMITED WARRANTY
+
+Cobalt Solutions reserves the right to grant the User the license for the Software, and he will replace the media on which the Software is furnished (disks and/or CD and/or password keys) which prove to be defective in material or workmanship under normal use. This warranty is good during a period of thirty (30) days starting from the date of purchase, and it does not apply to damages or problems resulting from misuse, abuse, accident or improper installation.
+
+DISCLAIMER OF WARRANTY AND LIMITATION OF LIABILITY. EXCEPT AS SET FORTH ABOVE, NO OTHER WARRANTIES, EITHER EXPRESS OR IMPLIED, INCLUDING THE WARRANTIES OR CONDITIONS OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE APPLICABLE TO THIS PRODUCT. COBALT SOLUTIONS SHALL NOT BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF BUSINESS, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, EXPRESSLY OR NOT SET FORTH HEREIN.
+THIRD PARTY RESPONSIBILITY
+
+The Software copyright is ownership of Cobalt Solutions. The User may be considered directly liable by Cobalt Solutions for any action concerning the use of the Software, made directly or indirectly, that does not comply with this "LICENSE AGREEMENT".
+
+USER DUTIES AND MISUSE
+
+The User agrees to make any effort in order to assure that his employees, consultants or other people that can access to the Software comply with the terms set forth in this "LICENSE AGREEMENT", including the prohibition to authorize anyone to use parts of the Software in order to identify its source code. The User shall immediately make any effort to stop any misuse that comes to his knowledge.
+
+LICENCE TERMINATION
+
+Cobalt Solutions reserves the right to terminate the license at any time if the User fails to comply with any provision of this "LICENSE AGREEMENT". In this case, the User must immediately destroy the Software and return the media and all the copies to Cobalt Solutions.
+
+CONTROLLING LAWS
+
+This agreement is governed by the laws of France, also for what concerns patent and copyright. In case of judicial acts or proceedings consequent to a demonstrated failure to comply with the conditions set forth in this "LICENSE AGREEMENT"., all the legal costs will be at losing party expense. This agreement regulates any Software update and/or upgrade, and constitutes the entire agreement between the parties with respect to the use of the Software and the related documentation. Any dispute falls under the competence of the Law Court of Paris (France).
+
+APPENDIX TO END USER LICENCE AGREEMENT
+
+NUMBER OF INSTALLATIONS 
+
+Number of workstations on which the Software may be installed on CANStream: a finite number of installations defined by User at order placement.
+
+IMPORTANT NOTE
+
+This covers only installations of Cobalt Solutions proprietary software. Any license fees for third party software are not included in the Cobalt Solutions license fee.

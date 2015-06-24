@@ -1,0 +1,11 @@
+<CS_VirtualChannelsLibrary Name="Gearbox" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="RpmRad2" Unit="rad/s" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Rpm * 3.14 / 30</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

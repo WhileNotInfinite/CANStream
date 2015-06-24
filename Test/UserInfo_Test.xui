@@ -1,0 +1,28 @@
+<CS_RecordUserInfoCollection>
+  <Informations>
+    <UserInformation>
+      <Title>ECU Number</Title>
+      <Value>351</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>SW Version</Title>
+      <Value>4.56Q1_GEAR</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Project</Title>
+      <Value>StockCar Brazil</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>CAN Spec</Title>
+      <Value>CS_1.2_Gbx_SW_Test</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Cycle</Title>
+      <Value>CS_1.2_Gbx_CycleTestBase</Value>
+    </UserInformation>
+    <UserInformation>
+      <Title>Name</Title>
+      <Value>Vincent Brault</Value>
+    </UserInformation>
+  </Informations>
+</CS_RecordUserInfoCollection>

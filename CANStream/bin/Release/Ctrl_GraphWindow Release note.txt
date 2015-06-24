@@ -1,0 +1,90 @@
+﻿11 18 2014 Release 1.0.0.2
+
+	New features
+	
+		None
+		
+	Bug fixes
+
+		Crash on changing serie's unit to "" from "xxx" through the general graph properties grid
+		Serie graph become overscaled when change drawing mode to 'Step' with a scale not containing serie's min & max values
+		Wrong serie graph shape when serie's values go out of scale
+		Previous series configuration persist when opening a new graphic config file from the configuration form
+		Y Axis overlay each other depending of the configuration used
+		Command 'Load data' isn't working and even cause crashes
+		
+	Known issues and bugs
+	
+		Need of pressing arrow keys twice to move the cursor while zooming.
+
+10 22 2014 Release 1.0.0.1
+
+	New features
+	
+		Zoom bars unvisible by default
+		Designer options (not changeable by user) to enable/disable:
+				- Tool bar
+				- Open data file
+				- Edit graphic configuration
+				- Cursors
+				- Zoom
+				- Channel list
+				- Legend
+				- Snapshot
+				- Print		
+		Function "Create_PropertiesXmlNode" of the "GraphWindowProperties" class 
+			modified in order to return a XML node which can be added anywhere
+			instead of returning nothing and adding the node at the end of the target xml document
+		Function "Save_Properties" of the "GraphWindowProperties" class updated according to the modification above
+		Channel added into the graphic when double clicked from the channel list
+		'Hide/Show' and 'Remove' channel functions from legend applied on the whole legend items selection
+		Time step min & max members added to the GW_DataFile class (For CANStream data file concatenation)	
+	
+	Bug fixes
+	
+		Crash on click on graph window while no data loaded
+		Crash on click on zoom buttons of the tool bar while no data loaded
+		Wrong legend area picked up in snapshots when control isn't in the test application. (gray bar on the top visible)
+		Crash on plotting a constant value channel (min = max => division by 0)
+		Crash on cursor plotting after a data change not containing previously channel plotted
+		Crash if no data plotted at the Y cursor position
+	
+	Known issues and bugs
+	
+		Need of pressing arrow keys twice to move the cursor while zooming.
+
+10 08 2014 Release 1.0.0.0
+
+	New features
+		
+		Sub-sampling level added as a graphic window property
+		'Save configuration' at each config modification removed
+		Use of a different channel than time as abscisse data added
+		Reference lines for abscisse axis added
+		Graphic cursor added
+		Reference cursor feature added
+		Graphic snapshot image feature added
+		Print graphic function added
+		Triangle marker added
+		Axis title option added
+		Legend header and grid lines visibility added as options of graphic
+		'Dispose' method called for each graphic object created in order to save memory
+		
+	Bug fixes
+	
+		Custom/Auto properties Frm_GraphPropertiesEdtion
+		GraphWindowProperties 'AbscisseAxis' member isn't saved or loaded into the xml
+		Sub sampling track bar doesn't change on sample count textbox change
+		Legend properties not saved/loaded/modifiable
+		Abscisse reference lines not modifiable
+		Y Axis visible option is always true on serie detailed properties edition
+		Horizontal user grid values not showed unless the vertical user grid values are
+	
+	Known issues and bugs
+	
+		Need of pressing arrow keys twice to move the cursor while zooming.
+	
+
+09 04 20124 Release 0.1.0.0
+
+	First release

@@ -1,0 +1,300 @@
+﻿/* ========== Text Styles ========== */
+hr { color: #000000}
+body, table, span.rvts0 /* Normal text */
+{
+ font-size: 10pt;
+ font-family: 'Arial', 'Helvetica', sans-serif;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+ text-decoration: none;
+}
+span.rvts1 /* Heading */
+{
+ font-weight: bold;
+ color: #0000ff;
+}
+span.rvts2 /* Subheading */
+{
+ font-weight: bold;
+ color: #000080;
+}
+span.rvts3 /* Keywords */
+{
+ font-style: italic;
+ color: #800000;
+}
+a.rvts4, span.rvts4 /* Jump 1 */
+{
+ color: #008000;
+ text-decoration: underline;
+}
+a.rvts5, span.rvts5 /* Jump 2 */
+{
+ color: #008000;
+ text-decoration: underline;
+}
+span.rvts6
+{
+}
+span.rvts7
+{
+ font-weight: bold;
+ color: #0000ff;
+}
+span.rvts8
+{
+ font-weight: bold;
+ color: #000080;
+}
+span.rvts9
+{
+ font-style: italic;
+ color: #800000;
+}
+a.rvts10, span.rvts10
+{
+ color: #008000;
+ text-decoration: underline;
+}
+span.rvts11
+{
+}
+span.rvts12 /* Font Style */
+{
+ font-family: 'Tahoma', 'Geneva', sans-serif;
+ font-style: italic;
+ color: #c0c0c0;
+}
+a.rvts13, span.rvts13 /* Font Style */
+{
+ font-family: 'Tahoma', 'Geneva', sans-serif;
+ font-style: italic;
+ color: #6666ff;
+ text-decoration: underline;
+}
+span.rvts14
+{
+ color: #000000;
+}
+span.rvts15
+{
+ color: #0081ff;
+}
+a.rvts16, span.rvts16
+{
+ color: #0081ff;
+ text-decoration: underline;
+}
+span.rvts17
+{
+ font-family: 'Consolas';
+ font-weight: bold;
+}
+span.rvts18
+{
+ font-family: 'Arial,Bold';
+ font-weight: bold;
+}
+span.rvts19
+{
+}
+span.rvts20
+{
+ font-family: 'Arial,BoldItalic';
+ font-style: italic;
+ font-weight: bold;
+}
+a.rvts21, span.rvts21
+{
+ color: #0000ff;
+ text-decoration: underline;
+}
+a.rvts22, span.rvts22
+{
+ color: #0000ff;
+ text-decoration: underline;
+}
+a.rvts23, span.rvts23
+{
+ text-decoration: none;
+}
+span.rvts24
+{
+ font-style: italic;
+ font-weight: bold;
+}
+span.rvts25
+{
+ color: #000000;
+}
+span.rvts26
+{
+ font-family: 'Arial,BoldItalic';
+ color: #000000;
+}
+a.rvts27, span.rvts27
+{
+ color: #000000;
+ text-decoration: underline;
+}
+span.rvts28
+{
+ font-family: 'Arial,Italic';
+ font-style: italic;
+}
+span.rvts29
+{
+ font-family: 'Corbel';
+}
+span.rvts30
+{
+}
+a.rvts31, span.rvts31
+{
+ color: #0000ff;
+ text-decoration: underline;
+}
+span.rvts32
+{
+ font-family: 'Corbel';
+}
+span.rvts33
+{
+ font-style: italic;
+ font-weight: bold;
+}
+span.rvts34
+{
+ font-size: 9pt;
+ font-weight: bold;
+}
+span.rvts35
+{
+ font-size: 13pt;
+ font-weight: bold;
+}
+span.rvts36
+{
+ font-size: 12pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.rvts37
+{
+ font-size: 13pt;
+ font-weight: bold;
+}
+span.rvts38
+{
+ font-size: 12pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.rvts39
+{
+ font-size: 12pt;
+}
+/* ========== Para Styles ========== */
+p,ul,ol /* Paragraph Style */
+{
+ text-align: left;
+ text-indent: 0px;
+ padding: 0px 0px 0px 0px;
+ margin: 0px 0px 0px 0px;
+}
+.rvps1 /* Centered */
+{
+ text-align: center;
+}
+.rvps2
+{
+}
+.rvps3
+{
+ text-align: center;
+}
+.rvps4 /* Paragraph Style */
+{
+ text-align: center;
+ border-color: #c0c0c0;
+ border-style: solid;
+ border-width: 1px;
+ border-right: none;
+ border-left: none;
+ padding: 2px 0px 2px 0px;
+ margin: 7px 0px 7px 0px;
+}
+.rvps5
+{
+ text-align: center;
+ line-height: 7px;
+}
+.rvps6
+{
+ line-height: 7px;
+}
+.rvps7
+{
+ margin: 0px 0px 0px 24px;
+}
+.rvps8
+{
+ margin: 0px 0px 0px 72px;
+}
+.rvps9
+{
+}
+.rvps10
+{
+ margin: 0px 0px 0px 24px;
+}
+.rvps11
+{
+ margin: 0px 0px 0px 72px;
+}
+.rvps12
+{
+ margin: 0px 0px 0px 96px;
+}
+.rvps13
+{
+ margin: 0px 0px 0px 96px;
+}
+.rvps14
+{
+ margin: 0px 0px 0px 48px;
+}
+.rvps15
+{
+}
+.rvps16
+{
+ text-align: center;
+}
+.rvps17
+{
+ text-align: left;
+ text-indent: 0px;
+ page-break-after: avoid;
+ padding: 0px 0px 0px 0px;
+ margin: 16px 0px 4px 0px;
+}
+.rvps18
+{
+ text-align: left;
+ text-indent: 0px;
+ page-break-after: avoid;
+ padding: 0px 0px 0px 0px;
+ margin: 16px 0px 4px 24px;
+}
+.rvps19
+{
+}
+/* ========== Lists ========== */
+.list0 {text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: decimal;}
+.list1 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: decimal;}
+.list2 {text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;}
+.list3 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;}
+.list4 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: square;}
+.list5 {text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: disc;}

@@ -1,0 +1,249 @@
+VERSION "HIPBNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY/4/%%%/4/'%**4YYY///"
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+
+BS_:
+
+BU_: ECU CUK
+
+
+BO_ 256 KCU_TX_0100: 8 CUK
+ SG_ diag_usr : 39|32@0+ (1,0) [0|-1] ""  ECU
+ SG_ lap_numb_test : 15|8@0+ (1,0) [0|255] ""  ECU
+ SG_ lap_numb_hrdl : 23|16@0+ (1,0) [0|65535] ""  ECU
+ SG_ test_acq : 7|8@0+ (1,0) [0|255] ""  ECU
+
+BO_ 588 KCU_TX_024C: 8 CUK
+ SG_ Vq_ctrl : 55|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "V"  ECU
+ SG_ Vd_ctrl : 39|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "V"  ECU
+ SG_ Iq_error : 23|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "A"  ECU
+ SG_ Id_error : 7|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "A"  ECU
+
+BO_ 580 KCU_TX_0244: 8 CUK
+ SG_ TMGUKRotorVirt : 55|8@0+ (2,0) [0|510] "°C"  ECU
+ SG_ RIsolation : 39|16@0+ (1,0) [0|65535] "kOhm"  ECU
+ SG_ VSE2 : 23|16@0+ (0.001,0) [0|65.535] "V"  ECU
+ SG_ VSE1 : 7|16@0+ (0.001,0) [0|65.535] "V"  ECU
+
+BO_ 576 KCU_TX_0240: 8 CUK
+ SG_ rCUKDriverW : 63|8@0+ (0.5,0) [0|100] "%"  ECU
+ SG_ rCUKDriverV : 55|8@0+ (0.5,0) [0|100] "%"  ECU
+ SG_ rCUKDriverU : 47|8@0+ (0.5,0) [0|100] "%"  ECU
+ SG_ KeMGUK : 39|8@0+ (2.5e-005,0.002) [0.002|0.008375] "V/rpm"  ECU
+ SG_ VCUKDCLink : 23|16@0+ (0.1,0) [0|500] "V"  ECU
+ SG_ VMGUKPhaseU : 7|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "V"  ECU
+
+BO_ 572 KCU_TX_023C: 8 CUK
+ SG_ aMGUKRotor : 55|16@0+ (0.01,0) [0|360] "deg"  ECU
+ SG_ ICUKPhaseW : 39|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ ICUKPhaseV : 23|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ ICUKPhaseU : 7|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+
+BO_ 560 KCU_TX_0230: 8 CUK
+ SG_ DiagTriggerTable : 63|8@0+ (1,0) [0|255] ""  ECU
+ SG_ Id_FW_prop : 55|8@0+ (2.5,-587.5) [-587.5|50] "A"  ECU
+ SG_ Ctrl_comp_q : 47|8@0+ (1,-127) [-127|128] ""  ECU
+ SG_ Ctrl_comp_d : 39|8@0+ (1,-127) [-127|128] "V"  ECU
+ SG_ Ctrl_integ_q : 31|8@0+ (1,-127) [-127|128] "V"  ECU
+ SG_ Ctrl_integ_d : 23|8@0+ (1,-127) [-127|128] "V"  ECU
+ SG_ Ctrl_prop_q : 15|8@0+ (1,-127) [-127|128] "V"  ECU
+ SG_ Ctrl_prop_d : 7|8@0+ (1,-127) [-127|128] "V"  ECU
+
+BO_ 556 KCU_TX_022C: 8 CUK
+ SG_ TMGUKWindingW : 63|8@0+ (1,0) [0|255] "°C"  ECU
+ SG_ TMGUKBearingOutput : 55|8@0+ (1,0) [0|255] "°C"  ECU
+ SG_ TMGUKBearingResolver : 47|8@0+ (1,0) [0|255] "°C"  ECU
+ SG_ TCUKIGBT : 31|8@0+ (1,0) [0|255] "°C"  ECU
+ SG_ TCUKDriver : 23|8@0+ (1,0) [0|255] "°C"  ECU
+ SG_ TMGUKWindingV : 39|8@0+ (1,25) [25|280] "°C"  ECU
+ SG_ TMGUKWindingU : 15|8@0+ (1,25) [25|280] "°C"  ECU
+ SG_ TCUKLogic : 7|8@0+ (1,0) [0|255] "°C"  ECU
+
+BO_ 552 KCU_TX_0228: 8 CUK
+ SG_ diag_s : 7|32@0+ (1,0) [0|-1] ""  ECU
+ SG_ diag_base_Sw : 39|32@0+ (1,0) [0|-1] ""  ECU
+
+BO_ 548 KCU_TX_0224: 8 CUK
+ SG_ PDemandEcho : 7|8@0+ (1,-127) [-100|100] "kW"  ECU
+ SG_ BCUKEDMOn : 58|1@0+ (1,0) [0|1] ""  ECU
+ SG_ VCUKLogic : 47|8@0+ (0.1,0) [0|15] "V"  ECU
+ SG_ NCUKState : 55|8@0+ (1,0) [0|255] ""  ECU
+ SG_ NCUKDiagnosticIGBT : 15|16@0+ (1,0) [0|65535] ""  ECU
+ SG_ ICUKDCBus : 31|16@0+ (0.1,-3276.8) [-500|500] "A"  ECU
+ SG_ BCUKInverterOn : 56|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ BCUKPhaseAdvOn : 57|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 544 KCU_TX_0220: 8 CUK
+ SG_ Torque_comp_motor : 23|16@0+ (0.0003125,-10.24) [-10.24|10.2397] "Nm"  ECU
+ SG_ Id_MTPA : 39|16@0+ (0.1,-3276.8) [-3276.8|3276.7] "A"  ECU
+ SG_ Id_FW : 63|8@0+ (2.5,-587.5) [-587.5|50] "A"  ECU
+ SG_ Id_EDM : 55|8@0+ (2.5,-587.5) [-587.5|50] "A"  ECU
+ SG_ MMGUDemandFinal : 7|16@0+ (0.001,-32.768) [-32.768|32.767] "Nm"  ECU
+
+BO_ 540 KCU_TX_021C: 8 CUK
+ SG_ diag_latch : 39|32@0+ (1,0) [0|-1] ""  ECU
+ SG_ diag_base_Hw : 7|32@0+ (1,0) [0|-1] ""  ECU
+
+BO_ 536 KCU_TX_0218: 8 CUK
+ SG_ Iq_dem : 55|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ Id_dem : 39|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ VCUKDCBus : 23|16@0+ (0.1,-3276.8) [0|500] "V"  ECU
+ SG_ nMGUKResolver : 7|16@0+ (1,0) [0|65535] "rpm"  ECU
+
+BO_ 532 KCU_TX_0214: 8 CUK
+ SG_ Iq_meas : 47|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ Id_meas : 31|16@0+ (0.1,-3276.8) [-1000|1000] "A"  ECU
+ SG_ EDMF_feed : 23|8@0+ (0.4,0) [0|100] "%"  ECU
+ SG_ NCUKState : 15|8@0+ (1,0) [0|0] ""  ECU
+ SG_ deg_fct : 63|8@0+ (0.4,0) [0|100] "%"  ECU
+ SG_ V_err : 7|8@0+ (0.166,-21.1667) [-20|20] "V"  ECU
+
+BO_ 528 KCU_TX_0210: 8 CUK
+ SG_ torque : 55|16@0+ (0.01,-327.68) [-100|100] "Nm"  ECU
+ SG_ diag_usr : 23|32@0+ (1,0) [0|-1] ""  ECU
+ SG_ FIA_power_feed : 7|16@0+ (0.01,-327.68) [-100|100] "kW"  ECU
+
+BO_ 516 KCU_RX_0204: 8 ECU
+ SG_ auto_ofs_state_dem : 63|8@0+ (1,0) [0|255] ""  CUK
+ SG_ batt_temp : 55|8@0+ (1,0) [0|255] "°C"  CUK
+ SG_ batt_volt : 47|8@0+ (2,0) [0|510] "V"  CUK
+ SG_ lap_numb : 39|8@0+ (1,0) [0|255] ""  CUK
+ SG_ engine_s : 23|16@0+ (1,0) [0|65535] "rpm"  CUK
+ SG_ cmd_high_low_side : 15|8@0+ (1,0) [0|255] ""  CUK
+ SG_ calib_state_dem : 7|8@0+ (1,0) [0|255] ""  CUK
+
+BO_ 512 KCU_RX_0200: 8 ECU
+ SG_ nMGUKTarget : 55|16@0+ (1,0) [0|65535] "rpm"  CUK
+ SG_ MMGUKDemand : 47|8@0+ (1,-127) [-100|100] "Nm"  CUK
+ SG_ NDiagnostic : 31|16@0+ (1,0) [0|65535] ""  CUK
+ SG_ rEDMDemand : 23|8@0+ (0.4,0) [0|100] "%"  CUK
+ SG_ PMGUKDemand : 7|16@0+ (0.01,-327.68) [-100|100] "kW"  CUK
+ 
+BO_ 520 KCU_RX_0208: 8 ECU
+ SG_ MuxId208 M : 4|4@0+ (1,0) [0|16] "" CUK
+ SG_ SigA : 15|8@0+ (1,0) [0|255] "" CUK
+ SG_ SigB1 m0 : 23|16@0+ (1,0) [0|65535] "bar" CUK
+ SG_ SigB2 m1 : 23|16@0+ (1,0) [0|65535] "deg" CUK
+ SG_ SigB3 m3 : 23|16@0+ (1,0) [0|65535] "mm" CUK
+ SG_ SigB4 m4 : 23|16@0+ (1,0) [0|65535] "sec" CUK
+ SG_ SigC1 m0 : 39|16@0+ (0.1,0) [0|6553.5] "bar" CUK
+ SG_ SigC2 m1 : 39|16@0+ (0.1,0) [0|6553.5] "deg" CUK
+ SG_ SigC3 m3 : 39|16@0+ (0.1,0) [0|6553.5] "mm" CUK
+ SG_ SigC4 m4 : 39|16@0+ (0.1,0) [0|6553.5] "sec" CUK
+ SG_ SigD1 m0 : 55|16@0+ (0.01,-327.68) [-327.68|327.67] "bar" CUK
+ SG_ SigD2 m1 : 55|16@0+ (0.01,-327.68) [-327.68|327.67] "deg" CUK
+ SG_ SigD3 m3 : 55|16@0+ (0.01,-327.68) [-327.68|327.67] "mm" CUK
+ SG_ SigD4 m4 : 55|16@0+ (0.01,-327.68) [-327.68|327.67] "sec" CUK
+
+
+CM_ BO_ 256 "The following packet is transmitted only if the programmable parameter e2__Usr.e2_enable_HRDL is set.";
+CM_ SG_ 256 diag_usr "Diagnostic mask Kers_diag_user";
+CM_ SG_ 256 lap_numb_test "Test lap";
+CM_ SG_ 256 lap_numb_hrdl "Lap number";
+CM_ SG_ 256 test_acq "Flag for test acq";
+CM_ SG_ 588 Vq_ctrl "Vq value after Vq check";
+CM_ SG_ 588 Vd_ctrl "Vd value after Vq check";
+CM_ SG_ 588 Iq_error "Iq error (PI regulator input)";
+CM_ SG_ 588 Id_error "Id_error (PI regulator input)";
+CM_ SG_ 580 TMGUKRotorVirt "Rotor temp";
+CM_ SG_ 580 RIsolation "R insulation";
+CM_ SG_ 580 VSE2 "Single ended 2";
+CM_ SG_ 580 VSE1 "Single ended 1";
+CM_ SG_ 576 rCUKDriverW "Duty control for phase W";
+CM_ SG_ 576 rCUKDriverV "Duty control for phase V";
+CM_ SG_ 576 rCUKDriverU "Duty control for phase V";
+CM_ SG_ 576 KeMGUK "Ke measured";
+CM_ SG_ 576 VCUKDCLink "DC link voltage";
+CM_ SG_ 576 VMGUKPhaseU "Phase voltage U";
+CM_ SG_ 572 aMGUKRotor "Absolute angle";
+CM_ SG_ 572 ICUKPhaseW "Phase current W";
+CM_ SG_ 572 ICUKPhaseV "Phase current V";
+CM_ SG_ 572 ICUKPhaseU "Phase current U";
+CM_ SG_ 560 Id_FW_prop "Field weakening Id proportional component";
+CM_ SG_ 560 Ctrl_comp_q "Comp. compens. ctrl Iq";
+CM_ SG_ 560 Ctrl_comp_d "Comp. compens. ctrl Id";
+CM_ SG_ 560 Ctrl_integ_q "Comp. integ. Ctrl Iq";
+CM_ SG_ 560 Ctrl_integ_d "Comp. integ. Ctrl Id";
+CM_ SG_ 560 Ctrl_prop_q "Comp. prop ctrl Iq";
+CM_ SG_ 560 Ctrl_prop_d "Comp. prop ctrl Id";
+CM_ SG_ 556 TMGUKWindingW "Spare temp 2";
+CM_ SG_ 556 TMGUKBearingOutput "Spare temp 1";
+CM_ SG_ 556 TMGUKBearingResolver "Spare temp 0";
+CM_ SG_ 556 TCUKIGBT "Power electronics temp";
+CM_ SG_ 556 TCUKDriver "Driver temp";
+CM_ SG_ 556 TMGUKWindingV "Motorgenerator temp";
+CM_ SG_ 556 TMGUKWindingU "Motorgenerator temp";
+CM_ SG_ 556 TCUKLogic "Logic temperature";
+CM_ SG_ 552 diag_s "Diagnostic sensors";
+CM_ SG_ 552 diag_base_Sw "Diagnostic base SW";
+CM_ SG_ 548 PDemandEcho "Power demand echo";
+CM_ SG_ 548 BCUKEDMOn "Power output status";
+CM_ SG_ 548 VCUKLogic "ECU voltage";
+CM_ SG_ 548 NCUKState "Car state";
+CM_ SG_ 548 NCUKDiagnosticIGBT "Diagnostic latch 2";
+CM_ SG_ 548 ICUKDCBus "DC current";
+CM_ SG_ 544 Torque_comp_motor "Compensation torque (2D map)";
+CM_ SG_ 544 Id_MTPA "Id current from MTPA";
+CM_ SG_ 544 Id_FW "Id current from FW (offset referred to Id_MTPA)";
+CM_ SG_ 544 Id_EDM "Id current from EDM (offset referred to Id_MTPA)";
+CM_ SG_ 544 MMGUDemandFinal "Final torque demand";
+CM_ SG_ 540 diag_latch "Diagnostic latch";
+CM_ SG_ 540 diag_base_Hw "Diagnostic base Hw";
+CM_ SG_ 536 Iq_dem "Iq target";
+CM_ SG_ 536 Id_dem "Id target";
+CM_ SG_ 536 VCUKDCBus "DC voltage";
+CM_ SG_ 536 nMGUKResolver "KERS speed";
+CM_ SG_ 532 Iq_meas "Iq from control";
+CM_ SG_ 532 Id_meas "Id from control";
+CM_ SG_ 532 EDMF_feed "EDM_Factor feedback";
+CM_ SG_ 532 NCUKState "KERS state";
+CM_ SG_ 532 deg_fct "Degradation factor";
+CM_ SG_ 532 V_err "Voltage Error BEMF-DCBus";
+CM_ SG_ 528 torque "Torque measured";
+CM_ SG_ 528 diag_usr "Diagnostic mask Kers_diag_user";
+CM_ SG_ 528 FIA_power_feed "Power feedback from FIA_BASE_MAP (new torque model)";
+CM_ BO_ 516 "200 Hz";
+CM_ SG_ 516 auto_ofs_state_dem "Resolver Offset";
+CM_ SG_ 516 batt_temp "BMS Battery Temperature";
+CM_ SG_ 516 batt_volt "BMS Battery Voltage";
+CM_ SG_ 516 lap_numb "Lap number";
+CM_ SG_ 516 engine_s "Engine speed";
+CM_ SG_ 516 cmd_high_low_side "Low side 0, 1, 2 cmd & High side 1, 2";
+CM_ SG_ 516 calib_state_dem "Enable calibration, according to type selected in PTA";
+CM_ BO_ 512 "1 kHz";
+CM_ SG_ 512 nMGUKTarget "Speed target";
+CM_ SG_ 512 MMGUKDemand "Torque dem";
+CM_ SG_ 512 NDiagnostic "Diagnostic flag";
+CM_ SG_ 512 rEDMDemand "Select EDM level";
+CM_ SG_ 512 PMGUKDemand "Power demand";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BusType" "CAN";
+VAL_ 552 diag_s 1073741824 "VREF_1_KO" -2147483648 "VREF_2_KO" 134217728 "WARN_TEMP_SENS_DRIVER2" 67108864 "WARN_TEMP_SENS_DRIVER1" 33554432 "WARN_IQ_CTRL" 16777216 "WARN_ID_CTRL" 8388608 "WARN_TEMP_SENS_INVERTER2" 4194304 "WARN_TEMP_SENS_INVERTER1" 2097152 "WARN_TEMP_SENS_MOTOR2" 1048576 "WARN_TEMP_SENS_MOTOR1" 524288 "WARN_TEMP_SENS_ECU" 262144 "TEMP_SENS_INVERTER2_KO" 131072 "TEMP_SENS_INVERTER1_KO" 65536 "TEMP_SENS_MOTOR2_KO" 32768 "TEMP_SENS_MOTOR1_KO" 16384 "TEMP_SENS_ECU_KO" 8192 "TEMP_SENS_DRIVER2_KO" 4096 "TEMP_SENS_DRIVER1_KO" 2048 "ERR_OFS_CURR_SENS" 1024 "TEMP_ROTOR_KO" 512 "VOLT_SENS_ECU_KO" 256 "CUR_SENS_BATT_KO_SF" 128 "CUR_SENS_BATT_KO_SB" 64 "CUR_SENS_BATT_KO_EB" 32 "VOLT_SENS_BATT_KO_SF" 16 "VOLT_SENS_BATT_KO_SB" 8 "VOLT_SENS_BATT_KO_EB" 4 "TORQUE_SENS_KO_SF" 2 "TORQUE_SENS_KO_SB" 1 "TORQUE_SENS_KO_EB" ;
+VAL_ 552 diag_base_Sw 1073741824 "ERR_CONGRUENCE_CUR_PHASE" 536870912 "VOLT_SENS_VPHASE_KO_EB" 268435456 "OVERSPEED" 134217728 "VQ_SATURATION" 67108864 "SENSORLESS_CTRL_EN" 33554432 "CONTROL_ERR_ID" 16777216 "CONTROL_ERR_IQ" 8388608 "FATAL_EXCEPTION_SW" 4194304 "ERR_HALL3" 2097152 "ERR_HALL2" 1048576 "ERR_HALL1" 524288 "WARN_KERS_FAIL_OVERVOLTAGE" 262144 "WARN_KERS_FAIL_OVERCURRENT" 131072 "REC_V_DC" 65536 "REC_CURR_SENS_W" 16384 "REC_CURR_SENS_U" 8192 "KERS_FAIL_RESOLVER_2" 4096 "KERS_FAIL_RESOLVER_1" 2048 "BOLT_SENS_DC_KO_SF" 1024 "VOLT_SENS_DC_KO_SB" 512 "VOLT_SENS_DC_KO_EB" 32 "CUR_SENS_PHASE_W_KO_SB" 8 "CUR_SENS_PHASE_U_KO_SB" 4 "CUR_SENS_PHASE_W_KO_EB" 1 "CUR_SENS_PHASE_U_KO_EB" ;
+VAL_ 548 NCUKState 5 "SPEED CTRL" 4 "CALIB" 3 "TEST" 2 "CAR RUN" 1 "ENGINE ON" 0 "CAR STOP" ;
+VAL_ 540 diag_latch 1073741824 "DEGRADATED_MODE_LT" 536870912 "OVERSPEED_LT" -2147483648 "VERY_HIGH_TEMP_ROTOR_LT" 268435456 "VQ_SATURATION_LT" 134217728 "PHASE_ADV_ON_LT" 67108864 "VOLT_SENS_DC_KO_SF_LT" 4194304 "ERR_INSULATION_LT" 2097152 "V_FROM_BATT_OFF_LT" 1048576 "DEGRADATION_OFF_LT" 524288 "BENCH_ALARM_HW_LT" 262144 "BENCH_ALARM_CAN_LT" 131072 "MECH_FAIL_BLOCK_LT" 65536 "MECH_FAIL_OVERREV_LT" 32768 "CONTROL_ERR_ID_LT" 16384 "CONTROL_ERR_IQ_LT" 8192 "ERR_KERS_FAIL_HW_LT" 4096 "ERR_KERS_FAIL_DESAT_LT" 2048 "FEM_MOT_OVER_VDC_LT" 1024 "WARN_KERS_FAIL_OVERVOLTAGE_LT" 512 "WARN_KERS_FAIL_OVERCURRENT_LT" 256 "OVER_CURR_INV_SW_W_LT" 64 "OVER_CURR_INV_SW_U_LT" 32 "OVER_VOLT_INV_SW_LT" 16 "CAN_RX_TIMEOUT_LT" 8 "KERS_FAIL_RESOLVER_2_LT" 4 "KERS_FAIL_RESOLVER_1_LT" 2 "OVER_VOLT_INV_HW_LT" 1 "OVER_CURR_INV_HW_LT" ;
+VAL_ 540 diag_base_Hw 268435456 "ERR_DESAT_WL" 134217728 "ERR_DESAT_WH" 67108864 "ERR_DESAT_VL" 33554432 "ERR_DESAT_VH" 16777216 "ERR_DESAT_UL" 8388608 "ERR_DESAT_UH" 4194304 "OVER_CURR_HW_DC" 2097152 "OVER_CURR_INV_HW_W" 1048576 "OVER_CURR_INV_HW_V" 524288 "OVER_CURR_INV_HW_U" 262144 "ERR_KERS_CROSS" 131072 "ERR_HSIDE2_SC" 65536 "ERR_HSIDE1_SC" 32768 "ERR_HSIDE2_OC" 16384 "ERR_HSIDE1_OC" 8192 "ERR_PELTIER_SC" 4096 "ERR_HVBAT_SC" 2048 "ERR_LSIDE2_SC" 1024 "ERR_LSIDE1_SC" 512 "ERR_LSIDE0_SC" 256 "ERR_PELTIER_OC" 128 "ERR_HVBAT_OC" 64 "ERR_LSIDE2_OC" 32 "ERR_LSIDE1_OC" 16 "ERR_LSIDE0_OC" 8 "ERR_KERS_FAIL_HW" 4 "ERR_KERS_FAIL_DESAT" 2 "OVER_VOLT_HW_INV" 1 "OVER_CURR_INV" ;
+VAL_ 532 NCUKState 6 "CALIBRATION" 5 "SYSTEM_OFF" 2 "AUTO_OFS" 1 "SYSTEM_OK" 0 "STARTING" ;
+VAL_ 516 auto_ofs_state_dem 3 "CALIB DUTY" 2 "CALIB IQ" 1 "CALIB ID" 0 "CALIB OFF" ;
+VAL_ 516 calib_state_dem 1 "ON" 0 "OFF" ;

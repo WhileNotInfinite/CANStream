@@ -1,0 +1,11 @@
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.pdb
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\FLEE_Lib.vbprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.CompileErrors.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.ElementNames.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.GeneralErrors.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\FLEE_Lib.vbproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Demo_Dbg\Ciloci.Flee.pdb

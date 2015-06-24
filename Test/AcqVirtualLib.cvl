@@ -1,0 +1,26 @@
+<CS_VirtualChannelsLibrary Name="DataVirtuals" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Channels>
+    <Channel Name="Virtual1" Unit="mm" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param2 * 2</Expression>
+    </Channel>
+    <Channel Name="Virtual2" Unit="deg" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param3 + Param4</Expression>
+    </Channel>
+    <Channel Name="Param1" Unit="W" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Param4 + Param3 + Param2</Expression>
+    </Channel>
+    <Channel Name="Virtual3" Unit="" Decimal="2" Enabled="True">
+      <Comment>0</Comment>
+      <TxDefaultValue />
+      <Expression>Virtual1 + Virtual2</Expression>
+    </Channel>
+  </Channels>
+</CS_VirtualChannelsLibrary>

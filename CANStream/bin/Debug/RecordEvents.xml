@@ -1,0 +1,255 @@
+<RecordEventsCollection>
+  <RecordEvent>
+    <Name>Semaine 50</Name>
+    <Date>11/7/2014 8:48:58 AM</Date>
+    <Comment>
+    </Comment>
+    <EventUserInfo />
+    <Sessions>
+      <RecordSession>
+        <Name>Mardi soir</Name>
+        <Date>11/7/2014 8:48:58 AM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+      <RecordSession>
+        <Name>Mercredi matin</Name>
+        <Date>11/7/2014 8:50:15 AM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+    </Sessions>
+    <ActiveSession>Mercredi matin</ActiveSession>
+  </RecordEvent>
+  <RecordEvent>
+    <Name>Semaine 40</Name>
+    <Date>11/6/2014 4:07:07 PM</Date>
+    <Comment>
+    </Comment>
+    <EventUserInfo />
+    <Sessions>
+      <RecordSession>
+        <Name>Dimanche matin</Name>
+        <Date>11/6/2014 4:07:07 PM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+      <RecordSession>
+        <Name>Dimanche apres midi</Name>
+        <Date>11/7/2014 8:38:26 AM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+      <RecordSession>
+        <Name>Lundi matin</Name>
+        <Date>11/7/2014 8:39:34 AM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+      <RecordSession>
+        <Name>Lundi soir</Name>
+        <Date>11/7/2014 8:44:47 AM</Date>
+        <Comment>
+        </Comment>
+        <SessionUserInfo />
+      </RecordSession>
+    </Sessions>
+    <ActiveSession>Lundi soir</ActiveSession>
+  </RecordEvent>
+  <RecordEvent>
+    <Name>Semaine 32</Name>
+    <Date>11/6/2014 2:47:43 PM</Date>
+    <Comment>Essai de la semaine 32</Comment>
+    <EventUserInfo>
+      <UserInfo Title="Version">1.6.0</UserInfo>
+      <UserInfo Title="Lieux">AH Office</UserInfo>
+      <UserInfo Title="Essayeur">Vincent Brault</UserInfo>
+      <UserInfo Title="SW">SRAE_StockCarBrazil_1.6.1.5</UserInfo>
+    </EventUserInfo>
+    <Sessions>
+      <RecordSession>
+        <Name>Lundi</Name>
+        <Date>11/17/2014 2:47:43 PM</Date>
+        <Comment>Data du lundi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">Gbx_CAN_Cfg_1.2</UserInfo>
+          <UserInfo Title="Cycle">Gbx_Cycle_Standard</UserInfo>
+          <UserInfo Title="Virtual channels">None</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mardi</Name>
+        <Date>11/18/2014 2:50:09 PM</Date>
+        <Comment>Data du mardi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">Gbx_CAN_Cfg_1.2</UserInfo>
+          <UserInfo Title="Cycle">Gbx_Cycle_Retry</UserInfo>
+          <UserInfo Title="Virtual channels">None</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mercredi</Name>
+        <Date>11/19/2014 2:50:45 PM</Date>
+        <Comment>Data du mercredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">Gbx_CAN_Cfg_1.3</UserInfo>
+          <UserInfo Title="Cycle">Gbx_Cycle_UpShift</UserInfo>
+          <UserInfo Title="Virtual channels">None</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Jeudi</Name>
+        <Date>11/20/2014 2:51:29 PM</Date>
+        <Comment>Data du jeudi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">Gbx_CAN_Cfg_1.3</UserInfo>
+          <UserInfo Title="Cycle">Gbx_Cycle_UpDown_N1st_NR</UserInfo>
+          <UserInfo Title="Virtual channels">None</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Vendredi</Name>
+        <Date>11/21/2014 2:52:40 PM</Date>
+        <Comment>Data du vendredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">Gbx_CAN_Cfg_1.2</UserInfo>
+          <UserInfo Title="Cycle">Gbx_Cycle_Standard</UserInfo>
+          <UserInfo Title="Virtual channels">None</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+    </Sessions>
+    <ActiveSession>Vendredi</ActiveSession>
+  </RecordEvent>
+  <RecordEvent>
+    <Name>Semaine 30</Name>
+    <Date>11/6/2014 2:31:56 PM</Date>
+    <Comment>Essais de la semaine 30</Comment>
+    <EventUserInfo>
+      <UserInfo Title="Version">1.4.0</UserInfo>
+      <UserInfo Title="Lieux">AH Office</UserInfo>
+      <UserInfo Title="Essayeur">Vincent Brault</UserInfo>
+    </EventUserInfo>
+    <Sessions>
+      <RecordSession>
+        <Name>Lundi</Name>
+        <Date>11/3/2014 2:31:56 PM</Date>
+        <Comment>Enregistrement du lundi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mardi</Name>
+        <Date>11/4/2014 2:35:59 PM</Date>
+        <Comment>Enregistrement du mardi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_CUK_Tx_Cycle</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_CUK_Virtual</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mercredi</Name>
+        <Date>11/5/2014 2:37:25 PM</Date>
+        <Comment>Enregistrement du mercredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v2</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v2</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Jeudi</Name>
+        <Date>11/6/2014 2:38:14 PM</Date>
+        <Comment>Enregistrement du jeudi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual_v2.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v3</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v5</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Vendredi</Name>
+        <Date>11/7/2014 2:39:32 PM</Date>
+        <Comment>Enregistrement du vendredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual_v5.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v6</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v7b</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+    </Sessions>
+    <ActiveSession>Vendredi</ActiveSession>
+  </RecordEvent>
+  <RecordEvent>
+    <Name>Semaine 31</Name>
+    <Date>11/10/2014 2:31:56 PM</Date>
+    <Comment>Essais de la semaine 31</Comment>
+    <EventUserInfo>
+      <UserInfo Title="Version">1.5.0</UserInfo>
+      <UserInfo Title="Lieux">AH Office</UserInfo>
+      <UserInfo Title="Essayeur">Vincent Brault</UserInfo>
+      <UserInfo Title="Test">Record Event/Session</UserInfo>
+    </EventUserInfo>
+    <Sessions>
+      <RecordSession>
+        <Name>Lundi</Name>
+        <Date>11/11/2014 2:31:56 PM</Date>
+        <Comment>Enregistrement du lundi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mardi</Name>
+        <Date>11/12/2014 2:35:59 PM</Date>
+        <Comment>Enregistrement du mardi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_CUK_Tx_Cycle</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_CUK_Virtual</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Mercredi</Name>
+        <Date>11/13/2014 2:37:25 PM</Date>
+        <Comment>Enregistrement du mercredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v2</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v2</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Jeudi</Name>
+        <Date>11/14/2014 2:38:14 PM</Date>
+        <Comment>Enregistrement du jeudi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual_v2.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v3</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v5</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+      <RecordSession>
+        <Name>Vendredi</Name>
+        <Date>11/15/2014 2:39:32 PM</Date>
+        <Comment>Enregistrement du vendredi</Comment>
+        <SessionUserInfo>
+          <UserInfo Title="CAN Config">ERSK_Virtual_v5.xcc</UserInfo>
+          <UserInfo Title="Cycle">ESRSK_Virtual_ECU_Tx_Cycle_v6</UserInfo>
+          <UserInfo Title="Virtual channels">ERSK_ECU_Virtual_v7b</UserInfo>
+        </SessionUserInfo>
+      </RecordSession>
+    </Sessions>
+    <ActiveSession>Vendredi</ActiveSession>
+  </RecordEvent>
+</RecordEventsCollection>

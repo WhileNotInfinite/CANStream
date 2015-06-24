@@ -1,0 +1,74 @@
+<CS_BuiltInSignalsLibrary Name="LibTest" ReadOnly="False">
+  <LibraryComment>
+  </LibraryComment>
+  <Signals>
+    <Signal Name="Sig1" Type="Sinusoid" Unit="" Decimal="2">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>200</Frequency>
+        <Magnitude>50</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>0</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>0</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+    <Signal Name="Sig2" Type="Step" Unit="" Decimal="2">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>0</Frequency>
+        <Magnitude>0</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>1</StartValue>
+        <EndValue>2</EndValue>
+        <Slope>0</Slope>
+        <StartTime>10</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+    <Signal Name="Sig1_01" Type="Sinusoid" Unit="" Decimal="2">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>200</Frequency>
+        <Magnitude>50</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>0</StartValue>
+        <EndValue>0</EndValue>
+        <Slope>0</Slope>
+        <StartTime>0</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+    <Signal Name="Sig2_01" Type="Step" Unit="" Decimal="2">
+      <Description>
+      </Description>
+      <Properties>
+        <Frequency>0</Frequency>
+        <Magnitude>0</Magnitude>
+        <Offset>0</Offset>
+        <Phase>0</Phase>
+        <Width>0</Width>
+        <StartValue>1</StartValue>
+        <EndValue>2</EndValue>
+        <Slope>0</Slope>
+        <StartTime>10</StartTime>
+        <MinValue>0</MinValue>
+        <MaxValue>0</MaxValue>
+      </Properties>
+    </Signal>
+  </Signals>
+</CS_BuiltInSignalsLibrary>

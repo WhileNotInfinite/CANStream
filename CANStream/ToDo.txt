@@ -1,0 +1,352 @@
+﻿							#############################################################
+							#			CANStream remaining tasks list					#
+							#############################################################
+
+------------------------------------------------------------
+|						NEW FEATURES					    |
+------------------------------------------------------------
+
+	Improve period consistency of message sending
+	Allow CAN message mapping graphical edition: move, resize parameter in the message map
+	Remove netchardir charts and use a Ctrl_GraphWindow for cycle player, cycle edition, spy graph
+	Add trigger for logging start/stop
+	Allow manual message sending for both raw and engineering Tx messages
+	Add history window of received messages
+		=> Show either spy graph or history
+	Add posibility to make a single logging file for multiple CAN buses		
+	Add a message box if a trace file hasn't been converted after a conversion request
+	Treat messages identifier as real number not as string to avoid bad comparison 0x42c != 0x42C
+	05-JUN-15: Add a feature allowing to filter item (by name) in windows (Eng Rx, Graph Rx, Can config treeview and other)
+	05-JUN-15: When data is loaded in the data viewer, return to the current data folder when re-opening the data browser
+	05-JUN-15: On spy Start/Stop/Resume, keep the spy graph configuration
+	05-JUN-15: Add a feature allowing to not save into the data file the entire CAN configuration trace conversion (make an acquisition table)
+	05-JUN-15: Add a feature allowing to not save into the data file all samples of a channel (make a logging frequency)
+	05-JUN-15: Use the CAN configuration of the CAN bus having done the record to make the conversion
+				=> Trace file are marked with the name of PCAN device used to make the trace
+				=> Ask for a CAN configuration only if no CAN config is loaded
+	05-JUN-15: Show data file size in MB (or KB if too small, or GB if too big) in the data browser, not in byte...
+	05-JUN-15: Add the possibility to copy/paste a page in the data viewer
+	11-JUN-15: Add the possibility to have virtual channels libraries loaded into the data viewer for data post processing
+	22-JUN-15: Create a dashboard windows being a spy/manual window featuring different controls type (graph, gauge, bargraph, bit field, numeric display)
+				=> Dashboard configuration shall be savable/openable/editable/lockable (read only)
+				=> Dashboard shall support multiple pages
+				=> Dashboard shall support command button/check boxes/radio button/combobox for data sending from dashboard to listner
+				=> Dashboard shall support virtual channel for data Rx/Tx
+				=> Dashboard shall be able to Start/Stop/Resume trace record
+				=> Dashboard edition shall be done in graphic fashion (like Visual Studio designer mode)
+				=> Idea is to make a Vision configuration / System Monitor desktop style feature
+	22-JUN-15: Make a permanent & all versions license mode
+	
+To finish
+---------
+	
+	Finish user guide word document import in the HelpNDoc project
+	Generate final CHM
+	Complete release script with the ConfuserEx part and userguide generation
+	Make two release folders (developper and client)
+
+To sign off
+-----------
+
+	
+Done
+----
+
+	***********************************************************************************************************************
+	* VERSION 1.1.0																										  *
+	***********************************************************************************************************************
+	
+	Excel data file reading
+	CSV comma ',' seperated reading
+	Create About form
+	Activate CAN Trace feature
+	Convert CAN Trace file into Wintax data
+	Cycle graphic display
+	Create a bus spy with display of raw and engineering data
+	Create a graphical display of bus spy data
+	Extend the Cycle/Data association form to avoid the horizontal scroll bar for long CAN config (KERS_20.00_BMS_CANB.xcc)
+	
+	***********************************************************************************************************************
+	* VERSION 1.2.0																										  *
+	***********************************************************************************************************************
+	
+	Check is PCAN device is still connected to the PC
+	Add comment property for CAN message & parameter
+	Add unit property for CAN parameter
+	Add support of MSB/LSB CAN parameters
+	Support of multiplexed message
+	Add support for proper dbc file
+	Add a function to filter Rx/Tx messages in the manual windows
+	Add a function to hide/show rows in the manual & spy windows
+	Virtual channels
+		Calculate virtual channels on the fly from data recieved
+		Add virtual channels to a record conversion
+		
+	***********************************************************************************************************************
+	* VERSION 1.3.0																										  *
+	***********************************************************************************************************************
+	
+	Manual & Spy tabs merged into a single tab
+	Add a signal generator (sin, square, triangle, ramp, etc) in Cycle/Data association
+	Add Gain/Zero conversion rules as an info for CAN parameters
+	Change Cycle graph abscisse to second instead of millisecond
+	Add an option in the Cycle player to play indifinitevly the cycle
+	Add start/end time point for cycle playing
+	Link stop record to Stop Spy if automatic record active
+	CAN Configuration embedded into the cycle file to ease cycle sharing
+	Graphical CAN Message map display added
+	Spy and Manuals grid columns customizable
+	Use of virtual channel in cycle
+	New cycle creation tool having the possibility to add some data before and after the actual cycle
+	Cursor showing current time position and progression added in the cycle graphic
+	Graphical definition of cycle starting and ending points
+	Create a graphical display of recording (Wintax style)
+	Add Event/Session structure for data recording/conversion
+	Add contextual informations to the data recording/conversion
+	Use Event/Session structure into the data browser
+	Use contextual information into the data browser
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.1 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Finish tool bar
+	Add multiple CAN buses management in parallel
+	Open data viewer book function operational
+	Use the "User" folder to store all user objects file (DataViewerBook, DataViewerPage, Cycle, Cycle creation config, etc, etc...)
+	Move the "User" folder to the Windows user "Document folder"
+	Allow CAN configuration to support multiple CAN lines
+	Use a CAN record (trc file) to generate a cycle
+	Add the import DBC function into the CAN Configuration form
+	Use Virtual Channel/Built-in signal library name as default filename for library file
+	Default message RxTx state changed to Tx for DBC to XCC conversion
+	Default message period changed from 0 to 1000 ms for DBC to XCC conversion
+	Modify manual control message counter display mangement to have a consistant refresh period whatever messages frequencies are.
+	Add a function to cycle the multiplexer in manual mode
+	Parameter linearization change from "Engeneering to Raw" to "Raw to Engeneering"
+	CAN parameters Gain/Zero conversion rules info updated
+	Integration of 'Signed' property for CAN parameter
+	Add 'Signed' column into the manual Tx grid
+	Message encoding/decoding functions reviewed to cope with special cases where MSB and LSB paramters are interlaced (param 1: 8 bits MSB starting on bit #3 / param 2: 8 bits LSB starting on bit #4)
+	Options added to show/hide manual control / spy panels
+	Add an option showing/hidding raw/eng data panels in the Rx panel
+	Use of 'CANMessageDecoded' class in the 'CANStreamCycle' class for cycle graph series creation
+	Spy grids and graph refreshing period move from 250 to 100 ms in order to improve graph fluidity.
+	Make a function to send raw message data in the Tx manual control
+	Slight optimization of engineering message sending function (conversion from 'CANMessageEncoded' type straight to 'TPCANMsg' without intermetiade 'CANMessageData' type stage)
+	Control 'Ctrl_CS_CAN_Bus' presentation reviewed
+	Command 'Reset' added to Raw & Eng spy grids
+	Add message ID column in the Manual engineering Tx grid
+	Commands "Show All" & "Hide All" columns added to Engineering manual, Spy raw & Spy Engineering grids context menu and menustrip options
+	Grid columns auto resizing method reviewed
+	PCAN Bus diagnostics showed in the main form status strip
+	Support of CAN Configuration, virtual channels library, built-in signals library and data files in the virtual channel definition form in order to get more objects to make calculation with
+	Final merge of 'Spy' and 'Manual' controllers: both controllers are now driven using same command buttons (start/stop)
+	Added virtual CAN parameters (virtual channel used as a CAN parmater)
+	Virtual CAN parameters implemented into the 'Manual & Spy' control : Virtual channels are computed based on CAN Rx value, then their values are sent on the CAN bus as an answer
+	Virtual CAN parameters implemented into the 'Cycle' control : Virtual channels are computed based on CAN Rx value, then their values are sent on the CAN bus as an answer
+	CAN bus controller layout (panels visibility, grids columns) stored for re-use from a session to another
+	CAN bus controller layout reset command added
+	Installation wizzard added
+	CANStream files association in the Windows registry by installer
+	Function added to load the file passed as argument on CANStream file double click from Windows explorer
+	Releasing sript created and called on a successful 'Release' build
+	Use of a ressource file for icons in order to reduce the size of the final exe (size ref 2866 KB / new size 1192 KB)
+	Last record event/session used by default at the application start
+	Trace files default location moved to 'My documents' to avoid crash in writing in the 'Program files' folder
+	CANStream XML files moved to '\users\xxx\AppData\Local\CANStream' folder to avoid crash in writing in the 'Program files' folder
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.2 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Help file access menu added
+	Help file included in the installation script
+	AssemblyCompany changed for 'Cobalt Solutions'
+	Add virtual channel expression as tooltip text of virtual CAN signals in manual grids
+	Make a user control of the Spy 'Raw' and 'Engineering' grids and use it in the Manual and Cycle tabs
+	Layout control commands added into the 'View' menu of the main form menu strip
+	Main form public methods for CAN controller replaced by CAN controller control custom events
+	Add Raw messages list management commands in the menu strip
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.3 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Session list toolbar items of the Frm_RecordEventEdition form using icons of the ressource file
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.4 [1.5.0 pre release]	Dev Ctrl_GraphWindow everywhere												  *
+	***********************************************************************************************************************
+	
+	Release 'Client' folder added to the releasing process
+	
+	***********************************************************************************************************************
+	* VERSION 2.0.0.0 																									  *
+	***********************************************************************************************************************
+	
+	Licencing system implementation
+	Licence information added into the 'About' form
+	
+	***********************************************************************************************************************
+	* VERSION 2.0.0.1 																									  *
+	***********************************************************************************************************************
+	
+	Demo version: Added define #DEMO for demo version build.
+	Assemblies confusing process added
+	ConfuserEx projects creation for 'Release' and 'Demo' version.
+	Installers update for confused assembly usage
+	Installers for 'Demo' version created
+	Release script update
+		'Release' & 'Demo' build through command lines
+		'Release' & 'Demo' confusing through command lines
+		Installer scripts build for 'Demo' version added
+		ConfuserEx files added to backup archive
+		'Demo package' creation
+		PDF user documentation added to 'Client' and 'Demo' package
+	
+	***********************************************************************************************************************
+	* VERSION 2.1.0.0																									  *
+	***********************************************************************************************************************
+	
+	Added 'DebugNoLicense' build configuration using #NO_LIC define. For development without carring about license.
+	DBC transmitter/receiver concept integration
+	!CAN configuration edition form resizeable
+	!CAN configuration edition treeview node expansion modified: Single CAN bus => All nodes expanded / Multiple CAN buses => Bus nodes expanded only
+	Manual Tx grid shows only Tx signals
+	Option 'Rx messages hidden' of manual Tx grid removed
+	Add Transmitter/Receiver feature to CAN config
+		=> If multiple CAN bus: Frames and signal created in Tx for a Bus shall be frame and signals duplicated as Rx in the destination bus if it exists
+		=> If multiple CAN bus: Frames and signal created in Rx for a Bus shall be frame and signale duplicated as Tx in the source bus if it exists
+	Limit size of converted data file to a certain value (50 Mo => Issue happened with a file larger than 1 Go) to avoid 'Out Of Memory' exception while loading the file into the data viewer
+	Limit the total size of all files attempted to be loaded into the data viewer to a certain value (50 Mo => Issue happened with a file larger than 1 Go) 
+	
+	***********************************************************************************************************************
+	* VERSION 2.2.0.0																									  *
+	***********************************************************************************************************************
+	
+	03-JUN-15: Remove double 'Manual/Spy' or 'Cycle/Spy' error messages on application closing attempt while the 'Manual/Spy' or 'Cycle/Spy' modes are running
+	
+Canceled / Not relevant anymore
+--------------------------------
+
+	Re-arrange menu strip with particular attention to the current CAN config loading function
+	Consider usage of a different library than Microsoft.Office.Interop.Excel to enhence xlsx file reading speed
+	Allow user to define the record options (path, conversion type, etc...)
+	Add a function to forward data recieved in a particular messages
+		=> Useless since CAN parameters received can be forwarded into a virtual CAN parameter
+	Add a function to filter messages Id in the manual & spy windows
+	Create a function to define column separator and decimal sepearator character for ascii data file reading
+	
+------------------------------------------------------------
+|							BUGS							|				
+------------------------------------------------------------
+	
+	05-JUN-15: Modification on the current CAN configuration aren't taken in account even after having reloaded it (need to close and reopen CANStream)
+	05-JUN-15: Crash on spy restart after a CAN error detection
+	05-JUN-15: Tx message counter increases while no messages are sent !
+	11-JUN-15: Cycle creators (easy & advanced) are not working with multiplexed Tx messages
+	11-JUN-15: Data viewer book 'Save as' windows shows the entire book file path (C:\Users\braul\Documents\CANStream\Data Viewers\CUH.dvb) while the file name only (CUH.dvb)is expected.
+	
+Fixed
+-----
+	
+	***********************************************************************************************************************
+	* VERSION 1.1.0																										  *
+	***********************************************************************************************************************
+	
+	Crash when attempt to read a csv file already opened in another application
+	Bug on loading a new cycle while the CAN communication is already established
+	
+	***********************************************************************************************************************
+	* VERSION 1.2.0																										  *
+	***********************************************************************************************************************
+	
+	Crash on CanConfiguration loading while the spy is running
+	
+	***********************************************************************************************************************
+	* VERSION 1.3.0																										  *
+	***********************************************************************************************************************
+	
+	Can't read csv file if there is a ";" at the end of the line (like Wintax export)
+	Crash on attempt to create a cycle with a CAN Configuration containing messages not described in the cycle/data association (cda)
+	Cycle resuming after a pause
+	Crash on attempt to create a new CAN parameter without any message selected
+	Crash on CAN parameter delete
+	Can't change the name of the multiplexer once defined as a parameter multiplexer
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.1 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Crash on CAN message map display: Msg 0x208 of VCAN.dbc (\CANStream\DBC Object\Samples)
+	Debug wrong message decoding when isn't starting at bit 0 of a byte
+	Crash on advanced cycle creation if message period is 0
+	Traces in the spy graph do not use the whole graph width after a while
+	Wrong CAN parameter update after edition from the message map
+	Rx graph 'Auto scale' check box not operating
+	Virtual channel 'Comment' and 'Default Tx value' lost during library file saving/opening
+	Default session duplicated on event creation while editing the default session
+	Select event command does'nt do anything
+	Crash on attempt to write on the startup path if CANStream is installed in C:\Program Files.
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.2 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Text box 'Expression' of a virtual channel is not updated after a 'Set Channel' of the virtual channel test window
+	Crash on Cycle graphic plotting if the cycle is empty
+	Cycle created with the 'Cycle_Creation_Demo' config is empty (All Tx paramater within messages containing virtual CAN signal)
+	Impossible to close the application when the cycle ends
+	Crash on attempt to replay a cycle with virtual signal
+	CAN Parameter raw value is always 0x0 in the spy grid
+	Virtual channel not created if it is tested and set before the final creation (click on 'create' button)
+	Manaul Grids are empty switching Manual -> Cycle -> Manuak after having loaded a multiple controller config
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.3 [1.5.0 pre release]																				  *
+	***********************************************************************************************************************
+	
+	Control misalignment corrected in the cycle player control panel
+	Wrong image index for the element treeview in the Cycle_Edition form
+	Crash when multiple session are selected at the same time in the data browser (Not replicated: Code protected to avoid exception)
+	
+	***********************************************************************************************************************
+	* VERSION 1.4.0.4 [1.5.0 pre release]	Dev Ctrl_GraphWindow everywhere												  *
+	***********************************************************************************************************************
+	
+	
+	
+	***********************************************************************************************************************
+	* VERSION 2.0.0.0 																									  *
+	***********************************************************************************************************************
+	
+	Crash on attempt to load a xlsx file without Excel installed
+	
+	***********************************************************************************************************************
+	* VERSION 2.0.0.1 																									  *
+	***********************************************************************************************************************
+	
+	Crash manual/cycle modes start without any virtual channel library loaded
+	
+	***********************************************************************************************************************
+	* VERSION 2.1.0.0																									  *
+	***********************************************************************************************************************
+	
+	Crash on DBC signed signal with a negative linearization gain
+	Crash on DBC special Vector message using 3221225472 as identifier
+	CAN messages having letter in their identifiers (0x42c) aren't decoded despite they appear in the row messages grid
+	Crash on Spy/Manual mode start without any CAN Configuration loaded
+	Refactor of signed parameter linearization and unlinearization
+	
+	***********************************************************************************************************************
+	* VERSION 2.2.0.0																									  *
+	***********************************************************************************************************************
+	
+	03-JUN-15: Multiplexed frames aren't decoded
+	
+Unreplicated bugs
+--------------------------------
+
+	Crash at start up if PCANBasic.dll is not properly installed
+	Crash on 'Advanced cycle creation' form opening when clicking the 'Cancel' button of CAN Config loading message box
