@@ -334,6 +334,65 @@ namespace CANStream
 			TraceConversionOptions.CanConfiguration = null;
         }
         
+        public static string GetScaledFileSize(long FileSize)
+        {
+        	long ScaledSize = FileSize;
+        	int iScale = 0;
+        	string sScale = "";
+        	string sScaledSize = "";
+        	
+        	while (ScaledSize > 1024)
+        	{
+        		ScaledSize /= 1024;
+        		iScale++;
+        	}
+        	
+        	switch (iScale)
+        	{	
+        		case 1: //Kilo Byte
+        			
+        			sScale = "KB";
+        			break;
+        			
+        		case 2: //Mega Byte
+        			
+        			sScale = "MB";
+        			break;
+        			
+        		case 3: //Giga Byte
+        			
+        			sScale = "GB";
+        			break;
+        			
+        		case 4: //Tera Byte
+        			
+        			sScale = "TB";
+        			break;
+        			
+        		default:
+        			
+        			sScale = "Bytes";
+        			ScaledSize = FileSize;
+        			break;
+        	}
+        	
+        	if (!(sScale.Equals("Bytes")))
+        	{
+        		double ScaledSizeRem = (FileSize - (ScaledSize * Math.Pow(1024, iScale))) / 1024;
+        		
+        		if (ScaledSizeRem > 0)
+        		{
+        			sScaledSize = ScaledSize.ToString() + "." + Math.Floor(ScaledSizeRem).ToString()  + " " + sScale;
+        		}
+        	}
+        	else
+        	{
+        		sScaledSize = ScaledSize.ToString() + " " + sScale;
+        	}
+        	
+        	return(sScaledSize);
+        }
+        
 		#endregion
 		
 		#region Private methods

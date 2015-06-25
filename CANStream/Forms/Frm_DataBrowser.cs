@@ -282,7 +282,7 @@ namespace CANStream
 							{
 								ListViewItem ItFile = LV_Files.Items.Add(oFile.Name, iIcone);
 								ItFile.SubItems.Add(oFile.LastWriteTime.ToShortDateString() + " " + oFile.LastWriteTime.ToShortTimeString());
-								ItFile.SubItems.Add(oFile.Length.ToString());
+								ItFile.SubItems.Add(CANStreamTools.GetScaledFileSize(oFile.Length));
 								
 								object[] FileTag = new object[3];
 								FileTag[0] = oFile.FullName;

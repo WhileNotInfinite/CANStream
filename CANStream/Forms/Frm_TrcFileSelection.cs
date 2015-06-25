@@ -137,7 +137,7 @@ namespace CANStream
 						}
 						
 						TrcIt.SubItems.Add(TrcInfo.TrcFileInfo.LastWriteTime.ToShortDateString() + " " + TrcInfo.TrcFileInfo.LastWriteTime.ToShortTimeString());
-						TrcIt.SubItems.Add((TrcInfo.TrcFileInfo.Length / 1024).ToString() + " KB");
+						TrcIt.SubItems.Add(CANStreamTools.GetScaledFileSize(TrcInfo.TrcFileInfo.Length));
 					}
 					
 					LV_TrcFiles.Sort();
