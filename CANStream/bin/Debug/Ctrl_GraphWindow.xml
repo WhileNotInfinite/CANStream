@@ -4,41 +4,6 @@
         <name>Ctrl_GraphWindow</name>
     </assembly>
     <members>
-        <member name="T:Ctrl_GraphWindow.GW_SampleCoordConversion">
-            <summary>
-            Sample data conversion to screen coordinates components
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Gain">
-            <summary>
-            Value to coordinate conversion gain
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Zero">
-            <summary>
-            Value to coordinate conversion zero
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Top">
-            <summary>
-            StartPos Y point of a serie
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Bottom">
-            <summary>
-            EndPos Y point of a serie
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Min">
-            <summary>
-            Min Y value of the serie
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Max">
-            <summary>
-            Max Y value of the serie
-            </summary>
-        </member>
         <member name="T:Ctrl_GraphWindow.SerieStatistics">
             <summary>
             Serie statistics structure
@@ -102,11 +67,6 @@
         <member name="F:Ctrl_GraphWindow.GW_DataChannel.Avg">
             <summary>
             Average value of the channel
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_DataChannel.CoordConversion">
-            <summary>
-            Sample data conversion to screen coordinates components
             </summary>
         </member>
         <member name="M:Ctrl_GraphWindow.GW_DataChannel.#ctor">
@@ -435,6 +395,41 @@
         <member name="F:Ctrl_GraphWindow.GraphSerieEnumValue.Text">
             <summary>
             Text of the enumeration
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.GW_SampleCoordConversion">
+            <summary>
+            Sample data conversion to screen coordinates components
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Gain">
+            <summary>
+            Value to coordinate conversion gain
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Zero">
+            <summary>
+            Value to coordinate conversion zero
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Top">
+            <summary>
+            StartPos Y point of a serie
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Bottom">
+            <summary>
+            EndPos Y point of a serie
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Min">
+            <summary>
+            Min Y value of the serie
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_SampleCoordConversion.Max">
+            <summary>
+            Max Y value of the serie
             </summary>
         </member>
         <member name="T:Ctrl_GraphWindow.GW_Font">
@@ -1054,6 +1049,11 @@
             Abcisse reference lines collection
             </summary>
         </member>
+        <member name="F:Ctrl_GraphWindow.GraphAbscisseAxis.CoordConversion">
+            <summary>
+            Abscisse sample data conversion to screen coordinates components
+            </summary>
+        </member>
         <member name="M:Ctrl_GraphWindow.GraphAbscisseAxis.#ctor">
             <summary>
             Default constructor
@@ -1194,6 +1194,11 @@
         <member name="F:Ctrl_GraphWindow.GraphSerieProperties.ReferenceLines">
             <summary>
             Serie reference lines properties
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GraphSerieProperties.CoordConversion">
+            <summary>
+            Serie sample data conversion to screen coordinates components
             </summary>
         </member>
         <member name="M:Ctrl_GraphWindow.GraphSerieProperties.#ctor">
@@ -1422,6 +1427,36 @@
             Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
             le contenu de cette méthode avec l'éditeur de code.
             </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList">
+            <summary>
+            Contextual channel list control class
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.MaxStringWidth">
+            <summary>Width of the string of the longest channel name</summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.AddChannel(System.String)">
+            <summary>
+            Add a channel name into the current object
+            </summary>
+            <param name="ChanName">Name of the channel to add</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.ShowChannels">
+            <summary>
+            Show the channel list
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.FilterItems(System.String)">
+            <summary>
+            Apply a filter to show only items matching the filter
+            </summary>
+            <param name="Filter">Filter value</param>
         </member>
         <member name="T:Ctrl_GraphWindow.Ctrl_ReferenceLines">
             <summary>

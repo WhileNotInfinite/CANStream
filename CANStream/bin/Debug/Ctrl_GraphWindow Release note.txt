@@ -1,4 +1,50 @@
-﻿11 18 2014 Release 1.0.0.2
+﻿06 14 2015 Release 1.0.0.4
+
+	New features
+	
+		Contextual list added showing channel names when writing in a 'Name' cell of general graphic serie properties
+	
+	Bug fixes
+	
+		Cannot change runtime the channel source of a trace
+		Cannot plot twice the same trace using different properties into the same window
+	
+	Known issues and bugs
+	
+		Need of pressing arrow keys twice to move the cursor while zooming.
+
+06 14 2015 Release 1.0.0.3
+
+	New features
+	
+		Enumeration 'ScreenPositions' added including all possible positions (center, top, bottom, left, right)
+		Enumeration 'CursorAbscisseValuePosition' removed (replaced by ScreenPositions)
+		Enumeration 'CursorOrdinateValuePosition' removed (replaced by ScreenPositions)
+		Member 'ReferenceValueVisible' of class 'GraphReferenceLine' removed (replaced by 'ReferenceValuePosition' member including 'invisible' value)
+		Member 'ReferenceValuePosition' added into class 'GraphReferenceLine'
+		Member 'ReferenceTitle' added into class 'GraphReferenceLine'
+		Member 'ReferenceTitlePosition' added into class 'GraphReferenceLine'
+		Column 'Reference value visible' of control 'Ctrl_GW_ReferenceLine' removed
+		Column 'Reference title' added to contorl 'Ctrl_GW_ReferenceLine'
+		Column 'Reference value position' added to contorl 'Ctrl_GW_ReferenceLine'
+		Column 'Reference title position' added to contorl 'Ctrl_GW_ReferenceLine'
+		Form 'Frm_GraphSerieDetailedProperties' reworked for new 'Ctrl_GW_ReferenceLine' control size
+		Condition TimeMode == False removed for abscisse reference lines
+		Reference line title, reference line title position, reference value position implemented into the control
+		Designer options available as properties in Visual Studio control configuration panel
+		GetDefaultSerieColor improvement to manage black, white and other background color
+	
+	Bug fixes
+	
+		Abscisse reference line don't reach the top of the graphic frame
+		Abscisse reference lines persist even after a new graph configuration creation
+		Display in hexadecimal isn't working
+	
+	Known issues and bugs
+	
+		Need of pressing arrow keys twice to move the cursor while zooming.
+
+11 18 2014 Release 1.0.0.2
 
 	New features
 	

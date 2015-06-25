@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 using Ctrl_GraphWindow;
@@ -340,6 +341,8 @@ namespace CANStream
 		{
 			if (ViewerBook.FilePath.Equals("") || RequestPath)
 			{
+				if (RequestPath) Dlg_SaveViewerBook.FileName = Path.GetFileName(ViewerBook.FilePath);
+				
 				if (Dlg_SaveViewerBook.ShowDialog().Equals(DialogResult.OK))
 				{
 					Write_DataViewerBook(Dlg_SaveViewerBook.FileName);

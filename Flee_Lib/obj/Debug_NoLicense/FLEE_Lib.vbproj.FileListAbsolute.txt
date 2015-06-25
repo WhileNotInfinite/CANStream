@@ -9,3 +9,14 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Debug_No
 C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.dll
 C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.xml
 C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.pdb
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.pdb
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\FLEE_Lib.vbprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.CompileErrors.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.ElementNames.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.GeneralErrors.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\FLEE_Lib.vbproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.pdb
