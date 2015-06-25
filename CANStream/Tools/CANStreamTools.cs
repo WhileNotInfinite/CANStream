@@ -336,10 +336,9 @@ namespace CANStream
         
         public static string GetScaledFileSize(long FileSize)
         {
-        	long ScaledSize = FileSize;
+        	double ScaledSize = FileSize;
         	int iScale = 0;
         	string sScale = "";
-        	string sScaledSize = "";
         	
         	while (ScaledSize > 1024)
         	{
@@ -376,21 +375,7 @@ namespace CANStream
         			break;
         	}
         	
-        	if (!(sScale.Equals("Bytes")))
-        	{
-        		double ScaledSizeRem = (FileSize - (ScaledSize * Math.Pow(1024, iScale))) / 1024;
-        		
-        		if (ScaledSizeRem > 0)
-        		{
-        			sScaledSize = ScaledSize.ToString() + "." + Math.Floor(ScaledSizeRem).ToString()  + " " + sScale;
-        		}
-        	}
-        	else
-        	{
-        		sScaledSize = ScaledSize.ToString() + " " + sScale;
-        	}
-        	
-        	return(sScaledSize);
+        	return(Math.Round(ScaledSize, 3).ToString() + " " + sScale);
         }
         
 		#endregion
