@@ -1252,6 +1252,7 @@
         	this.Bit7.HeaderText = "Bit 7";
         	this.Bit7.Name = "Bit7";
         	this.Bit7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit7.Width = 53;
         	// 
         	// Bit6
@@ -1259,6 +1260,7 @@
         	this.Bit6.HeaderText = "Bit 6";
         	this.Bit6.Name = "Bit6";
         	this.Bit6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit6.Width = 53;
         	// 
         	// Bit5
@@ -1266,6 +1268,7 @@
         	this.Bit5.HeaderText = "Bit 5";
         	this.Bit5.Name = "Bit5";
         	this.Bit5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit5.Width = 53;
         	// 
         	// Bit4
@@ -1273,6 +1276,7 @@
         	this.Bit4.HeaderText = "Bit 4";
         	this.Bit4.Name = "Bit4";
         	this.Bit4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit4.Width = 53;
         	// 
         	// Bit3
@@ -1280,6 +1284,7 @@
         	this.Bit3.HeaderText = "Bit 3";
         	this.Bit3.Name = "Bit3";
         	this.Bit3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit3.Width = 53;
         	// 
         	// Bit2
@@ -1287,6 +1292,7 @@
         	this.Bit2.HeaderText = "Bit 2";
         	this.Bit2.Name = "Bit2";
         	this.Bit2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit2.Width = 53;
         	// 
         	// Bit1
@@ -1294,6 +1300,7 @@
         	this.Bit1.HeaderText = "Bit 1";
         	this.Bit1.Name = "Bit1";
         	this.Bit1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit1.Width = 53;
         	// 
         	// Bit0
@@ -1301,6 +1308,7 @@
         	this.Bit0.HeaderText = "Bit 0";
         	this.Bit0.Name = "Bit0";
         	this.Bit0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         	this.Bit0.Width = 53;
         	// 
         	// Frm_CANConfiguration
