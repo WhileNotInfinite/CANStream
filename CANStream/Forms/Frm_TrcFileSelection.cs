@@ -6,6 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+using Microsoft.Win32; 
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -44,6 +46,52 @@ namespace CANStream
 		}
 		
 		#region Control events
+		
+		private void Frm_TrcFileSelectionLoad(object sender, EventArgs e)
+		{
+			object WidthRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Size", "Width", "546");
+			object HeigthRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Size", "Heigth", "296");
+			
+			if (!((WidthRegKey == null) || (HeigthRegKey == null)))
+			{
+				this.Width = Convert.ToInt16(WidthRegKey);
+				this.Height = Convert.ToInt16(HeigthRegKey);
+			}
+			
+			object WinStateRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Size", "WindowState", "Normal");
+			
+			if (!(WinStateRegKey == null))
+			{
+				this.WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), WinStateRegKey.ToString());
+			}
+			
+			if (this.WindowState.Equals(FormWindowState.Normal))
+			{
+				object LeftRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Position", "Left", "50");
+				object TopRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Position", "Top", "50");
+				
+				if (!((LeftRegKey == null) || (TopRegKey == null)))
+				{
+					this.Left = Convert.ToInt16(LeftRegKey);
+					this.Top = Convert.ToInt16(TopRegKey);
+				}
+			}
+		}
+		
+		private void Frm_TrcFileSelectionFormClosing(object sender, FormClosingEventArgs e)
+		{
+			string FormSizeRegKey = CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Size";
+			
+				Registry.SetValue(FormSizeRegKey, "Width", this.Width.ToString());
+				Registry.SetValue(FormSizeRegKey, "Heigth", this.Height.ToString());
+				Registry.SetValue(FormSizeRegKey, "WindowState", this.WindowState.ToString());
+			
+			string FormPosRegKey = CANStreamConstants.CS_REG_KEY + "\\TrcFileSelection\\Position";
+			
+				Registry.SetValue(FormPosRegKey, "Left", this.Left.ToString());
+				Registry.SetValue(FormPosRegKey, "Top", this.Top.ToString());
+			
+		}
 		
 		#region Context_LV_TrcFiles
 		

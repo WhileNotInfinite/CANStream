@@ -152,7 +152,10 @@ namespace CANStream
 			this.Controls.Add(this.LV_TrcFiles);
 			this.Icon = global::CANStream.Icones.CANStream_Icone;
 			this.Name = "Frm_TrcFileSelection";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Records selection";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_TrcFileSelectionFormClosing);
+			this.Load += new System.EventHandler(this.Frm_TrcFileSelectionLoad);
 			this.Context_LV_TrcFiles.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}

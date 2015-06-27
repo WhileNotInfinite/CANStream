@@ -1387,9 +1387,9 @@ namespace CANStream
 									this.TSSL_StopConversion,
 									this.TSS_Lbl_PCAN_Diag_Title,
 									this.TSS_Lbl_PCAN_Diag_Text});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 605);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 599);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(962, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(962, 28);
 			this.statusStrip1.TabIndex = 5;
 			this.statusStrip1.Text = "FrmMain_StatusStrip";
 			// 
@@ -1419,13 +1419,13 @@ namespace CANStream
 			// SS_TS_Lbl_RecordEvent
 			// 
 			this.SS_TS_Lbl_RecordEvent.Name = "SS_TS_Lbl_RecordEvent";
-			this.SS_TS_Lbl_RecordEvent.Size = new System.Drawing.Size(22, 17);
+			this.SS_TS_Lbl_RecordEvent.Size = new System.Drawing.Size(22, 23);
 			this.SS_TS_Lbl_RecordEvent.Text = "xxx";
 			// 
 			// SS_TS_Lbl_RecordSession
 			// 
 			this.SS_TS_Lbl_RecordSession.Name = "SS_TS_Lbl_RecordSession";
-			this.SS_TS_Lbl_RecordSession.Size = new System.Drawing.Size(22, 17);
+			this.SS_TS_Lbl_RecordSession.Size = new System.Drawing.Size(22, 23);
 			this.SS_TS_Lbl_RecordSession.Text = "xxx";
 			// 
 			// TS_Lbl_ConversionProgress
@@ -1459,14 +1459,14 @@ namespace CANStream
 			// 
 			this.TSS_Lbl_PCAN_Diag_Title.ForeColor = System.Drawing.Color.Red;
 			this.TSS_Lbl_PCAN_Diag_Title.Name = "TSS_Lbl_PCAN_Diag_Title";
-			this.TSS_Lbl_PCAN_Diag_Title.Size = new System.Drawing.Size(22, 17);
+			this.TSS_Lbl_PCAN_Diag_Title.Size = new System.Drawing.Size(22, 23);
 			this.TSS_Lbl_PCAN_Diag_Title.Text = "xxx";
 			this.TSS_Lbl_PCAN_Diag_Title.Visible = false;
 			// 
 			// TSS_Lbl_PCAN_Diag_Text
 			// 
 			this.TSS_Lbl_PCAN_Diag_Text.Name = "TSS_Lbl_PCAN_Diag_Text";
-			this.TSS_Lbl_PCAN_Diag_Text.Size = new System.Drawing.Size(22, 17);
+			this.TSS_Lbl_PCAN_Diag_Text.Size = new System.Drawing.Size(22, 23);
 			this.TSS_Lbl_PCAN_Diag_Text.Text = "xxx";
 			this.TSS_Lbl_PCAN_Diag_Text.Visible = false;
 			// 
