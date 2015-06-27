@@ -25,6 +25,8 @@ namespace CANStream
 	
 		private Frm_DataViewer ParentViewer;
 		
+		private string RootPath;
+		
 		#endregion
 		
 		public Frm_DataBrowser(Frm_DataViewer FrmCaller)
@@ -35,9 +37,12 @@ namespace CANStream
 			InitializeComponent();
 			
 			ParentViewer = FrmCaller;
+			RootPath = "";
 		}
 		
 		#region Control events
+		
+		#region Form
 		
 		private void Frm_DataBrowserLoad(object sender, EventArgs e)
 		{
@@ -84,6 +89,8 @@ namespace CANStream
 			}
 		}
 		
+		#endregion
+		
 		private void Cmd_RootFolderClick(object sender, EventArgs e)
 		{
 			Dlg_FolderBrowser.SelectedPath = CANStreamTools.MyDocumentPath + "\\CANStream\\Records\\Data";
@@ -97,24 +104,61 @@ namespace CANStream
 		
 		private void Cmb_RootFolderSelectedIndexChanged(object sender, EventArgs e)
 		{
-			UpDate_FolderTree(Cmb_RootFolder.Text);
+			RootPath = Cmb_RootFolder.Text;
+			UpDate_FolderTree(RootPath);
 		}
+		
+		#region TV_Folders
 		
 		private void TV_FoldersNodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			if (!(e.Node == null))
+			Set_CurrentEvent(e.Node);
+		}
+		
+		private void TV_FoldersKeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
 			{
-				if (e.Node.Nodes.Count == 0)
-				{
-					Extend_FolderNode(e.Node);
-				}
-				
-				LV_Files.Items.Clear();
-				UpDate_FileList(e.Node.Tag.ToString(), null, null);
-				
-				Update_SessionList(e.Node);
+				case Keys.Enter:
+					
+					Set_CurrentEvent(TV_Folders.SelectedNode);
+					break;
+					
+				case Keys.Delete:
+					
+					Delete_Item();
+					break;
 			}
 		}
+		
+		#endregion
+		
+		#region LV_Session
+		
+		private void LV_SessionsMouseClick(object sender, MouseEventArgs e)
+		{
+			Set_CurrentSession();
+		}
+		
+		private void LV_SessionsKeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.Enter:
+					
+					Set_CurrentSession();
+					break;
+					
+				case Keys.Delete:
+					
+					Delete_Item();
+					break;
+			}
+		}
+		
+		#endregion
+		
+		#region LV_Files
 		
 		private void LV_FilesMouseDoubleClick(object sender, MouseEventArgs e)
 		{
@@ -123,29 +167,32 @@ namespace CANStream
 		
 		private void LV_FilesKeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode.Equals(Keys.Enter))
+			switch (e.KeyCode)
 			{
-				Set_ViewerFileList();
+				case Keys.Enter:
+					
+					Set_ViewerFileList();
+					break;
+					
+				case Keys.Delete:
+					
+					Delete_Item();
+					break;
 			}
 		}
 		
-		private void LV_SessionsMouseClick(object sender, MouseEventArgs e)
+		#endregion
+		
+		#region Context TV_Folders
+		
+		private void DeleteEventToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			if (!(LV_Sessions.SelectedItems == null))
-			{
-				if (LV_Sessions.SelectedItems.Count > 0)
-				{
-					LV_Files.Items.Clear();
-					
-					object[] SessionTag = (object[])LV_Sessions.SelectedItems[0].Tag;
-					
-					if (!(SessionTag == null))
-					{
-						UpDate_FileList(SessionTag[0].ToString(), (CS_RecordSession)SessionTag[1], (CS_RecordEvent)SessionTag[2]);
-					}
-				}
-			}
+			Delete_Item();
 		}
+		
+		#endregion
+		
+		#region Context_LV_Sessions
 		
 		private void EventDetailsToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -159,6 +206,15 @@ namespace CANStream
 				}
 			}
 		}
+		
+		private void DeleteSessionToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Delete_Item();
+		}
+		
+		#endregion
+		
+		#region Context_LV_Files
 		
 		private void SessionDetailsToolStripMenuItemClick(object sender, EventArgs e)
 		{
@@ -174,6 +230,13 @@ namespace CANStream
 			}
 		}
 		
+		private void DeleteToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Delete_Item();
+		}
+		
+		#endregion
+		
 		#region Toolbar
 		
 		private void TSB_RefreshClick(object sender, EventArgs e)
@@ -184,6 +247,11 @@ namespace CANStream
 		private void TSB_LoadClick(object sender, EventArgs e)
 		{
 			Set_ViewerFileList();
+		}
+		
+		private void TSB_DelFileClick(object sender, EventArgs e)
+		{
+			Delete_Item();
 		}
 		
 		#endregion
@@ -244,6 +312,40 @@ namespace CANStream
 			}
 		}
 		
+		private void Set_CurrentEvent(TreeNode EventNode)
+		{
+			if (!(EventNode == null))
+			{
+				if (EventNode.Nodes.Count == 0)
+				{
+					Extend_FolderNode(EventNode);
+				}
+				
+				LV_Files.Items.Clear();
+				UpDate_FileList(EventNode.Tag.ToString(), null, null);
+				
+				Update_SessionList(EventNode);
+			}
+		}
+		
+		private void Set_CurrentSession()
+		{
+			if (!(LV_Sessions.SelectedItems == null))
+			{
+				if (LV_Sessions.SelectedItems.Count > 0)
+				{
+					LV_Files.Items.Clear();
+					
+					object[] SessionTag = (object[])LV_Sessions.SelectedItems[0].Tag;
+					
+					if (!(SessionTag == null))
+					{
+						UpDate_FileList(SessionTag[0].ToString(), (CS_RecordSession)SessionTag[1], (CS_RecordEvent)SessionTag[2]);
+					}
+				}
+			}
+		}
+		
 		private void UpDate_FileList(string fPath, CS_RecordSession oSession, CS_RecordEvent oEvent)
 		{
 			ListViewGroup oSessionGrp = null;
@@ -292,25 +394,44 @@ namespace CANStream
 								ItFile.Tag = FileTag;
 								
 								if (!(oSessionGrp == null)) ItFile.Group = oSessionGrp;
-								
-								int Rem = 0;
-								Math.DivRem(LV_Files.Items.Count, 2, out Rem);
-								if (Rem == 0)
-								{
-									if (iIcone == 2)
-									{
-										ItFile.BackColor = Color.PaleGreen;
-									}
-									else
-									{
-										ItFile.BackColor = Color.LightPink;
-									}
-								}
 							}
 						}
 						
+						Color_FileItems();
+						
 						LV_Files.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 					}
+				}
+			}
+		}
+		
+		private void Color_FileItems()
+		{
+			int iItem = 0;
+			
+			foreach(ListViewItem It in LV_Files.Items)
+			{
+				int Rem = 0;
+				Math.DivRem(iItem, 2, out Rem);
+				iItem++;
+				
+				if (Rem == 0)
+				{
+					object[] ItTags = (object[])It.Tag;
+					string FileExt = Path.GetExtension(ItTags[0].ToString());
+					
+					if (FileExt.Equals(".csv"))
+					{
+						It.BackColor = Color.PaleGreen;
+					}
+					else
+					{
+						It.BackColor = Color.LightPink;
+					}
+				}
+				else
+				{
+					It.BackColor = LV_Files.BackColor;
 				}
 			}
 		}
@@ -321,7 +442,7 @@ namespace CANStream
 			string[] ActivePathFolders = ActivePath.Split('\\');
 			int iFolder = Cmb_RootFolder.Text.Split('\\').Length;
 			
-			UpDate_FolderTree(Cmb_RootFolder.Text);
+			UpDate_FolderTree(RootPath);
 			
 			if (iFolder < ActivePathFolders.Length -1)
 			{
@@ -473,6 +594,73 @@ namespace CANStream
 			}
 		}
 		
-		#endregion		
+		private void Delete_Item()
+		{
+			DialogResult Rep;
+			
+			if (TV_Folders.Focused)
+			{
+				if (!(TV_Folders.SelectedNode == null))
+				{
+					Rep = MessageBox.Show("Do you really want remove selected record event from the disk ?",
+					                      Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					
+					if (Rep.Equals(DialogResult.Yes))
+					{	
+						Directory.Delete(TV_Folders.SelectedNode.Tag.ToString(), true);
+						
+						while (Directory.Exists(TV_Folders.SelectedNode.Tag.ToString()))
+						{
+							System.Threading.Thread.Sleep(1);
+						}
+						
+						TV_Folders.Nodes.Remove(TV_Folders.SelectedNode);
+						UpDate_FolderTree(RootPath);
+					}
+				}
+			}
+			else if (LV_Sessions.Focused)
+			{
+				if (LV_Sessions.SelectedItems.Count > 0)
+				{
+					Rep = MessageBox.Show("Do you really want remove selected record sessions from the disk ?",
+					                      Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					
+					if (Rep.Equals(DialogResult.Yes))
+					{
+						foreach (ListViewItem It in LV_Sessions.SelectedItems)
+						{
+							object[] ItTags = (object[])It.Tag;
+							Directory.Delete(ItTags[0].ToString(), true);
+							LV_Sessions.Items.Remove(It);
+						}
+						
+						UpDate_FolderTree(RootPath);
+					}
+				}
+			}
+			else if (LV_Files.Focused)
+			{
+				if (LV_Files.SelectedItems.Count > 0)
+				{
+					Rep = MessageBox.Show("Do you really want remove selected files from the disk ?",
+					                      Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+					
+					if (Rep.Equals(DialogResult.Yes))
+					{
+						foreach (ListViewItem It in LV_Files.SelectedItems)
+						{
+							object[] ItTags = (object[])It.Tag;
+							File.Delete(ItTags[0].ToString());
+							LV_Files.Items.Remove(It);
+						}
+						
+						Color_FileItems();
+					}
+				}
+			}
+		}
+		
+		#endregion
 	}
 }

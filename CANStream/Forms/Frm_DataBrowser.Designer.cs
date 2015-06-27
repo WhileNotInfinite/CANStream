@@ -41,6 +41,8 @@ namespace CANStream
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.TV_Folders = new System.Windows.Forms.TreeView();
+			this.Context_TV_Folders = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.deleteEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.Img_DataBrowser = new System.Windows.Forms.ImageList(this.components);
 			this.Cmd_RootFolder = new System.Windows.Forms.Button();
 			this.Cmb_RootFolder = new System.Windows.Forms.ComboBox();
@@ -48,16 +50,21 @@ namespace CANStream
 			this.SessionName = new System.Windows.Forms.ColumnHeader();
 			this.Context_LV_Sessions = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.eventDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+			this.deleteSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.LV_Files = new System.Windows.Forms.ListView();
 			this.FileName = new System.Windows.Forms.ColumnHeader();
 			this.FileLastModified = new System.Windows.Forms.ColumnHeader();
 			this.FileSize = new System.Windows.Forms.ColumnHeader();
 			this.Context_LV_Files = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.sessionDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.Dlg_FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
 			this.TSB_Refresh = new System.Windows.Forms.ToolStripButton();
 			this.TSB_Load = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.TSB_DelFile = new System.Windows.Forms.ToolStripButton();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -66,6 +73,7 @@ namespace CANStream
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
+			this.Context_TV_Folders.SuspendLayout();
 			this.Context_LV_Sessions.SuspendLayout();
 			this.Context_LV_Files.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -113,6 +121,7 @@ namespace CANStream
 			this.TV_Folders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
+			this.TV_Folders.ContextMenuStrip = this.Context_TV_Folders;
 			this.TV_Folders.ImageIndex = 0;
 			this.TV_Folders.ImageList = this.Img_DataBrowser;
 			this.TV_Folders.Location = new System.Drawing.Point(3, 34);
@@ -121,6 +130,22 @@ namespace CANStream
 			this.TV_Folders.Size = new System.Drawing.Size(250, 113);
 			this.TV_Folders.TabIndex = 2;
 			this.TV_Folders.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV_FoldersNodeMouseClick);
+			this.TV_Folders.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TV_FoldersKeyDown);
+			// 
+			// Context_TV_Folders
+			// 
+			this.Context_TV_Folders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+									this.deleteEventToolStripMenuItem});
+			this.Context_TV_Folders.Name = "Context_LV_Sessions";
+			this.Context_TV_Folders.Size = new System.Drawing.Size(140, 26);
+			// 
+			// deleteEventToolStripMenuItem
+			// 
+			this.deleteEventToolStripMenuItem.Image = global::CANStream.Icones.Delete_16;
+			this.deleteEventToolStripMenuItem.Name = "deleteEventToolStripMenuItem";
+			this.deleteEventToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+			this.deleteEventToolStripMenuItem.Text = "Delete event";
+			this.deleteEventToolStripMenuItem.Click += new System.EventHandler(this.DeleteEventToolStripMenuItemClick);
 			// 
 			// Img_DataBrowser
 			// 
@@ -167,6 +192,7 @@ namespace CANStream
 			this.LV_Sessions.TabIndex = 0;
 			this.LV_Sessions.UseCompatibleStateImageBehavior = false;
 			this.LV_Sessions.View = System.Windows.Forms.View.Details;
+			this.LV_Sessions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LV_SessionsKeyDown);
 			this.LV_Sessions.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_SessionsMouseClick);
 			// 
 			// SessionName
@@ -176,17 +202,32 @@ namespace CANStream
 			// Context_LV_Sessions
 			// 
 			this.Context_LV_Sessions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.eventDetailsToolStripMenuItem});
+									this.eventDetailsToolStripMenuItem,
+									this.toolStripMenuItem2,
+									this.deleteSessionToolStripMenuItem});
 			this.Context_LV_Sessions.Name = "Context_LV_Sessions";
-			this.Context_LV_Sessions.Size = new System.Drawing.Size(141, 26);
+			this.Context_LV_Sessions.Size = new System.Drawing.Size(149, 54);
 			// 
 			// eventDetailsToolStripMenuItem
 			// 
 			this.eventDetailsToolStripMenuItem.Image = global::CANStream.Icones.Record_Event_16;
 			this.eventDetailsToolStripMenuItem.Name = "eventDetailsToolStripMenuItem";
-			this.eventDetailsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+			this.eventDetailsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
 			this.eventDetailsToolStripMenuItem.Text = "Event details";
 			this.eventDetailsToolStripMenuItem.Click += new System.EventHandler(this.EventDetailsToolStripMenuItemClick);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(145, 6);
+			// 
+			// deleteSessionToolStripMenuItem
+			// 
+			this.deleteSessionToolStripMenuItem.Image = global::CANStream.Icones.Delete_16;
+			this.deleteSessionToolStripMenuItem.Name = "deleteSessionToolStripMenuItem";
+			this.deleteSessionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+			this.deleteSessionToolStripMenuItem.Text = "Delete session";
+			this.deleteSessionToolStripMenuItem.Click += new System.EventHandler(this.DeleteSessionToolStripMenuItemClick);
 			// 
 			// LV_Files
 			// 
@@ -226,9 +267,11 @@ namespace CANStream
 			// Context_LV_Files
 			// 
 			this.Context_LV_Files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-									this.sessionDetailsToolStripMenuItem});
+									this.sessionDetailsToolStripMenuItem,
+									this.toolStripMenuItem1,
+									this.deleteToolStripMenuItem});
 			this.Context_LV_Files.Name = "Context_LV_Sessions";
-			this.Context_LV_Files.Size = new System.Drawing.Size(151, 26);
+			this.Context_LV_Files.Size = new System.Drawing.Size(151, 54);
 			// 
 			// sessionDetailsToolStripMenuItem
 			// 
@@ -237,6 +280,19 @@ namespace CANStream
 			this.sessionDetailsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.sessionDetailsToolStripMenuItem.Text = "Session details";
 			this.sessionDetailsToolStripMenuItem.Click += new System.EventHandler(this.SessionDetailsToolStripMenuItemClick);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(147, 6);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Image = global::CANStream.Icones.Delete_16;
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.deleteToolStripMenuItem.Text = "Delete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItemClick);
 			// 
 			// TSB_Refresh
 			// 
@@ -264,12 +320,24 @@ namespace CANStream
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 									this.TSB_Refresh,
-									this.TSB_Load});
+									this.TSB_Load,
+									this.TSB_DelFile});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(647, 25);
 			this.toolStrip1.TabIndex = 0;
 			this.toolStrip1.Text = "toolStrip1";
+			// 
+			// TSB_DelFile
+			// 
+			this.TSB_DelFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.TSB_DelFile.Image = global::CANStream.Icones.Delete_16;
+			this.TSB_DelFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSB_DelFile.Name = "TSB_DelFile";
+			this.TSB_DelFile.Size = new System.Drawing.Size(23, 22);
+			this.TSB_DelFile.Text = "toolStripButton1";
+			this.TSB_DelFile.ToolTipText = "Deleted selected files";
+			this.TSB_DelFile.Click += new System.EventHandler(this.TSB_DelFileClick);
 			// 
 			// Frm_DataBrowser
 			// 
@@ -292,6 +360,7 @@ namespace CANStream
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
+			this.Context_TV_Folders.ResumeLayout(false);
 			this.Context_LV_Sessions.ResumeLayout(false);
 			this.Context_LV_Files.ResumeLayout(false);
 			this.toolStrip1.ResumeLayout(false);
@@ -299,6 +368,13 @@ namespace CANStream
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripMenuItem deleteEventToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip Context_TV_Folders;
+		private System.Windows.Forms.ToolStripMenuItem deleteSessionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripButton TSB_DelFile;
+		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem sessionDetailsToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip Context_LV_Files;
 		private System.Windows.Forms.ToolStripMenuItem eventDetailsToolStripMenuItem;
