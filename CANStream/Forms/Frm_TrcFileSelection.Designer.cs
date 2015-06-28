@@ -47,6 +47,7 @@ namespace CANStream
 			this.invertSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cmd_Convert = new System.Windows.Forms.Button();
 			this.Cmd_Cancel = new System.Windows.Forms.Button();
+			this.Cmd_Delete = new System.Windows.Forms.Button();
 			this.Context_LV_TrcFiles.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -134,7 +135,7 @@ namespace CANStream
 			// Cmd_Cancel
 			// 
 			this.Cmd_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.Cmd_Cancel.Location = new System.Drawing.Point(362, 227);
+			this.Cmd_Cancel.Location = new System.Drawing.Point(281, 227);
 			this.Cmd_Cancel.Name = "Cmd_Cancel";
 			this.Cmd_Cancel.Size = new System.Drawing.Size(75, 23);
 			this.Cmd_Cancel.TabIndex = 2;
@@ -142,11 +143,23 @@ namespace CANStream
 			this.Cmd_Cancel.UseVisualStyleBackColor = true;
 			this.Cmd_Cancel.Click += new System.EventHandler(this.Cmd_CancelClick);
 			// 
+			// Cmd_Delete
+			// 
+			this.Cmd_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.Cmd_Delete.Location = new System.Drawing.Point(362, 227);
+			this.Cmd_Delete.Name = "Cmd_Delete";
+			this.Cmd_Delete.Size = new System.Drawing.Size(75, 23);
+			this.Cmd_Delete.TabIndex = 3;
+			this.Cmd_Delete.Text = "Delete";
+			this.Cmd_Delete.UseVisualStyleBackColor = true;
+			this.Cmd_Delete.Click += new System.EventHandler(this.Cmd_DeleteClick);
+			// 
 			// Frm_TrcFileSelection
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(530, 257);
+			this.Controls.Add(this.Cmd_Delete);
 			this.Controls.Add(this.Cmd_Cancel);
 			this.Controls.Add(this.Cmd_Convert);
 			this.Controls.Add(this.LV_TrcFiles);
@@ -159,6 +172,7 @@ namespace CANStream
 			this.Context_LV_TrcFiles.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Button Cmd_Delete;
 		private System.Windows.Forms.ToolStripMenuItem invertSelectionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem unselectAllToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;

@@ -126,6 +126,23 @@ namespace CANStream
 			this.Close();
 		}
 		
+		private void Cmd_DeleteClick(object sender, EventArgs e)
+		{
+			if (MessageBox.Show("Do you really want remove from the disk all checked trace files ?",
+			                    Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+			{
+				for (int i=0; i<LV_TrcFiles.Items.Count; i++)
+				{
+					if (LV_TrcFiles.Items[i].Checked)
+					{
+						File.Delete(TrcFilesInfos[(int)LV_TrcFiles.Items[i].Tag].TrcFileInfo.FullName);
+					}
+				}
+				
+				ShowTrcFiles();
+			}
+		}
+		
 		private void Cmd_ConvertClick(object sender, EventArgs e)
 		{
 			List<PcanTrcFileInfo> ConversionList = new List<PcanTrcFileInfo>();
@@ -155,6 +172,7 @@ namespace CANStream
 		private void ShowTrcFiles()
 		{
 			LV_TrcFiles.Items.Clear();
+			CANStreamTools.ResetTrcFileInfoEventSession();
 			
 			if (Directory.Exists(RecordsFolder))
 			{

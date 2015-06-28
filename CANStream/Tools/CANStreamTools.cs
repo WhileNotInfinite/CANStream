@@ -94,6 +94,12 @@ namespace CANStream
 			return(true);
 		}
 		
+		public static void ResetTrcFileInfoEventSession()
+		{
+			oEventCurrent = null;
+			oSessionCurrent = null;
+		}
+		
 		public static PcanTrcFileInfo[] GetTrcFileInfoList(string FolderPath)
 		{
 			List<PcanTrcFileInfo> FolderTrcFilesInfo = new List<PcanTrcFileInfo>();
