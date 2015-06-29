@@ -495,6 +495,22 @@ namespace CANStream
         	Show_MsgMap(oActiveMessage);
         }
         
+        private void Grid_MsgMapSizeChanged(object sender, EventArgs e)
+        {
+        	Grid_MsgMap.SuspendLayout();
+        	
+        	int ColWidth = (int)((Grid_MsgMap.Width - Grid_MsgMap.RowHeadersWidth) / 8);
+        	
+        	foreach (DataGridViewColumn oCol in Grid_MsgMap.Columns)
+        	{
+        		oCol.Width = ColWidth;
+        	}   	
+        	
+        	Grid_MsgMap.ResumeLayout(true);
+        	
+        	if (!(oActiveMessage == null)) Show_MsgMap(oActiveMessage);     
+        }
+        
         #endregion
 
         #endregion
@@ -661,7 +677,8 @@ namespace CANStream
             
             if (oCANConfig.Messages.Count > 0)
             {
-            	Show_MsgMap(oCANConfig.Messages[0]);
+            	oActiveMessage=oCANConfig.Messages[0];
+            	Show_MsgMap(oActiveMessage);
             }
         }
 		
@@ -2041,10 +2058,12 @@ namespace CANStream
 	        		NumUpDown_MuxValue.Value = 0;
 	        	}
 	        	
+	        	int RowHeight = (int)((Grid_MsgMap.Height - 21) / MsgByteCnt);
+        		
 	        	for (int i=0; i<MsgByteCnt; i++)
 	        	{
 	        		Grid_MsgMap.Rows[i].HeaderCell.Value = "Byte " + i.ToString();
-	        		Grid_MsgMap.Rows[i].Height = 40;
+	        		Grid_MsgMap.Rows[i].Height = RowHeight;
 	        		
 	        		for (int j=0; j<Grid_MsgMap.Rows[i].Cells.Count; j++)
 	        		{

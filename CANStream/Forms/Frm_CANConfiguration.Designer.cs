@@ -30,6 +30,7 @@
         {
         	this.components = new System.ComponentModel.Container();
         	System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_CANConfiguration));
+        	this.Split_Tree_Props = new System.Windows.Forms.SplitContainer();
         	this.TV_Messages = new System.Windows.Forms.TreeView();
         	this.Context_TV_Messages = new System.Windows.Forms.ContextMenuStrip(this.components);
         	this.AddCanControllertoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,21 @@
         	this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.Img_TV_Messages = new System.Windows.Forms.ImageList(this.components);
+        	this.groupBox1 = new System.Windows.Forms.GroupBox();
+        	this.Txt_ConfigName = new System.Windows.Forms.TextBox();
+        	this.label22 = new System.Windows.Forms.Label();
+        	this.label18 = new System.Windows.Forms.Label();
+        	this.Txt_MsgLength = new System.Windows.Forms.TextBox();
+        	this.label17 = new System.Windows.Forms.Label();
+        	this.label16 = new System.Windows.Forms.Label();
+        	this.Cmb_BusRate = new System.Windows.Forms.ComboBox();
+        	this.label15 = new System.Windows.Forms.Label();
+        	this.Frame_MsgMap = new System.Windows.Forms.GroupBox();
+        	this.Lbl_MuxName = new System.Windows.Forms.Label();
+        	this.Lbl_Mux = new System.Windows.Forms.Label();
+        	this.NumUpDown_MuxValue = new System.Windows.Forms.NumericUpDown();
+        	this.Lbl_MuxValue = new System.Windows.Forms.Label();
+        	this.Grid_MsgMap = new System.Windows.Forms.DataGridView();
         	this.tabControl1 = new System.Windows.Forms.TabControl();
         	this.Tab_Controller = new System.Windows.Forms.TabPage();
         	this.Grp_ControllerForm = new System.Windows.Forms.GroupBox();
@@ -124,21 +140,6 @@
         	this.TSB_Delete = new System.Windows.Forms.ToolStripButton();
         	this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
         	this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-        	this.groupBox1 = new System.Windows.Forms.GroupBox();
-        	this.Txt_ConfigName = new System.Windows.Forms.TextBox();
-        	this.label22 = new System.Windows.Forms.Label();
-        	this.label18 = new System.Windows.Forms.Label();
-        	this.Txt_MsgLength = new System.Windows.Forms.TextBox();
-        	this.label17 = new System.Windows.Forms.Label();
-        	this.label16 = new System.Windows.Forms.Label();
-        	this.Cmb_BusRate = new System.Windows.Forms.ComboBox();
-        	this.label15 = new System.Windows.Forms.Label();
-        	this.Frame_MsgMap = new System.Windows.Forms.GroupBox();
-        	this.Lbl_MuxName = new System.Windows.Forms.Label();
-        	this.Lbl_Mux = new System.Windows.Forms.Label();
-        	this.NumUpDown_MuxValue = new System.Windows.Forms.NumericUpDown();
-        	this.Lbl_MuxValue = new System.Windows.Forms.Label();
-        	this.Grid_MsgMap = new System.Windows.Forms.DataGridView();
         	this.Bit7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.Bit6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.Bit5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,7 +148,15 @@
         	this.Bit2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.Bit1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.Bit0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
+        	this.Split_Tree_Props.Panel1.SuspendLayout();
+        	this.Split_Tree_Props.Panel2.SuspendLayout();
+        	this.Split_Tree_Props.SuspendLayout();
         	this.Context_TV_Messages.SuspendLayout();
+        	this.groupBox1.SuspendLayout();
+        	this.Frame_MsgMap.SuspendLayout();
+        	((System.ComponentModel.ISupportInitialize)(this.NumUpDown_MuxValue)).BeginInit();
+        	((System.ComponentModel.ISupportInitialize)(this.Grid_MsgMap)).BeginInit();
         	this.tabControl1.SuspendLayout();
         	this.Tab_Controller.SuspendLayout();
         	this.Grp_ControllerForm.SuspendLayout();
@@ -157,11 +166,28 @@
         	this.Grp_ParameterForm.SuspendLayout();
         	this.Grp_ParamMultiplexer.SuspendLayout();
         	this.toolStrip1.SuspendLayout();
-        	this.groupBox1.SuspendLayout();
-        	this.Frame_MsgMap.SuspendLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.NumUpDown_MuxValue)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.Grid_MsgMap)).BeginInit();
         	this.SuspendLayout();
+        	// 
+        	// Split_Tree_Props
+        	// 
+        	this.Split_Tree_Props.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.Split_Tree_Props.Location = new System.Drawing.Point(0, 39);
+        	this.Split_Tree_Props.Name = "Split_Tree_Props";
+        	// 
+        	// Split_Tree_Props.Panel1
+        	// 
+        	this.Split_Tree_Props.Panel1.Controls.Add(this.TV_Messages);
+        	this.Split_Tree_Props.Panel1MinSize = 100;
+        	// 
+        	// Split_Tree_Props.Panel2
+        	// 
+        	this.Split_Tree_Props.Panel2.Controls.Add(this.groupBox1);
+        	this.Split_Tree_Props.Panel2.Controls.Add(this.Frame_MsgMap);
+        	this.Split_Tree_Props.Panel2.Controls.Add(this.tabControl1);
+        	this.Split_Tree_Props.Panel2MinSize = 700;
+        	this.Split_Tree_Props.Size = new System.Drawing.Size(1181, 468);
+        	this.Split_Tree_Props.SplitterDistance = 381;
+        	this.Split_Tree_Props.TabIndex = 0;
         	// 
         	// TV_Messages
         	// 
@@ -171,10 +197,10 @@
         	this.TV_Messages.ContextMenuStrip = this.Context_TV_Messages;
         	this.TV_Messages.ImageIndex = 0;
         	this.TV_Messages.ImageList = this.Img_TV_Messages;
-        	this.TV_Messages.Location = new System.Drawing.Point(12, 42);
+        	this.TV_Messages.Location = new System.Drawing.Point(3, 3);
         	this.TV_Messages.Name = "TV_Messages";
         	this.TV_Messages.SelectedImageIndex = 0;
-        	this.TV_Messages.Size = new System.Drawing.Size(259, 461);
+        	this.TV_Messages.Size = new System.Drawing.Size(375, 462);
         	this.TV_Messages.TabIndex = 0;
         	this.TV_Messages.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV_Messages_NodeMouseClick);
         	this.TV_Messages.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TV_Messages_KeyDown);
@@ -344,17 +370,189 @@
         	this.Img_TV_Messages.Images.SetKeyName(2, "hardware-icone-4788-16.png");
         	this.Img_TV_Messages.Images.SetKeyName(3, "edu-des-mathematiques-icone-4069-16.png");
         	// 
+        	// groupBox1
+        	// 
+        	this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.groupBox1.Controls.Add(this.Txt_ConfigName);
+        	this.groupBox1.Controls.Add(this.label22);
+        	this.groupBox1.Controls.Add(this.label18);
+        	this.groupBox1.Controls.Add(this.Txt_MsgLength);
+        	this.groupBox1.Controls.Add(this.label17);
+        	this.groupBox1.Controls.Add(this.label16);
+        	this.groupBox1.Controls.Add(this.Cmb_BusRate);
+        	this.groupBox1.Controls.Add(this.label15);
+        	this.groupBox1.Location = new System.Drawing.Point(3, 3);
+        	this.groupBox1.Name = "groupBox1";
+        	this.groupBox1.Size = new System.Drawing.Size(784, 57);
+        	this.groupBox1.TabIndex = 4;
+        	this.groupBox1.TabStop = false;
+        	this.groupBox1.Text = "Bus properties";
+        	// 
+        	// Txt_ConfigName
+        	// 
+        	this.Txt_ConfigName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.Txt_ConfigName.Location = new System.Drawing.Point(482, 28);
+        	this.Txt_ConfigName.Name = "Txt_ConfigName";
+        	this.Txt_ConfigName.Size = new System.Drawing.Size(296, 20);
+        	this.Txt_ConfigName.TabIndex = 7;
+        	this.Txt_ConfigName.TextChanged += new System.EventHandler(this.Txt_ConfigNameTextChanged);
+        	// 
+        	// label22
+        	// 
+        	this.label22.AutoSize = true;
+        	this.label22.Location = new System.Drawing.Point(376, 31);
+        	this.label22.Name = "label22";
+        	this.label22.Size = new System.Drawing.Size(100, 13);
+        	this.label22.TabIndex = 6;
+        	this.label22.Text = "Configuration Name";
+        	// 
+        	// label18
+        	// 
+        	this.label18.AutoSize = true;
+        	this.label18.Location = new System.Drawing.Point(338, 31);
+        	this.label18.Name = "label18";
+        	this.label18.Size = new System.Drawing.Size(24, 13);
+        	this.label18.TabIndex = 5;
+        	this.label18.Text = "Bits";
+        	// 
+        	// Txt_MsgLength
+        	// 
+        	this.Txt_MsgLength.Location = new System.Drawing.Point(271, 28);
+        	this.Txt_MsgLength.Name = "Txt_MsgLength";
+        	this.Txt_MsgLength.Size = new System.Drawing.Size(61, 20);
+        	this.Txt_MsgLength.TabIndex = 4;
+        	this.Txt_MsgLength.TextChanged += new System.EventHandler(this.Txt_MsgLength_TextChanged);
+        	// 
+        	// label17
+        	// 
+        	this.label17.AutoSize = true;
+        	this.label17.Location = new System.Drawing.Point(187, 31);
+        	this.label17.Name = "label17";
+        	this.label17.Size = new System.Drawing.Size(82, 13);
+        	this.label17.TabIndex = 3;
+        	this.label17.Text = "Message length";
+        	// 
+        	// label16
+        	// 
+        	this.label16.AutoSize = true;
+        	this.label16.Location = new System.Drawing.Point(115, 31);
+        	this.label16.Name = "label16";
+        	this.label16.Size = new System.Drawing.Size(35, 13);
+        	this.label16.TabIndex = 2;
+        	this.label16.Text = "kBit/s";
+        	// 
+        	// Cmb_BusRate
+        	// 
+        	this.Cmb_BusRate.FormattingEnabled = true;
+        	this.Cmb_BusRate.Items.AddRange(new object[] {
+        	        	        	"500",
+        	        	        	"1000"});
+        	this.Cmb_BusRate.Location = new System.Drawing.Point(42, 28);
+        	this.Cmb_BusRate.Name = "Cmb_BusRate";
+        	this.Cmb_BusRate.Size = new System.Drawing.Size(67, 21);
+        	this.Cmb_BusRate.TabIndex = 1;
+        	this.Cmb_BusRate.SelectedIndexChanged += new System.EventHandler(this.Cmb_BusRate_SelectedIndexChanged);
+        	// 
+        	// label15
+        	// 
+        	this.label15.AutoSize = true;
+        	this.label15.Location = new System.Drawing.Point(6, 31);
+        	this.label15.Name = "label15";
+        	this.label15.Size = new System.Drawing.Size(30, 13);
+        	this.label15.TabIndex = 0;
+        	this.label15.Text = "Rate";
+        	// 
+        	// Frame_MsgMap
+        	// 
+        	this.Frame_MsgMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.Frame_MsgMap.Controls.Add(this.Lbl_MuxName);
+        	this.Frame_MsgMap.Controls.Add(this.Lbl_Mux);
+        	this.Frame_MsgMap.Controls.Add(this.NumUpDown_MuxValue);
+        	this.Frame_MsgMap.Controls.Add(this.Lbl_MuxValue);
+        	this.Frame_MsgMap.Controls.Add(this.Grid_MsgMap);
+        	this.Frame_MsgMap.Location = new System.Drawing.Point(379, 66);
+        	this.Frame_MsgMap.Name = "Frame_MsgMap";
+        	this.Frame_MsgMap.Size = new System.Drawing.Size(414, 399);
+        	this.Frame_MsgMap.TabIndex = 5;
+        	this.Frame_MsgMap.TabStop = false;
+        	this.Frame_MsgMap.Text = "Message Map";
+        	// 
+        	// Lbl_MuxName
+        	// 
+        	this.Lbl_MuxName.Enabled = false;
+        	this.Lbl_MuxName.Location = new System.Drawing.Point(72, 20);
+        	this.Lbl_MuxName.Name = "Lbl_MuxName";
+        	this.Lbl_MuxName.Size = new System.Drawing.Size(175, 18);
+        	this.Lbl_MuxName.TabIndex = 4;
+        	// 
+        	// Lbl_Mux
+        	// 
+        	this.Lbl_Mux.Enabled = false;
+        	this.Lbl_Mux.Location = new System.Drawing.Point(6, 20);
+        	this.Lbl_Mux.Name = "Lbl_Mux";
+        	this.Lbl_Mux.Size = new System.Drawing.Size(60, 18);
+        	this.Lbl_Mux.TabIndex = 3;
+        	this.Lbl_Mux.Text = "Multiplexer:";
+        	// 
+        	// NumUpDown_MuxValue
+        	// 
+        	this.NumUpDown_MuxValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        	this.NumUpDown_MuxValue.Enabled = false;
+        	this.NumUpDown_MuxValue.Location = new System.Drawing.Point(349, 20);
+        	this.NumUpDown_MuxValue.Name = "NumUpDown_MuxValue";
+        	this.NumUpDown_MuxValue.Size = new System.Drawing.Size(56, 20);
+        	this.NumUpDown_MuxValue.TabIndex = 2;
+        	this.NumUpDown_MuxValue.ValueChanged += new System.EventHandler(this.NumUpDown_MuxValueValueChanged);
+        	// 
+        	// Lbl_MuxValue
+        	// 
+        	this.Lbl_MuxValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        	this.Lbl_MuxValue.Enabled = false;
+        	this.Lbl_MuxValue.Location = new System.Drawing.Point(253, 20);
+        	this.Lbl_MuxValue.Name = "Lbl_MuxValue";
+        	this.Lbl_MuxValue.Size = new System.Drawing.Size(90, 18);
+        	this.Lbl_MuxValue.TabIndex = 1;
+        	this.Lbl_MuxValue.Text = "Multiplexer value:";
+        	// 
+        	// Grid_MsgMap
+        	// 
+        	this.Grid_MsgMap.AllowUserToAddRows = false;
+        	this.Grid_MsgMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.Grid_MsgMap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        	this.Grid_MsgMap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+        	        	        	this.Bit7,
+        	        	        	this.Bit6,
+        	        	        	this.Bit5,
+        	        	        	this.Bit4,
+        	        	        	this.Bit3,
+        	        	        	this.Bit2,
+        	        	        	this.Bit1,
+        	        	        	this.Bit0});
+        	this.Grid_MsgMap.Location = new System.Drawing.Point(6, 46);
+        	this.Grid_MsgMap.Name = "Grid_MsgMap";
+        	this.Grid_MsgMap.RowHeadersWidth = 71;
+        	this.Grid_MsgMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
+        	this.Grid_MsgMap.Size = new System.Drawing.Size(399, 349);
+        	this.Grid_MsgMap.TabIndex = 0;
+        	this.Grid_MsgMap.SizeChanged += new System.EventHandler(this.Grid_MsgMapSizeChanged);
+        	// 
         	// tabControl1
         	// 
         	this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	        	        	| System.Windows.Forms.AnchorStyles.Left)));
         	this.tabControl1.Controls.Add(this.Tab_Controller);
         	this.tabControl1.Controls.Add(this.Tab_Message);
         	this.tabControl1.Controls.Add(this.Tab_Parameter);
-        	this.tabControl1.Location = new System.Drawing.Point(277, 105);
+        	this.tabControl1.Location = new System.Drawing.Point(3, 66);
         	this.tabControl1.Name = "tabControl1";
         	this.tabControl1.SelectedIndex = 0;
-        	this.tabControl1.Size = new System.Drawing.Size(370, 398);
+        	this.tabControl1.Size = new System.Drawing.Size(370, 399);
         	this.tabControl1.TabIndex = 2;
         	// 
         	// Tab_Controller
@@ -363,7 +561,7 @@
         	this.Tab_Controller.Controls.Add(this.Grp_ControllerForm);
         	this.Tab_Controller.Location = new System.Drawing.Point(4, 22);
         	this.Tab_Controller.Name = "Tab_Controller";
-        	this.Tab_Controller.Size = new System.Drawing.Size(362, 372);
+        	this.Tab_Controller.Size = new System.Drawing.Size(362, 373);
         	this.Tab_Controller.TabIndex = 2;
         	this.Tab_Controller.Text = "Bus controller";
         	// 
@@ -431,7 +629,7 @@
         	this.Tab_Message.Location = new System.Drawing.Point(4, 22);
         	this.Tab_Message.Name = "Tab_Message";
         	this.Tab_Message.Padding = new System.Windows.Forms.Padding(3);
-        	this.Tab_Message.Size = new System.Drawing.Size(362, 372);
+        	this.Tab_Message.Size = new System.Drawing.Size(362, 373);
         	this.Tab_Message.TabIndex = 0;
         	this.Tab_Message.Text = "Message";
         	// 
@@ -595,7 +793,7 @@
         	this.Tab_Parameter.Location = new System.Drawing.Point(4, 22);
         	this.Tab_Parameter.Name = "Tab_Parameter";
         	this.Tab_Parameter.Padding = new System.Windows.Forms.Padding(3);
-        	this.Tab_Parameter.Size = new System.Drawing.Size(362, 372);
+        	this.Tab_Parameter.Size = new System.Drawing.Size(362, 373);
         	this.Tab_Parameter.TabIndex = 1;
         	this.Tab_Parameter.Text = "Parameter";
         	// 
@@ -935,7 +1133,7 @@
         	        	        	this.TSB_Delete});
         	this.toolStrip1.Location = new System.Drawing.Point(0, 0);
         	this.toolStrip1.Name = "toolStrip1";
-        	this.toolStrip1.Size = new System.Drawing.Size(1174, 39);
+        	this.toolStrip1.Size = new System.Drawing.Size(1181, 39);
         	this.toolStrip1.TabIndex = 3;
         	this.toolStrip1.Text = "toolStrip1";
         	// 
@@ -1085,175 +1283,13 @@
         	// 
         	this.openFileDialog1.FileName = "openFileDialog1";
         	// 
-        	// groupBox1
-        	// 
-        	this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        	this.groupBox1.Controls.Add(this.Txt_ConfigName);
-        	this.groupBox1.Controls.Add(this.label22);
-        	this.groupBox1.Controls.Add(this.label18);
-        	this.groupBox1.Controls.Add(this.Txt_MsgLength);
-        	this.groupBox1.Controls.Add(this.label17);
-        	this.groupBox1.Controls.Add(this.label16);
-        	this.groupBox1.Controls.Add(this.Cmb_BusRate);
-        	this.groupBox1.Controls.Add(this.label15);
-        	this.groupBox1.Location = new System.Drawing.Point(277, 42);
-        	this.groupBox1.Name = "groupBox1";
-        	this.groupBox1.Size = new System.Drawing.Size(891, 57);
-        	this.groupBox1.TabIndex = 4;
-        	this.groupBox1.TabStop = false;
-        	this.groupBox1.Text = "Bus properties";
-        	// 
-        	// Txt_ConfigName
-        	// 
-        	this.Txt_ConfigName.Location = new System.Drawing.Point(482, 28);
-        	this.Txt_ConfigName.Name = "Txt_ConfigName";
-        	this.Txt_ConfigName.Size = new System.Drawing.Size(397, 20);
-        	this.Txt_ConfigName.TabIndex = 7;
-        	this.Txt_ConfigName.TextChanged += new System.EventHandler(this.Txt_ConfigNameTextChanged);
-        	// 
-        	// label22
-        	// 
-        	this.label22.AutoSize = true;
-        	this.label22.Location = new System.Drawing.Point(376, 31);
-        	this.label22.Name = "label22";
-        	this.label22.Size = new System.Drawing.Size(100, 13);
-        	this.label22.TabIndex = 6;
-        	this.label22.Text = "Configuration Name";
-        	// 
-        	// label18
-        	// 
-        	this.label18.AutoSize = true;
-        	this.label18.Location = new System.Drawing.Point(338, 31);
-        	this.label18.Name = "label18";
-        	this.label18.Size = new System.Drawing.Size(24, 13);
-        	this.label18.TabIndex = 5;
-        	this.label18.Text = "Bits";
-        	// 
-        	// Txt_MsgLength
-        	// 
-        	this.Txt_MsgLength.Location = new System.Drawing.Point(271, 28);
-        	this.Txt_MsgLength.Name = "Txt_MsgLength";
-        	this.Txt_MsgLength.Size = new System.Drawing.Size(61, 20);
-        	this.Txt_MsgLength.TabIndex = 4;
-        	this.Txt_MsgLength.TextChanged += new System.EventHandler(this.Txt_MsgLength_TextChanged);
-        	// 
-        	// label17
-        	// 
-        	this.label17.AutoSize = true;
-        	this.label17.Location = new System.Drawing.Point(187, 31);
-        	this.label17.Name = "label17";
-        	this.label17.Size = new System.Drawing.Size(82, 13);
-        	this.label17.TabIndex = 3;
-        	this.label17.Text = "Message length";
-        	// 
-        	// label16
-        	// 
-        	this.label16.AutoSize = true;
-        	this.label16.Location = new System.Drawing.Point(115, 31);
-        	this.label16.Name = "label16";
-        	this.label16.Size = new System.Drawing.Size(35, 13);
-        	this.label16.TabIndex = 2;
-        	this.label16.Text = "kBit/s";
-        	// 
-        	// Cmb_BusRate
-        	// 
-        	this.Cmb_BusRate.FormattingEnabled = true;
-        	this.Cmb_BusRate.Items.AddRange(new object[] {
-        	        	        	"500",
-        	        	        	"1000"});
-        	this.Cmb_BusRate.Location = new System.Drawing.Point(42, 28);
-        	this.Cmb_BusRate.Name = "Cmb_BusRate";
-        	this.Cmb_BusRate.Size = new System.Drawing.Size(67, 21);
-        	this.Cmb_BusRate.TabIndex = 1;
-        	this.Cmb_BusRate.SelectedIndexChanged += new System.EventHandler(this.Cmb_BusRate_SelectedIndexChanged);
-        	// 
-        	// label15
-        	// 
-        	this.label15.AutoSize = true;
-        	this.label15.Location = new System.Drawing.Point(6, 31);
-        	this.label15.Name = "label15";
-        	this.label15.Size = new System.Drawing.Size(30, 13);
-        	this.label15.TabIndex = 0;
-        	this.label15.Text = "Rate";
-        	// 
-        	// Frame_MsgMap
-        	// 
-        	this.Frame_MsgMap.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
-        	this.Frame_MsgMap.Controls.Add(this.Lbl_MuxName);
-        	this.Frame_MsgMap.Controls.Add(this.Lbl_Mux);
-        	this.Frame_MsgMap.Controls.Add(this.NumUpDown_MuxValue);
-        	this.Frame_MsgMap.Controls.Add(this.Lbl_MuxValue);
-        	this.Frame_MsgMap.Controls.Add(this.Grid_MsgMap);
-        	this.Frame_MsgMap.Location = new System.Drawing.Point(653, 105);
-        	this.Frame_MsgMap.Name = "Frame_MsgMap";
-        	this.Frame_MsgMap.Size = new System.Drawing.Size(515, 398);
-        	this.Frame_MsgMap.TabIndex = 5;
-        	this.Frame_MsgMap.TabStop = false;
-        	this.Frame_MsgMap.Text = "Message Map";
-        	// 
-        	// Lbl_MuxName
-        	// 
-        	this.Lbl_MuxName.Enabled = false;
-        	this.Lbl_MuxName.Location = new System.Drawing.Point(106, 22);
-        	this.Lbl_MuxName.Name = "Lbl_MuxName";
-        	this.Lbl_MuxName.Size = new System.Drawing.Size(245, 18);
-        	this.Lbl_MuxName.TabIndex = 4;
-        	// 
-        	// Lbl_Mux
-        	// 
-        	this.Lbl_Mux.Enabled = false;
-        	this.Lbl_Mux.Location = new System.Drawing.Point(40, 22);
-        	this.Lbl_Mux.Name = "Lbl_Mux";
-        	this.Lbl_Mux.Size = new System.Drawing.Size(60, 18);
-        	this.Lbl_Mux.TabIndex = 3;
-        	this.Lbl_Mux.Text = "Multiplexer:";
-        	// 
-        	// NumUpDown_MuxValue
-        	// 
-        	this.NumUpDown_MuxValue.Enabled = false;
-        	this.NumUpDown_MuxValue.Location = new System.Drawing.Point(453, 20);
-        	this.NumUpDown_MuxValue.Name = "NumUpDown_MuxValue";
-        	this.NumUpDown_MuxValue.Size = new System.Drawing.Size(56, 20);
-        	this.NumUpDown_MuxValue.TabIndex = 2;
-        	this.NumUpDown_MuxValue.ValueChanged += new System.EventHandler(this.NumUpDown_MuxValueValueChanged);
-        	// 
-        	// Lbl_MuxValue
-        	// 
-        	this.Lbl_MuxValue.Enabled = false;
-        	this.Lbl_MuxValue.Location = new System.Drawing.Point(357, 22);
-        	this.Lbl_MuxValue.Name = "Lbl_MuxValue";
-        	this.Lbl_MuxValue.Size = new System.Drawing.Size(90, 18);
-        	this.Lbl_MuxValue.TabIndex = 1;
-        	this.Lbl_MuxValue.Text = "Multiplexer value:";
-        	// 
-        	// Grid_MsgMap
-        	// 
-        	this.Grid_MsgMap.AllowUserToAddRows = false;
-        	this.Grid_MsgMap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        	this.Grid_MsgMap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-        	        	        	this.Bit7,
-        	        	        	this.Bit6,
-        	        	        	this.Bit5,
-        	        	        	this.Bit4,
-        	        	        	this.Bit3,
-        	        	        	this.Bit2,
-        	        	        	this.Bit1,
-        	        	        	this.Bit0});
-        	this.Grid_MsgMap.Location = new System.Drawing.Point(12, 46);
-        	this.Grid_MsgMap.Name = "Grid_MsgMap";
-        	this.Grid_MsgMap.RowHeadersWidth = 70;
-        	this.Grid_MsgMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
-        	this.Grid_MsgMap.Size = new System.Drawing.Size(497, 346);
-        	this.Grid_MsgMap.TabIndex = 0;
-        	// 
         	// Bit7
         	// 
         	this.Bit7.HeaderText = "Bit 7";
         	this.Bit7.Name = "Bit7";
         	this.Bit7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit7.Width = 53;
+        	this.Bit7.Width = 41;
         	// 
         	// Bit6
         	// 
@@ -1261,7 +1297,7 @@
         	this.Bit6.Name = "Bit6";
         	this.Bit6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit6.Width = 53;
+        	this.Bit6.Width = 41;
         	// 
         	// Bit5
         	// 
@@ -1269,7 +1305,7 @@
         	this.Bit5.Name = "Bit5";
         	this.Bit5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit5.Width = 53;
+        	this.Bit5.Width = 41;
         	// 
         	// Bit4
         	// 
@@ -1277,7 +1313,7 @@
         	this.Bit4.Name = "Bit4";
         	this.Bit4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit4.Width = 53;
+        	this.Bit4.Width = 41;
         	// 
         	// Bit3
         	// 
@@ -1285,7 +1321,7 @@
         	this.Bit3.Name = "Bit3";
         	this.Bit3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit3.Width = 53;
+        	this.Bit3.Width = 41;
         	// 
         	// Bit2
         	// 
@@ -1293,7 +1329,7 @@
         	this.Bit2.Name = "Bit2";
         	this.Bit2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit2.Width = 53;
+        	this.Bit2.Width = 41;
         	// 
         	// Bit1
         	// 
@@ -1301,7 +1337,7 @@
         	this.Bit1.Name = "Bit1";
         	this.Bit1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit1.Width = 53;
+        	this.Bit1.Width = 41;
         	// 
         	// Bit0
         	// 
@@ -1309,25 +1345,32 @@
         	this.Bit0.Name = "Bit0";
         	this.Bit0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
         	this.Bit0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit0.Width = 53;
+        	this.Bit0.Width = 41;
         	// 
         	// Frm_CANConfiguration
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        	this.ClientSize = new System.Drawing.Size(1174, 507);
-        	this.Controls.Add(this.Frame_MsgMap);
-        	this.Controls.Add(this.TV_Messages);
-        	this.Controls.Add(this.groupBox1);
+        	this.ClientSize = new System.Drawing.Size(1181, 507);
+        	this.Controls.Add(this.Split_Tree_Props);
         	this.Controls.Add(this.toolStrip1);
-        	this.Controls.Add(this.tabControl1);
         	this.Icon = global::CANStream.Icones.CANStream_Icone;
+        	this.MinimumSize = new System.Drawing.Size(900, 470);
         	this.Name = "Frm_CANConfiguration";
         	this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         	this.Text = "CAN Messages Configuration";
         	this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_CANConfiguration_FormClosing);
         	this.Load += new System.EventHandler(this.Frm_CANConfiguration_Load);
+        	this.Split_Tree_Props.Panel1.ResumeLayout(false);
+        	this.Split_Tree_Props.Panel2.ResumeLayout(false);
+        	((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).EndInit();
+        	this.Split_Tree_Props.ResumeLayout(false);
         	this.Context_TV_Messages.ResumeLayout(false);
+        	this.groupBox1.ResumeLayout(false);
+        	this.groupBox1.PerformLayout();
+        	this.Frame_MsgMap.ResumeLayout(false);
+        	((System.ComponentModel.ISupportInitialize)(this.NumUpDown_MuxValue)).EndInit();
+        	((System.ComponentModel.ISupportInitialize)(this.Grid_MsgMap)).EndInit();
         	this.tabControl1.ResumeLayout(false);
         	this.Tab_Controller.ResumeLayout(false);
         	this.Grp_ControllerForm.ResumeLayout(false);
@@ -1342,11 +1385,6 @@
         	this.Grp_ParamMultiplexer.PerformLayout();
         	this.toolStrip1.ResumeLayout(false);
         	this.toolStrip1.PerformLayout();
-        	this.groupBox1.ResumeLayout(false);
-        	this.groupBox1.PerformLayout();
-        	this.Frame_MsgMap.ResumeLayout(false);
-        	((System.ComponentModel.ISupportInitialize)(this.NumUpDown_MuxValue)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.Grid_MsgMap)).EndInit();
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
@@ -1408,6 +1446,7 @@
 
         #endregion
 
+        private System.Windows.Forms.SplitContainer Split_Tree_Props;
         private System.Windows.Forms.TreeView TV_Messages;
         private System.Windows.Forms.ImageList Img_TV_Messages;
         private System.Windows.Forms.ContextMenuStrip Context_TV_Messages;
