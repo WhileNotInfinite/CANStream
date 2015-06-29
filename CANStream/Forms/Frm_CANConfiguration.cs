@@ -312,6 +312,51 @@ namespace CANStream
         
         #endregion
         
+        #region Cmb_Filter
+        
+        private void Cmb_FilterSelectedIndexChanged(object sender, EventArgs e)
+        {
+        	if (!(oMultipleControllersCfg == null))
+        	{
+        		ShowMultipleControllersConfiguration(Cmb_Filter.Text);
+        	}
+        	else
+        	{
+        		ShowConfiguration(Cmb_Filter.Text);
+        	}
+        }
+        
+        private void Cmb_FilterKeyDown(object sender, KeyEventArgs e)
+        {
+        	if (e.KeyCode.Equals(Keys.Enter))
+        	{
+        		if (!(Cmb_Filter.Text.Equals("")))
+        		{
+        			if (!(Cmb_Filter.Items.Contains(Cmb_Filter.Text)))
+        			{
+        				//FIFO 10 items
+        				if (Cmb_Filter.Items.Count == 10)
+        				{
+        					Cmb_Filter.Items.RemoveAt(9);
+        				}
+        				
+        				Cmb_Filter.Items.Insert(0, Cmb_Filter.Text);
+        			}
+        		}
+        		
+        		if (!(oMultipleControllersCfg == null))
+		    	{
+		    		ShowMultipleControllersConfiguration(Cmb_Filter.Text);
+		    	}
+		    	else
+		    	{
+		    		ShowConfiguration(Cmb_Filter.Text);
+		    	}
+        	}
+        }
+        
+        #endregion
+        
         #region Controller control
         
         private void Cmd_ControllerChangeClick(object sender, EventArgs e)
@@ -638,8 +683,13 @@ namespace CANStream
            		}
             }
         }
-
+		
         private void ShowConfiguration()
+        {
+        	ShowConfiguration("");
+        }
+        
+        private void ShowConfiguration(string sFilter)
         {
             ResetMessageForm();
             ResetParameterForm();
@@ -649,6 +699,8 @@ namespace CANStream
             Txt_MsgLength.Text = oCANConfig.MessageLength.ToString();
 			Txt_ConfigName.Text = oCANConfig.Name;
             
+			TV_Messages.SuspendLayout();
+			
             TV_Messages.Nodes.Clear();
 
             foreach (CANMessage oMsg in oCANConfig.Messages)
@@ -658,31 +710,50 @@ namespace CANStream
 
                 foreach (CANParameter oParam in oMsg.Parameters)
                 {
-	                TreeNode nParam = null;
-	                
-	                if (!(oParam.IsVirtual))
-	                {
-	                	nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
-	                }
-	                else
-	                {
-	                	nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
-	                }
-	                
-	                nParam.Tag = ConfigurationItemType.Parameter;
+                	if ((sFilter.Equals("")) || (oParam.Name.ToLower().Contains(sFilter.ToLower())))
+                	{
+                		TreeNode nParam = null;
+                		
+                		if (!(oParam.IsVirtual))
+                		{
+                			nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                		}
+                		else
+                		{
+                			nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                		}
+                		
+                		nParam.Tag = ConfigurationItemType.Parameter;
+                	}
+                }
+                
+                if (!(sFilter.Equals(""))) //If a filter is set
+                {
+                	//If message node has no child and its name isn't matching the filter
+                	if ((nMsg.Nodes.Count == 0) && (!(nMsg.Text.ToLower().Contains(sFilter.ToLower()))))
+                	{
+                		TV_Messages.Nodes.Remove(nMsg); //Message node removed
+                	}
                 }
             }
             
             TV_Messages.ExpandAll();
             
-            if (oCANConfig.Messages.Count > 0)
+            TV_Messages.ResumeLayout(true);
+            
+            if (oCANConfig.Messages.Count > 0 && TV_Messages.Nodes.Count > 0)
             {
             	oActiveMessage=oCANConfig.Messages[0];
             	Show_MsgMap(oActiveMessage);
             }
         }
-		
+        
         private void ShowMultipleControllersConfiguration()
+        {
+        	ShowMultipleControllersConfiguration("");
+        }
+        
+        private void ShowMultipleControllersConfiguration(string sFilter)
         {
         	ResetMessageForm();
             ResetParameterForm();
@@ -690,6 +761,8 @@ namespace CANStream
 
             Cmb_BusRate.Text = oMultipleControllersCfg.Controllers[0].CanRate.ToString();
             Txt_MsgLength.Text = oMultipleControllersCfg.Controllers[0].MessageLength.ToString();
+            
+            TV_Messages.SuspendLayout();
             
             TV_Messages.Nodes.Clear();
             
@@ -705,23 +778,52 @@ namespace CANStream
                 	
                 	foreach (CANParameter oParam in oMsg.Parameters)
                 	{
-                		TreeNode nParam = null;
-	                
-		                if (!(oParam.IsVirtual))
-		                {
-		                	nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
-		                }
-		                else
-		                {
-		                	nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
-		                }
-		                
-                   		nParam.Tag = ConfigurationItemType.Parameter;
+                		if ((sFilter.Equals("")) || (oParam.Name.ToLower().Contains(sFilter.ToLower())))
+                		{
+                			TreeNode nParam = null;
+                			
+                			if (!(oParam.IsVirtual))
+                			{
+                				nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                			}
+                			else
+                			{
+                				nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                			}
+                			
+                			nParam.Tag = ConfigurationItemType.Parameter;
+                		}
                 	}
+                	
+                	if (!(sFilter.Equals(""))) //If a filter is set
+	                {
+	                	//If message node has no child and its name isn't matching the filter
+	                	if ((nMsg.Nodes.Count == 0) && (!(nMsg.Text.ToLower().Contains(sFilter.ToLower()))))
+	                	{
+	                		TV_Messages.Nodes.Remove(nMsg); //Message node removed
+	                	}
+	                }
             	}
+            	
+            	if (!(sFilter.Equals(""))) //If a filter is set
+                {
+                	//If message node has no child and its name isn't matching the filter
+                	if ((nCtrl.Nodes.Count == 0) && (!(nCtrl.Text.ToLower().Contains(sFilter.ToLower()))))
+                	{
+                		TV_Messages.Nodes.Remove(nCtrl); //Message node removed
+                	}
+                }
             }
             
-            nController = TV_Messages.Nodes[0];
+            if (TV_Messages.Nodes.Count > 0)
+            {
+            	nController = TV_Messages.Nodes[0];
+            }
+            else
+            {
+            	nController = null;
+            }
+            	
             oCANConfig = oMultipleControllersCfg.Controllers[0];
             
             Cmb_BusRate.Text = oCANConfig.CanRate.ToString();
@@ -733,9 +835,12 @@ namespace CANStream
 				n.Expand();
 			}
             
+			TV_Messages.ResumeLayout(true);
+			
             if (oCANConfig.Messages.Count > 0)
             {
-            	Show_MsgMap(oCANConfig.Messages[0]);
+            	oActiveMessage = oCANConfig.Messages[0];
+            	Show_MsgMap(oActiveMessage);
             }
             
             if (!(tabControl1.TabPages.Contains(Tab_Controller)))

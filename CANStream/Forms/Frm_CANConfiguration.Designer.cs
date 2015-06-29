@@ -31,6 +31,8 @@
         	this.components = new System.ComponentModel.Container();
         	System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_CANConfiguration));
         	this.Split_Tree_Props = new System.Windows.Forms.SplitContainer();
+        	this.Grp_Filter = new System.Windows.Forms.GroupBox();
+        	this.Cmb_Filter = new System.Windows.Forms.ComboBox();
         	this.TV_Messages = new System.Windows.Forms.TreeView();
         	this.Context_TV_Messages = new System.Windows.Forms.ContextMenuStrip(this.components);
         	this.AddCanControllertoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +69,14 @@
         	this.NumUpDown_MuxValue = new System.Windows.Forms.NumericUpDown();
         	this.Lbl_MuxValue = new System.Windows.Forms.Label();
         	this.Grid_MsgMap = new System.Windows.Forms.DataGridView();
+        	this.Bit7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        	this.Bit0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	this.tabControl1 = new System.Windows.Forms.TabControl();
         	this.Tab_Controller = new System.Windows.Forms.TabPage();
         	this.Grp_ControllerForm = new System.Windows.Forms.GroupBox();
@@ -140,18 +150,11 @@
         	this.TSB_Delete = new System.Windows.Forms.ToolStripButton();
         	this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
         	this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-        	this.Bit7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        	this.Bit0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
         	((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
         	this.Split_Tree_Props.Panel1.SuspendLayout();
         	this.Split_Tree_Props.Panel2.SuspendLayout();
         	this.Split_Tree_Props.SuspendLayout();
+        	this.Grp_Filter.SuspendLayout();
         	this.Context_TV_Messages.SuspendLayout();
         	this.groupBox1.SuspendLayout();
         	this.Frame_MsgMap.SuspendLayout();
@@ -176,6 +179,7 @@
         	// 
         	// Split_Tree_Props.Panel1
         	// 
+        	this.Split_Tree_Props.Panel1.Controls.Add(this.Grp_Filter);
         	this.Split_Tree_Props.Panel1.Controls.Add(this.TV_Messages);
         	this.Split_Tree_Props.Panel1MinSize = 100;
         	// 
@@ -189,6 +193,30 @@
         	this.Split_Tree_Props.SplitterDistance = 381;
         	this.Split_Tree_Props.TabIndex = 0;
         	// 
+        	// Grp_Filter
+        	// 
+        	this.Grp_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.Grp_Filter.Controls.Add(this.Cmb_Filter);
+        	this.Grp_Filter.Location = new System.Drawing.Point(3, 417);
+        	this.Grp_Filter.Name = "Grp_Filter";
+        	this.Grp_Filter.Size = new System.Drawing.Size(375, 48);
+        	this.Grp_Filter.TabIndex = 1;
+        	this.Grp_Filter.TabStop = false;
+        	this.Grp_Filter.Text = "Filter";
+        	// 
+        	// Cmb_Filter
+        	// 
+        	this.Cmb_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+        	        	        	| System.Windows.Forms.AnchorStyles.Right)));
+        	this.Cmb_Filter.FormattingEnabled = true;
+        	this.Cmb_Filter.Location = new System.Drawing.Point(9, 19);
+        	this.Cmb_Filter.Name = "Cmb_Filter";
+        	this.Cmb_Filter.Size = new System.Drawing.Size(360, 21);
+        	this.Cmb_Filter.TabIndex = 0;
+        	this.Cmb_Filter.SelectedIndexChanged += new System.EventHandler(this.Cmb_FilterSelectedIndexChanged);
+        	this.Cmb_Filter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cmb_FilterKeyDown);
+        	// 
         	// TV_Messages
         	// 
         	this.TV_Messages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -200,7 +228,7 @@
         	this.TV_Messages.Location = new System.Drawing.Point(3, 3);
         	this.TV_Messages.Name = "TV_Messages";
         	this.TV_Messages.SelectedImageIndex = 0;
-        	this.TV_Messages.Size = new System.Drawing.Size(375, 462);
+        	this.TV_Messages.Size = new System.Drawing.Size(375, 408);
         	this.TV_Messages.TabIndex = 0;
         	this.TV_Messages.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV_Messages_NodeMouseClick);
         	this.TV_Messages.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TV_Messages_KeyDown);
@@ -541,6 +569,70 @@
         	this.Grid_MsgMap.Size = new System.Drawing.Size(399, 349);
         	this.Grid_MsgMap.TabIndex = 0;
         	this.Grid_MsgMap.SizeChanged += new System.EventHandler(this.Grid_MsgMapSizeChanged);
+        	// 
+        	// Bit7
+        	// 
+        	this.Bit7.HeaderText = "Bit 7";
+        	this.Bit7.Name = "Bit7";
+        	this.Bit7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit7.Width = 41;
+        	// 
+        	// Bit6
+        	// 
+        	this.Bit6.HeaderText = "Bit 6";
+        	this.Bit6.Name = "Bit6";
+        	this.Bit6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit6.Width = 41;
+        	// 
+        	// Bit5
+        	// 
+        	this.Bit5.HeaderText = "Bit 5";
+        	this.Bit5.Name = "Bit5";
+        	this.Bit5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit5.Width = 41;
+        	// 
+        	// Bit4
+        	// 
+        	this.Bit4.HeaderText = "Bit 4";
+        	this.Bit4.Name = "Bit4";
+        	this.Bit4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit4.Width = 41;
+        	// 
+        	// Bit3
+        	// 
+        	this.Bit3.HeaderText = "Bit 3";
+        	this.Bit3.Name = "Bit3";
+        	this.Bit3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit3.Width = 41;
+        	// 
+        	// Bit2
+        	// 
+        	this.Bit2.HeaderText = "Bit 2";
+        	this.Bit2.Name = "Bit2";
+        	this.Bit2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit2.Width = 41;
+        	// 
+        	// Bit1
+        	// 
+        	this.Bit1.HeaderText = "Bit 1";
+        	this.Bit1.Name = "Bit1";
+        	this.Bit1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit1.Width = 41;
+        	// 
+        	// Bit0
+        	// 
+        	this.Bit0.HeaderText = "Bit 0";
+        	this.Bit0.Name = "Bit0";
+        	this.Bit0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+        	this.Bit0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        	this.Bit0.Width = 41;
         	// 
         	// tabControl1
         	// 
@@ -1283,70 +1375,6 @@
         	// 
         	this.openFileDialog1.FileName = "openFileDialog1";
         	// 
-        	// Bit7
-        	// 
-        	this.Bit7.HeaderText = "Bit 7";
-        	this.Bit7.Name = "Bit7";
-        	this.Bit7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit7.Width = 41;
-        	// 
-        	// Bit6
-        	// 
-        	this.Bit6.HeaderText = "Bit 6";
-        	this.Bit6.Name = "Bit6";
-        	this.Bit6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit6.Width = 41;
-        	// 
-        	// Bit5
-        	// 
-        	this.Bit5.HeaderText = "Bit 5";
-        	this.Bit5.Name = "Bit5";
-        	this.Bit5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit5.Width = 41;
-        	// 
-        	// Bit4
-        	// 
-        	this.Bit4.HeaderText = "Bit 4";
-        	this.Bit4.Name = "Bit4";
-        	this.Bit4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit4.Width = 41;
-        	// 
-        	// Bit3
-        	// 
-        	this.Bit3.HeaderText = "Bit 3";
-        	this.Bit3.Name = "Bit3";
-        	this.Bit3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit3.Width = 41;
-        	// 
-        	// Bit2
-        	// 
-        	this.Bit2.HeaderText = "Bit 2";
-        	this.Bit2.Name = "Bit2";
-        	this.Bit2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit2.Width = 41;
-        	// 
-        	// Bit1
-        	// 
-        	this.Bit1.HeaderText = "Bit 1";
-        	this.Bit1.Name = "Bit1";
-        	this.Bit1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit1.Width = 41;
-        	// 
-        	// Bit0
-        	// 
-        	this.Bit0.HeaderText = "Bit 0";
-        	this.Bit0.Name = "Bit0";
-        	this.Bit0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-        	this.Bit0.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        	this.Bit0.Width = 41;
-        	// 
         	// Frm_CANConfiguration
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1365,6 +1393,7 @@
         	this.Split_Tree_Props.Panel2.ResumeLayout(false);
         	((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).EndInit();
         	this.Split_Tree_Props.ResumeLayout(false);
+        	this.Grp_Filter.ResumeLayout(false);
         	this.Context_TV_Messages.ResumeLayout(false);
         	this.groupBox1.ResumeLayout(false);
         	this.groupBox1.PerformLayout();
@@ -1388,6 +1417,8 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.ComboBox Cmb_Filter;
+        private System.Windows.Forms.GroupBox Grp_Filter;
         private System.Windows.Forms.Label Lbl_VirtualRef;
         private System.Windows.Forms.TextBox Txt_VirtualRef;
         private System.Windows.Forms.Button Cmd_VirtualRef;
