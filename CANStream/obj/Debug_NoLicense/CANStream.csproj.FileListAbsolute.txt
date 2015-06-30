@@ -92,3 +92,48 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Deb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.csproj.GenerateResource.Cache
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.exe
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.pdb
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.csprojResolveAssemblyReference.cache
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_CS_CAN_Bus.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordEventInformation.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordSessionInfo.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordUserInformations.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_SpyDataViewer.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Dlg_DBCTransmitterSelection.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_About.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_BuiltInSignal.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CANConfiguration.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_ContextualList.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleDataAssociation.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleCreation.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleEdition.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleRecordImport.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataBrowser.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataViewer.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataViewer_EventSession_Info.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_EventDetails.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordEventEdition.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordSessionEdition.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordEventSessionSelection.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_TrcFileSelection.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_VirtualChannel.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Frm_VirtualChannelTest.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Icones.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.MainForm.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.Properties.Resources.resources
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.csproj.GenerateResource.Cache
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ctrl_GraphWindow Release note.txt
+G:\Git\CANStream_USB\CANStream\bin\Debug\CANStream Release notes.txt
+G:\Git\CANStream_USB\CANStream\bin\Debug\CANStream.exe
+G:\Git\CANStream_USB\CANStream\bin\Debug\CANStream.pdb
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ciloci.Flee.dll
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ctrl_GraphWindow.dll
+G:\Git\CANStream_USB\CANStream\bin\Debug\SD_AppLicence.dll
+G:\Git\CANStream_USB\CANStream\bin\Debug\SD_AppLicence.pdb
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ctrl_GraphWindow.pdb
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ctrl_GraphWindow.xml
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ciloci.Flee.pdb
+G:\Git\CANStream_USB\CANStream\bin\Debug\Ciloci.Flee.xml
+G:\Git\CANStream_USB\CANStream\bin\Debug\netchartdir_cp.xml
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.exe
+G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.pdb
