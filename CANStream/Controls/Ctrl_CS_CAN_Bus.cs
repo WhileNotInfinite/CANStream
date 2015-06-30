@@ -187,6 +187,7 @@ namespace CANStream
 		private Int16 SpyMsgIdFilterMin;
 		private Int16 SpyMsgIdFilterMax;
         private bool bDataHistoryFrozen;
+        private List<string> SpyGraphChannelList;
 
 		//Manual control
 		private List<CANMessageEncoded> TxEngMessages;
@@ -328,6 +329,9 @@ namespace CANStream
 			
 			Cmb_SpyCANRate.SelectedIndex = 1; //1000 kBit/s
 			Cmb_SpyCANRxMode.Text = SpyCANRxMode.Event.ToString();
+			
+			SpyGraphChannelList = new List<string>();
+			ChkLst_ChannelSel.Tag = "";
 			
 			//Initialization of manual control management
 			SentMsgCounter = 0;
@@ -815,6 +819,35 @@ namespace CANStream
 			}
 		}	
 		
+		private void Context_SpyGraph_Filter_TSCmbKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode.Equals(Keys.Enter))
+			{
+				if (!(Context_SpyGraph_Filter_TSCmb.Text.Equals("")))
+				{
+					if (!(Context_SpyGraph_Filter_TSCmb.Items.Contains(Context_SpyGraph_Filter_TSCmb.Text)))
+					{
+						//FIFO
+						if (Context_SpyGraph_Filter_TSCmb.Items.Count == 10)
+						{
+							Context_SpyGraph_Filter_TSCmb.Items.RemoveAt(9);
+						}
+						
+						Context_SpyGraph_Filter_TSCmb.Items.Insert(0, ManualGrid_Filter_Combo_TSMI.Text);
+					}
+				}
+				
+				ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
+				FilterSpyGraphSeries();
+			}
+		}
+		
+		private void Context_SpyGraph_Filter_TSCmbSelectedIndexChanged(object sender, EventArgs e)
+		{
+			ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
+			FilterSpyGraphSeries();
+		}
+		
 		#endregion
 		
 		#region BGWrk_Spy
@@ -877,7 +910,7 @@ namespace CANStream
 		}
 		
 		#region Context_ManualGrid
-				
+		
 		private void HideRowToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			HideActiveRow();
@@ -886,6 +919,33 @@ namespace CANStream
 		private void ShowHiddenRowsToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			ShowHiddenRows();
+		}
+		
+		private void ManualGrid_Filter_Combo_TSMIKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode.Equals(Keys.Enter))
+			{
+				if (!(ManualGrid_Filter_Combo_TSMI.Text.Equals("")))
+				{
+					if (!(ManualGrid_Filter_Combo_TSMI.Items.Contains(ManualGrid_Filter_Combo_TSMI.Text)))
+					{
+						//FIFO
+						if (ManualGrid_Filter_Combo_TSMI.Items.Count == 10)
+						{
+							ManualGrid_Filter_Combo_TSMI.Items.RemoveAt(9);
+						}
+						
+						ManualGrid_Filter_Combo_TSMI.Items.Insert(0, ManualGrid_Filter_Combo_TSMI.Text);
+					}
+				}
+				
+				FilterManualCanConfig(ManualGrid_Filter_Combo_TSMI.Text);
+			}
+		}
+		
+		private void ManualGrid_Filter_Combo_TSMISelectedIndexChanged(object sender, EventArgs e)
+		{
+			FilterManualCanConfig(ManualGrid_Filter_Combo_TSMI.Text);
 		}
 		
 		#region Columns
@@ -2688,6 +2748,21 @@ namespace CANStream
         	}
         }
 		
+		private void FilterManualCanConfig(string sFilter)
+		{
+			foreach (DataGridViewRow oRow in Grid_CANData.Rows)
+			{
+				if ((sFilter.Equals("")) ||(oRow.Cells[GRID_MANUAL_NAME_COL].Value.ToString().ToLower().Contains(sFilter.ToLower())))
+				{
+					oRow.Visible = true;
+				}
+				else
+				{
+					oRow.Visible = false;
+				}
+			}
+		}
+		
         private void InitManualControlMessagesData()
         {
         	TxEngMessages=new List<CANMessageEncoded>();
@@ -3079,7 +3154,7 @@ namespace CANStream
         			Manual_SpyDataViewer.Clear_RawGrid();
         			Manual_SpyDataViewer.Clear_EngGrid();
         			
-        			ChkLst_ChannelSel.Items.Clear();
+        			SpyGraphChannelList.Clear(); //ChkLst_ChannelSel.Items.Clear(); //TODO: Remove
         			SpyGraphSeries.RTSeries.Clear();
         			
         			bClearSpyGrids=false;
@@ -3300,7 +3375,7 @@ namespace CANStream
 		                				
 		                				if (!(ChkLst_ChannelSel.Items.Contains(oParam.Name)))
 		                				{
-		                					ChkLst_ChannelSel.Items.Add(oParam.Name, false);
+		                					SpyGraphChannelList.Add(oParam.Name); //ChkLst_ChannelSel.Items.Add(oParam.Name, false); //TODO: Remove
 		                				}
 		                				
 										//Add Spy graphic sample
@@ -3313,6 +3388,8 @@ namespace CANStream
 										//Set param value in virtual channel variable element table
 										VCLibCollection.UpDateVariableElement(oParam.Name,oParam.DecodedValue);
 		                			}
+		                			
+		                			FilterSpyGraphSeries();
 		                		}
 		                	}
 		                }
@@ -3502,6 +3579,21 @@ namespace CANStream
         		}
         	}
         }
+		
+		private void FilterSpyGraphSeries()
+		{
+			string sFilter = (string)ChkLst_ChannelSel.Tag;
+			
+			ChkLst_ChannelSel.Items.Clear();
+			
+			foreach (string sChan in SpyGraphChannelList)
+			{
+				if ((sFilter.Equals("")) || (sChan.ToLower().Contains(sFilter.ToLower())))
+				{
+					ChkLst_ChannelSel.Items.Add(sChan, false);
+				}
+			}
+		}
 		
 		private void FireControllerSpyRunningChangedEvent(bool bRunning)
 		{
@@ -3729,7 +3821,7 @@ namespace CANStream
 	        			
 	        			if (!(ChkLst_ChannelSel.Items.Contains(oChan.Name)))
         				{
-        					ChkLst_ChannelSel.Items.Add(oChan.Name, false);
+	        				SpyGraphChannelList.Add(oChan.Name); //ChkLst_ChannelSel.Items.Add(oChan.Name, false); //TODO: Remove
         				}
         			}
         			
@@ -3743,6 +3835,8 @@ namespace CANStream
 						}
         			}
         		}
+        		
+        		FilterSpyGraphSeries();
         	}
         }
         

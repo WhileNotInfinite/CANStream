@@ -74,6 +74,8 @@ namespace CANStream
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.ContextSpyEng_HideSelectedRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextSpyEng_ShowHiddenRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ContextSpyEng_FilterTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ContextSpyEng_FiltetTSComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
 			this.ContextSpyEng_columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextSpyEng_showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -401,10 +403,11 @@ namespace CANStream
 									this.toolStripSeparator4,
 									this.ContextSpyEng_HideSelectedRowsTSMenuItem,
 									this.ContextSpyEng_ShowHiddenRowsTSMenuItem,
+									this.ContextSpyEng_FilterTSMenuItem,
 									this.toolStripMenuItem11,
 									this.ContextSpyEng_columnsToolStripMenuItem});
 			this.Context_SpyEngGrid.Name = "Context_SpyEngGrid";
-			this.Context_SpyEngGrid.Size = new System.Drawing.Size(174, 104);
+			this.Context_SpyEngGrid.Size = new System.Drawing.Size(174, 148);
 			// 
 			// ContextSpyEng_ResetTSMenuItem
 			// 
@@ -434,6 +437,21 @@ namespace CANStream
 			this.ContextSpyEng_ShowHiddenRowsTSMenuItem.Size = new System.Drawing.Size(173, 22);
 			this.ContextSpyEng_ShowHiddenRowsTSMenuItem.Text = "Show hidden rows";
 			this.ContextSpyEng_ShowHiddenRowsTSMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ShowHiddenRowsTSMenuItemClick);
+			// 
+			// ContextSpyEng_FilterTSMenuItem
+			// 
+			this.ContextSpyEng_FilterTSMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+									this.ContextSpyEng_FiltetTSComboBox});
+			this.ContextSpyEng_FilterTSMenuItem.Name = "ContextSpyEng_FilterTSMenuItem";
+			this.ContextSpyEng_FilterTSMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.ContextSpyEng_FilterTSMenuItem.Text = "Filter";
+			// 
+			// ContextSpyEng_FiltetTSComboBox
+			// 
+			this.ContextSpyEng_FiltetTSComboBox.Name = "ContextSpyEng_FiltetTSComboBox";
+			this.ContextSpyEng_FiltetTSComboBox.Size = new System.Drawing.Size(121, 23);
+			this.ContextSpyEng_FiltetTSComboBox.SelectedIndexChanged += new System.EventHandler(this.ContextSpyEng_FiltetTSComboBoxSelectedIndexChanged);
+			this.ContextSpyEng_FiltetTSComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContextSpyEng_FiltetTSComboBoxKeyDown);
 			// 
 			// toolStripMenuItem11
 			// 
@@ -543,6 +561,8 @@ namespace CANStream
 			this.Context_SpyEngGrid.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.ToolStripComboBox ContextSpyEng_FiltetTSComboBox;
+		private System.Windows.Forms.ToolStripMenuItem ContextSpyEng_FilterTSMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ContextSpyRaw_countToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ContextSpyRaw_periodToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ContextSpyRaw_dataToolStripMenuItem;

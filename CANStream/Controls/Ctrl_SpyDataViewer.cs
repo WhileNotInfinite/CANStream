@@ -20,6 +20,7 @@ namespace CANStream
 	{
 		#region Private constants
 		
+		private const int GRID_SPYENG_NAME = 1;
 		private const int GRID_SPYENG_VALUE = 3;
 		private const int GRID_MAX_COL_WIDTH = 60;
 		private const int GRID_RAW_SPY_FILLER_COL = 2;		//Column 'Data'
@@ -261,6 +262,33 @@ namespace CANStream
 		private void ContextSpyEng_ShowHiddenRowsTSMenuItemClick(object sender, EventArgs e)
 		{
 			ShowHiddenRows();
+		}
+		
+		private void ContextSpyEng_FiltetTSComboBoxKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode.Equals(Keys.Enter))
+			{
+				if (!(ContextSpyEng_FiltetTSComboBox.Text.Equals("")))
+				{
+					if (!(ContextSpyEng_FiltetTSComboBox.Items.Contains(ContextSpyEng_FiltetTSComboBox.Text)))
+					{
+						//FIFO
+						if (ContextSpyEng_FiltetTSComboBox.Items.Count == 10)
+						{
+							ContextSpyEng_FiltetTSComboBox.Items.RemoveAt(9);
+						}
+						
+						ContextSpyEng_FiltetTSComboBox.Items.Insert(0, ContextSpyEng_FiltetTSComboBox.Text);
+					}
+				}
+				
+				Filter_EngGrid(ContextSpyEng_FiltetTSComboBox.Text);
+			}
+		}
+		
+		private void ContextSpyEng_FiltetTSComboBoxSelectedIndexChanged(object sender, EventArgs e)
+		{
+			Filter_EngGrid(ContextSpyEng_FiltetTSComboBox.Text);
 		}
 		
 		#region Columns
@@ -565,6 +593,21 @@ namespace CANStream
 			{
 				Grid_SpyEngineering.Rows[iRow].Cells[i].Style.BackColor = CellBackColor;
 				Grid_SpyEngineering.Rows[iRow].Cells[i].Style.ForeColor = CellForeColor;
+			}
+		}
+		
+		private void Filter_EngGrid(string sFilter)
+		{
+			foreach (DataGridViewRow oRow in Grid_SpyEngineering.Rows)
+			{
+				if ((sFilter.Equals("")) || (oRow.Cells[GRID_SPYENG_NAME].Value.ToString().ToLower().Contains(sFilter.ToLower())))
+				{
+					oRow.Visible = true;
+				}
+				else
+				{
+					oRow.Visible = false;
+				}
 			}
 		}
 		
