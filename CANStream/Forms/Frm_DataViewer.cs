@@ -14,6 +14,8 @@ using System.Windows.Forms;
 
 using Ctrl_GraphWindow;
 
+using System.Runtime.Serialization.Formatters.Binary; //TODO: Remove
+
 namespace CANStream
 {
 	/// <summary>
@@ -151,7 +153,20 @@ namespace CANStream
 		{
 			DeleteViewerPage();
 		}
-		
+
+        private void TSB_CopyViewerPage_Click(object sender, EventArgs e)
+        {
+            if (!(Tab_Viewers.SelectedTab.Equals(Tab_NewViewer)))
+            {
+                CopyPage(Tab_Viewers.SelectedTab);
+            }
+        }
+
+        private void TSB_PastViewerPage_Click(object sender, EventArgs e)
+        {
+            PastPage();
+        }
+
 		private void TSB_EventSessionInfoClick(object sender, EventArgs e)
 		{
 			if (RecordEvents.Count > 0)
@@ -224,7 +239,17 @@ namespace CANStream
 				}
 			}
 		}
-		
+
+        private void TSMI_CtxtTab_Copy_Click(object sender, EventArgs e)
+        {
+            CopyPage(ContextTabPage);
+        }
+
+        private void TSMI_CtxtTab_Past_Click(object sender, EventArgs e)
+        {
+            PastPage();
+        }
+
 		#region TxtNewName
 		
 		private void TxtNewName_KeyDown(object sender, KeyEventArgs e)
@@ -547,7 +572,70 @@ namespace CANStream
 				Tab_Viewers.TabPages.Remove(Page);
 			}
 		}
-		
+
+        private void CopyPage(TabPage Page)
+        {
+            if (!(Page == null))
+            {
+                CS_DataViewerPage oClipPage = new CS_DataViewerPage();
+                oClipPage.Name = Page.Text;
+                oClipPage.GraphicProperties = ((Ctrl_WaveForm)Page.Controls[0]).Properties.Get_Clone();
+
+                DataFormats.Format oFormat = DataFormats.GetFormat(typeof(CS_DataViewerPage).FullName);
+                IDataObject ClipDataObj = new DataObject();
+                ClipDataObj.SetData(oFormat.Name, false, oClipPage);
+                Clipboard.SetDataObject(ClipDataObj, false);
+
+                TSMI_CtxtTab_Past.Enabled = true;
+                TSB_PastViewerPage.Enabled = true;
+            }
+        }
+
+        private void PastPage()
+        {
+            CS_DataViewerPage oClipPage = null;
+            IDataObject ClipDataObj = Clipboard.GetDataObject();
+            string sFormat = typeof(CS_DataViewerPage).FullName;
+
+            if (ClipDataObj.GetDataPresent(sFormat))
+            {
+                oClipPage = ClipDataObj.GetData(sFormat) as CS_DataViewerPage;
+
+                if (!(oClipPage == null))
+                {
+                    NewViewerPage(-1, GetViewerPageCopyName(oClipPage.Name), oClipPage.GraphicProperties);
+                }
+            }
+            else
+            {
+                TSMI_CtxtTab_Past.Enabled = false;
+                TSB_PastViewerPage.Enabled = false;
+            }
+        }
+
+        private string GetViewerPageCopyName(string BaseName)
+        {
+            int Indice = 0;
+            bool PageExists = true;
+
+            while (PageExists)
+            {
+                PageExists = false;
+                Indice++;
+
+                for (int i = 0; i < Tab_Viewers.TabPages.Count; i++)
+                {
+                    if (Tab_Viewers.TabPages[i].Text.Equals(BaseName + " " + Indice.ToString()))
+                    {
+                        PageExists = true;
+                        break;
+                    }
+                }
+            }
+
+            return (BaseName + " " + Indice.ToString());
+        }
+
 		#endregion
 		
 		#endregion
