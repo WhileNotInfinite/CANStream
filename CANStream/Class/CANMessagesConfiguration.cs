@@ -1603,15 +1603,17 @@ namespace CANStream
 		
 		private void DecodeMessage()
 		{
-			bMessageDecoded=false;
 			long MuxVal=-1;
+			bool bMuxExists = true;
+			
+			bMessageDecoded=false;
 			
 			//Get Multiplexer value
 			if(!(MultiplexerName.Equals("")))
 			{
 				if (!(GetMultiplexerValue(MultiplexerName, out MuxVal)))
 				{
-					return;
+					bMuxExists = false;
 				}
 			}
 			
@@ -1620,7 +1622,7 @@ namespace CANStream
 			{
 				if (!(oParam.Name.Equals(MultiplexerName)))
 				{
-					if ((!oParam.IsMultiplexed) || (oParam.IsMultiplexed && oParam.MultiplexerValue == MuxVal))
+					if ((!oParam.IsMultiplexed) || (oParam.IsMultiplexed && bMuxExists && oParam.MultiplexerValue == MuxVal))
 					{
 						if (!DecodeParameter(oParam)) return;
 					}
