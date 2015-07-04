@@ -4,326 +4,6 @@
         <name>Ctrl_GraphWindow</name>
     </assembly>
     <members>
-        <member name="T:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties">
-            <summary>
-            Graphic serie detailed properties form
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.#ctor(Ctrl_GraphWindow.GraphSerieProperties,System.Object,System.String)">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Ctrl_ReferenceLines">
-            <summary>
-            Graphic window reference lines management control
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.components">
-            <summary> 
-            Variable nécessaire au concepteur.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Dispose(System.Boolean)">
-            <summary> 
-            Nettoyage des ressources utilisées.
-            </summary>
-            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.InitializeComponent">
-            <summary> 
-            Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
-            le contenu de cette méthode avec l'éditeur de code.
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.ReferenceLines">
-            <summary>
-            Control reference lines collection
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.DefaultLineColor">
-            <summary>
-            Reference line default color
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.FORM_TITLE">
-            <summary>
-            Title of the form hosting the control
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Show_ReferenceLines">
-            <summary>
-            Show the reference lines collection hosted by the control
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Get_ReferenceLines">
-            <summary>
-            Update the reference lines collection of the control with properties set by the user
-            </summary>
-            <remarks>Updated reference lines is accessible by the 'ReferenceLines' member</remarks>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList">
-            <summary>
-            Contextual channel list control class
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.MaxStringWidth">
-            <summary>Width of the string of the longest channel name</summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.AddChannel(System.String)">
-            <summary>
-            Add a channel name into the current object
-            </summary>
-            <param name="ChanName">Name of the channel to add</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.ShowChannels">
-            <summary>
-            Show the channel list
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.FilterItems(System.String)">
-            <summary>
-            Apply a filter to show only items matching the filter
-            </summary>
-            <param name="Filter">Filter value</param>
-        </member>
-        <member name="T:Ctrl_GraphWindow.GW_SelectablePictureBox">
-            <summary>
-            Picture box getting the focus on click (derived of a picture box)
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.GW_SelectablePictureBox.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.GW_SelectablePictureBox.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Set the focus on the current control
-            </summary>
-            <param name="e">Mouse event argument</param>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Frm_GraphSeriesStatistics">
-            <summary>
-            Description of Frm_GraphSeriesStatistics.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.#ctor(Ctrl_GraphWindow.SerieStatistics[],System.Drawing.Color)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="Stats">Statistics to display</param>
-            <param name="BackColor">Grid cells back color</param>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.components">
-            <summary>
-            Designer variable used to keep track of non-visual components.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.Dispose(System.Boolean)">
-            <summary>
-            Disposes resources used by the form.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.InitializeComponent">
-            <summary>
-            This method is required for Windows Forms designer support.
-            Do not change the method contents inside the source code editor. The Forms designer might
-            not be able to load this method if it was changed manually.
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Frm_GraphPrinting">
-            <summary>
-            Graphic printing form
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.#ctor(System.Drawing.Image)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="GraphImg">Image of the graphic to be printed out</param>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Frm_GraphPrinting.components">
-            <summary>
-            Designer variable used to keep track of non-visual components.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.Dispose(System.Boolean)">
-            <summary>
-            Disposes resources used by the form.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.InitializeComponent">
-            <summary>
-            This method is required for Windows Forms designer support.
-            Do not change the method contents inside the source code editor. The Forms designer might
-            not be able to load this method if it was changed manually.
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Ctrl_GW_ChannelList">
-            <summary>
-            Data channel list control class
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ChannelList.ChannelList">
-            <summary>
-            List of channels
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.Show_ChannelList">
-            <summary>
-            Show the list of channels
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ChannelList.components">
-            <summary> 
-            Variable nécessaire au concepteur.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.Dispose(System.Boolean)">
-            <summary> 
-            Nettoyage des ressources utilisées.
-            </summary>
-            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.InitializeComponent">
-            <summary> 
-            Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
-            le contenu de cette méthode avec l'éditeur de code.
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Frm_FlyingChannelList">
-            <summary>
-            Flying channel list form for the graph properties edition form
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.#ctor(System.String[],Ctrl_GraphWindow.Frm_GraphPropertiesEdtion)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="Channels">List of channels</param>
-            <param name="Caller">Reference to the Frm_GraphPropertiesEdtion calling the Frm_FlyingChannelList</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.Send_NameListToPropertiesForm(System.String[])">
-            <summary>
-            Send a list a channel names coming from the Ctrl_GW_ChannelList to the Frm_GraphPropertiesEdition form having called this flying channel list
-            </summary>
-            <param name="NameList">List of channel names</param>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Frm_FlyingChannelList.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Icones">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Icones.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Icones.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion">
-            <summary>
-            Graphic properties edition form
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.#ctor(Ctrl_GraphWindow.Ctrl_WaveForm,System.String[])">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="Caller">Form calling the Frm_GraphPropertiesEdtion</param>
-            <param name="DataChannelList">List of channels of the data loaded</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.Add_SerieItems(System.String[])">
-            <summary>
-            Add a graphic serie for each item of the list given as argument
-            </summary>
-            <param name="Items">List of graphic serie to create</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.UpDate_SeriesGrid">
-            <summary>
-            Update the Grid_SeriesProperties after a single serie edition
-            </summary>
-            <remarks>Set the bModified flag of GraphWindowProperties to true</remarks>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.UpDate_Properties(Ctrl_GraphWindow.GraphWindowProperties)">
-            <summary>
-            Update the GraphWindowProperties of the current object
-            </summary>
-            <param name="NewProps">New GraphWindowProperties to use</param>
-        </member>
         <member name="T:Ctrl_GraphWindow.SerieStatistics">
             <summary>
             Serie statistics structure
@@ -477,108 +157,6 @@
             <param name="SampleIndex">Index of sample</param>
             <returns>Channel value at the sample index</returns>
             <remarks>Return NaN if the channel is not found or if the sample index doesn't exist</remarks>
-        </member>
-        <member name="T:Ctrl_GraphWindow.Ctrl_WaveForm">
-            <summary>
-            Description of Ctrl_WaveForm.
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_WaveForm.components">
-            <summary>
-            Designer variable used to keep track of non-visual components.
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Dispose(System.Boolean)">
-            <summary>
-            Disposes resources used by the control.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.InitializeComponent">
-            <summary>
-            This method is required for Windows Forms designer support.
-            Do not change the method contents inside the source code editor. The Forms designer might
-            not be able to load this method if it was changed manually.
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.Ctrl_WaveForm.Properties">
-            <summary>
-            Graphical properties of the graph
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Refresh_Graphic">
-            <summary>
-            Refresh the graphic window
-            </summary>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Reset_Properties(Ctrl_GraphWindow.Frm_GraphPropertiesEdtion)">
-            <summary>
-            Reset GraphWindowProperties of the current object
-            </summary>
-            <param name="Caller">Frm_GraphPropertiesEdtion having requested the reset</param>
-            <remarks>Function 'New' of a Frm_GraphPropertiesEdtion</remarks>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Set_DataFile(Ctrl_GraphWindow.GW_DataFile)">
-            <summary>
-            Set the GW_DataFile object containing the data to plot
-            </summary>
-            <param name="oDataFile">GW_DataFile object containing the data to plot</param>
-        </member>
-        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Add_Series(System.String[])">
-            <summary>
-            Add one or more series into the graphic window
-            </summary>
-            <param name="SerieNames">Names of series to add</param>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ToolBarVisible">
-            <summary>
-            Control toolbar visible property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.OpenFileVisible">
-            <summary>
-            Load data command visible property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.EditGraphicConfigurationEnable">
-            <summary>
-            Graphic properties editable property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.CursorEnabled">
-            <summary>
-            Cusrors enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ZoomEnabled">
-            <summary>
-            Zoom enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ChannelListEnabled">
-            <summary>
-            Channel list enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.LegendEnabled">
-            <summary>
-            Legend enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.SnapShotEnabled">
-            <summary>
-            Graphic snapshot enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.PrintEnabled">
-            <summary>
-            Graphic print enabled properties
-            </summary>
         </member>
         <member name="T:Ctrl_GraphWindow.ScreenPositions">
             <summary>
@@ -1812,6 +1390,428 @@
             Return a default line color for a graph serie
             </summary>
             <returns>Default line color for a graph serie</returns>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Ctrl_GW_ChannelList">
+            <summary>
+            Data channel list control class
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ChannelList.ChannelList">
+            <summary>
+            List of channels
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.Show_ChannelList">
+            <summary>
+            Show the list of channels
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ChannelList.components">
+            <summary> 
+            Variable nécessaire au concepteur.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.Dispose(System.Boolean)">
+            <summary> 
+            Nettoyage des ressources utilisées.
+            </summary>
+            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ChannelList.InitializeComponent">
+            <summary> 
+            Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
+            le contenu de cette méthode avec l'éditeur de code.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList">
+            <summary>
+            Contextual channel list control class
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.MaxStringWidth">
+            <summary>Width of the string of the longest channel name</summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.AddChannel(System.String)">
+            <summary>
+            Add a channel name into the current object
+            </summary>
+            <param name="ChanName">Name of the channel to add</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.ShowChannels">
+            <summary>
+            Show the channel list
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_GW_ContextualChannelList.FilterItems(System.String)">
+            <summary>
+            Apply a filter to show only items matching the filter
+            </summary>
+            <param name="Filter">Filter value</param>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Ctrl_ReferenceLines">
+            <summary>
+            Graphic window reference lines management control
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.ReferenceLines">
+            <summary>
+            Control reference lines collection
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.DefaultLineColor">
+            <summary>
+            Reference line default color
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.FORM_TITLE">
+            <summary>
+            Title of the form hosting the control
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Show_ReferenceLines">
+            <summary>
+            Show the reference lines collection hosted by the control
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Get_ReferenceLines">
+            <summary>
+            Update the reference lines collection of the control with properties set by the user
+            </summary>
+            <remarks>Updated reference lines is accessible by the 'ReferenceLines' member</remarks>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_ReferenceLines.components">
+            <summary> 
+            Variable nécessaire au concepteur.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.Dispose(System.Boolean)">
+            <summary> 
+            Nettoyage des ressources utilisées.
+            </summary>
+            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_ReferenceLines.InitializeComponent">
+            <summary> 
+            Méthode requise pour la prise en charge du concepteur - ne modifiez pas 
+            le contenu de cette méthode avec l'éditeur de code.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.GW_SelectablePictureBox">
+            <summary>
+            Picture box getting the focus on click (derived of a picture box)
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.GW_SelectablePictureBox.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.GW_SelectablePictureBox.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Set the focus on the current control
+            </summary>
+            <param name="e">Mouse event argument</param>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Ctrl_WaveForm">
+            <summary>
+            Description of Ctrl_WaveForm.
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_WaveForm.Properties">
+            <summary>
+            Graphical properties of the graph
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Refresh_Graphic">
+            <summary>
+            Refresh the graphic window
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Reset_Properties(Ctrl_GraphWindow.Frm_GraphPropertiesEdtion)">
+            <summary>
+            Reset GraphWindowProperties of the current object
+            </summary>
+            <param name="Caller">Frm_GraphPropertiesEdtion having requested the reset</param>
+            <remarks>Function 'New' of a Frm_GraphPropertiesEdtion</remarks>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Set_DataFile(Ctrl_GraphWindow.GW_DataFile)">
+            <summary>
+            Set the GW_DataFile object containing the data to plot
+            </summary>
+            <param name="oDataFile">GW_DataFile object containing the data to plot</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Add_Series(System.String[])">
+            <summary>
+            Add one or more series into the graphic window
+            </summary>
+            <param name="SerieNames">Names of series to add</param>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Ctrl_WaveForm.components">
+            <summary>
+            Designer variable used to keep track of non-visual components.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.Dispose(System.Boolean)">
+            <summary>
+            Disposes resources used by the control.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Ctrl_WaveForm.InitializeComponent">
+            <summary>
+            This method is required for Windows Forms designer support.
+            Do not change the method contents inside the source code editor. The Forms designer might
+            not be able to load this method if it was changed manually.
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ToolBarVisible">
+            <summary>
+            Control toolbar visible property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.OpenFileVisible">
+            <summary>
+            Load data command visible property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.EditGraphicConfigurationEnable">
+            <summary>
+            Graphic properties editable property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.CursorEnabled">
+            <summary>
+            Cusrors enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ZoomEnabled">
+            <summary>
+            Zoom enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ChannelListEnabled">
+            <summary>
+            Channel list enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.LegendEnabled">
+            <summary>
+            Legend enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.SnapShotEnabled">
+            <summary>
+            Graphic snapshot enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.PrintEnabled">
+            <summary>
+            Graphic print enabled properties
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Frm_FlyingChannelList">
+            <summary>
+            Flying channel list form for the graph properties edition form
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.#ctor(System.String[],Ctrl_GraphWindow.Frm_GraphPropertiesEdtion)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="Channels">List of channels</param>
+            <param name="Caller">Reference to the Frm_GraphPropertiesEdtion calling the Frm_FlyingChannelList</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.Send_NameListToPropertiesForm(System.String[])">
+            <summary>
+            Send a list a channel names coming from the Ctrl_GW_ChannelList to the Frm_GraphPropertiesEdition form having called this flying channel list
+            </summary>
+            <param name="NameList">List of channel names</param>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Frm_FlyingChannelList.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_FlyingChannelList.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Frm_GraphPrinting">
+            <summary>
+            Graphic printing form
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.#ctor(System.Drawing.Image)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="GraphImg">Image of the graphic to be printed out</param>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Frm_GraphPrinting.components">
+            <summary>
+            Designer variable used to keep track of non-visual components.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.Dispose(System.Boolean)">
+            <summary>
+            Disposes resources used by the form.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPrinting.InitializeComponent">
+            <summary>
+            This method is required for Windows Forms designer support.
+            Do not change the method contents inside the source code editor. The Forms designer might
+            not be able to load this method if it was changed manually.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion">
+            <summary>
+            Graphic properties edition form
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.#ctor(Ctrl_GraphWindow.Ctrl_WaveForm,System.String[])">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="Caller">Form calling the Frm_GraphPropertiesEdtion</param>
+            <param name="DataChannelList">List of channels of the data loaded</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.Add_SerieItems(System.String[])">
+            <summary>
+            Add a graphic serie for each item of the list given as argument
+            </summary>
+            <param name="Items">List of graphic serie to create</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.UpDate_SeriesGrid">
+            <summary>
+            Update the Grid_SeriesProperties after a single serie edition
+            </summary>
+            <remarks>Set the bModified flag of GraphWindowProperties to true</remarks>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.UpDate_Properties(Ctrl_GraphWindow.GraphWindowProperties)">
+            <summary>
+            Update the GraphWindowProperties of the current object
+            </summary>
+            <param name="NewProps">New GraphWindowProperties to use</param>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphPropertiesEdtion.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties">
+            <summary>
+            Graphic serie detailed properties form
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.#ctor(Ctrl_GraphWindow.GraphSerieProperties,System.Object,System.String)">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSerieDetailedProperties.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Frm_GraphSeriesStatistics">
+            <summary>
+            Description of Frm_GraphSeriesStatistics.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.#ctor(Ctrl_GraphWindow.SerieStatistics[],System.Drawing.Color)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="Stats">Statistics to display</param>
+            <param name="BackColor">Grid cells back color</param>
+        </member>
+        <member name="F:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.components">
+            <summary>
+            Designer variable used to keep track of non-visual components.
+            </summary>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.Dispose(System.Boolean)">
+            <summary>
+            Disposes resources used by the form.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Ctrl_GraphWindow.Frm_GraphSeriesStatistics.InitializeComponent">
+            <summary>
+            This method is required for Windows Forms designer support.
+            Do not change the method contents inside the source code editor. The Forms designer might
+            not be able to load this method if it was changed manually.
+            </summary>
+        </member>
+        <member name="T:Ctrl_GraphWindow.Icones">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Icones.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Icones.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
         </member>
     </members>
 </doc>
