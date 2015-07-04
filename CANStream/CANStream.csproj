@@ -108,35 +108,51 @@
     <Compile Include="Class\GraphicSeries.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
-    <Compile Include="Controls\Ctrl_CS_CAN_Bus.cs" />
+    <Compile Include="Controls\Ctrl_CS_CAN_Bus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Ctrl_CS_CAN_Bus.Designer.cs">
       <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ctrl_RecordEventInformation.cs" />
+    <Compile Include="Controls\Ctrl_RecordEventInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Ctrl_RecordEventInformation.Designer.cs">
       <DependentUpon>Ctrl_RecordEventInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ctrl_RecordSessionInfo.cs" />
+    <Compile Include="Controls\Ctrl_RecordSessionInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Ctrl_RecordSessionInfo.Designer.cs">
       <DependentUpon>Ctrl_RecordSessionInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ctrl_RecordUserInformations.cs" />
+    <Compile Include="Controls\Ctrl_RecordUserInformations.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Ctrl_RecordUserInformations.Designer.cs">
       <DependentUpon>Ctrl_RecordUserInformations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ctrl_SpyDataViewer.cs" />
+    <Compile Include="Controls\Ctrl_SpyDataViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Ctrl_SpyDataViewer.Designer.cs">
       <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs" />
+    <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.Designer.cs">
       <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_About.cs" />
+    <Compile Include="Forms\Frm_About.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_About.Designer.cs">
       <DependentUpon>Frm_About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_BuiltInSignal.cs" />
+    <Compile Include="Forms\Frm_BuiltInSignal.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_BuiltInSignal.Designer.cs">
       <DependentUpon>Frm_BuiltInSignal.cs</DependentUpon>
     </Compile>
@@ -151,11 +167,15 @@
       <DependentUpon>Frm_CANConfiguration.resx</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.cs" />
+    <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.Designer.cs">
       <DependentUpon>Frm_CANConfiguration_VirtualChannelReference.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_ContextualList.cs" />
+    <Compile Include="Forms\Frm_ContextualList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_ContextualList.Designer.cs">
       <DependentUpon>Frm_ContextualList.cs</DependentUpon>
     </Compile>
@@ -171,51 +191,75 @@
     <Compile Include="Forms\Frm_CycleCreation.Designer.cs">
       <DependentUpon>Frm_CycleCreation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_CycleEdition.cs" />
+    <Compile Include="Forms\Frm_CycleEdition.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_CycleEdition.Designer.cs">
       <DependentUpon>Frm_CycleEdition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_CycleRecordImport.cs" />
+    <Compile Include="Forms\Frm_CycleRecordImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_CycleRecordImport.Designer.cs">
       <DependentUpon>Frm_CycleRecordImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_DataBrowser.cs" />
+    <Compile Include="Forms\Frm_DataBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_DataBrowser.Designer.cs">
       <DependentUpon>Frm_DataBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_DataViewer.cs" />
+    <Compile Include="Forms\Frm_DataViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_DataViewer.Designer.cs">
       <DependentUpon>Frm_DataViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_DataViewer_EventSession_Info.cs" />
+    <Compile Include="Forms\Frm_DataViewer_EventSession_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_DataViewer_EventSession_Info.Designer.cs">
       <DependentUpon>Frm_DataViewer_EventSession_Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_EventDetails.cs" />
+    <Compile Include="Forms\Frm_EventDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_EventDetails.Designer.cs">
       <DependentUpon>Frm_EventDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_RecordEventEdition.cs" />
+    <Compile Include="Forms\Frm_RecordEventEdition.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_RecordEventEdition.Designer.cs">
       <DependentUpon>Frm_RecordEventEdition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_RecordSessionEdition.cs" />
+    <Compile Include="Forms\Frm_RecordSessionEdition.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_RecordSessionEdition.Designer.cs">
       <DependentUpon>Frm_RecordSessionEdition.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_RecordEventSessionSelection.cs" />
+    <Compile Include="Forms\Frm_RecordEventSessionSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_RecordEventSessionSelection.Designer.cs">
       <DependentUpon>Frm_RecordEventSessionSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_TrcFileSelection.cs" />
+    <Compile Include="Forms\Frm_TrcFileSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_TrcFileSelection.Designer.cs">
       <DependentUpon>Frm_TrcFileSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_VirtualChannel.cs" />
+    <Compile Include="Forms\Frm_VirtualChannel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_VirtualChannel.Designer.cs">
       <DependentUpon>Frm_VirtualChannel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Frm_VirtualChannelTest.cs" />
+    <Compile Include="Forms\Frm_VirtualChannelTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Frm_VirtualChannelTest.Designer.cs">
       <DependentUpon>Frm_VirtualChannelTest.cs</DependentUpon>
     </Compile>
@@ -331,12 +375,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls" />
-    <Folder Include="Dialogs" />
-    <Folder Include="Tools" />
-    <Folder Include="PCANBasic" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
@@ -348,13 +387,13 @@
     <None Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ctrl_GraphWindow\Ctrl_GraphWindow\Ctrl_GraphWindow.csproj">
-      <Project>{23726D07-E40C-42E4-B676-24837B2D8896}</Project>
-      <Name>Ctrl_GraphWindow</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SD_AppLicense\SD_AppLicence\SD_AppLicence.csproj">
+    <ProjectReference Include="..\..\SD_AppLicence\SD_AppLicence\SD_AppLicence.csproj">
       <Project>{043AD182-2573-4289-8860-DFE9E3101074}</Project>
       <Name>SD_AppLicence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SD_Ctrl_GraphWindow\Ctrl_GraphWindow\Ctrl_GraphWindow.csproj">
+      <Project>{23726D07-E40C-42E4-B676-24837B2D8896}</Project>
+      <Name>Ctrl_GraphWindow</Name>
     </ProjectReference>
     <ProjectReference Include="..\Flee_Lib\FLEE_Lib.vbproj">
       <Project>{28334152-7FB7-46A5-8639-68EB84A99BE0}</Project>

@@ -13,8 +13,9 @@ using System.Xml;
 using Ctrl_GraphWindow;
 
 namespace CANStream
-{	
-	public class CS_DataViewerPage
+{
+    [Serializable]
+    public class CS_DataViewerPage
 	{
 		#region Public members
 		
@@ -35,8 +36,23 @@ namespace CANStream
 			KeyId = -1;
 			
 			GraphicProperties = new GraphWindowProperties();
-		}
-	}
+        }
+
+        #region Public methodes
+
+        public CS_DataViewerPage Get_Clone()
+        {
+            CS_DataViewerPage oClone = new CS_DataViewerPage();
+
+                oClone.Name = this.Name;
+                oClone.KeyId = -1;
+                oClone.GraphicProperties = this.GraphicProperties.Get_Clone();
+
+            return (oClone);
+        }
+
+        #endregion
+    }
 	
 	public class CS_DataViewerBook
 	{
@@ -164,7 +180,20 @@ namespace CANStream
 			
 			return(null);
 		}
-		
+
+        public bool DataViewerPageExists(string PageName)
+        {
+            foreach (CS_DataViewerPage oPage in Pages)
+            {
+                if (oPage.Name.Equals(PageName))
+                {
+                    return (true);
+                }
+            }
+
+            return (false);
+        }
+
 		#endregion
 		
 		#endregion

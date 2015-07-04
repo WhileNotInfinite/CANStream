@@ -20,3 +20,13 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debu
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.dll
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.xml
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.pdb
+G:\Git\CANStream_USB\Flee_Lib\bin\Debug\Ciloci.Flee.dll
+G:\Git\CANStream_USB\Flee_Lib\bin\Debug\Ciloci.Flee.pdb
+G:\Git\CANStream_USB\Flee_Lib\bin\Debug\Ciloci.Flee.xml
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.CompileErrors.resources
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.ElementNames.resources
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.GeneralErrors.resources
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\FLEE_Lib.vbproj.GenerateResource.Cache
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.dll
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.xml
+G:\Git\CANStream_USB\Flee_Lib\obj\Debug_NoLicense\Ciloci.Flee.pdb
