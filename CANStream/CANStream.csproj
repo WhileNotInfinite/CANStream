@@ -101,6 +101,7 @@
     <Compile Include="Class\CS_AcquisitionTrigger.cs" />
     <Compile Include="Class\CS_BuiltInSignals.cs" />
     <Compile Include="Class\CS_DataViewerBook.cs" />
+    <Compile Include="Class\CS_LoggingConfig.cs" />
     <Compile Include="Class\CS_RecordSessionInfos.cs" />
     <Compile Include="Class\CS_VirtualChannels.cs" />
     <Compile Include="Class\CycleDataAssociation.cs" />
