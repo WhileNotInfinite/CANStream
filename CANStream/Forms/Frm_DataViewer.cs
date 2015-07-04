@@ -14,8 +14,6 @@ using System.Windows.Forms;
 
 using Ctrl_GraphWindow;
 
-using System.Runtime.Serialization.Formatters.Binary; //TODO: Remove
-
 namespace CANStream
 {
 	/// <summary>

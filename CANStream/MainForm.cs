@@ -360,7 +360,7 @@ namespace CANStream
         	{
         		if (!(oTab.Equals(TabPage_NewController)))
         		{
-        			((Ctrl_CS_CAN_Bus)oTab.Controls[0]).bRecordingAuto = automaticRecordingToolStripMenuItem.Checked; //HACK: Remove
+        			((Ctrl_CS_CAN_Bus)oTab.Controls[0]).bRecordingAuto = automaticRecordingToolStripMenuItem.Checked; //HACK: Remove [acquisition trigger]
         			//((Ctrl_CS_CAN_Bus)oTab.Controls[0]).RecordMode = NewRecMode; //HACK: Implement acquisition trigger
         		}
         	}

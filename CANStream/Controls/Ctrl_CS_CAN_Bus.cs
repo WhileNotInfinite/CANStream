@@ -275,7 +275,7 @@ namespace CANStream
 		#region Public members
 		
 		//CAN trace record
-		public bool bRecordingAuto; //HACK: Remove
+		public bool bRecordingAuto; //HACK: Remove [acquisition trigger]
 		public bool bConversionAuto;
 		public RecordingMode RecordMode;
 		public CS_AcquisitionTrigger RecordTrigger;
@@ -1639,7 +1639,7 @@ namespace CANStream
 	    		
 	    		FireControllerCycleRunningChangedEvent(bCycleRunning);
 	    		
-	    		//Automatic trace recording //HACK: Remove
+	    		//Automatic trace recording //HACK: Remove [acquisition trigger]
         		if(bRecordingAuto & bRecording)
         		{
         			StopRecording();
@@ -2364,7 +2364,7 @@ namespace CANStream
 	    			BGWrk_Cycle.RunWorkerAsync((int)NumUpDown_CycleCount.Value);
 	    		}
         		
-        		//Automatic trace recording //HACK: Remove
+        		//Automatic trace recording //HACK: Remove [acquisition trigger]
         		if(bRecordingAuto & !bRecording)
         		{
         			StartRecording();
@@ -2417,7 +2417,7 @@ namespace CANStream
 				FireControllerCycleRunningChangedEvent(bCycleRunning);
 				
 				//Automatic trace recording
-				if(bRecordingAuto & bRecording) //HACK: Remove
+				if(bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
 				{
 					StopRecording();
 				}
@@ -3154,7 +3154,7 @@ namespace CANStream
         			Manual_SpyDataViewer.Clear_RawGrid();
         			Manual_SpyDataViewer.Clear_EngGrid();
         			
-        			SpyGraphChannelList.Clear(); //ChkLst_ChannelSel.Items.Clear(); //TODO: Remove
+        			SpyGraphChannelList.Clear();
         			SpyGraphSeries.RTSeries.Clear();
         			
         			bClearSpyGrids=false;
@@ -3211,7 +3211,7 @@ namespace CANStream
         			BGWrk_Spy.RunWorkerAsync();
         			
         			//Lauch CAN trace record
-        			if(bRecordingAuto & !bRecording) //HACK: Remove
+        			if(bRecordingAuto & !bRecording) //HACK: Remove [acquisition trigger]
 		        	//if (RecordMode.Equals(RecordingMode.Auto) && !bRecording) //HACK: Implement acquisition trigger
         			{
 		        		StartRecording();
@@ -3242,7 +3242,7 @@ namespace CANStream
 			bClearSpyGrids=true;
 
 			//Automatic trace recording
-    		if(bRecordingAuto & bRecording) //HACK: Remove
+    		if(bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
     		//if (RecordMode.Equals(RecordingMode.Auto) && bRecording) //HACK: Implement acquisition trigger
     		{
     			StopRecording();
@@ -3375,7 +3375,7 @@ namespace CANStream
 		                				
 		                				if (!(ChkLst_ChannelSel.Items.Contains(oParam.Name)))
 		                				{
-		                					SpyGraphChannelList.Add(oParam.Name); //ChkLst_ChannelSel.Items.Add(oParam.Name, false); //TODO: Remove
+		                					SpyGraphChannelList.Add(oParam.Name);
 		                				}
 		                				
 										//Add Spy graphic sample
@@ -3821,7 +3821,7 @@ namespace CANStream
 	        			
 	        			if (!(ChkLst_ChannelSel.Items.Contains(oChan.Name)))
         				{
-	        				SpyGraphChannelList.Add(oChan.Name); //ChkLst_ChannelSel.Items.Add(oChan.Name, false); //TODO: Remove
+	        				SpyGraphChannelList.Add(oChan.Name);
         				}
         			}
         			

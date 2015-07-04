@@ -13,7 +13,7 @@ namespace CANStream
 {
     public partial class Frm_CANConfiguration : Form
     {
-        #region Private structures
+    	#region Private structures
         
     	private struct GridCellCoords
         {
@@ -33,6 +33,35 @@ namespace CANStream
         }
         
         #endregion
+        
+        #region Protected classes
+        
+        [Serializable]
+        protected class CANConfigClipboardObject
+        {
+        	#region Public members
+        	
+        	public object ClipboardObject;
+        	
+        	public bool ClipBoardCutOption;
+        	public int ClipboardObjectCANCfgSrcIndex;
+        	public string ParamClipBoardParentMessageName;
+        	public int ClipboardObjectSourceFormIndex;
+        	
+        	#endregion
+        	
+        	public CANConfigClipboardObject()
+        	{
+        		ClipboardObject = null;
+        		
+        		ClipBoardCutOption = false;
+        		ClipboardObjectCANCfgSrcIndex = -1;
+        		ParamClipBoardParentMessageName =  "";
+        		ClipboardObjectSourceFormIndex = -1;
+        	}
+        }
+        
+        #endregion
     	
     	#region Private members
 
@@ -41,18 +70,13 @@ namespace CANStream
         
         private TreeNode nController;
         private TreeNode nMessage;
-                
-        private CANMessage oActiveMessage;
+        
+		private CANMessage oActiveMessage;        
         private CANParameter oActiveParameter;
 
         private bool bParameterEdition;
         private bool ConfigurationModified;
 
-        private object ClipBoardObject;
-        private CANMessagesConfiguration ClipBoardObjectContainer;
-        private string ParamClipBoardParentMessageName;
-        private bool ClipBoardCutOption;
-        
         private bool ReloadMainFormCanCfg;
         private int CanControllerId;
         private MainForm FrmParent;
@@ -71,10 +95,6 @@ namespace CANStream
             ConfigurationModified = false;
             bParameterEdition = false;
             
-            ClipBoardObject = null;
-            ClipBoardObjectContainer = null;
-            ClipBoardCutOption = false;
-            
             ReloadMainFormCanCfg =  false;
             CanControllerId = -1;
             FrmParent =  null;
@@ -91,10 +111,6 @@ namespace CANStream
             oMultipleControllersCfg =  null;
             ConfigurationModified = false;
 			bParameterEdition = false;
-            
-            ClipBoardObject = null;
-            ClipBoardObjectContainer = null;
-            ClipBoardCutOption = false;
             
             ReloadMainFormCanCfg=CurrentConfig;
             CanControllerId = ControllerId;
@@ -1041,169 +1057,234 @@ namespace CANStream
         }
 		
         private void CopyItem(bool bCut)
-        {
-            ClipBoardCutOption = bCut;
-			
+        {			
             if (!(TV_Messages.SelectedNode == null))
             {
+            	CANConfigClipboardObject oClipObject = new CANConfigClipboardObject();
+            	
+            	oClipObject.ClipBoardCutOption = bCut;
+            	oClipObject.ClipboardObjectSourceFormIndex = GetFormIndex();
+            	
             	switch ((ConfigurationItemType)TV_Messages.SelectedNode.Tag)
             	{
             		case ConfigurationItemType.Controller:
             			
-            			ClipBoardObject = oMultipleControllersCfg.Get_BusController(TV_Messages.SelectedNode.Text).Clone();
+            			oClipObject.ClipboardObject = oMultipleControllersCfg.Get_BusController(TV_Messages.SelectedNode.Text).Clone();
             			break;
             			
             		case ConfigurationItemType.Message:
             			
-            			ClipBoardObject = oActiveMessage.Clone();
+            			oClipObject.ClipboardObject = oActiveMessage.Clone();
+            				
+            			if (!(oMultipleControllersCfg == null))
+            			{
+            				oClipObject.ClipboardObjectCANCfgSrcIndex = oMultipleControllersCfg.Get_BusControllerId(TV_Messages.SelectedNode.Parent.Text);
+            			}
             			
-            			if (oMultipleControllersCfg == null)
-            			{
-            				ClipBoardObjectContainer = oCANConfig;
-            			}
-            			else
-            			{
-            				ClipBoardObjectContainer = oMultipleControllersCfg.Get_BusController(TV_Messages.SelectedNode.Parent.Text);
-            			}
-
             			break;
             			
             		case ConfigurationItemType.Parameter:
             			
-            			ClipBoardObject = oActiveParameter.Clone();
-            			
-            			if (oMultipleControllersCfg == null)
+            			oClipObject.ClipboardObject = oActiveParameter.Clone();
+            		
+            			if (!(oMultipleControllersCfg == null))
             			{
-            				ClipBoardObjectContainer = oCANConfig;
-            			}
-            			else
-            			{
-            				ClipBoardObjectContainer = oMultipleControllersCfg.Get_BusController(TV_Messages.SelectedNode.Parent.Parent.Text);
+            				oClipObject.ClipboardObjectCANCfgSrcIndex = oMultipleControllersCfg.Get_BusControllerId(TV_Messages.SelectedNode.Parent.Parent.Text);
             			}
             			
-                		ParamClipBoardParentMessageName = oActiveMessage.Name;
+                		oClipObject.ParamClipBoardParentMessageName = oActiveMessage.Name;
             			break;
+            	}
+            	
+            	if (!(oClipObject.ClipboardObject == null))
+            	{
+            		DataFormats.Format oFormat = DataFormats.GetFormat(typeof(CANConfigClipboardObject).FullName);
+            		IDataObject ClipDataObj = new DataObject();
+                	ClipDataObj.SetData(oFormat.Name, false, oClipObject);
+                	Clipboard.SetDataObject(ClipDataObj, false);
             	}
             }
         }
         
         private void PasteItem()
         {
-        	if (!(ClipBoardObject == null))
-        	{
-        		if (ClipBoardObject.GetType().Equals(typeof(CANBusContoller)))
-        		{
-        			CANBusContoller oCtrlClip = (CANBusContoller)ClipBoardObject;
-        			
-        			if (oMultipleControllersCfg.Controllers.Count <= 8)
-        			{
-        				string ControllerOriginalName = oCtrlClip.ControllerName;
-        				
-        				if (oMultipleControllersCfg.ControllerExists(oCtrlClip.ControllerName))
-        				{
-        					int i = 2;
-        					while (oMultipleControllersCfg.ControllerExists(oCtrlClip.ControllerName + " " + i.ToString()))
-        					{
-        						i++;
+        	CANConfigClipboardObject oClipObject = null;
+        	IDataObject ClipDataObj = Clipboard.GetDataObject();
+            string sFormat = typeof(CANConfigClipboardObject).FullName;
+        	
+            if (ClipDataObj.GetDataPresent(sFormat))
+            {
+            	oClipObject = ClipDataObj.GetData(sFormat) as CANConfigClipboardObject;
+            	
+            	if (!(oClipObject == null))
+            	{
+            		if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANBusContoller)))
+            		{
+            			CANBusContoller oCtrlClip = (CANBusContoller)oClipObject.ClipboardObject;
+            			
+            			if (oMultipleControllersCfg == null)
+            			{
+            				oMultipleControllersCfg = new MultipleContollerCANConfiguration();
+            			}
+            			
+            			if (oMultipleControllersCfg.Controllers.Count <= 8)
+            			{
+            				string ControllerOriginalName = oCtrlClip.ControllerName;
+            				
+            				if (oMultipleControllersCfg.ControllerExists(oCtrlClip.ControllerName))
+            				{
+            					int i = 2;
+            					while (oMultipleControllersCfg.ControllerExists(oCtrlClip.ControllerName + " " + i.ToString()))
+            					{
+            						i++;
+            					}
+            					
+            					oCtrlClip.ControllerName = oCtrlClip.ControllerName + " " + i.ToString();
+            				}
+            				
+            				oMultipleControllersCfg.Controllers.Add(oCtrlClip);
+            					
+        					if ((oClipObject.ClipBoardCutOption) && (!(oClipObject.ClipboardObjectSourceFormIndex == -1)))
+        					{        						
+        						Frm_CANConfiguration oClipObjectSrcFrm = GetFormAtIndex(oClipObject.ClipboardObjectSourceFormIndex);
+            				
+	            				if (!(oClipObjectSrcFrm == null))
+	            				{
+	            					oCtrlClip.Name = ControllerOriginalName;
+	            					
+	            					try
+	            					{
+	            						/*
+	            						 * Not 100% sure ClipboardObjectSourceFormIndex
+	            						 * is still pointing to the actual source form...
+	            						 * If source form has been closed and a new form has been opened between cut and past operation
+	            						 * ClipboardObjectSourceFormIndex is pointing on the wrong form which even might no be a Frm_CANConfiguration class instance
+	            						 */
+	            						oClipObjectSrcFrm.CutPastCallBack(oClipObject);
+	            					}
+	            					catch
+	            					{
+	            					}
+	            				}
         					}
-        					
-        					oCtrlClip.ControllerName = oCtrlClip.ControllerName + " " + i.ToString();
-        					
-        					oMultipleControllersCfg.Controllers.Add(oCtrlClip);
-        					
-        					if (ClipBoardCutOption)
-        					{
-        						oMultipleControllersCfg.Controllers.RemoveAt(oMultipleControllersCfg.Get_BusControllerId(ControllerOriginalName));
-        						ClipBoardCutOption = false;
-        					}
-        				}
-        			}
-        			else
-        			{
-        				MessageBox.Show("Maximum number of CAN bus controller is 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        			}
-        		}
-        		else if (ClipBoardObject.GetType().Equals(typeof(CANMessage)))
-        		{
-        			CANMessage oMsgClip = (CANMessage)ClipBoardObject;
-        			
-        			string OriginalMsgName = oMsgClip.Name;
-					
-        			if (!(oCANConfig.IsFreeIdentifier(oMsgClip.Identifier, null)))
-        			{
-        				oMsgClip.Identifier = "0";
-        			}
+            			}
+            			else
+            			{
+            				MessageBox.Show("Maximum number of CAN bus controller is 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            			}
+            		}
+            		else if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANMessage)))
+            		{
+            			CANMessage oMsgClip = (CANMessage)oClipObject.ClipboardObject;
+            			
+            			string OriginalMsgName = oMsgClip.Name;
+            			
+            			if (!(oCANConfig.IsFreeIdentifier(oMsgClip.Identifier, null)))
+            			{
+            				oMsgClip.Identifier = "0";
+            			}
 
-        			if (!(oCANConfig.IsFreeMessageName(oMsgClip.Name, null)))
-        			{
-	        			int i = 2;
-	        			while (oCANConfig.IsFreeMessageName(oMsgClip.Name + " " + i.ToString(), null) == false)
-	        			{
-	        				i++;
-	        			}
-	
-	        			oMsgClip.Name = OriginalMsgName + " " + i.ToString();
-        			}
+            			if (!(oCANConfig.IsFreeMessageName(oMsgClip.Name, null)))
+            			{
+            				int i = 2;
+            				while (oCANConfig.IsFreeMessageName(oMsgClip.Name + " " + i.ToString(), null) == false)
+            				{
+            					i++;
+            				}
+            				
+            				oMsgClip.Name = OriginalMsgName + " " + i.ToString();
+            			}
 
-        			oCANConfig.Messages.Add(oMsgClip);
+            			oCANConfig.Messages.Add(oMsgClip);
 
-        			if (ClipBoardCutOption)
-        			{
-        				ClipBoardObjectContainer.Messages.RemoveAt(ClipBoardObjectContainer.GetCANMessageIndex(OriginalMsgName, MessageResearchOption.Name));
-        				ClipBoardCutOption = false;
-        			}
-        		}
-        		else if (ClipBoardObject.GetType().Equals(typeof(CANParameter)))
-        		{
-        			CANParameter oParamClip = (CANParameter)ClipBoardObject;
-        			
-        			string OriginalParameterName = oParamClip.Name;
+            			if ((oClipObject.ClipBoardCutOption) && (!(oClipObject.ClipboardObjectSourceFormIndex == -1)))
+            			{            				
+            				Frm_CANConfiguration oClipObjectSrcFrm = GetFormAtIndex(oClipObject.ClipboardObjectSourceFormIndex);
+            				
+            				if (!(oClipObjectSrcFrm == null))
+            				{
+            					oMsgClip.Name = OriginalMsgName;
+            					
+            					try
+            					{
+            						/*
+            						 * Not 100% sure ClipboardObjectSourceFormIndex
+            						 * is still pointing to the actual source form...
+            						 * If source form has been closed and a new form has been opened between cut and past operation
+            						 * ClipboardObjectSourceFormIndex is pointing on the wrong form which even might no be a Frm_CANConfiguration class instance
+            						 */
+            						oClipObjectSrcFrm.CutPastCallBack(oClipObject);
+            					}
+            					catch
+            					{
+            					}
+            				}
+            			}
+            		}
+            		else if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANParameter)))
+            		{
+            			CANParameter oParamClip = (CANParameter)oClipObject.ClipboardObject;
+            			
+            			string OriginalParameterName = oParamClip.Name;
 
-        			if (!(oActiveMessage.IsFreeParameterName(oParamClip.Name, null)))
-        			{
-	        			int i = 2;
-	        			while (oActiveMessage.IsFreeParameterName(oParamClip.Name + " " + i.ToString(), null) == false)
-	        			{
-	        				i++;
-	        			}
-	        			
-	        			oParamClip.Name = OriginalParameterName + " " + i.ToString();
-        			}
+            			if (!(oActiveMessage.IsFreeParameterName(oParamClip.Name, null)))
+            			{
+            				int i = 2;
+            				while (oActiveMessage.IsFreeParameterName(oParamClip.Name + " " + i.ToString(), null) == false)
+            				{
+            					i++;
+            				}
+            				
+            				oParamClip.Name = OriginalParameterName + " " + i.ToString();
+            			}
 
-        			if (oActiveMessage.IsParameterSlotFree(oParamClip) == false)
-        			{
-        				MessageBox.Show("Bits range defined for the current parameter is already used by another parameter !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        				return;
-        			}
+            			if (oActiveMessage.IsParameterSlotFree(oParamClip) == false)
+            			{
+            				MessageBox.Show("Bits range defined for the current parameter is already used by another parameter !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            				return;
+            			}
 
-        			oActiveMessage.Parameters.Add(oParamClip);
-					
-        			if (ClipBoardCutOption)
-        			{
-        				CANMessage oMsgParent = ClipBoardObjectContainer.GetCANMessage(ParamClipBoardParentMessageName, MessageResearchOption.Name);
-        				
-        				if (!(oMsgParent == null))
-        				{
-        					oMsgParent.Parameters.RemoveAt(oMsgParent.GetCANParameterIndex(OriginalParameterName, ParameterResearchOption.Name));
-        				}
-        				
-        				ClipBoardCutOption = false;
-        			}
-        		}
-        		
-        		ConfigurationModified = true;
-        			
-    			if (oMultipleControllersCfg == null)
-    			{
-    				ShowConfiguration();
-    			}
-    			else
-    			{
-    				ShowMultipleControllersConfiguration();
-    			}
-    			
-    			Show_MsgMap(oActiveMessage);
-        	}
+            			oActiveMessage.Parameters.Add(oParamClip);
+            			
+            			if ((oClipObject.ClipBoardCutOption) && (!(oClipObject.ClipboardObjectSourceFormIndex == -1)))
+            			{            				
+            				Frm_CANConfiguration oClipObjectSrcFrm = GetFormAtIndex(oClipObject.ClipboardObjectSourceFormIndex);
+            				
+            				if (!(oClipObjectSrcFrm == null))
+            				{
+            					oParamClip.Name = OriginalParameterName;
+            					
+            					try
+            					{
+            						/*
+            						 * Not 100% sure ClipboardObjectSourceFormIndex
+            						 * is still pointing to the actual source form...
+            						 * If source form has been closed and a new form has been opened between cut and past operation
+            						 * ClipboardObjectSourceFormIndex is pointing on the wrong form which even might no be a Frm_CANConfiguration class instance
+            						 */
+            						oClipObjectSrcFrm.CutPastCallBack(oClipObject);
+            					}
+            					catch
+            					{
+            					}
+            				}
+            			}
+            		}
+            		
+            		ConfigurationModified = true;
+            		
+            		if (oMultipleControllersCfg == null)
+            		{
+            			ShowConfiguration();
+            		}
+            		else
+            		{
+            			ShowMultipleControllersConfiguration();
+            		}
+            		
+            		Show_MsgMap(oActiveMessage);
+            	}
+            }
         }
         
         private TreeNode FindCanParameterNode(string ParamName)
@@ -1220,6 +1301,32 @@ namespace CANStream
         	}
         	
         	return(null);
+        }
+        
+        private int GetFormIndex()
+        {
+        	for (int i=0; i<Application.OpenForms.Count; i++)
+        	{
+        		if (Application.OpenForms[i].Equals((Form)this))
+        		{
+        			return (i);
+        		}
+        	}
+        	
+        	return (-1);
+        }
+        
+        private Frm_CANConfiguration GetFormAtIndex(int FormIndex)
+        {
+        	if ((FormIndex >= 0) && (FormIndex < Application.OpenForms.Count))
+        	{
+        		if (Application.OpenForms[FormIndex].GetType().Equals(typeof(Frm_CANConfiguration)))
+        		{
+        			return(Application.OpenForms[FormIndex] as Frm_CANConfiguration);
+        		}
+        	}
+        	
+        	return null;
         }
         
         #endregion
@@ -2357,6 +2464,85 @@ namespace CANStream
         
         #endregion
 
+        #endregion
+        
+        #region Protected methods
+        
+        protected  void CutPastCallBack(CANConfigClipboardObject oClipObject)
+        {
+        	if (!(oClipObject == null))
+        	{
+        		if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANBusContoller)))
+        		{
+        			CANBusContoller oCtrlClip = (CANBusContoller)oClipObject.ClipboardObject;
+        			oMultipleControllersCfg.Controllers.RemoveAt(oMultipleControllersCfg.Get_BusControllerId(oCtrlClip.Name));
+        		}
+        		else if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANMessage)))
+        		{        			
+        			CANMessage oMsgClip = (CANMessage)oClipObject.ClipboardObject;
+        			
+        			CANMessagesConfiguration oSrcCfg = GetClipboardObjectSrcCANCfg(oClipObject.ClipboardObjectCANCfgSrcIndex);
+        			
+        			if (!(oSrcCfg == null))
+        			{
+        				oSrcCfg.Messages.RemoveAt(oSrcCfg.GetCANMessageIndex(oMsgClip.Name, MessageResearchOption.Name));
+        			}
+        		}
+        		else if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANParameter)))
+        		{
+    				CANParameter oParamClip = (CANParameter)oClipObject.ClipboardObject;
+    				
+    				CANMessagesConfiguration oSrcCfg = GetClipboardObjectSrcCANCfg(oClipObject.ClipboardObjectCANCfgSrcIndex);
+    				
+    				if (!(oSrcCfg == null))
+    				{
+    					CANMessage oMsgParent = oSrcCfg.GetCANMessage(oClipObject.ParamClipBoardParentMessageName, MessageResearchOption.Name);
+    					
+    					if (!(oMsgParent == null))
+    					{
+    						oMsgParent.Parameters.RemoveAt(oMsgParent.GetCANParameterIndex(oParamClip.Name, ParameterResearchOption.Name));
+    					}
+    				}
+        		}
+        		
+        		/*
+        		 * Clear clipboard contents to avoid double cuts
+        		 * with second cut pointing to no longer existing object
+        		 * since it has been deleted after the first past
+        		 */
+        		Clipboard.Clear();
+        		
+        		if (oMultipleControllersCfg == null)
+        		{
+        			ShowConfiguration();
+        		}
+        		else
+        		{
+        			ShowMultipleControllersConfiguration();
+        		}
+        		
+        		Show_MsgMap(oActiveMessage);
+        	}
+        }
+        
+        protected CANMessagesConfiguration GetClipboardObjectSrcCANCfg(int CANCfgIndex)
+        {
+        	if (!(CANCfgIndex == -1))
+        	{
+        		if (!(oMultipleControllersCfg == null))
+        		{
+        			if ((CANCfgIndex >= 0) && (CANCfgIndex < oMultipleControllersCfg.Controllers.Count))
+	        		{
+	        			return(oMultipleControllersCfg.Controllers[CANCfgIndex] as CANMessagesConfiguration);
+	        		}
+        		}
+        		
+        		return(null);
+        	}
+        	
+        	return(oCANConfig);
+        }
+        
         #endregion
         
         #region Public methods

@@ -61,6 +61,10 @@ namespace CANStream
 	
 	#region Public structures declaration
 	
+	/// <summary>
+	/// Virtual CAN parameter structure
+	/// </summary>
+	[Serializable]
 	public struct VirtualParameter
 	{
 		public string LibraryName;
@@ -72,6 +76,7 @@ namespace CANStream
 	/// <summary>
 	/// Description of a CAN Parameter part of a CAN Message
 	/// </summary>
+	[Serializable]
 	public class CANParameter
 	{
 		#region Public members
@@ -227,6 +232,7 @@ namespace CANStream
 	/// <summary>
 	/// Description of a CAN single message
 	/// </summary>
+	[Serializable]
 	public class CANMessage
 	{
 		#region Public members
@@ -534,6 +540,7 @@ namespace CANStream
 	/// CAN Messages configuration file
 	/// Contains the description of CAN messages of the stream
 	/// </summary>
+	[Serializable]
 	public class CANMessagesConfiguration
 	{
 		#region Public members
@@ -1311,6 +1318,7 @@ namespace CANStream
 	/// <summary>
 	/// Single CAN bus controller configuration class
 	/// </summary>
+	[Serializable]
 	public class CANBusContoller: CANMessagesConfiguration
 	{
 		#region Public members
