@@ -50,6 +50,18 @@ namespace CANStream
 			this.TSB_LoadElementFile = new System.Windows.Forms.ToolStripButton();
 			this.Grid_GlobalSeriesProps = new System.Windows.Forms.DataGridView();
 			this.Dlg_OpenElementsFile = new System.Windows.Forms.OpenFileDialog();
+			this.GridCol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Fomat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Scale = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.GridCol_Min = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_YAxis = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Grid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_RefLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.GridCol_Details = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.TS_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Grid_GlobalSeriesProps)).BeginInit();
 			this.SuspendLayout();
@@ -71,7 +83,7 @@ namespace CANStream
 									this.TSB_LoadElementFile});
 			this.TS_Main.Location = new System.Drawing.Point(0, 0);
 			this.TS_Main.Name = "TS_Main";
-			this.TS_Main.Size = new System.Drawing.Size(767, 39);
+			this.TS_Main.Size = new System.Drawing.Size(758, 39);
 			this.TS_Main.TabIndex = 0;
 			this.TS_Main.Text = "toolStrip1";
 			// 
@@ -179,24 +191,111 @@ namespace CANStream
 			// 
 			// Grid_GlobalSeriesProps
 			// 
+			this.Grid_GlobalSeriesProps.AllowUserToAddRows = false;
+			this.Grid_GlobalSeriesProps.AllowUserToDeleteRows = false;
+			this.Grid_GlobalSeriesProps.AllowUserToResizeRows = false;
 			this.Grid_GlobalSeriesProps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 									| System.Windows.Forms.AnchorStyles.Left) 
 									| System.Windows.Forms.AnchorStyles.Right)));
 			this.Grid_GlobalSeriesProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.Grid_GlobalSeriesProps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+									this.GridCol_Name,
+									this.GridCol_Label,
+									this.GridCol_Unit,
+									this.GridCol_Color,
+									this.GridCol_Fomat,
+									this.GridCol_Scale,
+									this.GridCol_Min,
+									this.GridCol_Max,
+									this.GridCol_YAxis,
+									this.GridCol_Grid,
+									this.GridCol_RefLine,
+									this.GridCol_Details});
 			this.Grid_GlobalSeriesProps.Location = new System.Drawing.Point(12, 42);
 			this.Grid_GlobalSeriesProps.Name = "Grid_GlobalSeriesProps";
-			this.Grid_GlobalSeriesProps.Size = new System.Drawing.Size(743, 361);
+			this.Grid_GlobalSeriesProps.RowHeadersVisible = false;
+			this.Grid_GlobalSeriesProps.Size = new System.Drawing.Size(734, 361);
 			this.Grid_GlobalSeriesProps.TabIndex = 1;
 			// 
 			// Dlg_OpenElementsFile
 			// 
 			this.Dlg_OpenElementsFile.FileName = "openFileDialog1";
 			// 
+			// GridCol_Name
+			// 
+			this.GridCol_Name.HeaderText = "Serie";
+			this.GridCol_Name.Name = "GridCol_Name";
+			// 
+			// GridCol_Label
+			// 
+			this.GridCol_Label.HeaderText = "Label";
+			this.GridCol_Label.Name = "GridCol_Label";
+			// 
+			// GridCol_Unit
+			// 
+			this.GridCol_Unit.HeaderText = "Unit";
+			this.GridCol_Unit.Name = "GridCol_Unit";
+			this.GridCol_Unit.Width = 50;
+			// 
+			// GridCol_Color
+			// 
+			this.GridCol_Color.HeaderText = "Color";
+			this.GridCol_Color.Name = "GridCol_Color";
+			this.GridCol_Color.Width = 50;
+			// 
+			// GridCol_Fomat
+			// 
+			this.GridCol_Fomat.HeaderText = "Format";
+			this.GridCol_Fomat.Name = "GridCol_Fomat";
+			this.GridCol_Fomat.Width = 50;
+			// 
+			// GridCol_Scale
+			// 
+			this.GridCol_Scale.HeaderText = "Scale";
+			this.GridCol_Scale.Name = "GridCol_Scale";
+			this.GridCol_Scale.Width = 50;
+			// 
+			// GridCol_Min
+			// 
+			this.GridCol_Min.HeaderText = "Min";
+			this.GridCol_Min.Name = "GridCol_Min";
+			this.GridCol_Min.Width = 50;
+			// 
+			// GridCol_Max
+			// 
+			this.GridCol_Max.HeaderText = "Max";
+			this.GridCol_Max.Name = "GridCol_Max";
+			this.GridCol_Max.Width = 50;
+			// 
+			// GridCol_YAxis
+			// 
+			this.GridCol_YAxis.HeaderText = "Y Axis";
+			this.GridCol_YAxis.Name = "GridCol_YAxis";
+			this.GridCol_YAxis.Width = 50;
+			// 
+			// GridCol_Grid
+			// 
+			this.GridCol_Grid.HeaderText = "Grid";
+			this.GridCol_Grid.Name = "GridCol_Grid";
+			this.GridCol_Grid.Width = 50;
+			// 
+			// GridCol_RefLine
+			// 
+			this.GridCol_RefLine.HeaderText = "Ref Lines";
+			this.GridCol_RefLine.Name = "GridCol_RefLine";
+			this.GridCol_RefLine.Width = 80;
+			// 
+			// GridCol_Details
+			// 
+			this.GridCol_Details.HeaderText = "Details";
+			this.GridCol_Details.Name = "GridCol_Details";
+			this.GridCol_Details.Width = 50;
+			// 
 			// Frm_GlobalGraphSeriesProperties
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(767, 415);
+			this.ClientSize = new System.Drawing.Size(758, 415);
 			this.Controls.Add(this.Grid_GlobalSeriesProps);
 			this.Controls.Add(this.TS_Main);
 			this.Icon = global::CANStream.Icones.CANStream_Icone;
@@ -208,6 +307,18 @@ namespace CANStream
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.DataGridViewButtonColumn GridCol_Details;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_RefLine;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Grid;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_YAxis;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Max;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Min;
+		private System.Windows.Forms.DataGridViewComboBoxColumn GridCol_Scale;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Fomat;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Color;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Unit;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Label;
+		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Name;
 		private System.Windows.Forms.OpenFileDialog Dlg_OpenElementsFile;
 		private System.Windows.Forms.ToolStripButton TSB_LoadElementFile;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
