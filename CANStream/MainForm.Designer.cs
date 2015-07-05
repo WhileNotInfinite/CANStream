@@ -193,6 +193,8 @@ namespace CANStream
 			this.Context_TabControllers = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.closeCANBusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.BGWrk_RecordConversion = new System.ComponentModel.BackgroundWorker();
+			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.FrmMain_MenuStrip.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.Tab_CAN_Controllers.SuspendLayout();
@@ -674,7 +676,9 @@ namespace CANStream
 			// 
 			this.Tools_DataViewer_TSMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 									this.Tools_DataViewer_New_TSMenuItem,
-									this.Tools_DataViewer_Open_TSMenuItem});
+									this.Tools_DataViewer_Open_TSMenuItem,
+									this.toolStripMenuItem9,
+									this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem});
 			this.Tools_DataViewer_TSMenuItem.Image = global::CANStream.Icones.CANStream_DataViewer_16;
 			this.Tools_DataViewer_TSMenuItem.Name = "Tools_DataViewer_TSMenuItem";
 			this.Tools_DataViewer_TSMenuItem.Size = new System.Drawing.Size(160, 22);
@@ -684,7 +688,7 @@ namespace CANStream
 			// 
 			this.Tools_DataViewer_New_TSMenuItem.Image = global::CANStream.Icones.CANStream_DataViewer_16;
 			this.Tools_DataViewer_New_TSMenuItem.Name = "Tools_DataViewer_New_TSMenuItem";
-			this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(196, 22);
 			this.Tools_DataViewer_New_TSMenuItem.Text = "New";
 			this.Tools_DataViewer_New_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_New_TSMenuItemClick);
 			// 
@@ -692,7 +696,7 @@ namespace CANStream
 			// 
 			this.Tools_DataViewer_Open_TSMenuItem.Image = global::CANStream.Icones.File_Open_16;
 			this.Tools_DataViewer_Open_TSMenuItem.Name = "Tools_DataViewer_Open_TSMenuItem";
-			this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(196, 22);
 			this.Tools_DataViewer_Open_TSMenuItem.Text = "Open";
 			this.Tools_DataViewer_Open_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_Open_TSMenuItemClick);
 			// 
@@ -1387,9 +1391,9 @@ namespace CANStream
 									this.TSSL_StopConversion,
 									this.TSS_Lbl_PCAN_Diag_Title,
 									this.TSS_Lbl_PCAN_Diag_Text});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 599);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 605);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(962, 28);
+			this.statusStrip1.Size = new System.Drawing.Size(962, 22);
 			this.statusStrip1.TabIndex = 5;
 			this.statusStrip1.Text = "FrmMain_StatusStrip";
 			// 
@@ -1419,13 +1423,13 @@ namespace CANStream
 			// SS_TS_Lbl_RecordEvent
 			// 
 			this.SS_TS_Lbl_RecordEvent.Name = "SS_TS_Lbl_RecordEvent";
-			this.SS_TS_Lbl_RecordEvent.Size = new System.Drawing.Size(22, 23);
+			this.SS_TS_Lbl_RecordEvent.Size = new System.Drawing.Size(22, 17);
 			this.SS_TS_Lbl_RecordEvent.Text = "xxx";
 			// 
 			// SS_TS_Lbl_RecordSession
 			// 
 			this.SS_TS_Lbl_RecordSession.Name = "SS_TS_Lbl_RecordSession";
-			this.SS_TS_Lbl_RecordSession.Size = new System.Drawing.Size(22, 23);
+			this.SS_TS_Lbl_RecordSession.Size = new System.Drawing.Size(22, 17);
 			this.SS_TS_Lbl_RecordSession.Text = "xxx";
 			// 
 			// TS_Lbl_ConversionProgress
@@ -1459,14 +1463,14 @@ namespace CANStream
 			// 
 			this.TSS_Lbl_PCAN_Diag_Title.ForeColor = System.Drawing.Color.Red;
 			this.TSS_Lbl_PCAN_Diag_Title.Name = "TSS_Lbl_PCAN_Diag_Title";
-			this.TSS_Lbl_PCAN_Diag_Title.Size = new System.Drawing.Size(22, 23);
+			this.TSS_Lbl_PCAN_Diag_Title.Size = new System.Drawing.Size(22, 17);
 			this.TSS_Lbl_PCAN_Diag_Title.Text = "xxx";
 			this.TSS_Lbl_PCAN_Diag_Title.Visible = false;
 			// 
 			// TSS_Lbl_PCAN_Diag_Text
 			// 
 			this.TSS_Lbl_PCAN_Diag_Text.Name = "TSS_Lbl_PCAN_Diag_Text";
-			this.TSS_Lbl_PCAN_Diag_Text.Size = new System.Drawing.Size(22, 23);
+			this.TSS_Lbl_PCAN_Diag_Text.Size = new System.Drawing.Size(22, 17);
 			this.TSS_Lbl_PCAN_Diag_Text.Text = "xxx";
 			this.TSS_Lbl_PCAN_Diag_Text.Visible = false;
 			// 
@@ -1521,6 +1525,19 @@ namespace CANStream
 			this.BGWrk_RecordConversion.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_RecordConversionProgressChanged);
 			this.BGWrk_RecordConversion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_RecordConversionRunWorkerCompleted);
 			// 
+			// toolStripMenuItem9
+			// 
+			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+			this.toolStripMenuItem9.Size = new System.Drawing.Size(193, 6);
+			// 
+			// Tools_DataViewer_GlobalSeriesProps_TSMenuItem
+			// 
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem.Image = global::CANStream.Icones.Global_Serie_Props_16;
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem.Name = "Tools_DataViewer_GlobalSeriesProps_TSMenuItem";
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem.Size = new System.Drawing.Size(196, 22);
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem.Text = "Global series properties";
+			this.Tools_DataViewer_GlobalSeriesProps_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_GlobalSeriesProps_TSMenuItemClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1546,6 +1563,8 @@ namespace CANStream
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripMenuItem Tools_DataViewer_GlobalSeriesProps_TSMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
 		private System.Windows.Forms.ToolStripMenuItem newTriggerToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem recordingTriggerToolStripMenuItem;
