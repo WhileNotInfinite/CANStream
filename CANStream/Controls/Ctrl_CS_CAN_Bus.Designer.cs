@@ -1250,19 +1250,19 @@ namespace CANStream
 									this.uncheckAllToolStripMenuItem,
 									this.Context_SpyGraph_Filter_TSMI});
 			this.Context_SpyGraphChannels.Name = "Context_SpyGraphChannels";
-			this.Context_SpyGraphChannels.Size = new System.Drawing.Size(153, 92);
+			this.Context_SpyGraphChannels.Size = new System.Drawing.Size(136, 70);
 			// 
 			// checkAllToolStripMenuItem
 			// 
 			this.checkAllToolStripMenuItem.Name = "checkAllToolStripMenuItem";
-			this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
 			this.checkAllToolStripMenuItem.Text = "Check all";
 			this.checkAllToolStripMenuItem.Click += new System.EventHandler(this.CheckAllToolStripMenuItemClick);
 			// 
 			// uncheckAllToolStripMenuItem
 			// 
 			this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-			this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
 			this.uncheckAllToolStripMenuItem.Text = "Uncheck all";
 			this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.UncheckAllToolStripMenuItemClick);
 			// 
@@ -1271,7 +1271,7 @@ namespace CANStream
 			this.Context_SpyGraph_Filter_TSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
 									this.Context_SpyGraph_Filter_TSCmb});
 			this.Context_SpyGraph_Filter_TSMI.Name = "Context_SpyGraph_Filter_TSMI";
-			this.Context_SpyGraph_Filter_TSMI.Size = new System.Drawing.Size(152, 22);
+			this.Context_SpyGraph_Filter_TSMI.Size = new System.Drawing.Size(135, 22);
 			this.Context_SpyGraph_Filter_TSMI.Text = "Filter";
 			// 
 			// Context_SpyGraph_Filter_TSCmb
@@ -1801,7 +1801,7 @@ namespace CANStream
 			// Txt_CycleEnd
 			// 
 			this.Txt_CycleEnd.Enabled = false;
-			this.Txt_CycleEnd.Location = new System.Drawing.Point(500, 44);
+			this.Txt_CycleEnd.Location = new System.Drawing.Point(473, 43);
 			this.Txt_CycleEnd.Name = "Txt_CycleEnd";
 			this.Txt_CycleEnd.Size = new System.Drawing.Size(47, 20);
 			this.Txt_CycleEnd.TabIndex = 16;
@@ -1810,7 +1810,7 @@ namespace CANStream
 			// Txt_CycleStart
 			// 
 			this.Txt_CycleStart.Enabled = false;
-			this.Txt_CycleStart.Location = new System.Drawing.Point(500, 18);
+			this.Txt_CycleStart.Location = new System.Drawing.Point(473, 17);
 			this.Txt_CycleStart.Name = "Txt_CycleStart";
 			this.Txt_CycleStart.Size = new System.Drawing.Size(47, 20);
 			this.Txt_CycleStart.TabIndex = 15;
@@ -1819,7 +1819,7 @@ namespace CANStream
 			// Lbl_CycleEnd
 			// 
 			this.Lbl_CycleEnd.Enabled = false;
-			this.Lbl_CycleEnd.Location = new System.Drawing.Point(463, 47);
+			this.Lbl_CycleEnd.Location = new System.Drawing.Point(436, 46);
 			this.Lbl_CycleEnd.Name = "Lbl_CycleEnd";
 			this.Lbl_CycleEnd.Size = new System.Drawing.Size(31, 15);
 			this.Lbl_CycleEnd.TabIndex = 14;
@@ -1828,7 +1828,7 @@ namespace CANStream
 			// Lbl_CycleStart
 			// 
 			this.Lbl_CycleStart.Enabled = false;
-			this.Lbl_CycleStart.Location = new System.Drawing.Point(463, 21);
+			this.Lbl_CycleStart.Location = new System.Drawing.Point(436, 20);
 			this.Lbl_CycleStart.Name = "Lbl_CycleStart";
 			this.Lbl_CycleStart.Size = new System.Drawing.Size(31, 17);
 			this.Lbl_CycleStart.TabIndex = 13;
@@ -1860,10 +1860,10 @@ namespace CANStream
 			// 
 			this.Txt_CurrentCycleNum.BackColor = System.Drawing.SystemColors.Control;
 			this.Txt_CurrentCycleNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Txt_CurrentCycleNum.Location = new System.Drawing.Point(651, 20);
+			this.Txt_CurrentCycleNum.Location = new System.Drawing.Point(613, 20);
 			this.Txt_CurrentCycleNum.Name = "Txt_CurrentCycleNum";
 			this.Txt_CurrentCycleNum.ReadOnly = true;
-			this.Txt_CurrentCycleNum.Size = new System.Drawing.Size(50, 44);
+			this.Txt_CurrentCycleNum.Size = new System.Drawing.Size(88, 44);
 			this.Txt_CurrentCycleNum.TabIndex = 8;
 			this.Txt_CurrentCycleNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.Txt_CurrentCycleNum.Visible = false;
@@ -1871,7 +1871,7 @@ namespace CANStream
 			// Lbl_CurrentCycleNum
 			// 
 			this.Lbl_CurrentCycleNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Lbl_CurrentCycleNum.Location = new System.Drawing.Point(553, 20);
+			this.Lbl_CurrentCycleNum.Location = new System.Drawing.Point(526, 19);
 			this.Lbl_CurrentCycleNum.Name = "Lbl_CurrentCycleNum";
 			this.Lbl_CurrentCycleNum.Size = new System.Drawing.Size(92, 44);
 			this.Lbl_CurrentCycleNum.TabIndex = 7;
