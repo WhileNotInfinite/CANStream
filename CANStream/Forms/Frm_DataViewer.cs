@@ -24,6 +24,7 @@ namespace CANStream
 		#region Private members
 		
 		private string[] DataFilePathes;
+		private string LastFilePath;
 		
 		private GW_DataFile oConcatData;
 		private CS_DataViewerBook ViewerBook;
@@ -45,6 +46,7 @@ namespace CANStream
 			InitializeComponent();
 			
 			DataFilePathes = null;
+			LastFilePath = "";
 			oConcatData = null;
 			RecordEvents = new List<CS_RecordEvent>();
 			
@@ -642,6 +644,8 @@ namespace CANStream
 		
 		private void Load_DataFiles()
 		{
+			LastFilePath = "";
+			
 			if (!(DataFilePathes == null))
 			{
 				GW_DataFile[] oDataFiles = new GW_DataFile[DataFilePathes.Length];
@@ -653,6 +657,7 @@ namespace CANStream
 				}
 				
 				UpDate_PagesSeries(Concat_DataFiles(oDataFiles));
+				LastFilePath = Path.GetDirectoryName(DataFilePathes[DataFilePathes.Length -1]);
 			}
 		}
 		
@@ -828,7 +833,7 @@ namespace CANStream
 		
 		private void Open_DataBrowser()
 		{
-			Frm_DataBrowser Frm = new Frm_DataBrowser(this);
+			Frm_DataBrowser Frm = new Frm_DataBrowser(this, LastFilePath);
 			Frm.Show();
 		}
 		

@@ -26,6 +26,7 @@ namespace CANStream
 		private Frm_DataViewer ParentViewer;
 		
 		private string RootPath;
+		private string IntialFolder;
 		
 		#endregion
 		
@@ -38,6 +39,18 @@ namespace CANStream
 			
 			ParentViewer = FrmCaller;
 			RootPath = "";
+		}
+		
+		public Frm_DataBrowser(Frm_DataViewer FrmCaller, string InitialPath)
+		{
+			//
+			// The InitializeComponent() call is required for Windows Forms designer support.
+			//
+			InitializeComponent();
+			
+			ParentViewer = FrmCaller;
+			RootPath = "";
+			IntialFolder = InitialPath;
 		}
 		
 		#region Control events
@@ -68,6 +81,11 @@ namespace CANStream
 					
 					Cmb_RootFolder.SelectedIndex = 0;
 				}
+			}
+			
+			if (!(IntialFolder.Equals("")))
+			{
+				Refresh_Browser(IntialFolder);
 			}
 		}
 		
@@ -438,7 +456,14 @@ namespace CANStream
 		
 		private void Refresh_Browser()
 		{
-			string ActivePath = LV_Files.Tag.ToString();
+			Refresh_Browser("");
+		}
+		
+		private void Refresh_Browser(string InitPath)
+		{
+			string ActivePath = InitPath;
+			if (ActivePath.Equals("")) ActivePath = LV_Files.Tag.ToString();
+			
 			string[] ActivePathFolders = ActivePath.Split('\\');
 			int iFolder = Cmb_RootFolder.Text.Split('\\').Length;
 			
@@ -460,7 +485,67 @@ namespace CANStream
 				}
 			}
 			
-			UpDate_FileList(ActivePath, null, null);
+			CS_RecordEvent oEvent = null;
+			CS_RecordSession oSession =  null;
+			
+			if (File.Exists(ActivePath + "\\SessionDetails.xml"))
+			{
+				oSession = new CS_RecordSession();
+				if (oSession.Load_RecordSessionInformationFile(ActivePath + "\\SessionDetails.xml"))
+				{					
+					if (File.Exists(Path.GetDirectoryName(ActivePath) + "\\EventDetails.xml"))
+					{
+						oEvent = new CS_RecordEvent();
+						if (!(oEvent.Load_RecordEventInformationFile(Path.GetDirectoryName(ActivePath) + "\\EventDetails.xml")))
+						{
+							oEvent = null;
+							oSession = null;
+						}
+					}
+				}
+				else
+				{
+					oSession = null;
+				}
+			}
+			
+			if (!(oEvent ==  null))
+			{
+				TreeNode nEvent = FindEventNode(Path.GetDirectoryName(ActivePath));
+				
+				if (!(nEvent ==  null))
+				{
+					Set_CurrentEvent(nEvent);
+				}
+			}
+			
+			LV_Files.Items.Clear();
+			UpDate_FileList(ActivePath, oSession, oEvent);
+		}
+		
+		private TreeNode FindEventNode(string EventPath)
+		{
+			foreach (TreeNode nFolder in TV_Folders.Nodes)
+			{
+				if (nFolder.Tag.ToString().Equals(EventPath))
+				{
+					return(nFolder);
+				}
+				else
+				{
+					if (nFolder.Nodes.Count > 0)
+					{
+						TreeNode nSubFolder = FindEventNode(EventPath);
+						
+						if (!(nSubFolder == null))
+						{
+							return(nSubFolder);
+						}
+					}
+				}
+			}
+			
+			return(null);
 		}
 		
 		private void Set_ViewerFileList()
