@@ -380,12 +380,12 @@ namespace CANStream
 		}
 		
 		/// <summary>
-		/// Return a flag indication whether or not a session corresponding the name
+		/// Return a flag indicating whether or not a session corresponding the name
 		/// given a argument exist within the event
 		/// </summary>
 		/// <param name="SessionName">Name of the session to search</param>
 		/// <returns>Existance flag: True = Session exists / False = Session doesn't exist</returns>
-		public bool RecordSessionExits(string SessionName)
+		public bool RecordSessionExists(string SessionName)
 		{
 			foreach (CS_RecordSession oSession in Sessions)
 			{

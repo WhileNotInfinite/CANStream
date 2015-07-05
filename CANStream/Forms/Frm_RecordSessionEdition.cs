@@ -89,7 +89,7 @@ namespace CANStream
 		{
 			if (!(Txt_SessionName.Text.Equals("")))
 			{
-				if ((!(oEventParent.RecordSessionExits(Txt_SessionName.Text))) || (!bNewSession))
+				if ((!(oEventParent.RecordSessionExists(Txt_SessionName.Text))) || (!bNewSession))
 				{
 					oRecordSession.Name = Txt_SessionName.Text;
 				}

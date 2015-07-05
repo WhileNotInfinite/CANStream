@@ -14,6 +14,8 @@ using System.IO;
 using System.Text; //StringBuilder
 using System.Windows.Forms;
 
+using Microsoft.Win32;
+
 using SD_AppLicence;
 using ChartDirector;
 
@@ -168,17 +170,7 @@ namespace CANStream
 						MessageBox.Show("Manual & Spy mode is currently running on the " + oTab.Text + "!\nApplication closing abort !\nStop transmission prior to close the application",
 						                Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
 					}
-					
-                    /*
-					if (oController.IsSpyWorkerBusy())
-					{
-						e.Cancel=true;
-						
-						MessageBox.Show("The spy is currently running on the " + oTab.Text + "! Application closing abort !\nStop the spy prior to close the application",
-						                Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-					}
-                    */
-				}
+									}
 			}
 			
 			if(BGWrk_RecordConversion.IsBusy)
@@ -193,6 +185,7 @@ namespace CANStream
 			{
 				Save_ControllerLayout();
 				Delete_AllControllerTmpBackUpFile();
+				Set_RegisterRecordEventSession();
 			}
 		}
                 
@@ -2567,6 +2560,24 @@ namespace CANStream
         
         #region Recording Event/Session management
         
+        private void Set_RegisterRecordEventSession()
+        {
+        	if (!(oRecordEvent == null))
+        	{
+        		string RecordEventRegKey = CANStreamConstants.CS_REG_KEY + "\\RecordEventSession\\Event";
+        	
+        		Registry.SetValue(RecordEventRegKey, "Name", oRecordEvent.Name);
+        		Registry.SetValue(RecordEventRegKey, "Date", oRecordEvent.StartingDate.ToString());
+        		
+        		if (!(oRecordEvent.CurrentSession == null))
+        		{
+        			string RecordSessionRegKey = CANStreamConstants.CS_REG_KEY + "\\RecordEventSession\\Session";
+        	
+        			Registry.SetValue(RecordSessionRegKey, "Name", oRecordEvent.CurrentSession.Name);
+        		}
+        	}
+        }
+        
         private void Get_LastRecordEventSession()
         {
         	oRecordEvent = new CS_RecordEvent();
@@ -2578,7 +2589,38 @@ namespace CANStream
         		
         		if (oEvents.Read_EventsCollectionFile(AppEventsFile))
         		{
-        			oRecordEvent = oEvents.Events[0];
+        			object EventNameRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\RecordEventSession\\Event", "Name", "");
+        			object EventDateRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\RecordEventSession\\Event", "Date", "");
+        			
+        			if ((EventNameRegKey != null) && (EventDateRegKey != null))
+        			{
+        				int iEvent = oEvents.Get_RecordEventIndex(EventNameRegKey.ToString(), DateTime.Parse(EventDateRegKey.ToString()));
+        				
+        				if (iEvent >= 0)
+        				{
+        					oRecordEvent = oEvents.Events[iEvent];
+        					
+        					object SessionNameRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\RecordEventSession\\Session", "Name", "");
+        					
+        					if (SessionNameRegKey != null)
+        					{
+        						int iSession = oRecordEvent.Get_SessionIndex(SessionNameRegKey.ToString());
+        						
+        						if (iSession >= 0)
+        						{
+        							oRecordEvent.CurrentSession = oRecordEvent.Sessions[iSession];
+        						}
+        					}
+        				}
+        				else
+        				{
+        					oRecordEvent = oEvents.Events[0];
+        				}
+        			}
+        			else
+        			{
+        				oRecordEvent = oEvents.Events[0];
+        			}
         		}
         	}
         	

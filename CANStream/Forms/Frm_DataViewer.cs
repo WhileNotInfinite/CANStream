@@ -942,7 +942,7 @@ namespace CANStream
 						CurrentEvent = GetEvent(oEvent.Name);
 					}
 					
-					if (!(CurrentEvent.RecordSessionExits(oSession.Name)))
+					if (!(CurrentEvent.RecordSessionExists(oSession.Name)))
 					{
 						CurrentEvent.Sessions.Add(oSession.Clone());
 					}
