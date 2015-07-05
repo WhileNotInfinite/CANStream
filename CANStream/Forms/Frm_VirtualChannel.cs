@@ -59,12 +59,12 @@ namespace CANStream
 		string[] Fonctions;
 		string[] Operators = {"+","-","x","/","(",")"};
 		
-		private MainForm FrmParent;
+		private Form FrmParent;
 		private bool bFrmMain_ReloadLibraries;
 		
 		#endregion
 		
-		public Frm_VirtualChannel(MainForm FrmMain)
+		public Frm_VirtualChannel(Form ParentFrm)
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -80,7 +80,7 @@ namespace CANStream
 			oClipBoardItem = null;
 			bCutOption = false;
 			
-			FrmParent = FrmMain;
+			FrmParent = ParentFrm;
 			bFrmMain_ReloadLibraries =  false;
 			
 			ObjectNames = null;
@@ -155,10 +155,17 @@ namespace CANStream
 			//Save the library list file
 			oVCLibCollection.SaveLibrariesList(CANStreamTools.CsDataPath + "\\Libraries.xml");
 			
-			//Reloading of libraries by the main form if needed
+			//Reloading of libraries by the main form or the data viewer if needed
 			if (bFrmMain_ReloadLibraries)
 			{
-				FrmParent.Load_VirtualChannelsInControllers();
+				if (FrmParent.GetType().Equals(typeof(MainForm)))
+				{
+					((MainForm)FrmParent).Load_VirtualChannelsInControllers();
+				}
+				else if (FrmParent.GetType().Equals(typeof(Frm_DataViewer)))
+				{
+					((Frm_DataViewer)FrmParent).Reset_VirtualChannels();
+				}
 			}
 		}
 		

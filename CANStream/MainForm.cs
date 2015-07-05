@@ -2733,9 +2733,7 @@ namespace CANStream
         	if (!(UserLib == null))
         	{
         		Frm.Set_UserLibrary(UserLib);
-        	}
-        	
-        	//Frm.Show();
+        	}        	
         }
         
         private void EditBuiltInSignals(CS_BuiltInSignalLibrary UserLib)

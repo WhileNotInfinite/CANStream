@@ -28,6 +28,8 @@ namespace CANStream
 		
 		private GW_DataFile oConcatData;
 		private CS_DataViewerBook ViewerBook;
+		
+		private string VCLibCollectionPath;
 		private CS_VCLibrariesCollection VCLibraries;
 		
 		private int NextViewerPageKeyId;
@@ -38,7 +40,7 @@ namespace CANStream
 		
 		#endregion
 		
-		public Frm_DataViewer(string VCLibCollectionPath)
+		public Frm_DataViewer(string VCLibsFile)
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -52,7 +54,9 @@ namespace CANStream
 			
 			ViewerBook = new CS_DataViewerBook();
 			
+			VCLibCollectionPath = VCLibsFile;
 			VCLibraries = null;
+			
 			if (!(VCLibCollectionPath.Equals("")))
 			{
 				VCLibraries = new CS_VCLibrariesCollection();
@@ -166,7 +170,12 @@ namespace CANStream
         {
             PastPage();
         }
-
+		
+        private void TSB_VirtualChannelsClick(object sender, EventArgs e)
+		{
+        	Edit_VirtualChannels();
+		}
+        
 		private void TSB_EventSessionInfoClick(object sender, EventArgs e)
 		{
 			if (RecordEvents.Count > 0)
@@ -773,7 +782,7 @@ namespace CANStream
 										oConcatData.Channels.Add(oVirtualDataChan);
 									}
 									
-									if ((!(oVirtualDataChan == null)) && oVirtual.bNewValue)
+									if (!(oVirtualDataChan == null))
 									{
 										if (!(oVirtual.InError || double.IsNaN(oVirtual.Value)))
 										{
@@ -835,6 +844,12 @@ namespace CANStream
 		{
 			Frm_DataBrowser Frm = new Frm_DataBrowser(this, LastFilePath);
 			Frm.Show();
+		}
+		
+		private void Edit_VirtualChannels()
+		{
+			Frm_VirtualChannel Frm = new Frm_VirtualChannel(this);
+        	Frm.Show();
 		}
 		
 		#endregion
@@ -973,6 +988,19 @@ namespace CANStream
 			}
 			
 			return(false);
+		}
+		
+		public void Reset_VirtualChannels()
+		{
+			if (!(VCLibCollectionPath.Equals("")))
+			{
+				VCLibraries = new CS_VCLibrariesCollection();
+				
+				if (VCLibraries.LoadLibrariesList(VCLibCollectionPath))
+				{
+					Load_DataFiles();
+				}
+			}
 		}
 		
 		#endregion
