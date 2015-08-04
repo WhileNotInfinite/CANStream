@@ -32,13 +32,58 @@ namespace CANStream
 		Tx=1,
 	}
 	
+    /// <summary>
+    /// CAN parameter value endianess enumeration
+    /// </summary>
 	public enum CanParameterEndianess
 	{
 		Unknown=0,
 		MSBFirst=1,
 		LSBFirst=2,
 	}
-	
+
+    /// <summary>
+    /// CAN parameter value format enumeration
+    /// </summary>
+    public enum CanParameterValueFormat
+    {
+        /// <summary>Parameter value format autmatic</summary>
+    	Auto = 0,
+
+        /// <summary>Parameter value format decimal</summary>
+        Decimal = 1,
+
+        /// <summary>Parameter value format hexadecimal</summary>
+        Hexadecimal = 2,
+
+        /// <summary>Parameter value format binary</summary>
+        Binary = 3,
+
+        /// <summary>Parameter value format enumeration</summary>
+        Enum = 4,
+    }
+
+    /// <summary>
+    /// CAN parameter alarm status enumeration
+    /// </summary>
+    public enum CanParameterAlarmStatus
+    {
+        /// <summary>No alarm</summary>
+        None = 0,
+
+        /// <summary>Value exceeding the min warning limit</summary>
+        WarningMin = 1,
+
+        /// <summary>Value exceeding the max warning limit</summary>
+        WarningMax = 2,
+
+        /// <summary>Value exceeding the min alarm limit</summary>
+        AlarmMin = 3,
+
+        /// <summary>Value exceeding the max alarm limit</summary>
+        AlarmMax = 4,
+    }
+
 	/// <summary>
 	/// Option value for CAN parameter retrieving function
 	/// </summary>
@@ -70,13 +115,374 @@ namespace CANStream
 		public string LibraryName;
 		public string ChannelName;
 	}
-	
-	#endregion
-	
-	/// <summary>
-	/// Description of a CAN Parameter part of a CAN Message
-	/// </summary>
-	[Serializable]
+
+    /// <summary>
+    /// CAN Parameter enumeration value structure
+    /// </summary>
+    [Serializable]
+    public struct EnumerationValue
+    {
+        /// <summary>Enumeration value</summary> 
+        public int Value;
+
+        /// <summary>Enumeration text</summary> 
+        public string Text;
+    }
+
+    /// <summary>
+    /// CAN Parameter alarm value structure
+    /// </summary>
+    [Serializable]
+    public struct ParameterAlarmValue
+    {
+        /// <summary>Alarm value enabling flag</summary>
+        public bool Enabled;
+
+        /// <summary>Alarm threshold value</summary>
+        public double Value;
+
+        /// <summary>Value font color when value threshold is exceeded</summary>
+        public System.Drawing.Color ForeColor;
+
+        /// <summary>Value back color when value threshold is exceeded</summary>
+        public System.Drawing.Color BackColor;
+    }
+
+    #endregion
+
+    /// <summary>
+    /// CAN Parameter (signal) value format class
+    /// </summary>
+    [Serializable]
+    public class CANParameterFormat
+    {
+        #region Private constants
+
+        private const int AutoDecNumbers = 3;
+
+        #endregion
+
+        #region Public members
+
+        /// <summary>Value format type</summary> 
+        public CanParameterValueFormat FormatType;
+
+        /// <summary>Number of decimals digits for 'decimal' format</summary> 
+        public int Decimals;
+
+        /// <summary>Value format enumeration</summary>
+        public List<EnumerationValue> Enums;
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public CANParameterFormat()
+        {
+            FormatType = CanParameterValueFormat.Auto;
+            Decimals = 2;
+            Enums = new List<EnumerationValue>();
+        }
+
+        #region Private methodes
+
+        private string GetEnumText(int EnumValue)
+        {
+            foreach (EnumerationValue sEnum in Enums)
+            {
+                if (sEnum.Value == EnumValue)
+                {
+                    return (sEnum.Text);
+                }
+            }
+
+            return ("<?>");
+        }
+
+        private int GetEnumValue(string EnumText)
+        {
+            foreach (EnumerationValue sEnum in Enums)
+            {
+                if (sEnum.Text.Equals(EnumText))
+                {
+                    return (sEnum.Value);
+                }
+            }
+
+            return (0);
+        }
+
+        #endregion
+
+        #region Public methodes
+
+        /// <summary>
+        /// Returns a clone of the current CANParameterFormat object
+        /// </summary>
+        /// <returns>Clone of the current CANParameterFormat object</returns>
+        public CANParameterFormat Get_Clone()
+        {
+            CANParameterFormat oClone = new CANParameterFormat();
+
+            oClone.FormatType = this.FormatType;
+            oClone.Decimals = this.Decimals;
+
+            oClone.Enums = new List<EnumerationValue>();
+            foreach (EnumerationValue sEnum in this.Enums)
+            {
+                oClone.Enums.Add(sEnum);
+            }
+
+            return (oClone);
+        }
+
+        /// <summary>
+        /// Returns the current decoded value of the parameter formated according to its value format properties
+        /// </summary>
+        /// <param name="ValIn"> Value to format</param>
+        /// <returns>Current decoded value of the parameter formated according to its value format properties</returns>
+        public string GetParameterFormatedValue(double ValIn)
+        {
+            string sValue = "";
+
+            switch (FormatType)
+            {
+                case CanParameterValueFormat.Auto:
+
+                    sValue = Math.Round(ValIn, AutoDecNumbers).ToString();
+                    break;
+
+                case CanParameterValueFormat.Binary:
+
+                    sValue = Convert.ToString((int)ValIn, 2);
+                    break;
+
+                case CanParameterValueFormat.Decimal:
+
+                    sValue = Math.Round(ValIn, Decimals).ToString();
+                    break;
+
+                case CanParameterValueFormat.Enum:
+
+                    sValue = GetEnumText((int)ValIn);
+                    break;
+
+                case CanParameterValueFormat.Hexadecimal:
+
+                    sValue = "0x" + ((int)ValIn).ToString("X");
+                    break;
+            }
+
+            return (sValue);
+        }
+
+        /// <summary>
+        /// Returns the numerical decoded value of the parameter from the formated value according to is value format properties  
+        /// </summary>
+        /// <param name="FormatedValue">Formated decoded value of the paramter</param>
+        /// <returns>Numerical decoded value of the parameter</returns>
+        public double SetParameterFormatedValue(string FormatedValue)
+        {
+            double DecodValue = 0;
+
+            switch (FormatType)
+            {
+                case CanParameterValueFormat.Auto:
+
+                    DecodValue = Convert.ToDouble(FormatedValue);
+                    break;
+
+                case CanParameterValueFormat.Binary:
+
+                    DecodValue = (double)(Convert.ToInt32(FormatedValue, 2));
+                    break;
+
+                case CanParameterValueFormat.Decimal:
+
+                    DecodValue = Convert.ToDouble(FormatedValue);
+                    break;
+
+                case CanParameterValueFormat.Enum:
+
+                    DecodValue = (double)GetEnumValue(FormatedValue);
+                    break;
+
+                case CanParameterValueFormat.Hexadecimal:
+
+                    DecodValue = (double)(int.Parse(FormatedValue, System.Globalization.NumberStyles.HexNumber));
+                    break;
+            }
+
+            return (DecodValue);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// CAN Parameter alarm values class
+    /// </summary>
+    [Serializable]
+    public class CANParameterAlarms
+    {
+
+        #region Public members
+
+        /// <summary>CAN Parameter alarms enabling flag</summary>
+        public bool Enabled;
+
+        /// <summary>CAN Parameter lower warning limit</summary>
+        public ParameterAlarmValue WarningLimitMin;
+
+        /// <summary>CAN Parameter upper warning limit</summary>
+        public ParameterAlarmValue WarningLimitMax;
+
+        /// <summary>CAN Parameter lower alarm limit</summary>
+        public ParameterAlarmValue AlarmLimitMin;
+
+        /// <summary>CAN Parameter upper alarm limit</summary>
+        public ParameterAlarmValue AlarmLimitMax;
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public CANParameterAlarms()
+        {
+            Enabled = false;
+
+            WarningLimitMin = new ParameterAlarmValue();
+            WarningLimitMin.Enabled = false;
+            WarningLimitMin.Value = 0;
+            WarningLimitMin.BackColor = System.Drawing.SystemColors.Window;
+            WarningLimitMin.ForeColor = System.Drawing.Color.Orange;
+
+            WarningLimitMax = new ParameterAlarmValue();
+            WarningLimitMax.Enabled = false;
+            WarningLimitMax.Value = 0;
+            WarningLimitMax.BackColor = System.Drawing.SystemColors.Window;
+            WarningLimitMax.ForeColor = System.Drawing.Color.Orange;
+
+            AlarmLimitMin = new ParameterAlarmValue();
+            AlarmLimitMin.Enabled = false;
+            AlarmLimitMin.Value = 0;
+            AlarmLimitMin.BackColor = System.Drawing.SystemColors.Window;
+            AlarmLimitMin.ForeColor = System.Drawing.Color.Red;
+
+            AlarmLimitMax = new ParameterAlarmValue();
+            AlarmLimitMax.Enabled = false;
+            AlarmLimitMax.Value = 0;
+            AlarmLimitMax.BackColor = System.Drawing.SystemColors.Window;
+            AlarmLimitMax.ForeColor = System.Drawing.Color.Red;
+        }
+
+        #region Public methodes
+
+        /// <summary>
+        /// Returns a clone of the current CANParameterAlarms object
+        /// </summary>
+        /// <returns>Clone of the current CANParameterAlarms object</returns>
+        public CANParameterAlarms Get_Clone()
+        {
+            CANParameterAlarms oClone = new CANParameterAlarms();
+
+            oClone.Enabled = this.Enabled;
+
+            oClone.WarningLimitMin.Enabled = this.WarningLimitMin.Enabled;
+            oClone.WarningLimitMin.Value = this.WarningLimitMin.Value;
+            oClone.WarningLimitMin.BackColor = this.WarningLimitMin.BackColor;
+            oClone.WarningLimitMin.ForeColor = this.WarningLimitMin.ForeColor;
+
+            oClone.WarningLimitMax.Enabled = this.WarningLimitMax.Enabled;
+            oClone.WarningLimitMax.Value = this.WarningLimitMax.Value;
+            oClone.WarningLimitMax.BackColor = this.WarningLimitMax.BackColor;
+            oClone.WarningLimitMax.ForeColor = this.WarningLimitMax.ForeColor;
+
+            oClone.AlarmLimitMin.Enabled = this.AlarmLimitMin.Enabled;
+            oClone.AlarmLimitMin.Value = this.AlarmLimitMin.Value;
+            oClone.AlarmLimitMin.BackColor = this.AlarmLimitMin.BackColor;
+            oClone.AlarmLimitMin.ForeColor = this.AlarmLimitMin.ForeColor;
+
+            oClone.AlarmLimitMax.Enabled = this.AlarmLimitMax.Enabled;
+            oClone.AlarmLimitMax.Value = this.AlarmLimitMax.Value;
+            oClone.AlarmLimitMax.BackColor = this.AlarmLimitMax.BackColor;
+            oClone.AlarmLimitMax.ForeColor = this.AlarmLimitMax.ForeColor;
+
+            return (oClone);
+        }
+
+        /// <summary>
+        /// Return the current CAN parameter alarm status
+        /// </summary>
+        /// <param name="ValIn">Current CAN Parameter value</param>
+        /// <returns>Current CAN Parameter alarm status</returns>
+        public CanParameterAlarmStatus ProcessAlarms(double ValIn)
+        {
+            if (Enabled)
+            {
+                if (AlarmLimitMin.Enabled && ValIn <= AlarmLimitMin.Value)
+                {
+                    return (CanParameterAlarmStatus.AlarmMin);
+                }
+
+                if (AlarmLimitMax.Enabled && ValIn >= AlarmLimitMax.Value)
+                {
+                    return (CanParameterAlarmStatus.AlarmMax);
+                }
+
+                if (WarningLimitMin.Enabled && ValIn <= WarningLimitMin.Value)
+                {
+                    return (CanParameterAlarmStatus.WarningMin);
+                }
+
+                if (WarningLimitMax.Enabled && ValIn >= WarningLimitMax.Value)
+                {
+                    return (CanParameterAlarmStatus.WarningMax);
+                }
+            }
+
+            return (CanParameterAlarmStatus.None);
+        }
+
+        /// <summary>
+        /// Return the alarm properties structure corresponding to the status given as argument
+        /// </summary>
+        /// <param name="eAlarm">Alarm status</param>
+        /// <returns>Alarm properties structure corresponding to the status given as argument</returns>
+        /// <remarks>Return null if status is 'None' or unknown</remarks>
+        public Nullable<ParameterAlarmValue> GetAlarmProperties(CanParameterAlarmStatus eAlarm)
+        {
+            switch (eAlarm)
+            {
+                case CanParameterAlarmStatus.WarningMin:
+
+                    return (WarningLimitMin);
+
+                case CanParameterAlarmStatus.WarningMax:
+
+                    return (WarningLimitMax);
+
+                case CanParameterAlarmStatus.AlarmMin:
+
+                    return (AlarmLimitMin);
+
+                case CanParameterAlarmStatus.AlarmMax:
+
+                    return (AlarmLimitMax);
+            }
+
+            return (null);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Description of a CAN Parameter part of a CAN Message
+    /// </summary>
+    [Serializable]
 	public class CANParameter
 	{
 		#region Public members
@@ -99,10 +505,13 @@ namespace CANStream
 		
         public bool IsVirtual;
         public VirtualParameter VirtualChannelReference;
-        
-		#endregion
-		
-		public CANParameter()
+
+        public CANParameterFormat ValueFormat;
+        public CANParameterAlarms Alarms;
+
+        #endregion
+
+        public CANParameter()
 		{
 			Name = "";
 			Comment = "";
@@ -119,7 +528,9 @@ namespace CANStream
             RawValue = "0x0";
             IsVirtual = false;
             VirtualChannelReference = new VirtualParameter();
-		}
+            ValueFormat = new CANParameterFormat();
+            Alarms = new CANParameterAlarms();
+        }
 		
 		#region Public methodes
 		
@@ -146,7 +557,9 @@ namespace CANStream
 			oClone.Zero = Zero;
 			oClone.IsVirtual = IsVirtual;
 			oClone.VirtualChannelReference = VirtualChannelReference;
-			
+            oClone.ValueFormat = this.ValueFormat.Get_Clone();
+            oClone.Alarms = this.Alarms.Get_Clone();
+
 			return(oClone);
 		}
 		
@@ -225,7 +638,7 @@ namespace CANStream
 					return(-1);
 			}
 		}
-		
+
 		#endregion
 	}
 	
@@ -762,8 +1175,120 @@ namespace CANStream
 					XmlElement xParamZero=oXmlDoc.CreateElement("LinearizationZero");
 					xParamZero.InnerText=Parameter.Zero.ToString();
 					xParameter.AppendChild(xParamZero);
-					
-					if(Parameter.IsMultiplexed)
+
+                    XmlElement xParamFormat = oXmlDoc.CreateElement("ValueFormat");
+                    xParameter.AppendChild(xParamFormat);
+
+                        XmlElement xFormatType = oXmlDoc.CreateElement("FormatType");
+                        xFormatType.InnerText = Parameter.ValueFormat.FormatType.ToString();
+                        xParamFormat.AppendChild(xFormatType);
+
+                        XmlElement xFormatDec = oXmlDoc.CreateElement("FormatDecimals");
+                        xFormatDec.InnerText = Parameter.ValueFormat.Decimals.ToString();
+                        xFormatType.AppendChild(xFormatDec);
+
+                        if (Parameter.ValueFormat.Enums.Count > 0)
+                        {
+                            XmlElement xFormatEnums = oXmlDoc.CreateElement("FormatEnums");
+                            xFormatType.AppendChild(xFormatEnums);
+
+                            foreach (EnumerationValue sEnum in Parameter.ValueFormat.Enums)
+                            {
+                                XmlElement xEnum = oXmlDoc.CreateElement("Enumeration");
+                                xFormatEnums.AppendChild(xEnum);
+
+                                XmlElement xEnumVal = oXmlDoc.CreateElement("EnumValue");
+                                xEnumVal.InnerText = sEnum.Value.ToString();
+                                xEnum.AppendChild(xEnumVal);
+
+                                XmlElement xEnumText = oXmlDoc.CreateElement("EnumText");
+                                xEnumText.InnerText = sEnum.Text;
+                                xEnum.AppendChild(xEnumText);
+                            }
+                        }
+
+                    XmlElement xParamAlarms = oXmlDoc.CreateElement("ParameterAlarms");
+                    xParameter.AppendChild(xParamAlarms);
+
+                        XmlElement xAlarmsEnabled = oXmlDoc.CreateElement("AlarmsEnabled");
+                        xAlarmsEnabled.InnerText = Parameter.Alarms.Enabled.ToString();
+                        xParamAlarms.AppendChild(xAlarmsEnabled);
+
+                        XmlElement xAlarmActive, xAlarmVal, xAlarmForeColor, xAlarmBackColor;
+
+                        XmlElement xWarningMin = oXmlDoc.CreateElement("WarningMin");
+
+                            xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
+                            xAlarmActive.InnerText = Parameter.Alarms.WarningLimitMin.Enabled.ToString();
+                            xWarningMin.AppendChild(xAlarmActive);
+
+                            xAlarmVal = oXmlDoc.CreateElement("AlarmValue");
+                            xAlarmVal.InnerText = Parameter.Alarms.WarningLimitMin.Value.ToString();
+                            xWarningMin.AppendChild(xAlarmVal);
+
+                            xAlarmForeColor = oXmlDoc.CreateElement("AlarmForeColor");
+                            xAlarmForeColor.InnerText = Parameter.Alarms.WarningLimitMin.ForeColor.ToArgb().ToString();
+                            xWarningMin.AppendChild(xAlarmForeColor);
+
+                            xAlarmBackColor = oXmlDoc.CreateElement("AlarmBackColor");
+                            xAlarmBackColor.InnerText = Parameter.Alarms.WarningLimitMin.BackColor.ToArgb().ToString();
+                            xWarningMin.AppendChild(xAlarmBackColor);
+
+                        XmlElement xWarningMax = oXmlDoc.CreateElement("WarningMax");
+
+                            xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
+                            xAlarmActive.InnerText = Parameter.Alarms.WarningLimitMax.Enabled.ToString();
+                            xWarningMax.AppendChild(xAlarmActive);
+
+                            xAlarmVal = oXmlDoc.CreateElement("AlarmValue");
+                            xAlarmVal.InnerText = Parameter.Alarms.WarningLimitMax.Value.ToString();
+                            xWarningMax.AppendChild(xAlarmVal);
+
+                            xAlarmForeColor = oXmlDoc.CreateElement("AlarmForeColor");
+                            xAlarmForeColor.InnerText = Parameter.Alarms.WarningLimitMax.ForeColor.ToArgb().ToString();
+                            xWarningMax.AppendChild(xAlarmForeColor);
+
+                            xAlarmBackColor = oXmlDoc.CreateElement("AlarmBackColor");
+                            xAlarmBackColor.InnerText = Parameter.Alarms.WarningLimitMax.BackColor.ToArgb().ToString();
+                            xWarningMax.AppendChild(xAlarmBackColor);
+
+                        XmlElement xAlarmMin = oXmlDoc.CreateElement("AlarmMin");
+
+                            xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
+                            xAlarmActive.InnerText = Parameter.Alarms.AlarmLimitMin.Enabled.ToString();
+                            xAlarmMin.AppendChild(xAlarmActive);
+
+                            xAlarmVal = oXmlDoc.CreateElement("AlarmValue");
+                            xAlarmVal.InnerText = Parameter.Alarms.AlarmLimitMin.Value.ToString();
+                            xAlarmMin.AppendChild(xAlarmVal);
+
+                            xAlarmForeColor = oXmlDoc.CreateElement("AlarmForeColor");
+                            xAlarmForeColor.InnerText = Parameter.Alarms.AlarmLimitMin.ForeColor.ToArgb().ToString();
+                            xAlarmMin.AppendChild(xAlarmForeColor);
+
+                            xAlarmBackColor = oXmlDoc.CreateElement("AlarmBackColor");
+                            xAlarmBackColor.InnerText = Parameter.Alarms.AlarmLimitMin.BackColor.ToArgb().ToString();
+                            xAlarmMin.AppendChild(xAlarmBackColor);
+
+                        XmlElement xAlarmMax = oXmlDoc.CreateElement("AlarmMax");
+
+                            xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
+                            xAlarmActive.InnerText = Parameter.Alarms.AlarmLimitMax.Enabled.ToString();
+                            xAlarmMax.AppendChild(xAlarmActive);
+
+                            xAlarmVal = oXmlDoc.CreateElement("AlarmValue");
+                            xAlarmVal.InnerText = Parameter.Alarms.AlarmLimitMax.Value.ToString();
+                            xAlarmMax.AppendChild(xAlarmVal);
+
+                            xAlarmForeColor = oXmlDoc.CreateElement("AlarmForeColor");
+                            xAlarmForeColor.InnerText = Parameter.Alarms.AlarmLimitMax.ForeColor.ToArgb().ToString();
+                            xAlarmMax.AppendChild(xAlarmForeColor);
+
+                            xAlarmBackColor = oXmlDoc.CreateElement("AlarmBackColor");
+                            xAlarmBackColor.InnerText = Parameter.Alarms.AlarmLimitMax.BackColor.ToArgb().ToString();
+                            xAlarmMax.AppendChild(xAlarmBackColor);
+
+                    if (Parameter.IsMultiplexed)
 					{
 						XmlElement xParamMux = oXmlDoc.CreateElement("MultiplexerValue");
 						xParamMux.InnerText = Parameter.MultiplexerValue.ToString();
@@ -1096,8 +1621,445 @@ namespace CANStream
 									return(false);
 								}
 
-								//MultiplexerId
-								XmlNode xMuxValue = xParam.SelectSingleNode("MultiplexerValue");
+                                //Format
+                                XmlNode xParamFormat = xParam.SelectSingleNode("ValueFormat");
+                                if (!(xParamFormat==null))
+                                {
+                                    XmlNode xFormatType = xParamFormat.SelectSingleNode("FormatType");
+                                    if (!(xFormatType == null))
+                                    {
+                                        CanParameterValueFormat eFormatType;
+                                        if (Enum.TryParse(xFormatType.InnerText, out eFormatType))
+                                        {
+                                            oParameter.ValueFormat.FormatType = eFormatType;
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return (false);
+                                    }
+
+                                    XmlNode xFormatDec = xParamFormat.SelectSingleNode("FormatDecimals");
+                                    if (!(xFormatDec==null))
+                                    {
+                                        int nDec;
+                                        if (int.TryParse(xFormatDec.InnerText, out nDec))
+                                        {
+                                            oParameter.ValueFormat.Decimals = nDec;
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return (false);
+                                    }
+
+                                    XmlNode xFormatEnums = xParamFormat.SelectSingleNode("FormatEnums");
+                                    if (!(xFormatEnums == null))
+                                    {
+                                        oParameter.ValueFormat.Enums = new List<EnumerationValue>();
+
+                                        foreach (XmlNode xEnum in xFormatEnums.ChildNodes)
+                                        {
+                                            EnumerationValue sEnum = new EnumerationValue();
+
+                                            XmlNode xEnumVal = xEnum.SelectSingleNode("EnumValue");
+                                            if (!(xEnumVal == null))
+                                            {
+                                                int eVal;
+                                                if (int.TryParse(xEnumVal.InnerText, out eVal))
+                                                {
+                                                    sEnum.Value = eVal;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            XmlNode xEnumText = xEnum.SelectSingleNode("EnumText");
+                                            if (!(xEnumText == null))
+                                            {
+                                                sEnum.Text = xEnumText.InnerText;
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            oParameter.ValueFormat.Enums.Add(sEnum);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Enumeration list may not exist if parameter isn't an enum
+                                    }
+                                }
+                                else
+                                {
+                                    //'ValueFormat' node may not exists since it is a new feature of release 2.1.0.0
+                                    //If 'ValueFormat' node doesn't exist, CAN Paramter will use default properties
+                                }
+
+                                //Parameter alarms
+                                XmlNode xParamAlarms = xParam.SelectSingleNode("ParameterAlarms");
+                                if (!(xParamAlarms == null))
+                                {
+                                    XmlNode xAlarmsEnabled = xParamAlarms.SelectSingleNode("AlarmsEnabled");
+                                    if (!(xAlarmsEnabled == null))
+                                    {
+                                        bool bEnabled;
+                                        if (bool.TryParse(xAlarmsEnabled.InnerText, out bEnabled))
+                                        {
+                                            oParameter.Alarms.Enabled = bEnabled;
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+
+                                        XmlNode xAlarmActive, xAlarmVal, xAlarmForeColor, xAlarmBackColor;
+
+                                        XmlNode xWarningMin = xParamAlarms.SelectSingleNode("WarningMin");
+                                        if (!(xWarningMin == null))
+                                        {
+                                            xAlarmActive = xWarningMin.SelectSingleNode("AlarmActive");
+                                            if (!(xAlarmActive == null))
+                                            {
+                                                if (bool.TryParse(xAlarmActive.InnerText, out bEnabled))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMin.Enabled = bEnabled;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmVal = xWarningMin.SelectSingleNode("AlarmValue");
+                                            if (!(xAlarmVal == null))
+                                            {
+                                                double Val;
+                                                if (double.TryParse(xAlarmVal.InnerText, out Val))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMin.Value = Val;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmForeColor = xWarningMin.SelectSingleNode("AlarmForeColor");
+                                            if (!(xAlarmForeColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmForeColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMin.ForeColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmBackColor = xWarningMin.SelectSingleNode("AlarmBackColor");
+                                            if (!(xAlarmBackColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmBackColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMin.BackColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+
+                                        XmlNode xWarningMax = xParamAlarms.SelectSingleNode("WarningMax");
+                                        if (!(xWarningMax == null))
+                                        {
+                                            xAlarmActive = xWarningMax.SelectSingleNode("AlarmActive");
+                                            if (!(xAlarmActive == null))
+                                            {
+                                                if (bool.TryParse(xAlarmActive.InnerText, out bEnabled))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMax.Enabled = bEnabled;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmVal = xWarningMax.SelectSingleNode("AlarmValue");
+                                            if (!(xAlarmVal == null))
+                                            {
+                                                double Val;
+                                                if (double.TryParse(xAlarmVal.InnerText, out Val))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMax.Value = Val;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmForeColor = xWarningMax.SelectSingleNode("AlarmForeColor");
+                                            if (!(xAlarmForeColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmForeColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMax.ForeColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmBackColor = xWarningMax.SelectSingleNode("AlarmBackColor");
+                                            if (!(xAlarmBackColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmBackColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.WarningLimitMax.BackColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+
+                                        XmlNode xAlarmMin = xParamAlarms.SelectSingleNode("AlarmMin");
+                                        if (!(xAlarmMin == null))
+                                        {
+                                            xAlarmActive = xAlarmMin.SelectSingleNode("AlarmActive");
+                                            if (!(xAlarmActive == null))
+                                            {
+                                                if (bool.TryParse(xAlarmActive.InnerText, out bEnabled))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMin.Enabled = bEnabled;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmVal = xAlarmMin.SelectSingleNode("AlarmValue");
+                                            if (!(xAlarmVal == null))
+                                            {
+                                                double Val;
+                                                if (double.TryParse(xAlarmVal.InnerText, out Val))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMin.Value = Val;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmForeColor = xAlarmMin.SelectSingleNode("AlarmForeColor");
+                                            if (!(xAlarmForeColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmForeColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMin.ForeColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmBackColor = xAlarmMin.SelectSingleNode("AlarmBackColor");
+                                            if (!(xAlarmBackColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmBackColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMin.BackColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+
+                                        XmlNode xAlarmMax = xParamAlarms.SelectSingleNode("AlarmMax");
+                                        if (!(xAlarmMax == null))
+                                        {
+                                            xAlarmActive = xAlarmMax.SelectSingleNode("AlarmActive");
+                                            if (!(xAlarmActive == null))
+                                            {
+                                                if (bool.TryParse(xAlarmActive.InnerText, out bEnabled))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMax.Enabled = bEnabled;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmVal = xAlarmMax.SelectSingleNode("AlarmValue");
+                                            if (!(xAlarmVal == null))
+                                            {
+                                                double Val;
+                                                if (double.TryParse(xAlarmVal.InnerText, out Val))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMax.Value = Val;
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmForeColor = xAlarmMax.SelectSingleNode("AlarmForeColor");
+                                            if (!(xAlarmForeColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmForeColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMax.ForeColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+
+                                            xAlarmBackColor = xAlarmMax.SelectSingleNode("AlarmBackColor");
+                                            if (!(xAlarmBackColor == null))
+                                            {
+                                                int iColor;
+                                                if (int.TryParse(xAlarmBackColor.InnerText, out iColor))
+                                                {
+                                                    oParameter.Alarms.AlarmLimitMax.BackColor = System.Drawing.Color.FromArgb(iColor);
+                                                }
+                                                else
+                                                {
+                                                    return (false);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return (false);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return (false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return (false);
+                                    }
+                                }
+                                else
+                                {
+                                    //'ParameterAlarms' node may not exists since it is a new feature of release 2.1.0.0
+                                    //If 'ParameterAlarms' node doesn't exist, CAN Paramter will use default properties
+                                }
+
+                                //MultiplexerId
+                                XmlNode xMuxValue = xParam.SelectSingleNode("MultiplexerValue");
 								if (!(xMuxValue == null))
 								{
 									long MuxVal=0;
@@ -1510,7 +2472,7 @@ namespace CANStream
 		
 		#endregion
 	}
-	
+
 	#endregion
 	
 	#region CAN message decoding
