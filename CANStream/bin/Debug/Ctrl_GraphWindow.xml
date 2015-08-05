@@ -440,6 +440,29 @@
             This class features a base 'Font' class and implement two methodes for the font properties XML node writing and reading
             </remarks>
         </member>
+        <member name="T:Ctrl_GraphWindow.GW_Font.FontProperty">
+            <summary>
+            Enumeration of font internal properties
+            </summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Name">
+            <summary>Name of the font</summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Size">
+            <summary>Size of the font</summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Bold">
+            <summary>Bold flag of the font</summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Italic">
+            <summary>Italic flag of the font</summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Strikeout">
+            <summary>Strikeout flag of the font</summary>
+        </member>
+        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Underline">
+            <summary>Underline flag of the font</summary>
+        </member>
         <member name="F:Ctrl_GraphWindow.GW_Font.oFont">
             <summary>
             Font of the GW_Font object
@@ -491,29 +514,6 @@
             <param name="PropertyTarget">Property to change</param>
             <param name="PropertyValue">New property value</param>
             <returns>Property change result: True = property changed / False = Property not changed (error)</returns>
-        </member>
-        <member name="T:Ctrl_GraphWindow.GW_Font.FontProperty">
-            <summary>
-            Enumeration of font internal properties
-            </summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Name">
-            <summary>Name of the font</summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Size">
-            <summary>Size of the font</summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Bold">
-            <summary>Bold flag of the font</summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Italic">
-            <summary>Italic flag of the font</summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Strikeout">
-            <summary>Strikeout flag of the font</summary>
-        </member>
-        <member name="F:Ctrl_GraphWindow.GW_Font.FontProperty.Underline">
-            <summary>Underline flag of the font</summary>
         </member>
         <member name="T:Ctrl_GraphWindow.GraphLineProperties">
             <summary>
@@ -1547,6 +1547,51 @@
             Description of Ctrl_WaveForm.
             </summary>
         </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ToolBarVisible">
+            <summary>
+            Control toolbar visible property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.OpenFileVisible">
+            <summary>
+            Load data command visible property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.EditGraphicConfigurationEnable">
+            <summary>
+            Graphic properties editable property
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.CursorEnabled">
+            <summary>
+            Cusrors enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ZoomEnabled">
+            <summary>
+            Zoom enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ChannelListEnabled">
+            <summary>
+            Channel list enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.LegendEnabled">
+            <summary>
+            Legend enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.SnapShotEnabled">
+            <summary>
+            Graphic snapshot enabled properties
+            </summary>
+        </member>
+        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.PrintEnabled">
+            <summary>
+            Graphic print enabled properties
+            </summary>
+        </member>
         <member name="F:Ctrl_GraphWindow.Ctrl_WaveForm.Properties">
             <summary>
             Graphical properties of the graph
@@ -1597,51 +1642,6 @@
             This method is required for Windows Forms designer support.
             Do not change the method contents inside the source code editor. The Forms designer might
             not be able to load this method if it was changed manually.
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ToolBarVisible">
-            <summary>
-            Control toolbar visible property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.OpenFileVisible">
-            <summary>
-            Load data command visible property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.EditGraphicConfigurationEnable">
-            <summary>
-            Graphic properties editable property
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.CursorEnabled">
-            <summary>
-            Cusrors enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ZoomEnabled">
-            <summary>
-            Zoom enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.ChannelListEnabled">
-            <summary>
-            Channel list enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.LegendEnabled">
-            <summary>
-            Legend enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.SnapShotEnabled">
-            <summary>
-            Graphic snapshot enabled properties
-            </summary>
-        </member>
-        <member name="P:Ctrl_GraphWindow.Ctrl_WaveForm.PrintEnabled">
-            <summary>
-            Graphic print enabled properties
             </summary>
         </member>
         <member name="T:Ctrl_GraphWindow.Frm_FlyingChannelList">
