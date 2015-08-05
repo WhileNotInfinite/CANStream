@@ -1185,12 +1185,12 @@ namespace CANStream
 
                         XmlElement xFormatDec = oXmlDoc.CreateElement("FormatDecimals");
                         xFormatDec.InnerText = Parameter.ValueFormat.Decimals.ToString();
-                        xFormatType.AppendChild(xFormatDec);
+                        xParamFormat.AppendChild(xFormatDec);
 
                         if (Parameter.ValueFormat.Enums.Count > 0)
                         {
                             XmlElement xFormatEnums = oXmlDoc.CreateElement("FormatEnums");
-                            xFormatType.AppendChild(xFormatEnums);
+                            xParamFormat.AppendChild(xFormatEnums);
 
                             foreach (EnumerationValue sEnum in Parameter.ValueFormat.Enums)
                             {
@@ -1217,6 +1217,7 @@ namespace CANStream
                         XmlElement xAlarmActive, xAlarmVal, xAlarmForeColor, xAlarmBackColor;
 
                         XmlElement xWarningMin = oXmlDoc.CreateElement("WarningMin");
+                        xParamAlarms.AppendChild(xWarningMin);
 
                             xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
                             xAlarmActive.InnerText = Parameter.Alarms.WarningLimitMin.Enabled.ToString();
@@ -1235,6 +1236,7 @@ namespace CANStream
                             xWarningMin.AppendChild(xAlarmBackColor);
 
                         XmlElement xWarningMax = oXmlDoc.CreateElement("WarningMax");
+                        xParamAlarms.AppendChild(xWarningMax);
 
                             xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
                             xAlarmActive.InnerText = Parameter.Alarms.WarningLimitMax.Enabled.ToString();
@@ -1253,6 +1255,7 @@ namespace CANStream
                             xWarningMax.AppendChild(xAlarmBackColor);
 
                         XmlElement xAlarmMin = oXmlDoc.CreateElement("AlarmMin");
+                        xParamAlarms.AppendChild(xAlarmMin);
 
                             xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
                             xAlarmActive.InnerText = Parameter.Alarms.AlarmLimitMin.Enabled.ToString();
@@ -1271,6 +1274,7 @@ namespace CANStream
                             xAlarmMin.AppendChild(xAlarmBackColor);
 
                         XmlElement xAlarmMax = oXmlDoc.CreateElement("AlarmMax");
+                        xParamAlarms.AppendChild(xAlarmMax);
 
                             xAlarmActive = oXmlDoc.CreateElement("AlarmActive");
                             xAlarmActive.InnerText = Parameter.Alarms.AlarmLimitMax.Enabled.ToString();
