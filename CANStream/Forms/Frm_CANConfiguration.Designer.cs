@@ -104,6 +104,20 @@
             this.Tab_Parameter = new System.Windows.Forms.TabPage();
             this.Grp_ParameterForm = new System.Windows.Forms.GroupBox();
             this.Grp_Alarms = new System.Windows.Forms.GroupBox();
+            this.Pic_AlarmMax_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMax_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMin_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMin_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Pic_WarningMax_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_WarningMax_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Chk_AlarmMax = new System.Windows.Forms.CheckBox();
+            this.Chk_AlarmMin = new System.Windows.Forms.CheckBox();
+            this.Chk_WarningMax = new System.Windows.Forms.CheckBox();
+            this.Txt_AlarmMax = new System.Windows.Forms.TextBox();
+            this.Txt_AlarmMin = new System.Windows.Forms.TextBox();
+            this.Txt_WarningMax = new System.Windows.Forms.TextBox();
+            this.Lbl_Alarms_Forecolor = new System.Windows.Forms.Label();
+            this.Pic_WarningMin_Forecolor = new System.Windows.Forms.PictureBox();
             this.Chk_WarningMin = new System.Windows.Forms.CheckBox();
             this.Chk_AlarmsEnabled = new System.Windows.Forms.CheckBox();
             this.Pic_WarningMin_Backcolor = new System.Windows.Forms.PictureBox();
@@ -162,21 +176,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip_Commands = new System.Windows.Forms.ToolTip(this.components);
-            this.Pic_WarningMin_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Lbl_Alarms_Forecolor = new System.Windows.Forms.Label();
-            this.Txt_WarningMax = new System.Windows.Forms.TextBox();
-            this.Txt_AlarmMin = new System.Windows.Forms.TextBox();
-            this.Txt_AlarmMax = new System.Windows.Forms.TextBox();
-            this.Chk_WarningMax = new System.Windows.Forms.CheckBox();
-            this.Chk_AlarmMin = new System.Windows.Forms.CheckBox();
-            this.Chk_AlarmMax = new System.Windows.Forms.CheckBox();
-            this.Pic_WarningMax_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Pic_WarningMax_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMin_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMin_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMax_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMax_Forecolor = new System.Windows.Forms.PictureBox();
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
+            this.Lbl_ParamMinMax = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
             this.Split_Tree_Props.Panel1.SuspendLayout();
             this.Split_Tree_Props.Panel2.SuspendLayout();
@@ -195,16 +196,16 @@
             this.Tab_Parameter.SuspendLayout();
             this.Grp_ParameterForm.SuspendLayout();
             this.Grp_Alarms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Forecolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Backcolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Forecolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Backcolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Forecolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Backcolor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Forecolor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Backcolor)).BeginInit();
             this.Grp_ParamMultiplexer.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Forecolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Backcolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Forecolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Backcolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Forecolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Backcolor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Forecolor)).BeginInit();
             this.SuspendLayout();
             // 
             // Split_Tree_Props
@@ -225,7 +226,7 @@
             this.Split_Tree_Props.Panel2.Controls.Add(this.Frame_MsgMap);
             this.Split_Tree_Props.Panel2.Controls.Add(this.tabControl1);
             this.Split_Tree_Props.Panel2MinSize = 700;
-            this.Split_Tree_Props.Size = new System.Drawing.Size(1181, 663);
+            this.Split_Tree_Props.Size = new System.Drawing.Size(1181, 642);
             this.Split_Tree_Props.SplitterDistance = 381;
             this.Split_Tree_Props.TabIndex = 0;
             // 
@@ -234,7 +235,7 @@
             this.Grp_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grp_Filter.Controls.Add(this.Cmb_Filter);
-            this.Grp_Filter.Location = new System.Drawing.Point(3, 612);
+            this.Grp_Filter.Location = new System.Drawing.Point(3, 591);
             this.Grp_Filter.Name = "Grp_Filter";
             this.Grp_Filter.Size = new System.Drawing.Size(375, 48);
             this.Grp_Filter.TabIndex = 1;
@@ -264,7 +265,7 @@
             this.TV_Messages.Location = new System.Drawing.Point(3, 3);
             this.TV_Messages.Name = "TV_Messages";
             this.TV_Messages.SelectedImageIndex = 0;
-            this.TV_Messages.Size = new System.Drawing.Size(375, 603);
+            this.TV_Messages.Size = new System.Drawing.Size(375, 582);
             this.TV_Messages.TabIndex = 0;
             this.TV_Messages.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV_Messages_NodeMouseClick);
             this.TV_Messages.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TV_Messages_KeyDown);
@@ -540,7 +541,7 @@
             this.Frame_MsgMap.Controls.Add(this.Grid_MsgMap);
             this.Frame_MsgMap.Location = new System.Drawing.Point(379, 66);
             this.Frame_MsgMap.Name = "Frame_MsgMap";
-            this.Frame_MsgMap.Size = new System.Drawing.Size(414, 594);
+            this.Frame_MsgMap.Size = new System.Drawing.Size(414, 573);
             this.Frame_MsgMap.TabIndex = 5;
             this.Frame_MsgMap.TabStop = false;
             this.Frame_MsgMap.Text = "Message Map";
@@ -602,7 +603,7 @@
             this.Grid_MsgMap.Name = "Grid_MsgMap";
             this.Grid_MsgMap.RowHeadersWidth = 71;
             this.Grid_MsgMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.Grid_MsgMap.Size = new System.Drawing.Size(399, 544);
+            this.Grid_MsgMap.Size = new System.Drawing.Size(399, 523);
             this.Grid_MsgMap.TabIndex = 0;
             this.Grid_MsgMap.SizeChanged += new System.EventHandler(this.Grid_MsgMapSizeChanged);
             // 
@@ -680,7 +681,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 66);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(370, 594);
+            this.tabControl1.Size = new System.Drawing.Size(370, 573);
             this.tabControl1.TabIndex = 2;
             // 
             // Tab_Controller
@@ -921,12 +922,13 @@
             this.Tab_Parameter.Location = new System.Drawing.Point(4, 22);
             this.Tab_Parameter.Name = "Tab_Parameter";
             this.Tab_Parameter.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Parameter.Size = new System.Drawing.Size(362, 568);
+            this.Tab_Parameter.Size = new System.Drawing.Size(362, 547);
             this.Tab_Parameter.TabIndex = 1;
             this.Tab_Parameter.Text = "Parameter";
             // 
             // Grp_ParameterForm
             // 
+            this.Grp_ParameterForm.Controls.Add(this.Lbl_ParamMinMax);
             this.Grp_ParameterForm.Controls.Add(this.Grp_Alarms);
             this.Grp_ParameterForm.Controls.Add(this.Cmd_EnumDefinition);
             this.Grp_ParameterForm.Controls.Add(this.Txt_Decimals);
@@ -962,7 +964,7 @@
             this.Grp_ParameterForm.Enabled = false;
             this.Grp_ParameterForm.Location = new System.Drawing.Point(6, 6);
             this.Grp_ParameterForm.Name = "Grp_ParameterForm";
-            this.Grp_ParameterForm.Size = new System.Drawing.Size(348, 556);
+            this.Grp_ParameterForm.Size = new System.Drawing.Size(348, 542);
             this.Grp_ParameterForm.TabIndex = 16;
             this.Grp_ParameterForm.TabStop = false;
             // 
@@ -987,18 +989,165 @@
             this.Grp_Alarms.Controls.Add(this.Pic_WarningMin_Backcolor);
             this.Grp_Alarms.Controls.Add(this.Lbl_Alarms_Backcolor);
             this.Grp_Alarms.Controls.Add(this.Txt_WarningMin);
-            this.Grp_Alarms.Location = new System.Drawing.Point(12, 372);
+            this.Grp_Alarms.Location = new System.Drawing.Point(12, 363);
             this.Grp_Alarms.Name = "Grp_Alarms";
-            this.Grp_Alarms.Size = new System.Drawing.Size(330, 149);
+            this.Grp_Alarms.Size = new System.Drawing.Size(330, 144);
             this.Grp_Alarms.TabIndex = 50;
             this.Grp_Alarms.TabStop = false;
             this.Grp_Alarms.Text = "Warnings and alarms";
+            // 
+            // Pic_AlarmMax_Forecolor
+            // 
+            this.Pic_AlarmMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_AlarmMax_Forecolor.Enabled = false;
+            this.Pic_AlarmMax_Forecolor.Location = new System.Drawing.Point(269, 117);
+            this.Pic_AlarmMax_Forecolor.Name = "Pic_AlarmMax_Forecolor";
+            this.Pic_AlarmMax_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMax_Forecolor.TabIndex = 73;
+            this.Pic_AlarmMax_Forecolor.TabStop = false;
+            this.Pic_AlarmMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Forecolor_DoubleClick);
+            // 
+            // Pic_AlarmMax_Backcolor
+            // 
+            this.Pic_AlarmMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_AlarmMax_Backcolor.Enabled = false;
+            this.Pic_AlarmMax_Backcolor.Location = new System.Drawing.Point(206, 117);
+            this.Pic_AlarmMax_Backcolor.Name = "Pic_AlarmMax_Backcolor";
+            this.Pic_AlarmMax_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMax_Backcolor.TabIndex = 72;
+            this.Pic_AlarmMax_Backcolor.TabStop = false;
+            this.Pic_AlarmMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Backcolor_DoubleClick);
+            // 
+            // Pic_AlarmMin_Forecolor
+            // 
+            this.Pic_AlarmMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_AlarmMin_Forecolor.Enabled = false;
+            this.Pic_AlarmMin_Forecolor.Location = new System.Drawing.Point(269, 39);
+            this.Pic_AlarmMin_Forecolor.Name = "Pic_AlarmMin_Forecolor";
+            this.Pic_AlarmMin_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMin_Forecolor.TabIndex = 71;
+            this.Pic_AlarmMin_Forecolor.TabStop = false;
+            this.Pic_AlarmMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Forecolor_DoubleClick);
+            // 
+            // Pic_AlarmMin_Backcolor
+            // 
+            this.Pic_AlarmMin_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_AlarmMin_Backcolor.Enabled = false;
+            this.Pic_AlarmMin_Backcolor.Location = new System.Drawing.Point(206, 39);
+            this.Pic_AlarmMin_Backcolor.Name = "Pic_AlarmMin_Backcolor";
+            this.Pic_AlarmMin_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMin_Backcolor.TabIndex = 70;
+            this.Pic_AlarmMin_Backcolor.TabStop = false;
+            this.Pic_AlarmMin_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Backcolor_DoubleClick);
+            // 
+            // Pic_WarningMax_Forecolor
+            // 
+            this.Pic_WarningMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_WarningMax_Forecolor.Enabled = false;
+            this.Pic_WarningMax_Forecolor.Location = new System.Drawing.Point(269, 90);
+            this.Pic_WarningMax_Forecolor.Name = "Pic_WarningMax_Forecolor";
+            this.Pic_WarningMax_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMax_Forecolor.TabIndex = 69;
+            this.Pic_WarningMax_Forecolor.TabStop = false;
+            this.Pic_WarningMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Forecolor_DoubleClick);
+            // 
+            // Pic_WarningMax_Backcolor
+            // 
+            this.Pic_WarningMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_WarningMax_Backcolor.Enabled = false;
+            this.Pic_WarningMax_Backcolor.Location = new System.Drawing.Point(206, 90);
+            this.Pic_WarningMax_Backcolor.Name = "Pic_WarningMax_Backcolor";
+            this.Pic_WarningMax_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMax_Backcolor.TabIndex = 68;
+            this.Pic_WarningMax_Backcolor.TabStop = false;
+            this.Pic_WarningMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Backcolor_DoubleClick);
+            // 
+            // Chk_AlarmMax
+            // 
+            this.Chk_AlarmMax.AutoSize = true;
+            this.Chk_AlarmMax.Enabled = false;
+            this.Chk_AlarmMax.Location = new System.Drawing.Point(13, 120);
+            this.Chk_AlarmMax.Name = "Chk_AlarmMax";
+            this.Chk_AlarmMax.Size = new System.Drawing.Size(94, 17);
+            this.Chk_AlarmMax.TabIndex = 67;
+            this.Chk_AlarmMax.Text = "Alarm limit max";
+            this.Chk_AlarmMax.UseVisualStyleBackColor = true;
+            this.Chk_AlarmMax.CheckedChanged += new System.EventHandler(this.Chk_AlarmMax_CheckedChanged);
+            // 
+            // Chk_AlarmMin
+            // 
+            this.Chk_AlarmMin.AutoSize = true;
+            this.Chk_AlarmMin.Enabled = false;
+            this.Chk_AlarmMin.Location = new System.Drawing.Point(13, 41);
+            this.Chk_AlarmMin.Name = "Chk_AlarmMin";
+            this.Chk_AlarmMin.Size = new System.Drawing.Size(91, 17);
+            this.Chk_AlarmMin.TabIndex = 66;
+            this.Chk_AlarmMin.Text = "Alarm limit min";
+            this.Chk_AlarmMin.UseVisualStyleBackColor = true;
+            this.Chk_AlarmMin.CheckedChanged += new System.EventHandler(this.Chk_AlarmMin_CheckedChanged);
+            // 
+            // Chk_WarningMax
+            // 
+            this.Chk_WarningMax.AutoSize = true;
+            this.Chk_WarningMax.Enabled = false;
+            this.Chk_WarningMax.Location = new System.Drawing.Point(13, 92);
+            this.Chk_WarningMax.Name = "Chk_WarningMax";
+            this.Chk_WarningMax.Size = new System.Drawing.Size(108, 17);
+            this.Chk_WarningMax.TabIndex = 65;
+            this.Chk_WarningMax.Text = "Warning limit max";
+            this.Chk_WarningMax.UseVisualStyleBackColor = true;
+            this.Chk_WarningMax.CheckedChanged += new System.EventHandler(this.Chk_WarningMax_CheckedChanged);
+            // 
+            // Txt_AlarmMax
+            // 
+            this.Txt_AlarmMax.Enabled = false;
+            this.Txt_AlarmMax.Location = new System.Drawing.Point(124, 117);
+            this.Txt_AlarmMax.Name = "Txt_AlarmMax";
+            this.Txt_AlarmMax.Size = new System.Drawing.Size(76, 20);
+            this.Txt_AlarmMax.TabIndex = 64;
+            // 
+            // Txt_AlarmMin
+            // 
+            this.Txt_AlarmMin.Enabled = false;
+            this.Txt_AlarmMin.Location = new System.Drawing.Point(124, 39);
+            this.Txt_AlarmMin.Name = "Txt_AlarmMin";
+            this.Txt_AlarmMin.Size = new System.Drawing.Size(76, 20);
+            this.Txt_AlarmMin.TabIndex = 63;
+            // 
+            // Txt_WarningMax
+            // 
+            this.Txt_WarningMax.Enabled = false;
+            this.Txt_WarningMax.Location = new System.Drawing.Point(124, 90);
+            this.Txt_WarningMax.Name = "Txt_WarningMax";
+            this.Txt_WarningMax.Size = new System.Drawing.Size(76, 20);
+            this.Txt_WarningMax.TabIndex = 62;
+            // 
+            // Lbl_Alarms_Forecolor
+            // 
+            this.Lbl_Alarms_Forecolor.Enabled = false;
+            this.Lbl_Alarms_Forecolor.Location = new System.Drawing.Point(269, 19);
+            this.Lbl_Alarms_Forecolor.Name = "Lbl_Alarms_Forecolor";
+            this.Lbl_Alarms_Forecolor.Size = new System.Drawing.Size(55, 13);
+            this.Lbl_Alarms_Forecolor.TabIndex = 61;
+            this.Lbl_Alarms_Forecolor.Text = "Forecolor";
+            this.Lbl_Alarms_Forecolor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // Pic_WarningMin_Forecolor
+            // 
+            this.Pic_WarningMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pic_WarningMin_Forecolor.Enabled = false;
+            this.Pic_WarningMin_Forecolor.Location = new System.Drawing.Point(269, 65);
+            this.Pic_WarningMin_Forecolor.Name = "Pic_WarningMin_Forecolor";
+            this.Pic_WarningMin_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMin_Forecolor.TabIndex = 60;
+            this.Pic_WarningMin_Forecolor.TabStop = false;
+            this.Pic_WarningMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMin_Forecolor_DoubleClick);
             // 
             // Chk_WarningMin
             // 
             this.Chk_WarningMin.AutoSize = true;
             this.Chk_WarningMin.Enabled = false;
-            this.Chk_WarningMin.Location = new System.Drawing.Point(13, 41);
+            this.Chk_WarningMin.Location = new System.Drawing.Point(13, 67);
             this.Chk_WarningMin.Name = "Chk_WarningMin";
             this.Chk_WarningMin.Size = new System.Drawing.Size(105, 17);
             this.Chk_WarningMin.TabIndex = 56;
@@ -1021,7 +1170,7 @@
             // 
             this.Pic_WarningMin_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_WarningMin_Backcolor.Enabled = false;
-            this.Pic_WarningMin_Backcolor.Location = new System.Drawing.Point(206, 39);
+            this.Pic_WarningMin_Backcolor.Location = new System.Drawing.Point(206, 65);
             this.Pic_WarningMin_Backcolor.Name = "Pic_WarningMin_Backcolor";
             this.Pic_WarningMin_Backcolor.Size = new System.Drawing.Size(55, 20);
             this.Pic_WarningMin_Backcolor.TabIndex = 52;
@@ -1041,7 +1190,7 @@
             // Txt_WarningMin
             // 
             this.Txt_WarningMin.Enabled = false;
-            this.Txt_WarningMin.Location = new System.Drawing.Point(124, 39);
+            this.Txt_WarningMin.Location = new System.Drawing.Point(124, 65);
             this.Txt_WarningMin.Name = "Txt_WarningMin";
             this.Txt_WarningMin.Size = new System.Drawing.Size(76, 20);
             this.Txt_WarningMin.TabIndex = 49;
@@ -1136,6 +1285,7 @@
             this.Chk_Signed.TabIndex = 41;
             this.Chk_Signed.Text = "Signed";
             this.Chk_Signed.UseVisualStyleBackColor = true;
+            this.Chk_Signed.CheckedChanged += new System.EventHandler(this.Chk_Signed_CheckedChanged);
             // 
             // Lbl_LinearizationInfo_2
             // 
@@ -1228,7 +1378,7 @@
             // 
             // Cmd_CancelNewParam
             // 
-            this.Cmd_CancelNewParam.Location = new System.Drawing.Point(192, 527);
+            this.Cmd_CancelNewParam.Location = new System.Drawing.Point(186, 513);
             this.Cmd_CancelNewParam.Name = "Cmd_CancelNewParam";
             this.Cmd_CancelNewParam.Size = new System.Drawing.Size(75, 23);
             this.Cmd_CancelNewParam.TabIndex = 31;
@@ -1238,7 +1388,7 @@
             // 
             // Cmd_CreateParameter
             // 
-            this.Cmd_CreateParameter.Location = new System.Drawing.Point(273, 527);
+            this.Cmd_CreateParameter.Location = new System.Drawing.Point(267, 513);
             this.Cmd_CreateParameter.Name = "Cmd_CreateParameter";
             this.Cmd_CreateParameter.Size = new System.Drawing.Size(75, 23);
             this.Cmd_CreateParameter.TabIndex = 27;
@@ -1300,6 +1450,7 @@
             this.Txt_ParamZero.Name = "Txt_ParamZero";
             this.Txt_ParamZero.Size = new System.Drawing.Size(72, 20);
             this.Txt_ParamZero.TabIndex = 25;
+            this.Txt_ParamZero.TextChanged += new System.EventHandler(this.Txt_ParamZero_TextChanged);
             this.Txt_ParamZero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label12
@@ -1317,6 +1468,7 @@
             this.Txt_ParamGain.Name = "Txt_ParamGain";
             this.Txt_ParamGain.Size = new System.Drawing.Size(72, 20);
             this.Txt_ParamGain.TabIndex = 23;
+            this.Txt_ParamGain.TextChanged += new System.EventHandler(this.Txt_ParamGain_TextChanged);
             this.Txt_ParamGain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label13
@@ -1334,6 +1486,7 @@
             this.Txt_ParamLength.Name = "Txt_ParamLength";
             this.Txt_ParamLength.Size = new System.Drawing.Size(72, 20);
             this.Txt_ParamLength.TabIndex = 21;
+            this.Txt_ParamLength.TextChanged += new System.EventHandler(this.Txt_ParamLength_TextChanged);
             this.Txt_ParamLength.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label11
@@ -1549,158 +1702,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Pic_WarningMin_Forecolor
+            // Lbl_ParamMinMax
             // 
-            this.Pic_WarningMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_WarningMin_Forecolor.Enabled = false;
-            this.Pic_WarningMin_Forecolor.Location = new System.Drawing.Point(269, 39);
-            this.Pic_WarningMin_Forecolor.Name = "Pic_WarningMin_Forecolor";
-            this.Pic_WarningMin_Forecolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_WarningMin_Forecolor.TabIndex = 60;
-            this.Pic_WarningMin_Forecolor.TabStop = false;
-            this.Pic_WarningMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMin_Forecolor_DoubleClick);
-            // 
-            // Lbl_Alarms_Forecolor
-            // 
-            this.Lbl_Alarms_Forecolor.Enabled = false;
-            this.Lbl_Alarms_Forecolor.Location = new System.Drawing.Point(269, 19);
-            this.Lbl_Alarms_Forecolor.Name = "Lbl_Alarms_Forecolor";
-            this.Lbl_Alarms_Forecolor.Size = new System.Drawing.Size(55, 13);
-            this.Lbl_Alarms_Forecolor.TabIndex = 61;
-            this.Lbl_Alarms_Forecolor.Text = "Forecolor";
-            this.Lbl_Alarms_Forecolor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Txt_WarningMax
-            // 
-            this.Txt_WarningMax.Enabled = false;
-            this.Txt_WarningMax.Location = new System.Drawing.Point(124, 65);
-            this.Txt_WarningMax.Name = "Txt_WarningMax";
-            this.Txt_WarningMax.Size = new System.Drawing.Size(76, 20);
-            this.Txt_WarningMax.TabIndex = 62;
-            // 
-            // Txt_AlarmMin
-            // 
-            this.Txt_AlarmMin.Enabled = false;
-            this.Txt_AlarmMin.Location = new System.Drawing.Point(124, 91);
-            this.Txt_AlarmMin.Name = "Txt_AlarmMin";
-            this.Txt_AlarmMin.Size = new System.Drawing.Size(76, 20);
-            this.Txt_AlarmMin.TabIndex = 63;
-            // 
-            // Txt_AlarmMax
-            // 
-            this.Txt_AlarmMax.Enabled = false;
-            this.Txt_AlarmMax.Location = new System.Drawing.Point(124, 117);
-            this.Txt_AlarmMax.Name = "Txt_AlarmMax";
-            this.Txt_AlarmMax.Size = new System.Drawing.Size(76, 20);
-            this.Txt_AlarmMax.TabIndex = 64;
-            // 
-            // Chk_WarningMax
-            // 
-            this.Chk_WarningMax.AutoSize = true;
-            this.Chk_WarningMax.Enabled = false;
-            this.Chk_WarningMax.Location = new System.Drawing.Point(13, 67);
-            this.Chk_WarningMax.Name = "Chk_WarningMax";
-            this.Chk_WarningMax.Size = new System.Drawing.Size(108, 17);
-            this.Chk_WarningMax.TabIndex = 65;
-            this.Chk_WarningMax.Text = "Warning limit max";
-            this.Chk_WarningMax.UseVisualStyleBackColor = true;
-            this.Chk_WarningMax.CheckedChanged += new System.EventHandler(this.Chk_WarningMax_CheckedChanged);
-            // 
-            // Chk_AlarmMin
-            // 
-            this.Chk_AlarmMin.AutoSize = true;
-            this.Chk_AlarmMin.Enabled = false;
-            this.Chk_AlarmMin.Location = new System.Drawing.Point(13, 93);
-            this.Chk_AlarmMin.Name = "Chk_AlarmMin";
-            this.Chk_AlarmMin.Size = new System.Drawing.Size(91, 17);
-            this.Chk_AlarmMin.TabIndex = 66;
-            this.Chk_AlarmMin.Text = "Alarm limit min";
-            this.Chk_AlarmMin.UseVisualStyleBackColor = true;
-            this.Chk_AlarmMin.CheckedChanged += new System.EventHandler(this.Chk_AlarmMin_CheckedChanged);
-            // 
-            // Chk_AlarmMax
-            // 
-            this.Chk_AlarmMax.AutoSize = true;
-            this.Chk_AlarmMax.Enabled = false;
-            this.Chk_AlarmMax.Location = new System.Drawing.Point(13, 120);
-            this.Chk_AlarmMax.Name = "Chk_AlarmMax";
-            this.Chk_AlarmMax.Size = new System.Drawing.Size(94, 17);
-            this.Chk_AlarmMax.TabIndex = 67;
-            this.Chk_AlarmMax.Text = "Alarm limit max";
-            this.Chk_AlarmMax.UseVisualStyleBackColor = true;
-            this.Chk_AlarmMax.CheckedChanged += new System.EventHandler(this.Chk_AlarmMax_CheckedChanged);
-            // 
-            // Pic_WarningMax_Backcolor
-            // 
-            this.Pic_WarningMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_WarningMax_Backcolor.Enabled = false;
-            this.Pic_WarningMax_Backcolor.Location = new System.Drawing.Point(206, 65);
-            this.Pic_WarningMax_Backcolor.Name = "Pic_WarningMax_Backcolor";
-            this.Pic_WarningMax_Backcolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_WarningMax_Backcolor.TabIndex = 68;
-            this.Pic_WarningMax_Backcolor.TabStop = false;
-            this.Pic_WarningMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Backcolor_DoubleClick);
-            // 
-            // Pic_WarningMax_Forecolor
-            // 
-            this.Pic_WarningMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_WarningMax_Forecolor.Enabled = false;
-            this.Pic_WarningMax_Forecolor.Location = new System.Drawing.Point(269, 65);
-            this.Pic_WarningMax_Forecolor.Name = "Pic_WarningMax_Forecolor";
-            this.Pic_WarningMax_Forecolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_WarningMax_Forecolor.TabIndex = 69;
-            this.Pic_WarningMax_Forecolor.TabStop = false;
-            this.Pic_WarningMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Forecolor_DoubleClick);
-            // 
-            // Pic_AlarmMin_Backcolor
-            // 
-            this.Pic_AlarmMin_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_AlarmMin_Backcolor.Enabled = false;
-            this.Pic_AlarmMin_Backcolor.Location = new System.Drawing.Point(206, 91);
-            this.Pic_AlarmMin_Backcolor.Name = "Pic_AlarmMin_Backcolor";
-            this.Pic_AlarmMin_Backcolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_AlarmMin_Backcolor.TabIndex = 70;
-            this.Pic_AlarmMin_Backcolor.TabStop = false;
-            this.Pic_AlarmMin_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Backcolor_DoubleClick);
-            // 
-            // Pic_AlarmMin_Forecolor
-            // 
-            this.Pic_AlarmMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_AlarmMin_Forecolor.Enabled = false;
-            this.Pic_AlarmMin_Forecolor.Location = new System.Drawing.Point(269, 91);
-            this.Pic_AlarmMin_Forecolor.Name = "Pic_AlarmMin_Forecolor";
-            this.Pic_AlarmMin_Forecolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_AlarmMin_Forecolor.TabIndex = 71;
-            this.Pic_AlarmMin_Forecolor.TabStop = false;
-            this.Pic_AlarmMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Forecolor_DoubleClick);
-            // 
-            // Pic_AlarmMax_Backcolor
-            // 
-            this.Pic_AlarmMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_AlarmMax_Backcolor.Enabled = false;
-            this.Pic_AlarmMax_Backcolor.Location = new System.Drawing.Point(206, 116);
-            this.Pic_AlarmMax_Backcolor.Name = "Pic_AlarmMax_Backcolor";
-            this.Pic_AlarmMax_Backcolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_AlarmMax_Backcolor.TabIndex = 72;
-            this.Pic_AlarmMax_Backcolor.TabStop = false;
-            this.Pic_AlarmMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Backcolor_DoubleClick);
-            // 
-            // Pic_AlarmMax_Forecolor
-            // 
-            this.Pic_AlarmMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Pic_AlarmMax_Forecolor.Enabled = false;
-            this.Pic_AlarmMax_Forecolor.Location = new System.Drawing.Point(269, 117);
-            this.Pic_AlarmMax_Forecolor.Name = "Pic_AlarmMax_Forecolor";
-            this.Pic_AlarmMax_Forecolor.Size = new System.Drawing.Size(55, 20);
-            this.Pic_AlarmMax_Forecolor.TabIndex = 73;
-            this.Pic_AlarmMax_Forecolor.TabStop = false;
-            this.Pic_AlarmMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Forecolor_DoubleClick);
+            this.Lbl_ParamMinMax.AutoSize = true;
+            this.Lbl_ParamMinMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_ParamMinMax.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Lbl_ParamMinMax.Location = new System.Drawing.Point(159, 154);
+            this.Lbl_ParamMinMax.Name = "Lbl_ParamMinMax";
+            this.Lbl_ParamMinMax.Size = new System.Drawing.Size(61, 13);
+            this.Lbl_ParamMinMax.TabIndex = 51;
+            this.Lbl_ParamMinMax.Text = "Min: / Max:";
             // 
             // Frm_CANConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1181, 702);
+            this.ClientSize = new System.Drawing.Size(1181, 681);
             this.Controls.Add(this.Split_Tree_Props);
             this.Controls.Add(this.toolStrip1);
             this.Icon = global::CANStream.Icones.CANStream_Icone;
@@ -1733,18 +1750,18 @@
             this.Grp_ParameterForm.PerformLayout();
             this.Grp_Alarms.ResumeLayout(false);
             this.Grp_Alarms.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Forecolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Backcolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Forecolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Backcolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Forecolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Backcolor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Forecolor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Backcolor)).EndInit();
             this.Grp_ParamMultiplexer.ResumeLayout(false);
             this.Grp_ParamMultiplexer.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMin_Forecolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Backcolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_WarningMax_Forecolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Backcolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMin_Forecolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Backcolor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_AlarmMax_Forecolor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1899,5 +1916,6 @@
         private System.Windows.Forms.PictureBox Pic_WarningMax_Backcolor;
         private System.Windows.Forms.CheckBox Chk_AlarmMax;
         private System.Windows.Forms.ColorDialog Dlg_SelectColor;
+        private System.Windows.Forms.Label Lbl_ParamMinMax;
     }
 }
