@@ -666,6 +666,30 @@ namespace CANStream
 
         #endregion
 
+        #region Parameter min max updates
+
+        private void Txt_ParamLength_TextChanged(object sender, EventArgs e)
+        {
+            ShowParameterMinMax();
+        }
+
+        private void Txt_ParamGain_TextChanged(object sender, EventArgs e)
+        {
+            ShowParameterMinMax();
+        }
+
+        private void Txt_ParamZero_TextChanged(object sender, EventArgs e)
+        {
+            ShowParameterMinMax();
+        }
+
+        private void Chk_Signed_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowParameterMinMax();
+        }
+
+        #endregion
+
         #endregion
 
         #region Misc
@@ -1187,7 +1211,8 @@ namespace CANStream
                                     Chk_AlarmMin.Checked = oActiveParameter.Alarms.AlarmLimitMin.Enabled;
                                     Chk_AlarmMax.Checked = oActiveParameter.Alarms.AlarmLimitMax.Enabled;
 
-            						Cmd_CreateParameter.Text = "Modify";
+                                    ShowParameterMinMax();
+                                    Cmd_CreateParameter.Text = "Modify";
             						
             						bParameterEdition = false;
             					}
@@ -2564,6 +2589,7 @@ namespace CANStream
             Chk_WarningMax.Checked = false;
             Chk_AlarmMin.Checked = false;
             Chk_AlarmMax.Checked = false;
+            Lbl_ParamMinMax.Text = "";
 
             bParameterEdition = false;
         }
@@ -2615,6 +2641,53 @@ namespace CANStream
         {
         	Frm_CANConfiguration_VirtualChannelReference Frm = new Frm_CANConfiguration_VirtualChannelReference(this);
         	Frm.Show();
+        }
+
+        private void ShowParameterMinMax()
+        {
+            if (!(Txt_ParamLength.Text.Equals("")))
+            {
+                int BitLength = 0;
+
+                if(int.TryParse(Txt_ParamLength.Text, out BitLength))
+                {
+                    double Gain = 0;
+                    if (!(double.TryParse(Txt_ParamGain.Text, out Gain)))
+                    {
+                        Gain = 1; //Assumes 1 if not set or not correctly set
+                    }
+
+                    double Offset = 0;
+                    if (!(double.TryParse(Txt_ParamZero.Text, out Offset)))
+                    {
+                        Offset = 0; //Assumes 0 if not set or not correctly set
+                    }
+
+                    double EngMin = 0;
+                    double EngMax = 0;
+
+                    UInt64 RawMax = (UInt64)(Math.Pow(2, BitLength) - 1);
+
+                    if (Chk_Signed.Checked)
+                    {
+                        EngMin = ((double)(RawMax / 2) * Gain + Offset);
+                        if (EngMin > 0) EngMin *= -1;
+
+                        EngMax = ((double)((RawMax / 2) + 1) * Gain + Offset);
+                        if (EngMax < 0) EngMax *= -1;
+                    }
+                    else
+                    {
+                        EngMin = 0 * Gain + Offset;
+                        EngMax = (double)(RawMax) * Gain + Offset;
+                    }
+
+                    Lbl_ParamMinMax.Text = "Min: " + EngMin.ToString() + " \\ Max: " + EngMax.ToString();
+                    return;
+                }
+            }
+
+            Lbl_ParamMinMax.Text = "";
         }
 
         #region AlarmControls
