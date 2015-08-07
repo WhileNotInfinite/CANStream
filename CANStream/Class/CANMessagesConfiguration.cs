@@ -284,37 +284,70 @@ namespace CANStream
         /// <returns>Numerical decoded value of the parameter</returns>
         public double SetParameterFormatedValue(string FormatedValue)
         {
-            double DecodValue = 0;
+            double DecodValue = double.NaN;
 
-            switch (FormatType)
+            try
             {
-                case CanParameterValueFormat.Auto:
+                switch (FormatType)
+                {
+                    case CanParameterValueFormat.Auto:
 
-                    DecodValue = Convert.ToDouble(FormatedValue);
-                    break;
+                        DecodValue = Convert.ToDouble(FormatedValue);
+                        break;
 
-                case CanParameterValueFormat.Binary:
+                    case CanParameterValueFormat.Binary:
 
-                    DecodValue = (double)(Convert.ToInt32(FormatedValue, 2));
-                    break;
+                        DecodValue = (double)(Convert.ToInt32(FormatedValue, 2));
+                        break;
 
-                case CanParameterValueFormat.Decimal:
+                    case CanParameterValueFormat.Decimal:
 
-                    DecodValue = Convert.ToDouble(FormatedValue);
-                    break;
+                        DecodValue = Convert.ToDouble(FormatedValue);
+                        break;
 
-                case CanParameterValueFormat.Enum:
+                    case CanParameterValueFormat.Enum:
 
-                    DecodValue = (double)GetEnumValue(FormatedValue);
-                    break;
+                        DecodValue = (double)GetEnumValue(FormatedValue);
+                        break;
 
-                case CanParameterValueFormat.Hexadecimal:
+                    case CanParameterValueFormat.Hexadecimal:
 
-                    DecodValue = (double)(int.Parse(FormatedValue, System.Globalization.NumberStyles.HexNumber));
-                    break;
+                        if (FormatedValue.StartsWith("0x")) //Remove '0x' prefix
+                        {
+                            FormatedValue = FormatedValue.Substring(2, FormatedValue.Length - 2);
+                        }
+
+                        DecodValue = (double)(int.Parse(FormatedValue, System.Globalization.NumberStyles.HexNumber)); 
+                        break;
+                }
+            }
+            catch
+            {
+                //Nothing
             }
 
             return (DecodValue);
+        }
+
+        /// <summary>
+        /// Return all enumeration text into an array of string
+        /// </summary>
+        /// <returns>All enumeration text</returns>
+        public string[] GetEnumerationNames()
+        {
+            string[] Names = null;
+
+            if (Enums.Count > 0)
+            {
+                Names = new string[Enums.Count];
+
+                for (int i = 0; i < Enums.Count; i++)
+                {
+                    Names[i] = Enums[i].Text;
+                }
+            }
+
+            return (Names);
         }
 
         #endregion
