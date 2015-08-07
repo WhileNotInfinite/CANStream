@@ -444,12 +444,17 @@ namespace CANStream
 		{
 			StopRecording();
 		}
-		
-		#region TSSB_View
-		
-		#region TSMI_SpyManual
-		
-		private void TSMI_TxMessagesClick(object sender, EventArgs e)
+
+        private void TSB_RecordSelection_Click(object sender, EventArgs e)
+        {
+            RecordConversionSelection();
+        }
+
+        #region TSSB_View
+
+        #region TSMI_SpyManual
+
+        private void TSMI_TxMessagesClick(object sender, EventArgs e)
 		{
 			Switch_Manual_Tx_Panel();
 		}
@@ -3870,12 +3875,18 @@ namespace CANStream
         		HostForm.LaunchConvertRecords();
         	}
         }
-				
-		#region Recording Event/Session management
-		
-		#region Recording Events
-		
-		private string CreateRecordEventFolder(string RootFolder)
+
+        private void RecordConversionSelection()
+        {
+            Frm_TrcFileSelection Frm = new Frm_TrcFileSelection(CANStreamTools.TraceConversionOptions.SourceFileFolder, (MainForm)this.ParentForm);
+            Frm.Show();
+        }
+
+        #region Recording Event/Session management
+
+        #region Recording Events
+
+        private string CreateRecordEventFolder(string RootFolder)
         {
         	string EventDirectoryPath = RootFolder + "\\" + oRecordEvent.Name;
         	string EventInfoFilePath = EventDirectoryPath + "\\EventDetails.xml";
