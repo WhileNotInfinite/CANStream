@@ -340,9 +340,9 @@ namespace CANStream
 			TxRawMessages = null;
 			bVirtualParamTx = false;
             bRawMsgSending = false;
-			
-			//Trace recording init
-			RecordMode = RecordingMode.Manual;
+
+            //Trace recording init
+            RecordMode = RecordingMode.Manual;
 			RecordTrigger = new CS_AcquisitionTrigger();
 			RecordTrigger.TriggerStatusChanged += new EventHandler<TriggerChangedEventArg>(RecordTrigger_TriggerStatusChanged);
 			
@@ -1158,25 +1158,124 @@ namespace CANStream
 		{
 			Open_RawMessages();
 		}
-		
-		#endregion
-		
-		#region DataGrid Manual CAN Config
-        
+
+        #endregion
+
+        #region DataGrid Manual CAN Config
+
+        private void Grid_CANData_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (!(Grid_CANData.CurrentCell.Tag == null))
+            {
+                CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
+
+                if (oParam.ValueFormat.FormatType.Equals(CanParameterValueFormat.Enum))
+                {
+                    ListBox oList = new ListBox();
+                    Rectangle CellRect = Grid_CANData.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+                    oList.Visible = false;
+                    Grid_CANData.Controls.Add(oList);
+
+                    oList.Location = CellRect.Location;
+                    oList.Width = CellRect.Width;
+                    oList.Height = CellRect.Height * 2;
+                    oList.Tag = Grid_CANData.CurrentCell;
+
+                    oList.Items.AddRange(oParam.ValueFormat.GetEnumerationNames());
+
+                    oList.SelectedIndexChanged += new EventHandler(EnumList_SelectedIndexChanged);
+                    oList.LostFocus += new EventHandler(EnumList_LostFocus);
+                    oList.KeyDown += new KeyEventHandler(EnumList_KeyDown);
+
+                    oList.Visible = true;
+                    oList.Focus();
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void Grid_CANDataCellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
-        	UpdateManualControlMessagesData();
+            if (!(Grid_CANData.CurrentCell.Tag == null))
+            {
+                CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
+
+                double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
+
+                if (!(Double.IsNaN(EngValue)))
+                {
+                    oParam.DecodedValue = EngValue;
+                    Grid_CANData.CurrentCell.Value= oParam.ValueFormat.GetParameterFormatedValue(EngValue);
+
+                    Color CellBackColor = SystemColors.Window;
+                    Color CellForeColor = SystemColors.WindowText;
+
+                    Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
+
+                    if (sAlarm.HasValue)
+                    {
+                        CellBackColor = sAlarm.Value.BackColor;
+                        CellForeColor = sAlarm.Value.ForeColor;
+                    }
+
+                    Grid_CANData.CurrentCell.Style.BackColor = CellBackColor;
+                    Grid_CANData.CurrentCell.Style.ForeColor = CellForeColor;
+
+                    UpdateManualControlMessagesData();
+                }
+                else
+                {
+                    MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+                                                Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                }
+            }
 		}
         
         private void Grid_CANDataSizeChanged(object sender, EventArgs e)
 		{
         	ResizeGridColumns(Grid_CANData, GRID_ENG_MANUAL_FILLER_COL);
 		}
-        
+
+        #region EnumList
+
+        private void EnumList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox oList = (ListBox)sender;
+
+            if (!(oList.Tag == null))
+            {
+                DataGridViewCell oCell = (DataGridViewCell)oList.Tag;
+                oCell.Value = oList.SelectedItem.ToString();
+            }
+
+            Grid_CANData.Controls.Remove(oList);
+        }
+
+        private void EnumList_LostFocus(object sender, EventArgs e)
+        {
+            ListBox oList = (ListBox)sender;
+            Grid_CANData.Controls.Remove(oList);
+
+        }
+
+        private void EnumList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData.Equals(Keys.Escape))
+            {
+                ListBox oList = (ListBox)sender;
+                Grid_CANData.Controls.Remove(oList);
+            }
+        }
+
         #endregion
-		
+
+        #endregion
+
         #region Grid_CANRawData
-        
+
         private void Grid_CANRawDataCellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			if (!((e.RowIndex == -1) || bRawMsgGridEdition))
@@ -2681,26 +2780,27 @@ namespace CANStream
 	        				//Cells value
 	        				Grid_CANData.Rows[iRow].HeaderCell.Value=oMsg.Identifier;          			
 	        				
-	        				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier;						//Identifier
-	        				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			//RxTx
-	        				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			//Period
+	        				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier;						            //Identifier
+	        				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			            //RxTx
+	        				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			            //Period
+	        				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	            //Mux value
+	        				Grid_CANData.Rows[iRow].Cells[4].Value = oParam.Name;                			            //Parameter name
+	        				Grid_CANData.Rows[iRow].Cells[5].Value = oParam.StartBit.ToString(); 			            //Parameter start bit
+	        				Grid_CANData.Rows[iRow].Cells[6].Value = oParam.Length.ToString();   			            //Parameter bit length
+	        				Grid_CANData.Rows[iRow].Cells[7].Value = oParam.Endianess.ToString(); 			            //Parameter endianess
 	        				
-	        				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	//Mux value
-	        				Grid_CANData.Rows[iRow].Cells[4].Value = oParam.Name;                			//Parameter name
-	        				Grid_CANData.Rows[iRow].Cells[5].Value = oParam.StartBit.ToString(); 			//Parameter start bit
-	        				Grid_CANData.Rows[iRow].Cells[6].Value = oParam.Length.ToString();   			//Parameter bit length
-	        				Grid_CANData.Rows[iRow].Cells[7].Value = oParam.Endianess.ToString(); 			//Parameter endianess
-	        				
-	        				if (oParam.Signed) Grid_CANData.Rows[iRow].Cells[8].Value = "Signed";			//Parameter signedness
+	        				if (oParam.Signed) Grid_CANData.Rows[iRow].Cells[8].Value = "Signed";			            //Parameter signedness
 	        				else Grid_CANData.Rows[iRow].Cells[8].Value = "Unsigned";
 	        				
-	        				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			//Linearization gain
-	        				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();     			//Linearization zero
-	        				Grid_CANData.Rows[iRow].Cells[11].Value = "0";                        			//Initial value
-	        				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							//Parameter unit
-	        				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;						//Parameter comment
-	        				
-	        				//Cells backcolor
+	        				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			            //Linearization gain
+	        				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();                           //Linearization zero
+                            Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetParameterFormatedValue(0);  //Initial value
+	        				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							            //Parameter unit
+	        				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;                                   //Parameter comment
+
+                            Grid_CANData.Rows[iRow].Cells[11].Tag = oParam;
+
+                            //Cells backcolor
                             Color InfoBackColor = Color.Empty;
 	        				if (oParam.IsVirtual) InfoBackColor=Color.LightGreen;
 	        				else				  InfoBackColor=Color.LightBlue;
@@ -2808,17 +2908,17 @@ namespace CANStream
 	        			
 	        			if(iParamRow!=-1)
 	    				{
-	    					double EngValue=0;
-	    					if(double.TryParse(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString(),out EngValue))
-	    					{
-	    						oParam.DecodedValue = EngValue;
-	    					}
-	    					else
-	    					{
-	    						MessageBox.Show("Value for " + oParam.Name + " must be a numeric decimal value !",
-	    						                Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-	    						                
-	    					}
+                            double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
+                            
+                            if (!(double.IsNaN(EngValue)))
+                            {
+                                oParam.DecodedValue = EngValue;
+                            }
+                            else
+                            {
+                                MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+                                                Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }                            
 	    				}
         			}
         		}
@@ -3362,14 +3462,29 @@ namespace CANStream
 		                		{
 		                			foreach(CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
 		                			{
-		                				string[] EngParamData = {
-		                											DecodedMessages[MsgIndex].Identifier.ToString(),
-		                											oParam.Name,
-		                											oParam.RawValue,
-		                											oParam.DecodedValue.ToString(),
-		                											oParam.Unit,
-		                											oParam.Comment,
-		                										};
+                                        //Process parameter alarms
+                                        Color AlarmBackColor = Color.Empty;
+                                        Color AlarmForeColor = Color.Empty;
+
+                                        Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
+
+                                        if (sAlarm.HasValue)
+                                        {
+                                            AlarmBackColor = sAlarm.Value.BackColor;
+                                            AlarmForeColor = sAlarm.Value.ForeColor;
+                                        }
+
+                                        object[] EngParamData = {
+                                                                    DecodedMessages[MsgIndex].Identifier.ToString(),
+                                                                    oParam.Name,
+                                                                    oParam.RawValue,
+                                                                    oParam.DecodedValue,
+                                                                    oParam.Unit,
+                                                                    oParam.Comment,
+                                                                    oParam.ValueFormat,
+                                                                    AlarmBackColor,
+                                                                    AlarmForeColor,
+                                                                };
 		                				
 		                				CurrentSpyViewer.Update_EngGridRow(EngParamData);
 		                				
@@ -3808,13 +3923,16 @@ namespace CANStream
         			{
 	        			oChan.bNewValue=false;
 	        			
-	        			string[] ChanData = {
+	        			object[] ChanData = {
 	        									"Virtual",
 	        									oChan.Name,
 	        									oChan.Expression,
 	        									oChan.Value.ToString(),
 	        									oChan.Unit,
 	        									oChan.Comment,
+                                                null,
+                                                Color.Empty,
+                                                Color.Empty,
 	        								};
 	        			
 	        			CurrentSpyViewer.Update_VirtualChannelValue(ChanData);
@@ -4785,15 +4903,15 @@ namespace CANStream
 				oRecordEvent = oRecEvent;
 			}
 		}
-		
-		#endregion
 
-		#endregion
-	}
-	
-	#region Control custom events arguments
-	
-	public class ControllerModeChangedEventArgs : EventArgs
+        #endregion
+
+        #endregion
+    }
+
+    #region Control custom events arguments
+
+    public class ControllerModeChangedEventArgs : EventArgs
 	{
 		public int CurrentMode {get; set;}
 	}

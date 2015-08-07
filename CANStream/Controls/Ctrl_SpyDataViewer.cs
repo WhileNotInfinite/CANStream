@@ -22,7 +22,10 @@ namespace CANStream
 		
 		private const int GRID_SPYENG_NAME = 1;
 		private const int GRID_SPYENG_VALUE = 3;
-		private const int GRID_MAX_COL_WIDTH = 60;
+        private const int GRID_SPYENG_FORMAT = 6;
+        private const int GRID_SPYENG_ALARM_BACKCOLOR = 7;
+        private const int GRID_SPYENG_ALARM_FORECOLOR = 8;
+        private const int GRID_MAX_COL_WIDTH = 60;
 		private const int GRID_RAW_SPY_FILLER_COL = 2;		//Column 'Data'
 		private const int GRID_ENG_SPY_FILLER_COL = 7;		//Column 'Comment' 		
 		private const int GRID_RAW_KEY_COL = 0;
@@ -541,46 +544,47 @@ namespace CANStream
 			}
 		}
 		
-		private void Add_EngGridRow(string[] Data)
+		private void Add_EngGridRow(object[] Data)
 		{
 			Grid_SpyEngineering.Rows.Add();
 			int iRow =  Grid_SpyEngineering.Rows.Count - 1;
 			
-			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0]; //Name
-			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1]; //ID
-			Grid_SpyEngineering.Rows[iRow].Cells[2].Value = Data[2]; //Raw value
-			Grid_SpyEngineering.Rows[iRow].Cells[3].Value = Data[3]; //Value
-			Grid_SpyEngineering.Rows[iRow].Cells[4].Value = Data[3]; //Min
-			Grid_SpyEngineering.Rows[iRow].Cells[5].Value = Data[3]; //Max
-			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[4]; //Unit
-			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[5]; //Comment
-			
-			if ((Grid_SpyEngineering.Rows.Count % 2) == 0)
+			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0].ToString(); //Name
+			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1].ToString(); //ID
+			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[5].ToString(); //Unit
+			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[6].ToString(); //Comment
+
+            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = 0; //Min physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = 0; //Max physical value
+
+            if ((Grid_SpyEngineering.Rows.Count % 2) == 0)
 			{
 				for(int i=0; i < Grid_SpyEngineering.Rows[iRow].Cells.Count; i++)
 				{
 					Grid_SpyEngineering.Rows[iRow].Cells[i].Style.BackColor = Color.LightBlue;
 				}
 			}
-		}
+
+            Update_EngGridRow(Data, false, iRow); //Update row values
+        }
 		
-		private void Add_EngGridRowVirtual(string[] Data)
+		private void Add_EngGridRowVirtual(object[] Data)
 		{
 			Grid_SpyEngineering.Rows.Add();
 			int iRow =  Grid_SpyEngineering.Rows.Count - 1;
 			
-			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0]; //Name
-			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1]; //ID
+			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0].ToString(); //Name
+			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1].ToString(); //ID
 			Grid_SpyEngineering.Rows[iRow].Cells[2].Value = ""; //Raw value
-			Grid_SpyEngineering.Rows[iRow].Cells[3].Value = Data[3]; //Value
-			Grid_SpyEngineering.Rows[iRow].Cells[4].Value = Data[3]; //Min
-			Grid_SpyEngineering.Rows[iRow].Cells[5].Value = Data[3]; //Max
-			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[4]; //Unit
-			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[5]; //Comment
+			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[5].ToString(); //Unit
+			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[6].ToString(); //Comment
 			
-			Grid_SpyEngineering.Rows[iRow].Cells[3].ToolTipText = Data[2];
-			
-			Color CellBackColor = Color.LightGreen;
+			Grid_SpyEngineering.Rows[iRow].Cells[3].ToolTipText = Data[2].ToString();
+
+            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = 0; //Min physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = 0; //Max physical value
+
+            Color CellBackColor = Color.LightGreen;
 			Color CellForeColor = Color.Black;
 			
 			if ((Grid_SpyEngineering.Rows.Count % 2) == 0)
@@ -594,7 +598,9 @@ namespace CANStream
 				Grid_SpyEngineering.Rows[iRow].Cells[i].Style.BackColor = CellBackColor;
 				Grid_SpyEngineering.Rows[iRow].Cells[i].Style.ForeColor = CellForeColor;
 			}
-		}
+
+            Update_EngGridRow(Data, true, iRow); //Update row values
+        }
 		
 		private void Filter_EngGrid(string sFilter)
 		{
@@ -633,44 +639,96 @@ namespace CANStream
 			Add_RawGridRow(Data);
 		}
 		
-		public void Update_EngGridRow(string[] Data)
+		public void Update_EngGridRow(object[] Data)
 		{
-			Update_EngGridRow(Data, false);
+            Update_EngGridRow(Data, false, -1);
 		}
 		
-		public void Update_EngGridRow(string[] Data, bool Virtual)
+		public void Update_EngGridRow(object[] Data, bool Virtual, int RowIndex)
 		{
-			foreach (DataGridViewRow oRow in Grid_SpyEngineering.Rows)
-			{
-				if (oRow.Cells[GRID_ENG_KEY_COL].Value.ToString().Equals(Data[GRID_ENG_KEY_COL]))
-				{
-					if (!Virtual) oRow.Cells[GRID_SPYENG_VALUE - 1].Value = Data[GRID_SPYENG_VALUE - 1];
-					oRow.Cells[GRID_SPYENG_VALUE].Value = Data[GRID_SPYENG_VALUE];
-					
-					//Min / Max value update
-					double CurrentVal = 0;
-					if (double.TryParse(Data[GRID_SPYENG_VALUE], out CurrentVal))
-					{
-						double OldVal = 0;
-						
-						OldVal = double.Parse(oRow.Cells[GRID_SPYENG_VALUE + 1].Value.ToString());
-						if (CurrentVal < OldVal) oRow.Cells[GRID_SPYENG_VALUE + 1].Value =  CurrentVal.ToString();
-						
-						OldVal = double.Parse(oRow.Cells[GRID_SPYENG_VALUE + 2].Value.ToString());
-						if (CurrentVal > OldVal) oRow.Cells[GRID_SPYENG_VALUE + 2].Value =  CurrentVal.ToString();
-					}
-					
-					return;
-				}
-			}
-			
-			if (Virtual) Add_EngGridRowVirtual(Data);
-			else Add_EngGridRow(Data);
+            DataGridViewRow oRow = null;
+
+            if (RowIndex != -1) //Index of the grid row to update given as argument
+            {
+                oRow = Grid_SpyEngineering.Rows[RowIndex]; //Go straight to that row
+            }
+            else //Index of the grid row to update not defined
+            {
+                //Search for the row having the same name as the 'Data' packet
+                for (int iRow = 0; iRow < Grid_SpyEngineering.Rows.Count; iRow++)
+                {
+                    if (Grid_SpyEngineering.Rows[iRow].Cells[GRID_ENG_KEY_COL].Value.ToString().Equals(Data[GRID_ENG_KEY_COL].ToString()))
+                    {
+                        oRow = Grid_SpyEngineering.Rows[iRow];
+                        break;
+                    }
+                }
+            }
+
+            if (!(oRow == null)) //The row to update has been found
+            {
+                //Raw value
+                if (!Virtual)
+                {
+                    oRow.Cells[GRID_SPYENG_VALUE - 1].Value = Data[GRID_SPYENG_VALUE - 1].ToString();
+                }
+
+                //Formated value
+                double CurrentVal = (double)Data[GRID_SPYENG_VALUE];
+                string CurrentValFormated;
+                CANParameterFormat oFormat = (CANParameterFormat)Data[GRID_SPYENG_FORMAT];
+
+                if (!(oFormat == null))
+                {
+                    CurrentValFormated = oFormat.GetParameterFormatedValue(CurrentVal);
+                }
+                else
+                {
+                    CurrentValFormated = CurrentVal.ToString();
+                }
+
+                oRow.Cells[GRID_SPYENG_VALUE].Value = CurrentValFormated;
+
+                //Alarm colors application
+                Color CellBackColor = (Color)Data[GRID_SPYENG_ALARM_BACKCOLOR];
+                Color CellForeColor = (Color)Data[GRID_SPYENG_ALARM_FORECOLOR];
+
+                if (CellBackColor.Equals(Color.Empty) || CellForeColor.Equals(Color.Empty))
+                {
+                    CellBackColor = oRow.Cells[0].Style.BackColor; //Default cell backcolor
+                    CellForeColor = oRow.Cells[0].Style.ForeColor; //Default cell forecolor
+                }
+
+                oRow.Cells[GRID_SPYENG_VALUE].Style.BackColor = CellBackColor;
+                oRow.Cells[GRID_SPYENG_VALUE].Style.ForeColor = CellForeColor;
+
+                //Min / Max value update
+                if (CurrentVal < (double)oRow.Cells[GRID_SPYENG_VALUE + 1].Tag)
+                {
+                    oRow.Cells[GRID_SPYENG_VALUE + 1].Value = CurrentValFormated;
+                    oRow.Cells[GRID_SPYENG_VALUE + 1].Tag = CurrentVal;
+                    oRow.Cells[GRID_SPYENG_VALUE + 1].Style.BackColor = CellBackColor;
+                    oRow.Cells[GRID_SPYENG_VALUE + 1].Style.ForeColor = CellForeColor;
+                }
+
+                if (CurrentVal > (double)oRow.Cells[GRID_SPYENG_VALUE + 2].Tag)
+                {
+                    oRow.Cells[GRID_SPYENG_VALUE + 2].Value = CurrentValFormated;
+                    oRow.Cells[GRID_SPYENG_VALUE + 2].Tag = CurrentVal;
+                    oRow.Cells[GRID_SPYENG_VALUE + 2].Style.BackColor = CellBackColor;
+                    oRow.Cells[GRID_SPYENG_VALUE + 2].Style.ForeColor = CellForeColor;
+                }
+            }
+            else //The row doesn't exist yet, we have to create it
+            {
+                if (Virtual) Add_EngGridRowVirtual(Data);
+                else Add_EngGridRow(Data);
+            }
 		}
 		
-		public void Update_VirtualChannelValue(string[] Data)
+		public void Update_VirtualChannelValue(object[] Data)
 		{
-			Update_EngGridRow(Data, true);
+            Update_EngGridRow(Data, true, -1);
 		}
 		
 		public void HideActiveRow()
