@@ -216,6 +216,7 @@ namespace CANStream
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.TSB_RecordSelection = new System.Windows.Forms.ToolStripButton();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -266,6 +267,7 @@ namespace CANStream
             this.toolStripSeparator2,
             this.TSB_StartCANTraceRecording,
             this.TSB_StopCANTraceRecording,
+            this.TSB_RecordSelection,
             this.toolStripSeparator1,
             this.TSSB_View});
             this.CtrlMain_ToolStrip.Location = new System.Drawing.Point(0, 0);
@@ -2070,6 +2072,17 @@ namespace CANStream
             this.BGWrk_Spy.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_SpyProgressChanged);
             this.BGWrk_Spy.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_SpyRunWorkerCompleted);
             // 
+            // TSB_RecordSelection
+            // 
+            this.TSB_RecordSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_RecordSelection.Image = global::CANStream.Icones.Run_Process_16;
+            this.TSB_RecordSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_RecordSelection.Name = "TSB_RecordSelection";
+            this.TSB_RecordSelection.Size = new System.Drawing.Size(23, 22);
+            this.TSB_RecordSelection.Text = "TSB_RecordSelection";
+            this.TSB_RecordSelection.ToolTipText = "Select record to convert";
+            this.TSB_RecordSelection.Click += new System.EventHandler(this.TSB_RecordSelection_Click);
+            // 
             // Ctrl_CS_CAN_Bus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2303,5 +2316,6 @@ namespace CANStream
         private System.Windows.Forms.ToolStripTextBox TSTxt_IdFilterFrom;
         private System.Windows.Forms.ToolStripLabel TSLbl_IdFilterTo;
         private System.Windows.Forms.ToolStripTextBox TSTxt_IdFilterTo;
-	}
+        private System.Windows.Forms.ToolStripButton TSB_RecordSelection;
+    }
 }
