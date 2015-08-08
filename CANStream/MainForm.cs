@@ -1479,7 +1479,12 @@ namespace CANStream
 		
 		private void BGWrk_RecordConversionProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
-			TS_PB_Conversion.Value=e.ProgressPercentage;			
+            TS_PB_Conversion.Value=e.ProgressPercentage;
+            
+            if (!(e.UserState == null))
+            {
+                MessageBox.Show("An error occured while converting " + e.UserState.ToString() + " trace file !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }			
 		}
 		
 		private void BGWrk_RecordConversionRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -2473,8 +2478,9 @@ namespace CANStream
         			//PCAN Trace file reading
         			RecordDataFile oRecord=new RecordDataFile(CANStreamTools.TraceConversionOptions.CanConfiguration,
         			                                          SourceFileList[iFile], VCLibCollectionFilePath);
-        			
-        			//Trace file conversion
+
+                    //Trace file conversion
+                    object ErrorFile = null;
         			bool bConversionOK= oRecord.ConvertTrcFile(CANStreamTools.TraceConversionOptions.OutputFileFolder,
         			                                           CANStreamTools.TraceConversionOptions.OutputFileFormat);
         			
@@ -2485,13 +2491,12 @@ namespace CANStream
         			}
         			else
         			{
-        				//TODO: Add a message box if the trace file hasn't been converted
-        			}
+                        ErrorFile = SourceFileList[iFile].TrcFileInfo.Name;
+                    }
         				
-        			
         			//Update progression
         			Progress=(int)((iFile + 1) * 100 /SourceFileList.Length);
-        			Worker.ReportProgress(Progress);
+        			Worker.ReportProgress(Progress, ErrorFile);
         		}
         	}
         }
@@ -2558,6 +2563,10 @@ namespace CANStream
     			{
     				return(oCanCfg);
     			}
+                else
+                {
+                    MessageBox.Show("An error occured while loading the CAN configuration file !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
     		}
     		
     		return(null);
