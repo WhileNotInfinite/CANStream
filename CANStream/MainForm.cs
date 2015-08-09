@@ -1570,9 +1570,9 @@ namespace CANStream
         
         private void ActiveBusController_ControllerCycleRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-        	FrmMain_MenuStrip.Enabled = !e.Running;
-        	
-        	if (e.Running)
+            SetCANControlsRunningCommands(e.Running);
+
+            if (e.Running)
         	{
         		TSS_Lbl_PCAN_Diag_Title.Visible = false;
         		TSS_Lbl_PCAN_Diag_Text.Visible = false;
@@ -1581,9 +1581,9 @@ namespace CANStream
         
         private void ActiveBusController_ControllerManualRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-        	FrmMain_MenuStrip.Enabled = !e.Running;
-        	
-        	if (e.Running)
+            SetCANControlsRunningCommands(e.Running);
+
+            if (e.Running)
         	{
         		TSS_Lbl_PCAN_Diag_Title.Visible = false;
         		TSS_Lbl_PCAN_Diag_Text.Visible = false;
@@ -1592,9 +1592,9 @@ namespace CANStream
         
         private void ActiveBusController_ControllerSpyRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-        	FrmMain_MenuStrip.Enabled = !e.Running;
-        	
-        	if (e.Running)
+            SetCANControlsRunningCommands(e.Running);
+
+            if (e.Running)
         	{
         		TSS_Lbl_PCAN_Diag_Title.Visible = false;
         		TSS_Lbl_PCAN_Diag_Text.Visible = false;
@@ -2949,6 +2949,23 @@ namespace CANStream
         	}
         }
         
+        private void SetCANControlsRunningCommands(bool bRunning)
+        {
+            cANConfigurationToolStripMenuItem.Enabled = !bRunning;
+            cycleToolStripMenuItem.Enabled = !bRunning;
+
+            //Recording menuitem
+            automaticRecordingToolStripMenuItem.Enabled = !bRunning;
+            recordingTriggerToolStripMenuItem.Enabled = !bRunning;
+            recordingEventToolStripMenuItem.Enabled = !bRunning;
+            recordingSessionToolStripMenuItem.Enabled = !bRunning;
+
+            //Tools menuitem
+            virtualChannelsToolStripMenuItem.Enabled = !bRunning;
+            builtinSignalsToolStripMenuItem.Enabled = !bRunning;
+
+        }
+
         #endregion
         
         #endregion
