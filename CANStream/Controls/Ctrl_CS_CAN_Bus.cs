@@ -270,6 +270,19 @@ namespace CANStream
 		
 		public int ControllerActiveMode {get; private set;}
 		
+        public string ControllerChannelName
+        {
+            get
+            {
+                return (GetPCAN_BusName(m_PcanHandle));
+            }
+
+            private set
+            {
+
+            }
+        }
+
 		#endregion
 		
 		#region Public members
@@ -281,10 +294,11 @@ namespace CANStream
 		public CS_AcquisitionTrigger RecordTrigger;
 		
 		public string ManualCanConfigFilePath;
-		
-		#endregion
-		
-		public Ctrl_CS_CAN_Bus(MainForm FrmParent, CS_RecordEvent oCurrentEvent)
+        public DateTime TimeOfLastCANConfigChange;
+
+        #endregion
+
+        public Ctrl_CS_CAN_Bus(MainForm FrmParent, CS_RecordEvent oCurrentEvent)
 		{
 			InitializeComponent();
 			
@@ -343,7 +357,8 @@ namespace CANStream
 
             //Trace recording init
             RecordMode = RecordingMode.Manual;
-			RecordTrigger = new CS_AcquisitionTrigger();
+            TimeOfLastCANConfigChange = DateTime.MaxValue;
+            RecordTrigger = new CS_AcquisitionTrigger();
 			RecordTrigger.TriggerStatusChanged += new EventHandler<TriggerChangedEventArg>(RecordTrigger_TriggerStatusChanged);
 			
 			// Creates the list for received messages
@@ -2060,7 +2075,7 @@ namespace CANStream
 			if (stsResult != TPCANStatus.PCAN_ERROR_OK)
 			{
 				FireControllerDiagChangedEvent(stsResult, (int)this.Tag);
-				MessageBox.Show(GetFormatedError(stsResult),Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show(GetFormatedError(stsResult), Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 			else
 			{
@@ -3871,7 +3886,6 @@ namespace CANStream
         	if (bConversionAuto & !HostForm.IsTraceConversionRunning())
         	{
         		CANStreamTools.TraceConversionOptions.TrcFileList = null;
-        		CANStreamTools.TraceConversionOptions.CanConfiguration = oCanConfig;
         		HostForm.LaunchConvertRecords();
         	}
         }
@@ -4197,9 +4211,11 @@ namespace CANStream
 				oCANCfg.WriteCANConfigurationFile(TmpBackUpConfigPath, false);
 				
 				ManualCanConfigFilePath = TmpBackUpConfigPath;
-			}
+
+                TimeOfLastCANConfigChange = DateTime.Now;
+            }
 		}
-		
+
 		#endregion
 		
 		#region Cycle Management
@@ -4531,8 +4547,8 @@ namespace CANStream
         	if(stsResult==TPCANStatus.PCAN_ERROR_OK)
         	{
 	        	bRecording=true;
-        		
-        		TSB_StartCANTraceRecording.Enabled=false;
+
+                TSB_StartCANTraceRecording.Enabled=false;
 	        	TSB_StopCANTraceRecording.Enabled=true;
         	}
         	else

@@ -89,7 +89,8 @@ namespace CANStream
 		public FileInfo TrcFileInfo;
 		public CS_RecordEvent TrcFileEvent;
 		public CS_RecordSession TrcFileSession;
-		
+        public CANMessagesConfiguration TrcCanConfig;
+
 		#endregion
 		
 		public PcanTrcFileInfo()
@@ -97,7 +98,8 @@ namespace CANStream
 			TrcFileInfo = null;
 			TrcFileEvent = null;
 			TrcFileSession = null;
-		}
+            TrcCanConfig = null;
+        }
 	}
 	
 	/// <summary>
@@ -147,10 +149,25 @@ namespace CANStream
 		/// List of data in raw format
 		/// </summary>		
 		public List<TraceRecord> Records;
-		
-		#endregion
-		
-		public PcanTrcFile(string TrcFilePath)
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor, only create the PcanTrcFile instance
+        /// </summary>
+        public PcanTrcFile()
+        {
+            bTrcLoaded = false;
+            AbsDTStartTime = new DateTime();
+            StartTime = new DateTime();
+            Records = new List<TraceRecord>();
+        }
+        
+        /// <summary>
+        /// Constructor 2, create the PcanTrcFile instance and read the file at the path given as argument
+        /// </summary>
+        /// <param name="TrcFilePath">Path of PcanTrcFile to read</param>
+        public PcanTrcFile(string TrcFilePath)
 		{
 			bTrcLoaded=false;
 			AbsDTStartTime=new DateTime();

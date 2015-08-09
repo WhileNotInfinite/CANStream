@@ -180,9 +180,8 @@ namespace CANStream
 				
 				TrcFilesInfos = CANStreamTools.GetTrcFileInfoList(RecDirInfo.FullName);
 				
-				if (TrcFilesInfos.Length > 0)
+				if (!(TrcFilesInfos == null))
 				{
-					//foreach(PcanTrcFileInfo TrcInfo in TrcFilesInfos)
 					for (int iTrc = 0; iTrc < TrcFilesInfos.Length; iTrc++)
 					{
 						PcanTrcFileInfo TrcInfo = TrcFilesInfos[iTrc];

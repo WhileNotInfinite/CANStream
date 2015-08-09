@@ -1925,7 +1925,7 @@ namespace CANStream
         	}
         	else
         	{
-        		MessageBox.Show("Sorry, maximum number of CAN Controller is 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        		MessageBox.Show("Sorry, maximum number of CAN Controller is " + NB_CAN_CONTROLLER_MAX.ToString() + " !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         	}
         }
         
@@ -2262,6 +2262,42 @@ namespace CANStream
         	}
         }
         
+        private DateTime Get_ControllerLastCANConfigChange(string ControllerName)
+        {
+            if (!(ControllerName.Equals("")))
+            {
+                for (int iController=0; iController< CanControllerCount; iController++)
+                {
+                    Ctrl_CS_CAN_Bus oController = (Ctrl_CS_CAN_Bus)Tab_CAN_Controllers.TabPages[iController].Controls[0];
+
+                    if (oController.ControllerChannelName.Equals(ControllerName))
+                    {
+                        return (oController.TimeOfLastCANConfigChange);
+                    }
+                }
+            }
+
+            return (DateTime.MaxValue);
+        }
+
+        private CANMessagesConfiguration Get_ControllerChannelCANConfiguration(string ControllerName)
+        {
+            if (!(ControllerName.Equals("")))
+            {
+                for (int iController = 0; iController < CanControllerCount; iController++)
+                {
+                    Ctrl_CS_CAN_Bus oController = (Ctrl_CS_CAN_Bus)Tab_CAN_Controllers.TabPages[iController].Controls[0];
+
+                    if (oController.ControllerChannelName.Equals(ControllerName))
+                    {
+                        return (oController.Get_BusCANConfiguration());
+                    }
+                }
+            }
+
+            return (null);
+        }
+
         #endregion
         
         #region Active BUS CAN Configuration
@@ -2444,21 +2480,9 @@ namespace CANStream
         		
         		return;
         	}
-        	
-        	//Creation of trc files list to convert
-        	PcanTrcFileInfo[] SourceFileList;
-        	
-        	if(!(CANStreamTools.TraceConversionOptions.TrcFileList==null))
-        	{
-        		SourceFileList=CANStreamTools.TraceConversionOptions.TrcFileList;
-        	}
-        	else
-        	{
-        		SourceFileList = CANStreamTools.GetTrcFileInfoList(CANStreamTools.TraceConversionOptions.SourceFileFolder);
-        	}
-        	
-        	//Convert all files of the list
-        	if(SourceFileList.Length>0)
+
+            //Convert all files of the list
+            if (CANStreamTools.TraceConversionOptions.TrcFileList.Length>0)
         	{
         		string VCLibCollectionFilePath = "";
         		if (File.Exists(CANStreamTools.CsDataPath + "\\Libraries.xml"))
@@ -2468,16 +2492,15 @@ namespace CANStream
         		
         		int Progress=0;
         		
-        		for(int iFile=0;iFile<SourceFileList.Length;iFile++)
+        		for(int iFile=0;iFile< CANStreamTools.TraceConversionOptions.TrcFileList.Length;iFile++)
         		{
         			if(Worker.CancellationPending) //Exit converion process if cancellation is requested by the user
         			{
         				break;
         			}
-        			
-        			//PCAN Trace file reading
-        			RecordDataFile oRecord=new RecordDataFile(CANStreamTools.TraceConversionOptions.CanConfiguration,
-        			                                          SourceFileList[iFile], VCLibCollectionFilePath);
+
+                    //PCAN Trace file reading
+                    RecordDataFile oRecord = new RecordDataFile(CANStreamTools.TraceConversionOptions.TrcFileList[iFile], VCLibCollectionFilePath);
 
                     //Trace file conversion
                     object ErrorFile = null;
@@ -2487,15 +2510,15 @@ namespace CANStream
         			if(bConversionOK)
         			{
         				//Move the trace file from stack folder to backup folder
-        				MoveTrcFileToBackUpFolder(SourceFileList[iFile], CANStreamTools.TraceConversionOptions.SourceFileBackUpFolder);
+        				MoveTrcFileToBackUpFolder(CANStreamTools.TraceConversionOptions.TrcFileList[iFile], CANStreamTools.TraceConversionOptions.SourceFileBackUpFolder);
         			}
         			else
         			{
-                        ErrorFile = SourceFileList[iFile].TrcFileInfo.Name;
+                        ErrorFile = CANStreamTools.TraceConversionOptions.TrcFileList[iFile].TrcFileInfo.Name;
                     }
         				
         			//Update progression
-        			Progress=(int)((iFile + 1) * 100 /SourceFileList.Length);
+        			Progress=(int)((iFile + 1) * 100 / CANStreamTools.TraceConversionOptions.TrcFileList.Length);
         			Worker.ReportProgress(Progress, ErrorFile);
         		}
         	}
@@ -2523,9 +2546,16 @@ namespace CANStream
         			
         			BackUpFolder += ("\\" + oTrcFile.TrcFileSession.Name);
         		}
-        		
-        		File.Move(oTrcFile.TrcFileInfo.FullName, BackUpFolder + "\\" + Path.GetFileName(oTrcFile.TrcFileInfo.FullName));
-        		
+
+                try
+                {
+                    File.Move(oTrcFile.TrcFileInfo.FullName, BackUpFolder + "\\" + Path.GetFileName(oTrcFile.TrcFileInfo.FullName));
+                }
+                catch
+                {
+                    MessageBox.Show("Error while moving trace file " + oTrcFile.TrcFileInfo.Name + " to the raw data folder.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
         		//Delete session and event folders of the "Stack" folder if they is no trace file anymore
         		DirectoryInfo oStackSessionDirInfo = new DirectoryInfo(Path.GetDirectoryName(oTrcFile.TrcFileInfo.FullName));
         		
@@ -2961,30 +2991,118 @@ namespace CANStream
         #region CAN Trace recording management
         
         public void LaunchConvertRecords()
-        {	
-        	if (CANStreamTools.TraceConversionOptions.CanConfiguration == null)
-        	{
-        		if(MessageBox.Show("No CAN Configuration loaded !\nDo you want load a CAN Configuration and resume the conversion process ?"
-        		                   ,Application.ProductName,MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question).Equals(DialogResult.Yes))
-        		{
-        			CANStreamTools.TraceConversionOptions.CanConfiguration = LoadConversionCanConfiguration();
-        			
-        			if (CANStreamTools.TraceConversionOptions.CanConfiguration == null) return;
-        		}
-        		else
-        		{
-        			return;
-        		}
-        	}
-        	
-        	TS_Lbl_ConversionProgress.Visible=true;
-        	TS_PB_Conversion.Value=0;
-        	TS_PB_Conversion.Visible=true;
-        	TSSL_StopConversion.Visible=true;
-        	
-        	bConverting=true;
-        	
-        	BGWrk_RecordConversion.RunWorkerAsync();
+        {
+            CANMessagesConfiguration oConversionCanCfg = null;
+            bool bAllTracesUseSameCanCfg = false;
+
+            //Creation of trc files list to convert
+            if (CANStreamTools.TraceConversionOptions.TrcFileList == null) //List of Trc files to convert is empty in case of automatic conversion
+            {
+                CANStreamTools.GetTrcFileInfoList(CANStreamTools.TraceConversionOptions.SourceFileFolder);
+            }
+
+            //Set conversion CAN Configuration for each trace file
+            if (!(CANStreamTools.TraceConversionOptions.TrcFileList==null))
+            {
+                List<PcanTrcFileInfo> oFileList = new List<PcanTrcFileInfo>();
+                oFileList.AddRange(CANStreamTools.TraceConversionOptions.TrcFileList);
+
+                for (int iTrcFile = 0; iTrcFile < oFileList.Count; iTrcFile++)
+                {
+                    PcanTrcFileInfo oTrcInfo = oFileList[iTrcFile];
+                    PcanTrcFile oTrcFile = new PcanTrcFile();
+
+                    if (oTrcFile.ReadTrcFile(oTrcInfo.TrcFileInfo.FullName, true))
+                    {
+                        if (oTrcFile.AbsDTStartTime.CompareTo(Get_ControllerLastCANConfigChange(oTrcFile.PCAN_Channel)) >= 0)
+                        {
+                            //Trace file is poseterior to last CAN Config change of the controller
+                            //Get current CAN configuration of the controller
+                            oTrcInfo.TrcCanConfig = Get_ControllerChannelCANConfiguration(oTrcFile.PCAN_Channel);
+                        }
+
+                        if (oTrcInfo.TrcCanConfig == null)
+                        {
+                            //Trace file is anterior to last CAN Config change of the controller
+                            //OR controller currently doesn't exist
+                            //OR controller currently exists has no CAN config set
+
+                            if ((oConversionCanCfg != null) && (bAllTracesUseSameCanCfg))
+                            {
+                                oTrcInfo.TrcCanConfig = oConversionCanCfg;
+                            }
+                            else
+                            {
+                                DialogResult Rep = MessageBox.Show("No CAN configuration found for trace file " + oTrcInfo.TrcFileInfo.Name + " conversion !\nDo you want set a CAN configuration and resume the conversion process ?",
+                                                                    Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                                switch (Rep)
+                                {
+                                    case DialogResult.Yes:
+
+                                        oConversionCanCfg = LoadConversionCanConfiguration();
+
+                                        if (!(oConversionCanCfg == null))
+                                        {
+                                            oTrcInfo.TrcCanConfig = oConversionCanCfg;
+
+                                            if (iTrcFile < oFileList.Count - 1)
+                                            {
+                                                bAllTracesUseSameCanCfg = (MessageBox.Show("Do you want to use this configuration for all other trace files that will have an unknown conversion CAN configuration?",
+                                                                            Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return;
+                                        }
+
+                                        break;
+
+                                    case DialogResult.No:
+
+                                        oFileList.Remove(oTrcInfo);
+                                        iTrcFile--;
+                                        break;
+
+                                    case DialogResult.Cancel:
+
+                                        return;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error occured while loading " + oTrcInfo.TrcFileInfo.Name + " trace file!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        oFileList.Remove(oTrcInfo);
+                        iTrcFile--;
+                    }
+
+                    if (oFileList.Count == 0)
+                    {
+                        MessageBox.Show("Conversion file queue is empty !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+
+                CANStreamTools.TraceConversionOptions.TrcFileList = oFileList.ToArray();
+                oFileList = null;
+
+                //Start conversion
+                TS_Lbl_ConversionProgress.Visible = true;
+                TS_PB_Conversion.Value = 0;
+                TS_PB_Conversion.Visible = true;
+                TSSL_StopConversion.Visible = true;
+
+                bConverting = true;
+
+                BGWrk_RecordConversion.RunWorkerAsync();
+            }
+            else
+            {
+                MessageBox.Show("Conversion file queue is empty !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         
         public void SetRecordConversionList(PcanTrcFileInfo[] TrcList, Frm_TrcFileSelection SelectionForm)
