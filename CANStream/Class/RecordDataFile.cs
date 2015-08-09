@@ -59,11 +59,6 @@ namespace CANStream
 		/// </summary>
 		public string SourceFileBackUpFolder;
 		
-		/// <summary>
-		/// CAN messages configuation to be used for trace conversion
-		/// </summary>
-		public CANMessagesConfiguration CanConfiguration;
-		
 		#endregion
 	}
 	
@@ -238,8 +233,8 @@ namespace CANStream
 		
 		#endregion
 		
-		public RecordDataFile(CANMessagesConfiguration CanConfig, PcanTrcFileInfo oTrcInfo, string VCLibCollectionPath):base(oTrcInfo.TrcFileInfo.FullName)
-		{
+        public RecordDataFile(PcanTrcFileInfo oTrcInfo, string VCLibCollectionPath) : base(oTrcInfo.TrcFileInfo.FullName)
+        {
 			bTrcConverted=false;
 			Channels=new List<RecordDataChannel>();
 			
@@ -248,22 +243,22 @@ namespace CANStream
 			
 			if(bTrcLoaded)
 			{
-				if(!(CanConfig==null))
-				{
-					oCanConfig=CanConfig;
-					
-					VCLibraries = null;
-					if (!(VCLibCollectionPath.Equals("")))
-					{
-						VCLibraries = new CS_VCLibrariesCollection();
-						VCLibraries.LoadLibrariesList(VCLibCollectionPath);
-					}
-					
-					bTrcConverted=DecodeTrcFile();
-					
-					oRecordEvent = oTrcInfo.TrcFileEvent;
-					oRecordSession = oTrcInfo.TrcFileSession;
-				}
+                if (!(oTrcInfo.TrcCanConfig == null))
+                {
+                    oCanConfig = oTrcInfo.TrcCanConfig;
+
+                    VCLibraries = null;
+                    if (!(VCLibCollectionPath.Equals("")))
+                    {
+                        VCLibraries = new CS_VCLibrariesCollection();
+                        VCLibraries.LoadLibrariesList(VCLibCollectionPath);
+                    }
+
+                    bTrcConverted = DecodeTrcFile();
+
+                    oRecordEvent = oTrcInfo.TrcFileEvent;
+                    oRecordSession = oTrcInfo.TrcFileSession;
+                }
 			}
 		}
 		

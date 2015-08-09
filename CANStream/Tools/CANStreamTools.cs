@@ -158,7 +158,12 @@ namespace CANStream
 				}
 			}
 			
-			return(FolderTrcFilesInfo.ToArray());
+            if (FolderTrcFilesInfo.Count > 0)
+            {
+                return (FolderTrcFilesInfo.ToArray());
+            }
+
+            return (null);
 		}
 		
 		public static int GetParamByteLength(int ParamLength)
@@ -337,7 +342,6 @@ namespace CANStream
 			TraceConversionOptions.SourceFileBackUpFolder = BasePath + CANStreamConstants.RawDirectory;
 			TraceConversionOptions.TrcFileList = null;
 			TraceConversionOptions.OutputFileFormat = RecordConversionFormat.Text;
-			TraceConversionOptions.CanConfiguration = null;
         }
         
         public static string GetScaledFileSize(long FileSize)
