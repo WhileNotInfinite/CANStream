@@ -47,6 +47,7 @@ namespace CANStream
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TSB_StartCANTraceRecording = new System.Windows.Forms.ToolStripButton();
             this.TSB_StopCANTraceRecording = new System.Windows.Forms.ToolStripButton();
+            this.TSB_RecordSelection = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TSSB_View = new System.Windows.Forms.ToolStripSplitButton();
             this.TSMI_SpyManual = new System.Windows.Forms.ToolStripMenuItem();
@@ -216,7 +217,6 @@ namespace CANStream
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.TSB_RecordSelection = new System.Windows.Forms.ToolStripButton();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -354,6 +354,17 @@ namespace CANStream
             this.TSB_StopCANTraceRecording.Text = "toolStripButton5";
             this.TSB_StopCANTraceRecording.ToolTipText = "Stop stream recording";
             this.TSB_StopCANTraceRecording.Click += new System.EventHandler(this.TSB_StopCANTraceRecordingClick);
+            // 
+            // TSB_RecordSelection
+            // 
+            this.TSB_RecordSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_RecordSelection.Image = global::CANStream.Icones.Run_Process_16;
+            this.TSB_RecordSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_RecordSelection.Name = "TSB_RecordSelection";
+            this.TSB_RecordSelection.Size = new System.Drawing.Size(23, 22);
+            this.TSB_RecordSelection.Text = "TSB_RecordSelection";
+            this.TSB_RecordSelection.ToolTipText = "Select record to convert";
+            this.TSB_RecordSelection.Click += new System.EventHandler(this.TSB_RecordSelection_Click);
             // 
             // toolStripSeparator1
             // 
@@ -2071,17 +2082,6 @@ namespace CANStream
             this.BGWrk_Spy.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_SpyDoWork);
             this.BGWrk_Spy.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_SpyProgressChanged);
             this.BGWrk_Spy.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_SpyRunWorkerCompleted);
-            // 
-            // TSB_RecordSelection
-            // 
-            this.TSB_RecordSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_RecordSelection.Image = global::CANStream.Icones.Run_Process_16;
-            this.TSB_RecordSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_RecordSelection.Name = "TSB_RecordSelection";
-            this.TSB_RecordSelection.Size = new System.Drawing.Size(23, 22);
-            this.TSB_RecordSelection.Text = "TSB_RecordSelection";
-            this.TSB_RecordSelection.ToolTipText = "Select record to convert";
-            this.TSB_RecordSelection.Click += new System.EventHandler(this.TSB_RecordSelection_Click);
             // 
             // Ctrl_CS_CAN_Bus
             // 
