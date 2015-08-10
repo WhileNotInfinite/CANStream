@@ -137,3 +137,4 @@ G:\Git\CANStream_USB\CANStream\bin\Debug\Ciloci.Flee.xml
 G:\Git\CANStream_USB\CANStream\bin\Debug\netchartdir_cp.xml
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.exe
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.pdb
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_GlobalGraphSeriesProperties.resources

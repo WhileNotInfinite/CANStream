@@ -1212,6 +1212,21 @@
             </summary>
             <returns>Clone of the current object</returns>
         </member>
+        <member name="M:Ctrl_GraphWindow.GraphSerieProperties.Write_PropertiesXmlNode(System.Xml.XmlDocument,System.String)">
+            <summary>
+            Return the XML node of the current GraphSerieProperties object
+            </summary>
+            <param name="oXDoc">XML document in which the graph serie properties XML node will be created</param>
+            <param name="NodeName">Name of the XML node to create</param>
+            <returns>XML node of the current GraphSerieProperties object</returns>
+        </member>
+        <member name="M:Ctrl_GraphWindow.GraphSerieProperties.Read_PropertiesXmlNode(System.Xml.XmlNode)">
+            <summary>
+            Read a GraphSerieProperties XML node
+            </summary>
+            <param name="xSerie">XML node to read</param>
+            <returns>>Node reading error flag: True = No Error / False = Error</returns>
+        </member>
         <member name="M:Ctrl_GraphWindow.GraphSerieProperties.Get_ReferenceLineAtKey(System.Int32)">
             <summary>
             Return the GraphReferenceLine corresponding to the identification key given as argument
@@ -1315,7 +1330,7 @@
             <summary>
             Return the XML node of the current GraphWindowProperties object
             </summary>
-            <param name="oXDoc">XML document in which the graph window properties will be created</param>
+            <param name="oXDoc">XML document in which the graph window properties XML node will be created</param>
             <param name="NodeName">Name of the XML node to create</param>
             <returns>XML node of the current GraphWindowProperties object</returns>
         </member>

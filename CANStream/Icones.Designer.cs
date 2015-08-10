@@ -73,6 +73,16 @@ namespace CANStream {
 		/// <summary>
 		///   Looks up a localized resource of type System.Drawing.Bitmap.
 		/// </summary>
+		internal static System.Drawing.Bitmap Apply_32 {
+			get {
+				object obj = ResourceManager.GetObject("Apply_32", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+		
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
 		internal static System.Drawing.Bitmap Auto_16 {
 			get {
 				object obj = ResourceManager.GetObject("Auto_16", resourceCulture);
@@ -166,6 +176,16 @@ namespace CANStream {
 		internal static System.Drawing.Bitmap Cancel_16 {
 			get {
 				object obj = ResourceManager.GetObject("Cancel_16", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+		
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Cancel_32 {
+			get {
+				object obj = ResourceManager.GetObject("Cancel_32", resourceCulture);
 				return ((System.Drawing.Bitmap)(obj));
 			}
 		}
@@ -516,6 +536,36 @@ namespace CANStream {
 		internal static System.Drawing.Bitmap File_SaveAll_32 {
 			get {
 				object obj = ResourceManager.GetObject("File_SaveAll_32", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+		
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Global_Prop_Add_32 {
+			get {
+				object obj = ResourceManager.GetObject("Global_Prop_Add_32", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+		
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Global_Prop_Del_32 {
+			get {
+				object obj = ResourceManager.GetObject("Global_Prop_Del_32", resourceCulture);
+				return ((System.Drawing.Bitmap)(obj));
+			}
+		}
+		
+		/// <summary>
+		///   Looks up a localized resource of type System.Drawing.Bitmap.
+		/// </summary>
+		internal static System.Drawing.Bitmap Global_Serie_Props_16 {
+			get {
+				object obj = ResourceManager.GetObject("Global_Serie_Props_16", resourceCulture);
 				return ((System.Drawing.Bitmap)(obj));
 			}
 		}

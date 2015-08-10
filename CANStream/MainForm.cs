@@ -456,6 +456,11 @@ namespace CANStream
 			LoadDataViewer();
 		}
         
+		private void Tools_DataViewer_GlobalSeriesProps_TSMenuItemClick(object sender, EventArgs e)
+		{
+			EditGlobalSeriesProperties();
+		}
+		
         #endregion
         
         #endregion
@@ -2773,6 +2778,12 @@ namespace CANStream
     		{
     			OpenDataViewer(openFileDialog1.FileName);
     		}
+        }
+        
+        private void EditGlobalSeriesProperties()
+        {
+        	Frm_GlobalGraphSeriesProperties Frm =  new Frm_GlobalGraphSeriesProperties();
+        	Frm.Show();
         }
         
         private void OpenDataViewer(string fPath)
