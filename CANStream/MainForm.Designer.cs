@@ -684,7 +684,7 @@ namespace CANStream
             // 
             this.Tools_DataViewer_New_TSMenuItem.Image = global::CANStream.Icones.CANStream_DataViewer_16;
             this.Tools_DataViewer_New_TSMenuItem.Name = "Tools_DataViewer_New_TSMenuItem";
-            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(152, 22);
             this.Tools_DataViewer_New_TSMenuItem.Text = "New";
             this.Tools_DataViewer_New_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_New_TSMenuItemClick);
             // 
@@ -692,7 +692,7 @@ namespace CANStream
             // 
             this.Tools_DataViewer_Open_TSMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.Tools_DataViewer_Open_TSMenuItem.Name = "Tools_DataViewer_Open_TSMenuItem";
-            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(152, 22);
             this.Tools_DataViewer_Open_TSMenuItem.Text = "Open";
             this.Tools_DataViewer_Open_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_Open_TSMenuItemClick);
             // 
