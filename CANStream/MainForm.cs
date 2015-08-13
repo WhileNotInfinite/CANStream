@@ -455,14 +455,28 @@ namespace CANStream
 		{
 			LoadDataViewer();
 		}
-        		
+
         #endregion
-        
+
+        #region Dashboard
+
+        private void Tools_Dashboard_New_TSMenuItem_Click(object sender, EventArgs e)
+        {
+            NewDashboard();
+        }
+
+        private void Tools_Dashboard_Open_TSMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDashboard();
+        }
+
         #endregion
-        
+
+        #endregion
+
         #region View
-		
-		private void TSMI_HideSelectedRowsClick(object sender, EventArgs e)
+
+        private void TSMI_HideSelectedRowsClick(object sender, EventArgs e)
 		{
 			if (!(ActiveCanBus == null)) ActiveCanBus.HideActiveRow();
 		}
@@ -2830,11 +2844,26 @@ namespace CANStream
     			Frm.Close();
     		}
         }
-        
+
         #endregion
+
+        #region Dashboard
         
+        private void NewDashboard()
+        {
+            Frm_Dashboard Frm = new Frm_Dashboard();
+            Frm.Show();
+        }
+
+        private void OpenDashboard()
+        {
+            MessageBox.Show("TODO !");
+        }
+
+        #endregion
+
         #region Misc
-        
+
         private void Check_CANStreamFolders()
         {
         	CANStreamTools.CreateFolderIfItDoesNotExist(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\CANStream");
@@ -3172,7 +3201,7 @@ namespace CANStream
         		}
         	}
         }
-        
+
         #endregion
 
         #endregion

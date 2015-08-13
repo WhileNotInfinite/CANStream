@@ -138,3 +138,11 @@ G:\Git\CANStream_USB\CANStream\bin\Debug\netchartdir_cp.xml
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.exe
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.pdb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_ParamEnumerationEdition.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dashboard.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\CANStream.exe.config
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\System.Windows.Forms.Ribbon35.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_SignalExplorer.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_ToolBox.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_Window.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_ControlProperties.resources

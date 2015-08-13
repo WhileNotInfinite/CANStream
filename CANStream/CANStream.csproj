@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectGuid>{2A669821-D5C3-4A52-9C7B-64F4A1B9CAB4}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,8 +7,9 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>CANStream</RootNamespace>
     <AssemblyName>CANStream</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <ApplicationIcon>..\Ressources\Icones\CANConfiguration_xcc.ico</ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
@@ -87,6 +88,21 @@
     <DefineConstants>DEBUG;TRACE;NO_LIC</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_NoLicense|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo_Dbg|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel">
       <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\Microsoft.Office.Interop.Excel.dll</HintPath>
@@ -104,9 +120,15 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon35">
+      <HintPath>..\..\..\..\Visual Studio 2015\WinFormsControls\Ribbon\Binaries\System.Windows.Forms.Ribbon35.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\..\..\..\Visual Studio 2015\WinFormsControls\DockPanel\DockPanel_2_9_0\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +307,36 @@
     <Compile Include="Forms\Frm_ParamEnumerationEdition.Designer.cs">
       <DependentUpon>Frm_ParamEnumerationEdition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Frm_Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_Dashboard.Designer.cs">
+      <DependentUpon>Frm_Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_SignalExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_SignalExplorer.Designer.cs">
+      <DependentUpon>Frm_Dash_SignalExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_ToolBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_ToolBox.Designer.cs">
+      <DependentUpon>Frm_Dash_ToolBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_Window.Designer.cs">
+      <DependentUpon>Frm_Dash_Window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_ControlProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Dash_Docked_Forms\Frm_Dash_ControlProperties.Designer.cs">
+      <DependentUpon>Frm_Dash_ControlProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalConst.cs" />
     <Compile Include="Icones.Designer.cs">
       <DependentUpon>Icones.resx</DependentUpon>
@@ -326,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Dlg_DBCTransmitterSelection.resx">
       <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dash_Docked_Forms\Frm_Dash_SignalExplorer.resx">
+      <DependentUpon>Frm_Dash_SignalExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dash_Docked_Forms\Frm_Dash_ToolBox.resx">
+      <DependentUpon>Frm_Dash_ToolBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_About.resx">
       <DependentUpon>Frm_About.cs</DependentUpon>
@@ -389,6 +447,15 @@
     <EmbeddedResource Include="Forms\Frm_VirtualChannelTest.resx">
       <DependentUpon>Frm_VirtualChannelTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_Dashboard.resx">
+      <DependentUpon>Frm_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dash_Docked_Forms\Frm_Dash_Window.resx">
+      <DependentUpon>Frm_Dash_Window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dash_Docked_Forms\Frm_Dash_ControlProperties.resx">
+      <DependentUpon>Frm_Dash_ControlProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icones.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Icones.Designer.cs</LastGenOutput>
@@ -421,6 +488,7 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="app.config" />
     <None Include="Resources\remove-a-blue-mark-icone-9732-16.png" />
     <None Include="Resources\add-a-tag-blue-icone-6061-16.png" />
     <None Include="Resources\edit-the-blue-label-icone-8149-16.png" />
