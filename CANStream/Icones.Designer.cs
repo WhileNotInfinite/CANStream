@@ -163,6 +163,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CAN_Signal_Explorer_32 {
+            get {
+                object obj = ResourceManager.GetObject("CAN_Signal_Explorer_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cancel_16 {
             get {
                 object obj = ResourceManager.GetObject("Cancel_16", resourceCulture);
@@ -336,6 +346,216 @@ namespace CANStream {
         internal static System.Drawing.Bitmap Cycle_Start_16 {
             get {
                 object obj = ResourceManager.GetObject("Cycle_Start_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Controls_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Controls_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Controls_Properties_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Controls_Properties_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Bottom_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Bottom_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Center_Horz_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Center_Horz_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Center_Vert_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Center_Vert_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Left_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Left_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Right_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Right_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Align_Top_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Align_Top_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Color {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Color", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Font {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Font", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Rotate_Left_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Rotate_Left_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Rotate_Right_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Rotate_Right_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Lock_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Lock_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_Add {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_Del {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_Del", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_First {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_First", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_Last {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_Last", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_Next {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_Next", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Page_Prev {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Page_Prev", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dash_Unlock_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Unlock_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dashboard_16 {
+            get {
+                object obj = ResourceManager.GetObject("Dashboard_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -893,6 +1113,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Start_Record_32 {
+            get {
+                object obj = ResourceManager.GetObject("Start_Record_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stop_32 {
             get {
                 object obj = ResourceManager.GetObject("Stop_32", resourceCulture);
@@ -926,6 +1156,16 @@ namespace CANStream {
         internal static System.Drawing.Bitmap Stop_Recording {
             get {
                 object obj = ResourceManager.GetObject("Stop_Recording", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stop_Recording_32 {
+            get {
+                object obj = ResourceManager.GetObject("Stop_Recording_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

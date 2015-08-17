@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Dash_ControlProperties));
             this.PropGrid = new System.Windows.Forms.PropertyGrid();
             this.Cmb_Controls = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             this.Controls.Add(this.Cmb_Controls);
             this.Controls.Add(this.PropGrid);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Dash_ControlProperties";
             this.Text = "Properties";
             this.ResumeLayout(false);

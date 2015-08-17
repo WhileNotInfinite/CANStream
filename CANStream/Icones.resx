@@ -9455,4 +9455,76 @@
   <data name="Enumeration_Del_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\remove-a-blue-mark-icone-9732-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CAN_Signal_Explorer_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CAN_Signal_Explorer_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Controls_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\computer-game-tetris-icone-8365-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Controls_Properties_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\kservices-icone-4203-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Bottom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\form-align-bottom-icone-5182-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Center_Horz_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\center-align-shape-icone-8343-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Center_Vert_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\shape-aligned-in-the-middle-icone-9221-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Left_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\form-left-align-icone-3844-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Right_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\form-of-right-align-icone-6020-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Align_Top_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bring-in-top-form-icone-5013-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Rotate_Left_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\form-of-anti-clockwise-rotation-icone-4085-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Rotate_Right_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\form-turn-to-the-right-icone-4829-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\add-a-tab-icone-7644-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_Del" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\remove-tab-icone-6446-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_First" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\back-icone-6510-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_Last" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\prior-to-icone-8085-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_Next" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\right-icone-8621-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Page_Prev" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\left-icone-6353-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Start_Record_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\media-recorder-icone-5036-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop_Recording_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\stop-reading-media-icone-5684-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dashboard_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\vitesse-icone-6751-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\palette-icone-6918-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Ctrl_Font" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\police-icone-4027-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Lock_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\blue-lock-secure-safe-icone-7808-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dash_Unlock_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\open-lock-unlock-icone-8014-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
