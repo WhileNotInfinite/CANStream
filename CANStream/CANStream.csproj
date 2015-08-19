@@ -104,6 +104,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AGauge">
+      <HintPath>..\DLL\AGauge.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel">
       <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
@@ -175,6 +178,7 @@
     <Compile Include="Controls\Ctrl_SpyDataViewer.Designer.cs">
       <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class\CS_Dashboard.cs" />
     <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -488,6 +492,7 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\1439828977_100_Pressure_Reading.png" />
     <None Include="Resources\vitesse-icone-6751-16.png" />
     <None Include="Resources\open-lock-unlock-icone-8014-32.png" />
     <None Include="Resources\blue-lock-secure-safe-icone-7808-32.png" />

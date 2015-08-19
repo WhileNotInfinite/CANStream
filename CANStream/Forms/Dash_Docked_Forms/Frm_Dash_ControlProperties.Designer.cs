@@ -53,6 +53,7 @@
             this.Cmb_Controls.Name = "Cmb_Controls";
             this.Cmb_Controls.Size = new System.Drawing.Size(240, 21);
             this.Cmb_Controls.TabIndex = 1;
+            this.Cmb_Controls.SelectedIndexChanged += new System.EventHandler(this.Cmb_Controls_SelectedIndexChanged);
             // 
             // Frm_Dash_ControlProperties
             // 

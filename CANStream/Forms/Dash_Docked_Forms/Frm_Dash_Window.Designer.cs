@@ -34,6 +34,7 @@
             // 
             // Dash_Panel
             // 
+            this.Dash_Panel.AllowDrop = true;
             this.Dash_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -43,6 +44,9 @@
             this.Dash_Panel.Name = "Dash_Panel";
             this.Dash_Panel.Size = new System.Drawing.Size(622, 459);
             this.Dash_Panel.TabIndex = 0;
+            this.Dash_Panel.DragDrop += new System.Windows.Forms.DragEventHandler(this.Dash_Panel_DragDrop);
+            this.Dash_Panel.DragOver += new System.Windows.Forms.DragEventHandler(this.Dash_Panel_DragOver);
+            this.Dash_Panel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Dash_Panel_MouseClick);
             // 
             // Frm_Dash_Window
             // 

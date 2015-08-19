@@ -146,3 +146,4 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Deb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_ToolBox.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_Window.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_Dash_ControlProperties.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\AGauge.dll

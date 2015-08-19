@@ -453,6 +453,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Dash_Ctrl_Gauge_16 {
+            get {
+                object obj = ResourceManager.GetObject("Dash_Ctrl_Gauge_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dash_Ctrl_Rotate_Left_32 {
             get {
                 object obj = ResourceManager.GetObject("Dash_Ctrl_Rotate_Left_32", resourceCulture);

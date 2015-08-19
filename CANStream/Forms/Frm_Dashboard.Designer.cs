@@ -372,6 +372,7 @@
             // 
             this.Rib_Edit_Cmb_Select.Text = "";
             this.Rib_Edit_Cmb_Select.TextBoxText = "";
+            this.Rib_Edit_Cmb_Select.DropDownItemClicked += new System.Windows.Forms.RibbonComboBox.RibbonItemEventHandler(this.Rib_Edit_Cmb_Select_DropDownItemClicked);
             // 
             // Rib_Edit_Btn_Del
             // 

@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Dash_ToolBox));
             this.Grp_Filter = new System.Windows.Forms.GroupBox();
             this.Cmb_Filter = new System.Windows.Forms.ComboBox();
-            this.Lv_Tools = new System.Windows.Forms.ListView();
+            this.LV_Tools = new System.Windows.Forms.ListView();
+            this.Img_LV_Tools = new System.Windows.Forms.ImageList(this.components);
             this.Grp_Filter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,24 +59,33 @@
             this.Cmb_Filter.Size = new System.Drawing.Size(212, 21);
             this.Cmb_Filter.TabIndex = 0;
             // 
-            // Lv_Tools
+            // LV_Tools
             // 
-            this.Lv_Tools.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.LV_Tools.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lv_Tools.Location = new System.Drawing.Point(3, 2);
-            this.Lv_Tools.Name = "Lv_Tools";
-            this.Lv_Tools.Size = new System.Drawing.Size(228, 403);
-            this.Lv_Tools.TabIndex = 3;
-            this.Lv_Tools.UseCompatibleStateImageBehavior = false;
-            this.Lv_Tools.View = System.Windows.Forms.View.SmallIcon;
+            this.LV_Tools.Location = new System.Drawing.Point(3, 2);
+            this.LV_Tools.Name = "LV_Tools";
+            this.LV_Tools.Size = new System.Drawing.Size(228, 403);
+            this.LV_Tools.SmallImageList = this.Img_LV_Tools;
+            this.LV_Tools.TabIndex = 3;
+            this.LV_Tools.UseCompatibleStateImageBehavior = false;
+            this.LV_Tools.View = System.Windows.Forms.View.SmallIcon;
+            this.LV_Tools.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.LV_Tools_ItemDrag);
+            this.LV_Tools.DragOver += new System.Windows.Forms.DragEventHandler(this.LV_Tools_DragOver);
+            // 
+            // Img_LV_Tools
+            // 
+            this.Img_LV_Tools.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Img_LV_Tools.ImageStream")));
+            this.Img_LV_Tools.TransparentColor = System.Drawing.Color.Transparent;
+            this.Img_LV_Tools.Images.SetKeyName(0, "1439828977_100_Pressure_Reading.png");
             // 
             // Frm_Dash_ToolBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(235, 457);
-            this.Controls.Add(this.Lv_Tools);
+            this.Controls.Add(this.LV_Tools);
             this.Controls.Add(this.Grp_Filter);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
@@ -90,6 +101,7 @@
 
         private System.Windows.Forms.GroupBox Grp_Filter;
         private System.Windows.Forms.ComboBox Cmb_Filter;
-        private System.Windows.Forms.ListView Lv_Tools;
+        private System.Windows.Forms.ListView LV_Tools;
+        private System.Windows.Forms.ImageList Img_LV_Tools;
     }
 }

@@ -129,6 +129,14 @@ namespace CANStream
             Del_DashPage();
         }
 
+        private void Rib_Edit_Cmb_Select_DropDownItemClicked(object sender, RibbonItemEventArgs e)
+        {
+            if (dockPanel1.ActiveDocument.GetType().Equals(typeof(Frm_Dash_Window)))
+            {
+                ((Frm_Dash_Window)dockPanel1.ActiveDocument).SelectDashboardControl(e.Item.Text);
+            }
+        }
+
         #endregion
 
         #region View panel
@@ -167,6 +175,18 @@ namespace CANStream
                     {
                         Rib_Dash_Cmb_PageSelect.SelectedItem = (RibbonButton)Frm.Tag;
                     }
+
+                    Rib_Edit_Cmb_Select.DropDownItems.Clear();
+
+                    if (FrmProperties.IsHandleCreated)
+                    {
+                        FrmProperties.Clear_ControlItems();
+                    }
+
+                    foreach(Control oCtrl in Frm.Controls[0].Controls)
+                    {
+                        Add_FormControl(oCtrl);
+                    }
                 }
             }
         }
@@ -184,6 +204,62 @@ namespace CANStream
 
                 DashWindows.Remove(Frm);
                 Frm.Dispose();
+            }
+        }
+
+        #endregion
+
+        #region Frm_Dash_Window events
+
+        private void DashWindowControlCreated(object sender, DashboardControlEventArgs e)
+        {
+            Add_FormControl(e.DashboardControl);
+        }
+
+        private void DashWindowControlSelected(object sender, DashboardControlEventArgs e)
+        {
+            for (int i = 0; i < Rib_Edit_Cmb_Select.DropDownItems.Count; i++)
+            {
+                if (Rib_Edit_Cmb_Select.DropDownItems[i].Text.Equals(e.DashboardControl.Name))
+                {
+                    Rib_Edit_Cmb_Select.SelectedItem = Rib_Edit_Cmb_Select.DropDownItems[i];
+                    break;
+                }
+            }
+
+            if (FrmProperties.IsHandleCreated)
+            {
+                FrmProperties.Set_PropertyGridControl(e.DashboardControl);
+            }
+        }
+
+        private void DashWindowControlRemoved(object sender, DashboardControlRemovedEventArgs e)
+        {
+            for (int i = 0; i < Rib_Edit_Cmb_Select.DropDownItems.Count; i++)
+            {
+                if (Rib_Edit_Cmb_Select.DropDownItems[i].Text.Equals(e.ControlName))
+                {
+                    Rib_Edit_Cmb_Select.DropDownItems.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (FrmProperties.IsHandleCreated)
+            {
+                FrmProperties.Set_PropertyGridControl(null);
+                FrmProperties.Del_ControlItem(e.ControlName);
+            }
+        }
+
+        #endregion
+
+        #region Frm_Dash_ControlProperties events
+
+        private void DashControlPropertiesControlSelectedChanged(object sender, ControlsListSelectedChangedEventArgs e)
+        {
+            if (dockPanel1.ActiveDocument.GetType().Equals(typeof(Frm_Dash_Window)))
+            {
+                ((Frm_Dash_Window)dockPanel1.ActiveDocument).SelectDashboardControl(e.ControlName);
             }
         }
 
@@ -290,6 +366,8 @@ namespace CANStream
         private void Open_Properties(bool Visible)
         {
             FrmProperties = new Frm_Dash_ControlProperties();
+
+            FrmProperties.ControlsListSelectedChanged += new EventHandler<ControlsListSelectedChangedEventArgs>(DashControlPropertiesControlSelectedChanged);
 
             if (Visible)
             {
@@ -413,6 +491,10 @@ namespace CANStream
             }
 
             Frm.Text = PageName;
+
+            Frm.DashboardControlCreated += new EventHandler<DashboardControlEventArgs>(DashWindowControlCreated);
+            Frm.DashboardControlSelected += new EventHandler<DashboardControlEventArgs>(DashWindowControlSelected);
+            Frm.DashboarControlRemoved += new EventHandler<DashboardControlRemovedEventArgs>(DashWindowControlRemoved);
             
             RibbonButton RibBtn_Page = new RibbonButton(PageName);
             RibBtn_Page.SmallImage = (Image)Icones.Dashboard_16;
@@ -451,7 +533,31 @@ namespace CANStream
 
         #endregion
 
-        #region Dash control
+        #region Dashboard controls
+        
+        private void Add_FormControl(Control oCtrl)
+        {
+            RibbonButton RibBtn_DashCtrl = new RibbonButton();
+            RibBtn_DashCtrl.Text = oCtrl.Name;
+
+            Type CtrlType = oCtrl.GetType();
+            if (CtrlType.Equals(typeof(AGauge)))
+            {
+                RibBtn_DashCtrl.SmallImage = Icones.Dash_Ctrl_Gauge_16;
+            }
+
+            Rib_Edit_Cmb_Select.DropDownItems.Add(RibBtn_DashCtrl);
+            Rib_Edit_Cmb_Select.SelectedItem = RibBtn_DashCtrl;
+
+            if (FrmProperties.IsHandleCreated)
+            {
+                FrmProperties.Add_ControlItem(oCtrl.Name);
+            }
+        }
+
+        #endregion
+
+        #region Dash running control
 
         private void Start_Dashboard()
         {
