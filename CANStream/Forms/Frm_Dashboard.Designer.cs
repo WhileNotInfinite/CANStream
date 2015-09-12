@@ -98,6 +98,8 @@
             this.Rib_View_Btn_DashControls = new System.Windows.Forms.RibbonButton();
             this.Rib_View_Btn_ControlProperties = new System.Windows.Forms.RibbonButton();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.Dlg_Save = new System.Windows.Forms.SaveFileDialog();
+            this.Dlg_Open = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -146,6 +148,7 @@
             this.Rib_Orb_Open.SmallImage = global::CANStream.Icones.File_Open_32;
             this.Rib_Orb_Open.Text = "Open dashboard";
             this.Rib_Orb_Open.ToolTip = "Load a dashboard file";
+            this.Rib_Orb_Open.Click += new System.EventHandler(this.Rib_Orb_Open_Click);
             // 
             // Rib_Orb_Save
             // 
@@ -154,6 +157,7 @@
             this.Rib_Orb_Save.SmallImage = global::CANStream.Icones.File_Save_32;
             this.Rib_Orb_Save.Text = "Save dashboard";
             this.Rib_Orb_Save.ToolTip = "Save dashboard";
+            this.Rib_Orb_Save.Click += new System.EventHandler(this.Rib_Orb_Save_Click);
             // 
             // Rib_Ord_SaveAs
             // 
@@ -553,6 +557,17 @@
             this.dockPanel1.ContentRemoved += new System.EventHandler<WeifenLuo.WinFormsUI.Docking.DockContentEventArgs>(this.dockPanel1_ContentRemoved);
             this.dockPanel1.ActiveDocumentChanged += new System.EventHandler(this.dockPanel1_ActiveDocumentChanged);
             // 
+            // Dlg_Save
+            // 
+            this.Dlg_Save.Filter = "CANStream Dashboard file|*.dsh";
+            this.Dlg_Save.Title = "Save dashboard as";
+            // 
+            // Dlg_Open
+            // 
+            this.Dlg_Open.FileName = "openFileDialog1";
+            this.Dlg_Open.Filter = "CANStream Dashboard file|*.dsh";
+            this.Dlg_Open.Title = "Open dashboard";
+            // 
             // Frm_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -626,5 +641,7 @@
         private System.Windows.Forms.RibbonButton Rib_Edit_Btn_Page_Add;
         private System.Windows.Forms.RibbonButton Rib_Edit_Btn_Page_Del;
         private System.Windows.Forms.RibbonComboBox Rib_Edit_Cmb_Select;
+        private System.Windows.Forms.SaveFileDialog Dlg_Save;
+        private System.Windows.Forms.OpenFileDialog Dlg_Open;
     }
 }

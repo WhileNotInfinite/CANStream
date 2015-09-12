@@ -179,6 +179,9 @@
       <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Class\CS_Dashboard.cs" />
+    <Compile Include="Controls\Dashboard_Controls\DashboardGauge.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs">
       <SubType>Form</SubType>
     </Compile>

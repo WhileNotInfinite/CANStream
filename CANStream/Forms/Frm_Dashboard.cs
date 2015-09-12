@@ -22,6 +22,8 @@ namespace CANStream
         private List<Frm_Dash_Window> DashWindows;
         private int CurrentDashPageIndex;
 
+        private CS_Dashboard oDashboard;
+
         #endregion
 
         public Frm_Dashboard()
@@ -30,6 +32,8 @@ namespace CANStream
 
             DashWindows = new List<Frm_Dash_Window>();
             CurrentDashPageIndex = -1;
+
+            oDashboard = new CS_Dashboard();
         }
 
         #region Control events
@@ -47,6 +51,20 @@ namespace CANStream
         #endregion
 
         #region Ribbon
+
+        #region Orbital button
+
+        private void Rib_Orb_Save_Click(object sender, EventArgs e)
+        {
+            Save_Dashboard();
+        }
+
+        private void Rib_Orb_Open_Click(object sender, EventArgs e)
+        {
+            Open_Dashboard();
+        }
+
+        #endregion
 
         #region Dashboard panel
 
@@ -425,6 +443,8 @@ namespace CANStream
 
         private void Lock_Dashboard()
         {
+            oDashboard.Locked = true;
+
             Rib_Edit_Btn_Lock.Visible = false;
             Rib_Edit_Btn_Unlock.Visible = true;
 
@@ -450,6 +470,8 @@ namespace CANStream
 
         private void Unlock_Dashboard()
         {
+            oDashboard.Locked = false;
+
             Rib_Edit_Btn_Lock.Visible = true;
             Rib_Edit_Btn_Unlock.Visible = false;
 
@@ -470,6 +492,46 @@ namespace CANStream
             Rib_Edit_Btn_Align_Center_Horz.Enabled = true;
             Rib_Edit_Btn_Rotate_Left.Enabled = true;
             Rib_Edit_Btn_Rotate_Right.Enabled = true;
+        }
+
+        private void Save_Dashboard()
+        {
+            if(Dlg_Save.ShowDialog().Equals(DialogResult.OK))
+            {
+                oDashboard = new CS_Dashboard();
+
+                foreach(Frm_Dash_Window oDashPage in DashWindows)
+                {
+                    CS_DashboardPage oPage = new CS_DashboardPage();
+                    oPage.Name = oDashPage.Text;
+
+                    foreach (Control oCtrl in oDashPage.Controls[0].Controls)
+                    {
+                        oPage.Controls.Add(oCtrl);
+                    }
+
+                    oDashboard.Pages.Add(oPage);
+                }
+
+                oDashboard.Write_DashboardFile(Dlg_Save.FileName);
+            }
+        }
+
+        private void Open_Dashboard()
+        {
+            if (Dlg_Open.ShowDialog().Equals(DialogResult.OK))
+            {
+                oDashboard = new CS_Dashboard();
+
+                if( oDashboard.Read_DashboardFile(Dlg_Open.FileName))
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("An error occured while reading the dashboard file !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
 
         #endregion

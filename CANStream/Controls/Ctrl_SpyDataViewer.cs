@@ -551,11 +551,11 @@ namespace CANStream
 			
 			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0].ToString(); //Name
 			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1].ToString(); //ID
-			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[5].ToString(); //Unit
-			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[6].ToString(); //Comment
+			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[4].ToString(); //Unit
+			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[5].ToString(); //Comment
 
-            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = 0; //Min physical value
-            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = 0; //Max physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = (double)Data[3]; //Min physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = (double)Data[3]; //Max physical value
 
             if ((Grid_SpyEngineering.Rows.Count % 2) == 0)
 			{
@@ -576,13 +576,13 @@ namespace CANStream
 			Grid_SpyEngineering.Rows[iRow].Cells[0].Value = Data[0].ToString(); //Name
 			Grid_SpyEngineering.Rows[iRow].Cells[1].Value = Data[1].ToString(); //ID
 			Grid_SpyEngineering.Rows[iRow].Cells[2].Value = ""; //Raw value
-			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[5].ToString(); //Unit
-			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[6].ToString(); //Comment
+			Grid_SpyEngineering.Rows[iRow].Cells[6].Value = Data[4].ToString(); //Unit
+			Grid_SpyEngineering.Rows[iRow].Cells[7].Value = Data[5].ToString(); //Comment
 			
 			Grid_SpyEngineering.Rows[iRow].Cells[3].ToolTipText = Data[2].ToString();
 
-            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = 0; //Min physical value
-            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = 0; //Max physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[4].Tag = (double)Data[3]; //Min physical value
+            Grid_SpyEngineering.Rows[iRow].Cells[5].Tag = (double)Data[3]; //Max physical value
 
             Color CellBackColor = Color.LightGreen;
 			Color CellForeColor = Color.Black;
@@ -703,7 +703,7 @@ namespace CANStream
                 oRow.Cells[GRID_SPYENG_VALUE].Style.ForeColor = CellForeColor;
 
                 //Min / Max value update
-                if (CurrentVal < (double)oRow.Cells[GRID_SPYENG_VALUE + 1].Tag)
+                if ((CurrentVal < (double)oRow.Cells[GRID_SPYENG_VALUE + 1].Tag) || (oRow.Cells[GRID_SPYENG_VALUE + 1].Value == null))
                 {
                     oRow.Cells[GRID_SPYENG_VALUE + 1].Value = CurrentValFormated;
                     oRow.Cells[GRID_SPYENG_VALUE + 1].Tag = CurrentVal;
@@ -711,7 +711,7 @@ namespace CANStream
                     oRow.Cells[GRID_SPYENG_VALUE + 1].Style.ForeColor = CellForeColor;
                 }
 
-                if (CurrentVal > (double)oRow.Cells[GRID_SPYENG_VALUE + 2].Tag)
+                if ((CurrentVal > (double)oRow.Cells[GRID_SPYENG_VALUE + 2].Tag) || (oRow.Cells[GRID_SPYENG_VALUE + 2].Value == null))
                 {
                     oRow.Cells[GRID_SPYENG_VALUE + 2].Value = CurrentValFormated;
                     oRow.Cells[GRID_SPYENG_VALUE + 2].Tag = CurrentVal;

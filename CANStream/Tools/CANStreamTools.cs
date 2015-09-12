@@ -387,10 +387,23 @@ namespace CANStream
         	
         	return(Math.Round(ScaledSize, 3).ToString() + " " + sScale);
         }
-        
-		#endregion
-		
-		#region Private methods
-		#endregion
-	}
+
+        public static Type CS_GetType(string typeName)
+        {
+            var type = Type.GetType(typeName);
+            if (type != null) return type;
+            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                type = a.GetType(typeName);
+                if (type != null)
+                    return type;
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Private methods
+        #endregion
+    }
 }

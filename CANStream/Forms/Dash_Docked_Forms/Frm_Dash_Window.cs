@@ -427,7 +427,8 @@ namespace CANStream
 
         private void Create_Gauge(Point Location)
         {
-            AGauge oGauge = new AGauge();
+            //AGauge oGauge = new AGauge();
+            DashboardGauge oGauge = new DashboardGauge();
 
             oGauge.Location = Location;
             oGauge.Name = Get_ControlName(oGauge.GetType());

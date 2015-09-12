@@ -27,7 +27,7 @@ using NumberBaseConversion;
 
 namespace CANStream
 {
-	#region Enums
+	#region Public Enums
 	
 	public enum CANControllerGrid
 	{
@@ -88,13 +88,13 @@ namespace CANStream
 		Auto    = 1,
 		Trigger = 2,
 	}
-	
-	#endregion
-	
-	/// <summary>
-	/// Description of Ctrl_CAN_Bus.
-	/// </summary>
-	public partial class Ctrl_CS_CAN_Bus : UserControl
+
+    #endregion
+
+    /// <summary>
+    /// Description of Ctrl_CAN_Bus.
+    /// </summary>
+    public partial class Ctrl_CS_CAN_Bus : UserControl
 	{
 		#region Private enums
 		
@@ -113,12 +113,128 @@ namespace CANStream
 			Periodic_500ms = 10,
 			Periodic_1sec  = 11,
 		}
-		
-		#endregion
-		
-		#region private constants
-		
-		private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
+
+        #endregion
+
+        #region Private Structures
+
+        private struct SpySerieState
+        {
+            public string Name;
+            public bool Checked;
+        }
+
+        #endregion
+
+        #region Private Classes
+
+        private class SpySerieStateCollection
+        {
+            #region Private members
+
+            private List<SpySerieState> SeriesState;
+
+            #endregion
+
+            #region Properties
+
+            public int ItemCount
+            {
+                get
+                {
+                    return (SeriesState.Count);
+                }
+
+                private set
+                {
+                    //Noting
+                }
+            }
+
+            #endregion
+
+            public SpySerieStateCollection()
+            {
+                SeriesState = new List<SpySerieState>();
+            }
+
+            #region Public methodes
+
+            public void Clear()
+            {
+                SeriesState.Clear();
+            }
+
+            public void AddItem(Nullable<SpySerieState> SpySerie)
+            {
+                if(SpySerie.HasValue)
+                {
+                    SeriesState.Add(SpySerie.Value);
+                }
+            }
+
+            public Nullable<SpySerieState> GetItem(int Index)
+            {
+                if (Index >= 0 && Index < SeriesState.Count)
+                {
+                    return (SeriesState[Index]);
+                }
+
+                return (null);
+            }
+
+            public bool Contains(string Name)
+            {
+                foreach(SpySerieState sSerie in SeriesState)
+                {
+                    if(sSerie.Name.Equals(Name))
+                    {
+                        return (true);
+                    }
+                }
+
+                return (false);
+            }
+
+            public bool GetSerieState(string Name)
+            {
+                foreach (SpySerieState sSerie in SeriesState)
+                {
+                    if (sSerie.Name.Equals(Name))
+                    {
+                        return (sSerie.Checked);
+                    }
+                }
+
+                return (false);
+            }
+
+            public void SetSerieState(string Name, bool State)
+            {
+                for (int i = 0; i < SeriesState.Count; i++)
+                {
+                    if (SeriesState[i].Name.Equals(Name))
+                    {
+                        SpySerieState sSerie = new SpySerieState();
+
+                        sSerie.Name = SeriesState[i].Name;
+                        sSerie.Checked = State;
+
+                        SeriesState[i] = sSerie;
+
+                        break;
+                    }
+                }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
+        #region private constants
+
+        private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
 		private const int SPY_GRID_UPDATE_PERIOD=100;
 		private const int SPY_GRAPH_UPDATE_PERIOD=100;
 		private Color GRID_BACK_COLOR=Color.LightBlue;
@@ -187,10 +303,10 @@ namespace CANStream
 		private Int16 SpyMsgIdFilterMin;
 		private Int16 SpyMsgIdFilterMax;
         private bool bDataHistoryFrozen;
-        private List<string> SpyGraphChannelList;
+        private SpySerieStateCollection oSpySeriesStates;
 
-		//Manual control
-		private List<CANMessageEncoded> TxEngMessages;
+        //Manual control
+        private List<CANMessageEncoded> TxEngMessages;
 		private long SentMsgCounter;
 		private bool bRawMsgGridEdition;
 		private int NextRawMessageKeyId;
@@ -338,14 +454,14 @@ namespace CANStream
 			SpyGraphAutoScale=true;
 			SpyGraphRestarted=false;
             bDataHistoryFrozen = false;
-            TSTxt_IdFilterFrom.Tag = 0x0;
-            TSTxt_IdFilterTo.Tag = 0x7ff;
+            TSTxt_IdFilterFrom.Tag = (uint)0x0;
+            TSTxt_IdFilterTo.Tag = (uint)0x7ff;
 			
 			Cmb_SpyCANRate.SelectedIndex = 1; //1000 kBit/s
 			Cmb_SpyCANRxMode.Text = SpyCANRxMode.Event.ToString();
-			
-			SpyGraphChannelList = new List<string>();
-			ChkLst_ChannelSel.Tag = "";
+
+            oSpySeriesStates = new SpySerieStateCollection();
+            ChkLst_ChannelSel.Tag = "";
 			
 			//Initialization of manual control management
 			SentMsgCounter = 0;
@@ -681,7 +797,8 @@ namespace CANStream
 		
 		private void ChkLst_ChannelSelItemCheck(object sender, ItemCheckEventArgs e)
 		{
-			SpyGraphSeries.SetSerieVisible(ChkLst_ChannelSel.Items[e.Index].ToString(),e.NewValue.Equals(CheckState.Checked));
+            oSpySeriesStates.SetSerieState(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
+            SpyGraphSeries.SetSerieVisible(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
 			
 			if(!bSpyRunning)
 			{
@@ -853,7 +970,7 @@ namespace CANStream
 							Context_SpyGraph_Filter_TSCmb.Items.RemoveAt(9);
 						}
 						
-						Context_SpyGraph_Filter_TSCmb.Items.Insert(0, ManualGrid_Filter_Combo_TSMI.Text);
+						Context_SpyGraph_Filter_TSCmb.Items.Insert(0, Context_SpyGraph_Filter_TSCmb.Text);
 					}
 				}
 				
@@ -1215,45 +1332,48 @@ namespace CANStream
             }
         }
 
-        private void Grid_CANDataCellEndEdit(object sender, DataGridViewCellEventArgs e)
-		{
-            if (!(Grid_CANData.CurrentCell.Tag == null))
+        private void Grid_CANData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Grid_CANData.CurrentCell != null)
             {
-                CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
-
-                double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
-
-                if (!(Double.IsNaN(EngValue)))
+                if (!(Grid_CANData.CurrentCell.Tag == null))
                 {
-                    oParam.DecodedValue = EngValue;
-                    Grid_CANData.CurrentCell.Value= oParam.ValueFormat.GetParameterFormatedValue(EngValue);
+                    CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
 
-                    Color CellBackColor = SystemColors.Window;
-                    Color CellForeColor = SystemColors.WindowText;
+                    double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
 
-                    Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
-
-                    if (sAlarm.HasValue)
+                    if (!(Double.IsNaN(EngValue)))
                     {
-                        CellBackColor = sAlarm.Value.BackColor;
-                        CellForeColor = sAlarm.Value.ForeColor;
+                        oParam.DecodedValue = EngValue;
+                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(EngValue);
+
+                        Color CellBackColor = SystemColors.Window;
+                        Color CellForeColor = SystemColors.WindowText;
+
+                        Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
+
+                        if (sAlarm.HasValue)
+                        {
+                            CellBackColor = sAlarm.Value.BackColor;
+                            CellForeColor = sAlarm.Value.ForeColor;
+                        }
+
+                        Grid_CANData.CurrentCell.Style.BackColor = CellBackColor;
+                        Grid_CANData.CurrentCell.Style.ForeColor = CellForeColor;
+
+                        UpdateManualControlMessagesData();
                     }
+                    else
+                    {
+                        MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+                                                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                    Grid_CANData.CurrentCell.Style.BackColor = CellBackColor;
-                    Grid_CANData.CurrentCell.Style.ForeColor = CellForeColor;
-
-                    UpdateManualControlMessagesData();
-                }
-                else
-                {
-                    MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
-                                                Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                    Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                    }
                 }
             }
-		}
-        
+        }
+
         private void Grid_CANDataSizeChanged(object sender, EventArgs e)
 		{
         	ResizeGridColumns(Grid_CANData, GRID_ENG_MANUAL_FILLER_COL);
@@ -3273,9 +3393,9 @@ namespace CANStream
         		{
         			Manual_SpyDataViewer.Clear_RawGrid();
         			Manual_SpyDataViewer.Clear_EngGrid();
-        			
-        			SpyGraphChannelList.Clear();
-        			SpyGraphSeries.RTSeries.Clear();
+
+                    oSpySeriesStates.Clear();
+                    SpyGraphSeries.RTSeries.Clear();
         			
         			bClearSpyGrids=false;
         		}
@@ -3441,7 +3561,7 @@ namespace CANStream
 		
 		private void DisplayMessages()
         {
-        	TimeSpan TSinceLastUpdate=DateTime.Now.Subtract(TLastSpyGridUpdate);
+            TimeSpan TSinceLastUpdate = DateTime.Now.Subtract(TLastSpyGridUpdate);
         	if(!(TSinceLastUpdate.TotalMilliseconds > SPY_GRID_UPDATE_PERIOD))
         	{
         		return;
@@ -3449,8 +3569,8 @@ namespace CANStream
         	
         	lock (m_LastMsgsList.SyncRoot)
         	{
-        		TLastSpyGridUpdate=DateTime.Now;
-        		DecodedMessageCount=0;
+                TLastSpyGridUpdate = DateTime.Now;
+                DecodedMessageCount = 0;
         		
         		foreach(MessageStatus msgStatus in m_LastMsgsList)
         		{
@@ -3507,11 +3627,17 @@ namespace CANStream
                                                                 };
 		                				
 		                				CurrentSpyViewer.Update_EngGridRow(EngParamData);
-		                				
-		                				if (!(ChkLst_ChannelSel.Items.Contains(oParam.Name)))
-		                				{
-		                					SpyGraphChannelList.Add(oParam.Name);
-		                				}
+
+                                        if (!(oSpySeriesStates.Contains(oParam.Name)))
+                                        {
+                                            SpySerieState sSpySerie = new SpySerieState();
+
+                                            sSpySerie.Name = oParam.Name;
+                                            sSpySerie.Checked = false;
+
+                                            oSpySeriesStates.AddItem(sSpySerie);
+                                            FilterSpyGraphSeries();
+                                        }
 		                				
 										//Add Spy graphic sample
 										if(bSpyGraphEnabled)
@@ -3523,8 +3649,6 @@ namespace CANStream
 										//Set param value in virtual channel variable element table
 										VCLibCollection.UpDateVariableElement(oParam.Name,oParam.DecodedValue);
 		                			}
-		                			
-		                			FilterSpyGraphSeries();
 		                		}
 		                	}
 		                }
@@ -3550,7 +3674,7 @@ namespace CANStream
                                             {
                                                 Lst_SpyDataHistory.Items.Insert(iParam + 1,
                                                                                 "  " + DecodedMessages[MsgIndex].Parameters[iParam].Name
-                                                                                + " : " + DecodedMessages[MsgIndex].Parameters[iParam].DecodedValue.ToString()
+                                                                                + " : " + DecodedMessages[MsgIndex].Parameters[iParam].ValueFormat.GetParameterFormatedValue(DecodedMessages[MsgIndex].Parameters[iParam].DecodedValue)
                                                                                 + " " + DecodedMessages[MsgIndex].Parameters[iParam].Unit);
                                             }
                                         }
@@ -3706,29 +3830,43 @@ namespace CANStream
 		
 		private void SetSpyGraphSeriesVisibility()
         {
-        	for(int i=0; i<ChkLst_ChannelSel.Items.Count;i++)
-        	{
-        		if(ChkLst_ChannelSel.GetItemChecked(i))
-        		{
-        			SpyGraphSeries.SetSerieVisible(ChkLst_ChannelSel.Items[i].ToString(),true);
-        		}
-        	}
+            for (int i = 0; i < oSpySeriesStates.ItemCount; i++)
+            {
+                Nullable<SpySerieState> sSerie = oSpySeriesStates.GetItem(i);
+
+                if (sSerie.HasValue)
+                {
+                    SpyGraphSeries.SetSerieVisible(sSerie.Value.Name, sSerie.Value.Checked);
+                }
+            }
         }
 		
 		private void FilterSpyGraphSeries()
 		{
-			string sFilter = (string)ChkLst_ChannelSel.Tag;
-			
+            string sFilter = (string)ChkLst_ChannelSel.Tag;
+
+            //Channel list updating
 			ChkLst_ChannelSel.Items.Clear();
 			
-			foreach (string sChan in SpyGraphChannelList)
-			{
-				if ((sFilter.Equals("")) || (sChan.ToLower().Contains(sFilter.ToLower())))
-				{
-					ChkLst_ChannelSel.Items.Add(sChan, false);
-				}
-			}
-		}
+            for(int i=0;i<oSpySeriesStates.ItemCount;i++)
+            {
+                Nullable<SpySerieState> sSerie = oSpySeriesStates.GetItem(i);
+
+                if (sSerie.HasValue)
+                {
+                    if ((sFilter.Equals("")) || (sSerie.Value.Name.ToLower().Contains(sFilter.ToLower())))
+                    {
+                        ChkLst_ChannelSel.Items.Add(sSerie.Value.Name, oSpySeriesStates.GetSerieState(sSerie.Value.Name));
+                    }
+                    else
+                    {
+                        oSpySeriesStates.SetSerieState(sSerie.Value.Name, false);
+                    }
+                }
+            }
+
+            SetSpyGraphSeriesVisibility();
+        }
 		
 		private void FireControllerSpyRunningChangedEvent(bool bRunning)
 		{
@@ -3941,7 +4079,7 @@ namespace CANStream
         private void ShowVirtualChannelValues()
         {
         	foreach(CS_VirtualChannelsLibrary oLib in VCLibCollection.Libraries)
-        	{
+            {
         		foreach(CS_VirtualChannel oChan in oLib.Channels)
         		{
         			if (oChan.bNewValue && oChan.bComputed)
@@ -3962,10 +4100,16 @@ namespace CANStream
 	        			
 	        			CurrentSpyViewer.Update_VirtualChannelValue(ChanData);
 	        			
-	        			if (!(ChkLst_ChannelSel.Items.Contains(oChan.Name)))
+	        			if (!(oSpySeriesStates.Contains(oChan.Name)))
         				{
-	        				SpyGraphChannelList.Add(oChan.Name);
-        				}
+                            SpySerieState sSpySerie = new SpySerieState();
+
+                            sSpySerie.Name = oChan.Name;
+                            sSpySerie.Checked = false;
+
+                            oSpySeriesStates.AddItem(sSpySerie);
+                            FilterSpyGraphSeries();
+                        }
         			}
         			
         			//Add Spy graphic sample
@@ -3978,8 +4122,6 @@ namespace CANStream
 						}
         			}
         		}
-        		
-        		FilterSpyGraphSeries();
         	}
         }
         
