@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,13 +14,17 @@ namespace CANStream
     [Serializable]
     public class DashboardGauge : AGauge
     {
-        [Browsable(false)]
-        public new bool Visible { get; set; }
-
         public DashboardGauge()
         {
-            Visible = true;
-            base.Visible = Visible;
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(this.GetType())["Anchor"];
+            BrowsableAttribute attrib = (BrowsableAttribute)descriptor.Attributes[typeof(BrowsableAttribute)];
+            FieldInfo isBrow = attrib.GetType().GetField("browsable", BindingFlags.NonPublic | BindingFlags.Instance);
+            isBrow.SetValue(attrib, false);
+
+            descriptor = TypeDescriptor.GetProperties(this.GetType())["UseWaitCursor"];
+            attrib = (BrowsableAttribute)descriptor.Attributes[typeof(BrowsableAttribute)];
+            isBrow = attrib.GetType().GetField("browsable", BindingFlags.NonPublic | BindingFlags.Instance);
+            isBrow.SetValue(attrib, false);
         }
     }
 }

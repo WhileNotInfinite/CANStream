@@ -85,6 +85,11 @@ namespace CANStream
                                 Create_Gauge(DropPoint);
                                 break;
 
+                            case DashboardControlType.BarGraph:
+
+                                Create_BarGraph(DropPoint);
+                                break;
+
                             default:
                                 break;
                         }
@@ -427,7 +432,6 @@ namespace CANStream
 
         private void Create_Gauge(Point Location)
         {
-            //AGauge oGauge = new AGauge();
             DashboardGauge oGauge = new DashboardGauge();
 
             oGauge.Location = Location;
@@ -442,6 +446,25 @@ namespace CANStream
 
             DashboardControlEventArgs e = new DashboardControlEventArgs();
             e.DashboardControl = (Control)oGauge;
+            OnDashboardControlCreated(e);
+        }
+
+        private void Create_BarGraph(Point Location)
+        {
+            DashboardBarGraph oBarGraph = new DashboardBarGraph();
+
+            oBarGraph.Location = Location;
+            oBarGraph.Name = Get_ControlName(oBarGraph.GetType());
+
+            oBarGraph.MouseDown += new MouseEventHandler(DashCtrl_MouseDown);
+            oBarGraph.MouseMove += new MouseEventHandler(DashCtrl_MouseMove);
+            oBarGraph.MouseLeave += new EventHandler(DashCtrl_MouseLeave);
+            oBarGraph.KeyDown += new KeyEventHandler(DashCtrl_KeyDown);
+
+            Dash_Panel.Controls.Add(oBarGraph);
+
+            DashboardControlEventArgs e = new DashboardControlEventArgs();
+            e.DashboardControl = (Control)oBarGraph;
             OnDashboardControlCreated(e);
         }
 

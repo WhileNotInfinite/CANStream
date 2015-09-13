@@ -145,6 +145,12 @@
     <Compile Include="Class\CS_VirtualChannels.cs" />
     <Compile Include="Class\CycleDataAssociation.cs" />
     <Compile Include="Class\CycleEditionConfiguration.cs" />
+    <Compile Include="Class\Dummy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class\Dummy.Designer.cs">
+      <DependentUpon>Dummy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class\GraphicSeries.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
@@ -181,6 +187,12 @@
     <Compile Include="Class\CS_Dashboard.cs" />
     <Compile Include="Controls\Dashboard_Controls\DashboardGauge.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Dashboard_Controls\DashboardBarGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Dashboard_Controls\DashboardBarGraph.Designer.cs">
+      <DependentUpon>DashboardBarGraph.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Dlg_DBCTransmitterSelection.cs">
       <SubType>Form</SubType>
@@ -368,6 +380,9 @@
     <Compile Include="Tools\NumberBaseConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Class\Dummy.resx">
+      <DependentUpon>Dummy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ctrl_CS_CAN_Bus.resx">
       <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ctrl_SpyDataViewer.resx">
       <DependentUpon>Ctrl_SpyDataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Dashboard_Controls\DashboardBarGraph.resx">
+      <DependentUpon>DashboardBarGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Dlg_DBCTransmitterSelection.resx">
       <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>

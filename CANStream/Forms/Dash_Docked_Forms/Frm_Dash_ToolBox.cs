@@ -45,6 +45,9 @@ namespace CANStream
 
             It = LV_Tools.Items.Add("Gauge", 0);
             It.Tag = DashboardControlType.Gauge;
+
+            It = LV_Tools.Items.Add("BarGraph", 0);
+            It.Tag = DashboardControlType.BarGraph;
         }
 
         #endregion
