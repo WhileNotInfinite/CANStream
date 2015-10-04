@@ -29,9 +29,22 @@ namespace CANStream
         private const float SCALE_DIV_SIZE = 5;
         private const float SCALE_TXT_POS_OFFSET = 3;
 
+        private const int CTRL_SIZE_BAR_OFFSET = 10;
+        private const int BAR_LEFT_BASE = 5;
+        private const int BAR_TOP_BASE = 5;
+        private const int PIC_SCALE_POS_OFFSET = 5;
+        private const int LBL_VALUE_POS_OFFSET = 5;
+        private const int LBL_VALUE_BASE_POS = 5;
+        private const int LBL_VALUE_BASE_WIDTH = 71;
+        private const int LBL_VALUE_BASE_HEIGHT = 33;
+        private const int LBL_TITLE_POS_OFFSET = 5;
+        private const int LBL_TILTE_BASE_POS = 5;
+
         #endregion
 
         #region Properties
+
+        //TODO: Set category & description for each properties
 
         [Browsable(true)]
         [CategoryAttribute("Settings")]
@@ -445,60 +458,215 @@ namespace CANStream
 
             if (BarDirection!=mDirection) //Control bar graph direction change
             {
-                switch(mDirection)
+                int CtrlWidthBarDelta = (CTRL_SIZE_BAR_OFFSET * 2);
+                int CtrlHeightBarDelta = (CTRL_SIZE_BAR_OFFSET * 2);
+
+                int BarWidth = Pic_BarGraph.Height;
+                int BarHeigth = Pic_BarGraph.Width;
+                int BarLeft = BAR_LEFT_BASE;
+                int BarTop = BAR_TOP_BASE;
+
+                int ScaleWidth = Pic_Scale.Height;
+                int ScaleHeigth = Pic_Scale.Width;
+                int ScaleLeft = BAR_LEFT_BASE;
+                int ScaleTop = BAR_TOP_BASE;
+
+                int LblValueWidth = 0;
+                int LblValueHeight = 0;
+                int LblValueLeft = 0;
+                int LblValueTop = 0;
+
+                int LblMinWidth = 0;
+                int LblMinHeight = 0;
+                int LblMinLeft = 0;
+                int LblMinTop = 0;
+
+                mDirection = BarDirection;
+
+                switch (mDirection)
                 {
                     case BarGraphDirection.Horizontal: //Current direction is horizontal => switch to vertical
 
-                        int NewWidth = Pic_BarGraph.Height + 20;
-                        if (Pic_Scale.Visible) NewWidth += (Pic_Scale.Height + 10);
-
-                        int NewHeigth = Pic_BarGraph.Width + 20;
-                        if (Lbl_Value.Visible) NewHeigth += (Lbl_Value.Height + 5);
-                        if (Lbl_MinValue.Visible) NewHeigth += (Lbl_MinValue.Height + Lbl_MaxValue.Height + 5);
-
-                        this.Height = NewHeigth;
-                        this.Width = NewWidth;
-
-                        int NewLeft = 10;
-                        int NewTop = 10;
-
+                        //Scale
                         if (Pic_Scale.Visible)
                         {
-                            NewWidth = Pic_Scale.Height;
-                            NewHeigth = Pic_Scale.Width;
-
-                            Pic_Scale.Height = NewHeigth;
-                            Pic_Scale.Width = NewWidth;
-                            Pic_Scale.Top = NewTop;
-                            Pic_Scale.Left = NewLeft;
-
-                            NewLeft += Pic_Scale.Width + 10;
+                            CtrlHeightBarDelta += (ScaleHeigth + PIC_SCALE_POS_OFFSET);
+                            BarTop += (ScaleHeigth + PIC_SCALE_POS_OFFSET);
                         }
 
-                        NewWidth = Pic_BarGraph.Height;
-                        NewHeigth = Pic_BarGraph.Width;
+                        //Value label
+                        if (Lbl_Value.Visible)
+                        {
+                            if (!(Pic_Scale.Visible))
+                            {
+                                CtrlHeightBarDelta += (LBL_VALUE_BASE_HEIGHT + LBL_VALUE_BASE_POS);
+                                BarTop += (LBL_VALUE_BASE_HEIGHT + LBL_VALUE_BASE_POS);
 
-                        Pic_BarGraph.Height = NewHeigth;
-                        Pic_BarGraph.Width = NewWidth;
-                        Pic_BarGraph.Top = NewTop;
-                        Pic_BarGraph.Left = NewLeft;
+                                LblValueHeight = LBL_VALUE_BASE_HEIGHT;
+                            }
+                            else
+                            {
+                                LblValueHeight = ScaleHeigth;
+                            }
+                           
+                            LblValueWidth = LBL_VALUE_BASE_WIDTH;
+                            LblValueLeft = LBL_VALUE_BASE_POS;
+                            LblValueTop = LBL_VALUE_BASE_POS;
 
-                        NewTop += Pic_BarGraph.Height + 10;
+                            BarLeft += (LblValueWidth + LBL_VALUE_POS_OFFSET);
+                            ScaleLeft += (LblValueWidth + LBL_VALUE_POS_OFFSET);
 
-                        //TODO: Ici
-                        //Dimensionner & placer les labels value, MinValue & MaxValue 
+                            CtrlWidthBarDelta += (LblValueWidth + LBL_VALUE_POS_OFFSET);
+                        }
+
+                        //Min & Max lablels
+                        if (Lbl_MinValue.Visible)
+                        {
+                            LblMinWidth = LBL_VALUE_BASE_WIDTH;
+                            LblMinHeight = BarHeigth / 2;
+                            LblMinLeft = LBL_VALUE_POS_OFFSET;
+                            LblMinTop = BarTop;
+
+                            if (!(Lbl_Value.Visible))
+                            {
+                                CtrlWidthBarDelta += (LblMinWidth + LBL_VALUE_POS_OFFSET);
+                                BarLeft += (LblMinWidth + LBL_VALUE_POS_OFFSET);
+                                ScaleLeft += (LblMinWidth + LBL_VALUE_POS_OFFSET);
+                            }
+                        }
+
+                        //Title label
+                        if (Lbl_Title.Visible)
+                        {
+                            CtrlHeightBarDelta += (Lbl_Title.Height + (LBL_TITLE_POS_OFFSET * 2));
+                        }
 
                         break;
 
                     case BarGraphDirection.Vertical: //Current direction is vertical => switch to horizontal
 
-                        //TODO: Coder le changement vertical vers horizontal
+                        //Scale
+                        if(Pic_Scale.Visible)
+                        {
+                            CtrlWidthBarDelta += (ScaleWidth + PIC_SCALE_POS_OFFSET);
+                            BarLeft += (ScaleWidth + PIC_SCALE_POS_OFFSET);
+                        }
+
+                        //Value label
+                        if (Lbl_Value.Visible)
+                        {
+                            if (Pic_Scale.Visible)
+                            {
+                                LblValueWidth = ScaleWidth + PIC_SCALE_POS_OFFSET + BarWidth;
+                            }
+                            else
+                            {
+                                LblValueWidth = LBL_VALUE_BASE_WIDTH;
+
+                                if ((BarWidth + CtrlWidthBarDelta) < LblValueWidth)
+                                {
+                                    int WidthInc = LblValueWidth - (BarWidth + CtrlWidthBarDelta);
+
+                                    CtrlWidthBarDelta += WidthInc;
+                                    BarLeft += (WidthInc / 2);
+                                }
+                            }
+                            
+                            LblValueHeight = LBL_VALUE_BASE_HEIGHT;
+                            LblValueLeft = LBL_VALUE_POS_OFFSET;
+                            LblValueTop = BarTop + BarHeigth + LBL_VALUE_POS_OFFSET;
+
+                            CtrlHeightBarDelta += (LblValueHeight + LBL_VALUE_POS_OFFSET);
+                        }
+
+                        //Min & Max lablels
+                        if (Lbl_MinValue.Visible)
+                        {
+                            if(Pic_Scale.Visible)
+                            {
+                                LblMinWidth = ScaleWidth + PIC_SCALE_POS_OFFSET + BarWidth;
+                            }
+                            else
+                            {
+                                LblMinWidth = LBL_VALUE_BASE_WIDTH;
+
+                                if ((BarWidth + CtrlWidthBarDelta) < LblMinWidth)
+                                {
+                                    int WidthInc = LblMinWidth - (BarWidth + CtrlWidthBarDelta);
+
+                                    CtrlWidthBarDelta += WidthInc;
+                                    BarLeft += (WidthInc / 2);
+                                }
+                            }
+
+                            if(Lbl_Value.Visible)
+                            {
+                                LblMinTop = LblValueTop + LblValueHeight + LBL_VALUE_POS_OFFSET;
+                            }
+                            else
+                            {
+                                LblMinTop = BarTop + BarHeigth + LBL_VALUE_POS_OFFSET;
+                            }
+
+                            LblMinHeight = LBL_VALUE_BASE_HEIGHT / 2;
+                            LblMinLeft = LBL_VALUE_BASE_POS;
+
+                            CtrlHeightBarDelta += ((LblMinHeight * 2) + LBL_VALUE_POS_OFFSET);
+                        }
+
+                        //Title label
+                        if (Lbl_Title.Visible)
+                        {
+                            CtrlHeightBarDelta += (Lbl_Title.Height + (LBL_TITLE_POS_OFFSET * 2));
+                        }
 
                         break;
                 }
 
-                mDirection = BarDirection;
+                this.Width = BarWidth + CtrlWidthBarDelta;
+                this.Height = BarHeigth + CtrlHeightBarDelta;
+
+                Pic_BarGraph.Width = BarWidth;
+                Pic_BarGraph.Height = BarHeigth;
+                Pic_BarGraph.Left = BarLeft;
+                Pic_BarGraph.Top = BarTop;
+
+                if (Pic_Scale.Visible)
+                {
+                    Pic_Scale.Width = ScaleWidth;
+                    Pic_Scale.Height = ScaleHeigth;
+                    Pic_Scale.Left = ScaleLeft;
+                    Pic_Scale.Top = ScaleTop;
+                }
+
+                if (Lbl_Value.Visible)
+                {
+                    Lbl_Value.Width = LblValueWidth;
+                    Lbl_Value.Height = LblValueHeight;
+                    Lbl_Value.Left = LblValueLeft;
+                    Lbl_Value.Top = LblValueTop;
+                }
+
+                if(Lbl_MinValue.Visible)
+                {
+                    Lbl_MinValue.Width = LblMinWidth;
+                    Lbl_MinValue.Height = LblMinHeight;
+                    Lbl_MinValue.Left = LblMinLeft;
+                    Lbl_MinValue.Top = LblMinTop;
+
+                    Lbl_MaxValue.Size = Lbl_MinValue.Size;
+                    Lbl_MaxValue.Left = LblMinLeft;
+                    Lbl_MaxValue.Top = LblMinTop + LblMinHeight;
+                }
+
+                if (Lbl_Title.Visible)
+                {
+                    Lbl_Title.Left = LBL_TILTE_BASE_POS;
+                    Lbl_Title.Top = this.Height - Lbl_Title.Height - (LBL_TITLE_POS_OFFSET * 2);
+                }
             }
+
+            DrawBarGraph();
 
             this.ResumeLayout(true);
         }
@@ -592,8 +760,8 @@ namespace CANStream
                         }
                         else
                         {
-                            ptScale.Y += (float)((ptStart.Y - ptEnd.Y) / mScaleDivisionCount);
-                            ptScale.Y = ptScale.Y;
+                            ptScale.Y -= (float)((ptStart.Y - ptEnd.Y) / mScaleDivisionCount);
+                            ptScale2.Y = ptScale.Y;
                         }
 
                         gScale.DrawLine(p, ptScale, ptScale2);
