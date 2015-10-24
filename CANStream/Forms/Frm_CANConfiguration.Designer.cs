@@ -434,6 +434,7 @@
             this.Img_TV_Messages.Images.SetKeyName(1, "parametres-theme-icone-3702-16.png");
             this.Img_TV_Messages.Images.SetKeyName(2, "hardware-icone-4788-16.png");
             this.Img_TV_Messages.Images.SetKeyName(3, "edu-des-mathematiques-icone-4069-16.png");
+            this.Img_TV_Messages.Images.SetKeyName(4, "address-book-icone-9846-16.png");
             // 
             // groupBox1
             // 

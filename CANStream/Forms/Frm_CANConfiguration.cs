@@ -27,9 +27,10 @@ namespace CANStream
         
         private enum ConfigurationItemType
         {
-        	Controller = 0,
-        	Message    = 1,
-        	Parameter  = 2,
+        	Controller  = 0,
+        	Message     = 1,
+        	Parameter   = 2,
+            Multiplexer = 3,
         }
         
         #endregion
@@ -922,15 +923,39 @@ namespace CANStream
                 	if ((sFilter.Equals("")) || (oParam.Name.ToLower().Contains(sFilter.ToLower())))
                 	{
                 		TreeNode nParam = null;
-                		
-                		if (!(oParam.IsVirtual))
-                		{
-                			nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
-                		}
-                		else
-                		{
-                			nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
-                		}
+
+                        if (oParam.IsMultiplexed)
+                        {
+                            TreeNode nMux = GetParameterMultiplexerNode(nMsg, oParam.MultiplexerValue);
+
+                            if (nMux == null)
+                            {
+                                nMux = nMsg.Nodes.Add(oParam.MultiplexerValue.ToString(), oMsg.MultiplexerName + " = " + oParam.MultiplexerValue.ToString(), 4, 4);
+                                nMux.Tag = ConfigurationItemType.Multiplexer;
+                            }
+
+                            if (!(oParam.IsVirtual))
+                            {
+                                nParam = nMux.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                            }
+                            else
+                            {
+                                nParam = nMux.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                            }
+
+                        }
+                        else
+                        {
+
+                            if (!(oParam.IsVirtual))
+                            {
+                                nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                            }
+                            else
+                            {
+                                nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                            }
+                        }
                 		
                 		nParam.Tag = ConfigurationItemType.Parameter;
                 	}
@@ -990,15 +1015,37 @@ namespace CANStream
                 		if ((sFilter.Equals("")) || (oParam.Name.ToLower().Contains(sFilter.ToLower())))
                 		{
                 			TreeNode nParam = null;
-                			
-                			if (!(oParam.IsVirtual))
-                			{
-                				nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
-                			}
-                			else
-                			{
-                				nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
-                			}
+
+                            if (oParam.IsMultiplexed)
+                            {
+                                TreeNode nMux = GetParameterMultiplexerNode(nMsg, oParam.MultiplexerValue);
+
+                                if (nMux == null)
+                                {
+                                    nMux = nMsg.Nodes.Add(oParam.MultiplexerValue.ToString(), oMsg.MultiplexerName + " = " + oParam.MultiplexerValue.ToString(), 4, 4);
+                                    nMux.Tag = ConfigurationItemType.Multiplexer;
+                                }
+
+                                if (!(oParam.IsVirtual))
+                                {
+                                    nParam = nMux.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                                }
+                                else
+                                {
+                                    nParam = nMux.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                                }
+                            }
+                            else
+                            {
+                                if (!(oParam.IsVirtual))
+                                {
+                                    nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 1, 1);
+                                }
+                                else
+                                {
+                                    nParam = nMsg.Nodes.Add(oParam.Name, oParam.Name, 3, 3);
+                                }
+                            }
                 			
                 			nParam.Tag = ConfigurationItemType.Parameter;
                 		}
@@ -1135,13 +1182,30 @@ namespace CANStream
             			break;
             			
             		case ConfigurationItemType.Parameter:
-            			
-            			MsgName = nItem.Parent.Text.Substring(0, nItem.Parent.Text.IndexOf("[") - 1);
-            			
-            			if (!(oMultipleControllersCfg == null))
-            			{
-            				oCANConfig = oMultipleControllersCfg.Get_BusController(nItem.Parent.Parent.Text);
-            			}
+
+                        if (nItem.Parent.Tag.Equals(ConfigurationItemType.Message))
+                        {
+                            MsgName = nItem.Parent.Text.Substring(0, nItem.Parent.Text.IndexOf("[") - 1);
+
+                            if (!(oMultipleControllersCfg == null))
+                            {
+                                oCANConfig = oMultipleControllersCfg.Get_BusController(nItem.Parent.Parent.Text);
+                            }
+                        }
+                        else if (nItem.Parent.Tag.Equals(ConfigurationItemType.Multiplexer))
+                        {
+                            MsgName = nItem.Parent.Parent.Text.Substring(0, nItem.Parent.Parent.Text.IndexOf("[") - 1);
+
+                            if (!(oMultipleControllersCfg == null))
+                            {
+                                oCANConfig = oMultipleControllersCfg.Get_BusController(nItem.Parent.Parent.Parent.Text);
+                            }
+                        }
+                        else
+                        {
+                            //Not supposed to happen
+                            return;
+                        }
             			
             			if (!(oCANConfig == null))
             			{
@@ -1233,6 +1297,29 @@ namespace CANStream
 			Txt_ConfigName.Text = oCANConfig.Name;
         }
         
+        private TreeNode GetParameterMultiplexerNode(TreeNode MsgNode, long MultiplexerValue)
+        {
+            foreach (TreeNode nChild in MsgNode.Nodes)
+            {
+                if (nChild.Tag.Equals(ConfigurationItemType.Multiplexer))
+                {
+                    int SeparatorIndex = nChild.Text.IndexOf('=', 0);
+
+                    if (SeparatorIndex > 0)
+                    {
+                        string sMuxVal = (nChild.Text.Substring(SeparatorIndex + 1, nChild.Text.Length - (SeparatorIndex + 1))).Trim();
+
+                        if (MultiplexerValue == Convert.ToInt64(sMuxVal))
+                        {
+                            return (nChild);
+                        }
+                    }
+                }
+            }
+
+            return (null);
+        }
+
         #endregion
         
         #region Generic methodes
@@ -1263,6 +1350,10 @@ namespace CANStream
 	                    DeleteParameter(MsgName, nItem.Text);
 	                    Show_MsgMap(oActiveMessage);
             			break;
+
+                    default:
+
+                        return;
             	}
 
                 ConfigurationModified = true;
@@ -1307,6 +1398,10 @@ namespace CANStream
             			
                 		oClipObject.ParamClipBoardParentMessageName = oActiveMessage.Name;
             			break;
+
+                    default:
+
+                        return;
             	}
             	
             	if (!(oClipObject.ClipboardObject == null))
@@ -1456,6 +1551,16 @@ namespace CANStream
             				MessageBox.Show("Bits range defined for the current parameter is already used by another parameter !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             				return;
             			}
+
+                        if (oParamClip.IsMultiplexed)
+                        {
+                            if (oActiveMessage.MultiplexerName.Equals("")) //Attempt to past a multiplexed parameter into a non multpixed message
+                            {
+                                //Paramter pasted as a non multiplexed parameter
+                                oParamClip.IsMultiplexed = false;
+                                oParamClip.MultiplexerValue = -1;
+                            }
+                        }
 
             			oActiveMessage.Parameters.Add(oParamClip);
             			
