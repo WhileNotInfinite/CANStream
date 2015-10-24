@@ -103,6 +103,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Tab_Parameter = new System.Windows.Forms.TabPage();
             this.Grp_ParameterForm = new System.Windows.Forms.GroupBox();
+            this.Lbl_ParamMinMax = new System.Windows.Forms.Label();
             this.Grp_Alarms = new System.Windows.Forms.GroupBox();
             this.Pic_AlarmMax_Forecolor = new System.Windows.Forms.PictureBox();
             this.Pic_AlarmMax_Backcolor = new System.Windows.Forms.PictureBox();
@@ -177,7 +178,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip_Commands = new System.Windows.Forms.ToolTip(this.components);
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
-            this.Lbl_ParamMinMax = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
             this.Split_Tree_Props.Panel1.SuspendLayout();
             this.Split_Tree_Props.Panel2.SuspendLayout();
@@ -250,7 +250,7 @@
             this.Cmb_Filter.Location = new System.Drawing.Point(9, 19);
             this.Cmb_Filter.Name = "Cmb_Filter";
             this.Cmb_Filter.Size = new System.Drawing.Size(360, 21);
-            this.Cmb_Filter.TabIndex = 0;
+            this.Cmb_Filter.TabIndex = 1;
             this.Cmb_Filter.SelectedIndexChanged += new System.EventHandler(this.Cmb_FilterSelectedIndexChanged);
             this.Cmb_Filter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cmb_FilterKeyDown);
             // 
@@ -461,7 +461,7 @@
             this.Txt_ConfigName.Location = new System.Drawing.Point(482, 28);
             this.Txt_ConfigName.Name = "Txt_ConfigName";
             this.Txt_ConfigName.Size = new System.Drawing.Size(296, 20);
-            this.Txt_ConfigName.TabIndex = 7;
+            this.Txt_ConfigName.TabIndex = 4;
             this.Txt_ConfigName.TextChanged += new System.EventHandler(this.Txt_ConfigNameTextChanged);
             // 
             // label22
@@ -487,7 +487,7 @@
             this.Txt_MsgLength.Location = new System.Drawing.Point(271, 28);
             this.Txt_MsgLength.Name = "Txt_MsgLength";
             this.Txt_MsgLength.Size = new System.Drawing.Size(61, 20);
-            this.Txt_MsgLength.TabIndex = 4;
+            this.Txt_MsgLength.TabIndex = 3;
             this.Txt_MsgLength.TextChanged += new System.EventHandler(this.Txt_MsgLength_TextChanged);
             // 
             // label17
@@ -517,7 +517,7 @@
             this.Cmb_BusRate.Location = new System.Drawing.Point(42, 28);
             this.Cmb_BusRate.Name = "Cmb_BusRate";
             this.Cmb_BusRate.Size = new System.Drawing.Size(67, 21);
-            this.Cmb_BusRate.TabIndex = 1;
+            this.Cmb_BusRate.TabIndex = 2;
             this.Cmb_BusRate.SelectedIndexChanged += new System.EventHandler(this.Cmb_BusRate_SelectedIndexChanged);
             // 
             // label15
@@ -570,7 +570,7 @@
             this.NumUpDown_MuxValue.Location = new System.Drawing.Point(349, 20);
             this.NumUpDown_MuxValue.Name = "NumUpDown_MuxValue";
             this.NumUpDown_MuxValue.Size = new System.Drawing.Size(56, 20);
-            this.NumUpDown_MuxValue.TabIndex = 2;
+            this.NumUpDown_MuxValue.TabIndex = 45;
             this.NumUpDown_MuxValue.ValueChanged += new System.EventHandler(this.NumUpDown_MuxValueValueChanged);
             // 
             // Lbl_MuxValue
@@ -604,7 +604,7 @@
             this.Grid_MsgMap.RowHeadersWidth = 71;
             this.Grid_MsgMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.Grid_MsgMap.Size = new System.Drawing.Size(399, 523);
-            this.Grid_MsgMap.TabIndex = 0;
+            this.Grid_MsgMap.TabIndex = 44;
             this.Grid_MsgMap.SizeChanged += new System.EventHandler(this.Grid_MsgMapSizeChanged);
             // 
             // Bit7
@@ -690,7 +690,7 @@
             this.Tab_Controller.Controls.Add(this.Grp_ControllerForm);
             this.Tab_Controller.Location = new System.Drawing.Point(4, 22);
             this.Tab_Controller.Name = "Tab_Controller";
-            this.Tab_Controller.Size = new System.Drawing.Size(362, 568);
+            this.Tab_Controller.Size = new System.Drawing.Size(362, 547);
             this.Tab_Controller.TabIndex = 2;
             this.Tab_Controller.Text = "Bus controller";
             // 
@@ -713,7 +713,7 @@
             this.Cmd_ControllerChange.Location = new System.Drawing.Point(267, 333);
             this.Cmd_ControllerChange.Name = "Cmd_ControllerChange";
             this.Cmd_ControllerChange.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_ControllerChange.TabIndex = 35;
+            this.Cmd_ControllerChange.TabIndex = 7;
             this.Cmd_ControllerChange.Text = "Change";
             this.Cmd_ControllerChange.UseVisualStyleBackColor = true;
             this.Cmd_ControllerChange.Click += new System.EventHandler(this.Cmd_ControllerChangeClick);
@@ -724,7 +724,7 @@
             this.Txt_ControllerDescription.Multiline = true;
             this.Txt_ControllerDescription.Name = "Txt_ControllerDescription";
             this.Txt_ControllerDescription.Size = new System.Drawing.Size(264, 73);
-            this.Txt_ControllerDescription.TabIndex = 34;
+            this.Txt_ControllerDescription.TabIndex = 6;
             // 
             // label24
             // 
@@ -740,7 +740,7 @@
             this.Txt_ControllerName.Location = new System.Drawing.Point(78, 13);
             this.Txt_ControllerName.Name = "Txt_ControllerName";
             this.Txt_ControllerName.Size = new System.Drawing.Size(264, 20);
-            this.Txt_ControllerName.TabIndex = 18;
+            this.Txt_ControllerName.TabIndex = 5;
             // 
             // label23
             // 
@@ -758,7 +758,7 @@
             this.Tab_Message.Location = new System.Drawing.Point(4, 22);
             this.Tab_Message.Name = "Tab_Message";
             this.Tab_Message.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Message.Size = new System.Drawing.Size(362, 568);
+            this.Tab_Message.Size = new System.Drawing.Size(362, 547);
             this.Tab_Message.TabIndex = 0;
             this.Tab_Message.Text = "Message";
             // 
@@ -791,7 +791,7 @@
             this.Txt_MsgComment.Multiline = true;
             this.Txt_MsgComment.Name = "Txt_MsgComment";
             this.Txt_MsgComment.Size = new System.Drawing.Size(264, 73);
-            this.Txt_MsgComment.TabIndex = 32;
+            this.Txt_MsgComment.TabIndex = 13;
             this.Txt_MsgComment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label8
@@ -808,7 +808,7 @@
             this.Cmd_CancelNewMessage.Location = new System.Drawing.Point(186, 331);
             this.Cmd_CancelNewMessage.Name = "Cmd_CancelNewMessage";
             this.Cmd_CancelNewMessage.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_CancelNewMessage.TabIndex = 30;
+            this.Cmd_CancelNewMessage.TabIndex = 15;
             this.Cmd_CancelNewMessage.Text = "Cancel";
             this.Cmd_CancelNewMessage.UseVisualStyleBackColor = true;
             this.Cmd_CancelNewMessage.Click += new System.EventHandler(this.Cmd_CancelNewMessage_Click);
@@ -818,7 +818,7 @@
             this.Cmd_CreateMessage.Location = new System.Drawing.Point(267, 331);
             this.Cmd_CreateMessage.Name = "Cmd_CreateMessage";
             this.Cmd_CreateMessage.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_CreateMessage.TabIndex = 29;
+            this.Cmd_CreateMessage.TabIndex = 14;
             this.Cmd_CreateMessage.Text = "Create";
             this.Cmd_CreateMessage.UseVisualStyleBackColor = true;
             this.Cmd_CreateMessage.Click += new System.EventHandler(this.Cmd_CreateMessage_Click);
@@ -846,7 +846,7 @@
             this.Txt_MsgPeriod.Location = new System.Drawing.Point(78, 68);
             this.Txt_MsgPeriod.Name = "Txt_MsgPeriod";
             this.Txt_MsgPeriod.Size = new System.Drawing.Size(101, 20);
-            this.Txt_MsgPeriod.TabIndex = 22;
+            this.Txt_MsgPeriod.TabIndex = 12;
             this.Txt_MsgPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label3
@@ -865,7 +865,7 @@
             this.Radio_Tx.Location = new System.Drawing.Point(247, 40);
             this.Radio_Tx.Name = "Radio_Tx";
             this.Radio_Tx.Size = new System.Drawing.Size(37, 17);
-            this.Radio_Tx.TabIndex = 20;
+            this.Radio_Tx.TabIndex = 11;
             this.Radio_Tx.TabStop = true;
             this.Radio_Tx.Text = "Tx";
             this.Radio_Tx.UseVisualStyleBackColor = true;
@@ -876,7 +876,7 @@
             this.Radio_Rx.Location = new System.Drawing.Point(203, 40);
             this.Radio_Rx.Name = "Radio_Rx";
             this.Radio_Rx.Size = new System.Drawing.Size(38, 17);
-            this.Radio_Rx.TabIndex = 19;
+            this.Radio_Rx.TabIndex = 10;
             this.Radio_Rx.TabStop = true;
             this.Radio_Rx.Text = "Rx";
             this.Radio_Rx.UseVisualStyleBackColor = true;
@@ -886,7 +886,7 @@
             this.Txt_MsgIdentifier.Location = new System.Drawing.Point(99, 39);
             this.Txt_MsgIdentifier.Name = "Txt_MsgIdentifier";
             this.Txt_MsgIdentifier.Size = new System.Drawing.Size(79, 20);
-            this.Txt_MsgIdentifier.TabIndex = 18;
+            this.Txt_MsgIdentifier.TabIndex = 9;
             this.Txt_MsgIdentifier.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label2
@@ -903,7 +903,7 @@
             this.Txt_MsgName.Location = new System.Drawing.Point(78, 13);
             this.Txt_MsgName.Name = "Txt_MsgName";
             this.Txt_MsgName.Size = new System.Drawing.Size(264, 20);
-            this.Txt_MsgName.TabIndex = 16;
+            this.Txt_MsgName.TabIndex = 8;
             this.Txt_MsgName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label1
@@ -968,6 +968,17 @@
             this.Grp_ParameterForm.TabIndex = 16;
             this.Grp_ParameterForm.TabStop = false;
             // 
+            // Lbl_ParamMinMax
+            // 
+            this.Lbl_ParamMinMax.AutoSize = true;
+            this.Lbl_ParamMinMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_ParamMinMax.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Lbl_ParamMinMax.Location = new System.Drawing.Point(159, 154);
+            this.Lbl_ParamMinMax.Name = "Lbl_ParamMinMax";
+            this.Lbl_ParamMinMax.Size = new System.Drawing.Size(61, 13);
+            this.Lbl_ParamMinMax.TabIndex = 51;
+            this.Lbl_ParamMinMax.Text = "Min: / Max:";
+            // 
             // Grp_Alarms
             // 
             this.Grp_Alarms.Controls.Add(this.Pic_AlarmMax_Forecolor);
@@ -992,7 +1003,7 @@
             this.Grp_Alarms.Location = new System.Drawing.Point(12, 363);
             this.Grp_Alarms.Name = "Grp_Alarms";
             this.Grp_Alarms.Size = new System.Drawing.Size(330, 144);
-            this.Grp_Alarms.TabIndex = 50;
+            this.Grp_Alarms.TabIndex = 33;
             this.Grp_Alarms.TabStop = false;
             this.Grp_Alarms.Text = "Warnings and alarms";
             // 
@@ -1069,7 +1080,7 @@
             this.Chk_AlarmMax.Location = new System.Drawing.Point(13, 120);
             this.Chk_AlarmMax.Name = "Chk_AlarmMax";
             this.Chk_AlarmMax.Size = new System.Drawing.Size(94, 17);
-            this.Chk_AlarmMax.TabIndex = 67;
+            this.Chk_AlarmMax.TabIndex = 41;
             this.Chk_AlarmMax.Text = "Alarm limit max";
             this.Chk_AlarmMax.UseVisualStyleBackColor = true;
             this.Chk_AlarmMax.CheckedChanged += new System.EventHandler(this.Chk_AlarmMax_CheckedChanged);
@@ -1081,7 +1092,7 @@
             this.Chk_AlarmMin.Location = new System.Drawing.Point(13, 41);
             this.Chk_AlarmMin.Name = "Chk_AlarmMin";
             this.Chk_AlarmMin.Size = new System.Drawing.Size(91, 17);
-            this.Chk_AlarmMin.TabIndex = 66;
+            this.Chk_AlarmMin.TabIndex = 35;
             this.Chk_AlarmMin.Text = "Alarm limit min";
             this.Chk_AlarmMin.UseVisualStyleBackColor = true;
             this.Chk_AlarmMin.CheckedChanged += new System.EventHandler(this.Chk_AlarmMin_CheckedChanged);
@@ -1093,7 +1104,7 @@
             this.Chk_WarningMax.Location = new System.Drawing.Point(13, 92);
             this.Chk_WarningMax.Name = "Chk_WarningMax";
             this.Chk_WarningMax.Size = new System.Drawing.Size(108, 17);
-            this.Chk_WarningMax.TabIndex = 65;
+            this.Chk_WarningMax.TabIndex = 39;
             this.Chk_WarningMax.Text = "Warning limit max";
             this.Chk_WarningMax.UseVisualStyleBackColor = true;
             this.Chk_WarningMax.CheckedChanged += new System.EventHandler(this.Chk_WarningMax_CheckedChanged);
@@ -1104,7 +1115,7 @@
             this.Txt_AlarmMax.Location = new System.Drawing.Point(124, 117);
             this.Txt_AlarmMax.Name = "Txt_AlarmMax";
             this.Txt_AlarmMax.Size = new System.Drawing.Size(76, 20);
-            this.Txt_AlarmMax.TabIndex = 64;
+            this.Txt_AlarmMax.TabIndex = 42;
             // 
             // Txt_AlarmMin
             // 
@@ -1112,7 +1123,7 @@
             this.Txt_AlarmMin.Location = new System.Drawing.Point(124, 39);
             this.Txt_AlarmMin.Name = "Txt_AlarmMin";
             this.Txt_AlarmMin.Size = new System.Drawing.Size(76, 20);
-            this.Txt_AlarmMin.TabIndex = 63;
+            this.Txt_AlarmMin.TabIndex = 36;
             // 
             // Txt_WarningMax
             // 
@@ -1120,7 +1131,7 @@
             this.Txt_WarningMax.Location = new System.Drawing.Point(124, 90);
             this.Txt_WarningMax.Name = "Txt_WarningMax";
             this.Txt_WarningMax.Size = new System.Drawing.Size(76, 20);
-            this.Txt_WarningMax.TabIndex = 62;
+            this.Txt_WarningMax.TabIndex = 40;
             // 
             // Lbl_Alarms_Forecolor
             // 
@@ -1150,7 +1161,7 @@
             this.Chk_WarningMin.Location = new System.Drawing.Point(13, 67);
             this.Chk_WarningMin.Name = "Chk_WarningMin";
             this.Chk_WarningMin.Size = new System.Drawing.Size(105, 17);
-            this.Chk_WarningMin.TabIndex = 56;
+            this.Chk_WarningMin.TabIndex = 37;
             this.Chk_WarningMin.Text = "Warning limit min";
             this.Chk_WarningMin.UseVisualStyleBackColor = true;
             this.Chk_WarningMin.CheckedChanged += new System.EventHandler(this.Chk_WarningMin_CheckedChanged);
@@ -1161,7 +1172,7 @@
             this.Chk_AlarmsEnabled.Location = new System.Drawing.Point(6, 19);
             this.Chk_AlarmsEnabled.Name = "Chk_AlarmsEnabled";
             this.Chk_AlarmsEnabled.Size = new System.Drawing.Size(158, 17);
-            this.Chk_AlarmsEnabled.TabIndex = 55;
+            this.Chk_AlarmsEnabled.TabIndex = 34;
             this.Chk_AlarmsEnabled.Text = "Enable warnings and alarms";
             this.Chk_AlarmsEnabled.UseVisualStyleBackColor = true;
             this.Chk_AlarmsEnabled.CheckedChanged += new System.EventHandler(this.Chk_AlarmsEnabled_CheckedChanged);
@@ -1193,7 +1204,7 @@
             this.Txt_WarningMin.Location = new System.Drawing.Point(124, 65);
             this.Txt_WarningMin.Name = "Txt_WarningMin";
             this.Txt_WarningMin.Size = new System.Drawing.Size(76, 20);
-            this.Txt_WarningMin.TabIndex = 49;
+            this.Txt_WarningMin.TabIndex = 38;
             // 
             // Cmd_EnumDefinition
             // 
@@ -1202,7 +1213,7 @@
             this.Cmd_EnumDefinition.Location = new System.Drawing.Point(311, 332);
             this.Cmd_EnumDefinition.Name = "Cmd_EnumDefinition";
             this.Cmd_EnumDefinition.Size = new System.Drawing.Size(25, 25);
-            this.Cmd_EnumDefinition.TabIndex = 49;
+            this.Cmd_EnumDefinition.TabIndex = 32;
             this.ToolTip_Commands.SetToolTip(this.Cmd_EnumDefinition, "Edit enumeration");
             this.Cmd_EnumDefinition.UseVisualStyleBackColor = true;
             this.Cmd_EnumDefinition.Click += new System.EventHandler(this.Cmd_EnumDefinition_Click);
@@ -1213,7 +1224,7 @@
             this.Txt_Decimals.Location = new System.Drawing.Point(260, 335);
             this.Txt_Decimals.Name = "Txt_Decimals";
             this.Txt_Decimals.Size = new System.Drawing.Size(45, 20);
-            this.Txt_Decimals.TabIndex = 48;
+            this.Txt_Decimals.TabIndex = 31;
             // 
             // Lbl_Decimals
             // 
@@ -1234,7 +1245,7 @@
             this.Cmb_ValueFormat.Location = new System.Drawing.Point(81, 335);
             this.Cmb_ValueFormat.Name = "Cmb_ValueFormat";
             this.Cmb_ValueFormat.Size = new System.Drawing.Size(117, 21);
-            this.Cmb_ValueFormat.TabIndex = 46;
+            this.Cmb_ValueFormat.TabIndex = 30;
             this.Cmb_ValueFormat.SelectedValueChanged += new System.EventHandler(this.Cmb_ValueFormat_SelectedValueChanged);
             // 
             // label21
@@ -1252,7 +1263,7 @@
             this.Cmd_VirtualRef.Location = new System.Drawing.Point(313, 218);
             this.Cmd_VirtualRef.Name = "Cmd_VirtualRef";
             this.Cmd_VirtualRef.Size = new System.Drawing.Size(25, 25);
-            this.Cmd_VirtualRef.TabIndex = 44;
+            this.Cmd_VirtualRef.TabIndex = 25;
             this.ToolTip_Commands.SetToolTip(this.Cmd_VirtualRef, "Select virtual channel");
             this.Cmd_VirtualRef.UseVisualStyleBackColor = true;
             this.Cmd_VirtualRef.Visible = false;
@@ -1282,7 +1293,7 @@
             this.Chk_Signed.Location = new System.Drawing.Point(169, 67);
             this.Chk_Signed.Name = "Chk_Signed";
             this.Chk_Signed.Size = new System.Drawing.Size(104, 20);
-            this.Chk_Signed.TabIndex = 41;
+            this.Chk_Signed.TabIndex = 20;
             this.Chk_Signed.Text = "Signed";
             this.Chk_Signed.UseVisualStyleBackColor = true;
             this.Chk_Signed.CheckedChanged += new System.EventHandler(this.Chk_Signed_CheckedChanged);
@@ -1315,7 +1326,7 @@
             this.Txt_ParamComment.Multiline = true;
             this.Txt_ParamComment.Name = "Txt_ParamComment";
             this.Txt_ParamComment.Size = new System.Drawing.Size(255, 38);
-            this.Txt_ParamComment.TabIndex = 38;
+            this.Txt_ParamComment.TabIndex = 24;
             this.Txt_ParamComment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label20
@@ -1332,7 +1343,7 @@
             this.Txt_ParamUnit.Location = new System.Drawing.Point(81, 151);
             this.Txt_ParamUnit.Name = "Txt_ParamUnit";
             this.Txt_ParamUnit.Size = new System.Drawing.Size(72, 20);
-            this.Txt_ParamUnit.TabIndex = 36;
+            this.Txt_ParamUnit.TabIndex = 23;
             this.Txt_ParamUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label19
@@ -1353,7 +1364,7 @@
             this.Cmb_ParamEndianess.Location = new System.Drawing.Point(81, 67);
             this.Cmb_ParamEndianess.Name = "Cmb_ParamEndianess";
             this.Cmb_ParamEndianess.Size = new System.Drawing.Size(72, 21);
-            this.Cmb_ParamEndianess.TabIndex = 34;
+            this.Cmb_ParamEndianess.TabIndex = 19;
             this.Cmb_ParamEndianess.SelectedIndexChanged += new System.EventHandler(this.Cmb_ParamEndianessSelectedIndexChanged);
             this.Cmb_ParamEndianess.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
@@ -1371,7 +1382,7 @@
             this.Chk_MuxParameter.Location = new System.Drawing.Point(12, 242);
             this.Chk_MuxParameter.Name = "Chk_MuxParameter";
             this.Chk_MuxParameter.Size = new System.Drawing.Size(133, 24);
-            this.Chk_MuxParameter.TabIndex = 32;
+            this.Chk_MuxParameter.TabIndex = 26;
             this.Chk_MuxParameter.Text = "Multiplexed parameter";
             this.Chk_MuxParameter.UseVisualStyleBackColor = true;
             this.Chk_MuxParameter.CheckedChanged += new System.EventHandler(this.Chk_MuxParameterCheckedChanged);
@@ -1381,7 +1392,7 @@
             this.Cmd_CancelNewParam.Location = new System.Drawing.Point(186, 513);
             this.Cmd_CancelNewParam.Name = "Cmd_CancelNewParam";
             this.Cmd_CancelNewParam.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_CancelNewParam.TabIndex = 31;
+            this.Cmd_CancelNewParam.TabIndex = 44;
             this.Cmd_CancelNewParam.Text = "Cancel";
             this.Cmd_CancelNewParam.UseVisualStyleBackColor = true;
             this.Cmd_CancelNewParam.Click += new System.EventHandler(this.Cmd_CancelNewParam_Click);
@@ -1391,7 +1402,7 @@
             this.Cmd_CreateParameter.Location = new System.Drawing.Point(267, 513);
             this.Cmd_CreateParameter.Name = "Cmd_CreateParameter";
             this.Cmd_CreateParameter.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_CreateParameter.TabIndex = 27;
+            this.Cmd_CreateParameter.TabIndex = 43;
             this.Cmd_CreateParameter.Text = "Create";
             this.Cmd_CreateParameter.UseVisualStyleBackColor = true;
             this.Cmd_CreateParameter.Click += new System.EventHandler(this.Cmd_CreateParameter_Click);
@@ -1406,7 +1417,7 @@
             this.Grp_ParamMultiplexer.Location = new System.Drawing.Point(12, 261);
             this.Grp_ParamMultiplexer.Name = "Grp_ParamMultiplexer";
             this.Grp_ParamMultiplexer.Size = new System.Drawing.Size(330, 64);
-            this.Grp_ParamMultiplexer.TabIndex = 26;
+            this.Grp_ParamMultiplexer.TabIndex = 27;
             this.Grp_ParamMultiplexer.TabStop = false;
             // 
             // Cmb_ParamMultiplexerValue
@@ -1415,7 +1426,7 @@
             this.Cmb_ParamMultiplexerValue.Location = new System.Drawing.Point(124, 38);
             this.Cmb_ParamMultiplexerValue.Name = "Cmb_ParamMultiplexerValue";
             this.Cmb_ParamMultiplexerValue.Size = new System.Drawing.Size(200, 21);
-            this.Cmb_ParamMultiplexerValue.TabIndex = 12;
+            this.Cmb_ParamMultiplexerValue.TabIndex = 29;
             // 
             // label6
             // 
@@ -1432,7 +1443,7 @@
             this.Cmb_ParamMultiplexerName.Location = new System.Drawing.Point(124, 11);
             this.Cmb_ParamMultiplexerName.Name = "Cmb_ParamMultiplexerName";
             this.Cmb_ParamMultiplexerName.Size = new System.Drawing.Size(200, 21);
-            this.Cmb_ParamMultiplexerName.TabIndex = 10;
+            this.Cmb_ParamMultiplexerName.TabIndex = 28;
             this.Cmb_ParamMultiplexerName.SelectedIndexChanged += new System.EventHandler(this.Cmb_ParamMultiplexerNameSelectedIndexChanged);
             // 
             // label14
@@ -1449,7 +1460,7 @@
             this.Txt_ParamZero.Location = new System.Drawing.Point(218, 94);
             this.Txt_ParamZero.Name = "Txt_ParamZero";
             this.Txt_ParamZero.Size = new System.Drawing.Size(72, 20);
-            this.Txt_ParamZero.TabIndex = 25;
+            this.Txt_ParamZero.TabIndex = 22;
             this.Txt_ParamZero.TextChanged += new System.EventHandler(this.Txt_ParamZero_TextChanged);
             this.Txt_ParamZero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
@@ -1467,7 +1478,7 @@
             this.Txt_ParamGain.Location = new System.Drawing.Point(81, 94);
             this.Txt_ParamGain.Name = "Txt_ParamGain";
             this.Txt_ParamGain.Size = new System.Drawing.Size(72, 20);
-            this.Txt_ParamGain.TabIndex = 23;
+            this.Txt_ParamGain.TabIndex = 21;
             this.Txt_ParamGain.TextChanged += new System.EventHandler(this.Txt_ParamGain_TextChanged);
             this.Txt_ParamGain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
@@ -1485,7 +1496,7 @@
             this.Txt_ParamLength.Location = new System.Drawing.Point(218, 39);
             this.Txt_ParamLength.Name = "Txt_ParamLength";
             this.Txt_ParamLength.Size = new System.Drawing.Size(72, 20);
-            this.Txt_ParamLength.TabIndex = 21;
+            this.Txt_ParamLength.TabIndex = 18;
             this.Txt_ParamLength.TextChanged += new System.EventHandler(this.Txt_ParamLength_TextChanged);
             this.Txt_ParamLength.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
@@ -1503,7 +1514,7 @@
             this.Txt_ParamStartBit.Location = new System.Drawing.Point(81, 39);
             this.Txt_ParamStartBit.Name = "Txt_ParamStartBit";
             this.Txt_ParamStartBit.Size = new System.Drawing.Size(72, 20);
-            this.Txt_ParamStartBit.TabIndex = 19;
+            this.Txt_ParamStartBit.TabIndex = 17;
             this.Txt_ParamStartBit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label10
@@ -1520,7 +1531,7 @@
             this.Txt_ParamName.Location = new System.Drawing.Point(81, 13);
             this.Txt_ParamName.Name = "Txt_ParamName";
             this.Txt_ParamName.Size = new System.Drawing.Size(255, 20);
-            this.Txt_ParamName.TabIndex = 17;
+            this.Txt_ParamName.TabIndex = 16;
             this.Txt_ParamName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // label9
@@ -1701,17 +1712,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // Lbl_ParamMinMax
-            // 
-            this.Lbl_ParamMinMax.AutoSize = true;
-            this.Lbl_ParamMinMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_ParamMinMax.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Lbl_ParamMinMax.Location = new System.Drawing.Point(159, 154);
-            this.Lbl_ParamMinMax.Name = "Lbl_ParamMinMax";
-            this.Lbl_ParamMinMax.Size = new System.Drawing.Size(61, 13);
-            this.Lbl_ParamMinMax.TabIndex = 51;
-            this.Lbl_ParamMinMax.Text = "Min: / Max:";
             // 
             // Frm_CANConfiguration
             // 

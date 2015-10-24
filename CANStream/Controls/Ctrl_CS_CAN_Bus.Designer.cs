@@ -657,7 +657,7 @@ namespace CANStream
             this.Grid_CANData.Size = new System.Drawing.Size(287, 391);
             this.Grid_CANData.TabIndex = 9;
             this.Grid_CANData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANData_CellBeginEdit);
-            this.Grid_CANData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANDataCellEndEdit);
+            this.Grid_CANData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANData_CellValueChanged);
             this.Grid_CANData.SizeChanged += new System.EventHandler(this.Grid_CANDataSizeChanged);
             // 
             // Column4
@@ -1508,7 +1508,7 @@ namespace CANStream
             // TSLbl_IdFilterTo
             // 
             this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
-            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(21, 22);
+            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(20, 22);
             this.TSLbl_IdFilterTo.Text = "To";
             // 
             // TSTxt_IdFilterTo

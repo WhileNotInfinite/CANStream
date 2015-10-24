@@ -2059,17 +2059,16 @@ namespace CANStream
             if (bNewParameter)
             {
                 oParameter = new CANParameter();
-
-                if (oActiveParameter.ValueFormat.Enums.Count > 0)
-                {
-                    EnumList = oActiveParameter.ValueFormat.Enums.ToArray(); //Save enumeration if defined prior to destroy the oActiveParameter object
-                }
-
                 //oActiveParameter = null;
             }
             else
             {
                 oParameter = oActiveParameter;
+            }
+
+            if (oActiveParameter.ValueFormat.Enums.Count > 0)
+            {
+                EnumList = oActiveParameter.ValueFormat.Enums.ToArray(); //Save enumeration if defined prior to destroy the oActiveParameter object
             }
 
             //Parameter name
