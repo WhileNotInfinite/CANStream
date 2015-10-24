@@ -231,7 +231,7 @@ namespace CANStream
             // 
             this.CANConfig_newToolStripMenuItem.Image = global::CANStream.Icones.File_New_16;
             this.CANConfig_newToolStripMenuItem.Name = "CANConfig_newToolStripMenuItem";
-            this.CANConfig_newToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_newToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_newToolStripMenuItem.Text = "New";
             this.CANConfig_newToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_newToolStripMenuItem_Click);
             // 
@@ -239,7 +239,7 @@ namespace CANStream
             // 
             this.CANConfig_openToolStripMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.CANConfig_openToolStripMenuItem.Name = "CANConfig_openToolStripMenuItem";
-            this.CANConfig_openToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_openToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_openToolStripMenuItem.Text = "Open";
             this.CANConfig_openToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_openToolStripMenuItemClick);
             // 
@@ -247,20 +247,20 @@ namespace CANStream
             // 
             this.CANConfig_editToolStripMenuItem.Image = global::CANStream.Icones.Edit_16;
             this.CANConfig_editToolStripMenuItem.Name = "CANConfig_editToolStripMenuItem";
-            this.CANConfig_editToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_editToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_editToolStripMenuItem.Text = "Edit";
             this.CANConfig_editToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_editToolStripMenuItemClick);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(161, 6);
             // 
             // importDBCToolStripMenuItem
             // 
             this.importDBCToolStripMenuItem.Image = global::CANStream.Icones.DBC_Import_16;
             this.importDBCToolStripMenuItem.Name = "importDBCToolStripMenuItem";
-            this.importDBCToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.importDBCToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.importDBCToolStripMenuItem.Text = "Import DBC";
             this.importDBCToolStripMenuItem.Click += new System.EventHandler(this.ImportDBCToolStripMenuItemClick);
             // 
@@ -275,7 +275,7 @@ namespace CANStream
             this.openMessageListToolStripMenuItem});
             this.rawMessagesTxToolStripMenuItem.Image = global::CANStream.Icones.Raw_Data;
             this.rawMessagesTxToolStripMenuItem.Name = "rawMessagesTxToolStripMenuItem";
-            this.rawMessagesTxToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.rawMessagesTxToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.rawMessagesTxToolStripMenuItem.Text = "Raw messages Tx";
             // 
             // addMessageToolStripMenuItem
@@ -651,7 +651,7 @@ namespace CANStream
             this.builtinSignalsToolStripMenuItem,
             this.Tools_DataViewer_TSMenuItem});
             this.Tools_TSMenuItem.Name = "Tools_TSMenuItem";
-            this.Tools_TSMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.Tools_TSMenuItem.Size = new System.Drawing.Size(47, 20);
             this.Tools_TSMenuItem.Text = "Tools";
             // 
             // virtualChannelsToolStripMenuItem
@@ -684,7 +684,7 @@ namespace CANStream
             // 
             this.Tools_DataViewer_New_TSMenuItem.Image = global::CANStream.Icones.CANStream_DataViewer_16;
             this.Tools_DataViewer_New_TSMenuItem.Name = "Tools_DataViewer_New_TSMenuItem";
-            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(103, 22);
             this.Tools_DataViewer_New_TSMenuItem.Text = "New";
             this.Tools_DataViewer_New_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_New_TSMenuItemClick);
             // 
@@ -692,7 +692,7 @@ namespace CANStream
             // 
             this.Tools_DataViewer_Open_TSMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.Tools_DataViewer_Open_TSMenuItem.Name = "Tools_DataViewer_Open_TSMenuItem";
-            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(103, 22);
             this.Tools_DataViewer_Open_TSMenuItem.Text = "Open";
             this.Tools_DataViewer_Open_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_Open_TSMenuItemClick);
             // 

@@ -2116,7 +2116,19 @@ namespace CANStream
 		private void ReleaseCANCommunication()
 		{
 			PCANBasic.Uninitialize(m_PcanHandle);
-			bCANConnected=false;
+            bCANConnected = false;
+
+            if (bSpyRunning || bManualRunning)
+            {
+                StopSpy();
+                StopManualControl();
+            }
+
+            if (bCycleRunning)
+            {
+                StopCycle();
+            }
+
 			Timer_CheckDevice.Enabled=false;
 			UpDateConnectionStatus();
 		}
