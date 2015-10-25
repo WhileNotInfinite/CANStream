@@ -8,27 +8,68 @@
  */
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+//PCANBasic includes
+using Peak.Can.Basic;
+using TPCANHandle = System.Byte;
+
 namespace CANStream
 {
-	/// <summary>
-	/// Description of Ctrl_SpyDataViewer.
-	/// </summary>
-	public partial class Ctrl_SpyDataViewer : UserControl
+    #region Public enums
+
+    /// <summary>
+    /// Grid row data type enumeration
+    /// </summary>
+    public enum GridRowDataType
+    {
+        None            = 0,    /// <summary>Grid row does not contain data</summary>
+        RawData         = 1,    /// <summary>Grid row contains Raw CAN message data</summary>
+        EngineeringData = 2,    /// <summary>Grid row contains Engineering CAN message data</summary>
+        Multiplexer     = 3,    /// <summary>Grid row contains a CAN message multiplexer data</summary>    
+        VirtualData     = 4,    /// <summary>Grid row contains virtual channel data</summary>
+    }
+
+    /// <summary>
+    /// Collapsable grid row state enumeration
+    /// </summary>
+    public enum GridRowCollapsedStatus
+    {
+        Collasped = 0,  /// <summary>Grid row is collapsed</summary>
+        Extended = 1,   /// <summary>Grid row is extended</summary>
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Description of Ctrl_SpyDataViewer.
+    /// </summary>
+    public partial class Ctrl_SpyDataViewer : UserControl
 	{
         #region Private constants
 
-        private const int GRID_SPYENG_MSG_ID = 0;
-        private const int GRID_SPYENG_NAME = 1;
-		private const int GRID_SPYENG_VALUE = 3;
-        private const int GRID_SPYENG_FORMAT = 6;
+        //TODO: Remove unused constants
+        private const int GRID_SPYENG_COLLAPSE  = 0;
+        private const int GRID_SPYENG_MSG_ID    = 1;
+        private const int GRID_SPYENG_NAME      = 2;
+        private const int GRID_SPYENG_RAW_VALUE = 3;
+        private const int GRID_SPYENG_ENG_VALUE = 4;
+        private const int GRID_SPYENG_MIN_VALUE = 5;
+        private const int GRID_SPYENG_MAX_VALUE = 6;
+        private const int GRID_SPYENG_UNIT      = 7;
+        private const int GRID_SPYENG_PERIOD    = 8;
+        private const int GRID_SPYENG_COUNT     = 9;
+        private const int GRID_SPYENG_DLC       = 10;
+        private const int GRID_SPYENG_COMMENT   = 11;
+
+        private const int GRID_SPYENG_DEF_FORMAT = 6;
         private const int GRID_SPYENG_ALARM_BACKCOLOR = 7;
         private const int GRID_SPYENG_ALARM_FORECOLOR = 8;
         private const int GRID_MAX_COL_WIDTH = 60;
-		private const int GRID_RAW_SPY_FILLER_COL = 2;		//Column 'Data'
-		private const int GRID_ENG_SPY_FILLER_COL = 7;		//Column 'Comment' 		
+		private const int GRID_RAW_SPY_FILLER_COL = 2;		                //Column 'Data'
+		private const int GRID_ENG_SPY_FILLER_COL = GRID_SPYENG_COMMENT;	//Column 'Comment' 		
 		private const int GRID_RAW_KEY_COL = 0;
 		
 		#endregion
@@ -423,14 +464,31 @@ namespace CANStream
 		{
 			ResizeGridColumns(Grid_SpyEngineering, GRID_ENG_SPY_FILLER_COL);
 		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Private methods
-		
-		private void ResizeGridColumns(DataGridView oGrid, int FillerColumn)
+
+        private void Grid_SpyEngineering_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex== GRID_SPYENG_COLLAPSE)
+            {
+                CollapsableGridRowProperties oRowCollaspeProps = Grid_SpyEngineering.Rows[e.RowIndex].Tag as CollapsableGridRowProperties;
+
+                if (oRowCollaspeProps.State == GridRowCollapsedStatus.Collasped)
+                {
+                    oRowCollaspeProps.ExtendChildren();
+                }
+                else
+                {
+                    oRowCollaspeProps.CollapseChildren();
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Private methods
+
+        private void ResizeGridColumns(DataGridView oGrid, int FillerColumn)
 		{
 			int ColCnt = GetGridColumnsVisibleCount(oGrid);
         	
@@ -524,8 +582,10 @@ namespace CANStream
 			Arg.ColumnsVisible = SpyEngGridColumnsVisible;
 			OnEngGridColumnsVisibleChanged(Arg);
 		}
-		
-		private void Add_RawGridRow(string[] Data)
+
+        #region Non collapsable grid functions
+
+        private void Add_RawGridRow(string[] Data)
 		{
 			Grid_SpyRaw.Rows.Add();
 			int iRow = Grid_SpyRaw.Rows.Count - 1;
@@ -616,12 +676,136 @@ namespace CANStream
 				}
 			}
 		}
-		
-		#endregion
-		
-		#region Public methods
-		
-		public void Update_RawGridRow(string[] Data)
+
+        #endregion
+
+        #region Collapsable grid functions
+
+        private DataGridViewRow Add_RawDataRow(MessageStatus oRawMsg)
+        {
+            //Add the row to the grid
+            Grid_SpyEngineering.Rows.Add();
+            DataGridViewRow oRow = Grid_SpyEngineering.Rows[Grid_SpyEngineering.Rows.Count - 1];
+
+            //Fill fixed data
+            oRow.Cells[GRID_SPYENG_COLLAPSE].Value = Icones.Grid_Collapse;
+            oRow.Cells[GRID_SPYENG_MSG_ID].Value = oRawMsg.IdString;
+            oRow.Cells[GRID_SPYENG_DLC].Value = oRawMsg.CANMsg.LEN.ToString();
+
+            //Color row
+            foreach (DataGridViewCell oCell in oRow.Cells)
+            {
+                oCell.Style.BackColor = Color.LightCoral;
+            }
+
+            //Collapsing properties creation
+            CollapsableGridRowProperties oColapsProps = new CollapsableGridRowProperties();
+
+            oColapsProps.Row = oRow;
+            oColapsProps.Parent = null;
+            oColapsProps.RowDataType = GridRowDataType.RawData;
+            oColapsProps.State = GridRowCollapsedStatus.Extended;
+
+            oRow.Tag = oColapsProps;
+
+            return (oRow);
+        }
+
+        private DataGridViewRow Get_RawDataRow(string MsgId)
+        {
+            foreach (DataGridViewRow oRow in Grid_SpyEngineering.Rows)
+            {
+                if (((CollapsableGridRowProperties)oRow.Tag).RowDataType.Equals(GridRowDataType.RawData))
+                {
+                    if (oRow.Cells[GRID_SPYENG_MSG_ID].Value.ToString().Equals(MsgId)) //Message ID comparison
+                    {
+                        return (oRow);
+                    }
+                }
+            }
+
+            return (null);
+        }
+
+        private DataGridViewRow Add_MultiplexerRow(DataGridViewRow ParentRow, string MuxName, long MuxValue)
+        {
+            //Add the row to the grid
+            Grid_SpyEngineering.Rows.Add();
+            DataGridViewRow oRow = Grid_SpyEngineering.Rows[Grid_SpyEngineering.Rows.Count - 1];
+
+            //Fill fixed data
+            oRow.Cells[GRID_SPYENG_COLLAPSE].Value = Icones.Grid_Collapse;
+            oRow.Cells[GRID_SPYENG_NAME].Value = MuxName;
+            oRow.Cells[GRID_SPYENG_ENG_VALUE].Value = MuxValue.ToString();
+
+            //Color row
+            foreach (DataGridViewCell oCell in oRow.Cells)
+            {
+                oCell.Style.BackColor = Color.LightPink;
+            }
+
+            //Collapsing properties creation
+            CollapsableGridRowProperties oColapsProps = new CollapsableGridRowProperties();
+
+            oColapsProps.Row = oRow;
+            oColapsProps.Parent = ParentRow;
+            oColapsProps.RowDataType = GridRowDataType.Multiplexer;
+            oColapsProps.State = GridRowCollapsedStatus.Extended;
+
+            oRow.Tag = oColapsProps;
+            ((CollapsableGridRowProperties)ParentRow.Tag).Children.Add(oRow);
+
+            return (oRow);
+        }
+
+        private DataGridViewRow Add_EngDataRow(DataGridViewRow ParentRow, CANParameter oEngParam)
+        {
+            //Add the row to the grid
+            Grid_SpyEngineering.Rows.Add();
+            DataGridViewRow oRow = Grid_SpyEngineering.Rows[Grid_SpyEngineering.Rows.Count - 1];
+
+            //Fill fixed data
+            oRow.Cells[GRID_SPYENG_COLLAPSE].Value = Icones.Grid_NoAction;
+            oRow.Cells[GRID_SPYENG_NAME].Value = oEngParam.Name;
+            oRow.Cells[GRID_SPYENG_UNIT].Value = oEngParam.Unit;
+            oRow.Cells[GRID_SPYENG_COMMENT].Value = oEngParam.Comment;
+
+            //Init Min/Max cellse
+            oRow.Cells[GRID_SPYENG_MIN_VALUE].Tag = oEngParam.DecodedValue;
+            oRow.Cells[GRID_SPYENG_MAX_VALUE].Tag = oEngParam.DecodedValue;
+
+            //Color row
+            if (((CollapsableGridRowProperties)ParentRow.Tag).Children.Count % 2 == 0)
+            {
+                foreach (DataGridViewCell oCell in oRow.Cells)
+                {
+                    oCell.Style.BackColor = Color.LightBlue;
+                }
+            }
+            
+            //Collapsing properties creation
+            CollapsableGridRowProperties oColapsProps = new CollapsableGridRowProperties();
+
+            oColapsProps.Row = oRow;
+            oColapsProps.Parent = ParentRow;
+            oColapsProps.RowDataType = GridRowDataType.EngineeringData;
+            oColapsProps.State = GridRowCollapsedStatus.Collasped;
+
+            oRow.Tag = oColapsProps;
+            ((CollapsableGridRowProperties)ParentRow.Tag).Children.Add(oRow);
+
+            return (oRow);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Public methods
+
+        #region Non collapsable grid functions
+
+        public void Update_RawGridRow(string[] Data)
 		{
 			foreach (DataGridViewRow oRow in Grid_SpyRaw.Rows)
 			{
@@ -671,13 +855,13 @@ namespace CANStream
                 //Raw value
                 if (!Virtual)
                 {
-                    oRow.Cells[GRID_SPYENG_VALUE - 1].Value = Data[GRID_SPYENG_VALUE - 1].ToString();
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE - 1].Value = Data[GRID_SPYENG_ENG_VALUE - 1].ToString();
                 }
 
                 //Formated value
-                double CurrentVal = (double)Data[GRID_SPYENG_VALUE];
+                double CurrentVal = (double)Data[GRID_SPYENG_ENG_VALUE];
                 string CurrentValFormated;
-                CANParameterFormat oFormat = (CANParameterFormat)Data[GRID_SPYENG_FORMAT];
+                CANParameterFormat oFormat = (CANParameterFormat)Data[GRID_SPYENG_DEF_FORMAT];
 
                 if (!(oFormat == null))
                 {
@@ -688,7 +872,7 @@ namespace CANStream
                     CurrentValFormated = CurrentVal.ToString();
                 }
 
-                oRow.Cells[GRID_SPYENG_VALUE].Value = CurrentValFormated;
+                oRow.Cells[GRID_SPYENG_ENG_VALUE].Value = CurrentValFormated;
 
                 //Alarm colors application
                 Color CellBackColor = (Color)Data[GRID_SPYENG_ALARM_BACKCOLOR];
@@ -700,24 +884,24 @@ namespace CANStream
                     CellForeColor = oRow.Cells[0].Style.ForeColor; //Default cell forecolor
                 }
 
-                oRow.Cells[GRID_SPYENG_VALUE].Style.BackColor = CellBackColor;
-                oRow.Cells[GRID_SPYENG_VALUE].Style.ForeColor = CellForeColor;
+                oRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor = CellBackColor;
+                oRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor = CellForeColor;
 
                 //Min / Max value update
-                if ((CurrentVal < (double)oRow.Cells[GRID_SPYENG_VALUE + 1].Tag) || (oRow.Cells[GRID_SPYENG_VALUE + 1].Value == null))
+                if ((CurrentVal < (double)oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Tag) || (oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Value == null))
                 {
-                    oRow.Cells[GRID_SPYENG_VALUE + 1].Value = CurrentValFormated;
-                    oRow.Cells[GRID_SPYENG_VALUE + 1].Tag = CurrentVal;
-                    oRow.Cells[GRID_SPYENG_VALUE + 1].Style.BackColor = CellBackColor;
-                    oRow.Cells[GRID_SPYENG_VALUE + 1].Style.ForeColor = CellForeColor;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Value = CurrentValFormated;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Tag = CurrentVal;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Style.BackColor = CellBackColor;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 1].Style.ForeColor = CellForeColor;
                 }
 
-                if ((CurrentVal > (double)oRow.Cells[GRID_SPYENG_VALUE + 2].Tag) || (oRow.Cells[GRID_SPYENG_VALUE + 2].Value == null))
+                if ((CurrentVal > (double)oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Tag) || (oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Value == null))
                 {
-                    oRow.Cells[GRID_SPYENG_VALUE + 2].Value = CurrentValFormated;
-                    oRow.Cells[GRID_SPYENG_VALUE + 2].Tag = CurrentVal;
-                    oRow.Cells[GRID_SPYENG_VALUE + 2].Style.BackColor = CellBackColor;
-                    oRow.Cells[GRID_SPYENG_VALUE + 2].Style.ForeColor = CellForeColor;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Value = CurrentValFormated;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Tag = CurrentVal;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Style.BackColor = CellBackColor;
+                    oRow.Cells[GRID_SPYENG_ENG_VALUE + 2].Style.ForeColor = CellForeColor;
                 }
             }
             else //The row doesn't exist yet, we have to create it
@@ -731,8 +915,190 @@ namespace CANStream
 		{
             Update_EngGridRow(Data, true, -1);
 		}
-		
-		public void HideActiveRow()
+
+        #endregion
+
+        #region Collapsable grid functions
+
+        public void Update_SpyGridRawData(MessageStatus RawMsg)
+        {
+            //Find raw message grid row
+            DataGridViewRow oRawDataRow = Get_RawDataRow(RawMsg.IdString);
+
+            if (oRawDataRow == null) //Create raw data grid row if it doesn't exist
+            {
+                oRawDataRow = Add_RawDataRow(RawMsg);
+            }
+
+            if (!(oRawDataRow==null))
+            {
+                //Refresh variable fields of the raw message
+                oRawDataRow.Cells[GRID_SPYENG_ENG_VALUE].Value = RawMsg.DataString;
+                oRawDataRow.Cells[GRID_SPYENG_PERIOD].Value = RawMsg.TimeString;
+                oRawDataRow.Cells[GRID_SPYENG_COUNT].Value = RawMsg.Count.ToString();
+            }
+        }
+
+        public void Update_SpyGridEngData(string RawMsgId, CANMessageDecoded oEngMsg)
+        {
+            //Find raw message grid row
+            DataGridViewRow oRawDataRow = Get_RawDataRow(RawMsgId);
+
+            if (!(oRawDataRow==null))
+            {
+                CollapsableGridRowProperties oRawMsgCollapsProps = (CollapsableGridRowProperties)oRawDataRow.Tag;
+
+                if (oRawMsgCollapsProps.Children.Count == 0) 
+                {
+                    //Update message name and comment if first message update
+                    oRawDataRow.Cells[GRID_SPYENG_NAME].Value = oEngMsg.Name;
+                    oRawDataRow.Cells[GRID_SPYENG_COMMENT].Value = oEngMsg.Comment;
+                }
+                
+                foreach (CANParameter oParam in oEngMsg.Parameters)
+                {
+                    DataGridViewRow oMuxRow = null;
+                    DataGridViewRow oEngDataRow = null;
+
+                    //Get paramter row among raw data row children rows
+                    if (oParam.IsMultiplexed)
+                    {
+                        //Find engineering CAN parameter multiplexer value grid row
+                        foreach(DataGridViewRow oRow in oRawMsgCollapsProps.Children)
+                        {
+                            if (((CollapsableGridRowProperties)oRow.Tag).RowDataType.Equals(GridRowDataType.Multiplexer))
+                            {
+                                if((oRow.Cells[GRID_SPYENG_NAME].Value.ToString().Equals(oEngMsg.MultiplexerName))
+                                    && (oRow.Cells[GRID_SPYENG_ENG_VALUE].Value.ToString().Equals(oParam.MultiplexerValue.ToString())))
+                                {
+                                    oMuxRow = oRow;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(oMuxRow==null)
+                        {
+                            //Create multiplexer grid row
+                            oMuxRow = Add_MultiplexerRow(oRawDataRow, oEngMsg.MultiplexerName, oParam.MultiplexerValue);
+                        }
+                        else
+                        {
+                            //Find engineering CAN parameter grid row
+                            CollapsableGridRowProperties oMuxCollapsProps = (CollapsableGridRowProperties)oMuxRow.Tag;
+
+                            foreach (DataGridViewRow oRow in oMuxCollapsProps.Children)
+                            {
+                                if (((CollapsableGridRowProperties)oRow.Tag).RowDataType.Equals(GridRowDataType.EngineeringData))
+                                {
+                                    if (oRow.Cells[GRID_SPYENG_NAME].Value.ToString().Equals(oParam.Name))
+                                    {
+                                        oEngDataRow = oRow;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        //Find engineering CAN parameter grid row
+                        foreach (DataGridViewRow oRow in oRawMsgCollapsProps.Children)
+                        {
+                            if (((CollapsableGridRowProperties)oRow.Tag).RowDataType.Equals(GridRowDataType.EngineeringData))
+                            {
+                                if (oRow.Cells[GRID_SPYENG_NAME].Value.ToString().Equals(oParam.Name))
+                                {
+                                    oEngDataRow = oRow;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (oEngDataRow==null) //Create eng data grid row if it doesn't exist
+                    {
+                        if(oParam.IsMultiplexed)
+                        {
+                            oEngDataRow = Add_EngDataRow(oMuxRow, oParam); //Create eng data grid row as a child of its multiplexer
+                        }
+                        else
+                        {
+                            oEngDataRow = Add_EngDataRow(oRawDataRow, oParam); //Create eng data grid row as a child of its raw message
+                        }
+                    }
+
+                    if (!(oEngDataRow==null))
+                    {
+                        //Process parameter alarms
+                        Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
+
+                        //Get parameter value formatted
+                        string CurrentValFormated;
+
+                        if (oParam.ValueFormat == null)
+                        {
+                            CurrentValFormated = oParam.DecodedValue.ToString();
+                        }
+                        else
+                        {
+                            CurrentValFormated = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                        }
+
+                        //Refresh variable fields of the engineering data parameter
+                        oEngDataRow.Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue; //Parameter raw data
+
+                        oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Value = CurrentValFormated; //Parameter formatted value
+
+                        if (sAlarm.HasValue) //Apply alarm style
+                        {
+                            oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor = sAlarm.Value.BackColor;
+                            oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor = sAlarm.Value.ForeColor;
+                        }
+                        else //Apply default style if no alarm
+                        {
+                            oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor = oEngDataRow.Cells[GRID_SPYENG_NAME].Style.BackColor;
+                            oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor = oEngDataRow.Cells[GRID_SPYENG_NAME].Style.ForeColor;
+                        }
+
+                        if ((oParam.DecodedValue < (double)oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Tag) //Update min value
+                            || (oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Value == null)) 
+                        {
+                            //Min formatted value
+                            oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Value = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Value;
+
+                            //Apply cell 'Value' style
+                            oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Style.BackColor = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor;
+                            oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Style.ForeColor = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor;
+
+                            oEngDataRow.Cells[GRID_SPYENG_MIN_VALUE].Tag = oParam.DecodedValue;
+                        }
+
+                        if ((oParam.DecodedValue > (double)oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Tag) //Update max value
+                            || (oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Value == null)) 
+                        {
+                            //Max formatted value
+                            oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Value = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Value;
+
+                            //Apply cell 'Value' style
+                            oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Style.BackColor = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor;
+                            oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Style.ForeColor = oEngDataRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor;
+
+                            oEngDataRow.Cells[GRID_SPYENG_MAX_VALUE].Tag = oParam.DecodedValue;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //Not supposed to happen since engineering message has been decoded from a previously showed raw message
+            }
+        }
+
+        #endregion
+
+        public void HideActiveRow()
 		{
 			if (Grid_SpyRaw.ContainsFocus)
 			{
@@ -816,13 +1182,13 @@ namespace CANStream
 				Handler(this, e);
 			}
 		}
-		
-		#endregion
-	}
-	
-	#region Grids columns visible changed event argument
-	
-	public class RawGridColVisibleChangedEventArgs : EventArgs
+
+        #endregion
+    }
+
+    #region Grids columns visible changed event argument
+
+    public class RawGridColVisibleChangedEventArgs : EventArgs
 	{
 		public SpyRaw_Grid_Columns ColumnsVisible {get; set;}
 	}
@@ -831,6 +1197,93 @@ namespace CANStream
 	{
 		public SpyEngineering_Grid_Columns ColumnsVisible {get; set;}
 	}
-	
-	#endregion
+
+    #endregion
+
+    #region Collapsable grid row properties class
+
+    /// <summary>
+    /// Collapsable data grid view row class
+    /// </summary>
+    public class CollapsableGridRowProperties
+    {
+        #region Public members
+
+        /// <summary>
+        /// Data type of the current row
+        /// </summary>
+        public GridRowDataType RowDataType;
+
+        /// <summary>
+        /// Collapsed state of the current row
+        /// </summary>
+        public GridRowCollapsedStatus State;
+
+        /// <summary>
+        /// Current grid row
+        /// </summary>
+        public DataGridViewRow Row;
+
+        /// <summary>
+        /// Parent of the current grid row
+        /// </summary>
+        public DataGridViewRow Parent;
+
+        /// <summary>
+        /// Children of the current grid row
+        /// </summary>
+        public List<DataGridViewRow> Children;
+
+        #endregion
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public CollapsableGridRowProperties()
+        {
+            RowDataType = GridRowDataType.None;
+            State = GridRowCollapsedStatus.Extended;
+            Row = null;
+            Parent = null;
+            Children = new List<DataGridViewRow>();
+        }
+
+        #region Public methodes
+
+        public void CollapseChildren()
+        {
+            if (Children.Count > 0)
+            {
+                foreach (DataGridViewRow oChildRow in Children)
+                {
+                    oChildRow.Visible = false;
+
+                    CollapsableGridRowProperties oChildRowCollapsProps = oChildRow.Tag as CollapsableGridRowProperties;
+                    oChildRowCollapsProps.CollapseChildren();
+                }
+
+                Row.Cells[0].Value = Icones.Grid_Expand;
+            }
+
+            State = GridRowCollapsedStatus.Collasped;
+        }
+
+        public void ExtendChildren()
+        {
+            if (Children.Count > 0)
+            {
+                foreach (DataGridViewRow oChildRow in Children)
+                {
+                    oChildRow.Visible = true;
+                }
+
+                Row.Cells[0].Value = Icones.Grid_Collapse;
+            }
+
+            State = GridRowCollapsedStatus.Extended;
+        }
+
+        #endregion
+    }
+    #endregion
 }

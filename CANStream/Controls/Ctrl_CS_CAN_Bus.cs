@@ -3591,16 +3591,19 @@ namespace CANStream
         			if(msgStatus.MarkedAsUpdated)
         			{
         				msgStatus.MarkedAsUpdated=false;
-        				
-        				string[] RawMsgData = {
-        										msgStatus.IdString,
-        										msgStatus.CANMsg.LEN.ToString(),
-        										msgStatus.DataString,
-        										msgStatus.TimeString,
-        										msgStatus.Count.ToString(),
-        									  };
-        				
-        				CurrentSpyViewer.Update_RawGridRow(RawMsgData);
+
+                        //TODO: Old code, remove
+                        //string[] RawMsgData = {
+                        //						msgStatus.IdString,
+                        //						msgStatus.CANMsg.LEN.ToString(),
+                        //						msgStatus.DataString,
+                        //						msgStatus.TimeString,
+                        //						msgStatus.Count.ToString(),
+                        //					  };
+
+                        //CurrentSpyViewer.Update_RawGridRow(RawMsgData);
+
+                        CurrentSpyViewer.Update_SpyGridRawData(msgStatus);
 
                         int MsgIndex = -1;
 
@@ -3614,33 +3617,36 @@ namespace CANStream
 		                		
 		                		if(DecodedMessages[MsgIndex].bMessageDecoded)
 		                		{
-		                			foreach(CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
+                                    CurrentSpyViewer.Update_SpyGridEngData(msgStatus.IdString, DecodedMessages[MsgIndex]);
+
+                                    foreach (CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
 		                			{
-                                        //Process parameter alarms
-                                        Color AlarmBackColor = Color.Empty;
-                                        Color AlarmForeColor = Color.Empty;
+                                        //TODO: Old code, remove
+                      //                  //Process parameter alarms
+                      //                  Color AlarmBackColor = Color.Empty;
+                      //                  Color AlarmForeColor = Color.Empty;
 
-                                        Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
+                      //                  Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
 
-                                        if (sAlarm.HasValue)
-                                        {
-                                            AlarmBackColor = sAlarm.Value.BackColor;
-                                            AlarmForeColor = sAlarm.Value.ForeColor;
-                                        }
+                      //                  if (sAlarm.HasValue)
+                      //                  {
+                      //                      AlarmBackColor = sAlarm.Value.BackColor;
+                      //                      AlarmForeColor = sAlarm.Value.ForeColor;
+                      //                  }
 
-                                        object[] EngParamData = {
-                                                                    DecodedMessages[MsgIndex].Identifier.ToString(),
-                                                                    oParam.Name,
-                                                                    oParam.RawValue,
-                                                                    oParam.DecodedValue,
-                                                                    oParam.Unit,
-                                                                    oParam.Comment,
-                                                                    oParam.ValueFormat,
-                                                                    AlarmBackColor,
-                                                                    AlarmForeColor,
-                                                                };
+                      //                  object[] EngParamData = {
+                      //                                              DecodedMessages[MsgIndex].Identifier.ToString(),
+                      //                                              oParam.Name,
+                      //                                              oParam.RawValue,
+                      //                                              oParam.DecodedValue,
+                      //                                              oParam.Unit,
+                      //                                              oParam.Comment,
+                      //                                              oParam.ValueFormat,
+                      //                                              AlarmBackColor,
+                      //                                              AlarmForeColor,
+                      //                                          };
 		                				
-		                				CurrentSpyViewer.Update_EngGridRow(EngParamData);
+		                				//CurrentSpyViewer.Update_EngGridRow(EngParamData);
 
                                         if (!(oSpySeriesStates.Contains(oParam.Name)))
                                         {
