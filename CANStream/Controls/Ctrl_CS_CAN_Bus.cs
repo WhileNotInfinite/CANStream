@@ -239,7 +239,8 @@ namespace CANStream
 		private const int SPY_GRAPH_UPDATE_PERIOD=100;
 		private Color GRID_BACK_COLOR=Color.LightBlue;
 		private const int GRID_MANUAL_VALUE_COL = 11;
-		private const int GRID_MANUAL_NAME_COL = 4;
+        private const int GRID_MANUAL_MSG_ID_COL = 0;
+        private const int GRID_MANUAL_NAME_COL = 4;
 		private const int GRID_MANUAL_COMMENT_COL = 13;
 		private const int GRID_MAX_COL_WIDTH = 60;							
 		private const int GRID_ENG_MANUAL_FILLER_COL = 13;	//Column 'Comment'
@@ -1605,7 +1606,7 @@ namespace CANStream
                             {
                                 if (int.Parse(tabControl1.SelectedTab.Tag.ToString()) == 1)
                                 {
-                                    int iRow = GetParameterRowIndex(oParam.Name);
+                                    int iRow = GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
 
                                     if (iRow != -1)
                                     {
@@ -2932,7 +2933,7 @@ namespace CANStream
 	        				//Cells value
 	        				Grid_CANData.Rows[iRow].HeaderCell.Value=oMsg.Identifier;          			
 	        				
-	        				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier;						            //Identifier
+	        				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier + "h";						    //Identifier
 	        				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			            //RxTx
 	        				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			            //Period
 	        				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	            //Mux value
@@ -3056,7 +3057,7 @@ namespace CANStream
         		{
         			if (!(oParam.IsVirtual))
         			{
-	        			int iParamRow=GetParameterRowIndex(oParam.Name);
+	        			int iParamRow=GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
 	        			
 	        			if(iParamRow!=-1)
 	    				{
@@ -3080,11 +3081,12 @@ namespace CANStream
         	}
         }
         
-        private int GetParameterRowIndex(string ParameterName)
+        private int GetParameterRowIndex(string ParameterName, string MsgId)
         {
         	for(int iRow=0;iRow<Grid_CANData.Rows.Count;iRow++)
         	{
-        		if(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.Equals(ParameterName))
+                if ((Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_MSG_ID_COL].Value.Equals(MsgId))
+                    && (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.Equals(ParameterName)))
         		{
         			return(iRow);
         		}

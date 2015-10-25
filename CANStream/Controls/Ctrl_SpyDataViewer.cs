@@ -18,9 +18,10 @@ namespace CANStream
 	/// </summary>
 	public partial class Ctrl_SpyDataViewer : UserControl
 	{
-		#region Private constants
-		
-		private const int GRID_SPYENG_NAME = 1;
+        #region Private constants
+
+        private const int GRID_SPYENG_MSG_ID = 0;
+        private const int GRID_SPYENG_NAME = 1;
 		private const int GRID_SPYENG_VALUE = 3;
         private const int GRID_SPYENG_FORMAT = 6;
         private const int GRID_SPYENG_ALARM_BACKCOLOR = 7;
@@ -29,7 +30,6 @@ namespace CANStream
 		private const int GRID_RAW_SPY_FILLER_COL = 2;		//Column 'Data'
 		private const int GRID_ENG_SPY_FILLER_COL = 7;		//Column 'Comment' 		
 		private const int GRID_RAW_KEY_COL = 0;
-		private const int GRID_ENG_KEY_COL = 1;
 		
 		#endregion
 		
@@ -657,7 +657,8 @@ namespace CANStream
                 //Search for the row having the same name as the 'Data' packet
                 for (int iRow = 0; iRow < Grid_SpyEngineering.Rows.Count; iRow++)
                 {
-                    if (Grid_SpyEngineering.Rows[iRow].Cells[GRID_ENG_KEY_COL].Value.ToString().Equals(Data[GRID_ENG_KEY_COL].ToString()))
+                    if ((Grid_SpyEngineering.Rows[iRow].Cells[GRID_SPYENG_MSG_ID].Value.ToString().Equals(Data[GRID_SPYENG_MSG_ID].ToString()))
+                        && (Grid_SpyEngineering.Rows[iRow].Cells[GRID_SPYENG_NAME].Value.ToString().Equals(Data[GRID_SPYENG_NAME].ToString())))
                     {
                         oRow = Grid_SpyEngineering.Rows[iRow];
                         break;
