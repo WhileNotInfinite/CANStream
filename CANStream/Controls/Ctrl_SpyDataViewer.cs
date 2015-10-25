@@ -499,17 +499,16 @@ namespace CANStream
         	
         	foreach (DataGridViewColumn oCol in oGrid.Columns)
         	{
-        		if (oCol.Visible)
-        		{
-        			
-        			if (TotalWidth + ColWidth >= oGrid.Width - 5)
-        			{
-        				ColWidth = oGrid.Width - TotalWidth - 5;
-        			}
-        			
-        			oCol.Width = ColWidth;
-        			TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
-        		}
+                if (oCol.Visible && oCol.Index > 0)
+                {
+                    if (TotalWidth + ColWidth >= oGrid.Width - 5)
+                    {
+                        ColWidth = oGrid.Width - TotalWidth - 5;
+                    }
+
+                    oCol.Width = ColWidth;
+                    TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
+                }
         	}
         	
         	if (TotalWidth < oGrid.Width - 5)
@@ -693,10 +692,7 @@ namespace CANStream
             oRow.Cells[GRID_SPYENG_DLC].Value = oRawMsg.CANMsg.LEN.ToString();
 
             //Color row
-            foreach (DataGridViewCell oCell in oRow.Cells)
-            {
-                oCell.Style.BackColor = Color.LightCoral;
-            }
+            Color_GridRow(oRow, Color.DarkBlue, Color.White);
 
             //Collapsing properties creation
             CollapsableGridRowProperties oColapsProps = new CollapsableGridRowProperties();
@@ -739,10 +735,7 @@ namespace CANStream
             oRow.Cells[GRID_SPYENG_ENG_VALUE].Value = MuxValue.ToString();
 
             //Color row
-            foreach (DataGridViewCell oCell in oRow.Cells)
-            {
-                oCell.Style.BackColor = Color.LightPink;
-            }
+            Color_GridRow(oRow, Color.Blue, Color.White);
 
             //Collapsing properties creation
             CollapsableGridRowProperties oColapsProps = new CollapsableGridRowProperties();
@@ -777,10 +770,7 @@ namespace CANStream
             //Color row
             if (((CollapsableGridRowProperties)ParentRow.Tag).Children.Count % 2 == 0)
             {
-                foreach (DataGridViewCell oCell in oRow.Cells)
-                {
-                    oCell.Style.BackColor = Color.LightBlue;
-                }
+                Color_GridRow(oRow, Color.LightBlue, Color.Empty);
             }
             
             //Collapsing properties creation
@@ -795,6 +785,18 @@ namespace CANStream
             ((CollapsableGridRowProperties)ParentRow.Tag).Children.Add(oRow);
 
             return (oRow);
+        }
+
+        private void Color_GridRow(DataGridViewRow oRow, Color BackColor, Color ForeColor)
+        {
+            foreach (DataGridViewCell oCell in oRow.Cells)
+            {
+                if (oCell.ColumnIndex != GRID_SPYENG_COLLAPSE)
+                {
+                    if (BackColor != Color.Empty) oCell.Style.BackColor = BackColor;
+                    if (ForeColor != Color.Empty) oCell.Style.ForeColor = ForeColor;
+                }
+            }
         }
 
         #endregion

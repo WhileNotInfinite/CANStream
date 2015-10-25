@@ -37,6 +37,16 @@ namespace CANStream
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Split_RawEng_Data = new System.Windows.Forms.SplitContainer();
             this.label3 = new System.Windows.Forms.Label();
             this.Grid_SpyRaw = new System.Windows.Forms.DataGridView();
@@ -61,18 +71,6 @@ namespace CANStream
             this.ContextSpyRaw_countToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label12 = new System.Windows.Forms.Label();
             this.Grid_SpyEngineering = new System.Windows.Forms.DataGridView();
-            this.Grid_Eng_Collapse_State = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RawValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpyEng_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grid_Eng_Period = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grid_Eng_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grid_Eng_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpyEng_Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Context_SpyEngGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ContextSpyEng_ResetTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -92,6 +90,18 @@ namespace CANStream
             this.ContextSpyEng_maxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_unitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_commentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Grid_Eng_Collapse_State = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RawValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpyEng_Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grid_Eng_Period = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grid_Eng_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grid_Eng_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpyEng_Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Split_RawEng_Data)).BeginInit();
             this.Split_RawEng_Data.Panel1.SuspendLayout();
             this.Split_RawEng_Data.Panel2.SuspendLayout();
@@ -346,88 +356,6 @@ namespace CANStream
             this.Grid_SpyEngineering.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellDoubleClick);
             this.Grid_SpyEngineering.SizeChanged += new System.EventHandler(this.Grid_SpyEngineeringSizeChanged);
             // 
-            // Grid_Eng_Collapse_State
-            // 
-            this.Grid_Eng_Collapse_State.HeaderText = "";
-            this.Grid_Eng_Collapse_State.Name = "Grid_Eng_Collapse_State";
-            this.Grid_Eng_Collapse_State.Width = 20;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "ID";
-            this.Column6.MinimumWidth = 30;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 40;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Parameter";
-            this.Column7.MinimumWidth = 150;
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 150;
-            // 
-            // RawValue
-            // 
-            this.RawValue.HeaderText = "Raw value";
-            this.RawValue.MinimumWidth = 30;
-            this.RawValue.Name = "RawValue";
-            this.RawValue.ReadOnly = true;
-            this.RawValue.Visible = false;
-            this.RawValue.Width = 50;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Value";
-            this.Column8.MinimumWidth = 40;
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 50;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "Min";
-            this.Column9.MinimumWidth = 40;
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 50;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Max";
-            this.Column10.MinimumWidth = 40;
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 50;
-            // 
-            // SpyEng_Unit
-            // 
-            this.SpyEng_Unit.HeaderText = "Unit";
-            this.SpyEng_Unit.MinimumWidth = 20;
-            this.SpyEng_Unit.Name = "SpyEng_Unit";
-            this.SpyEng_Unit.ReadOnly = true;
-            this.SpyEng_Unit.Width = 40;
-            // 
-            // Grid_Eng_Period
-            // 
-            this.Grid_Eng_Period.HeaderText = "Period";
-            this.Grid_Eng_Period.Name = "Grid_Eng_Period";
-            this.Grid_Eng_Period.Width = 50;
-            // 
-            // Grid_Eng_Count
-            // 
-            this.Grid_Eng_Count.HeaderText = "Count";
-            this.Grid_Eng_Count.Name = "Grid_Eng_Count";
-            this.Grid_Eng_Count.Width = 50;
-            // 
-            // Grid_Eng_DLC
-            // 
-            this.Grid_Eng_DLC.HeaderText = "DLC";
-            this.Grid_Eng_DLC.Name = "Grid_Eng_DLC";
-            this.Grid_Eng_DLC.Width = 40;
-            // 
-            // SpyEng_Comment
-            // 
-            this.SpyEng_Comment.HeaderText = "Comment";
-            this.SpyEng_Comment.Name = "SpyEng_Comment";
-            this.SpyEng_Comment.ReadOnly = true;
-            // 
             // Context_SpyEngGrid
             // 
             this.Context_SpyEngGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -575,6 +503,110 @@ namespace CANStream
             this.ContextSpyEng_commentToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ContextSpyEng_commentToolStripMenuItem.Text = "Comment";
             this.ContextSpyEng_commentToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_commentToolStripMenuItemClick);
+            // 
+            // Grid_Eng_Collapse_State
+            // 
+            this.Grid_Eng_Collapse_State.HeaderText = "";
+            this.Grid_Eng_Collapse_State.Name = "Grid_Eng_Collapse_State";
+            this.Grid_Eng_Collapse_State.ReadOnly = true;
+            this.Grid_Eng_Collapse_State.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_Eng_Collapse_State.Width = 20;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column6.HeaderText = "ID";
+            this.Column6.MinimumWidth = 30;
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 40;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Parameter";
+            this.Column7.MinimumWidth = 150;
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 150;
+            // 
+            // RawValue
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RawValue.DefaultCellStyle = dataGridViewCellStyle2;
+            this.RawValue.HeaderText = "Raw value";
+            this.RawValue.MinimumWidth = 30;
+            this.RawValue.Name = "RawValue";
+            this.RawValue.ReadOnly = true;
+            this.RawValue.Visible = false;
+            this.RawValue.Width = 50;
+            // 
+            // Column8
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column8.HeaderText = "Value";
+            this.Column8.MinimumWidth = 150;
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 150;
+            // 
+            // Column9
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Column9.HeaderText = "Min";
+            this.Column9.MinimumWidth = 40;
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 50;
+            // 
+            // Column10
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column10.HeaderText = "Max";
+            this.Column10.MinimumWidth = 40;
+            this.Column10.Name = "Column10";
+            this.Column10.Width = 50;
+            // 
+            // SpyEng_Unit
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Unit.DefaultCellStyle = dataGridViewCellStyle6;
+            this.SpyEng_Unit.HeaderText = "Unit";
+            this.SpyEng_Unit.MinimumWidth = 20;
+            this.SpyEng_Unit.Name = "SpyEng_Unit";
+            this.SpyEng_Unit.ReadOnly = true;
+            this.SpyEng_Unit.Width = 40;
+            // 
+            // Grid_Eng_Period
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Period.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Grid_Eng_Period.HeaderText = "Period";
+            this.Grid_Eng_Period.Name = "Grid_Eng_Period";
+            this.Grid_Eng_Period.Width = 50;
+            // 
+            // Grid_Eng_Count
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Count.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Grid_Eng_Count.HeaderText = "Count";
+            this.Grid_Eng_Count.Name = "Grid_Eng_Count";
+            this.Grid_Eng_Count.Width = 50;
+            // 
+            // Grid_Eng_DLC
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_DLC.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Grid_Eng_DLC.HeaderText = "DLC";
+            this.Grid_Eng_DLC.Name = "Grid_Eng_DLC";
+            this.Grid_Eng_DLC.Width = 40;
+            // 
+            // SpyEng_Comment
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Comment.DefaultCellStyle = dataGridViewCellStyle10;
+            this.SpyEng_Comment.HeaderText = "Comment";
+            this.SpyEng_Comment.Name = "SpyEng_Comment";
+            this.SpyEng_Comment.ReadOnly = true;
             // 
             // Ctrl_SpyDataViewer
             // 
