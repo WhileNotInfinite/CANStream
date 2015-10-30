@@ -187,11 +187,26 @@ span.rvts37
 }
 span.rvts38
 {
- font-size: 12pt;
  font-style: italic;
  font-weight: bold;
 }
 span.rvts39
+{
+ font-weight: bold;
+ color: #00b050;
+}
+span.rvts40
+{
+ font-weight: bold;
+ color: #ff0000;
+}
+span.rvts41
+{
+ font-size: 12pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.rvts42
 {
  font-size: 12pt;
 }

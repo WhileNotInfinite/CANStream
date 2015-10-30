@@ -4,7 +4,7 @@
 	<title>Virtual channel properties</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
-	<meta name="keywords" content="channel, virtual, properties, property, name, unit, expression, test, function, operator, comment, default, value">
+	<meta name="keywords" content="channel, virtual, properties, property, name, unit, expression, test, function, operator, comment, default, value, argument separator">
 	
 	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
 	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
@@ -104,6 +104,9 @@
 <p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Virtual_Channel_04.png"></p>
 <p class="rvps2"><span class="rvts11"><br/></span></p>
 <p class="rvps2"><span class="rvts11">Regarding virtual channel objects, click the 'Load an object file' </span><img alt="" style="padding : 1px;" src="lib/Virtual_Channel_Element_32.png"><span class="rvts11"> button of the tool bar to load an object file and retrieve all names that can be used in a virtual channel expression.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Doc_Warning_16.png"><span class="rvts11">: </span><span class="rvts38">For virtual channels functions using multiple arguments, such as</span><span class="rvts11"> </span><a class="rvts21" href="Virtualchannelbuiltinfunctions.html#IFGT">IFGT</a><span class="rvts11">, </span><span class="rvts38">the argument separator character is ' ; '.</span><span class="rvts11"> </span></p>
+<p class="rvps2"><span class="rvts11">Thus, expression "IFGT(4 </span><span class="rvts39">;</span><span class="rvts11"> 2)" will be correctly evaluated while the expression "IFGT(4 </span><span class="rvts40">,</span><span class="rvts11"> 2)" will lead to a raise of an expression evaluation error.</span></p>
 <p class="rvps2"><span class="rvts11"><br/></span></p>
 <p class="rvps2"><span class="rvts11">While writing the virtual channel expression, it is possible to test it by simulating a computation. To do so, click on 'Test' </span><img alt="" style="padding : 1px;" src="lib/Virtual_Channel_12.png"><span class="rvts11"> button. </span></p>
 <p class="rvps2"><span class="rvts11"><br/></span></p>
