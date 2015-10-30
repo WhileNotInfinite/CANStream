@@ -32,9 +32,7 @@ namespace CANStream
 	public enum CANControllerGrid
 	{
 		Grid_Manual    = 1,
-		Grid_SpyRaw    = 2,
 		Grid_SpyEng    = 3,
-		Grid_Cycle_Raw = 4,
 		Grid_Cycle_Eng = 5,
 	}
 	
@@ -57,28 +55,20 @@ namespace CANStream
 		Default 		  = (Column_ID | Column_RxTx | Column_Period | Column_Unit | Column_Comment),
 	}
 	
-	public enum SpyRaw_Grid_Columns
-	{
-		None		  = 0x00,
-		Column_DLC    = 0x01,
-		Column_Data   = 0x02,
-		Column_Period = 0x04,
-		Column_Count  = 0x08,
-		All			  = 0x0F, //Update value 'All' in case of change
-		Default       = (Column_Data | Column_Period | Column_Count),
-	}
-	
 	public enum SpyEngineering_Grid_Columns
 	{
-		None			= 0x00,
-		Column_ID       = 0x01,
-		Column_Value    = 0x02,
-		Column_RawValue = 0x04,
-		Column_Min      = 0x08,
-		Column_Max      = 0x10,
-		Column_Unit     = 0x20,
-		Column_Comment  = 0x40,
-		All				= 0x7F, //Update value 'All' in case of change
+		None			= 0x0000,
+		Column_ID       = 0x0001,
+		Column_Value    = 0x0002,
+		Column_RawValue = 0x0004,
+		Column_Min      = 0x0008,
+		Column_Max      = 0x0010,
+		Column_Unit     = 0x0020,
+		Column_Comment  = 0x0040,
+        Column_DLC      = 0x0080,
+        Column_Period   = 0x0100,
+        Column_Count    = 0x0200,
+		All				= 0x03FF, //Update value 'All' in case of change
 		Default			= (Column_Value | Column_Min | Column_Max | Column_Unit | Column_Comment),
 	}
 	
@@ -429,7 +419,6 @@ namespace CANStream
 			CurrentSpyViewer = Manual_SpyDataViewer;
 			
 			Set_ManualGridColumnsVisible(Manual_Grid_Columns.Default);
-			Set_SpyRawGridColumnsVisible(SpyRaw_Grid_Columns.Default);
 			Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns.Default);
 			
 			//Initialization of cycle control management
@@ -617,20 +606,6 @@ namespace CANStream
 			Switch_Manual_Rx_Data_Panel();
 		}
 		
-		#region TSMI_RxMessages_Data
-		
-		private void TSMI_RxMsg_Data_EngClick(object sender, EventArgs e)
-		{
-			Switch_Manual_Rx_Data_Eng_Panel();
-		}
-		
-		private void TSMI_RxMsg_Data_RawClick(object sender, EventArgs e)
-		{
-			Switch_Manual_Rx_Data_Raw_Panel();
-		}
-		
-		#endregion
-		
 		private void TSMI_RxMessages_GraphClick(object sender, EventArgs e)
 		{
 			Switch_Manual_Rx_Graph_Panel();
@@ -648,24 +623,6 @@ namespace CANStream
 			Split_Cycle_VirtualSig_Graph.Panel1Collapsed = !TSMI_CyclePlayer_Data.Checked;
 			TSMI_CyclePlayer_Graph.Checked = !Split_Cycle_VirtualSig_Graph.Panel2Collapsed;
 		}
-		
-		#region TSMI_CyclePlayer_Data
-		
-		private void TSMI_CyclePlayer_Data_EngClick(object sender, EventArgs e)
-		{
-			TSMI_CyclePlayer_Data_Eng.Checked = !TSMI_CyclePlayer_Data_Eng.Checked;
-			Cycle_SpyDataViewer.EngDataGridVisible = TSMI_CyclePlayer_Data_Eng.Checked;
-			TSMI_CyclePlayer_Data_Raw.Checked = Cycle_SpyDataViewer.RawDataGridVisible;
-		}
-		
-		private void TSMI_CyclePlayer_Data_RawClick(object sender, EventArgs e)
-		{
-			TSMI_CyclePlayer_Data_Raw.Checked = !TSMI_CyclePlayer_Data_Raw.Checked;
-			Cycle_SpyDataViewer.RawDataGridVisible = TSMI_CyclePlayer_Data_Raw.Checked;
-			TSMI_CyclePlayer_Data_Eng.Checked = Cycle_SpyDataViewer.EngDataGridVisible;
-		}
-		
-		#endregion
 		
 		private void TSMI_CyclePlayer_GraphClick(object sender, EventArgs e)
 		{
@@ -786,12 +743,20 @@ namespace CANStream
 		{
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, e.ColumnsVisible);
 		}
-		
-		private void Manual_SpyDataViewerRawGridColumnsVisibleChanged(object sender, RawGridColVisibleChangedEventArgs e)
-		{
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyRaw, e.ColumnsVisible);
-		}
-		
+
+        private void Manual_SpyDataViewer_GridDataReseted(object sender, EventArgs e)
+        {
+            //Force all virtual channels computation after a grid reset in order to pass through the 'bNewValue' filter
+            
+            foreach (CS_VirtualChannelsLibrary oLib in VCLibCollection.Libraries)
+            {
+                foreach (CS_VirtualChannel oChan in oLib.Channels)
+                {
+                    oChan.bForceNextComputation = true;
+                }
+            }
+        }
+
 		#endregion
 		
 		#region Spy graph panel
@@ -1699,11 +1664,6 @@ namespace CANStream
 		private void Cycle_SpyDataViewerEngGridColumnsVisibleChanged(object sender, EngGridColVisibleChangedEventArgs e)
 		{
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, e.ColumnsVisible);
-		}
-		
-		private void Cycle_SpyDataViewerRawGridColumnsVisibleChanged(object sender, RawGridColVisibleChangedEventArgs e)
-		{
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Raw, e.ColumnsVisible);
 		}
 		
 		#endregion
@@ -3405,7 +3365,6 @@ namespace CANStream
         		//Value grids init
         		if(bClearSpyGrids)
         		{
-        			Manual_SpyDataViewer.Clear_RawGrid();
         			Manual_SpyDataViewer.Clear_EngGrid();
 
                     oSpySeriesStates.Clear();
@@ -3585,23 +3544,12 @@ namespace CANStream
         	{
                 TLastSpyGridUpdate = DateTime.Now;
                 DecodedMessageCount = 0;
-        		
+
         		foreach(MessageStatus msgStatus in m_LastMsgsList)
         		{
         			if(msgStatus.MarkedAsUpdated)
         			{
         				msgStatus.MarkedAsUpdated=false;
-
-                        //TODO: Old code, remove
-                        //string[] RawMsgData = {
-                        //						msgStatus.IdString,
-                        //						msgStatus.CANMsg.LEN.ToString(),
-                        //						msgStatus.DataString,
-                        //						msgStatus.TimeString,
-                        //						msgStatus.Count.ToString(),
-                        //					  };
-
-                        //CurrentSpyViewer.Update_RawGridRow(RawMsgData);
 
                         CurrentSpyViewer.Update_SpyGridRawData(msgStatus);
 
@@ -3621,33 +3569,6 @@ namespace CANStream
 
                                     foreach (CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
 		                			{
-                                        //TODO: Old code, remove
-                      //                  //Process parameter alarms
-                      //                  Color AlarmBackColor = Color.Empty;
-                      //                  Color AlarmForeColor = Color.Empty;
-
-                      //                  Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
-
-                      //                  if (sAlarm.HasValue)
-                      //                  {
-                      //                      AlarmBackColor = sAlarm.Value.BackColor;
-                      //                      AlarmForeColor = sAlarm.Value.ForeColor;
-                      //                  }
-
-                      //                  object[] EngParamData = {
-                      //                                              DecodedMessages[MsgIndex].Identifier.ToString(),
-                      //                                              oParam.Name,
-                      //                                              oParam.RawValue,
-                      //                                              oParam.DecodedValue,
-                      //                                              oParam.Unit,
-                      //                                              oParam.Comment,
-                      //                                              oParam.ValueFormat,
-                      //                                              AlarmBackColor,
-                      //                                              AlarmForeColor,
-                      //                                          };
-		                				
-		                				//CurrentSpyViewer.Update_EngGridRow(EngParamData);
-
                                         if (!(oSpySeriesStates.Contains(oParam.Name)))
                                         {
                                             SpySerieState sSpySerie = new SpySerieState();
@@ -3706,7 +3627,7 @@ namespace CANStream
 
                     DecodedMessageCount++;
         		}
-        		
+
         		//Update virtual channels
         		VCLibCollection.ComputeLibraries();
         		ShowVirtualChannelValues();
@@ -4005,7 +3926,6 @@ namespace CANStream
         private void ResetManualSpyGrids()
         {
         	Grid_CANData.Rows.Clear();
-        	Manual_SpyDataViewer.Clear_RawGrid();
         	Manual_SpyDataViewer.Clear_EngGrid();
         }
         
@@ -4105,20 +4025,8 @@ namespace CANStream
         			if (oChan.bNewValue && oChan.bComputed)
         			{
 	        			oChan.bNewValue=false;
-	        			
-	        			object[] ChanData = {
-	        									"Virtual",
-	        									oChan.Name,
-	        									oChan.Expression,
-	        									oChan.Value.ToString(),
-	        									oChan.Unit,
-	        									oChan.Comment,
-                                                null,
-                                                Color.Empty,
-                                                Color.Empty,
-	        								};
-	        			
-	        			CurrentSpyViewer.Update_VirtualChannelValue(ChanData);
+
+                        CurrentSpyViewer.Update_SpyGridVirtualChannel(oLib.Name, oChan);
 	        			
 	        			if (!(oSpySeriesStates.Contains(oChan.Name)))
         				{
@@ -4221,18 +4129,11 @@ namespace CANStream
 			
 			Args.Manual_Rx_Panel_Visible = !Split_RxTx.Panel2Collapsed;
 			
-				Args.Manual_Rx_Panel_Data_Visible = !Split_Rx_DataGraph.Panel1Collapsed;
-				
-					Args.Manual_Rx_Panel_Data_Eng_Visible = Manual_SpyDataViewer.EngDataGridVisible;
-					Args.Manual_Rx_Panel_Data_Raw_Visible = Manual_SpyDataViewer.RawDataGridVisible;
-				
+				Args.Manual_Rx_Panel_Data_Visible = !Split_Rx_DataGraph.Panel1Collapsed;				
 				Args.Manual_Rx_Panel_Graph_Visible = !Split_Rx_DataGraph.Panel2Collapsed;
 				
 			Args.Cycle_Panel_Data_Visible = !Split_Cycle_VirtualSig_Graph.Panel1Collapsed;
-			
-				Args.Cycle_Panel_Data_Eng_Visible = Cycle_SpyDataViewer.EngDataGridVisible;
-				Args.Cycle_Panel_Data_Raw_Visible = Cycle_SpyDataViewer.RawDataGridVisible;
-			
+						
 			Args.Cycle_Panel_Graph_Visible = !Split_Cycle_VirtualSig_Graph.Panel2Collapsed;
 			
 			OnControllerLayoutChanged(Args);
@@ -4658,15 +4559,7 @@ namespace CANStream
 		
 		public void HideActiveRow()
         {
-			if (Manual_SpyDataViewer.ContainsFocus)
-			{
-				Manual_SpyDataViewer.HideActiveRow();
-			}
-			else if (Cycle_SpyDataViewer.ContainsFocus)
-			{
-				Cycle_SpyDataViewer.HideActiveRow();
-			}
-			else if (Grid_CANData.ContainsFocus)
+			if (Grid_CANData.ContainsFocus)
 			{
 				if (Grid_CANData.CurrentCell != null)
 				{
@@ -4677,15 +4570,7 @@ namespace CANStream
 		
 		public void ShowHiddenRows()
         {
-			if (Manual_SpyDataViewer.ContainsFocus)
-			{
-				Manual_SpyDataViewer.ShowHiddenRows();
-			}
-			else if (Cycle_SpyDataViewer.ContainsFocus)
-			{
-				Cycle_SpyDataViewer.ShowHiddenRows();
-			}
-			else if (Grid_CANData.ContainsFocus)
+			if (Grid_CANData.ContainsFocus)
 			{
 				foreach (DataGridViewRow oRow in Grid_CANData.Rows)
 				{
@@ -4761,8 +4646,10 @@ namespace CANStream
 		#region Layout control
 		
 		#region Grid columns
-		
-		public Manual_Grid_Columns Get_ManualGridColumnsVisible()
+
+        #region Manual mode
+
+        public Manual_Grid_Columns Get_ManualGridColumnsVisible()
 		{
 			return(ManualGridColumnsVisible);
 		}
@@ -4804,17 +4691,6 @@ namespace CANStream
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, (object)ManualGridColumnsVisible);
 		}
 		
-		public SpyRaw_Grid_Columns Get_SpyRawGridColumnsVisible()
-		{
-			return(Manual_SpyDataViewer.RawGridColumnsVisible);
-		}
-		
-		public void Set_SpyRawGridColumnsVisible(SpyRaw_Grid_Columns eColumnsVisible)
-		{
-			Manual_SpyDataViewer.RawGridColumnsVisible = eColumnsVisible;
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyRaw, (object)eColumnsVisible);
-		}
-		
 		public SpyEngineering_Grid_Columns Get_SpyEngGridColumnsVisible()
 		{
 			return(Manual_SpyDataViewer.EngineeringGridColumnsVisible);
@@ -4825,19 +4701,12 @@ namespace CANStream
 			Manual_SpyDataViewer.EngineeringGridColumnsVisible = eColumnsVisible;
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, (object)eColumnsVisible);
 		}
-		
-		public SpyRaw_Grid_Columns Get_CycleRawGridColumnsVisible()
-		{
-			return(Cycle_SpyDataViewer.RawGridColumnsVisible);
-		}
-		
-		public void Set_CycleRawGridColumnsVisible(SpyRaw_Grid_Columns eColumnsVisible)
-		{
-			Cycle_SpyDataViewer.RawGridColumnsVisible = eColumnsVisible;
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Raw, (object)eColumnsVisible);
-		}
-		
-		public SpyEngineering_Grid_Columns Get_CycleEngGridColumnsVisible()
+
+        #endregion
+
+        #region Cycle mode
+
+        public SpyEngineering_Grid_Columns Get_CycleEngGridColumnsVisible()
 		{
 			return(Cycle_SpyDataViewer.EngineeringGridColumnsVisible);
 		}
@@ -4847,14 +4716,16 @@ namespace CANStream
 			Cycle_SpyDataViewer.EngineeringGridColumnsVisible = eColumnsVisible;
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, (object)eColumnsVisible);
 		}
-		
-		#endregion
-		
-		#region View
-		
-		#region Manual and spy
-		
-		public void Switch_Manual_Tx_Panel()
+
+        #endregion
+
+        #endregion
+
+        #region View
+
+        #region Manual and spy
+
+        public void Switch_Manual_Tx_Panel()
 		{
 			Split_RxTx.Panel1Collapsed = !Split_RxTx.Panel1Collapsed;
 			TSMI_TxMessages.Checked  = !Split_RxTx.Panel1Collapsed;
@@ -4900,26 +4771,6 @@ namespace CANStream
 			FireLayoutChangedEvent();
 		}
 		
-		#region Message Rx Data
-		
-		public void Switch_Manual_Rx_Data_Eng_Panel()
-		{
-			Manual_SpyDataViewer.EngDataGridVisible = !Manual_SpyDataViewer.EngDataGridVisible;
-			TSMI_RxMsg_Data_Eng.Checked = Manual_SpyDataViewer.EngDataGridVisible;
-			TSMI_RxMsg_Data_Raw.Checked = Manual_SpyDataViewer.RawDataGridVisible;
-			FireLayoutChangedEvent();
-		}
-		
-		public void Switch_Manual_Rx_Data_Raw_Panel()
-		{
-			Manual_SpyDataViewer.RawDataGridVisible = !Manual_SpyDataViewer.RawDataGridVisible;
-			TSMI_RxMsg_Data_Raw.Checked = Manual_SpyDataViewer.RawDataGridVisible;
-			TSMI_RxMsg_Data_Eng.Checked = Manual_SpyDataViewer.EngDataGridVisible;
-			FireLayoutChangedEvent();
-		}
-		
-		#endregion
-		
 		public void Switch_Manual_Rx_Graph_Panel()
 		{
 			Split_Rx_DataGraph.Panel2Collapsed = !Split_Rx_DataGraph.Panel2Collapsed;
@@ -4942,26 +4793,6 @@ namespace CANStream
 			FireLayoutChangedEvent();
 		}
 		
-		#region Cycle data
-		
-		public void Switch_Cycle_Data_Eng_Panel()
-		{
-			Cycle_SpyDataViewer.EngDataGridVisible =  !Cycle_SpyDataViewer.EngDataGridVisible;
-			TSMI_CyclePlayer_Data_Eng.Checked = Cycle_SpyDataViewer.EngDataGridVisible;
-			TSMI_CyclePlayer_Data_Raw.Checked = Cycle_SpyDataViewer.RawDataGridVisible;
-			FireLayoutChangedEvent();
-		}
-		
-		public void Switch_Cycle_Data_Raw_Panel()
-		{
-			Cycle_SpyDataViewer.RawDataGridVisible = !Cycle_SpyDataViewer.RawDataGridVisible;
-			TSMI_CyclePlayer_Data_Raw.Checked = Cycle_SpyDataViewer.RawDataGridVisible;
-			TSMI_CyclePlayer_Data_Eng.Checked = Cycle_SpyDataViewer.EngDataGridVisible;
-			FireLayoutChangedEvent();
-		}
-		
-		#endregion
-		
 		public void Switch_Cycle_Graph_Panel()
 		{
 			Split_Cycle_VirtualSig_Graph.Panel2Collapsed = !Split_Cycle_VirtualSig_Graph.Panel2Collapsed;
@@ -4983,28 +4814,20 @@ namespace CANStream
 			
 			Split_RxTx.Panel2Collapsed = !oLayout.RxPanelVisible;
 			Split_Rx_DataGraph.Panel1Collapsed = !oLayout.DataRxPanelVisible;
-			Manual_SpyDataViewer.RawDataGridVisible = oLayout.RawDataRxPanelVisible;
-			Manual_SpyDataViewer.EngDataGridVisible = oLayout.EngDataRxPanelVisible;
 			Split_Rx_DataGraph.Panel2Collapsed = !oLayout.GraphRxPanelVisible;
-			Set_SpyRawGridColumnsVisible(oLayout.eRawDataRxColumns);
 			Set_SpyEngGridColumnsVisible(oLayout.eEngDataRxColumns);
 						
 			Split_Cycle_VirtualSig_Graph.Panel1Collapsed = !oLayout.Cycle_DataPanelVisible;
 			Split_Cycle_VirtualSig_Graph.Panel2Collapsed = !oLayout.Cycle_GraphPanelVisible;
-			Cycle_SpyDataViewer.RawDataGridVisible = oLayout.Cycle_RawDataPanelVisible;
-			Cycle_SpyDataViewer.EngDataGridVisible = oLayout.Cycle_EngDataPanelVisible;
-			Set_CycleRawGridColumnsVisible(oLayout.eCycleRawDataColumns);
 			Set_CycleEngGridColumnsVisible(oLayout.eCycleEngDataColumns);
 			
 			Split_RxTx.SplitterDistance = oLayout.Pos_Split_RxTx;
 			Split_Tx_EngRaw.SplitterDistance = oLayout.Pos_Split_Tx_EngRaw;
 			Split_Rx_DataGraph.SplitterDistance = oLayout.Pos_Split_Rx_DataGraph;
-			Manual_SpyDataViewer.GridSplitterDistance = oLayout.Pos_Split_RxData_RawEng;
 			
 			tabControl1.SelectedIndex = 1;
 			
 			Split_Cycle_VirtualSig_Graph.SplitterDistance = oLayout.Pos_Split_CycleDataGraph;
-			Cycle_SpyDataViewer.GridSplitterDistance = oLayout.Pos_Split_CycleData_RawEng;
 			
 			tabControl1.SelectedIndex = 0;
 			
@@ -5013,13 +4836,9 @@ namespace CANStream
 			TSMI_TxMessages_Raw.Checked = oLayout.RawDataTxPanelVisible;
 			TSMI_RxMessages.Checked = oLayout.RxPanelVisible;
 			TSMI_RxMessages_Data.Checked = oLayout.DataRxPanelVisible;
-			TSMI_RxMsg_Data_Raw.Checked = oLayout.RawDataRxPanelVisible;
-			TSMI_RxMsg_Data_Eng.Checked = oLayout.EngDataRxPanelVisible;
 			TSMI_RxMessages_Graph.Checked = oLayout.GraphRxPanelVisible;
 			TSMI_CyclePlayer_Data.Checked = oLayout.Cycle_DataPanelVisible;
 			TSMI_CyclePlayer_Graph.Checked = oLayout.Cycle_GraphPanelVisible;
-			TSMI_CyclePlayer_Data_Raw.Checked = oLayout.Cycle_RawDataPanelVisible;
-			TSMI_CyclePlayer_Data_Eng.Checked = oLayout.Cycle_EngDataPanelVisible;
 			
 			FireLayoutChangedEvent();
 		}
@@ -5035,25 +4854,17 @@ namespace CANStream
 			
 			oLayout.RxPanelVisible = !Split_RxTx.Panel2Collapsed;
 			oLayout.DataRxPanelVisible = !Split_Rx_DataGraph.Panel1Collapsed;
-			oLayout.RawDataRxPanelVisible = Manual_SpyDataViewer.RawDataGridVisible;
-			oLayout.EngDataRxPanelVisible = Manual_SpyDataViewer.EngDataGridVisible;
 			oLayout.GraphRxPanelVisible = !Split_Rx_DataGraph.Panel2Collapsed;
-			oLayout.eRawDataRxColumns = Manual_SpyDataViewer.RawGridColumnsVisible;
 			oLayout.eEngDataRxColumns = Manual_SpyDataViewer.EngineeringGridColumnsVisible;
 			
 			oLayout.Cycle_DataPanelVisible = !Split_Cycle_VirtualSig_Graph.Panel1Collapsed;
 			oLayout.Cycle_GraphPanelVisible = !Split_Cycle_VirtualSig_Graph.Panel2Collapsed;
-			oLayout.Cycle_RawDataPanelVisible = Cycle_SpyDataViewer.RawDataGridVisible;
-			oLayout.Cycle_EngDataPanelVisible = Cycle_SpyDataViewer.EngDataGridVisible;
-			oLayout.eCycleRawDataColumns = Cycle_SpyDataViewer.RawGridColumnsVisible;
 			oLayout.eCycleEngDataColumns = Cycle_SpyDataViewer.EngineeringGridColumnsVisible;
 			
 			oLayout.Pos_Split_RxTx = Split_RxTx.SplitterDistance;
 			oLayout.Pos_Split_Tx_EngRaw = Split_Tx_EngRaw.SplitterDistance;
 			oLayout.Pos_Split_Rx_DataGraph = Split_Rx_DataGraph.SplitterDistance;
-			oLayout.Pos_Split_RxData_RawEng = Manual_SpyDataViewer.GridSplitterDistance;
 			oLayout.Pos_Split_CycleDataGraph = Split_Cycle_VirtualSig_Graph.SplitterDistance;
-			oLayout.Pos_Split_CycleData_RawEng = Cycle_SpyDataViewer.GridSplitterDistance;
 			
 			return (oLayout);
 		}
@@ -5138,19 +4949,11 @@ namespace CANStream
 		public bool Manual_Rx_Panel_Visible {get; set;}
 		
 		public bool Manual_Rx_Panel_Data_Visible {get; set;}
-		
-		public bool Manual_Rx_Panel_Data_Eng_Visible {get; set;}
-		
-		public bool Manual_Rx_Panel_Data_Raw_Visible {get; set;}
-		
+				
 		public bool Manual_Rx_Panel_Graph_Visible {get; set;}
 		
 		public bool Cycle_Panel_Data_Visible {get; set;}
-		
-		public bool Cycle_Panel_Data_Eng_Visible {get; set;}
-		
-		public bool Cycle_Panel_Data_Raw_Visible {get; set;}
-		
+				
 		public bool Cycle_Panel_Graph_Visible {get; set;}
 		
 		#endregion
@@ -5184,24 +4987,16 @@ namespace CANStream
 		public bool RxPanelVisible;
 		public bool GraphRxPanelVisible;
 		public bool DataRxPanelVisible;
-		public bool EngDataRxPanelVisible;
-		public bool RawDataRxPanelVisible;
-		public SpyRaw_Grid_Columns eRawDataRxColumns;
 		public SpyEngineering_Grid_Columns eEngDataRxColumns;
 		
 		public bool Cycle_DataPanelVisible;
 		public bool Cycle_GraphPanelVisible;
-		public bool Cycle_RawDataPanelVisible;
-		public bool Cycle_EngDataPanelVisible;
-		public SpyRaw_Grid_Columns eCycleRawDataColumns;
 		public SpyEngineering_Grid_Columns eCycleEngDataColumns;
 		
 		public int Pos_Split_RxTx;
 		public int Pos_Split_Tx_EngRaw;
 		public int Pos_Split_Rx_DataGraph;
-		public int Pos_Split_RxData_RawEng;
 		public int Pos_Split_CycleDataGraph;
-		public int Pos_Split_CycleData_RawEng;
 		
 		#endregion
 		
@@ -5215,25 +5010,16 @@ namespace CANStream
 			RxPanelVisible = true;
 			GraphRxPanelVisible = true;
 			DataRxPanelVisible = true;
-			EngDataRxPanelVisible = true;
-			RawDataRxPanelVisible = true;
-			eRawDataRxColumns = SpyRaw_Grid_Columns.Default;
 			eEngDataRxColumns = SpyEngineering_Grid_Columns.Default;
 			
 			Cycle_DataPanelVisible = true;
 			Cycle_GraphPanelVisible = true;
-			Cycle_RawDataPanelVisible = true;
-			Cycle_EngDataPanelVisible = true;
-			eCycleRawDataColumns = SpyRaw_Grid_Columns.Default;
 			eCycleEngDataColumns = SpyEngineering_Grid_Columns.Default;
 			
 			Pos_Split_RxTx = 290;
 			Pos_Split_Tx_EngRaw = 411;
 			Pos_Split_Rx_DataGraph = 277;
-			Pos_Split_RxData_RawEng = 360;
-			Pos_Split_CycleDataGraph = 302;
-			Pos_Split_CycleData_RawEng = 143;
-			
+			Pos_Split_CycleDataGraph = 302;			
 		}
 	}
 	
@@ -5299,19 +5085,7 @@ namespace CANStream
 						xProp = oXDoc.CreateElement("DataRxPanelVisible");
 						xProp.InnerText = Layouts[i].DataRxPanelVisible.ToString();
 						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("EngDataRxPanelVisible");
-						xProp.InnerText = Layouts[i].EngDataRxPanelVisible.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("RawDataRxPanelVisible");
-						xProp.InnerText = Layouts[i].RawDataRxPanelVisible.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("eRawDataRxColumns");
-						xProp.InnerText = Layouts[i].eRawDataRxColumns.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
+																		
 						xProp = oXDoc.CreateElement("eEngDataRxColumns");
 						xProp.InnerText = Layouts[i].eEngDataRxColumns.ToString();
 						xCtrlLayout.AppendChild(xProp);
@@ -5323,19 +5097,7 @@ namespace CANStream
 						xProp = oXDoc.CreateElement("Cycle_GraphPanelVisible");
 						xProp.InnerText = Layouts[i].Cycle_GraphPanelVisible.ToString();
 						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("Cycle_RawDataPanelVisible");
-						xProp.InnerText = Layouts[i].Cycle_RawDataPanelVisible.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("Cycle_EngDataPanelVisible");
-						xProp.InnerText = Layouts[i].Cycle_EngDataPanelVisible.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("eCycleRawDataColumns");
-						xProp.InnerText = Layouts[i].eCycleRawDataColumns.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
+																		
 						xProp = oXDoc.CreateElement("eCycleEngDataColumns");
 						xProp.InnerText = Layouts[i].eCycleEngDataColumns.ToString();
 						xCtrlLayout.AppendChild(xProp);
@@ -5351,21 +5113,10 @@ namespace CANStream
 						xProp = oXDoc.CreateElement("Pos_Split_Rx_DataGraph");
 						xProp.InnerText = Layouts[i].Pos_Split_Rx_DataGraph.ToString();
 						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("Pos_Split_RxData_RawEng");
-						xProp.InnerText = Layouts[i].Pos_Split_RxData_RawEng.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						
-						//
+												
 						xProp = oXDoc.CreateElement("Pos_Split_CycleDataGraph");
 						xProp.InnerText = Layouts[i].Pos_Split_CycleDataGraph.ToString();
 						xCtrlLayout.AppendChild(xProp);
-						
-						xProp = oXDoc.CreateElement("Pos_Split_CycleData_RawEng");
-						xProp.InnerText = Layouts[i].Pos_Split_CycleData_RawEng.ToString();
-						xCtrlLayout.AppendChild(xProp);
-						//
-						
 				}
 				
 				oXDoc.Save(fPath);
@@ -5413,16 +5164,7 @@ namespace CANStream
 							
 							xProp = xCtrlLayout.SelectSingleNode("DataRxPanelVisible");
 							oLayout.DataRxPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("EngDataRxPanelVisible");
-							oLayout.EngDataRxPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("RawDataRxPanelVisible");
-							oLayout.RawDataRxPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("eRawDataRxColumns");
-							oLayout.eRawDataRxColumns = (SpyRaw_Grid_Columns)Enum.Parse(typeof(SpyRaw_Grid_Columns), xProp.InnerText);
-							
+																												
 							xProp = xCtrlLayout.SelectSingleNode("eEngDataRxColumns");
 							oLayout.eEngDataRxColumns = (SpyEngineering_Grid_Columns)Enum.Parse(typeof(SpyEngineering_Grid_Columns), xProp.InnerText);
 							
@@ -5431,16 +5173,7 @@ namespace CANStream
 							
 							xProp = xCtrlLayout.SelectSingleNode("Cycle_GraphPanelVisible");
 							oLayout.Cycle_GraphPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("Cycle_RawDataPanelVisible");
-							oLayout.Cycle_RawDataPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("Cycle_EngDataPanelVisible");
-							oLayout.Cycle_EngDataPanelVisible = bool.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("eCycleRawDataColumns");
-							oLayout.eCycleRawDataColumns = (SpyRaw_Grid_Columns)Enum.Parse(typeof(SpyRaw_Grid_Columns), xProp.InnerText);
-							
+																												
 							xProp = xCtrlLayout.SelectSingleNode("eCycleEngDataColumns");
 							oLayout.eCycleEngDataColumns = (SpyEngineering_Grid_Columns)Enum.Parse(typeof(SpyEngineering_Grid_Columns), xProp.InnerText);
 							
@@ -5452,16 +5185,10 @@ namespace CANStream
 							
 							xProp = xCtrlLayout.SelectSingleNode("Pos_Split_Rx_DataGraph");
 							oLayout.Pos_Split_Rx_DataGraph = int.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("Pos_Split_RxData_RawEng");
-							oLayout.Pos_Split_RxData_RawEng = int.Parse(xProp.InnerText);
-							
+														
 							xProp = xCtrlLayout.SelectSingleNode("Pos_Split_CycleDataGraph");
 							oLayout.Pos_Split_CycleDataGraph = int.Parse(xProp.InnerText);
-							
-							xProp = xCtrlLayout.SelectSingleNode("Pos_Split_CycleData_RawEng");
-							oLayout.Pos_Split_CycleData_RawEng = int.Parse(xProp.InnerText);
-														
+																					
 						Layouts.Insert(CtrlId, oLayout);
 					}
 				}

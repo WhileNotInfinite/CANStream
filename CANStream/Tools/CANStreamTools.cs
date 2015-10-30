@@ -158,12 +158,15 @@ namespace CANStream
 				}
 			}
 			
-            if (FolderTrcFilesInfo.Count > 0)
-            {
-                return (FolderTrcFilesInfo.ToArray());
-            }
+            //TODO: Old code remove
+            //if (FolderTrcFilesInfo.Count > 0)
+            //{
+            //    return (FolderTrcFilesInfo.ToArray());
+            //}
 
-            return (null);
+            //return (null);
+
+            return (FolderTrcFilesInfo.ToArray());
 		}
 		
 		public static int GetParamByteLength(int ParamLength)

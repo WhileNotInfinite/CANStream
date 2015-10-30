@@ -777,6 +777,14 @@ namespace CANStream
 		/// Flag to force channel computation even if its variables values did not change since last computation
 		/// </summary>
 		public bool bForceComputation;
+
+        /// <summary>
+        /// Flag to force next channel computation even if its variables values did not change since last computation
+        /// </summary>
+        /// <remarks>
+        /// The flag is self reseted after channel computation
+        /// </remarks>
+        public bool bForceNextComputation;
 		
 		/// <summary>
 		/// Flag indicating whether the channel value has been computed
@@ -817,6 +825,7 @@ namespace CANStream
 			HasDependent = false;
 			bNewValue = false;
 			bForceComputation = false;
+            bForceNextComputation = false;
 		}
 		
 		#region Public methods
@@ -887,19 +896,21 @@ namespace CANStream
 			try
 			{
 				bComputed = false;
-				
-				if (UpDateFleeContextVariable() | bForceComputation)
+
+                if (UpDateFleeContextVariable() | bForceComputation | bForceNextComputation)
 				{
-					Value = Math.Round(Flee_Expression.Evaluate(),Decimals);
+                    Value = Math.Round(Flee_Expression.Evaluate(), Decimals);
 					InError = false;
 					bNewValue=true;
 					bComputed = true;
+                    bForceNextComputation = false;
 				}
 			}
 			catch (ExpressionCompileException FleeExcep)
 			{
 				InError = true;
 				bNewValue=true;
+                bForceNextComputation = false;
 				ErrorMsg = FleeExcep.Message;
 			}
 		}

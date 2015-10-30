@@ -414,6 +414,7 @@
             // 
             // expandAllToolStripMenuItem
             // 
+            this.expandAllToolStripMenuItem.Image = global::CANStream.Icones.Expand_16;
             this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
             this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.expandAllToolStripMenuItem.Text = "Expand all";
@@ -421,6 +422,7 @@
             // 
             // collapseAllToolStripMenuItem
             // 
+            this.collapseAllToolStripMenuItem.Image = global::CANStream.Icones.Collapse_16;
             this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
             this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.collapseAllToolStripMenuItem.Text = "Collapse all";

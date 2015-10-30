@@ -421,9 +421,14 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
-    <None Include="Resources\Grid_Expand.png" />
-    <None Include="Resources\Grid_Collapse.png" />
-    <None Include="Resources\Grid_NoAction.png" />
+    <None Include="Resources\Grid_NoAction2.png" />
+    <None Include="Resources\TreeView_Minus.gif" />
+    <None Include="Resources\TreeView_Plus.gif" />
+    <None Include="Resources\IC133569.gif" />
+    <None Include="Resources\astreeview-minus.gif" />
+    <None Include="Resources\filtre-entonnoir-icone-6583-16.png" />
+    <None Include="Resources\restauration-vue-icone-8456-16.png" />
+    <None Include="Resources\fullscreen-gtk-icone-7340-16.png" />
     <None Include="Resources\remove-a-blue-mark-icone-9732-16.png" />
     <None Include="Resources\add-a-tag-blue-icone-6061-16.png" />
     <None Include="Resources\edit-the-blue-label-icone-8149-16.png" />

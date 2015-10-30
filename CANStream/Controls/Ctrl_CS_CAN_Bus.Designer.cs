@@ -56,13 +56,9 @@ namespace CANStream
             this.TSMI_TxMessages_Raw = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_RxMessages = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_RxMessages_Data = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_RxMsg_Data_Eng = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_RxMsg_Data_Raw = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_RxMessages_Graph = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_CyclePlayer = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_CyclePlayer_Data = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_CyclePlayer_Data_Eng = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_CyclePlayer_Data_Raw = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_CyclePlayer_Graph = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.TSMI_ResetLayout = new System.Windows.Forms.ToolStripMenuItem();
@@ -448,35 +444,12 @@ namespace CANStream
             // 
             this.TSMI_RxMessages_Data.Checked = true;
             this.TSMI_RxMessages_Data.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_RxMessages_Data.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_RxMsg_Data_Eng,
-            this.TSMI_RxMsg_Data_Raw});
             this.TSMI_RxMessages_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_RxMessages_Data.Name = "TSMI_RxMessages_Data";
             this.TSMI_RxMessages_Data.Size = new System.Drawing.Size(106, 22);
             this.TSMI_RxMessages_Data.Text = "Data";
             this.TSMI_RxMessages_Data.ToolTipText = "Show/Hide CAN Spy control data";
             this.TSMI_RxMessages_Data.Click += new System.EventHandler(this.TSMI_RxMessages_DataClick);
-            // 
-            // TSMI_RxMsg_Data_Eng
-            // 
-            this.TSMI_RxMsg_Data_Eng.Checked = true;
-            this.TSMI_RxMsg_Data_Eng.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_RxMsg_Data_Eng.Image = global::CANStream.Icones.Engineering_Data;
-            this.TSMI_RxMsg_Data_Eng.Name = "TSMI_RxMsg_Data_Eng";
-            this.TSMI_RxMsg_Data_Eng.Size = new System.Drawing.Size(191, 22);
-            this.TSMI_RxMsg_Data_Eng.Text = "Engineering messages";
-            this.TSMI_RxMsg_Data_Eng.Click += new System.EventHandler(this.TSMI_RxMsg_Data_EngClick);
-            // 
-            // TSMI_RxMsg_Data_Raw
-            // 
-            this.TSMI_RxMsg_Data_Raw.Checked = true;
-            this.TSMI_RxMsg_Data_Raw.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_RxMsg_Data_Raw.Image = global::CANStream.Icones.Raw_Data;
-            this.TSMI_RxMsg_Data_Raw.Name = "TSMI_RxMsg_Data_Raw";
-            this.TSMI_RxMsg_Data_Raw.Size = new System.Drawing.Size(191, 22);
-            this.TSMI_RxMsg_Data_Raw.Text = "Raw messages";
-            this.TSMI_RxMsg_Data_Raw.Click += new System.EventHandler(this.TSMI_RxMsg_Data_RawClick);
             // 
             // TSMI_RxMessages_Graph
             // 
@@ -504,34 +477,11 @@ namespace CANStream
             // 
             this.TSMI_CyclePlayer_Data.Checked = true;
             this.TSMI_CyclePlayer_Data.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_CyclePlayer_Data.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_CyclePlayer_Data_Eng,
-            this.TSMI_CyclePlayer_Data_Raw});
             this.TSMI_CyclePlayer_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_CyclePlayer_Data.Name = "TSMI_CyclePlayer_Data";
             this.TSMI_CyclePlayer_Data.Size = new System.Drawing.Size(106, 22);
             this.TSMI_CyclePlayer_Data.Text = "Data";
             this.TSMI_CyclePlayer_Data.Click += new System.EventHandler(this.TSMI_CyclePlayer_DataClick);
-            // 
-            // TSMI_CyclePlayer_Data_Eng
-            // 
-            this.TSMI_CyclePlayer_Data_Eng.Checked = true;
-            this.TSMI_CyclePlayer_Data_Eng.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_CyclePlayer_Data_Eng.Image = global::CANStream.Icones.Engineering_Data;
-            this.TSMI_CyclePlayer_Data_Eng.Name = "TSMI_CyclePlayer_Data_Eng";
-            this.TSMI_CyclePlayer_Data_Eng.Size = new System.Drawing.Size(191, 22);
-            this.TSMI_CyclePlayer_Data_Eng.Text = "Engineering messages";
-            this.TSMI_CyclePlayer_Data_Eng.Click += new System.EventHandler(this.TSMI_CyclePlayer_Data_EngClick);
-            // 
-            // TSMI_CyclePlayer_Data_Raw
-            // 
-            this.TSMI_CyclePlayer_Data_Raw.Checked = true;
-            this.TSMI_CyclePlayer_Data_Raw.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TSMI_CyclePlayer_Data_Raw.Image = global::CANStream.Icones.Raw_Data;
-            this.TSMI_CyclePlayer_Data_Raw.Name = "TSMI_CyclePlayer_Data_Raw";
-            this.TSMI_CyclePlayer_Data_Raw.Size = new System.Drawing.Size(191, 22);
-            this.TSMI_CyclePlayer_Data_Raw.Text = "Raw messages";
-            this.TSMI_CyclePlayer_Data_Raw.Click += new System.EventHandler(this.TSMI_CyclePlayer_Data_RawClick);
             // 
             // TSMI_CyclePlayer_Graph
             // 
@@ -1168,18 +1118,13 @@ namespace CANStream
             this.Manual_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Manual_SpyDataViewer.EngDataGridVisible = true;
             this.Manual_SpyDataViewer.EngineeringGridColumnsVisible = CANStream.SpyEngineering_Grid_Columns.Default;
-            this.Manual_SpyDataViewer.GridOrientation = System.Windows.Forms.Orientation.Vertical;
-            this.Manual_SpyDataViewer.GridSplitterDistance = 0;
             this.Manual_SpyDataViewer.Location = new System.Drawing.Point(2, 0);
             this.Manual_SpyDataViewer.Name = "Manual_SpyDataViewer";
-            this.Manual_SpyDataViewer.RawDataGridVisible = true;
-            this.Manual_SpyDataViewer.RawGridColumnsVisible = CANStream.SpyRaw_Grid_Columns.Default;
             this.Manual_SpyDataViewer.Size = new System.Drawing.Size(668, 276);
             this.Manual_SpyDataViewer.TabIndex = 0;
-            this.Manual_SpyDataViewer.RawGridColumnsVisibleChanged += new System.EventHandler<CANStream.RawGridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerRawGridColumnsVisibleChanged);
             this.Manual_SpyDataViewer.EngGridColumnsVisibleChanged += new System.EventHandler<CANStream.EngGridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Manual_SpyDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
             // 
             // Tab_SpyHistory
             // 
@@ -1508,7 +1453,7 @@ namespace CANStream
             // TSLbl_IdFilterTo
             // 
             this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
-            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(20, 22);
+            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(21, 22);
             this.TSLbl_IdFilterTo.Text = "To";
             // 
             // TSTxt_IdFilterTo
@@ -1741,18 +1686,12 @@ namespace CANStream
             this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cycle_SpyDataViewer.EngDataGridVisible = true;
             this.Cycle_SpyDataViewer.EngineeringGridColumnsVisible = CANStream.SpyEngineering_Grid_Columns.Default;
-            this.Cycle_SpyDataViewer.GridOrientation = System.Windows.Forms.Orientation.Horizontal;
-            this.Cycle_SpyDataViewer.GridSplitterDistance = 432;
             this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
             this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
             this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
-            this.Cycle_SpyDataViewer.RawDataGridVisible = true;
-            this.Cycle_SpyDataViewer.RawGridColumnsVisible = CANStream.SpyRaw_Grid_Columns.Default;
             this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
             this.Cycle_SpyDataViewer.TabIndex = 0;
-            this.Cycle_SpyDataViewer.RawGridColumnsVisibleChanged += new System.EventHandler<CANStream.RawGridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerRawGridColumnsVisibleChanged);
             this.Cycle_SpyDataViewer.EngGridColumnsVisibleChanged += new System.EventHandler<CANStream.EngGridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
             // 
             // Graph_Cycle
@@ -2142,9 +2081,7 @@ namespace CANStream
 		private System.Windows.Forms.ToolStripMenuItem Context_SpyGraph_Filter_TSMI;
 		private System.Windows.Forms.ToolStripComboBox ManualGrid_Filter_Combo_TSMI;
 		private System.Windows.Forms.ToolStripMenuItem FiltertoolStripMenuItem;
-		private System.Windows.Forms.DataGridViewButtonColumn GridCol_Raw_Tx_BtnTx;
-		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Data_Raw;
-		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Data_Eng;
+        private System.Windows.Forms.DataGridViewButtonColumn GridCol_Raw_Tx_BtnTx;
 		private System.Windows.Forms.ImageList Img_TabControl;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_SpyManual;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Graph;
@@ -2157,9 +2094,7 @@ namespace CANStream
 		private System.Windows.Forms.ToolStripMenuItem TSMI_ResetLayout;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.CheckBox Chk_CycleVirtualParamTxEnabled;
-		private System.Windows.Forms.CheckBox Chk_VirtualParamTxEnabled;
-		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMsg_Data_Raw;
-		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMsg_Data_Eng;
+        private System.Windows.Forms.CheckBox Chk_VirtualParamTxEnabled;
 		private System.Windows.Forms.SplitContainer Split_Rx_DataGraph;
 		private System.Windows.Forms.SplitContainer Split_Tx_EngRaw;
 		private System.Windows.Forms.SplitContainer Split_RxTx;
