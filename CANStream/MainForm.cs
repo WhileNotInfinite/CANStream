@@ -1886,12 +1886,12 @@ namespace CANStream
         		}
         		else
         		{
-        			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout());
+        			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout(CtrlCanBus.Size));
         		}
         	}
         	else
     		{
-    			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout());
+    			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout(CtrlCanBus.Size));
     		}
         	
     		CanControllerCount++;

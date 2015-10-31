@@ -4845,7 +4845,7 @@ namespace CANStream
 		
 		public Ctrl_CS_CAN_Bus_Layout GetControllerLayout()
 		{
-			Ctrl_CS_CAN_Bus_Layout oLayout = new Ctrl_CS_CAN_Bus_Layout();
+			Ctrl_CS_CAN_Bus_Layout oLayout = new Ctrl_CS_CAN_Bus_Layout(Size.Empty);
 			
 			oLayout.TxPanelVisible = !Split_RxTx.Panel1Collapsed;
 			oLayout.EngDataTxPanelVisible = !Split_Tx_EngRaw.Panel1Collapsed;
@@ -4871,7 +4871,7 @@ namespace CANStream
 		
 		public void ResetControllerLayout()
 		{
-			SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout());
+			SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout(this.Size));
 		}
 		
 		#endregion
@@ -4977,9 +4977,11 @@ namespace CANStream
 	
 	public class Ctrl_CS_CAN_Bus_Layout
 	{
-		#region Public members
-		
-		public bool TxPanelVisible;
+        
+
+        #region Public members
+
+        public bool TxPanelVisible;
 		public bool EngDataTxPanelVisible;
 		public bool RawDataTxPanelVisible;
 		public Manual_Grid_Columns eEngDataTxColumns;
@@ -4997,30 +4999,45 @@ namespace CANStream
 		public int Pos_Split_Tx_EngRaw;
 		public int Pos_Split_Rx_DataGraph;
 		public int Pos_Split_CycleDataGraph;
-		
-		#endregion
-		
-		public Ctrl_CS_CAN_Bus_Layout()
-		{
-			TxPanelVisible = true;
-			EngDataTxPanelVisible = true;
-			RawDataTxPanelVisible = true;
-			eEngDataTxColumns = Manual_Grid_Columns.Default;
-			
-			RxPanelVisible = true;
-			GraphRxPanelVisible = true;
-			DataRxPanelVisible = true;
-			eEngDataRxColumns = SpyEngineering_Grid_Columns.Default;
-			
-			Cycle_DataPanelVisible = true;
-			Cycle_GraphPanelVisible = true;
-			eCycleEngDataColumns = SpyEngineering_Grid_Columns.Default;
-			
-			Pos_Split_RxTx = 290;
-			Pos_Split_Tx_EngRaw = 411;
-			Pos_Split_Rx_DataGraph = 277;
-			Pos_Split_CycleDataGraph = 302;			
-		}
+
+        #endregion
+
+        public Ctrl_CS_CAN_Bus_Layout(Size CtrlSize)
+        {
+            const int DEF_SPLIT_RX_TX = 44;
+            const int DEF_SPLIT_TX_ENG_RAW = 60;
+            const int DEF_SPLIT_RX_DATA_GRAPH = 40;
+            const int DEF_SPLIT_CYCLE_DATA_GRAPH = 30;
+
+            TxPanelVisible = true;
+            EngDataTxPanelVisible = true;
+            RawDataTxPanelVisible = true;
+            eEngDataTxColumns = Manual_Grid_Columns.Default;
+
+            RxPanelVisible = true;
+            GraphRxPanelVisible = true;
+            DataRxPanelVisible = true;
+            eEngDataRxColumns = SpyEngineering_Grid_Columns.Default;
+
+            Cycle_DataPanelVisible = true;
+            Cycle_GraphPanelVisible = true;
+            eCycleEngDataColumns = SpyEngineering_Grid_Columns.Default;
+
+            if (!(CtrlSize == Size.Empty))
+            {
+                Pos_Split_RxTx = CtrlSize.Width * DEF_SPLIT_RX_TX / 100;
+                Pos_Split_Tx_EngRaw = CtrlSize.Height * DEF_SPLIT_TX_ENG_RAW / 100; ;
+                Pos_Split_Rx_DataGraph = CtrlSize.Height * DEF_SPLIT_RX_DATA_GRAPH / 100; ;
+                Pos_Split_CycleDataGraph = CtrlSize.Width * DEF_SPLIT_CYCLE_DATA_GRAPH / 100; ;
+            }
+            else
+            {
+                Pos_Split_RxTx = 290;
+                Pos_Split_Tx_EngRaw = 411;
+                Pos_Split_Rx_DataGraph = 277;
+                Pos_Split_CycleDataGraph = 302;
+            }
+        }
 	}
 	
 	public class CAN_Controller_Layouts
@@ -5140,7 +5157,7 @@ namespace CANStream
 				{
 					if (xCtrlLayout.Name.Equals("Layout"))
 					{
-						Ctrl_CS_CAN_Bus_Layout oLayout = new Ctrl_CS_CAN_Bus_Layout();
+						Ctrl_CS_CAN_Bus_Layout oLayout = new Ctrl_CS_CAN_Bus_Layout(Size.Empty);
 						
 						int CtrlId = int.Parse(xCtrlLayout.Attributes["ControllerId"].Value);
 						
