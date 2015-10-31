@@ -1001,11 +1001,16 @@ namespace CANStream
 		/// Library read only flag
 		/// </summary>
 		public bool ReadOnly;
-		
-		/// <summary>
-		/// Virtual channels collection of the library
-		/// </summary>
-		public List<CS_VirtualChannel> Channels;
+
+        /// <summary>
+        /// Library computation enabled flag
+        /// </summary>
+        public bool Enabled;
+
+        /// <summary>
+        /// Virtual channels collection of the library
+        /// </summary>
+        public List<CS_VirtualChannel> Channels;
 		
 		/// <summary>
 		/// Flag indicating whether the library has been modified since it has been loaded into the virtual channel editor
@@ -1034,6 +1039,7 @@ namespace CANStream
 			Name = "";
 			Comment = "";
 			ReadOnly =  false;
+            Enabled = true;
 			Channels = new List<CS_VirtualChannel>();
 			
 			FilePath = "";
@@ -1100,8 +1106,12 @@ namespace CANStream
 			XmlAttribute xAtrReadOnly = oXmlLib.CreateAttribute("ReadOnly");
 			xAtrReadOnly.Value = ReadOnly.ToString();
 			xLibrary.Attributes.Append(xAtrReadOnly);
-			
-			XmlElement xLibComment = oXmlLib.CreateElement("LibraryComment");
+
+            XmlAttribute xAtrEnabled = oXmlLib.CreateAttribute("Enabled");
+            xAtrEnabled.Value = Enabled.ToString();
+            xLibrary.Attributes.Append(xAtrEnabled);
+
+            XmlElement xLibComment = oXmlLib.CreateElement("LibraryComment");
 			xLibComment.InnerText =  Comment;
 			xLibrary.AppendChild(xLibComment);
 			
@@ -1179,8 +1189,9 @@ namespace CANStream
 				{
 					Name = xLibrary.Attributes["Name"].Value;
 					ReadOnly = Convert.ToBoolean(xLibrary.Attributes["ReadOnly"].Value);
-					
-					XmlNode xComment = xLibrary.SelectSingleNode("LibraryComment");
+                    Enabled = Convert.ToBoolean(xLibrary.Attributes["Enabled"].Value);
+
+                    XmlNode xComment = xLibrary.SelectSingleNode("LibraryComment");
 					if (!(xComment == null))
 					{
 						Comment = xComment.InnerText;
@@ -1663,13 +1674,16 @@ namespace CANStream
 			//1st pass: Compile all channels of all libraries
 			foreach (CS_VirtualChannelsLibrary oLib in Libraries)
 			{
-				foreach (CS_VirtualChannel oChan in oLib.Channels)
-				{
-					if (oChan.Enabled)
-					{
-						oChan.InterpreteExpression(); //Virtual channel expression compilation
-					}
-				}
+                if (oLib.Enabled)
+                {
+                    foreach (CS_VirtualChannel oChan in oLib.Channels)
+                    {
+                        if (oChan.Enabled)
+                        {
+                            oChan.InterpreteExpression(); //Virtual channel expression compilation
+                        }
+                    }
+                }
 			}
 			
 			//2nd pass: Create the computation order list

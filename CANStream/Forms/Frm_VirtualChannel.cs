@@ -305,6 +305,7 @@ namespace CANStream
 						oActiveLibrary.Name = Txt_LibName.Text;
 						oActiveLibrary.Comment = rTxt_LibComment.Text;
 						oActiveLibrary.ReadOnly = Chk_LibReadOnly.Checked;
+                        oActiveLibrary.Enabled = Chk_LibEnabled.Checked;
 						
 						oVCLibCollection.AddLibrary(oActiveLibrary);
 						
@@ -343,6 +344,7 @@ namespace CANStream
 						oActiveLibrary.Name = Txt_LibName.Text;
 						oActiveLibrary.Comment = rTxt_LibComment.Text;
 						oActiveLibrary.ReadOnly = Chk_LibReadOnly.Checked;
+                        oActiveLibrary.Enabled = Chk_LibEnabled.Checked;
 						
 						oActiveLibrary.bModified =  true;
 
@@ -558,6 +560,7 @@ namespace CANStream
 			Txt_LibName.Text = "";
 			rTxt_LibComment.Text = "";
 			Chk_LibReadOnly.Checked =  false;
+            Chk_LibEnabled.Checked = true;
 		}
 		
 		private void ShowActiveLibrary()
@@ -567,7 +570,8 @@ namespace CANStream
 				Txt_LibName.Text = oActiveLibrary.Name;
 				rTxt_LibComment.Text = oActiveLibrary.Comment;
 				Chk_LibReadOnly.Checked = oActiveLibrary.ReadOnly;
-				
+                Chk_LibEnabled.Checked = oActiveLibrary.Enabled;
+
 				TabCtrl_PropertiesEdit.SelectedIndex = 0;
 				
 				Cmd_LibCreate.Text = "Modify";
