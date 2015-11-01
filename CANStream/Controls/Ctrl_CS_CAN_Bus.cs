@@ -1272,7 +1272,7 @@ namespace CANStream
             {
                 CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
 
-                if (oParam.ValueFormat.FormatType.Equals(CanParameterValueFormat.Enum))
+                if (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
                 {
                     ListBox oList = new ListBox();
                     Rectangle CellRect = Grid_CANData.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
@@ -1306,17 +1306,17 @@ namespace CANStream
                 {
                     CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
 
-                    double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
+                    double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
 
                     if (!(Double.IsNaN(EngValue)))
                     {
                         oParam.DecodedValue = EngValue;
-                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(EngValue);
+                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(EngValue);
 
                         Color CellBackColor = SystemColors.Window;
                         Color CellForeColor = SystemColors.WindowText;
 
-                        Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
+                        Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
 
                         if (sAlarm.HasValue)
                         {
@@ -1334,7 +1334,7 @@ namespace CANStream
                         MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
                                                     Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
                     }
                 }
             }
@@ -2907,7 +2907,7 @@ namespace CANStream
 	        				
 	        				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			            //Linearization gain
 	        				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();                           //Linearization zero
-                            Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetParameterFormatedValue(0);  //Initial value
+                            Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetSignalFormatedValue(0);  //Initial value
 	        				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							            //Parameter unit
 	        				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;                                   //Parameter comment
 
@@ -3021,7 +3021,7 @@ namespace CANStream
 	        			
 	        			if(iParamRow!=-1)
 	    				{
-                            double EngValue = oParam.ValueFormat.SetParameterFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
+                            double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
                             
                             if (!(double.IsNaN(EngValue)))
                             {
@@ -3615,7 +3615,7 @@ namespace CANStream
                                             {
                                                 Lst_SpyDataHistory.Items.Insert(iParam + 1,
                                                                                 "  " + DecodedMessages[MsgIndex].Parameters[iParam].Name
-                                                                                + " : " + DecodedMessages[MsgIndex].Parameters[iParam].ValueFormat.GetParameterFormatedValue(DecodedMessages[MsgIndex].Parameters[iParam].DecodedValue)
+                                                                                + " : " + DecodedMessages[MsgIndex].Parameters[iParam].ValueFormat.GetSignalFormatedValue(DecodedMessages[MsgIndex].Parameters[iParam].DecodedValue)
                                                                                 + " " + DecodedMessages[MsgIndex].Parameters[iParam].Unit);
                                             }
                                         }

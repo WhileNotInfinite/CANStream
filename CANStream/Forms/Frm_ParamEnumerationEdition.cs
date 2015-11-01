@@ -13,15 +13,15 @@ namespace CANStream
     {
         #region Private members
 
-        private CANParameterFormat oRefFormat;
-        private CANParameterFormat oCurrentFormat;
+        private SignalFormatProperties oRefFormat;
+        private SignalFormatProperties oCurrentFormat;
 
         private int NextEnumValue;
         private bool FrmClosing;
         
         #endregion
 
-        public Frm_ParamEnumerationEdition(CANParameterFormat oFormat)
+        public Frm_ParamEnumerationEdition(SignalFormatProperties oFormat)
         {
             InitializeComponent();
 
@@ -130,7 +130,7 @@ namespace CANStream
 
         private bool Set_EnumValues()
         {
-            CANParameterFormat oBackupFormat = oCurrentFormat.Get_Clone();
+            SignalFormatProperties oBackupFormat = oCurrentFormat.Get_Clone();
             oCurrentFormat.Enums.Clear();
 
             foreach (DataGridViewRow oRow in Grid_Enum.Rows)
@@ -168,7 +168,7 @@ namespace CANStream
                 }
 
 
-                string EnumTxt; // = oRow.Cells[1].ToString();
+                string EnumTxt;
                 if (!(oRow.Cells[1].Value == null))
                 {
                     EnumTxt = oRow.Cells[1].Value.ToString();

@@ -127,7 +127,7 @@ namespace CANStream
         private void Frm_CANConfiguration_Load(object sender, EventArgs e)
         {
             Cmb_ValueFormat.Items.Clear();
-            Cmb_ValueFormat.Items.AddRange(Enum.GetNames(typeof(CanParameterValueFormat)));
+            Cmb_ValueFormat.Items.AddRange(Enum.GetNames(typeof(SignalValueFormat)));
 
             ShowConfiguration();
         }
@@ -520,13 +520,13 @@ namespace CANStream
         {
             if (!(bParameterEdition))
             {
-                CanParameterValueFormat eFormat;
+                SignalValueFormat eFormat;
 
                 if (Enum.TryParse(Cmb_ValueFormat.Text, out eFormat))
                 {
                     switch (eFormat)
                     {
-                        case CanParameterValueFormat.Decimal:
+                        case SignalValueFormat.Decimal:
 
                             Lbl_Decimals.Enabled = true;
                             Txt_Decimals.Enabled = true;
@@ -535,7 +535,7 @@ namespace CANStream
 
                             break;
 
-                        case CanParameterValueFormat.Enum:
+                        case SignalValueFormat.Enum:
 
                             Lbl_Decimals.Enabled = false;
                             Txt_Decimals.Text = "";
@@ -1258,13 +1258,13 @@ namespace CANStream
 
                                     Cmb_ValueFormat.SelectedIndex = (int)oActiveParameter.ValueFormat.FormatType;
 
-                                    if (oActiveParameter.ValueFormat.FormatType.Equals(CanParameterValueFormat.Decimal))
+                                    if (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Decimal))
                                     {
                                         Txt_Decimals.Enabled = true;
                                         Txt_Decimals.Text = oActiveParameter.ValueFormat.Decimals.ToString();
                                     }
 
-                                    if (oActiveParameter.ValueFormat.FormatType.Equals(CanParameterValueFormat.Enum))
+                                    if (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
                                     {
                                         Cmd_EnumDefinition.Enabled = true;
                                     }
@@ -2437,7 +2437,7 @@ namespace CANStream
                 {
                     switch (oParameter.ValueFormat.FormatType)
                     {
-                        case CanParameterValueFormat.Decimal:
+                        case SignalValueFormat.Decimal:
 
                             if (!(Txt_Decimals.Text.Equals("")))
                             {
@@ -2455,7 +2455,7 @@ namespace CANStream
 
                             break;
 
-                        case CanParameterValueFormat.Enum:
+                        case SignalValueFormat.Enum:
 
                             if (!(EnumList == null))
                             {

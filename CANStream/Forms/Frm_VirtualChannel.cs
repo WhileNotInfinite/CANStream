@@ -67,7 +67,7 @@ namespace CANStream
 		
 		ExpressionElementItem[] ObjectNames;
         ExpressionFunctionInfo[] Fonctions;
-		string[] Operators = {"+","-","x","/","(",")"};
+        string[] Operators = { "+", "-", "x", "/", "(", ")", ";", };
 		
 		private Form FrmParent;
 		private bool bFrmMain_ReloadLibraries;
@@ -108,7 +108,10 @@ namespace CANStream
 		
 		private void Frm_VirtualChannelLoad(object sender, EventArgs e)
 		{
-			if (File.Exists(CANStreamTools.CsDataPath+ "\\Libraries.xml"))
+            Cmb_ValueFormat.Items.Clear();
+            Cmb_ValueFormat.Items.AddRange(Enum.GetNames(typeof(SignalValueFormat)));
+
+            if (File.Exists(CANStreamTools.CsDataPath+ "\\Libraries.xml"))
 			{
 				if (oVCLibCollection.LoadLibrariesList(CANStreamTools.CsDataPath + "\\Libraries.xml"))
 				{
@@ -428,12 +431,162 @@ namespace CANStream
 		{
 			TestChannel();
 		}
-		
-		#endregion
-		
-		#region TV_Libraries
-		
-		private void TV_LibrariesAfterSelect(object sender, TreeViewEventArgs e)
+
+        #region Value format
+
+        private void Cmb_ValueFormat_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SignalValueFormat eFormat;
+
+            if (Enum.TryParse(Cmb_ValueFormat.Text, out eFormat))
+            {
+                switch (eFormat)
+                {
+                    case SignalValueFormat.Decimal:
+
+                        Lbl_Decimals.Enabled = true;
+                        Txt_Decimals.Enabled = true;
+                        Txt_Decimals.Text = "3";
+                        Cmd_EnumDefinition.Enabled = false;
+
+                        break;
+
+                    case SignalValueFormat.Enum:
+
+                        Lbl_Decimals.Enabled = false;
+                        Txt_Decimals.Text = "";
+                        Txt_Decimals.Enabled = false;
+                        Cmd_EnumDefinition.Enabled = true;
+
+                        break;
+
+                    default:
+
+                        Lbl_Decimals.Enabled = false;
+                        Txt_Decimals.Text = "";
+                        Txt_Decimals.Enabled = false;
+                        Cmd_EnumDefinition.Enabled = false;
+
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void Cmd_EnumDefinition_Click(object sender, EventArgs e)
+        {
+            Frm_ParamEnumerationEdition Frm = new Frm_ParamEnumerationEdition(oActiveChannel.ValueFormat);
+            Frm.Show();
+        }
+
+        #endregion
+
+        #region Warnings and alarms
+
+        private void Chk_AlarmsEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Chk_AlarmsEnabled.Checked)
+            {
+                Lbl_Alarms_Backcolor.Enabled = true;
+                Lbl_Alarms_Forecolor.Enabled = true;
+
+                Chk_WarningMin.Enabled = true;
+                Chk_WarningMax.Enabled = true;
+                Chk_AlarmMin.Enabled = true;
+                Chk_AlarmMax.Enabled = true;
+
+                SetWarningMinControls(Chk_WarningMin.Checked);
+                SetWarningMaxControls(Chk_WarningMax.Checked);
+                SetAlarmMinControls(Chk_AlarmMin.Checked);
+                SetAlarmMaxControls(Chk_AlarmMax.Checked);
+            }
+            else
+            {
+                Lbl_Alarms_Backcolor.Enabled = false;
+                Lbl_Alarms_Forecolor.Enabled = false;
+
+                Chk_WarningMin.Enabled = false;
+                Chk_WarningMax.Enabled = false;
+                Chk_AlarmMin.Enabled = false;
+                Chk_AlarmMax.Enabled = false;
+
+                SetWarningMinControls(false);
+                SetWarningMaxControls(false);
+                SetAlarmMinControls(false);
+                SetAlarmMaxControls(false);
+            }
+        }
+
+        private void Chk_AlarmMin_CheckedChanged(object sender, EventArgs e)
+        {
+            SetAlarmMinControls(Chk_AlarmMin.Checked);
+        }
+
+        private void Chk_WarningMin_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWarningMinControls(Chk_WarningMin.Checked);
+        }
+
+        private void Chk_WarningMax_CheckedChanged(object sender, EventArgs e)
+        {
+            SetWarningMaxControls(Chk_WarningMax.Checked);
+        }
+
+        private void Chk_AlarmMax_CheckedChanged(object sender, EventArgs e)
+        {
+            SetAlarmMaxControls(Chk_AlarmMax.Checked);
+        }
+
+        private void Pic_AlarmMin_Backcolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_AlarmMin_Backcolor);
+        }
+
+        private void Pic_AlarmMin_Forecolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_AlarmMin_Forecolor);
+        }
+
+        private void Pic_WarningMin_Backcolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_WarningMin_Backcolor);
+        }
+
+        private void Pic_WarningMin_Forecolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_WarningMin_Forecolor);
+        }
+
+        private void Pic_WarningMax_Backcolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_WarningMax_Backcolor);
+        }
+
+        private void Pic_WarningMax_Forecolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_WarningMax_Forecolor);
+        }
+
+        private void Pic_AlarmMax_Backcolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_AlarmMax_Backcolor);
+        }
+
+        private void Pic_AlarmMax_Forecolor_DoubleClick(object sender, EventArgs e)
+        {
+            GetAlarmColor(Pic_AlarmMax_Forecolor);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region TV_Libraries
+
+        private void TV_LibrariesAfterSelect(object sender, TreeViewEventArgs e)
 		{
 			UpDateActiveObjects(e.Node);
 			TV_Libraries.Focus();
@@ -638,7 +791,9 @@ namespace CANStream
 				{
 					ResetChannelForm();
 					Cmd_ChanCreate.Text =  "Create";
-					
+
+                    oActiveChannel = new CS_VirtualChannel();
+
 					TabCtrl_PropertiesEdit.SelectedIndex = 1;
 				}
 				else
@@ -657,16 +812,33 @@ namespace CANStream
 		{
 			Txt_ChanName.Text = "";
 			Txt_ChanUnit.Text = "";
-			Txt_ChanDecimal.Text = "2";
+            //TODO: Remove
+            //Txt_ChanDecimal.Text = "2";
 			Chk_ChanComputationEnabled.Checked = true;
 			Txt_ChanValDef.Text = "0";
 			rTxt_ChanComment.Text = "";
 			rTxt_ChanExpression.Text = "";
-		}
+            Cmb_ValueFormat.SelectedIndex = 0;
+            Txt_Decimals.Text = "";
+            Txt_Decimals.Enabled = false;
+            Cmd_EnumDefinition.Enabled = false;
+            Chk_AlarmsEnabled.Checked = false;
+            Chk_WarningMin.Checked = false;
+            Chk_WarningMax.Checked = false;
+            Chk_AlarmMin.Checked = false;
+            Chk_AlarmMax.Checked = false;
+        }
 		
 		private bool SetActiveChannel()
 		{
-			if (oActiveChannel == null)
+            EnumerationValue[] EnumList = null;
+
+            if (oActiveChannel.ValueFormat.Enums.Count > 0)
+            {
+                EnumList = oActiveChannel.ValueFormat.Enums.ToArray(); //Save enumeration if defined prior to destroy the oActiveParameter object
+            }
+
+            if (oActiveChannel == null)
 			{
 				oActiveChannel = new CS_VirtualChannel();
 			}
@@ -675,24 +847,25 @@ namespace CANStream
 			oActiveChannel.Unit = Txt_ChanUnit.Text;
 			oActiveChannel.Comment = rTxt_ChanComment.Text;
 			oActiveChannel.Enabled = Chk_ChanComputationEnabled.Checked;
-			
-			if (!(Txt_ChanDecimal.Text.Equals("")))
-			{
-				int dec = 0;
-				if (int.TryParse(Txt_ChanDecimal.Text,out dec))
-				{
-					oActiveChannel.Decimals = dec;
-				}
-				else
-				{
-					MessageBox.Show("Decimals of the virtual channel must be a number !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-					return(false);
-				}
-			}
-			else
-			{
-				oActiveChannel.Decimals = 0;
-			}
+
+            //TODO: Remove
+   //         if (!(Txt_ChanDecimal.Text.Equals("")))
+			//{
+			//	int dec = 0;
+			//	if (int.TryParse(Txt_ChanDecimal.Text,out dec))
+			//	{
+   //                 oActiveChannel.Decimals = dec;
+			//	}
+			//	else
+			//	{
+			//		MessageBox.Show("Decimals of the virtual channel must be a number !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+			//		return(false);
+			//	}
+			//}
+			//else
+			//{
+   //             oActiveChannel.Decimals = 0;
+			//}
 			
 			if (!(Txt_ChanValDef.Text.Equals("")))
 			{
@@ -721,8 +894,177 @@ namespace CANStream
 				MessageBox.Show("The virtual channel expression must be defined !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
 				return(false);
 			}
-			
-			return(true);
+
+            //Format
+            if (!(Cmb_ValueFormat.SelectedIndex == -1))
+            {
+                if (Enum.TryParse(Cmb_ValueFormat.Text, out oActiveChannel.ValueFormat.FormatType))
+                {
+                    switch (oActiveChannel.ValueFormat.FormatType)
+                    {
+                        case SignalValueFormat.Decimal:
+
+                            if (!(Txt_Decimals.Text.Equals("")))
+                            {
+                                if (!(int.TryParse(Txt_Decimals.Text, out oActiveChannel.ValueFormat.Decimals)))
+                                {
+                                    MessageBox.Show("Number of decimal digits must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    return(false);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please set the number of decimal digits !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return(false);
+                            }
+
+                            break;
+
+                        case SignalValueFormat.Enum:
+
+                            if (!(EnumList == null))
+                            {
+                                oActiveChannel.ValueFormat.Enums.Clear();
+                                oActiveChannel.ValueFormat.Enums.AddRange(EnumList);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Enumeration hasn't been defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return(false);
+                            }
+
+                            break;
+
+                        default:
+
+                            //Nothing
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Unknown parameter value format selected !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return(false);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No parameter value format defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return(false);
+            }
+
+            //Warnings and alarms
+            if (Chk_AlarmsEnabled.Checked)
+            {
+                oActiveChannel.Alarms.Enabled = true;
+
+                oActiveChannel.Alarms.WarningLimitMin.Enabled = Chk_WarningMin.Checked;
+                oActiveChannel.Alarms.WarningLimitMax.Enabled = Chk_WarningMax.Checked;
+                oActiveChannel.Alarms.AlarmLimitMin.Enabled = Chk_AlarmMin.Checked;
+                oActiveChannel.Alarms.AlarmLimitMax.Enabled = Chk_AlarmMax.Checked;
+
+                if (oActiveChannel.Alarms.WarningLimitMin.Enabled)
+                {
+                    if (!(Txt_WarningMin.Text.Equals("")))
+                    {
+                        if (!(double.TryParse(Txt_WarningMin.Text, out oActiveChannel.Alarms.WarningLimitMin.Value)))
+                        {
+                            MessageBox.Show("Warning limit min threshold must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return(false);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Warning limit min isn't defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+
+                    oActiveChannel.Alarms.WarningLimitMin.BackColor = Pic_WarningMin_Backcolor.BackColor;
+                    oActiveChannel.Alarms.WarningLimitMin.ForeColor = Pic_WarningMin_Forecolor.BackColor;
+                }
+
+                if (oActiveChannel.Alarms.WarningLimitMax.Enabled)
+                {
+                    if (!(Txt_WarningMax.Text.Equals("")))
+                    {
+                        if (!(double.TryParse(Txt_WarningMax.Text, out oActiveChannel.Alarms.WarningLimitMax.Value)))
+                        {
+                            MessageBox.Show("Warning limit max threshold must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return(false);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Warning limit max isn't defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+
+                    oActiveChannel.Alarms.WarningLimitMax.BackColor = Pic_WarningMax_Backcolor.BackColor;
+                    oActiveChannel.Alarms.WarningLimitMax.ForeColor = Pic_WarningMax_Forecolor.BackColor;
+                }
+
+                //Warning limits consistency check
+                if (oActiveChannel.Alarms.WarningLimitMin.Enabled && oActiveChannel.Alarms.WarningLimitMax.Enabled)
+                {
+                    if (oActiveChannel.Alarms.WarningLimitMin.Value >= oActiveChannel.Alarms.WarningLimitMax.Value)
+                    {
+                        MessageBox.Show("Warning limit max must be greater than warning limit min !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+                }
+
+                if (oActiveChannel.Alarms.AlarmLimitMin.Enabled)
+                {
+                    if (!(Txt_AlarmMin.Text.Equals("")))
+                    {
+                        if (!(double.TryParse(Txt_AlarmMin.Text, out oActiveChannel.Alarms.AlarmLimitMin.Value)))
+                        {
+                            MessageBox.Show("Alarm limit min threshold must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return(false);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Alarm limit min isn't defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+
+                    oActiveChannel.Alarms.AlarmLimitMin.BackColor = Pic_AlarmMin_Backcolor.BackColor;
+                    oActiveChannel.Alarms.AlarmLimitMin.ForeColor = Pic_AlarmMin_Forecolor.BackColor;
+                }
+
+                if (oActiveChannel.Alarms.AlarmLimitMax.Enabled)
+                {
+                    if (!(Txt_AlarmMax.Text.Equals("")))
+                    {
+                        if (!(double.TryParse(Txt_AlarmMax.Text, out oActiveChannel.Alarms.AlarmLimitMax.Value)))
+                        {
+                            MessageBox.Show("Alarm limit max threshold must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return(false);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Alarm limit max isn't defined !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+
+                    oActiveChannel.Alarms.AlarmLimitMax.BackColor = Pic_AlarmMax_Backcolor.BackColor;
+                    oActiveChannel.Alarms.AlarmLimitMax.ForeColor = Pic_AlarmMax_Forecolor.BackColor;
+                }
+
+                //Alarm limits consistency check
+                if (oActiveChannel.Alarms.AlarmLimitMin.Enabled && oActiveChannel.Alarms.AlarmLimitMax.Enabled)
+                {
+                    if (oActiveChannel.Alarms.AlarmLimitMin.Value >= oActiveChannel.Alarms.AlarmLimitMax.Value)
+                    {
+                        MessageBox.Show("Alarm limit max must be greater than warning limit min !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return(false);
+                    }
+                }
+            }
+
+            return (true);
 		}
 		
 		private bool MakeChannel()
@@ -733,7 +1075,8 @@ namespace CANStream
 				{
 					if (!oActiveLibrary.ChannelExists(Txt_ChanName.Text))
 					{
-						oActiveChannel = new CS_VirtualChannel();
+						//TODO:Remove
+                        //oActiveChannel = new CS_VirtualChannel();
 						
 						if (SetActiveChannel())
 						{
@@ -817,14 +1160,34 @@ namespace CANStream
 					//oActiveChannel.ParentLibraryName = oActiveLibrary.Name;
 					
 					Txt_ChanName.Text = oActiveChannel.Name;
-					Txt_ChanDecimal.Text = oActiveChannel.Decimals.ToString();
+                    //TODO: Remove
+                    //Txt_ChanDecimal.Text = oActiveChannel.Decimals.ToString();
 					Txt_ChanUnit.Text = oActiveChannel.Unit;
 					Chk_ChanComputationEnabled.Checked = oActiveChannel.Enabled;
 					Txt_ChanValDef.Text = oActiveChannel.DefaultValue.ToString();
 					rTxt_ChanComment.Text = oActiveChannel.Comment;
 					rTxt_ChanExpression.Text = oActiveChannel.Expression;
-					
-					TabCtrl_PropertiesEdit.SelectedIndex = 1;
+
+                    Cmb_ValueFormat.SelectedIndex = (int)oActiveChannel.ValueFormat.FormatType;
+
+                    if (oActiveChannel.ValueFormat.FormatType.Equals(SignalValueFormat.Decimal))
+                    {
+                        Txt_Decimals.Enabled = true;
+                        Txt_Decimals.Text = oActiveChannel.ValueFormat.Decimals.ToString();
+                    }
+
+                    if (oActiveChannel.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
+                    {
+                        Cmd_EnumDefinition.Enabled = true;
+                    }
+
+                    Chk_AlarmsEnabled.Checked = oActiveChannel.Alarms.Enabled;
+                    Chk_WarningMin.Checked = oActiveChannel.Alarms.WarningLimitMin.Enabled;
+                    Chk_WarningMax.Checked = oActiveChannel.Alarms.WarningLimitMax.Enabled;
+                    Chk_AlarmMin.Checked = oActiveChannel.Alarms.AlarmLimitMin.Enabled;
+                    Chk_AlarmMax.Checked = oActiveChannel.Alarms.AlarmLimitMax.Enabled;
+
+                    TabCtrl_PropertiesEdit.SelectedIndex = 1;
 					
 					Cmd_ChanCreate.Text = "Modify";
 				}
@@ -972,12 +1335,168 @@ namespace CANStream
 				Frm.Show();
 			}
 		}
-		
-		#endregion
-		
-		#region Common
-		
-		private void CopyItem(bool bCut)
+
+        #region AlarmControls
+
+        private void GetAlarmColor(PictureBox oPic)
+        {
+            if (!(oPic == null))
+            {
+                if (!(Dlg_SelectColor.ShowDialog().Equals(DialogResult.Cancel)))
+                {
+                    oPic.BackColor = Dlg_SelectColor.Color;
+                }
+            }
+        }
+
+        private void SetWarningMinControls(bool State)
+        {
+            if (State)
+            {
+                Txt_WarningMin.Enabled = true;
+                Pic_WarningMin_Backcolor.Enabled = true;
+                Pic_WarningMin_Forecolor.Enabled = true;
+
+                if (!(oActiveChannel==null))
+                {
+                    Txt_WarningMin.Text = oActiveChannel.Alarms.WarningLimitMin.Value.ToString();
+                    Pic_WarningMin_Backcolor.BackColor = oActiveChannel.Alarms.WarningLimitMin.BackColor;
+                    Pic_WarningMin_Forecolor.BackColor = oActiveChannel.Alarms.WarningLimitMin.ForeColor;
+                }
+                else
+                {
+                    Txt_WarningMin.Text = "";
+                    Pic_WarningMin_Backcolor.BackColor = Color.Yellow;
+                    Pic_WarningMin_Forecolor.BackColor = Color.Black;
+                }
+            }
+            else
+            {
+                Txt_WarningMin.Text = "";
+                Txt_WarningMin.Enabled = false;
+
+                Pic_WarningMin_Backcolor.BackColor = SystemColors.Control;
+                Pic_WarningMin_Backcolor.Enabled = false;
+
+                Pic_WarningMin_Forecolor.BackColor = SystemColors.Control;
+                Pic_WarningMin_Forecolor.Enabled = false;
+
+            }
+        }
+
+        private void SetWarningMaxControls(bool State)
+        {
+            if (State)
+            {
+                Txt_WarningMax.Enabled = true;
+                Pic_WarningMax_Backcolor.Enabled = true;
+                Pic_WarningMax_Forecolor.Enabled = true;
+                
+                if (!(oActiveChannel == null))
+                {
+                    Txt_WarningMax.Text = oActiveChannel.Alarms.WarningLimitMax.Value.ToString();
+                    Pic_WarningMax_Backcolor.BackColor = oActiveChannel.Alarms.WarningLimitMax.BackColor;
+                    Pic_WarningMax_Forecolor.BackColor = oActiveChannel.Alarms.WarningLimitMax.ForeColor;
+                }
+                else
+                {
+                    Txt_WarningMax.Text = "";
+                    Pic_WarningMax_Backcolor.BackColor = Color.Yellow;
+                    Pic_WarningMax_Forecolor.BackColor = Color.Black;
+                }
+            }
+            else
+            {
+                Txt_WarningMax.Text = "";
+                Txt_WarningMax.Enabled = false;
+
+                Pic_WarningMax_Backcolor.BackColor = SystemColors.Control;
+                Pic_WarningMax_Backcolor.Enabled = false;
+
+                Pic_WarningMax_Forecolor.BackColor = SystemColors.Control;
+                Pic_WarningMax_Forecolor.Enabled = false;
+
+            }
+        }
+
+        private void SetAlarmMinControls(bool State)
+        {
+            if (State)
+            {
+                Txt_AlarmMin.Enabled = true;
+                Pic_AlarmMin_Backcolor.Enabled = true;
+                Pic_AlarmMin_Forecolor.Enabled = true;
+                
+                if (!(oActiveChannel == null))
+                {
+                    Txt_AlarmMin.Text = oActiveChannel.Alarms.AlarmLimitMin.Value.ToString();
+                    Pic_AlarmMin_Backcolor.BackColor = oActiveChannel.Alarms.AlarmLimitMin.BackColor;
+                    Pic_AlarmMin_Forecolor.BackColor = oActiveChannel.Alarms.AlarmLimitMin.ForeColor;
+                }
+                else
+                {
+                    Txt_AlarmMin.Text = "";
+                    Pic_AlarmMin_Backcolor.BackColor = Color.Red;
+                    Pic_AlarmMin_Forecolor.BackColor = Color.White;
+                }
+            }
+            else
+            {
+                Txt_AlarmMin.Text = "";
+                Txt_AlarmMin.Enabled = false;
+
+                Pic_AlarmMin_Backcolor.BackColor = SystemColors.Control;
+                Pic_AlarmMin_Backcolor.Enabled = false;
+
+                Pic_AlarmMin_Forecolor.BackColor = SystemColors.Control;
+                Pic_AlarmMin_Forecolor.Enabled = false;
+
+            }
+        }
+
+        private void SetAlarmMaxControls(bool State)
+        {
+            if (State)
+            {
+                Txt_AlarmMax.Enabled = true;
+                Pic_AlarmMax_Backcolor.Enabled = true;
+                Pic_AlarmMax_Forecolor.Enabled = true;
+                
+
+                if (!(oActiveChannel == null))
+                {
+                    Txt_AlarmMax.Text = oActiveChannel.Alarms.AlarmLimitMax.Value.ToString();
+                    Pic_AlarmMax_Backcolor.BackColor = oActiveChannel.Alarms.AlarmLimitMax.BackColor;
+                    Pic_AlarmMax_Forecolor.BackColor = oActiveChannel.Alarms.AlarmLimitMax.ForeColor;
+                }
+                else
+                {
+                    Txt_AlarmMax.Text = "";
+                    Pic_AlarmMax_Backcolor.BackColor = Color.Red;
+                    Pic_AlarmMax_Forecolor.BackColor = Color.White;
+                }
+            }
+            else
+            {
+                Txt_AlarmMax.Text = "";
+                Txt_AlarmMax.Enabled = false;
+
+                Pic_AlarmMax_Backcolor.BackColor = SystemColors.Control;
+                Pic_AlarmMax_Backcolor.Enabled = false;
+
+                Pic_AlarmMax_Forecolor.BackColor = SystemColors.Control;
+                Pic_AlarmMax_Forecolor.Enabled = false;
+
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Common
+
+        private void CopyItem(bool bCut)
 		{
 			oClipBoardItem = GetActiveItem();
 			bCutOption = bCut;	
@@ -1258,7 +1777,7 @@ namespace CANStream
 			oVCLibCollection.Libraries.Add(UserLib);
 			AddLibrary(UserLib);
 		}
-		
-		#endregion
-	}
+
+        #endregion
+    }
 }
