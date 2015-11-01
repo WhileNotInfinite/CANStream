@@ -78,10 +78,25 @@ namespace CANStream
 				}
 			}
 		}
-		
-		#region Control events
-		
-		private void LV_ItemsMouseLeave(object sender, EventArgs e)
+
+        #region Control events
+
+        private void Frm_ContextualList_Activated(object sender, EventArgs e)
+        {
+            Rectangle rScreen = Screen.GetBounds(this);
+
+            if (this.Right > rScreen.Right)
+            {
+                this.Left -= ((this.Right - rScreen.Right) + 5);
+            }
+
+            if (this.Bottom > rScreen.Bottom)
+            {
+                this.Top -= ((this.Bottom - rScreen.Bottom) + 5);
+            }
+        }
+
+        private void LV_ItemsMouseLeave(object sender, EventArgs e)
 		{
 			this.Close();
 		}
@@ -130,7 +145,7 @@ namespace CANStream
 				}
 			}
 		}
-		
-		#endregion
-	}
+
+        #endregion
+    }
 }
