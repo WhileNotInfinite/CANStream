@@ -1,0 +1,96 @@
+﻿<html>
+	
+<head>
+	<title>Spy &amp; Manual mode</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="manual, panel, start, stop, multiplex, mux, rate, RX, mode, TX, transmission, reception, ID, identifier, filter, virtual, bus, controller, tool bar, frame, message">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("SpyManualmode1");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Spy &amp; Manual mode</h1>
+				
+				</div>
+			<div id="topic_header_nav">
+				<a href="Configurationimportexport.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="DataReception.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">The </span><span class="rvts19">‘</span><span class="rvts11">Spy &amp; Manual' mode is intended to be used to spy the content of </span><a class="rvts21" href="CANmessageproperties.html">frames</a><span class="rvts11"> (or messages) circulating on the </span><a class="rvts21" href="Busproperties.html">bus</a><span class="rvts11">.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Using this mode, it also possible to send messages containing values set by the user.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Both reception and transmission handle </span><span class="rvts19">‘</span><span class="rvts11">Engineering' and </span><span class="rvts19">‘</span><span class="rvts11">Raw' formats of data. </span><span class="rvts19">‘</span><span class="rvts11">Engineering' means that user can read and write actual physical values of </span><a class="rvts21" href="CANsignalproperties.html">CAN signals</a><span class="rvts11"> while the </span><span class="rvts19">‘</span><span class="rvts11">Raw' format means raw byte values of the CAN messages.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">The </span><span class="rvts19">‘</span><span class="rvts11">Spy &amp; Manual' mode is controlled through the tool bar of the </span><span class="rvts19">‘</span><span class="rvts11">Spy &amp; Manual' panel.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_01.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">This tool bar contains the following elements.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Play_32.png"><span class="rvts11"> Start button: Start data transmission and reception.</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Stop_32.png"><span class="rvts11"> Stop button: Stop data transmission and reception.</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_02.png"><span class="rvts11"> CAN rate selection: Allows definition of the CAN communication speed.</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_03.png"><span class="rvts11"> Rx mode selection: Allows selection of the message reception mode (event, manual, periodic).</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_04.png"><span class="rvts11"> Rx IDs filter: Allows the definition of the range of CAN message IDs that have to be considered in the reception panel.</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_05.png"><span class="rvts11"> </span><a class="rvts21" href="VirtualCANsignal.html">Virtual parameters</a><span class="rvts11"> transmission enabled flag: Enable and disable the transmission of virtual CAN signals.</span></p>
+<p class="rvps7"><span class="rvts11"><br/></span></p>
+<p class="rvps7"><img alt="" style="padding : 1px;" src="lib/Manual_Mode_06.png"><span class="rvts11"> </span><a class="rvts21" href="Multiplexedparameter.html">Multiplexer</a><span class="rvts11"> auto-cycling flag: If the CAN configuration in use contains some multiplexed message, CANStream will automatically cycle the multiplexer value for data transmission.</span></p>
+<p class="rvps7" style="page-break-before: always;"><span class="rvts11"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour">Full-featured Help generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

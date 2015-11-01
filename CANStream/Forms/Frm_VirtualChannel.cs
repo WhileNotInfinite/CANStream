@@ -15,7 +15,7 @@ using System.Xml;
 
 namespace CANStream
 {
-	#region Enums
+	#region Public Enums
 	
 	public enum ExpressionElementType
 	{
@@ -31,19 +31,29 @@ namespace CANStream
 		BuiltInSignal  = 2,
 		DataChannel    = 3,
 	}
-	
-	public struct ExpressionElementItem
-	{
-		public string Name;
-		public ExpressionElementChannelSource Source;
-	}
-	
-	#endregion
-	
-	/// <summary>
-	/// Description of Frm_VirtualChannel.
-	/// </summary>
-	public partial class Frm_VirtualChannel : Form
+
+    #endregion
+
+    #region Public Structures
+
+    public struct ExpressionElementItem
+    {
+        public string Name;
+        public ExpressionElementChannelSource Source;
+    }
+
+    public struct ExpressionFunctionInfo
+    {
+        public string Name;
+        public int ArgumentCount;
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Description of Frm_VirtualChannel.
+    /// </summary>
+    public partial class Frm_VirtualChannel : Form
 	{
 		#region Private members
 		
@@ -56,7 +66,7 @@ namespace CANStream
 		private bool bCutOption;
 		
 		ExpressionElementItem[] ObjectNames;
-		string[] Fonctions;
+        ExpressionFunctionInfo[] Fonctions;
 		string[] Operators = {"+","-","x","/","(",")"};
 		
 		private Form FrmParent;
@@ -1149,18 +1159,23 @@ namespace CANStream
 			}
 		}
 		
-		private string[] Create_VC_FunctionList()
+		private ExpressionFunctionInfo[] Create_VC_FunctionList()
 		{
-			List<string> Funcs = new List<string>();
+			List<ExpressionFunctionInfo> Funcs = new List<ExpressionFunctionInfo>();
 			
 			Type t = typeof(Math);
 			System.Reflection.MethodInfo[] MethodsInfo =  t.GetMethods();
 			
 			foreach(System.Reflection.MethodInfo mInfo in MethodsInfo)
 			{
-				if (!(Funcs.Contains(mInfo.Name)))
+                ExpressionFunctionInfo sFuncInfo = new ExpressionFunctionInfo();
+
+                sFuncInfo.Name = mInfo.Name;
+                sFuncInfo.ArgumentCount = mInfo.GetParameters().Length;
+
+                if (!(Funcs.Contains(sFuncInfo)))
 				{
-					Funcs.Add(mInfo.Name);
+					Funcs.Add(sFuncInfo);
 				}
 			}
 			
@@ -1169,25 +1184,32 @@ namespace CANStream
 			
 			foreach(System.Reflection.MethodInfo mInfo in MethodsInfo)
 			{
-				if (!(Funcs.Contains(mInfo.Name)))
+                ExpressionFunctionInfo sFuncInfo = new ExpressionFunctionInfo();
+
+                sFuncInfo.Name = mInfo.Name;
+                sFuncInfo.ArgumentCount = mInfo.GetParameters().Length;
+
+                if (!(Funcs.Contains(sFuncInfo)))
 				{
-					Funcs.Add(mInfo.Name);
+					Funcs.Add(sFuncInfo);
 				}
 			}
-			
-			Funcs.Sort();
+
+            Funcs.Sort(delegate (ExpressionFunctionInfo a1, ExpressionFunctionInfo a2) { return string.Compare(a1.Name, a2.Name); });
 			
 			return(Funcs.ToArray());
 			
 		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Public methods
-		
-		public void AddElementFromContextualList(string Element)
+
+        
+
+        #endregion
+
+        #endregion
+
+        #region Public methods
+
+        public void AddElementFromContextualList(string Element)
 		{
 			if (!(Element == null))
 			{	

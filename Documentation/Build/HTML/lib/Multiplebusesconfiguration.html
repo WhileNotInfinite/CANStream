@@ -1,0 +1,105 @@
+﻿<html>
+	
+<head>
+	<title>Multiple buses configuration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, bus, multiple, configuration, DBC, frame, message, node, parameter, signal, import, open, new, save, property, properties, controller">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Multiplebusesconfiguration");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Multiple buses configuration</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="CANFramesconfiguration.html">CAN Frames configuration</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="CANFramesconfiguration.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="VectorCANdatabasedbcimport.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="CANBusinformation.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">As we saw in the </span><a class="rvts21" href="Singlebusconfiguration.html">previous section</a><span class="rvts11">, a CAN configuration contains description of CAN messages and parameter for a single CAN bus.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">In the CANStream world, a CAN bus is considered as a Peak PCAN-USB adapter. One CAN bus = one PCAN-USB.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Since CANStream can handle up to eight PCAN-USB adapters, it can run simultaneously up to eight CAN configurations. Those multiple configurations (or buses) can be grouped in a single file in order to have the user configuring its buses once and using and reusing them with a simple command.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">To create a multiples buses CAN configuration, click on the </span><span class="rvts19">‘</span><span class="rvts11">CAN Configuration' menu of the menu strip and then click on </span><span class="rvts19">‘</span><span class="rvts11">New'.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_19.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">The CAN configuration editor should appear as bellow.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_01.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Click the 'New CAN bus controller' button </span><img alt="" style="padding : 1px;" src="lib/CAN_Bus_32.png"><span class="rvts11"> to create a new CAN Bus.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Then, add </span><a class="rvts21" href="CANmessageproperties.html">messages</a><span class="rvts11"> and </span><a class="rvts21" href="CANsignalproperties.html">parameters</a><span class="rvts11"> using the same method you would use for a single bus configuration.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">You don't need to create such configuration from scratch. You can open </span><img alt="" style="padding : 1px;" src="lib/File_Open_32.png"><span class="rvts11"> an existing single bus configuration or </span><a class="rvts21" href="VectorCANdatabasedbcimport.html">import a DBC file</a><span class="rvts11"> </span><img alt="" style="padding : 1px;" src="lib/DBC_Import_32.png"><span class="rvts11"> first and then create all buses on the top of it. On the 'New CAN bus controller' button </span><img alt="" style="padding : 1px;" src="lib/CAN_Bus_32.png"><span class="rvts11"> click, CANStream will automatically create a fist CAN bus for existing messages and then create a second CAN bus in which you can add messages and parameters.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_15.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">In multiple CAN buses mode, each bus is represented in the configuration tree view by the bus controller icon </span><img alt="" style="padding : 1px;" src="lib/CAN_Bus_16.png"><span class="rvts11">. Then CAN messages of a bus become child nodes (or branches) of the CAN bus.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">Multiple Buses CAN configuration file has a specific extension (*.mcb). Use standard 'Save CAN configuration' button </span><img alt="" style="padding : 1px;" src="lib/File_Save_32.png"><span class="rvts11"> to save your multiple buses configuration, CANStream will automatically switch to the '*.mcb' extension.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">When you are using the 'Open CAN configuration' command </span><img alt="" style="padding : 1px;" src="lib/File_Open_32.png"><span class="rvts11"> , the file opening dialog has two file extension filters: '*.xcc' for single bus configuration and '*.mcb' for multiple buses configuration. Just switch to the '*.mcb' extension to open a multiple buses configuration and load it into the CAN configuration edition form.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_16.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts11"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Free EPub and documentation generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

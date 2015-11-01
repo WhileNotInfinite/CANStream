@@ -21,10 +21,11 @@ namespace CANStream
 		
 		private Form FormParent;
 		private ExpressionElementType TypeItem;
-		
-		#endregion
-		
-		public Frm_ContextualList(Form FrmParent, object Items, ExpressionElementType ItemType)
+        private ExpressionFunctionInfo[] FuncListInfo;
+
+        #endregion
+
+        public Frm_ContextualList(Form FrmParent, object Items, ExpressionElementType ItemType)
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -35,20 +36,33 @@ namespace CANStream
 			TypeItem = ItemType;
 			
 			LV_Items.Items.Clear();
-			
-			if (!(Items == null))
+
+            //ExpressionFunctionInfo
+
+            if (!(Items == null))
 			{
-				if (Items.GetType().Equals(typeof(string[])))
+                Type ItemsType = Items.GetType();
+
+                if (ItemsType.Equals(typeof(string[]))) //List of operators
 				{
 					string[] Elements = (string[]) Items;
-					int iIcon = (int) TypeItem;
+					//int iIcon = (int) TypeItem;
 					
 					foreach (string ElemName in Elements)
 					{
-						LV_Items.Items.Add(ElemName, iIcon);
+						LV_Items.Items.Add(ElemName, 2);
 					}
 				}
-				else
+                else if (ItemsType.Equals(typeof(ExpressionFunctionInfo[]))) //List of functions
+                {
+                    FuncListInfo = (ExpressionFunctionInfo[])Items;
+
+                    foreach(ExpressionFunctionInfo sFuncInfo in FuncListInfo)
+                    {
+                        LV_Items.Items.Add(sFuncInfo.Name, 1);
+                    }
+                }
+				else //List of elements (CAN parameters, virtual channels, built-in signals)
 				{
 					ExpressionElementItem[] Elements = (ExpressionElementItem[]) Items;
 					
@@ -135,7 +149,23 @@ namespace CANStream
 						
 						if (TypeItem.Equals(ExpressionElementType.Function))
 						{
-							sItem = sItem + "( )";
+                            int ArgCnt = GetFunctionArgCount(sItem);
+
+                            if (ArgCnt > 1)
+                            {
+                                sItem += "(";
+
+                                for (int i = 0; i < ArgCnt - 1; i++)
+                                {
+                                    sItem += " ;";
+                                }
+
+                                sItem += " )";
+                            }
+                            else
+                            {
+                                sItem += "( )";
+                            }
 						}
 						
 						Frm_VirtualChannel Frm = (Frm_VirtualChannel) FormParent;
@@ -145,6 +175,19 @@ namespace CANStream
 				}
 			}
 		}
+
+        private int GetFunctionArgCount(string FuncName)
+        {
+            foreach (ExpressionFunctionInfo sFuncInfo in FuncListInfo)
+            {
+                if(sFuncInfo.Name.Equals(FuncName))
+                {
+                    return (sFuncInfo.ArgumentCount);
+                }
+            }
+
+            return (-1);
+        }
 
         #endregion
     }

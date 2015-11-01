@@ -1,0 +1,110 @@
+﻿<html>
+	
+<head>
+	<title>Received data graphic</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, channel, virtual, engineering, parameter, data, signal, data viewer, graphic, chart, plot, value, start, stop, pause, freeze, resume, spy">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Receiveddatagraphic");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Received data graphic</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="SpyManualmode1.html">Spy &amp; Manual mode</a> &rsaquo;&rsaquo; <a href="DataReception.html">Data Reception</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="DataReception.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="VirtualdataReception.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="DataTransmission.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">When </span><a class="rvts22" href="CANmessageproperties.html">CAN frames</a><span class="rvts6"> received contains data that can be decoded using the loaded </span><a class="rvts22" href="CANFramesconfiguration.html">CAN configuration</a><span class="rvts6">, values of </span><a class="rvts22" href="CANsignalproperties.html">CAN signals</a><span class="rvts6"> received can be traced in real time into a graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Spy_Mode_03.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The graphic shows CAN parameters values as a function of the time. By default, the graphic is empty, simply select data to trace by checking channels in the channels list.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Spy_Mode_04.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Using the small tool bar on the top of the channel list, it is possible to stop or freeze the graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Spy_Mode_05.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Button </span><img alt="" style="padding : 1px;" src="lib/Spy_Mode_06.png"><span class="rvts6"> stops the real time graphic plotting. Once clicked this button becomes ‘Start plot’ button </span><img alt="" style="padding : 1px;" src="lib/Spy_Mode_09.png"><span class="rvts6"> Those two commands actually reset the graphic window so all data plotted will be lost after a ‘Stop/Start’ commands.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Button </span><img alt="" style="padding : 1px;" src="lib/Spy_Mode_07.png"><span class="rvts6"> freezes the real time graphic plotting. Once clicked this button becomes ‘Resume’ button </span><img alt="" style="padding : 1px;" src="lib/Spy_Mode_08.png"><span class="rvts6"> Unlike the ‘Stop’ button, ‘Freeze’ command doesn’t reset the graphic. On graphic resuming, graph will appear as if it never stopped before.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Graphic time window and Y axis scale can be changed through the ‘Graphic properties’ panel.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Spy_Mode_10.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Field ‘Time window’ define the time span between the beginning and the end of graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">If check box ‘Auto scale’ is ticked, all values of all plotted signal are shown in the graphic. Uncheck that box to define the scale of the Y axis. After having typed a value into the ‘Y min’ or ‘Y max’ fields; press ‘Enter’ to update the graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Spy_Mode_11.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour">Easily create Web Help sites</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

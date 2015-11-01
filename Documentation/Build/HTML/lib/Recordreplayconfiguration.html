@@ -1,0 +1,118 @@
+﻿<html>
+	
+<head>
+	<title>Record replay configuration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="replay, creation, cycle, PCAN-USB, file, open, save, record, trace, CAN, add, clear, delete, conversion, progression, start, stop">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Recordreplayconfiguration");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Record replay configuration</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Cyclemode1.html">Cycle mode</a> &rsaquo;&rsaquo; <a href="Cyclecreation.html">Cycle creation</a> &rsaquo;&rsaquo; <a href="Recordreplay.html">Record replay</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Recordreplay.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Recordreplay.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="CANcontrollerappearanceoptions.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">To create a cycle using this method, simply follow steps described below:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts6">Add one or more </span><a class="rvts22" href="PeakPCANtracefile.html">PCAN Trace file</a><span class="rvts6"> into the ‘Trace record file’. Basically all trace files are concatenated to each other in the order they appear in the list in order to make the final cycle.</span></li>
+</ul></ul>
+<p class="rvps9"><span class="rvts30"><br/></span></p>
+<p class="rvps11"><span class="rvts30">Trace files list control commands are located on the left of the list. There are three commands:</span></p>
+<p class="rvps11"><span class="rvts30"><br/></span></p>
+<p class="rvps13"><img alt="" style="padding : 1px;" src="lib/Item_Add_16.png"><span class="rvts6"> </span><span class="rvts24">Add</span><span class="rvts6">: Add a PCAN Trace file into the list.</span></p>
+<p class="rvps13"><span class="rvts6"><br/></span></p>
+<p class="rvps12"><img alt="" style="padding : 1px;" src="lib/Item_Delete_16.png"><span class="rvts30"> </span><span class="rvts33">Del</span><span class="rvts30">: Remove a PCAN Trace file from the list.</span></p>
+<p class="rvps12"><span class="rvts30"><br/></span></p>
+<p class="rvps12"><img alt="" style="padding : 1px;" src="lib/Item_Clear_16.png"><span class="rvts30"> </span><span class="rvts33">Clear</span><span class="rvts30">: Clear all PCAN Trace file from the list.</span></p>
+<p class="rvps12"><span class="rvts29"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps10"><span class="rvts30">Select a </span><a class="rvts31" href="CANFramesconfiguration.html">CAN configuration</a><span class="rvts30"> file by clicking the ‘Open’ button </span><img alt="" style="padding : 1px;" src="lib/File_Open_16.png"><span class="rvts30"> on the right of the ‘CAN Configuration’ field. This CAN configuration is only use to get the CAN bus speed (1000 kBit/s, 500 kBit/s) nothing else.</span></li>
+</ul></ul>
+<p class="rvps10"><span class="rvts30"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps10"><span class="rvts30">Define name and file path of the output cycle by clicking the ‘Save’ button </span><img alt="" style="padding : 1px;" src="lib/File_Save_16.png"><span class="rvts30"> on the right of the ‘Output cycle file’ field.</span></li>
+</ul></ul>
+<p class="rvps10"><span class="rvts30"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps10"><span class="rvts30">Click the ‘Create’ button </span><img alt="" style="padding : 1px;" src="lib/RecordReplay_Cycle_Creation_03.png"><span class="rvts30"> to launch the cycle creation.</span></li>
+</ul></ul>
+<p class="rvps10"><span class="rvts30"><br/></span></p>
+<p class="rvps2"><span class="rvts6">During the cycle creation process two progress bars appears.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/RecordReplay_Cycle_Creation_04.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The first bar, on the top, indicates the process progression among PCAN Trace file to convert. The second bar, at the bottom, indicates the progression of the conversion for the current file.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">At the end of the cycle creation, when all PCAN Trace file have been converted, a message box pops up indicating that process has ended.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/RecordReplay_Cycle_Creation_05.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">At any time in the process it is possible to cancel the cycle creation by clicking the ‘Cancel’ button </span><img alt="" style="padding : 1px;" src="lib/RecordReplay_Cycle_Creation_06.png"><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle">Produce Kindle eBooks easily</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+
