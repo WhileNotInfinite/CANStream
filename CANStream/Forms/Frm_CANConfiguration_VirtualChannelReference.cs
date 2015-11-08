@@ -90,18 +90,9 @@ namespace CANStream
 					sReference.LibraryName = TV_VirtualChannels.SelectedNode.Parent.Text;
 					sReference.ChannelName = TV_VirtualChannels.SelectedNode.Text;
 					
-					string ChanUnit = "";
-					string ChanComment = "";
-					
 					CS_VirtualChannel oVirtual = oVCLibCollection.GetVirtualChannel(sReference.LibraryName, sReference.ChannelName);
 					
-					if (!(oVirtual == null))
-					{
-						ChanUnit = oVirtual.Unit;
-						ChanComment = oVirtual.Comment;
-					}
-					
-					FrmCaller.SetVirtualChannelReference(sReference, ChanUnit, ChanComment);
+					FrmCaller.SetVirtualChannelReference(sReference, oVirtual);
 					this.Close();
 				}
 				else
