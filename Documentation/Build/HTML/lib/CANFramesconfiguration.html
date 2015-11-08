@@ -1,0 +1,81 @@
+﻿<html>
+	
+<head>
+	<title>CAN Frames configuration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, frame, configuration, message, node, bus, single, multiple, PCAN-USB, PEAK">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("CANFramesconfiguration");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">CAN Frames configuration</h1>
+				
+				</div>
+			<div id="topic_header_nav">
+				<a href="Aboutform.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="CANConfigurationform.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">You can use CANStream to send and receive CAN messages in raw format (hexadecimal byte values) but if you want use all features of CANStream and get the maximum out of it (and I'm sure you do), the first thing you have to do is to create a CAN configuration file.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">A CAN configuration file contains the description of all </span><a class="rvts21" href="CANmessageproperties.html">messages</a><span class="rvts11"> (frames) circulating on the CAN </span><a class="rvts21" href="Busproperties.html">bus</a><span class="rvts11"> and all properties of all </span><a class="rvts21" href="CANsignalproperties.html">parameters</a><span class="rvts11"> (nodes) for each message. Such configuration doesn't need to be exhaustive, you can setup only messages and parameters which are of your interest and simply ignore those you don't want work with.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">CANStream actually handles two kinds of CAN configuration file: </span><a class="rvts21" href="Singlebusconfiguration.html">single bus</a><span class="rvts11"> configuration and </span><a class="rvts21" href="Multiplebusesconfiguration.html">multiple buses</a><span class="rvts11"> configuration.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">A single bus configuration simply contains descriptions and properties of CAN messages and parameters for a single CAN bus. This the configuration you have to use if you are using only one Peak PCAN-USB adapter.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts11">A multiple buses configuration does the same but it can handle up to height CAN buses at the same time. This is the kind of configuration which is intended to be used when you are using simultaneously two, three or more (up to eight) Peak PCAN-USB adapters.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts11"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour/iphone-website-generation">Easily create iPhone documentation</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

@@ -123,6 +123,7 @@
     <Compile Include="Class\GraphicSeries.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
+    <Compile Include="Class\CommonSignalProperties.cs" />
     <Compile Include="Controls\Ctrl_CS_CAN_Bus.cs">
       <SubType>UserControl</SubType>
     </Compile>

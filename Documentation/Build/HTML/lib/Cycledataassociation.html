@@ -1,0 +1,137 @@
+﻿<html>
+	
+<head>
+	<title>Cycle data association</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="cycle, creation, easy, association, data, message, ID, identifier, channel, type, signal, built-in, default, value, open, save, properties, property, grid, row, column, configuration, CAN, frame, node, parameter, name">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Cycledataassociation");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Cycle data association</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Cyclemode1.html">Cycle mode</a> &rsaquo;&rsaquo; <a href="Cyclecreation.html">Cycle creation</a> &rsaquo;&rsaquo; <a href="Easycyclecreation.html">Easy cycle creation</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Easycyclecreation.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Easycyclecreation.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Associationtype.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">A ‘Cycle data association’ file is a file containing association between </span><a class="rvts22" href="CANsignalproperties.html">CAN parameters</a><span class="rvts6"> and data source channels.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">For example, let’s say that you have a </span><a class="rvts22" href="CANFramesconfiguration.html">CAN configuration</a><span class="rvts6"> containing a CAN parameter called ‘Speed’ and that you want create a cycle using this configuration. You have a source data file to create your cycle but in this data file, the ‘Speed’ channel is called ‘Velocity’.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">A ‘Cycle data association’ file will fix that issue since it allow to associate CAN parameters with a data channel. So in our case we will simply states that the CAN parameter ‘Speed’ is using values of the data channel ‘Velocity’ as source of data.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">To open the ‘Cycle data association’ edition form, click the ‘Cycle\Tools\New Cycle\Data association’ menu.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_01.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The ‘Cycle data association’ edition form appears.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_02.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">This form contains a tool bar on the top to access the ‘Cycle data association’ file management commands (new, open, save).</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">A control panel in which CAN configuration and data file are intended to be specified.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">A grid, containing actual CAN parameter/data channel associations.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Click the ‘Open’ </span><img alt="" style="padding : 1px;" src="lib/File_Open_16.png"><span class="rvts6"> button on the right of the ‘CAN configuration’ field. </span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Then select the data file that you want to use as template to set associations by clicking the ‘Open’ </span><img alt="" style="padding : 1px;" src="lib/File_Open_16.png"><span class="rvts6"> button on the right of the ‘Data file template’ field.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_03.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">As mentioned by its label, that file is a template. So it doesn’t mean that association works only with this particular data file. It means association will work with any data file having the same structure as the template.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">This is important here to underline that by ‘structure’ we consider both data channel name and data channel location. If channel ‘Velocity’ is placed on the third column of the data file, association will work with all data file having a channel ‘Velocity’ on the third column. If ‘Velocity’ moves to the fifth column for some reasons, association won’t any longer work and association file will have to be modified accordingly.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Another important point is that CANStream consider data of the first column as time vector. If time isn’t on the first column it may results to unpredictable cycle.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Once the CAN configuration loaded the association grid is filled, each row of the grid being a CAN parameter of the CAN configuration.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_04.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The association grid has six columns:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Message ID</span><span class="rvts6">: Identifier of the </span><a class="rvts22" href="CANmessageproperties.html">message</a><span class="rvts6"> containing the CAN parameter (for information only).</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">CAN Parameter</span><span class="rvts6">: Name of the CAN parameter in the CAN configuration.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Association type</span><span class="rvts6">: Type of the association.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Data channel</span><span class="rvts6">: Name of the data channel associated to the CAN parameter.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Built-in signal</span><span class="rvts6">: Name of the </span><a class="rvts22" href="Builtinsignals.html">built-in signal</a><span class="rvts6"> associated to the CAN parameter.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Default value</span><span class="rvts6">: Fix value associated to the CAN parameter.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<p class="rvps7" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/create-epub-ebooks">Produce electronic books easily</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

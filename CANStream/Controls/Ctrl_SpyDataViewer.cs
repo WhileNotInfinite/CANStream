@@ -979,7 +979,7 @@ namespace CANStream
                             if (!(oEngDataRow == null))
                             {
                                 //Process parameter alarms
-                                Nullable<ParameterAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
+                                Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(oParam.DecodedValue));
 
                                 //Get parameter value formatted
                                 string CurrentValFormated;
@@ -990,7 +990,7 @@ namespace CANStream
                                 }
                                 else
                                 {
-                                    CurrentValFormated = oParam.ValueFormat.GetParameterFormatedValue(oParam.DecodedValue);
+                                    CurrentValFormated = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
                                 }
 
                                 //Refresh variable fields of the engineering data parameter
@@ -1188,13 +1188,40 @@ namespace CANStream
                     if (!(oChannelRow == null))
                     {
                         //Update value
-                        oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oVirtualChan.Value.ToString();
+                        if (oVirtualChan.ValueFormat == null)
+                        {
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oVirtualChan.Value.ToString();
+                        }
+                        else
+                        {
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oVirtualChan.ValueFormat.GetSignalFormatedValue(oVirtualChan.Value);
+                        }
+
+                        //Process parameter alarms
+                        Nullable<SignalAlarmValue> sAlarm = oVirtualChan.Alarms.GetAlarmProperties(oVirtualChan.Alarms.ProcessAlarms(oVirtualChan.Value));
+
+                        if (sAlarm.HasValue) //Apply alarm style
+                        {
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor = sAlarm.Value.BackColor;
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor = sAlarm.Value.ForeColor;
+                        }
+                        else //Apply default style if no alarm
+                        {
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor = oChannelRow.Cells[GRID_SPYENG_NAME].Style.BackColor;
+                            oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor = oChannelRow.Cells[GRID_SPYENG_NAME].Style.ForeColor;
+                        }
 
                         //Update Min value
                         if ((oVirtualChan.Value < (double)oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Tag)
                             || (oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Value == null))
                         {
                             oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Value = oVirtualChan.Value.ToString();
+                            oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Tag = oVirtualChan.Value;
+
+                            //Apply cell 'Value' style
+                            oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Style.BackColor = oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor;
+                            oChannelRow.Cells[GRID_SPYENG_MIN_VALUE].Style.ForeColor = oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor;
+
                         }
 
                         //Update Max value
@@ -1202,6 +1229,11 @@ namespace CANStream
                             || (oChannelRow.Cells[GRID_SPYENG_MAX_VALUE].Value == null))
                         {
                             oChannelRow.Cells[GRID_SPYENG_MAX_VALUE].Value = oVirtualChan.Value.ToString();
+                            oChannelRow.Cells[GRID_SPYENG_MAX_VALUE].Tag = oVirtualChan.Value;
+
+                            //Apply cell 'Value' style
+                            oChannelRow.Cells[GRID_SPYENG_MAX_VALUE].Style.BackColor = oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor;
+                            oChannelRow.Cells[GRID_SPYENG_MAX_VALUE].Style.ForeColor = oChannelRow.Cells[GRID_SPYENG_ENG_VALUE].Style.ForeColor;
                         }
                     }
                 }

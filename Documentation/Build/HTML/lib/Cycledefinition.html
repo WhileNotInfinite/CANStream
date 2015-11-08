@@ -1,0 +1,147 @@
+﻿<html>
+	
+<head>
+	<title>Cycle definition</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, channel, virtual, configuration, frame, message, node, parameter, data, signal, built-in, chart, graphic, plot, cycle, creation, advanced, in, part, post, pre, constant, grid, row, column, start, stop, file">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Cycledefinition");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Cycle definition</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Cyclemode1.html">Cycle mode</a> &rsaquo;&rsaquo; <a href="Cyclecreation.html">Cycle creation</a> &rsaquo;&rsaquo; <a href="Advancedcyclecreation.html">Advanced cycle creation</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Advancedcyclecreation.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Cyclepartssetting.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Recordreplay.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">If there was not </span><a class="rvts22" href="CANFramesconfiguration.html">CAN configuration</a><span class="rvts6"> loaded at the form start up, click the ‘Load CAN Configuration’ button </span><img alt="" style="padding : 1px;" src="lib/CANStream_32.png"><span class="rvts6"> of the tool bar to load one.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Once loaded, all </span><a class="rvts22" href="CANsignalproperties.html">CAN parameters</a><span class="rvts6"> contained in </span><a class="rvts22" href="CANmessageproperties.html">CAN messages</a><span class="rvts6"> set with ‘Transmission’ (Tx) flag will be display in the grid.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_08.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Each row of the grid represents a CAN parameter and has three groups of two columns.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Those three groups are respectively, ‘Pre-cycle’, ‘Cycle’ and ‘Post-cycle’ </span><a class="rvts22" href="Advancedcyclecreation.html">parts</a><span class="rvts6"> of the cycle.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">The two columns of each group are configuration of the CAN parameter for a given cycle part.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_09.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Column ‘Source’ defines the data source for the CAN parameter. Click the ‘Source’ cell to drop the source list down and pick up the desired source.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">There are six possible sources:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">None</span><span class="rvts6">: CAN parameter value is set to zero.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Default</span><span class="rvts6">: CAN parameter value is set with the default value which is zero.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Constant</span><span class="rvts6">: CAN parameter value is set with the constant value set in the ‘Data’ cell.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">BuiltSignal</span><span class="rvts6">: CAN parameter value is set with value of the built-in signal defined in the ‘Data’ cell.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">VirtualChannel</span><span class="rvts6">: CAN parameter value is set with value of the virtual channel defined in the ‘Data’ cell.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">AcqData</span><span class="rvts6">: CAN parameter value is set with value of the acquisition data channel defined in the ‘Data’ cell.</span></li>
+</ul></ul>
+<p class="rvps12"><span class="rvts29"><br/></span></p>
+<p class="rvps2"><span class="rvts6">If the ‘Source’ property is set to ‘</span><a class="rvts22" href="Builtinsignals.html">BuiltSignal</a><span class="rvts6">’ or ‘</span><a class="rvts22" href="VirtualChannels.html">VirtualChannel</a><span class="rvts6">’, click the ‘Data’ cell to get the list of items available.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_10.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Available item list takes a form of a tree where libraries are roots of the tree and items (virtual channels or built-in signals are branches. Just double-click an item to select it as data source of the CAN parameter.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_11.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">If the ‘Source’ property is set to ‘AcqData’, click the ‘Data’ cell to get the list of data channels available. Simply double-click a channel to select it as data source of the CAN parameter.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_12.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">You don’t need here to select a source for each CAN parameter and for all cycle parts. If a cycle part length is null, it won’t generated so it can be ignored while selecting data sources of CAN parameters.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Once all CAN parameter of your interest are set, click the ‘Build cycle’ button </span><img alt="" style="padding : 1px;" src="lib/Process_Start_32.png"><span class="rvts6"> to launch the cycle creation.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">At the first cycle building, a ‘file save’ dialog pops up. Set the name and path of the output cycle file. The cycle can be built several times but the ‘file save’ dialog will show up only once.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">During cycle building, the ‘Abort’ button </span><img alt="" style="padding : 1px;" src="lib/Process_Stop_32.png"><span class="rvts6"> will appear. Click this button at any time while CANStream is building the cycle to cancel the process.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">At the end of the cycle creation process, a message box will pop up indicating that cycle has been successfully created.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">In addition, a graphic preview of the cycle will be drawn on right side of the form. </span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_13.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">As per the </span><a class="rvts22" href="Cycleplaying.html">cycle player</a><span class="rvts6"> graph, right click in the graph to select traces that you want to see in the graphic.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Advanced_Cycle_Creation_14.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Free Web Help generator</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+
