@@ -177,6 +177,20 @@ namespace CANStream
             this.Context_TabControllers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeCANBusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BGWrk_RecordConversion = new System.ComponentModel.BackgroundWorker();
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Start = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Length = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Signed = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Gain = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Manual_Rx_Eng_Zero = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_RxTx = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Start = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Length = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Endianess = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Signedness = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Gain = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Columns_Cycle_Eng_Zero = new System.Windows.Forms.ToolStripMenuItem();
             this.FrmMain_MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.Tab_CAN_Controllers.SuspendLayout();
@@ -868,109 +882,109 @@ namespace CANStream
             this.TSMI_Columns_Manual_Tx_Comment});
             this.TSMI_Columns_Manual_Tx.Image = global::CANStream.Icones.Message_Tx;
             this.TSMI_Columns_Manual_Tx.Name = "TSMI_Columns_Manual_Tx";
-            this.TSMI_Columns_Manual_Tx.Size = new System.Drawing.Size(129, 22);
+            this.TSMI_Columns_Manual_Tx.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx.Text = "Manual Tx";
             // 
             // TSMI_Columns_Manual_Tx_ShowAll
             // 
             this.TSMI_Columns_Manual_Tx_ShowAll.Name = "TSMI_Columns_Manual_Tx_ShowAll";
-            this.TSMI_Columns_Manual_Tx_ShowAll.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_ShowAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_ShowAll.Text = "Show All";
             this.TSMI_Columns_Manual_Tx_ShowAll.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_ShowAllClick);
             // 
             // TSMI_Columns_Manual_Tx_HideAll
             // 
             this.TSMI_Columns_Manual_Tx_HideAll.Name = "TSMI_Columns_Manual_Tx_HideAll";
-            this.TSMI_Columns_Manual_Tx_HideAll.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_HideAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_HideAll.Text = "Hide All";
             this.TSMI_Columns_Manual_Tx_HideAll.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_HideAllClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // TSMI_Columns_Manual_Tx_ID
             // 
             this.TSMI_Columns_Manual_Tx_ID.Name = "TSMI_Columns_Manual_Tx_ID";
-            this.TSMI_Columns_Manual_Tx_ID.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_ID.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_ID.Text = "ID";
             this.TSMI_Columns_Manual_Tx_ID.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_IDClick);
             // 
             // TSMI_Columns_Manual_Tx_RxTx
             // 
             this.TSMI_Columns_Manual_Tx_RxTx.Name = "TSMI_Columns_Manual_Tx_RxTx";
-            this.TSMI_Columns_Manual_Tx_RxTx.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_RxTx.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_RxTx.Text = "RxTx";
             this.TSMI_Columns_Manual_Tx_RxTx.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_RxTxClick);
             // 
             // TSMI_Columns_Manual_Tx_Period
             // 
             this.TSMI_Columns_Manual_Tx_Period.Name = "TSMI_Columns_Manual_Tx_Period";
-            this.TSMI_Columns_Manual_Tx_Period.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Period.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Period.Text = "Period";
             this.TSMI_Columns_Manual_Tx_Period.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_PeriodClick);
             // 
             // TSMI_Columns_Manual_Tx_Mux
             // 
             this.TSMI_Columns_Manual_Tx_Mux.Name = "TSMI_Columns_Manual_Tx_Mux";
-            this.TSMI_Columns_Manual_Tx_Mux.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Mux.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Mux.Text = "Mux value";
             this.TSMI_Columns_Manual_Tx_Mux.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_MuxValClick);
             // 
             // TSMI_Columns_Manual_Tx_Start
             // 
             this.TSMI_Columns_Manual_Tx_Start.Name = "TSMI_Columns_Manual_Tx_Start";
-            this.TSMI_Columns_Manual_Tx_Start.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Start.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Start.Text = "Start";
             this.TSMI_Columns_Manual_Tx_Start.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_StartClick);
             // 
             // TSMI_Columns_Manual_Tx_Length
             // 
             this.TSMI_Columns_Manual_Tx_Length.Name = "TSMI_Columns_Manual_Tx_Length";
-            this.TSMI_Columns_Manual_Tx_Length.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Length.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Length.Text = "Length";
             this.TSMI_Columns_Manual_Tx_Length.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_LengthClick);
             // 
             // TSMI_Columns_Manual_Tx_Endianess
             // 
             this.TSMI_Columns_Manual_Tx_Endianess.Name = "TSMI_Columns_Manual_Tx_Endianess";
-            this.TSMI_Columns_Manual_Tx_Endianess.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Endianess.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Endianess.Text = "Endianess";
             this.TSMI_Columns_Manual_Tx_Endianess.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_EndianessClick);
             // 
             // TSMI_Columns_Manual_Tx_Signedness
             // 
             this.TSMI_Columns_Manual_Tx_Signedness.Name = "TSMI_Columns_Manual_Tx_Signedness";
-            this.TSMI_Columns_Manual_Tx_Signedness.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Signedness.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Signedness.Text = "Signedness";
             this.TSMI_Columns_Manual_Tx_Signedness.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_SignednessClick);
             // 
             // TSMI_Columns_Manual_Tx_Gain
             // 
             this.TSMI_Columns_Manual_Tx_Gain.Name = "TSMI_Columns_Manual_Tx_Gain";
-            this.TSMI_Columns_Manual_Tx_Gain.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Gain.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Gain.Text = "Gain";
             this.TSMI_Columns_Manual_Tx_Gain.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_GainClick);
             // 
             // TSMI_Columns_Manual_Tx_Zero
             // 
             this.TSMI_Columns_Manual_Tx_Zero.Name = "TSMI_Columns_Manual_Tx_Zero";
-            this.TSMI_Columns_Manual_Tx_Zero.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Zero.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Zero.Text = "Zero";
             this.TSMI_Columns_Manual_Tx_Zero.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_ZeroClick);
             // 
             // TSMI_Columns_Manual_Tx_Unit
             // 
             this.TSMI_Columns_Manual_Tx_Unit.Name = "TSMI_Columns_Manual_Tx_Unit";
-            this.TSMI_Columns_Manual_Tx_Unit.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Unit.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Unit.Text = "Unit";
             this.TSMI_Columns_Manual_Tx_Unit.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_UnitClick);
             // 
             // TSMI_Columns_Manual_Tx_Comment
             // 
             this.TSMI_Columns_Manual_Tx_Comment.Name = "TSMI_Columns_Manual_Tx_Comment";
-            this.TSMI_Columns_Manual_Tx_Comment.Size = new System.Drawing.Size(133, 22);
+            this.TSMI_Columns_Manual_Tx_Comment.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Tx_Comment.Text = "Comment";
             this.TSMI_Columns_Manual_Tx_Comment.Click += new System.EventHandler(this.TSMI_Columns_Manual_Tx_CommentClick);
             // 
@@ -981,106 +995,113 @@ namespace CANStream
             this.TSMI_Columns_Manual_Rx_Eng_HideAll,
             this.toolStripSeparator3,
             this.TSMI_Columns_Manual_Rx_Eng_ID,
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx,
             this.TSMI_Columns_Manual_Rx_Eng_Value,
             this.TSMI_Columns_Manual_Rx_Eng_RawVal,
             this.TSMI_Columns_Manual_Rx_Eng_Min,
             this.TSMI_Columns_Manual_Rx_Eng_Max,
             this.TSMI_Columns_Manual_Rx_Eng_Unit,
             this.TSMI_Columns_Manual_Rx_Eng_Period,
+            this.TSMI_Columns_Manual_Rx_Eng_Start,
+            this.TSMI_Columns_Manual_Rx_Eng_Length,
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess,
+            this.TSMI_Columns_Manual_Rx_Eng_Signed,
+            this.TSMI_Columns_Manual_Rx_Eng_Gain,
+            this.TSMI_Columns_Manual_Rx_Eng_Zero,
             this.TSMI_Columns_Manual_Rx_Eng_Count,
             this.TSMI_Columns_Manual_Rx_Eng_DLC,
             this.TSMI_Columns_Manual_Rx_Eng_Comment});
             this.TSMI_Columns_Manual_Rx.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_Columns_Manual_Rx.Name = "TSMI_Columns_Manual_Rx";
-            this.TSMI_Columns_Manual_Rx.Size = new System.Drawing.Size(129, 22);
+            this.TSMI_Columns_Manual_Rx.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx.Text = "Manual Rx";
             // 
             // TSMI_Columns_Manual_Rx_Eng_ShowAll
             // 
             this.TSMI_Columns_Manual_Rx_Eng_ShowAll.Name = "TSMI_Columns_Manual_Rx_Eng_ShowAll";
-            this.TSMI_Columns_Manual_Rx_Eng_ShowAll.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_ShowAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_ShowAll.Text = "Show All";
             this.TSMI_Columns_Manual_Rx_Eng_ShowAll.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_ShowAllClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_HideAll
             // 
             this.TSMI_Columns_Manual_Rx_Eng_HideAll.Name = "TSMI_Columns_Manual_Rx_Eng_HideAll";
-            this.TSMI_Columns_Manual_Rx_Eng_HideAll.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_HideAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_HideAll.Text = "Hide All";
             this.TSMI_Columns_Manual_Rx_Eng_HideAll.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_HideAllClick);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // TSMI_Columns_Manual_Rx_Eng_ID
             // 
             this.TSMI_Columns_Manual_Rx_Eng_ID.Name = "TSMI_Columns_Manual_Rx_Eng_ID";
-            this.TSMI_Columns_Manual_Rx_Eng_ID.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_ID.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_ID.Text = "ID";
             this.TSMI_Columns_Manual_Rx_Eng_ID.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_IDClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Value
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Value.Name = "TSMI_Columns_Manual_Rx_Eng_Value";
-            this.TSMI_Columns_Manual_Rx_Eng_Value.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Value.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Value.Text = "Value";
             this.TSMI_Columns_Manual_Rx_Eng_Value.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_ValueClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_RawVal
             // 
             this.TSMI_Columns_Manual_Rx_Eng_RawVal.Name = "TSMI_Columns_Manual_Rx_Eng_RawVal";
-            this.TSMI_Columns_Manual_Rx_Eng_RawVal.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_RawVal.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_RawVal.Text = "Raw value";
             this.TSMI_Columns_Manual_Rx_Eng_RawVal.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_RawValClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Min
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Min.Name = "TSMI_Columns_Manual_Rx_Eng_Min";
-            this.TSMI_Columns_Manual_Rx_Eng_Min.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Min.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Min.Text = "Min";
             this.TSMI_Columns_Manual_Rx_Eng_Min.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_MinClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Max
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Max.Name = "TSMI_Columns_Manual_Rx_Eng_Max";
-            this.TSMI_Columns_Manual_Rx_Eng_Max.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Max.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Max.Text = "Max";
             this.TSMI_Columns_Manual_Rx_Eng_Max.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_MaxClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Unit
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Unit.Name = "TSMI_Columns_Manual_Rx_Eng_Unit";
-            this.TSMI_Columns_Manual_Rx_Eng_Unit.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Unit.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Unit.Text = "Unit";
             this.TSMI_Columns_Manual_Rx_Eng_Unit.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_UnitClick);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Period
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Period.Name = "TSMI_Columns_Manual_Rx_Eng_Period";
-            this.TSMI_Columns_Manual_Rx_Eng_Period.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Period.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Period.Text = "Period";
             this.TSMI_Columns_Manual_Rx_Eng_Period.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Period_Click);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Count
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Count.Name = "TSMI_Columns_Manual_Rx_Eng_Count";
-            this.TSMI_Columns_Manual_Rx_Eng_Count.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Count.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Count.Text = "Count";
             this.TSMI_Columns_Manual_Rx_Eng_Count.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Count_Click);
             // 
             // TSMI_Columns_Manual_Rx_Eng_DLC
             // 
             this.TSMI_Columns_Manual_Rx_Eng_DLC.Name = "TSMI_Columns_Manual_Rx_Eng_DLC";
-            this.TSMI_Columns_Manual_Rx_Eng_DLC.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_DLC.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_DLC.Text = "DLC";
             this.TSMI_Columns_Manual_Rx_Eng_DLC.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_DLC_Click);
             // 
             // TSMI_Columns_Manual_Rx_Eng_Comment
             // 
             this.TSMI_Columns_Manual_Rx_Eng_Comment.Name = "TSMI_Columns_Manual_Rx_Eng_Comment";
-            this.TSMI_Columns_Manual_Rx_Eng_Comment.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Comment.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Manual_Rx_Eng_Comment.Text = "Comment";
             this.TSMI_Columns_Manual_Rx_Eng_Comment.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_CommentClick);
             // 
@@ -1091,12 +1112,19 @@ namespace CANStream
             this.TSMI_Columns_Cycle_Eng_HideAll,
             this.toolStripSeparator4,
             this.TSMI_Columns_Cycle_Eng_ID,
+            this.TSMI_Columns_Cycle_Eng_RxTx,
             this.TSMI_Columns_Cycle_Eng_Value,
             this.TSMI_Columns_Cycle_Eng_RawVal,
             this.TSMI_Columns_Cycle_Eng_Min,
             this.TSMI_Columns_Cycle_Eng_Max,
             this.TSMI_Columns_Cycle_Eng_Unit,
             this.TSMI_Columns_Cycle_Eng_Period,
+            this.TSMI_Columns_Cycle_Eng_Start,
+            this.TSMI_Columns_Cycle_Eng_Length,
+            this.TSMI_Columns_Cycle_Eng_Endianess,
+            this.TSMI_Columns_Cycle_Eng_Signedness,
+            this.TSMI_Columns_Cycle_Eng_Gain,
+            this.TSMI_Columns_Cycle_Eng_Zero,
             this.TSMI_Columns_Cycle_Eng_Count,
             this.TSMI_Columns_Cycle_Eng_DLC,
             this.TSMI_Columns_Cycle_Eng_Comment});
@@ -1108,89 +1136,89 @@ namespace CANStream
             // TSMI_Columns_Cycle_Eng_ShowAll
             // 
             this.TSMI_Columns_Cycle_Eng_ShowAll.Name = "TSMI_Columns_Cycle_Eng_ShowAll";
-            this.TSMI_Columns_Cycle_Eng_ShowAll.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_ShowAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_ShowAll.Text = "Show All";
             this.TSMI_Columns_Cycle_Eng_ShowAll.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_ShowAllClick);
             // 
             // TSMI_Columns_Cycle_Eng_HideAll
             // 
             this.TSMI_Columns_Cycle_Eng_HideAll.Name = "TSMI_Columns_Cycle_Eng_HideAll";
-            this.TSMI_Columns_Cycle_Eng_HideAll.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_HideAll.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_HideAll.Text = "Hide All";
             this.TSMI_Columns_Cycle_Eng_HideAll.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_HideAllClick);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // TSMI_Columns_Cycle_Eng_ID
             // 
             this.TSMI_Columns_Cycle_Eng_ID.Name = "TSMI_Columns_Cycle_Eng_ID";
-            this.TSMI_Columns_Cycle_Eng_ID.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_ID.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_ID.Text = "ID";
             this.TSMI_Columns_Cycle_Eng_ID.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_IDClick);
             // 
             // TSMI_Columns_Cycle_Eng_Value
             // 
             this.TSMI_Columns_Cycle_Eng_Value.Name = "TSMI_Columns_Cycle_Eng_Value";
-            this.TSMI_Columns_Cycle_Eng_Value.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Value.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Value.Text = "Value";
             this.TSMI_Columns_Cycle_Eng_Value.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_ValueClick);
             // 
             // TSMI_Columns_Cycle_Eng_RawVal
             // 
             this.TSMI_Columns_Cycle_Eng_RawVal.Name = "TSMI_Columns_Cycle_Eng_RawVal";
-            this.TSMI_Columns_Cycle_Eng_RawVal.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_RawVal.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_RawVal.Text = "Raw value";
             this.TSMI_Columns_Cycle_Eng_RawVal.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_RawValClick);
             // 
             // TSMI_Columns_Cycle_Eng_Min
             // 
             this.TSMI_Columns_Cycle_Eng_Min.Name = "TSMI_Columns_Cycle_Eng_Min";
-            this.TSMI_Columns_Cycle_Eng_Min.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Min.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Min.Text = "Min";
             this.TSMI_Columns_Cycle_Eng_Min.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_MinClick);
             // 
             // TSMI_Columns_Cycle_Eng_Max
             // 
             this.TSMI_Columns_Cycle_Eng_Max.Name = "TSMI_Columns_Cycle_Eng_Max";
-            this.TSMI_Columns_Cycle_Eng_Max.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Max.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Max.Text = "Max";
             this.TSMI_Columns_Cycle_Eng_Max.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_MaxClick);
             // 
             // TSMI_Columns_Cycle_Eng_Unit
             // 
             this.TSMI_Columns_Cycle_Eng_Unit.Name = "TSMI_Columns_Cycle_Eng_Unit";
-            this.TSMI_Columns_Cycle_Eng_Unit.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Unit.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Unit.Text = "Unit";
             this.TSMI_Columns_Cycle_Eng_Unit.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_UnitClick);
             // 
             // TSMI_Columns_Cycle_Eng_Period
             // 
             this.TSMI_Columns_Cycle_Eng_Period.Name = "TSMI_Columns_Cycle_Eng_Period";
-            this.TSMI_Columns_Cycle_Eng_Period.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Period.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Period.Text = "Period";
             this.TSMI_Columns_Cycle_Eng_Period.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Period_Click);
             // 
             // TSMI_Columns_Cycle_Eng_Count
             // 
             this.TSMI_Columns_Cycle_Eng_Count.Name = "TSMI_Columns_Cycle_Eng_Count";
-            this.TSMI_Columns_Cycle_Eng_Count.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Count.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Count.Text = "Count";
             this.TSMI_Columns_Cycle_Eng_Count.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Count_Click);
             // 
             // TSMI_Columns_Cycle_Eng_DLC
             // 
             this.TSMI_Columns_Cycle_Eng_DLC.Name = "TSMI_Columns_Cycle_Eng_DLC";
-            this.TSMI_Columns_Cycle_Eng_DLC.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_DLC.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_DLC.Text = "DLC";
             this.TSMI_Columns_Cycle_Eng_DLC.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_DLC_Click);
             // 
             // TSMI_Columns_Cycle_Eng_Comment
             // 
             this.TSMI_Columns_Cycle_Eng_Comment.Name = "TSMI_Columns_Cycle_Eng_Comment";
-            this.TSMI_Columns_Cycle_Eng_Comment.Size = new System.Drawing.Size(128, 22);
+            this.TSMI_Columns_Cycle_Eng_Comment.Size = new System.Drawing.Size(152, 22);
             this.TSMI_Columns_Cycle_Eng_Comment.Text = "Comment";
             this.TSMI_Columns_Cycle_Eng_Comment.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_CommentClick);
             // 
@@ -1371,6 +1399,104 @@ namespace CANStream
             this.BGWrk_RecordConversion.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_RecordConversionProgressChanged);
             this.BGWrk_RecordConversion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_RecordConversionRunWorkerCompleted);
             // 
+            // TSMI_Columns_Manual_Rx_Eng_RxTx
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx.Name = "TSMI_Columns_Manual_Rx_Eng_RxTx";
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx.Text = "RxTx";
+            this.TSMI_Columns_Manual_Rx_Eng_RxTx.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_RxTx_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Start
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Start.Name = "TSMI_Columns_Manual_Rx_Eng_Start";
+            this.TSMI_Columns_Manual_Rx_Eng_Start.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Start.Text = "Start";
+            this.TSMI_Columns_Manual_Rx_Eng_Start.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Start_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Length
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Length.Name = "TSMI_Columns_Manual_Rx_Eng_Length";
+            this.TSMI_Columns_Manual_Rx_Eng_Length.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Length.Text = "Length";
+            this.TSMI_Columns_Manual_Rx_Eng_Length.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Length_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Endianess
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess.Name = "TSMI_Columns_Manual_Rx_Eng_Endianess";
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess.Text = "Endianess";
+            this.TSMI_Columns_Manual_Rx_Eng_Endianess.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Endianess_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Signed
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Signed.Name = "TSMI_Columns_Manual_Rx_Eng_Signed";
+            this.TSMI_Columns_Manual_Rx_Eng_Signed.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Signed.Text = "Signedness";
+            this.TSMI_Columns_Manual_Rx_Eng_Signed.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Signed_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Gain
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Gain.Name = "TSMI_Columns_Manual_Rx_Eng_Gain";
+            this.TSMI_Columns_Manual_Rx_Eng_Gain.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Gain.Text = "Gain";
+            this.TSMI_Columns_Manual_Rx_Eng_Gain.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Gain_Click);
+            // 
+            // TSMI_Columns_Manual_Rx_Eng_Zero
+            // 
+            this.TSMI_Columns_Manual_Rx_Eng_Zero.Name = "TSMI_Columns_Manual_Rx_Eng_Zero";
+            this.TSMI_Columns_Manual_Rx_Eng_Zero.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Manual_Rx_Eng_Zero.Text = "Zero";
+            this.TSMI_Columns_Manual_Rx_Eng_Zero.Click += new System.EventHandler(this.TSMI_Columns_Manual_Rx_Eng_Zero_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_RxTx
+            // 
+            this.TSMI_Columns_Cycle_Eng_RxTx.Name = "TSMI_Columns_Cycle_Eng_RxTx";
+            this.TSMI_Columns_Cycle_Eng_RxTx.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_RxTx.Text = "RxTx";
+            this.TSMI_Columns_Cycle_Eng_RxTx.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_RxTx_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Start
+            // 
+            this.TSMI_Columns_Cycle_Eng_Start.Name = "TSMI_Columns_Cycle_Eng_Start";
+            this.TSMI_Columns_Cycle_Eng_Start.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Start.Text = "Start";
+            this.TSMI_Columns_Cycle_Eng_Start.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Start_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Length
+            // 
+            this.TSMI_Columns_Cycle_Eng_Length.Name = "TSMI_Columns_Cycle_Eng_Length";
+            this.TSMI_Columns_Cycle_Eng_Length.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Length.Text = "Length";
+            this.TSMI_Columns_Cycle_Eng_Length.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Length_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Endianess
+            // 
+            this.TSMI_Columns_Cycle_Eng_Endianess.Name = "TSMI_Columns_Cycle_Eng_Endianess";
+            this.TSMI_Columns_Cycle_Eng_Endianess.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Endianess.Text = "Endianess";
+            this.TSMI_Columns_Cycle_Eng_Endianess.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Endianess_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Signedness
+            // 
+            this.TSMI_Columns_Cycle_Eng_Signedness.Name = "TSMI_Columns_Cycle_Eng_Signedness";
+            this.TSMI_Columns_Cycle_Eng_Signedness.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Signedness.Text = "Signedness";
+            this.TSMI_Columns_Cycle_Eng_Signedness.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Signedness_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Gain
+            // 
+            this.TSMI_Columns_Cycle_Eng_Gain.Name = "TSMI_Columns_Cycle_Eng_Gain";
+            this.TSMI_Columns_Cycle_Eng_Gain.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Gain.Text = "Gain";
+            this.TSMI_Columns_Cycle_Eng_Gain.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Gain_Click);
+            // 
+            // TSMI_Columns_Cycle_Eng_Zero
+            // 
+            this.TSMI_Columns_Cycle_Eng_Zero.Name = "TSMI_Columns_Cycle_Eng_Zero";
+            this.TSMI_Columns_Cycle_Eng_Zero.Size = new System.Drawing.Size(152, 22);
+            this.TSMI_Columns_Cycle_Eng_Zero.Text = "Zero";
+            this.TSMI_Columns_Cycle_Eng_Zero.Click += new System.EventHandler(this.TSMI_Columns_Cycle_Eng_Zero_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1538,5 +1664,19 @@ namespace CANStream
         private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Period;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Count;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_DLC;
-	}
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_RxTx;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Start;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Length;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Endianess;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Signed;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Gain;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Rx_Eng_Zero;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_RxTx;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Start;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Length;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Endianess;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Signedness;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Gain;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Cycle_Eng_Zero;
+    }
 }

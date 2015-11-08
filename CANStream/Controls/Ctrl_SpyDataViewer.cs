@@ -73,18 +73,25 @@ namespace CANStream
 	{
         #region Private constants
 
-        private const int GRID_SPYENG_COLLAPSE  = 0;
-        private const int GRID_SPYENG_MSG_ID    = 1;
-        private const int GRID_SPYENG_NAME      = 2;
-        private const int GRID_SPYENG_RAW_VALUE = 3;
-        private const int GRID_SPYENG_ENG_VALUE = 4;
-        private const int GRID_SPYENG_MIN_VALUE = 5;
-        private const int GRID_SPYENG_MAX_VALUE = 6;
-        private const int GRID_SPYENG_UNIT      = 7;
-        private const int GRID_SPYENG_PERIOD    = 8;
-        private const int GRID_SPYENG_COUNT     = 9;
-        private const int GRID_SPYENG_DLC       = 10;
-        private const int GRID_SPYENG_COMMENT   = 11;
+        private const int GRID_SPYENG_COLLAPSE      = 0;
+        private const int GRID_SPYENG_MSG_ID        = 1;
+        private const int GRID_SPYENG_MSG_RXTX      = 2;
+        private const int GRID_SPYENG_NAME          = 3;
+        private const int GRID_SPYENG_RAW_VALUE     = 4;
+        private const int GRID_SPYENG_ENG_VALUE     = 5;
+        private const int GRID_SPYENG_MIN_VALUE     = 6;
+        private const int GRID_SPYENG_MAX_VALUE     = 7;
+        private const int GRID_SPYENG_UNIT          = 8;
+        private const int GRID_SPYENG_PERIOD        = 9;
+        private const int GRID_SPYENG_START         = 10;
+        private const int GRID_SPYENG_LENGTH        = 11;
+        private const int GRID_SPYENG_ENDIANESS     = 12;
+        private const int GRID_SPYENG_SIGNEDNESS    = 13;
+        private const int GRID_SPYENG_GAIN          = 14;
+        private const int GRID_SPYENG_ZERO          = 15;
+        private const int GRID_SPYENG_COUNT         = 16;
+        private const int GRID_SPYENG_DLC           = 17;
+        private const int GRID_SPYENG_COMMENT       = 18;
 
         private const int GRID_MAX_COL_WIDTH = 60;
 		private const int GRID_ENG_SPY_FILLER_COL = GRID_SPYENG_COMMENT;	//Column 'Comment' 		
@@ -191,7 +198,7 @@ namespace CANStream
 		}
 		
 		#region Columns
-		
+
 		private void ContextSpyEng_showAllToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns.All);
@@ -204,143 +211,88 @@ namespace CANStream
 		
 		private void ContextSpyEng_iDToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_iDToolStripMenuItem.Checked = !ContextSpyEng_iDToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_iDToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_ID);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_ID));
-			}
-		}
-		
-		private void ContextSpyEng_valueToolStripMenuItemClick(object sender, EventArgs e)
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_ID);
+        }
+
+        private void ContextSpyEng_RxTxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_RxTx);
+        }
+
+        private void ContextSpyEng_valueToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_valueToolStripMenuItem.Checked = !ContextSpyEng_valueToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_valueToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Value);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Value));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Value);
+        }
 		
 		private void ContextSpyEng_rawValueToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_rawValueToolStripMenuItem.Checked = !ContextSpyEng_rawValueToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_rawValueToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_RawValue);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_RawValue));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_RawValue);
+        }
 		
 		private void ContextSpyEng_minToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_minToolStripMenuItem.Checked = !ContextSpyEng_minToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_minToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Min);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Min));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Min);
+        }
 		
 		private void ContextSpyEng_maxToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_maxToolStripMenuItem.Checked = !ContextSpyEng_maxToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_maxToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Max);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Max));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Max);
+        }
 		
 		private void ContextSpyEng_unitToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_unitToolStripMenuItem.Checked = !ContextSpyEng_unitToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_unitToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Unit);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Unit));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Unit);
+        }
 
         private void ContextSpyEng_periodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ContextSpyEng_periodToolStripMenuItem.Checked = !ContextSpyEng_periodToolStripMenuItem.Checked;
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Period);
+        }
 
-            if (ContextSpyEng_periodToolStripMenuItem.Checked)
-            {
-                Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Period);
-            }
-            else
-            {
-                Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Period));
-            }
+        private void ContextSpyEng_StartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Start);
+        }
+
+        private void ContextSpyEng_LengthToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Length);
+        }
+
+        private void ContextSpyEng_EndianessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Endianess);
+        }
+
+        private void ContextSpyEng_SignedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Signedness);
+        }
+
+        private void ContextSpyEng_GainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Gain);
+        }
+
+        private void ContextSpyEng_ZeroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Zero);
         }
 
         private void ContextSpyEng_countToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ContextSpyEng_countToolStripMenuItem.Checked = !ContextSpyEng_countToolStripMenuItem.Checked;
-
-            if (ContextSpyEng_countToolStripMenuItem.Checked)
-            {
-                Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Count);
-            }
-            else
-            {
-                Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Count));
-            }
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Count);
         }
 
         private void ContextSpyEng_dlcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ContextSpyEng_dlcToolStripMenuItem.Checked = !ContextSpyEng_dlcToolStripMenuItem.Checked;
-
-            if (ContextSpyEng_dlcToolStripMenuItem.Checked)
-            {
-                Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_DLC);
-            }
-            else
-            {
-                Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_DLC));
-            }
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_DLC);
         }
 
 		private void ContextSpyEng_commentToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			ContextSpyEng_commentToolStripMenuItem.Checked = !ContextSpyEng_commentToolStripMenuItem.Checked;
-			
-			if (ContextSpyEng_commentToolStripMenuItem.Checked)
-			{
-				Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | SpyEngineering_Grid_Columns.Column_Comment);
-			}
-			else
-			{
-				Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - SpyEngineering_Grid_Columns.Column_Comment));
-			}
-		}
+            ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, SpyEngineering_Grid_Columns.Column_Comment);
+        }
 		
 		#endregion
 		
@@ -420,33 +372,62 @@ namespace CANStream
 			return(ColVisible);
 		}
 		
+        private void ContexSpyGridColumnsChanged(ToolStripMenuItem oMenuItem, SpyEngineering_Grid_Columns eColumn)
+        {
+            oMenuItem.Checked = !oMenuItem.Checked;
+
+            if(oMenuItem.Checked)
+            {
+                Set_SpyEngGridColumnsVisible(SpyEngGridColumnsVisible | eColumn);
+            }
+            else
+            {
+                Set_SpyEngGridColumnsVisible((SpyEngineering_Grid_Columns)(SpyEngGridColumnsVisible - eColumn));
+            }
+
+        }
+
 		private void Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns eColumnsVisible)
 		{
 			SpyEngGridColumnsVisible = eColumnsVisible;
 
             Grid_SpyEngineering.Columns[GRID_SPYENG_MSG_ID].Visible     = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_ID);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_MSG_RXTX].Visible   = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RxTx);
             Grid_SpyEngineering.Columns[GRID_SPYENG_RAW_VALUE].Visible  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RawValue);
             Grid_SpyEngineering.Columns[GRID_SPYENG_ENG_VALUE].Visible  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Value);
             Grid_SpyEngineering.Columns[GRID_SPYENG_MIN_VALUE].Visible  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Min);
             Grid_SpyEngineering.Columns[GRID_SPYENG_MAX_VALUE].Visible  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Max);
             Grid_SpyEngineering.Columns[GRID_SPYENG_UNIT].Visible       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Unit);
             Grid_SpyEngineering.Columns[GRID_SPYENG_PERIOD].Visible     = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Period);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_START].Visible      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Start);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_LENGTH].Visible     = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Length);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_ENDIANESS].Visible  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Endianess);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_SIGNEDNESS].Visible = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Signedness);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_GAIN].Visible       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Gain);
+            Grid_SpyEngineering.Columns[GRID_SPYENG_ZERO].Visible       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Zero);
             Grid_SpyEngineering.Columns[GRID_SPYENG_COUNT].Visible      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Count);
             Grid_SpyEngineering.Columns[GRID_SPYENG_DLC].Visible        = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_DLC);
             Grid_SpyEngineering.Columns[GRID_SPYENG_COMMENT].Visible    = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Comment);
 			
 			ResizeGridColumns(Grid_SpyEngineering, GRID_ENG_SPY_FILLER_COL);
 			
-			ContextSpyEng_iDToolStripMenuItem.Checked       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_ID);
-			ContextSpyEng_valueToolStripMenuItem.Checked    = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Value);
-			ContextSpyEng_rawValueToolStripMenuItem.Checked = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RawValue);
-			ContextSpyEng_minToolStripMenuItem.Checked      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Min);
-			ContextSpyEng_maxToolStripMenuItem.Checked      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Max);
-			ContextSpyEng_unitToolStripMenuItem.Checked     = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Unit);
-            ContextSpyEng_periodToolStripMenuItem.Checked   = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Period);
-            ContextSpyEng_countToolStripMenuItem.Checked    = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Count);
-            ContextSpyEng_dlcToolStripMenuItem.Checked      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_DLC);
-			ContextSpyEng_commentToolStripMenuItem.Checked  = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Comment);
+			ContextSpyEng_iDToolStripMenuItem.Checked           = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_ID);
+            ContextSpyEng_RxTxToolStripMenuItem.Checked         = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RxTx);
+            ContextSpyEng_valueToolStripMenuItem.Checked        = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Value);
+			ContextSpyEng_rawValueToolStripMenuItem.Checked     = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RawValue);
+			ContextSpyEng_minToolStripMenuItem.Checked          = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Min);
+			ContextSpyEng_maxToolStripMenuItem.Checked          = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Max);
+			ContextSpyEng_unitToolStripMenuItem.Checked         = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Unit);
+            ContextSpyEng_periodToolStripMenuItem.Checked       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Period);
+            ContextSpyEng_StartToolStripMenuItem.Checked        = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Start);
+            ContextSpyEng_LengthToolStripMenuItem.Checked       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Length);
+            ContextSpyEng_EndianessToolStripMenuItem.Checked    = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Endianess);
+            ContextSpyEng_SignedToolStripMenuItem.Checked       = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Signedness);
+            ContextSpyEng_GainToolStripMenuItem.Checked         = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Gain);
+            ContextSpyEng_ZeroToolStripMenuItem.Checked         = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Zero);
+            ContextSpyEng_countToolStripMenuItem.Checked        = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Count);
+            ContextSpyEng_dlcToolStripMenuItem.Checked          = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_DLC);
+			ContextSpyEng_commentToolStripMenuItem.Checked      = SpyEngGridColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Comment);
 			
 			//Event EngGridColumnsVisibleChanged firing
 			EngGridColVisibleChangedEventArgs Arg = new EngGridColVisibleChangedEventArgs();
@@ -568,6 +549,12 @@ namespace CANStream
             oRow.Cells[GRID_SPYENG_COLLAPSE].Value = Icones.Grid_NoAction2;
             oRow.Cells[GRID_SPYENG_NAME].Value = oEngParam.Name;
             oRow.Cells[GRID_SPYENG_UNIT].Value = oEngParam.Unit;
+            oRow.Cells[GRID_SPYENG_START].Value = oEngParam.StartBit.ToString();
+            oRow.Cells[GRID_SPYENG_LENGTH].Value = oEngParam.Length.ToString();
+            oRow.Cells[GRID_SPYENG_ENDIANESS].Value = oEngParam.Endianess.ToString();
+            oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = oEngParam.Signed.ToString();
+            oRow.Cells[GRID_SPYENG_GAIN].Value = oEngParam.Gain.ToString();
+            oRow.Cells[GRID_SPYENG_ZERO].Value = oEngParam.Zero.ToString();
             oRow.Cells[GRID_SPYENG_COMMENT].Value = oEngParam.Comment;
 
             //Init Min/Max cellse
@@ -863,6 +850,7 @@ namespace CANStream
                 {
                     //Update message name and comment if first message update
                     oRawDataRow.Cells[GRID_SPYENG_NAME].Value = oEngMsg.Name;
+                    oRawDataRow.Cells[GRID_SPYENG_MSG_RXTX].Value = oEngMsg.RxTx.ToString();
                     oRawDataRow.Cells[GRID_SPYENG_COMMENT].Value = oEngMsg.Comment;
                 }
 
@@ -1298,8 +1286,8 @@ namespace CANStream
     }
 
     #region Grids columns visible changed event argument
-	
-	public class EngGridColVisibleChangedEventArgs : EventArgs
+
+    public class EngGridColVisibleChangedEventArgs : EventArgs
 	{
 		public SpyEngineering_Grid_Columns ColumnsVisible {get; set;}
 	}

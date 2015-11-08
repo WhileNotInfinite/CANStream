@@ -1453,7 +1453,7 @@ namespace CANStream
             // TSLbl_IdFilterTo
             // 
             this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
-            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(21, 22);
+            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(20, 22);
             this.TSLbl_IdFilterTo.Text = "To";
             // 
             // TSTxt_IdFilterTo

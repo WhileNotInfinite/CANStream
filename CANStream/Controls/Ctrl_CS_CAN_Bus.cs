@@ -57,19 +57,27 @@ namespace CANStream
 	
 	public enum SpyEngineering_Grid_Columns
 	{
-		None			= 0x0000,
-		Column_ID       = 0x0001,
-		Column_Value    = 0x0002,
-		Column_RawValue = 0x0004,
-		Column_Min      = 0x0008,
-		Column_Max      = 0x0010,
-		Column_Unit     = 0x0020,
-		Column_Comment  = 0x0040,
-        Column_DLC      = 0x0080,
-        Column_Period   = 0x0100,
-        Column_Count    = 0x0200,
-		All				= 0x03FF, //Update value 'All' in case of change
-		Default			= (Column_Value | Column_Min | Column_Max | Column_Unit | Column_Comment),
+		None			    = 0x00000000,
+		Column_ID           = 0x00000001,
+        Column_RxTx         = 0x00000002,
+        Column_Value        = 0x00000004,
+		Column_RawValue     = 0x00000008,
+		Column_Min          = 0x00000010,
+		Column_Max          = 0x00000020,
+		Column_Unit         = 0x00000040,
+        Column_Period       = 0x00000080,
+        Column_Start        = 0x00000100,
+        Column_Length       = 0x00000200,
+        Column_Endianess    = 0x00000400,
+        Column_Signedness   = 0x00000800,
+        Column_Gain         = 0x00001000,
+        Column_Zero         = 0x00002000,
+        Column_Count        = 0x00004000,
+        Column_DLC          = 0x00008000,
+        Column_Comment      = 0x00010000,
+
+        All				    = 0x0001FFFF, //Update value 'All' in case of change
+		Default			    = (Column_Value | Column_Min | Column_Max | Column_Unit | Column_Comment),
 	}
 	
 	public enum RecordingMode
