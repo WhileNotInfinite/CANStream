@@ -812,8 +812,6 @@ namespace CANStream
 		{
 			Txt_ChanName.Text = "";
 			Txt_ChanUnit.Text = "";
-            //TODO: Remove
-            //Txt_ChanDecimal.Text = "2";
 			Chk_ChanComputationEnabled.Checked = true;
 			Txt_ChanValDef.Text = "0";
 			rTxt_ChanComment.Text = "";
@@ -848,25 +846,6 @@ namespace CANStream
 			oActiveChannel.Comment = rTxt_ChanComment.Text;
 			oActiveChannel.Enabled = Chk_ChanComputationEnabled.Checked;
 
-            //TODO: Remove
-   //         if (!(Txt_ChanDecimal.Text.Equals("")))
-			//{
-			//	int dec = 0;
-			//	if (int.TryParse(Txt_ChanDecimal.Text,out dec))
-			//	{
-   //                 oActiveChannel.Decimals = dec;
-			//	}
-			//	else
-			//	{
-			//		MessageBox.Show("Decimals of the virtual channel must be a number !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-			//		return(false);
-			//	}
-			//}
-			//else
-			//{
-   //             oActiveChannel.Decimals = 0;
-			//}
-			
 			if (!(Txt_ChanValDef.Text.Equals("")))
 			{
 				double ValDef = 0;
@@ -1075,9 +1054,6 @@ namespace CANStream
 				{
 					if (!oActiveLibrary.ChannelExists(Txt_ChanName.Text))
 					{
-						//TODO:Remove
-                        //oActiveChannel = new CS_VirtualChannel();
-						
 						if (SetActiveChannel())
 						{
 							//Add the channel into the active library
@@ -1160,8 +1136,6 @@ namespace CANStream
 					//oActiveChannel.ParentLibraryName = oActiveLibrary.Name;
 					
 					Txt_ChanName.Text = oActiveChannel.Name;
-                    //TODO: Remove
-                    //Txt_ChanDecimal.Text = oActiveChannel.Decimals.ToString();
 					Txt_ChanUnit.Text = oActiveChannel.Unit;
 					Chk_ChanComputationEnabled.Checked = oActiveChannel.Enabled;
 					Txt_ChanValDef.Text = oActiveChannel.DefaultValue.ToString();

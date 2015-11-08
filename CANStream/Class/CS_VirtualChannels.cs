@@ -717,12 +717,6 @@ namespace CANStream
 		/// </summary>
 		public string Unit;
 		
-		//TODO: Remove
-        /// <summary>
-		/// Virtual channel decimal rounding
-		/// </summary>
-		//public int Decimals; 
-		
 		/// <summary>
 		/// Virtual channel computation enabled flag
 		/// </summary>
@@ -819,8 +813,6 @@ namespace CANStream
 			Name = "";
 			Comment = "";
 			Unit = "";
-            //TODO: Remove
-			//Decimals = 0;
 			Expression = "";
 			Enabled = true;
             ValueFormat = new SignalFormatProperties();
@@ -913,9 +905,6 @@ namespace CANStream
 
                 if (UpDateFleeContextVariable() | bForceComputation | bForceNextComputation)
 				{
-                    //TODO: Remove
-                    //Value = Math.Round(Flee_Expression.Evaluate(), Decimals);
-
                     Value = Flee_Expression.Evaluate();
                     InError = false;
 					bNewValue=true;
@@ -1148,11 +1137,6 @@ namespace CANStream
 				xAtrChanUnit.Value = oVChan.Unit;
 				xVirtual.Attributes.Append(xAtrChanUnit);
 				
-                //TODO: Remove
-				//XmlAttribute xAtrChanDec = oXmlLib.CreateAttribute("Decimal");
-				//xAtrChanDec.Value = oVChan.Decimals.ToString();
-				//xVirtual.Attributes.Append(xAtrChanDec);
-				
 				XmlAttribute xAtrChanEnabled = oXmlLib.CreateAttribute("Enabled");
 				xAtrChanEnabled.Value = oVChan.Enabled.ToString();
 				xVirtual.Attributes.Append(xAtrChanEnabled);
@@ -1247,13 +1231,6 @@ namespace CANStream
 							{
 								oChannel.Enabled = true;
 							}
-
-                            //TODO: Remove
-                            //int dec = 0;
-                            //if(int.TryParse(xChannel.Attributes["Decimal"].Value, out dec))
-                            //{
-                            //	oChannel.Decimals =  dec;
-                            //}
 
                             XmlNode xChanFormat = xChannel.SelectSingleNode("ValueFormat");
                             if (!(xChanFormat == null))
@@ -1389,8 +1366,6 @@ namespace CANStream
 				CS_VirtualChannel oClone = new CS_VirtualChannel();
 				
 				oClone.Comment = OrigialChannel.Comment;
-                //TODO: Remove
-                //oClone.Decimals = OrigialChannel.Decimals;
 				oClone.Expression = OrigialChannel.Expression;
 				oClone.Name = OrigialChannel.Name;
 				oClone.Unit = OrigialChannel.Unit;

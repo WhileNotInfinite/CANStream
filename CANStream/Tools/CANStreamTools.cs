@@ -158,14 +158,6 @@ namespace CANStream
 				}
 			}
 			
-            //TODO: Old code remove
-            //if (FolderTrcFilesInfo.Count > 0)
-            //{
-            //    return (FolderTrcFilesInfo.ToArray());
-            //}
-
-            //return (null);
-
             return (FolderTrcFilesInfo.ToArray());
 		}
 		
