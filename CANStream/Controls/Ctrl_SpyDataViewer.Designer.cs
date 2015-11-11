@@ -8,7 +8,7 @@
  */
 namespace CANStream
 {
-	partial class Ctrl_SpyDataViewer
+	partial class Ctrl_CANDataGrid
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.

@@ -65,7 +65,6 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Deb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordEventInformation.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordSessionInfo.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordUserInformations.resources
-C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_SpyDataViewer.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Dlg_DBCTransmitterSelection.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_About.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_BuiltInSignal.resources
@@ -138,3 +137,4 @@ G:\Git\CANStream_USB\CANStream\bin\Debug\netchartdir_cp.xml
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.exe
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.pdb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_ParamEnumerationEdition.resources
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_CANDataGrid.resources

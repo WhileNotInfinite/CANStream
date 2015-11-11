@@ -35,51 +35,27 @@ namespace CANStream
 		Grid_SpyEng    = 3,
 		Grid_Cycle_Eng = 5,
 	}
-	
-	public enum Manual_Grid_Columns
-	{
-		None			  = 0x0000,
-		Column_ID         = 0x0001,
-		Column_RxTx       = 0x0002,
-		Column_Period     = 0x0004,
-		Column_MuxValue   = 0x0008,
-		Column_Start      = 0x0010,
-		Column_Length     = 0x0020,
-		Column_Endianess  = 0x0040,
-		Column_Signedness = 0x0080,
-		Column_Gain       = 0x0100,
-		Column_Zero       = 0x0200,
-		Column_Unit       = 0x0400,
-		Column_Comment    = 0x0800,
-		All				  = 0x0FFF, //Update value 'All' in case of change
-		Default 		  = (Column_ID | Column_RxTx | Column_Period | Column_Unit | Column_Comment),
-	}
-	
-	public enum SpyEngineering_Grid_Columns
-	{
-		None			    = 0x00000000,
-		Column_ID           = 0x00000001,
-        Column_RxTx         = 0x00000002,
-        Column_Value        = 0x00000004,
-		Column_RawValue     = 0x00000008,
-		Column_Min          = 0x00000010,
-		Column_Max          = 0x00000020,
-		Column_Unit         = 0x00000040,
-        Column_Period       = 0x00000080,
-        Column_Start        = 0x00000100,
-        Column_Length       = 0x00000200,
-        Column_Endianess    = 0x00000400,
-        Column_Signedness   = 0x00000800,
-        Column_Gain         = 0x00001000,
-        Column_Zero         = 0x00002000,
-        Column_Count        = 0x00004000,
-        Column_DLC          = 0x00008000,
-        Column_Comment      = 0x00010000,
 
-        All				    = 0x0001FFFF, //Update value 'All' in case of change
-		Default			    = (Column_Value | Column_Min | Column_Max | Column_Unit | Column_Comment),
-	}
-	
+    //TODO: Remove
+    //public enum Manual_Grid_Columns
+    //{
+    //	None			  = 0x0000,
+    //	Column_ID         = 0x0001,
+    //	Column_RxTx       = 0x0002,
+    //	Column_Period     = 0x0004,
+    //	Column_MuxValue   = 0x0008,
+    //	Column_Start      = 0x0010,
+    //	Column_Length     = 0x0020,
+    //	Column_Endianess  = 0x0040,
+    //	Column_Signedness = 0x0080,
+    //	Column_Gain       = 0x0100,
+    //	Column_Zero       = 0x0200,
+    //	Column_Unit       = 0x0400,
+    //	Column_Comment    = 0x0800,
+    //	All				  = 0x0FFF, //Update value 'All' in case of change
+    //	Default 		  = (Column_ID | Column_RxTx | Column_Period | Column_Unit | Column_Comment),
+    //}
+
 	public enum RecordingMode
 	{
 		Manual  = 0,
@@ -235,14 +211,17 @@ namespace CANStream
         private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
 		private const int SPY_GRID_UPDATE_PERIOD=100;
 		private const int SPY_GRAPH_UPDATE_PERIOD=100;
-		private Color GRID_BACK_COLOR=Color.LightBlue;
-		private const int GRID_MANUAL_VALUE_COL = 11;
-        private const int GRID_MANUAL_MSG_ID_COL = 0;
-        private const int GRID_MANUAL_NAME_COL = 4;
-		private const int GRID_MANUAL_COMMENT_COL = 13;
-		private const int GRID_MAX_COL_WIDTH = 60;							
-		private const int GRID_ENG_MANUAL_FILLER_COL = 13;	//Column 'Comment'
-		private const int GRID_RAW_MANUAL_FILLER_COL = 0;	//Column 'ID'
+
+        //TODO: Remove
+        //private Color GRID_BACK_COLOR=Color.LightBlue;
+        //private const int GRID_MANUAL_VALUE_COL = 11;
+        //private const int GRID_MANUAL_MSG_ID_COL = 0;
+        //private const int GRID_MANUAL_NAME_COL = 4;
+        //private const int GRID_MANUAL_COMMENT_COL = 13;
+        //private const int GRID_MAX_COL_WIDTH = 60;							
+        //private const int GRID_ENG_MANUAL_FILLER_COL = 13;	//Column 'Comment'
+
+        private const int GRID_RAW_MANUAL_FILLER_COL = 0;	//Column 'ID'
         private const int GRID_RAW_COL_TX_PERIOD = 2;
 		private const int GRID_RAW_COL_TX_BTN = 4;		
 		private const int GRID_RAW_COL_1ST_BYTE = 5;
@@ -263,8 +242,9 @@ namespace CANStream
 		private bool bManualRunning;
 		private bool bSpyRunning;
 		
-		private Manual_Grid_Columns ManualGridColumnsVisible;
-		private Ctrl_SpyDataViewer CurrentSpyViewer;
+        //TODO: Remove
+		//private Manual_Grid_Columns ManualGridColumnsVisible;
+		private Ctrl_CANDataGrid CurrentSpyViewer;
 		
 		//Cycle control
 		private bool bPauseCycle;
@@ -375,7 +355,7 @@ namespace CANStream
 				
 		public event EventHandler<ControllerLayoutChangedEventArgs> ControllerLayoutChanged;
 		
-		public event EventHandler<ControllerGridColumnsChangedEventArgs> ControllerGridColumnsChanged;
+		public event EventHandler<ControllerGridColumnsChangedEventArgs> ControllerGridColumnsChanged; //TODO: What grid ?
 		
 		public event EventHandler<ControllerDiagChangedEventArgs> ControllerDiagChanged;
 		
@@ -424,10 +404,10 @@ namespace CANStream
 			Cmb_SpyCANRxMode.Items.Clear();
 			Cmb_SpyCANRxMode.Items.AddRange(Enum.GetNames(typeof(SpyCANRxMode)));
 			
-			CurrentSpyViewer = Manual_SpyDataViewer;
+			CurrentSpyViewer = Grid_ManualDataViewer;
 			
-			Set_ManualGridColumnsVisible(Manual_Grid_Columns.Default);
-			Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns.Default);
+			Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum.Default);
+			Set_RxGridColumnsVisible(GridCANData_ColumnsEnum.Default);
 			
 			//Initialization of cycle control management
 			iLoopInitial=0;
@@ -747,7 +727,7 @@ namespace CANStream
 		
 		#region Manual_SpyDataViewer
 		
-		private void Manual_SpyDataViewerEngGridColumnsVisibleChanged(object sender, EngGridColVisibleChangedEventArgs e)
+		private void Manual_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
 		{
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, e.ColumnsVisible);
 		}
@@ -1007,240 +987,22 @@ namespace CANStream
 		private void Chk_VirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
 		{
 			bVirtualParamTx = Chk_VirtualParamTxEnabled.Checked;
-			
-			if (Grid_CANData.Rows.Count > 0)
-			{
-				for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-				{
-					if (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly) //If cell 'Value' of a vitual parameter is read-only
-					{
-						Grid_CANData.Rows[iRow].Visible = bVirtualParamTx;
-					}
-				}
-			}
+
+            //TODO: Create a 'VirtualChannelVisible' property in the CtrlSpyViewer control allowing to hide or show virtual channles
+
+            //TODO: Remove old code
+            //if (Grid_CANData.Rows.Count > 0)
+			//{
+			//	for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
+			//	{
+			//		if (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly) //If cell 'Value' of a vitual parameter is read-only
+			//		{
+			//			Grid_CANData.Rows[iRow].Visible = bVirtualParamTx;
+			//		}
+			//	}
+			//}
 		}
-		
-		#region Context_ManualGrid
-		
-		private void HideRowToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			HideActiveRow();
-		}
-		
-		private void ShowHiddenRowsToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			ShowHiddenRows();
-		}
-		
-		private void ManualGrid_Filter_Combo_TSMIKeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode.Equals(Keys.Enter))
-			{
-				if (!(ManualGrid_Filter_Combo_TSMI.Text.Equals("")))
-				{
-					if (!(ManualGrid_Filter_Combo_TSMI.Items.Contains(ManualGrid_Filter_Combo_TSMI.Text)))
-					{
-						//FIFO
-						if (ManualGrid_Filter_Combo_TSMI.Items.Count == 10)
-						{
-							ManualGrid_Filter_Combo_TSMI.Items.RemoveAt(9);
-						}
-						
-						ManualGrid_Filter_Combo_TSMI.Items.Insert(0, ManualGrid_Filter_Combo_TSMI.Text);
-					}
-				}
-				
-				FilterManualCanConfig(ManualGrid_Filter_Combo_TSMI.Text);
-			}
-		}
-		
-		private void ManualGrid_Filter_Combo_TSMISelectedIndexChanged(object sender, EventArgs e)
-		{
-			FilterManualCanConfig(ManualGrid_Filter_Combo_TSMI.Text);
-		}
-		
-		#region Columns
-		
-		private void Context_Manual_showAllToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Set_ManualGridColumnsVisible(Manual_Grid_Columns.All);
-		}
-		
-		private void Context_Manual_hideAllToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Set_ManualGridColumnsVisible(Manual_Grid_Columns.None);
-		}
-		
-		private void Context_Manual_iDToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_iDToolStripMenuItem.Checked = !Context_Manual_iDToolStripMenuItem.Checked;
-			
-			if (Context_Manual_iDToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_ID);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_ID));
-			}			
-		}
-		
-		private void Context_Manual_rxTxToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_rxTxToolStripMenuItem.Checked = !Context_Manual_rxTxToolStripMenuItem.Checked;
-			
-			if (Context_Manual_rxTxToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_RxTx);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_RxTx));
-			}
-		}
-		
-		private void Context_Manual_periodToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_periodToolStripMenuItem.Checked = !Context_Manual_periodToolStripMenuItem.Checked;
-			
-			if (Context_Manual_periodToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Period);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Period));
-			}
-		}
-		
-		private void Context_Manual_muxValueToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_muxValueToolStripMenuItem.Checked = !Context_Manual_muxValueToolStripMenuItem.Checked;
-			
-			if (Context_Manual_muxValueToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_MuxValue);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_MuxValue));
-			}
-		}
-		
-		private void Context_Manual_startToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_startToolStripMenuItem.Checked = !Context_Manual_startToolStripMenuItem.Checked;
-			
-			if (Context_Manual_startToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Start);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Start));
-			}
-		}
-		
-		private void Context_Manual_lengthToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_lengthToolStripMenuItem.Checked = !Context_Manual_lengthToolStripMenuItem.Checked;
-			
-			if (Context_Manual_lengthToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Length);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Length));
-			}
-		}
-		
-		private void Context_Manual_endianessToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_endianessToolStripMenuItem.Checked = !Context_Manual_endianessToolStripMenuItem.Checked;
-			
-			if (Context_Manual_endianessToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Endianess);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Endianess));
-			}
-		}
-		
-		private void Context_Manual_signedToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_signedToolStripMenuItem.Checked = !Context_Manual_signedToolStripMenuItem.Checked;
-			
-			if (Context_Manual_signedToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Signedness);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Signedness));
-			}
-		}
-		
-		private void Context_Manual_gainToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_gainToolStripMenuItem.Checked = !Context_Manual_gainToolStripMenuItem.Checked;
-			
-			if (Context_Manual_gainToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Gain);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Gain));
-			}
-		}
-		
-		private void Context_Manual_zeroToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_zeroToolStripMenuItem.Checked = !Context_Manual_zeroToolStripMenuItem.Checked;
-			
-			if (Context_Manual_zeroToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Zero);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Zero));
-			}
-		}
-		
-		private void Context_Manual_unitToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_unitToolStripMenuItem.Checked = !Context_Manual_unitToolStripMenuItem.Checked;
-			
-			if (Context_Manual_unitToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Unit);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Unit));
-			}
-		}
-		
-		private void Context_Manual_commentToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Context_Manual_commentToolStripMenuItem.Checked = !Context_Manual_commentToolStripMenuItem.Checked;
-			
-			if (Context_Manual_commentToolStripMenuItem.Checked)
-			{
-				Set_ManualGridColumnsVisible(ManualGridColumnsVisible | Manual_Grid_Columns.Column_Comment);
-			}
-			else
-			{
-				Set_ManualGridColumnsVisible((Manual_Grid_Columns)(ManualGridColumnsVisible - Manual_Grid_Columns.Column_Comment));
-			}
-		}
-		
-		#endregion
-		
+	
 		#endregion
 		
 		#region Context_ManualRawGrid
@@ -1274,117 +1036,7 @@ namespace CANStream
 
         #region DataGrid Manual CAN Config
 
-        private void Grid_CANData_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (!(Grid_CANData.CurrentCell.Tag == null))
-            {
-                CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
-
-                if (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
-                {
-                    ListBox oList = new ListBox();
-                    Rectangle CellRect = Grid_CANData.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-
-                    oList.Visible = false;
-                    Grid_CANData.Controls.Add(oList);
-
-                    oList.Location = CellRect.Location;
-                    oList.Width = CellRect.Width;
-                    oList.Height = CellRect.Height * 2;
-                    oList.Tag = Grid_CANData.CurrentCell;
-
-                    oList.Items.AddRange(oParam.ValueFormat.GetEnumerationNames());
-
-                    oList.SelectedIndexChanged += new EventHandler(EnumList_SelectedIndexChanged);
-                    oList.LostFocus += new EventHandler(EnumList_LostFocus);
-                    oList.KeyDown += new KeyEventHandler(EnumList_KeyDown);
-
-                    oList.Visible = true;
-                    oList.Focus();
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void Grid_CANData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Grid_CANData.CurrentCell != null)
-            {
-                if (!(Grid_CANData.CurrentCell.Tag == null))
-                {
-                    CANParameter oParam = (CANParameter)Grid_CANData.CurrentCell.Tag;
-
-                    double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.CurrentCell.Value.ToString());
-
-                    if (!(Double.IsNaN(EngValue)))
-                    {
-                        oParam.DecodedValue = EngValue;
-                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(EngValue);
-
-                        Color CellBackColor = SystemColors.Window;
-                        Color CellForeColor = SystemColors.WindowText;
-
-                        Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngValue));
-
-                        if (sAlarm.HasValue)
-                        {
-                            CellBackColor = sAlarm.Value.BackColor;
-                            CellForeColor = sAlarm.Value.ForeColor;
-                        }
-
-                        Grid_CANData.CurrentCell.Style.BackColor = CellBackColor;
-                        Grid_CANData.CurrentCell.Style.ForeColor = CellForeColor;
-
-                        UpdateManualControlMessagesData();
-                    }
-                    else
-                    {
-                        MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
-                                                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                        Grid_CANData.CurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
-                    }
-                }
-            }
-        }
-
-        private void Grid_CANDataSizeChanged(object sender, EventArgs e)
-		{
-        	ResizeGridColumns(Grid_CANData, GRID_ENG_MANUAL_FILLER_COL);
-		}
-
-        #region EnumList
-
-        private void EnumList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListBox oList = (ListBox)sender;
-
-            if (!(oList.Tag == null))
-            {
-                DataGridViewCell oCell = (DataGridViewCell)oList.Tag;
-                oCell.Value = oList.SelectedItem.ToString();
-            }
-
-            Grid_CANData.Controls.Remove(oList);
-        }
-
-        private void EnumList_LostFocus(object sender, EventArgs e)
-        {
-            ListBox oList = (ListBox)sender;
-            Grid_CANData.Controls.Remove(oList);
-
-        }
-
-        private void EnumList_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData.Equals(Keys.Escape))
-            {
-                ListBox oList = (ListBox)sender;
-                Grid_CANData.Controls.Remove(oList);
-            }
-        }
-
-        #endregion
+        //TODO: Remove if empty
 
         #endregion
 
@@ -1583,7 +1235,8 @@ namespace CANStream
 
                                     if (iRow != -1)
                                     {
-                                        Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].Value = oParam.DecodedValue.ToString();
+                                        //TODO: Make a function in the CtrlSpyDataViewer control to update virtual channels
+                                        //Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].Value = oParam.DecodedValue.ToString();
                                     }
                                 }
                                 else
@@ -1598,8 +1251,6 @@ namespace CANStream
 		}
         
         #endregion
-        
-		#endregion
 		
 		#region Cycle control
 		
@@ -1669,7 +1320,7 @@ namespace CANStream
 		
 		#region Cycle_SpyDataViewer
 		
-		private void Cycle_SpyDataViewerEngGridColumnsVisibleChanged(object sender, EngGridColVisibleChangedEventArgs e)
+		private void Cycle_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
 		{
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, e.ColumnsVisible);
 		}
@@ -1925,7 +1576,7 @@ namespace CANStream
 					TSMI_CyclePlayer.Enabled = false;
 					
 					bVirtualParamTx = Chk_VirtualParamTxEnabled.Checked;
-					CurrentSpyViewer = Manual_SpyDataViewer;
+					CurrentSpyViewer = Grid_ManualDataViewer;
 					
         			break;
         			
@@ -2884,86 +2535,89 @@ namespace CANStream
 			
         	if(!(oCanConfig==null))
         	{
-        		Grid_CANData.Rows.Clear();
+        		//TODO: Make in a function in the Ctrl_SpyDataViewer to clear grid rows
+                //Grid_CANData.Rows.Clear();
         		int RowsCnt = oCanConfig.GetTxParameterCount();
-        		
-        		if (RowsCnt > 0) Grid_CANData.Rows.Add(RowsCnt);
-        		else			 return;
-        			
-        		int iRow=0;
-        		
-        		foreach(CANMessage oMsg in oCanConfig.Messages)
-        		{
-        			if(oMsg.RxTx.Equals(CanMsgRxTx.Tx))
-        			{
-	        			foreach(CANParameter oParam in oMsg.Parameters)
-	        			{
-	        				//Cells value
-	        				Grid_CANData.Rows[iRow].HeaderCell.Value=oMsg.Identifier;          			
-	        				
-	        				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier + "h";						    //Identifier
-	        				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			            //RxTx
-	        				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			            //Period
-	        				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	            //Mux value
-	        				Grid_CANData.Rows[iRow].Cells[4].Value = oParam.Name;                			            //Parameter name
-	        				Grid_CANData.Rows[iRow].Cells[5].Value = oParam.StartBit.ToString(); 			            //Parameter start bit
-	        				Grid_CANData.Rows[iRow].Cells[6].Value = oParam.Length.ToString();   			            //Parameter bit length
-	        				Grid_CANData.Rows[iRow].Cells[7].Value = oParam.Endianess.ToString(); 			            //Parameter endianess
-	        				
-	        				if (oParam.Signed) Grid_CANData.Rows[iRow].Cells[8].Value = "Signed";			            //Parameter signedness
-	        				else Grid_CANData.Rows[iRow].Cells[8].Value = "Unsigned";
-	        				
-	        				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			            //Linearization gain
-	        				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();                           //Linearization zero
-                            Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetSignalFormatedValue(0);  //Initial value
-	        				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							            //Parameter unit
-	        				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;                                   //Parameter comment
 
-                            Grid_CANData.Rows[iRow].Cells[11].Tag = oParam;
+                //TODO: Make in a function in the Ctrl_SpyDataViewer show Rx frames and signals
+                //TODO: Remove old code
+                //if (RowsCnt > 0) Grid_CANData.Rows.Add(RowsCnt);
+                //else			 return;
 
-                            //Cells backcolor
-                            Color InfoBackColor = Color.Empty;
-	        				if (oParam.IsVirtual) InfoBackColor=Color.LightGreen;
-	        				else				  InfoBackColor=Color.LightBlue;
-	        				
-	        				for (int iCol=0; iCol<Grid_CANData.Rows[iRow].Cells.Count; iCol++)
-	        				{
-	        					//Alignment
-	        					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_COMMENT_COL))
-	        					{    
-	        						Grid_CANData.Rows[iRow].Cells[iCol].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-	        					}
-	        					
-	        					//BackColor
-	        					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_VALUE_COL) || oParam.IsVirtual)
-	        					{
-	        						Grid_CANData.Rows[iRow].Cells[iCol].Style.BackColor=InfoBackColor;
-	        					}
-	        				}
+                //int iRow=0;
 
-	        				if (oParam.IsVirtual)
-    						{
-	        					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly = true;
-	        					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ToolTipText = VCLibCollection.GetVirtualChannelExpression(oParam.VirtualChannelReference.LibraryName, oParam.VirtualChannelReference.ChannelName);
-	        					
-	        					Chk_VirtualParamTxEnabled.Enabled = true;
-								Chk_VirtualParamTxEnabled.Checked = true;
-    						}
-	        				
-	        				iRow++;
-	        				
-	        				Grid_CANData.AutoResizeColumns();
-	        			}
-	        			
-	        			if ((!oMsg.MultiplexerName.Equals("") && !Chk_CycleMux.Enabled))
-	        			{
-	        				Chk_CycleMux.Enabled = true;
-	        				Chk_CycleMux.Checked = true;
-	        			}
-        			}
-        		}
-        		
-        		InitManualControlMessagesData();
+                //		foreach(CANMessage oMsg in oCanConfig.Messages)
+                //		{
+                //			if(oMsg.RxTx.Equals(CanMsgRxTx.Tx))
+                //			{
+                // 			foreach(CANParameter oParam in oMsg.Parameters)
+                // 			{
+                // 				//Cells value
+                // 				Grid_CANData.Rows[iRow].HeaderCell.Value=oMsg.Identifier;          			
+
+                // 				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier + "h";						    //Identifier
+                // 				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			            //RxTx
+                // 				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			            //Period
+                // 				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	            //Mux value
+                // 				Grid_CANData.Rows[iRow].Cells[4].Value = oParam.Name;                			            //Parameter name
+                // 				Grid_CANData.Rows[iRow].Cells[5].Value = oParam.StartBit.ToString(); 			            //Parameter start bit
+                // 				Grid_CANData.Rows[iRow].Cells[6].Value = oParam.Length.ToString();   			            //Parameter bit length
+                // 				Grid_CANData.Rows[iRow].Cells[7].Value = oParam.Endianess.ToString(); 			            //Parameter endianess
+
+                // 				if (oParam.Signed) Grid_CANData.Rows[iRow].Cells[8].Value = "Signed";			            //Parameter signedness
+                // 				else Grid_CANData.Rows[iRow].Cells[8].Value = "Unsigned";
+
+                // 				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			            //Linearization gain
+                // 				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();                           //Linearization zero
+                //                    Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetSignalFormatedValue(0);  //Initial value
+                // 				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							            //Parameter unit
+                // 				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;                                   //Parameter comment
+
+                //                    Grid_CANData.Rows[iRow].Cells[11].Tag = oParam;
+
+                //                    //Cells backcolor
+                //                    Color InfoBackColor = Color.Empty;
+                // 				if (oParam.IsVirtual) InfoBackColor=Color.LightGreen;
+                // 				else				  InfoBackColor=Color.LightBlue;
+
+                // 				for (int iCol=0; iCol<Grid_CANData.Rows[iRow].Cells.Count; iCol++)
+                // 				{
+                // 					//Alignment
+                // 					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_COMMENT_COL))
+                // 					{    
+                // 						Grid_CANData.Rows[iRow].Cells[iCol].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                // 					}
+
+                // 					//BackColor
+                // 					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_VALUE_COL) || oParam.IsVirtual)
+                // 					{
+                // 						Grid_CANData.Rows[iRow].Cells[iCol].Style.BackColor=InfoBackColor;
+                // 					}
+                // 				}
+
+                // 				if (oParam.IsVirtual)
+                //		{
+                // 					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly = true;
+                // 					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ToolTipText = VCLibCollection.GetVirtualChannelExpression(oParam.VirtualChannelReference.LibraryName, oParam.VirtualChannelReference.ChannelName);
+
+                // 					Chk_VirtualParamTxEnabled.Enabled = true;
+                //Chk_VirtualParamTxEnabled.Checked = true;
+                //		}
+
+                // 				iRow++;
+
+                // 				Grid_CANData.AutoResizeColumns();
+                // 			}
+
+                // 			if ((!oMsg.MultiplexerName.Equals("") && !Chk_CycleMux.Enabled))
+                // 			{
+                // 				Chk_CycleMux.Enabled = true;
+                // 				Chk_CycleMux.Checked = true;
+                // 			}
+                //			}
+                //		}
+
+                InitManualControlMessagesData();
         		
         		FireCanConfigChangedEvent(true);
         	}
@@ -2971,17 +2625,19 @@ namespace CANStream
 		
 		private void FilterManualCanConfig(string sFilter)
 		{
-			foreach (DataGridViewRow oRow in Grid_CANData.Rows)
-			{
-				if ((sFilter.Equals("")) ||(oRow.Cells[GRID_MANUAL_NAME_COL].Value.ToString().ToLower().Contains(sFilter.ToLower())))
-				{
-					oRow.Visible = true;
-				}
-				else
-				{
-					oRow.Visible = false;
-				}
-			}
+			//TODO: Call the Ctrl_SpyDataViewer filtering method
+            //TODO: Remove old code
+            //foreach (DataGridViewRow oRow in Grid_CANData.Rows)
+			//{
+			//	if ((sFilter.Equals("")) ||(oRow.Cells[GRID_MANUAL_NAME_COL].Value.ToString().ToLower().Contains(sFilter.ToLower())))
+			//	{
+			//		oRow.Visible = true;
+			//	}
+			//	else
+			//	{
+			//		oRow.Visible = false;
+			//	}
+			//}
 		}
 		
         private void InitManualControlMessagesData()
@@ -3025,22 +2681,24 @@ namespace CANStream
         		{
         			if (!(oParam.IsVirtual))
         			{
-	        			int iParamRow=GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
+                        //TODO: Make a function in the Ctrl_SpyDataViewer to retrieve values from the grid
+                        //TODO: Remove old code
+	        //			int iParamRow=GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
 	        			
-	        			if(iParamRow!=-1)
-	    				{
-                            double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
+	        //			if(iParamRow!=-1)
+	    				//{
+         //                   double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
                             
-                            if (!(double.IsNaN(EngValue)))
-                            {
-                                oParam.DecodedValue = EngValue;
-                            }
-                            else
-                            {
-                                MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
-                                                Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }                            
-	    				}
+         //                   if (!(double.IsNaN(EngValue)))
+         //                   {
+         //                       oParam.DecodedValue = EngValue;
+         //                   }
+         //                   else
+         //                   {
+         //                       MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+         //                                       Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+         //                   }                            
+	    				//}
         			}
         		}
         		
@@ -3051,14 +2709,15 @@ namespace CANStream
         
         private int GetParameterRowIndex(string ParameterName, string MsgId)
         {
-        	for(int iRow=0;iRow<Grid_CANData.Rows.Count;iRow++)
-        	{
-                if ((Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_MSG_ID_COL].Value.Equals(MsgId))
-                    && (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.Equals(ParameterName)))
-        		{
-        			return(iRow);
-        		}
-        	}
+            //TODO: Verify present methode is still called
+        	//for(int iRow=0;iRow<Grid_CANData.Rows.Count;iRow++)
+        	//{
+         //       if ((Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_MSG_ID_COL].Value.Equals(MsgId))
+         //           && (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.Equals(ParameterName)))
+        	//	{
+        	//		return(iRow);
+        	//	}
+        	//}
         	
         	return(-1);
         }
@@ -3201,37 +2860,42 @@ namespace CANStream
 		
 		private void Hide_MessageParametersRows(CANMessageEncoded oMsg)
 		{
-			for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-			{
-				if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
-				{
-					Grid_CANData.Rows[iRow].Visible = false;
-				}
-			}
-		}
-		
-		private void Show_MessageParametersRows(string sMsgId)
+            //TODO: Ensure that a frame ID isn't present in both raw and engineering Tx grids
+            //TODO: Verify if present method is still called
+            //TODO: Remove old code
+            //for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
+            //{
+            //	if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
+            //	{
+            //		Grid_CANData.Rows[iRow].Visible = false;
+            //	}
+            //}
+        }
+
+        private void Show_MessageParametersRows(string sMsgId)
 		{
-			if (!(oCanConfig == null) && Grid_CANData.Rows.Count > 0)
-			{
-				CANMessage oMsg = oCanConfig.GetCANMessage(sMsgId, MessageResearchOption.Identifier);
+			//TODO: Ensure that a frame ID isn't present in both raw and engineering Tx grids
+            //TODO: Remove old code
+            //if (!(oCanConfig == null) && Grid_CANData.Rows.Count > 0)
+			//{
+			//	CANMessage oMsg = oCanConfig.GetCANMessage(sMsgId, MessageResearchOption.Identifier);
 				
-				if (!(oMsg == null))
-				{
-					if (oMsg.RxTx.Equals(CanMsgRxTx.Tx))
-					{						
-						for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-						{							
-							if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
-							{
-								Grid_CANData.Rows[iRow].Visible = true;
-							}
-						}
+			//	if (!(oMsg == null))
+			//	{
+			//		if (oMsg.RxTx.Equals(CanMsgRxTx.Tx))
+			//		{						
+			//			for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
+			//			{							
+			//				if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
+			//				{
+			//					Grid_CANData.Rows[iRow].Visible = true;
+			//				}
+			//			}
 						
-						InitManualControlMessagesData();
-					}
-				}
-			}
+			//			InitManualControlMessagesData();
+			//		}
+			//	}
+			//}
 		}
 		
 		private void Update_VirtualParameterTxValue(string ParameterName, double Value)
@@ -3373,7 +3037,7 @@ namespace CANStream
         		//Value grids init
         		if(bClearSpyGrids)
         		{
-        			Manual_SpyDataViewer.Clear_EngGrid();
+        			Grid_ManualDataViewer.Clear_EngGrid();
 
                     oSpySeriesStates.Clear();
                     SpyGraphSeries.RTSeries.Clear();
@@ -3523,7 +3187,7 @@ namespace CANStream
             {
                 // We add this status in the last message list
                 //
-                msgStsCurrentMsg = new MessageStatus(newMsg, timeStamp, Manual_SpyDataViewer.Get_RawMessageCount() - 1);
+                msgStsCurrentMsg = new MessageStatus(newMsg, timeStamp, Grid_ManualDataViewer.Get_RawMessageCount() - 1);
                 m_LastMsgsList.Add(msgStsCurrentMsg);
                 
                 if(!(oCanConfig == null))
@@ -3559,7 +3223,7 @@ namespace CANStream
         			{
         				msgStatus.MarkedAsUpdated=false;
 
-                        CurrentSpyViewer.Update_SpyGridRawData(msgStatus);
+                        CurrentSpyViewer.Update_GridRawData(msgStatus);
 
                         int MsgIndex = -1;
 
@@ -3573,7 +3237,7 @@ namespace CANStream
 		                		
 		                		if(DecodedMessages[MsgIndex].bMessageDecoded)
 		                		{
-                                    CurrentSpyViewer.Update_SpyGridEngData(msgStatus.IdString, DecodedMessages[MsgIndex]);
+                                    CurrentSpyViewer.Update_GridEngineeringData(msgStatus.IdString, DecodedMessages[MsgIndex]);
 
                                     foreach (CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
 		                			{
@@ -3933,8 +3597,10 @@ namespace CANStream
 
         private void ResetManualSpyGrids()
         {
-        	Grid_CANData.Rows.Clear();
-        	Manual_SpyDataViewer.Clear_EngGrid();
+        	//TODO: Make a function in the Ctrl_SpyDataViewer to clear data grid rows
+            //TODO: Remove old code
+            //Grid_CANData.Rows.Clear();
+        	Grid_ManualDataViewer.Clear_EngGrid();
         }
         
 		#endregion
@@ -4034,7 +3700,7 @@ namespace CANStream
         			{
 	        			oChan.bNewValue=false;
 
-                        CurrentSpyViewer.Update_SpyGridVirtualChannel(oLib.Name, oChan);
+                        CurrentSpyViewer.Update_GridVirtualChannel(oLib.Name, oChan);
 	        			
 	        			if (!(oSpySeriesStates.Contains(oChan.Name)))
         				{
@@ -4067,32 +3733,34 @@ namespace CANStream
 				
 		private void ResizeGridColumns(DataGridView oGrid, int FillerColumn)
 		{
-			int ColCnt = GetGridColumnsVisibleCount(oGrid);
+			//TODO: Use grid columns resizing method of the Ctrl_SpyDataViewer
+            //TODO: Remove old code
+            //int ColCnt = GetGridColumnsVisibleCount(oGrid);
         	
-			int ColWidth = (int)(oGrid.Width / ColCnt);
-			if (ColWidth > GRID_MAX_COL_WIDTH) ColWidth = GRID_MAX_COL_WIDTH;
+			//int ColWidth = (int)(oGrid.Width / ColCnt);
+			//if (ColWidth > GRID_MAX_COL_WIDTH) ColWidth = GRID_MAX_COL_WIDTH;
 			
-        	int TotalWidth = 0;
+   //     	int TotalWidth = 0;
         	
-        	foreach (DataGridViewColumn oCol in oGrid.Columns)
-        	{
-        		if (oCol.Visible)
-        		{
+   //     	foreach (DataGridViewColumn oCol in oGrid.Columns)
+   //     	{
+   //     		if (oCol.Visible)
+   //     		{
         			
-        			if (TotalWidth + ColWidth >= oGrid.Width - 5)
-        			{
-        				ColWidth = oGrid.Width - TotalWidth - 5;
-        			}
+   //     			if (TotalWidth + ColWidth >= oGrid.Width - 5)
+   //     			{
+   //     				ColWidth = oGrid.Width - TotalWidth - 5;
+   //     			}
         			
-        			oCol.Width = ColWidth;
-        			TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
-        		}
-        	}
+   //     			oCol.Width = ColWidth;
+   //     			TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
+   //     		}
+   //     	}
         	
-        	if (TotalWidth < oGrid.Width - 5)
-        	{
-        		oGrid.Columns[FillerColumn].Width += (oGrid.Width - TotalWidth - 5);
-        	}
+   //     	if (TotalWidth < oGrid.Width - 5)
+   //     	{
+   //     		oGrid.Columns[FillerColumn].Width += (oGrid.Width - TotalWidth - 5);
+   //     	}
 		}
 		
 		private int GetGridColumnsVisibleCount(DataGridView oGrid)
@@ -4434,7 +4102,9 @@ namespace CANStream
 		
 		public int Get_Grid_CANDataRowsCount()
 		{
-			return (Grid_CANData.Rows.Count);
+            //TODO: Create a method in the Ctrl_SpyDataViewer returning the signals rows count
+            //return (Grid_CANData.Rows.Count);
+            return (-1); //TODO: Remove
 		}
 		
 		public bool IsManualWorkerBusy()
@@ -4565,29 +4235,35 @@ namespace CANStream
 		
 		#region Common Manual & Spy
 		
+        //TODO: Remove region if empty
+
 		public void HideActiveRow()
         {
-			if (Grid_CANData.ContainsFocus)
-			{
-				if (Grid_CANData.CurrentCell != null)
-				{
-					Grid_CANData.Rows[Grid_CANData.CurrentCell.RowIndex].Visible = false;
-				}
-			}
+			//TODO: Verify if still needed since 'Show/Hide' rows feature is about to be removed
+            //TODO: Remove old code
+            //if (Grid_CANData.ContainsFocus)
+			//{
+			//	if (Grid_CANData.CurrentCell != null)
+			//	{
+			//		Grid_CANData.Rows[Grid_CANData.CurrentCell.RowIndex].Visible = false;
+			//	}
+			//}
         }
 		
 		public void ShowHiddenRows()
         {
-			if (Grid_CANData.ContainsFocus)
-			{
-				foreach (DataGridViewRow oRow in Grid_CANData.Rows)
-				{
-					if (!oRow.Visible)
-					{
-						oRow.Visible = true;
-					}
-				}
-			}
+            //TODO: Verify if still needed since 'Show/Hide' rows feature is about to be removed
+            //TODO: Remove old code
+            //if (Grid_CANData.ContainsFocus)
+			//{
+			//	foreach (DataGridViewRow oRow in Grid_CANData.Rows)
+			//	{
+			//		if (!oRow.Visible)
+			//		{
+			//			oRow.Visible = true;
+			//		}
+			//	}
+			//}
         }
 		
 		#endregion
@@ -4657,56 +4333,32 @@ namespace CANStream
 
         #region Manual mode
 
-        public Manual_Grid_Columns Get_ManualGridColumnsVisible()
+        //TODO: Remove old code
+        //public Manual_Grid_Columns Get_ManualGridColumnsVisible()
+		//{
+		//	return(ManualGridColumnsVisible);
+		//}
+		
+        public GridCANData_ColumnsEnum Get_TxGridColumnsVisible()
+        {
+            //TODO: Replace all 'Get_ManualGridColumnsVisible' method calls by calls to this method
+            return (Grid_ManualDataWriter.eGridColumnsVisible);
+        }
+
+        public void Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
-			return(ManualGridColumnsVisible);
+            Grid_ManualDataWriter.eGridColumnsVisible = eColumnsVisible;
+            FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, (object)eColumnsVisible);
+        }
+
+        public GridCANData_ColumnsEnum Get_SpyEngGridColumnsVisible()
+		{
+			return(Grid_ManualDataViewer.eGridColumnsVisible);
 		}
 		
-		public void Set_ManualGridColumnsVisible(Manual_Grid_Columns eColumnsVisible)
+		public void Set_RxGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
-			ManualGridColumnsVisible = eColumnsVisible;
-			
-			Grid_CANData.Columns[0].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_ID);
-			Grid_CANData.Columns[1].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_RxTx);
-			Grid_CANData.Columns[2].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Period);
-			Grid_CANData.Columns[3].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_MuxValue);
-			//Column 4:  Parameter name => Always visible
-			Grid_CANData.Columns[5].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Start);
-			Grid_CANData.Columns[6].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Length);
-			Grid_CANData.Columns[7].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Endianess);
-			Grid_CANData.Columns[8].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Signedness);
-			Grid_CANData.Columns[9].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Gain);
-			Grid_CANData.Columns[10].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Zero);
-			//Column 11: Parameter value => Always visible
-			Grid_CANData.Columns[12].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Unit);
-			Grid_CANData.Columns[13].Visible =  ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Comment);
-			
-			ResizeGridColumns(Grid_CANData, GRID_ENG_MANUAL_FILLER_COL);
-			
-			Context_Manual_iDToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_ID);
-			Context_Manual_rxTxToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_RxTx);
-			Context_Manual_periodToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Period);
-			Context_Manual_muxValueToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_MuxValue);
-			Context_Manual_startToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Start);
-			Context_Manual_lengthToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Length);
-			Context_Manual_endianessToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Endianess);
-			Context_Manual_signedToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Signedness);
-			Context_Manual_gainToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Gain);
-			Context_Manual_zeroToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Zero);
-			Context_Manual_unitToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Unit);
-			Context_Manual_commentToolStripMenuItem.Checked = ManualGridColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Comment);
-			
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, (object)ManualGridColumnsVisible);
-		}
-		
-		public SpyEngineering_Grid_Columns Get_SpyEngGridColumnsVisible()
-		{
-			return(Manual_SpyDataViewer.EngineeringGridColumnsVisible);
-		}
-		
-		public void Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns eColumnsVisible)
-		{
-			Manual_SpyDataViewer.EngineeringGridColumnsVisible = eColumnsVisible;
+			Grid_ManualDataViewer.eGridColumnsVisible = eColumnsVisible;
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, (object)eColumnsVisible);
 		}
 
@@ -4714,14 +4366,14 @@ namespace CANStream
 
         #region Cycle mode
 
-        public SpyEngineering_Grid_Columns Get_CycleEngGridColumnsVisible()
+        public GridCANData_ColumnsEnum Get_CycleEngGridColumnsVisible()
 		{
-			return(Cycle_SpyDataViewer.EngineeringGridColumnsVisible);
+			return(Cycle_SpyDataViewer.eGridColumnsVisible);
 		}
 		
-		public void Set_CycleEngGridColumnsVisible(SpyEngineering_Grid_Columns eColumnsVisible)
+		public void Set_CycleEngGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
-			Cycle_SpyDataViewer.EngineeringGridColumnsVisible = eColumnsVisible;
+			Cycle_SpyDataViewer.eGridColumnsVisible = eColumnsVisible;
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, (object)eColumnsVisible);
 		}
 
@@ -4823,7 +4475,7 @@ namespace CANStream
 			Split_RxTx.Panel2Collapsed = !oLayout.RxPanelVisible;
 			Split_Rx_DataGraph.Panel1Collapsed = !oLayout.DataRxPanelVisible;
 			Split_Rx_DataGraph.Panel2Collapsed = !oLayout.GraphRxPanelVisible;
-			Set_SpyEngGridColumnsVisible(oLayout.eEngDataRxColumns);
+			Set_RxGridColumnsVisible(oLayout.eEngDataRxColumns);
 						
 			Split_Cycle_VirtualSig_Graph.Panel1Collapsed = !oLayout.Cycle_DataPanelVisible;
 			Split_Cycle_VirtualSig_Graph.Panel2Collapsed = !oLayout.Cycle_GraphPanelVisible;
@@ -4858,16 +4510,16 @@ namespace CANStream
 			oLayout.TxPanelVisible = !Split_RxTx.Panel1Collapsed;
 			oLayout.EngDataTxPanelVisible = !Split_Tx_EngRaw.Panel1Collapsed;
 			oLayout.RawDataTxPanelVisible = !Split_Tx_EngRaw.Panel2Collapsed;
-			oLayout.eEngDataTxColumns = ManualGridColumnsVisible;
+            oLayout.eEngDataTxColumns = Grid_ManualDataWriter.eGridColumnsVisible;
 			
 			oLayout.RxPanelVisible = !Split_RxTx.Panel2Collapsed;
 			oLayout.DataRxPanelVisible = !Split_Rx_DataGraph.Panel1Collapsed;
 			oLayout.GraphRxPanelVisible = !Split_Rx_DataGraph.Panel2Collapsed;
-			oLayout.eEngDataRxColumns = Manual_SpyDataViewer.EngineeringGridColumnsVisible;
+			oLayout.eEngDataRxColumns = Grid_ManualDataViewer.eGridColumnsVisible;
 			
 			oLayout.Cycle_DataPanelVisible = !Split_Cycle_VirtualSig_Graph.Panel1Collapsed;
 			oLayout.Cycle_GraphPanelVisible = !Split_Cycle_VirtualSig_Graph.Panel2Collapsed;
-			oLayout.eCycleEngDataColumns = Cycle_SpyDataViewer.EngineeringGridColumnsVisible;
+			oLayout.eCycleEngDataColumns = Cycle_SpyDataViewer.eGridColumnsVisible;
 			
 			oLayout.Pos_Split_RxTx = Split_RxTx.SplitterDistance;
 			oLayout.Pos_Split_Tx_EngRaw = Split_Tx_EngRaw.SplitterDistance;
@@ -4985,23 +4637,21 @@ namespace CANStream
 	
 	public class Ctrl_CS_CAN_Bus_Layout
 	{
-        
-
         #region Public members
 
         public bool TxPanelVisible;
 		public bool EngDataTxPanelVisible;
 		public bool RawDataTxPanelVisible;
-		public Manual_Grid_Columns eEngDataTxColumns;
+		public GridCANData_ColumnsEnum eEngDataTxColumns;
 		
 		public bool RxPanelVisible;
 		public bool GraphRxPanelVisible;
 		public bool DataRxPanelVisible;
-		public SpyEngineering_Grid_Columns eEngDataRxColumns;
+		public GridCANData_ColumnsEnum eEngDataRxColumns;
 		
 		public bool Cycle_DataPanelVisible;
 		public bool Cycle_GraphPanelVisible;
-		public SpyEngineering_Grid_Columns eCycleEngDataColumns;
+		public GridCANData_ColumnsEnum eCycleEngDataColumns;
 		
 		public int Pos_Split_RxTx;
 		public int Pos_Split_Tx_EngRaw;
@@ -5020,16 +4670,16 @@ namespace CANStream
             TxPanelVisible = true;
             EngDataTxPanelVisible = true;
             RawDataTxPanelVisible = true;
-            eEngDataTxColumns = Manual_Grid_Columns.Default;
+            eEngDataTxColumns = GridCANData_ColumnsEnum.Default;
 
             RxPanelVisible = true;
             GraphRxPanelVisible = true;
             DataRxPanelVisible = true;
-            eEngDataRxColumns = SpyEngineering_Grid_Columns.Default;
+            eEngDataRxColumns = GridCANData_ColumnsEnum.Default;
 
             Cycle_DataPanelVisible = true;
             Cycle_GraphPanelVisible = true;
-            eCycleEngDataColumns = SpyEngineering_Grid_Columns.Default;
+            eCycleEngDataColumns = GridCANData_ColumnsEnum.Default;
 
             if (!(CtrlSize == Size.Empty))
             {
@@ -5179,7 +4829,7 @@ namespace CANStream
 							oLayout.RawDataTxPanelVisible = bool.Parse(xProp.InnerText);
 							
 							xProp = xCtrlLayout.SelectSingleNode("eEngDataTxColumns");
-							oLayout.eEngDataTxColumns = (Manual_Grid_Columns)Enum.Parse(typeof(Manual_Grid_Columns), xProp.InnerText);
+							oLayout.eEngDataTxColumns = (GridCANData_ColumnsEnum)Enum.Parse(typeof(GridCANData_ColumnsEnum), xProp.InnerText);
 							
 							xProp = xCtrlLayout.SelectSingleNode("RxPanelVisible");
 							oLayout.RxPanelVisible = bool.Parse(xProp.InnerText);
@@ -5191,7 +4841,7 @@ namespace CANStream
 							oLayout.DataRxPanelVisible = bool.Parse(xProp.InnerText);
 																												
 							xProp = xCtrlLayout.SelectSingleNode("eEngDataRxColumns");
-							oLayout.eEngDataRxColumns = (SpyEngineering_Grid_Columns)Enum.Parse(typeof(SpyEngineering_Grid_Columns), xProp.InnerText);
+							oLayout.eEngDataRxColumns = (GridCANData_ColumnsEnum)Enum.Parse(typeof(GridCANData_ColumnsEnum), xProp.InnerText);
 							
 							xProp = xCtrlLayout.SelectSingleNode("Cycle_DataPanelVisible");
 							oLayout.Cycle_DataPanelVisible = bool.Parse(xProp.InnerText);
@@ -5200,7 +4850,7 @@ namespace CANStream
 							oLayout.Cycle_GraphPanelVisible = bool.Parse(xProp.InnerText);
 																												
 							xProp = xCtrlLayout.SelectSingleNode("eCycleEngDataColumns");
-							oLayout.eCycleEngDataColumns = (SpyEngineering_Grid_Columns)Enum.Parse(typeof(SpyEngineering_Grid_Columns), xProp.InnerText);
+							oLayout.eCycleEngDataColumns = (GridCANData_ColumnsEnum)Enum.Parse(typeof(GridCANData_ColumnsEnum), xProp.InnerText);
 							
 							xProp = xCtrlLayout.SelectSingleNode("Pos_Split_RxTx");
 							oLayout.Pos_Split_RxTx = int.Parse(xProp.InnerText);

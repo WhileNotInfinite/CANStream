@@ -66,44 +66,7 @@ namespace CANStream
             this.TabPg_SpyAndManual = new System.Windows.Forms.TabPage();
             this.Split_RxTx = new System.Windows.Forms.SplitContainer();
             this.Split_Tx_EngRaw = new System.Windows.Forms.SplitContainer();
-            this.Grid_CANData = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RxTx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MsgPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MuxVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CANParameter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartBit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ParamLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Endianess = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Signed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LinGain = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LinZero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Context_ManualGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.hideRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showHiddenRowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FiltertoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ManualGrid_Filter_Combo_TSMI = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextManual_columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.Context_Manual_iDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_rxTxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_periodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_muxValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_lengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_endianessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_signedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_gainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_zeroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_unitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_Manual_commentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
             this.Grid_CANRawData = new System.Windows.Forms.DataGridView();
             this.GridCol_Raw_Tx_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridCol_Raw_Tx_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,7 +89,7 @@ namespace CANStream
             this.Ctxt_TxRaw_Save_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctxt_TxRaw_Open_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Split_Rx_DataGraph = new System.Windows.Forms.SplitContainer();
-            this.Manual_SpyDataViewer = new CANStream.Ctrl_SpyDataViewer();
+            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
             this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
             this.Graph_Spy = new ChartDirector.WinChartViewer();
@@ -179,7 +142,7 @@ namespace CANStream
             this.TabPg_Cycle = new System.Windows.Forms.TabPage();
             this.Panel_Cycle = new System.Windows.Forms.Panel();
             this.Split_Cycle_VirtualSig_Graph = new System.Windows.Forms.SplitContainer();
-            this.Cycle_SpyDataViewer = new CANStream.Ctrl_SpyDataViewer();
+            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Graph_Cycle = new ChartDirector.WinChartViewer();
             this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -224,8 +187,6 @@ namespace CANStream
             this.Split_Tx_EngRaw.Panel1.SuspendLayout();
             this.Split_Tx_EngRaw.Panel2.SuspendLayout();
             this.Split_Tx_EngRaw.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANData)).BeginInit();
-            this.Context_ManualGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).BeginInit();
             this.Context_ManualRawGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).BeginInit();
@@ -552,7 +513,7 @@ namespace CANStream
             // 
             this.Split_RxTx.Panel2.Controls.Add(this.Split_Rx_DataGraph);
             this.Split_RxTx.Size = new System.Drawing.Size(967, 538);
-            this.Split_RxTx.SplitterDistance = 290;
+            this.Split_RxTx.SplitterDistance = 449;
             this.Split_RxTx.TabIndex = 3;
             // 
             // Split_Tx_EngRaw
@@ -564,350 +525,25 @@ namespace CANStream
             // 
             // Split_Tx_EngRaw.Panel1
             // 
-            this.Split_Tx_EngRaw.Panel1.Controls.Add(this.Grid_CANData);
-            this.Split_Tx_EngRaw.Panel1.Controls.Add(this.label2);
+            this.Split_Tx_EngRaw.Panel1.Controls.Add(this.Grid_ManualDataWriter);
             // 
             // Split_Tx_EngRaw.Panel2
             // 
             this.Split_Tx_EngRaw.Panel2.Controls.Add(this.Grid_CANRawData);
-            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(290, 538);
+            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(449, 538);
             this.Split_Tx_EngRaw.SplitterDistance = 410;
             this.Split_Tx_EngRaw.TabIndex = 0;
             // 
-            // Grid_CANData
+            // Grid_ManualDataWriter
             // 
-            this.Grid_CANData.AllowUserToAddRows = false;
-            this.Grid_CANData.AllowUserToDeleteRows = false;
-            this.Grid_CANData.AllowUserToResizeColumns = false;
-            this.Grid_CANData.AllowUserToResizeRows = false;
-            this.Grid_CANData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_CANData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.Grid_CANData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column4,
-            this.RxTx,
-            this.MsgPeriod,
-            this.MuxVal,
-            this.CANParameter,
-            this.StartBit,
-            this.ParamLength,
-            this.Endianess,
-            this.Signed,
-            this.LinGain,
-            this.LinZero,
-            this.DefaultValue,
-            this.Unit,
-            this.Comment});
-            this.Grid_CANData.ContextMenuStrip = this.Context_ManualGrid;
-            this.Grid_CANData.Location = new System.Drawing.Point(3, 17);
-            this.Grid_CANData.Name = "Grid_CANData";
-            this.Grid_CANData.RowHeadersVisible = false;
-            this.Grid_CANData.RowHeadersWidth = 40;
-            this.Grid_CANData.Size = new System.Drawing.Size(287, 391);
-            this.Grid_CANData.TabIndex = 9;
-            this.Grid_CANData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANData_CellBeginEdit);
-            this.Grid_CANData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANData_CellValueChanged);
-            this.Grid_CANData.SizeChanged += new System.EventHandler(this.Grid_CANDataSizeChanged);
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "ID";
-            this.Column4.MinimumWidth = 40;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 40;
-            // 
-            // RxTx
-            // 
-            this.RxTx.HeaderText = "RxTx";
-            this.RxTx.MinimumWidth = 30;
-            this.RxTx.Name = "RxTx";
-            this.RxTx.ReadOnly = true;
-            this.RxTx.Width = 40;
-            // 
-            // MsgPeriod
-            // 
-            this.MsgPeriod.HeaderText = "Period";
-            this.MsgPeriod.MinimumWidth = 40;
-            this.MsgPeriod.Name = "MsgPeriod";
-            this.MsgPeriod.ReadOnly = true;
-            this.MsgPeriod.Width = 50;
-            // 
-            // MuxVal
-            // 
-            this.MuxVal.HeaderText = "Mux value";
-            this.MuxVal.MinimumWidth = 20;
-            this.MuxVal.Name = "MuxVal";
-            this.MuxVal.ReadOnly = true;
-            this.MuxVal.Visible = false;
-            this.MuxVal.Width = 40;
-            // 
-            // CANParameter
-            // 
-            this.CANParameter.HeaderText = "Parameter";
-            this.CANParameter.MinimumWidth = 100;
-            this.CANParameter.Name = "CANParameter";
-            this.CANParameter.ReadOnly = true;
-            // 
-            // StartBit
-            // 
-            this.StartBit.HeaderText = "Start";
-            this.StartBit.MinimumWidth = 20;
-            this.StartBit.Name = "StartBit";
-            this.StartBit.ReadOnly = true;
-            this.StartBit.Visible = false;
-            this.StartBit.Width = 40;
-            // 
-            // ParamLength
-            // 
-            this.ParamLength.HeaderText = "Length";
-            this.ParamLength.MinimumWidth = 20;
-            this.ParamLength.Name = "ParamLength";
-            this.ParamLength.ReadOnly = true;
-            this.ParamLength.Visible = false;
-            this.ParamLength.Width = 50;
-            // 
-            // Endianess
-            // 
-            this.Endianess.HeaderText = "Endianess";
-            this.Endianess.MinimumWidth = 20;
-            this.Endianess.Name = "Endianess";
-            this.Endianess.ReadOnly = true;
-            this.Endianess.Visible = false;
-            this.Endianess.Width = 40;
-            // 
-            // Signed
-            // 
-            this.Signed.HeaderText = "Signed";
-            this.Signed.MinimumWidth = 20;
-            this.Signed.Name = "Signed";
-            this.Signed.ReadOnly = true;
-            this.Signed.Visible = false;
-            this.Signed.Width = 40;
-            // 
-            // LinGain
-            // 
-            this.LinGain.HeaderText = "Gain";
-            this.LinGain.MinimumWidth = 20;
-            this.LinGain.Name = "LinGain";
-            this.LinGain.ReadOnly = true;
-            this.LinGain.Visible = false;
-            this.LinGain.Width = 40;
-            // 
-            // LinZero
-            // 
-            this.LinZero.HeaderText = "Zero";
-            this.LinZero.MinimumWidth = 20;
-            this.LinZero.Name = "LinZero";
-            this.LinZero.ReadOnly = true;
-            this.LinZero.Visible = false;
-            this.LinZero.Width = 40;
-            // 
-            // DefaultValue
-            // 
-            this.DefaultValue.HeaderText = "Value";
-            this.DefaultValue.MinimumWidth = 80;
-            this.DefaultValue.Name = "DefaultValue";
-            // 
-            // Unit
-            // 
-            this.Unit.HeaderText = "Unit";
-            this.Unit.MinimumWidth = 20;
-            this.Unit.Name = "Unit";
-            this.Unit.ReadOnly = true;
-            this.Unit.Width = 40;
-            // 
-            // Comment
-            // 
-            this.Comment.HeaderText = "Comment";
-            this.Comment.MinimumWidth = 20;
-            this.Comment.Name = "Comment";
-            this.Comment.ReadOnly = true;
-            // 
-            // Context_ManualGrid
-            // 
-            this.Context_ManualGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideRowToolStripMenuItem,
-            this.showHiddenRowsToolStripMenuItem,
-            this.FiltertoolStripMenuItem,
-            this.toolStripMenuItem9,
-            this.ContextManual_columnsToolStripMenuItem});
-            this.Context_ManualGrid.Name = "Context_ManualGrid";
-            this.Context_ManualGrid.Size = new System.Drawing.Size(174, 98);
-            // 
-            // hideRowToolStripMenuItem
-            // 
-            this.hideRowToolStripMenuItem.Image = global::CANStream.Icones.Row_Hide_16;
-            this.hideRowToolStripMenuItem.Name = "hideRowToolStripMenuItem";
-            this.hideRowToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.hideRowToolStripMenuItem.Text = "Hide selected rows";
-            this.hideRowToolStripMenuItem.Click += new System.EventHandler(this.HideRowToolStripMenuItemClick);
-            // 
-            // showHiddenRowsToolStripMenuItem
-            // 
-            this.showHiddenRowsToolStripMenuItem.Image = global::CANStream.Icones.Row_Show_16;
-            this.showHiddenRowsToolStripMenuItem.Name = "showHiddenRowsToolStripMenuItem";
-            this.showHiddenRowsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.showHiddenRowsToolStripMenuItem.Text = "Show hidden rows";
-            this.showHiddenRowsToolStripMenuItem.Click += new System.EventHandler(this.ShowHiddenRowsToolStripMenuItemClick);
-            // 
-            // FiltertoolStripMenuItem
-            // 
-            this.FiltertoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ManualGrid_Filter_Combo_TSMI});
-            this.FiltertoolStripMenuItem.Name = "FiltertoolStripMenuItem";
-            this.FiltertoolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.FiltertoolStripMenuItem.Text = "Filter";
-            // 
-            // ManualGrid_Filter_Combo_TSMI
-            // 
-            this.ManualGrid_Filter_Combo_TSMI.Name = "ManualGrid_Filter_Combo_TSMI";
-            this.ManualGrid_Filter_Combo_TSMI.Size = new System.Drawing.Size(121, 23);
-            this.ManualGrid_Filter_Combo_TSMI.SelectedIndexChanged += new System.EventHandler(this.ManualGrid_Filter_Combo_TSMISelectedIndexChanged);
-            this.ManualGrid_Filter_Combo_TSMI.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ManualGrid_Filter_Combo_TSMIKeyDown);
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(170, 6);
-            // 
-            // ContextManual_columnsToolStripMenuItem
-            // 
-            this.ContextManual_columnsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Context_Manual_showAllToolStripMenuItem,
-            this.Context_Manual_hideAllToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.Context_Manual_iDToolStripMenuItem,
-            this.Context_Manual_rxTxToolStripMenuItem,
-            this.Context_Manual_periodToolStripMenuItem,
-            this.Context_Manual_muxValueToolStripMenuItem,
-            this.Context_Manual_startToolStripMenuItem,
-            this.Context_Manual_lengthToolStripMenuItem,
-            this.Context_Manual_endianessToolStripMenuItem,
-            this.Context_Manual_signedToolStripMenuItem,
-            this.Context_Manual_gainToolStripMenuItem,
-            this.Context_Manual_zeroToolStripMenuItem,
-            this.Context_Manual_unitToolStripMenuItem,
-            this.Context_Manual_commentToolStripMenuItem});
-            this.ContextManual_columnsToolStripMenuItem.Image = global::CANStream.Icones.Columns_16;
-            this.ContextManual_columnsToolStripMenuItem.Name = "ContextManual_columnsToolStripMenuItem";
-            this.ContextManual_columnsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.ContextManual_columnsToolStripMenuItem.Text = "Columns";
-            // 
-            // Context_Manual_showAllToolStripMenuItem
-            // 
-            this.Context_Manual_showAllToolStripMenuItem.Name = "Context_Manual_showAllToolStripMenuItem";
-            this.Context_Manual_showAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_showAllToolStripMenuItem.Text = "Show All";
-            this.Context_Manual_showAllToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_showAllToolStripMenuItemClick);
-            // 
-            // Context_Manual_hideAllToolStripMenuItem
-            // 
-            this.Context_Manual_hideAllToolStripMenuItem.Name = "Context_Manual_hideAllToolStripMenuItem";
-            this.Context_Manual_hideAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_hideAllToolStripMenuItem.Text = "Hide All";
-            this.Context_Manual_hideAllToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_hideAllToolStripMenuItemClick);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(130, 6);
-            // 
-            // Context_Manual_iDToolStripMenuItem
-            // 
-            this.Context_Manual_iDToolStripMenuItem.Name = "Context_Manual_iDToolStripMenuItem";
-            this.Context_Manual_iDToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_iDToolStripMenuItem.Text = "ID";
-            this.Context_Manual_iDToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_iDToolStripMenuItemClick);
-            // 
-            // Context_Manual_rxTxToolStripMenuItem
-            // 
-            this.Context_Manual_rxTxToolStripMenuItem.Name = "Context_Manual_rxTxToolStripMenuItem";
-            this.Context_Manual_rxTxToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_rxTxToolStripMenuItem.Text = "RxTx";
-            this.Context_Manual_rxTxToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_rxTxToolStripMenuItemClick);
-            // 
-            // Context_Manual_periodToolStripMenuItem
-            // 
-            this.Context_Manual_periodToolStripMenuItem.Name = "Context_Manual_periodToolStripMenuItem";
-            this.Context_Manual_periodToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_periodToolStripMenuItem.Text = "Period";
-            this.Context_Manual_periodToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_periodToolStripMenuItemClick);
-            // 
-            // Context_Manual_muxValueToolStripMenuItem
-            // 
-            this.Context_Manual_muxValueToolStripMenuItem.Name = "Context_Manual_muxValueToolStripMenuItem";
-            this.Context_Manual_muxValueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_muxValueToolStripMenuItem.Text = "Mux value";
-            this.Context_Manual_muxValueToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_muxValueToolStripMenuItemClick);
-            // 
-            // Context_Manual_startToolStripMenuItem
-            // 
-            this.Context_Manual_startToolStripMenuItem.Name = "Context_Manual_startToolStripMenuItem";
-            this.Context_Manual_startToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_startToolStripMenuItem.Text = "Start";
-            this.Context_Manual_startToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_startToolStripMenuItemClick);
-            // 
-            // Context_Manual_lengthToolStripMenuItem
-            // 
-            this.Context_Manual_lengthToolStripMenuItem.Name = "Context_Manual_lengthToolStripMenuItem";
-            this.Context_Manual_lengthToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_lengthToolStripMenuItem.Text = "Length";
-            this.Context_Manual_lengthToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_lengthToolStripMenuItemClick);
-            // 
-            // Context_Manual_endianessToolStripMenuItem
-            // 
-            this.Context_Manual_endianessToolStripMenuItem.Name = "Context_Manual_endianessToolStripMenuItem";
-            this.Context_Manual_endianessToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_endianessToolStripMenuItem.Text = "Endianess";
-            this.Context_Manual_endianessToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_endianessToolStripMenuItemClick);
-            // 
-            // Context_Manual_signedToolStripMenuItem
-            // 
-            this.Context_Manual_signedToolStripMenuItem.Name = "Context_Manual_signedToolStripMenuItem";
-            this.Context_Manual_signedToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_signedToolStripMenuItem.Text = "Signedness";
-            this.Context_Manual_signedToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_signedToolStripMenuItemClick);
-            // 
-            // Context_Manual_gainToolStripMenuItem
-            // 
-            this.Context_Manual_gainToolStripMenuItem.Name = "Context_Manual_gainToolStripMenuItem";
-            this.Context_Manual_gainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_gainToolStripMenuItem.Text = "Gain";
-            this.Context_Manual_gainToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_gainToolStripMenuItemClick);
-            // 
-            // Context_Manual_zeroToolStripMenuItem
-            // 
-            this.Context_Manual_zeroToolStripMenuItem.Name = "Context_Manual_zeroToolStripMenuItem";
-            this.Context_Manual_zeroToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_zeroToolStripMenuItem.Text = "Zero";
-            this.Context_Manual_zeroToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_zeroToolStripMenuItemClick);
-            // 
-            // Context_Manual_unitToolStripMenuItem
-            // 
-            this.Context_Manual_unitToolStripMenuItem.Name = "Context_Manual_unitToolStripMenuItem";
-            this.Context_Manual_unitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_unitToolStripMenuItem.Text = "Unit";
-            this.Context_Manual_unitToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_unitToolStripMenuItemClick);
-            // 
-            // Context_Manual_commentToolStripMenuItem
-            // 
-            this.Context_Manual_commentToolStripMenuItem.Name = "Context_Manual_commentToolStripMenuItem";
-            this.Context_Manual_commentToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.Context_Manual_commentToolStripMenuItem.Text = "Comment";
-            this.Context_Manual_commentToolStripMenuItem.Click += new System.EventHandler(this.Context_Manual_commentToolStripMenuItemClick);
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 14);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Data Transmitted";
+            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(3, 3);
+            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
+            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(444, 405);
+            this.Grid_ManualDataWriter.TabIndex = 9;
             // 
             // Grid_CANRawData
             // 
@@ -938,7 +574,7 @@ namespace CANStream
             this.Grid_CANRawData.Name = "Grid_CANRawData";
             this.Grid_CANRawData.RowHeadersVisible = false;
             this.Grid_CANRawData.RowHeadersWidth = 40;
-            this.Grid_CANRawData.Size = new System.Drawing.Size(287, 124);
+            this.Grid_CANRawData.Size = new System.Drawing.Size(446, 124);
             this.Grid_CANRawData.TabIndex = 8;
             this.Grid_CANRawData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANRawData_CellBeginEdit);
             this.Grid_CANRawData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellClick);
@@ -1104,27 +740,27 @@ namespace CANStream
             // 
             // Split_Rx_DataGraph.Panel1
             // 
-            this.Split_Rx_DataGraph.Panel1.Controls.Add(this.Manual_SpyDataViewer);
+            this.Split_Rx_DataGraph.Panel1.Controls.Add(this.Grid_ManualDataViewer);
             // 
             // Split_Rx_DataGraph.Panel2
             // 
             this.Split_Rx_DataGraph.Panel2.Controls.Add(this.Tab_SpyHistory);
-            this.Split_Rx_DataGraph.Size = new System.Drawing.Size(673, 538);
+            this.Split_Rx_DataGraph.Size = new System.Drawing.Size(514, 538);
             this.Split_Rx_DataGraph.SplitterDistance = 276;
             this.Split_Rx_DataGraph.TabIndex = 0;
             // 
-            // Manual_SpyDataViewer
+            // Grid_ManualDataViewer
             // 
-            this.Manual_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Manual_SpyDataViewer.EngineeringGridColumnsVisible = CANStream.SpyEngineering_Grid_Columns.Default;
-            this.Manual_SpyDataViewer.Location = new System.Drawing.Point(2, 0);
-            this.Manual_SpyDataViewer.Name = "Manual_SpyDataViewer";
-            this.Manual_SpyDataViewer.Size = new System.Drawing.Size(668, 276);
-            this.Manual_SpyDataViewer.TabIndex = 0;
-            this.Manual_SpyDataViewer.EngGridColumnsVisibleChanged += new System.EventHandler<CANStream.EngGridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
-            this.Manual_SpyDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
+            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(2, 0);
+            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
+            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 276);
+            this.Grid_ManualDataViewer.TabIndex = 0;
+            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
             // 
             // Tab_SpyHistory
             // 
@@ -1138,7 +774,7 @@ namespace CANStream
             this.Tab_SpyHistory.Multiline = true;
             this.Tab_SpyHistory.Name = "Tab_SpyHistory";
             this.Tab_SpyHistory.SelectedIndex = 0;
-            this.Tab_SpyHistory.Size = new System.Drawing.Size(671, 256);
+            this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 256);
             this.Tab_SpyHistory.TabIndex = 10;
             // 
             // Tab_SpyHistory_Graph
@@ -1152,7 +788,7 @@ namespace CANStream
             this.Tab_SpyHistory_Graph.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Graph.Name = "Tab_SpyHistory_Graph";
             this.Tab_SpyHistory_Graph.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(644, 248);
+            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(485, 248);
             this.Tab_SpyHistory_Graph.TabIndex = 0;
             this.Tab_SpyHistory_Graph.Tag = "Graph";
             this.Tab_SpyHistory_Graph.Text = "Graphic";
@@ -1165,7 +801,7 @@ namespace CANStream
             this.Graph_Spy.ChartSizeMode = ChartDirector.WinChartSizeMode.StretchImage;
             this.Graph_Spy.Location = new System.Drawing.Point(164, 0);
             this.Graph_Spy.Name = "Graph_Spy";
-            this.Graph_Spy.Size = new System.Drawing.Size(477, 245);
+            this.Graph_Spy.Size = new System.Drawing.Size(318, 245);
             this.Graph_Spy.TabIndex = 3;
             this.Graph_Spy.TabStop = false;
             this.Graph_Spy.Visible = false;
@@ -1351,7 +987,7 @@ namespace CANStream
             this.Tab_SpyHistory_Data.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Data.Name = "Tab_SpyHistory_Data";
             this.Tab_SpyHistory_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(644, 248);
+            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(485, 248);
             this.Tab_SpyHistory_Data.TabIndex = 1;
             this.Tab_SpyHistory_Data.Tag = "Data";
             this.Tab_SpyHistory_Data.Text = "Data";
@@ -1364,7 +1000,7 @@ namespace CANStream
             this.Lst_SpyDataHistory.FormattingEnabled = true;
             this.Lst_SpyDataHistory.Location = new System.Drawing.Point(3, 31);
             this.Lst_SpyDataHistory.Name = "Lst_SpyDataHistory";
-            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(638, 212);
+            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(479, 212);
             this.Lst_SpyDataHistory.TabIndex = 1;
             // 
             // TS_SpyDataHistory
@@ -1381,7 +1017,7 @@ namespace CANStream
             this.TSTxt_IdFilterTo});
             this.TS_SpyDataHistory.Location = new System.Drawing.Point(3, 3);
             this.TS_SpyDataHistory.Name = "TS_SpyDataHistory";
-            this.TS_SpyDataHistory.Size = new System.Drawing.Size(638, 25);
+            this.TS_SpyDataHistory.Size = new System.Drawing.Size(479, 25);
             this.TS_SpyDataHistory.TabIndex = 0;
             this.TS_SpyDataHistory.Text = "toolStrip1";
             // 
@@ -1686,13 +1322,13 @@ namespace CANStream
             this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cycle_SpyDataViewer.EngineeringGridColumnsVisible = CANStream.SpyEngineering_Grid_Columns.Default;
+            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
             this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
             this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
             this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
             this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
             this.Cycle_SpyDataViewer.TabIndex = 0;
-            this.Cycle_SpyDataViewer.EngGridColumnsVisibleChanged += new System.EventHandler<CANStream.EngGridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
             // 
             // Graph_Cycle
             // 
@@ -2042,8 +1678,6 @@ namespace CANStream
             this.Split_Tx_EngRaw.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tx_EngRaw)).EndInit();
             this.Split_Tx_EngRaw.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANData)).EndInit();
-            this.Context_ManualGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).EndInit();
             this.Context_ManualRawGrid.ResumeLayout(false);
             this.Split_Rx_DataGraph.Panel1.ResumeLayout(false);
@@ -2079,16 +1713,14 @@ namespace CANStream
 		}
 		private System.Windows.Forms.ToolStripComboBox Context_SpyGraph_Filter_TSCmb;
 		private System.Windows.Forms.ToolStripMenuItem Context_SpyGraph_Filter_TSMI;
-		private System.Windows.Forms.ToolStripComboBox ManualGrid_Filter_Combo_TSMI;
-		private System.Windows.Forms.ToolStripMenuItem FiltertoolStripMenuItem;
         private System.Windows.Forms.DataGridViewButtonColumn GridCol_Raw_Tx_BtnTx;
 		private System.Windows.Forms.ImageList Img_TabControl;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_SpyManual;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Graph;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Data;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer;
-		private CANStream.Ctrl_SpyDataViewer Cycle_SpyDataViewer;
-		private CANStream.Ctrl_SpyDataViewer Manual_SpyDataViewer;
+		private CANStream.Ctrl_CANDataGrid Cycle_SpyDataViewer;
+		private CANStream.Ctrl_CANDataGrid Grid_ManualDataViewer;
 		private System.Windows.Forms.Panel Panel_Cycle;
 		private System.Windows.Forms.SplitContainer Split_Cycle_VirtualSig_Graph;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_ResetLayout;
@@ -2101,11 +1733,6 @@ namespace CANStream
 		private System.Windows.Forms.TabPage TabPg_SpyAndManual;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_TxMessages_Raw;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_TxMessages_Eng;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_hideAllToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_showAllToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_iDToolStripMenuItem;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 		private System.Windows.Forms.ToolStripMenuItem Ctxt_TxRaw_Open_TSMI;
 		private System.Windows.Forms.ToolStripMenuItem Ctxt_TxRaw_Save_TSMI;
@@ -2126,7 +1753,6 @@ namespace CANStream
 		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_Period;
 		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_DLC;
 		private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_Id;
-		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.DataGridView Grid_CANRawData;
 		private System.Windows.Forms.Button Cmd_GraphSpyPause;
 		private System.Windows.Forms.Button Cmd_GraphSpyRec;
@@ -2140,8 +1766,6 @@ namespace CANStream
 		private System.Windows.Forms.TextBox Txt_SpyGraphTimeWindow;
 		private System.Windows.Forms.GroupBox Grp_GraphProperties;
 		private ChartDirector.WinChartViewer Graph_Spy;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_signedToolStripMenuItem;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Signed;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages_Graph;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages_Data;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages;
@@ -2161,21 +1785,6 @@ namespace CANStream
 		private System.ComponentModel.BackgroundWorker BGWrk_Cycle;
 		private System.Windows.Forms.Timer Timer_CheckDevice;
 		private System.Windows.Forms.Timer Timer_CycleGraph;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_commentToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_unitToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_zeroToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_gainToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_endianessToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_lengthToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_startToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_muxValueToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_periodToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem Context_Manual_rxTxToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem ContextManual_columnsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
-		private System.Windows.Forms.ToolStripMenuItem showHiddenRowsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem hideRowToolStripMenuItem;
-		private System.Windows.Forms.ContextMenuStrip Context_ManualGrid;
 		private System.Windows.Forms.Label Lbl_CycleFile;
 		private System.Windows.Forms.Label Lbl_CanConfig;
 		private System.Windows.Forms.Label label1;
@@ -2214,19 +1823,6 @@ namespace CANStream
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.TextBox Txt_MsgCounter;
 		private System.Windows.Forms.Label Lbl_MsgCounter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Unit;
-		private System.Windows.Forms.DataGridViewTextBoxColumn DefaultValue;
-		private System.Windows.Forms.DataGridViewTextBoxColumn LinZero;
-		private System.Windows.Forms.DataGridViewTextBoxColumn LinGain;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Endianess;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ParamLength;
-		private System.Windows.Forms.DataGridViewTextBoxColumn StartBit;
-		private System.Windows.Forms.DataGridViewTextBoxColumn CANParameter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn MuxVal;
-		private System.Windows.Forms.DataGridViewTextBoxColumn MsgPeriod;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RxTx;
-		private System.Windows.Forms.DataGridView Grid_CANData;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.ToolStripButton TSB_StopCANTraceRecording;
 		private System.Windows.Forms.ToolStripButton TSB_StartCANTraceRecording;
@@ -2252,5 +1848,6 @@ namespace CANStream
         private System.Windows.Forms.ToolStripLabel TSLbl_IdFilterTo;
         private System.Windows.Forms.ToolStripTextBox TSTxt_IdFilterTo;
         private System.Windows.Forms.ToolStripButton TSB_RecordSelection;
+        private Ctrl_CANDataGrid Grid_ManualDataWriter;
     }
 }
