@@ -236,6 +236,35 @@ namespace CANStream
 			}
 		}
 
+        /// <summary>
+        /// Return paramater engineering min and max values according to its CAN properties
+        /// </summary>
+        /// <returns>Array of double, index 0: Min value, index 1: Max value</returns>
+        public double[] GetParameterMinMax()
+        {
+            double[] MinMax = new double[2] { (double)0, (double)0 };
+
+            if (Length > 0)
+            {
+                if (Signed)
+                {
+                    UInt64 RawMax = (UInt64)(Math.Pow(2, Length - 1) - 1);
+
+                    MinMax[1] = (double)RawMax * Gain + Zero;
+                    MinMax[0] = MinMax[1] * -1;
+                }
+                else
+                {
+                    UInt64 RawMax = (UInt64)(Math.Pow(2, Length) - 1);
+
+                    MinMax[0] = (double)0 * Gain + Zero;
+                    MinMax[1] = (double)RawMax * Gain + Zero;
+                }
+            }
+
+            return (MinMax);
+        }
+
 		#endregion
 	}
 	
@@ -438,12 +467,29 @@ namespace CANStream
         	
         	return(false);
         }
-        
-		#endregion
-		
-		#region Private methodes
-		
-		private bool AreParmeterOverlaping(CANParameter ParamA, CANParameter ParamB)
+
+        #endregion
+
+        #region Protected methodes
+
+        protected UInt64 SwapBytes(UInt64 ValIn, int ByteLen)
+        {
+            UInt64 ValOut = 0;
+
+            for (int iByte = 0; iByte < ByteLen; iByte++)
+            {
+                UInt64 ByteVal = (ValIn & ((UInt64)0xFF << (iByte * 8))) >> (iByte * 8);
+                ValOut |= (ByteVal << ((ByteLen - iByte - 1) * 8));
+            }
+
+            return (ValOut);
+        }
+
+        #endregion
+
+        #region Private methodes
+
+        private bool AreParmeterOverlaping(CANParameter ParamA, CANParameter ParamB)
 		{
 			if (!(ParamA.Name.Equals(ParamB.Name)))
 			{
@@ -1748,21 +1794,33 @@ namespace CANStream
 			{
 				RawValue += (UInt64)(ParamBytes[iByte] << ((ByteLen - iByte - 1) * 8));
 			}
-			
-			oParam.RawValue = "0x" + string.Format("{0:X}", RawValue);
-			
+
 			//Raw to engineering value conversion
 			if (oParam.Signed)
 			{
-                UInt64 ZeroRaw = Convert.ToUInt64((Math.Pow(2, oParam.Length) - 1)) / 2 + 1;
-                oParam.DecodedValue = ((double)RawValue - (double)ZeroRaw) * oParam.Gain + oParam.Zero;
-			}
+                byte SignBit = (byte)((RawValue & ((UInt64)0x01 << (oParam.Length - 1))) >> (oParam.Length - 1));
+                RawValue &= ((UInt64)(Math.Pow(2, (oParam.Length - 1)) - 1));
+
+                oParam.DecodedValue = (double)RawValue * oParam.Gain + oParam.Zero;
+
+                if (SignBit == 0x01)
+                {
+                    oParam.DecodedValue *= -1;
+                }
+            }
 			else
 			{
 				oParam.DecodedValue = (double)RawValue * oParam.Gain + oParam.Zero;
 			}
 			
-			return(true);
+            if (oParam.Endianess== CanParameterEndianess.LSBFirst)
+            {
+                RawValue = SwapBytes(RawValue, ByteLen);
+            }
+
+            oParam.RawValue = "0x" + string.Format("{0:X" + (ByteLen * 2).ToString() + "}", RawValue);
+
+            return (true);
 		}
 		
 		#endregion
@@ -1774,9 +1832,27 @@ namespace CANStream
 	
 	public class CANMessageEncoded:CANMessage
 	{
-		#region Public members
-		
-		public UInt32 uMessageId;
+        #region Public properties
+
+        //TODO: Remove ???
+        public Byte[] MessageData
+        {
+            get
+            {
+                return (ByteMessageData);
+            }
+
+            set
+            {
+                ByteMessageData = value;
+            }
+        }
+
+        #endregion
+
+        #region Public members
+
+        public UInt32 uMessageId;
 		public bool HasVirtualParameters;
 		
 		#endregion
@@ -1865,16 +1941,20 @@ namespace CANStream
 		public void EncodeMessage()
 		{
 			ByteMessageData = new byte[MsgByteLength];
-			long CurrentMuxVal = GetCurrentMultiplexerValue();
 			
 			foreach(CANParameter oParam in Parameters)
-			{
-				if ((!oParam.IsMultiplexed) ||(oParam.IsMultiplexed && oParam.MultiplexerValue == CurrentMuxVal))
+			{                
+                /*
+                    All parameters encoded in order to update the raw value of any parameter changed into the CAN data grid, 
+                    even if it is a multiplexed parameter which is not sent due to the multiplexer value 
+                */
+                
+                //Get paramter value into an array of bytes, most significant byte being byte 0
+                // 4258 = 0x10A2 => Byte[0] = 0x10, Byte[1] = 0xA2
+                byte[] ParamBytes = GetParameterBytes(oParam);
+
+                if ((!oParam.IsMultiplexed) ||(oParam.IsMultiplexed && oParam.MultiplexerValue == GetCurrentMultiplexerValue()))
 				{
-					//Get paramter value into an array of bytes, most significant byte being byte 0
-					// 4258 = 0x10A2 => Byte[0] = 0x10, Byte[1] = 0xA2
-					byte[] ParamBytes = GetParameterBytes(oParam);
-					
 					int iMapByte = oParam.StartBit / 8;
 					int iBitInMapByte = oParam.StartBit - iMapByte * 8;
 					
@@ -1936,7 +2016,7 @@ namespace CANStream
 				}
 			}
 		}
-		
+
 		#endregion
 		
 		#region Private methodes
@@ -1982,38 +2062,19 @@ namespace CANStream
 				
 		private double ClipParameterEngineeringValue(CANParameter Parameter)
 		{
-			double EngMin = 0;
-			double EngMax = 0;
-			
-			UInt64 RawMax = (UInt64)(Math.Pow(2,Parameter.Length) - 1);
-			
-			if (Parameter.Signed)
-			{
-				EngMin = ((double)(RawMax / 2) * Parameter.Gain + Parameter.Zero);
-				if (EngMin > 0) EngMin *= -1;
-				
-				EngMax = ((double)((RawMax / 2) + 1) * Parameter.Gain + Parameter.Zero);
-				if (EngMax < 0) EngMax *= -1;
-			}
-			else
-			{
-				EngMin = 0 * Parameter.Gain + Parameter.Zero;
-				EngMax = (double)(RawMax) * Parameter.Gain + Parameter.Zero;
-			}
-						
-			if (Parameter.DecodedValue < EngMin)
-			{
-				return(EngMin);
-			}
-			else if (Parameter.DecodedValue > EngMax)
-			{
-				return(EngMax);
-			}
-			else
-			{
-				return(Parameter.DecodedValue);
-			}
-		}
+            double[] ParamRange = Parameter.GetParameterMinMax();
+
+            if (Parameter.DecodedValue < ParamRange[0])
+            {
+                return (ParamRange[0]);
+            }
+            else if (Parameter.DecodedValue > ParamRange[1])
+            {
+                return (ParamRange[1]);
+            }
+
+            return (Parameter.DecodedValue);
+        }
 		
 		private byte[] GetParameterBytes(CANParameter Parameter)
 		{
@@ -2031,9 +2092,14 @@ namespace CANStream
 			
 			if (Parameter.Signed)
 			{
-                UInt64 ZeroRaw = Convert.ToUInt64((Math.Pow(2, Parameter.Length) - 1)) / 2 + 1;
-                RawVal = Convert.ToUInt64(ZeroRaw + ((ClipEngValue - Parameter.Zero) / Parameter.Gain));
-			}
+                RawVal = Convert.ToUInt64((Math.Abs(ClipEngValue) - Parameter.Zero) / Parameter.Gain);
+
+                if (ClipEngValue < 0)
+                {
+                    RawVal |= ((UInt64)0x01 << (Parameter.Length - 1));
+                }
+
+            }
 			else
 			{
 				RawVal = Convert.ToUInt64((ClipEngValue - Parameter.Zero) / Parameter.Gain);
@@ -2046,9 +2112,16 @@ namespace CANStream
 				ParamBytes[iByte] = (byte)(RawValMasked >> ((ByteLen - iByte - 1) * 8));
 			}
 			
+            if(Parameter.Endianess== CanParameterEndianess.LSBFirst)
+            {
+                RawVal = SwapBytes(RawVal, ByteLen);
+            }
+
+            Parameter.RawValue = "0x" + string.Format("{0:X" + (ByteLen * 2).ToString() + "}", RawVal);
+
 			return(ParamBytes);
 		}
-		
+
 		private long GetCurrentMultiplexerValue()
 		{
 			if (!(MultiplexerName.Equals("")))
@@ -2064,7 +2137,7 @@ namespace CANStream
 			
 			return(-1);
 		}
-		
+
 		#endregion
 	}
 	

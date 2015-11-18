@@ -462,16 +462,6 @@ namespace CANStream
         
         #region View
 		
-		private void TSMI_HideSelectedRowsClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null)) ActiveCanBus.HideActiveRow();
-		}
-		
-		private void TSMI_ShowHiddenRowsClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null)) ActiveCanBus.ShowHiddenRows();
-		}
-        
 		#region Controller layout
 		
 		#region Spy and manual
@@ -572,12 +562,12 @@ namespace CANStream
 		
 		private void TSMI_Columns_Manual_Tx_ShowAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum.All);
+			ActiveCanBus.Set_TxGridColumnsVisible(GridCANData_ColumnsEnum.All);
 		}
 		
 		private void TSMI_Columns_Manual_Tx_HideAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum.None);
+			ActiveCanBus.Set_TxGridColumnsVisible(GridCANData_ColumnsEnum.None);
 		}
 		
 		private void TSMI_Columns_Manual_Tx_IDClick(object sender, EventArgs e)
@@ -1628,8 +1618,8 @@ namespace CANStream
 						TSMI_Columns_Manual.Enabled = true;
 						TSMI_Columns_Cycle.Enabled = false;
 						
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_Manual, (object)ActiveCanBus.Get_TxGridColumnsVisible());
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_SpyEng, (object)ActiveCanBus.Get_SpyEngGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_Manual, ActiveCanBus.Get_TxGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_SpyEng, ActiveCanBus.Get_RxGridColumnsVisible());
 						
 						CANMessagesConfiguration oActiveCanCfg = ActiveCanBus.Get_BusCANConfiguration();
 						
@@ -1666,7 +1656,7 @@ namespace CANStream
 						TSMI_Columns_Manual.Enabled = false;
 						TSMI_Columns_Cycle.Enabled = true;
 						
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_Cycle_Eng, (object)ActiveCanBus.Get_CycleEngGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_Cycle_Eng, ActiveCanBus.Get_CycleEngGridColumnsVisible());
 						
         				break;
         		}
@@ -1711,7 +1701,7 @@ namespace CANStream
                     eColumns -= eTSMIColumn;
                 }
 
-                ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
+                ActiveCanBus.Set_TxGridColumnsVisible(eColumns);
             }
         }
 
@@ -1720,7 +1710,7 @@ namespace CANStream
             if (!(ActiveCanBus == null))
             {
                 oMenuItem.Checked = !oMenuItem.Checked;
-                GridCANData_ColumnsEnum eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
+                GridCANData_ColumnsEnum eColumns = ActiveCanBus.Get_RxGridColumnsVisible();
 
                 if (oMenuItem.Checked)
                 {
@@ -2407,86 +2397,78 @@ namespace CANStream
         		CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Record User Information");
         }
         
-        private void UpdateGridsColumnsStates(CANControllerGrid eGrid, object eColVisible)
+        private void UpdateGridsColumnsStates(CANControllerGrid eGrid, GridCANData_ColumnsEnum eColVisible)
         {
-            //TODO: Change 'eColVisible' argument type to 'GridCANData_ColumnsEnum' since all grids are now of the same type (Ctrl_CANDataGrid)
-
             switch (eGrid)
         	{
         		case CANControllerGrid.Grid_Manual:
         			
         			{
-                        GridCANData_ColumnsEnum eColumnsVisible = (GridCANData_ColumnsEnum)eColVisible;
-
-                        TSMI_Columns_Manual_Tx_ID.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
-                        TSMI_Columns_Manual_Tx_RxTx.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
-                        TSMI_Columns_Manual_Tx_Value.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
-                        TSMI_Columns_Manual_Tx_RawValue.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
-                        TSMI_Columns_Manual_Tx_Min.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
-                        TSMI_Columns_Manual_Tx_Max.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
-                        TSMI_Columns_Manual_Tx_Unit.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
-                        TSMI_Columns_Manual_Tx_Period.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
-                        TSMI_Columns_Manual_Tx_Start.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
-                        TSMI_Columns_Manual_Tx_Length.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
-                        TSMI_Columns_Manual_Tx_Endianess.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
-                        TSMI_Columns_Manual_Tx_Signedness.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
-                        TSMI_Columns_Manual_Tx_Gain.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
-                        TSMI_Columns_Manual_Tx_Zero.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
-                        TSMI_Columns_Manual_Tx_Count.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
-                        TSMI_Columns_Manual_Tx_DLC.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
-			        	TSMI_Columns_Manual_Tx_Comment.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
+                        TSMI_Columns_Manual_Tx_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Manual_Tx_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Manual_Tx_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+                        TSMI_Columns_Manual_Tx_RawValue.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+                        TSMI_Columns_Manual_Tx_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+                        TSMI_Columns_Manual_Tx_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+                        TSMI_Columns_Manual_Tx_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Manual_Tx_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Manual_Tx_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Manual_Tx_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Manual_Tx_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Manual_Tx_Signedness.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Manual_Tx_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Manual_Tx_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Manual_Tx_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Manual_Tx_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Manual_Tx_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
                     }
         			
         			break;
         			
         		case CANControllerGrid.Grid_SpyEng:
         			
-        			{
-        				GridCANData_ColumnsEnum eColumnsVisible = (GridCANData_ColumnsEnum)eColVisible;
-        				
-        				TSMI_Columns_Manual_Rx_Eng_ID.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
-                        TSMI_Columns_Manual_Rx_Eng_RxTx.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
-                        TSMI_Columns_Manual_Rx_Eng_Value.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
-			        	TSMI_Columns_Manual_Rx_Eng_RawVal.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
-			        	TSMI_Columns_Manual_Rx_Eng_Min.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
-			        	TSMI_Columns_Manual_Rx_Eng_Max.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
-			        	TSMI_Columns_Manual_Rx_Eng_Unit.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
-                        TSMI_Columns_Manual_Rx_Eng_Period.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
-                        TSMI_Columns_Manual_Rx_Eng_Start.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
-                        TSMI_Columns_Manual_Rx_Eng_Length.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
-                        TSMI_Columns_Manual_Rx_Eng_Endianess.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
-                        TSMI_Columns_Manual_Rx_Eng_Signed.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
-                        TSMI_Columns_Manual_Rx_Eng_Gain.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
-                        TSMI_Columns_Manual_Rx_Eng_Zero.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
-                        TSMI_Columns_Manual_Rx_Eng_Count.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
-                        TSMI_Columns_Manual_Rx_Eng_DLC.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
-			        	TSMI_Columns_Manual_Rx_Eng_Comment.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);	
+        			{        				
+        				TSMI_Columns_Manual_Rx_Eng_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Manual_Rx_Eng_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Manual_Rx_Eng_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+			        	TSMI_Columns_Manual_Rx_Eng_RawVal.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+			        	TSMI_Columns_Manual_Rx_Eng_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+			        	TSMI_Columns_Manual_Rx_Eng_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+			        	TSMI_Columns_Manual_Rx_Eng_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Manual_Rx_Eng_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Manual_Rx_Eng_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Manual_Rx_Eng_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Manual_Rx_Eng_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Manual_Rx_Eng_Signed.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Manual_Rx_Eng_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Manual_Rx_Eng_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Manual_Rx_Eng_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Manual_Rx_Eng_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Manual_Rx_Eng_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);	
         			}
         			
         			break;
         			
         		case CANControllerGrid.Grid_Cycle_Eng:
         			
-        			{
-        				GridCANData_ColumnsEnum eColumnsVisible = (GridCANData_ColumnsEnum)eColVisible;
-        				
-        				TSMI_Columns_Cycle_Eng_ID.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
-                        TSMI_Columns_Cycle_Eng_RxTx.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
-                        TSMI_Columns_Cycle_Eng_Value.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
-			        	TSMI_Columns_Cycle_Eng_RawVal.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
-			        	TSMI_Columns_Cycle_Eng_Min.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
-			        	TSMI_Columns_Cycle_Eng_Max.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
-			        	TSMI_Columns_Cycle_Eng_Unit.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
-                        TSMI_Columns_Cycle_Eng_Period.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
-                        TSMI_Columns_Cycle_Eng_Start.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
-                        TSMI_Columns_Cycle_Eng_Length.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
-                        TSMI_Columns_Cycle_Eng_Endianess.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
-                        TSMI_Columns_Cycle_Eng_Signedness.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
-                        TSMI_Columns_Cycle_Eng_Gain.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
-                        TSMI_Columns_Cycle_Eng_Zero.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
-                        TSMI_Columns_Cycle_Eng_Count.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
-                        TSMI_Columns_Cycle_Eng_DLC.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
-			        	TSMI_Columns_Cycle_Eng_Comment.Checked = eColumnsVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
+        			{        				
+        				TSMI_Columns_Cycle_Eng_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Cycle_Eng_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Cycle_Eng_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+			        	TSMI_Columns_Cycle_Eng_RawVal.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+			        	TSMI_Columns_Cycle_Eng_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+			        	TSMI_Columns_Cycle_Eng_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+			        	TSMI_Columns_Cycle_Eng_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Cycle_Eng_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Cycle_Eng_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Cycle_Eng_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Cycle_Eng_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Cycle_Eng_Signedness.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Cycle_Eng_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Cycle_Eng_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Cycle_Eng_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Cycle_Eng_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Cycle_Eng_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
         			}
         			
         			break;

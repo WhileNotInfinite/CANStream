@@ -125,10 +125,10 @@ namespace CANStream
 		
 		#region Public events
 		
-		[Browsable(true), Description("Occurs when a column of the engineering data grid column is hidden or shown")]
+		[Category("Appearance"), Browsable(true), Description("Occurs when a column of the engineering data grid column is hidden or shown")]
 		public event EventHandler<GridColVisibleChangedEventArgs> GridColumnsVisibleChanged;
 
-        [Browsable(true), Description("Occurs when the CAN data grid is reset")]
+        [Category("Appearance"), Browsable(true), Description("Occurs when the CAN data grid is reset")]
         public event EventHandler<EventArgs> GridDataReseted;
 
 		#endregion
@@ -148,7 +148,21 @@ namespace CANStream
 				Set_SpyEngGridColumnsVisible(value);
 			}
 		}
-			
+
+        [Category("Appearance"), Browsable(true), Description("Set false to hide virtual channels grid row")]
+        public bool VirtualChannelsVisible
+        {
+            get
+            {
+                return this.bVirtualChannelsRowVisible;
+            }
+
+            set
+            {
+                ShowHide_VirtualChannel(value);
+            }
+        }
+        	
 		#endregion
 		
 		#region Private members
@@ -158,7 +172,10 @@ namespace CANStream
         private GridSortingDirection eItemsSortingDirection;
         
         private int VirtualChannelsRowIndex;
-		
+        private bool bVirtualChannelsRowVisible;
+
+        private bool bCellValueChangedEventEnabled;
+
 		#endregion
 		
 		public Ctrl_CANDataGrid()
@@ -173,8 +190,10 @@ namespace CANStream
             eItemsSortingDirection = GridSortingDirection.Default;
 
             VirtualChannelsRowIndex = -1;
-			
-		}
+            ShowHide_VirtualChannel(true);
+
+            bCellValueChangedEventEnabled = true;
+        }
 		
 		#region Control events
 		
@@ -318,14 +337,66 @@ namespace CANStream
 		{
             ContexSpyGridColumnsChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Comment);
         }
-		
-		#endregion
-		
-		#endregion
-		
-		#region Grid_SpyEngineering
-		
-		private void Grid_SpyEngineeringSizeChanged(object sender, EventArgs e)
+
+        #endregion
+
+        #endregion
+
+        #region Grid_SpyEngineering
+
+        private void Grid_SpyEngineering_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == GRID_SPYENG_ENG_VALUE && e.RowIndex >= 0 && bCellValueChangedEventEnabled)
+            {
+                bCellValueChangedEventEnabled = false;
+
+                DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (!(oCurrentCell.Tag == null))
+                {
+                    CANParameter oParam = (CANParameter)oCurrentCell.Tag;
+
+                    double EngVal = oParam.ValueFormat.SetSignalFormatedValue(oCurrentCell.Value.ToString());
+
+                    if (!(double.IsNaN(EngVal)))
+                    {
+                        if (oParam.DecodedValue != EngVal)
+                        {
+                            oParam.DecodedValue = EngVal;
+
+                            Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngVal));
+
+                            if (sAlarm.HasValue)
+                            {
+                                oCurrentCell.Style.BackColor = sAlarm.Value.BackColor;
+                                oCurrentCell.Style.ForeColor = sAlarm.Value.ForeColor;
+                            }
+                            else
+                            {
+                                oCurrentCell.Style.BackColor = Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_NAME].Style.BackColor;
+                                oCurrentCell.Style.ForeColor = Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_NAME].Style.ForeColor;
+                            }
+
+                            CANMessageEncoded oMsgEncoder = (CANMessageEncoded)((((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow()).Cells[GRID_SPYENG_ENG_VALUE].Tag);
+                            oMsgEncoder.EncodeMessage();
+
+                            Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+                                            Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                    oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+                }
+
+                bCellValueChangedEventEnabled = true;
+            }
+        }
+
+        private void Grid_SpyEngineeringSizeChanged(object sender, EventArgs e)
 		{
 			ResizeGridColumns(Grid_SpyEngineering, GRID_ENG_SPY_FILLER_COL);
 		}
@@ -462,7 +533,18 @@ namespace CANStream
 
         #region Collapsable grid functions
 
+        private DataGridViewRow Add_RawDataRow(CANMessage oMessage, int MessageLen)
+        {
+            //TODO: remove 'MessageLen' arg and use the DLC property of the CAN message instead when it will be available
+            return (Add_RawDataRow(oMessage.Identifier, MessageLen.ToString(), oMessage.Name, oMessage.RxTx.ToString(), oMessage.Comment));
+        }
+
         private DataGridViewRow Add_RawDataRow(MessageStatus oRawMsg)
+        {
+            return (Add_RawDataRow(oRawMsg.IdString, oRawMsg.CANMsg.LEN.ToString(), "", "", ""));
+        }
+
+        private DataGridViewRow Add_RawDataRow(string MsgId, string MsgLen, string MsgName, string MsgRxTx, string MsgComment)
         {
             //Add the row to the grid
             Grid_SpyEngineering.Rows.Add();
@@ -470,8 +552,11 @@ namespace CANStream
 
             //Fill fixed data
             oRow.Cells[GRID_SPYENG_COLLAPSE].Value = Icones.Grid_Collapse;
-            oRow.Cells[GRID_SPYENG_MSG_ID].Value = oRawMsg.IdString;
-            oRow.Cells[GRID_SPYENG_DLC].Value = oRawMsg.CANMsg.LEN.ToString();
+            oRow.Cells[GRID_SPYENG_MSG_ID].Value = MsgId;
+            oRow.Cells[GRID_SPYENG_MSG_RXTX].Value = MsgRxTx;
+            oRow.Cells[GRID_SPYENG_NAME].Value = MsgName;
+            oRow.Cells[GRID_SPYENG_DLC].Value = MsgLen;
+            oRow.Cells[GRID_SPYENG_COMMENT].Value = MsgComment;
 
             //Color row
             Color_GridRow(oRow, Color.DarkBlue, Color.White);
@@ -577,10 +662,12 @@ namespace CANStream
             oRow.Cells[GRID_SPYENG_START].Value = oEngParam.StartBit.ToString();
             oRow.Cells[GRID_SPYENG_LENGTH].Value = oEngParam.Length.ToString();
             oRow.Cells[GRID_SPYENG_ENDIANESS].Value = oEngParam.Endianess.ToString();
-            oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = oEngParam.Signed.ToString();
             oRow.Cells[GRID_SPYENG_GAIN].Value = oEngParam.Gain.ToString();
             oRow.Cells[GRID_SPYENG_ZERO].Value = oEngParam.Zero.ToString();
             oRow.Cells[GRID_SPYENG_COMMENT].Value = oEngParam.Comment;
+
+            if (oEngParam.Signed)   oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = "Yes";
+            else                    oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = "No";
 
             //Init Min/Max cellse
             oRow.Cells[GRID_SPYENG_MIN_VALUE].Tag = oEngParam.DecodedValue;
@@ -835,13 +922,119 @@ namespace CANStream
             }
         }
 
+        private void ShowHide_VirtualChannel(bool bVisible)
+        {
+            bVirtualChannelsRowVisible = bVisible;
+
+            if (VirtualChannelsRowIndex != -1)
+            {
+                CollapsableGridRowProperties oVirtualChanRowProps = (CollapsableGridRowProperties)Grid_SpyEngineering.Rows[VirtualChannelsRowIndex].Tag;
+
+                if (!(oVirtualChanRowProps == null))
+                {
+                    if (bVirtualChannelsRowVisible)
+                    {
+                        oVirtualChanRowProps.SetRowVisibility(true);
+                        oVirtualChanRowProps.ExpandChildren();
+                    }
+                    else
+                    {
+                        oVirtualChanRowProps.CollapseChildren();
+                        oVirtualChanRowProps.SetRowVisibility(false);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #endregion
 
         #region Public methods
 
-        #region Collapsable grid functions
+        #region Data Tx grid methodes
+
+        public void Add_TxMessage(CANMessageEncoded oMsgEncoder, int MsgLen)
+        {
+            //TODO: Remove 'MsgLen' prop and use the DLC property of the CAN message instead when it will be availble
+
+            if (!(oMsgEncoder == null))
+            {
+                bCellValueChangedEventEnabled = false;
+
+                DataGridViewRow oMsgRow = Add_RawDataRow(oMsgEncoder, MsgLen);
+                CollapsableGridRowProperties oMsgRowProps = (CollapsableGridRowProperties)oMsgRow.Tag;
+
+                oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag = oMsgEncoder;
+                oMsgEncoder.EncodeMessage();
+
+                foreach (CANParameter oParam in oMsgEncoder.Parameters)
+                {
+                    DataGridViewRow oParamRow = null;
+
+                    if (oParam.IsMultiplexed)
+                    {
+                        //Get multiplexer row
+                        DataGridViewRow oMuxRow = null;
+
+                        foreach(DataGridViewRow oChildRow in oMsgRowProps.Children)
+                        {
+                            if (((CollapsableGridRowProperties)oChildRow.Tag).RowDataType == GridRowDataType.Multiplexer)
+                            {
+                                if ((oChildRow.Cells[GRID_SPYENG_NAME].Value.ToString().Equals(oMsgEncoder.MultiplexerName))
+                                        && (oChildRow.Cells[GRID_SPYENG_ENG_VALUE].Value.ToString().Equals(oParam.MultiplexerValue.ToString())))
+                                {
+                                    oMuxRow = oChildRow;
+                                    break;
+                                }
+                            }
+                        }
+
+                        //Create multiplexer row if it doesn't exist
+                        if (oMuxRow == null)
+                        {
+                            oMuxRow = Add_MultiplexerRow(oMsgRow, oMsgEncoder.MultiplexerName, oParam.MultiplexerValue);
+                        }
+
+                        int RowIndex = oMuxRow.Index + ((CollapsableGridRowProperties)oMuxRow.Tag).Children.Count + 1;
+
+                        oParamRow = Add_EngDataRow(oMuxRow, oParam, RowIndex);
+                    }
+                    else //CAN Parameter is not multiplexed
+                    {
+                        int RowIndex = oMsgRowProps.Children[0].Index + ((CollapsableGridRowProperties)oMsgRowProps.Children[0].Tag).Children.Count + 1;
+                        oParamRow = Add_EngDataRow(oMsgRowProps.Children[0], oParam, RowIndex);
+                    }
+
+                    if (oParam.IsVirtual)
+                    {
+                        Color_GridRow(oParamRow, Color.LightGreen, Color.Black);
+                    }
+                    else
+                    {
+                        oParamRow.Cells[GRID_SPYENG_ENG_VALUE].ReadOnly = false;
+                    }
+
+                    //Set Tx parameter min/max
+                    double[] ParamMinMax = oParam.GetParameterMinMax();
+                    oParamRow.Cells[GRID_SPYENG_MIN_VALUE].Value = ParamMinMax[0].ToString();
+                    oParamRow.Cells[GRID_SPYENG_MAX_VALUE].Value = ParamMinMax[1].ToString();
+
+                    //Set parameter formated and row values
+                    oParamRow.Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
+                    oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+
+                    //Set 'Value' cell tag
+                    oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Tag = oParam;
+                }
+
+                bCellValueChangedEventEnabled = true;
+            }
+        }
+
+        #endregion
+
+        #region Data Rx grid methodes
 
         public void Update_GridRawData(MessageStatus RawMsg)
         {
@@ -1310,12 +1503,20 @@ namespace CANStream
         #endregion
     }
 
-    #region Grids columns visible changed event argument
+    #region Events argument class
 
     public class GridColVisibleChangedEventArgs : EventArgs
 	{
 		public GridCANData_ColumnsEnum ColumnsVisible {get; set;}
 	}
+
+    public class GridTxParameterValueChangedEventArgs : EventArgs
+    {
+        public UInt32 MessageId { get; set; }
+        public long MultiplexerValue { get; set; }
+        public string ParameterName { get; set; }
+        public double ParameterValue { get; set};
+    }
 
     #endregion
 
@@ -1431,6 +1632,25 @@ namespace CANStream
                     Row.Cells[0].Value = Icones.Grid_Expand;
                 }
             }
+        }
+
+        public DataGridViewRow GetRootRow()
+        {
+            DataGridViewRow oRootRow = this.Row;
+
+            if (this.Parent != null)
+            {
+                CollapsableGridRowProperties oParentRowProps = (CollapsableGridRowProperties)this.Parent.Tag;
+
+                while (oParentRowProps.Parent != null)
+                {
+                    oParentRowProps = (CollapsableGridRowProperties)oParentRowProps.Parent.Tag;
+                }
+
+                oRootRow = oParentRowProps.Row;
+            }
+
+            return (oRootRow);
         }
 
         #endregion

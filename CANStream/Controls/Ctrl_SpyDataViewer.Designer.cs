@@ -37,49 +37,25 @@ namespace CANStream
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle109 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle110 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle111 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle112 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle113 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle114 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle115 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle116 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle117 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle118 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle119 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle120 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle121 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle122 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle123 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle124 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle125 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle126 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Grid_SpyEngineering = new System.Windows.Forms.DataGridView();
-            this.Context_SpyEngGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ContextSpyEng_ResetTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextSpyEng_CollapseRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_ExpandRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextSpyEng_FilterTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_FiltetTSComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextSpyEng_columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextSpyEng_iDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_valueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_rawValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_minToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_maxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_unitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_periodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_countToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_dlcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextSpyEng_commentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
             this.Grid_Eng_Collapse_State = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grid_Eng_RxTx = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,13 +75,37 @@ namespace CANStream
             this.Grid_Eng_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grid_Eng_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SpyEng_Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Context_SpyEngGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ContextSpyEng_ResetTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ContextSpyEng_CollapseRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_ExpandRowsTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ContextSpyEng_FilterTSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_FiltetTSComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
+            this.ContextSpyEng_columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.ContextSpyEng_iDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_RxTxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_valueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_rawValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_minToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_maxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_unitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_periodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_StartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_LengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_EndianessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_SignedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_GainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_ZeroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_countToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_dlcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextSpyEng_commentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_SpyEngineering)).BeginInit();
             this.Context_SpyEngGrid.SuspendLayout();
             this.SuspendLayout();
@@ -148,7 +148,196 @@ namespace CANStream
             this.Grid_SpyEngineering.Size = new System.Drawing.Size(746, 300);
             this.Grid_SpyEngineering.TabIndex = 12;
             this.Grid_SpyEngineering.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellDoubleClick);
+            this.Grid_SpyEngineering.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellValueChanged);
             this.Grid_SpyEngineering.SizeChanged += new System.EventHandler(this.Grid_SpyEngineeringSizeChanged);
+            // 
+            // Grid_Eng_Collapse_State
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
+            this.Grid_Eng_Collapse_State.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Grid_Eng_Collapse_State.HeaderText = "";
+            this.Grid_Eng_Collapse_State.Name = "Grid_Eng_Collapse_State";
+            this.Grid_Eng_Collapse_State.ReadOnly = true;
+            this.Grid_Eng_Collapse_State.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Grid_Eng_Collapse_State.Width = 20;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column6.HeaderText = "ID";
+            this.Column6.MinimumWidth = 30;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 40;
+            // 
+            // Grid_Eng_RxTx
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_RxTx.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Grid_Eng_RxTx.HeaderText = "RxTx";
+            this.Grid_Eng_RxTx.MinimumWidth = 40;
+            this.Grid_Eng_RxTx.Name = "Grid_Eng_RxTx";
+            this.Grid_Eng_RxTx.ReadOnly = true;
+            this.Grid_Eng_RxTx.Width = 40;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Parameter";
+            this.Column7.MinimumWidth = 150;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 150;
+            // 
+            // RawValue
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RawValue.DefaultCellStyle = dataGridViewCellStyle4;
+            this.RawValue.HeaderText = "Raw value";
+            this.RawValue.MinimumWidth = 30;
+            this.RawValue.Name = "RawValue";
+            this.RawValue.ReadOnly = true;
+            this.RawValue.Visible = false;
+            this.RawValue.Width = 50;
+            // 
+            // Column8
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column8.HeaderText = "Value";
+            this.Column8.MinimumWidth = 150;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 150;
+            // 
+            // Column9
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column9.HeaderText = "Min";
+            this.Column9.MinimumWidth = 40;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 50;
+            // 
+            // Column10
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column10.HeaderText = "Max";
+            this.Column10.MinimumWidth = 40;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 50;
+            // 
+            // SpyEng_Unit
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Unit.DefaultCellStyle = dataGridViewCellStyle8;
+            this.SpyEng_Unit.HeaderText = "Unit";
+            this.SpyEng_Unit.MinimumWidth = 20;
+            this.SpyEng_Unit.Name = "SpyEng_Unit";
+            this.SpyEng_Unit.ReadOnly = true;
+            this.SpyEng_Unit.Width = 40;
+            // 
+            // Grid_Eng_Period
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Period.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Grid_Eng_Period.HeaderText = "Period";
+            this.Grid_Eng_Period.Name = "Grid_Eng_Period";
+            this.Grid_Eng_Period.ReadOnly = true;
+            this.Grid_Eng_Period.Width = 50;
+            // 
+            // Grid_Eng_Start
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Start.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Grid_Eng_Start.HeaderText = "Start";
+            this.Grid_Eng_Start.MinimumWidth = 40;
+            this.Grid_Eng_Start.Name = "Grid_Eng_Start";
+            this.Grid_Eng_Start.ReadOnly = true;
+            this.Grid_Eng_Start.Width = 50;
+            // 
+            // Grid_Eng_Length
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Length.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Grid_Eng_Length.HeaderText = "Length";
+            this.Grid_Eng_Length.MinimumWidth = 40;
+            this.Grid_Eng_Length.Name = "Grid_Eng_Length";
+            this.Grid_Eng_Length.ReadOnly = true;
+            this.Grid_Eng_Length.Width = 50;
+            // 
+            // Grid_Eng_Endianess
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Endianess.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Grid_Eng_Endianess.HeaderText = "Endianess";
+            this.Grid_Eng_Endianess.MinimumWidth = 40;
+            this.Grid_Eng_Endianess.Name = "Grid_Eng_Endianess";
+            this.Grid_Eng_Endianess.ReadOnly = true;
+            this.Grid_Eng_Endianess.Width = 50;
+            // 
+            // Grid_Eng_Signed
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Signed.DefaultCellStyle = dataGridViewCellStyle13;
+            this.Grid_Eng_Signed.HeaderText = "Signed";
+            this.Grid_Eng_Signed.MinimumWidth = 40;
+            this.Grid_Eng_Signed.Name = "Grid_Eng_Signed";
+            this.Grid_Eng_Signed.ReadOnly = true;
+            this.Grid_Eng_Signed.Width = 50;
+            // 
+            // Grid_Eng_Gain
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Gain.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Grid_Eng_Gain.HeaderText = "Gain";
+            this.Grid_Eng_Gain.MinimumWidth = 40;
+            this.Grid_Eng_Gain.Name = "Grid_Eng_Gain";
+            this.Grid_Eng_Gain.ReadOnly = true;
+            this.Grid_Eng_Gain.Width = 50;
+            // 
+            // Grid_Eng_Zero
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Zero.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Grid_Eng_Zero.HeaderText = "Zero";
+            this.Grid_Eng_Zero.MinimumWidth = 40;
+            this.Grid_Eng_Zero.Name = "Grid_Eng_Zero";
+            this.Grid_Eng_Zero.ReadOnly = true;
+            this.Grid_Eng_Zero.Width = 50;
+            // 
+            // Grid_Eng_Count
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Count.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Grid_Eng_Count.HeaderText = "Count";
+            this.Grid_Eng_Count.MinimumWidth = 40;
+            this.Grid_Eng_Count.Name = "Grid_Eng_Count";
+            this.Grid_Eng_Count.ReadOnly = true;
+            this.Grid_Eng_Count.Width = 50;
+            // 
+            // Grid_Eng_DLC
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_DLC.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Grid_Eng_DLC.HeaderText = "DLC";
+            this.Grid_Eng_DLC.MinimumWidth = 30;
+            this.Grid_Eng_DLC.Name = "Grid_Eng_DLC";
+            this.Grid_Eng_DLC.ReadOnly = true;
+            this.Grid_Eng_DLC.Width = 40;
+            // 
+            // SpyEng_Comment
+            // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Comment.DefaultCellStyle = dataGridViewCellStyle18;
+            this.SpyEng_Comment.HeaderText = "Comment";
+            this.SpyEng_Comment.MinimumWidth = 20;
+            this.SpyEng_Comment.Name = "SpyEng_Comment";
+            this.SpyEng_Comment.ReadOnly = true;
             // 
             // Context_SpyEngGrid
             // 
@@ -162,7 +351,7 @@ namespace CANStream
             this.toolStripMenuItem11,
             this.ContextSpyEng_columnsToolStripMenuItem});
             this.Context_SpyEngGrid.Name = "Context_SpyEngGrid";
-            this.Context_SpyEngGrid.Size = new System.Drawing.Size(163, 154);
+            this.Context_SpyEngGrid.Size = new System.Drawing.Size(163, 132);
             // 
             // ContextSpyEng_ResetTSMenuItem
             // 
@@ -250,89 +439,138 @@ namespace CANStream
             // ContextSpyEng_showAllToolStripMenuItem
             // 
             this.ContextSpyEng_showAllToolStripMenuItem.Name = "ContextSpyEng_showAllToolStripMenuItem";
-            this.ContextSpyEng_showAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_showAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_showAllToolStripMenuItem.Text = "Show All";
             this.ContextSpyEng_showAllToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_showAllToolStripMenuItemClick);
             // 
             // ContextSpyEng_hideAllToolStripMenuItem
             // 
             this.ContextSpyEng_hideAllToolStripMenuItem.Name = "ContextSpyEng_hideAllToolStripMenuItem";
-            this.ContextSpyEng_hideAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_hideAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_hideAllToolStripMenuItem.Text = "Hide All";
             this.ContextSpyEng_hideAllToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_hideAllToolStripMenuItemClick);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(130, 6);
             // 
             // ContextSpyEng_iDToolStripMenuItem
             // 
             this.ContextSpyEng_iDToolStripMenuItem.Name = "ContextSpyEng_iDToolStripMenuItem";
-            this.ContextSpyEng_iDToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_iDToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_iDToolStripMenuItem.Text = "ID";
             this.ContextSpyEng_iDToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_iDToolStripMenuItemClick);
+            // 
+            // ContextSpyEng_RxTxToolStripMenuItem
+            // 
+            this.ContextSpyEng_RxTxToolStripMenuItem.Name = "ContextSpyEng_RxTxToolStripMenuItem";
+            this.ContextSpyEng_RxTxToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_RxTxToolStripMenuItem.Text = "RxTx";
+            this.ContextSpyEng_RxTxToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_RxTxToolStripMenuItem_Click);
             // 
             // ContextSpyEng_valueToolStripMenuItem
             // 
             this.ContextSpyEng_valueToolStripMenuItem.Name = "ContextSpyEng_valueToolStripMenuItem";
-            this.ContextSpyEng_valueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_valueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_valueToolStripMenuItem.Text = "Value";
             this.ContextSpyEng_valueToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_valueToolStripMenuItemClick);
             // 
             // ContextSpyEng_rawValueToolStripMenuItem
             // 
             this.ContextSpyEng_rawValueToolStripMenuItem.Name = "ContextSpyEng_rawValueToolStripMenuItem";
-            this.ContextSpyEng_rawValueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_rawValueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_rawValueToolStripMenuItem.Text = "Raw value";
             this.ContextSpyEng_rawValueToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_rawValueToolStripMenuItemClick);
             // 
             // ContextSpyEng_minToolStripMenuItem
             // 
             this.ContextSpyEng_minToolStripMenuItem.Name = "ContextSpyEng_minToolStripMenuItem";
-            this.ContextSpyEng_minToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_minToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_minToolStripMenuItem.Text = "Min";
             this.ContextSpyEng_minToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_minToolStripMenuItemClick);
             // 
             // ContextSpyEng_maxToolStripMenuItem
             // 
             this.ContextSpyEng_maxToolStripMenuItem.Name = "ContextSpyEng_maxToolStripMenuItem";
-            this.ContextSpyEng_maxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_maxToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_maxToolStripMenuItem.Text = "Max";
             this.ContextSpyEng_maxToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_maxToolStripMenuItemClick);
             // 
             // ContextSpyEng_unitToolStripMenuItem
             // 
             this.ContextSpyEng_unitToolStripMenuItem.Name = "ContextSpyEng_unitToolStripMenuItem";
-            this.ContextSpyEng_unitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_unitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_unitToolStripMenuItem.Text = "Unit";
             this.ContextSpyEng_unitToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_unitToolStripMenuItemClick);
             // 
             // ContextSpyEng_periodToolStripMenuItem
             // 
             this.ContextSpyEng_periodToolStripMenuItem.Name = "ContextSpyEng_periodToolStripMenuItem";
-            this.ContextSpyEng_periodToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_periodToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_periodToolStripMenuItem.Text = "Period";
             this.ContextSpyEng_periodToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_periodToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_StartToolStripMenuItem
+            // 
+            this.ContextSpyEng_StartToolStripMenuItem.Name = "ContextSpyEng_StartToolStripMenuItem";
+            this.ContextSpyEng_StartToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_StartToolStripMenuItem.Text = "Start";
+            this.ContextSpyEng_StartToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_StartToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_LengthToolStripMenuItem
+            // 
+            this.ContextSpyEng_LengthToolStripMenuItem.Name = "ContextSpyEng_LengthToolStripMenuItem";
+            this.ContextSpyEng_LengthToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_LengthToolStripMenuItem.Text = "Length";
+            this.ContextSpyEng_LengthToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_LengthToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_EndianessToolStripMenuItem
+            // 
+            this.ContextSpyEng_EndianessToolStripMenuItem.Name = "ContextSpyEng_EndianessToolStripMenuItem";
+            this.ContextSpyEng_EndianessToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_EndianessToolStripMenuItem.Text = "Endianess";
+            this.ContextSpyEng_EndianessToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_EndianessToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_SignedToolStripMenuItem
+            // 
+            this.ContextSpyEng_SignedToolStripMenuItem.Name = "ContextSpyEng_SignedToolStripMenuItem";
+            this.ContextSpyEng_SignedToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_SignedToolStripMenuItem.Text = "Signedness";
+            this.ContextSpyEng_SignedToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_SignedToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_GainToolStripMenuItem
+            // 
+            this.ContextSpyEng_GainToolStripMenuItem.Name = "ContextSpyEng_GainToolStripMenuItem";
+            this.ContextSpyEng_GainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_GainToolStripMenuItem.Text = "Gain";
+            this.ContextSpyEng_GainToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_GainToolStripMenuItem_Click);
+            // 
+            // ContextSpyEng_ZeroToolStripMenuItem
+            // 
+            this.ContextSpyEng_ZeroToolStripMenuItem.Name = "ContextSpyEng_ZeroToolStripMenuItem";
+            this.ContextSpyEng_ZeroToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_ZeroToolStripMenuItem.Text = "Zero";
+            this.ContextSpyEng_ZeroToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ZeroToolStripMenuItem_Click);
             // 
             // ContextSpyEng_countToolStripMenuItem
             // 
             this.ContextSpyEng_countToolStripMenuItem.Name = "ContextSpyEng_countToolStripMenuItem";
-            this.ContextSpyEng_countToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_countToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_countToolStripMenuItem.Text = "Count";
             this.ContextSpyEng_countToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_countToolStripMenuItem_Click);
             // 
             // ContextSpyEng_dlcToolStripMenuItem
             // 
             this.ContextSpyEng_dlcToolStripMenuItem.Name = "ContextSpyEng_dlcToolStripMenuItem";
-            this.ContextSpyEng_dlcToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_dlcToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_dlcToolStripMenuItem.Text = "DLC";
             this.ContextSpyEng_dlcToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_dlcToolStripMenuItem_Click);
             // 
             // ContextSpyEng_commentToolStripMenuItem
             // 
             this.ContextSpyEng_commentToolStripMenuItem.Name = "ContextSpyEng_commentToolStripMenuItem";
-            this.ContextSpyEng_commentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ContextSpyEng_commentToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ContextSpyEng_commentToolStripMenuItem.Text = "Comment";
             this.ContextSpyEng_commentToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_commentToolStripMenuItemClick);
             // 
@@ -347,250 +585,13 @@ namespace CANStream
             this.label2.TabIndex = 13;
             this.label2.Text = "Data Received";
             // 
-            // Grid_Eng_Collapse_State
-            // 
-            dataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle109.NullValue = "System.Drawing.Bitmap";
-            this.Grid_Eng_Collapse_State.DefaultCellStyle = dataGridViewCellStyle109;
-            this.Grid_Eng_Collapse_State.HeaderText = "";
-            this.Grid_Eng_Collapse_State.Name = "Grid_Eng_Collapse_State";
-            this.Grid_Eng_Collapse_State.ReadOnly = true;
-            this.Grid_Eng_Collapse_State.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_Eng_Collapse_State.Width = 20;
-            // 
-            // Column6
-            // 
-            dataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle110;
-            this.Column6.HeaderText = "ID";
-            this.Column6.MinimumWidth = 30;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 40;
-            // 
-            // Grid_Eng_RxTx
-            // 
-            dataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_RxTx.DefaultCellStyle = dataGridViewCellStyle111;
-            this.Grid_Eng_RxTx.HeaderText = "RxTx";
-            this.Grid_Eng_RxTx.MinimumWidth = 40;
-            this.Grid_Eng_RxTx.Name = "Grid_Eng_RxTx";
-            this.Grid_Eng_RxTx.ReadOnly = true;
-            this.Grid_Eng_RxTx.Width = 40;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Parameter";
-            this.Column7.MinimumWidth = 150;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 150;
-            // 
-            // RawValue
-            // 
-            dataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RawValue.DefaultCellStyle = dataGridViewCellStyle112;
-            this.RawValue.HeaderText = "Raw value";
-            this.RawValue.MinimumWidth = 30;
-            this.RawValue.Name = "RawValue";
-            this.RawValue.ReadOnly = true;
-            this.RawValue.Visible = false;
-            this.RawValue.Width = 50;
-            // 
-            // Column8
-            // 
-            dataGridViewCellStyle113.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle113;
-            this.Column8.HeaderText = "Value";
-            this.Column8.MinimumWidth = 150;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 150;
-            // 
-            // Column9
-            // 
-            dataGridViewCellStyle114.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle114;
-            this.Column9.HeaderText = "Min";
-            this.Column9.MinimumWidth = 40;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 50;
-            // 
-            // Column10
-            // 
-            dataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle115;
-            this.Column10.HeaderText = "Max";
-            this.Column10.MinimumWidth = 40;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 50;
-            // 
-            // SpyEng_Unit
-            // 
-            dataGridViewCellStyle116.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SpyEng_Unit.DefaultCellStyle = dataGridViewCellStyle116;
-            this.SpyEng_Unit.HeaderText = "Unit";
-            this.SpyEng_Unit.MinimumWidth = 20;
-            this.SpyEng_Unit.Name = "SpyEng_Unit";
-            this.SpyEng_Unit.ReadOnly = true;
-            this.SpyEng_Unit.Width = 40;
-            // 
-            // Grid_Eng_Period
-            // 
-            dataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Period.DefaultCellStyle = dataGridViewCellStyle117;
-            this.Grid_Eng_Period.HeaderText = "Period";
-            this.Grid_Eng_Period.Name = "Grid_Eng_Period";
-            this.Grid_Eng_Period.ReadOnly = true;
-            this.Grid_Eng_Period.Width = 50;
-            // 
-            // Grid_Eng_Start
-            // 
-            dataGridViewCellStyle118.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Start.DefaultCellStyle = dataGridViewCellStyle118;
-            this.Grid_Eng_Start.HeaderText = "Start";
-            this.Grid_Eng_Start.MinimumWidth = 40;
-            this.Grid_Eng_Start.Name = "Grid_Eng_Start";
-            this.Grid_Eng_Start.ReadOnly = true;
-            this.Grid_Eng_Start.Width = 50;
-            // 
-            // Grid_Eng_Length
-            // 
-            dataGridViewCellStyle119.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Length.DefaultCellStyle = dataGridViewCellStyle119;
-            this.Grid_Eng_Length.HeaderText = "Length";
-            this.Grid_Eng_Length.MinimumWidth = 40;
-            this.Grid_Eng_Length.Name = "Grid_Eng_Length";
-            this.Grid_Eng_Length.ReadOnly = true;
-            this.Grid_Eng_Length.Width = 50;
-            // 
-            // Grid_Eng_Endianess
-            // 
-            dataGridViewCellStyle120.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Endianess.DefaultCellStyle = dataGridViewCellStyle120;
-            this.Grid_Eng_Endianess.HeaderText = "Endianess";
-            this.Grid_Eng_Endianess.MinimumWidth = 40;
-            this.Grid_Eng_Endianess.Name = "Grid_Eng_Endianess";
-            this.Grid_Eng_Endianess.ReadOnly = true;
-            this.Grid_Eng_Endianess.Width = 50;
-            // 
-            // Grid_Eng_Signed
-            // 
-            dataGridViewCellStyle121.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Signed.DefaultCellStyle = dataGridViewCellStyle121;
-            this.Grid_Eng_Signed.HeaderText = "Signed";
-            this.Grid_Eng_Signed.MinimumWidth = 40;
-            this.Grid_Eng_Signed.Name = "Grid_Eng_Signed";
-            this.Grid_Eng_Signed.ReadOnly = true;
-            this.Grid_Eng_Signed.Width = 50;
-            // 
-            // Grid_Eng_Gain
-            // 
-            dataGridViewCellStyle122.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Gain.DefaultCellStyle = dataGridViewCellStyle122;
-            this.Grid_Eng_Gain.HeaderText = "Gain";
-            this.Grid_Eng_Gain.MinimumWidth = 40;
-            this.Grid_Eng_Gain.Name = "Grid_Eng_Gain";
-            this.Grid_Eng_Gain.ReadOnly = true;
-            this.Grid_Eng_Gain.Width = 50;
-            // 
-            // Grid_Eng_Zero
-            // 
-            dataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Zero.DefaultCellStyle = dataGridViewCellStyle123;
-            this.Grid_Eng_Zero.HeaderText = "Zero";
-            this.Grid_Eng_Zero.MinimumWidth = 40;
-            this.Grid_Eng_Zero.Name = "Grid_Eng_Zero";
-            this.Grid_Eng_Zero.ReadOnly = true;
-            this.Grid_Eng_Zero.Width = 50;
-            // 
-            // Grid_Eng_Count
-            // 
-            dataGridViewCellStyle124.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Count.DefaultCellStyle = dataGridViewCellStyle124;
-            this.Grid_Eng_Count.HeaderText = "Count";
-            this.Grid_Eng_Count.MinimumWidth = 40;
-            this.Grid_Eng_Count.Name = "Grid_Eng_Count";
-            this.Grid_Eng_Count.ReadOnly = true;
-            this.Grid_Eng_Count.Width = 50;
-            // 
-            // Grid_Eng_DLC
-            // 
-            dataGridViewCellStyle125.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_DLC.DefaultCellStyle = dataGridViewCellStyle125;
-            this.Grid_Eng_DLC.HeaderText = "DLC";
-            this.Grid_Eng_DLC.MinimumWidth = 30;
-            this.Grid_Eng_DLC.Name = "Grid_Eng_DLC";
-            this.Grid_Eng_DLC.ReadOnly = true;
-            this.Grid_Eng_DLC.Width = 40;
-            // 
-            // SpyEng_Comment
-            // 
-            dataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SpyEng_Comment.DefaultCellStyle = dataGridViewCellStyle126;
-            this.SpyEng_Comment.HeaderText = "Comment";
-            this.SpyEng_Comment.MinimumWidth = 20;
-            this.SpyEng_Comment.Name = "SpyEng_Comment";
-            this.SpyEng_Comment.ReadOnly = true;
-            // 
-            // ContextSpyEng_RxTxToolStripMenuItem
-            // 
-            this.ContextSpyEng_RxTxToolStripMenuItem.Name = "ContextSpyEng_RxTxToolStripMenuItem";
-            this.ContextSpyEng_RxTxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_RxTxToolStripMenuItem.Text = "RxTx";
-            this.ContextSpyEng_RxTxToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_RxTxToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_StartToolStripMenuItem
-            // 
-            this.ContextSpyEng_StartToolStripMenuItem.Name = "ContextSpyEng_StartToolStripMenuItem";
-            this.ContextSpyEng_StartToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_StartToolStripMenuItem.Text = "Start";
-            this.ContextSpyEng_StartToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_StartToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_LengthToolStripMenuItem
-            // 
-            this.ContextSpyEng_LengthToolStripMenuItem.Name = "ContextSpyEng_LengthToolStripMenuItem";
-            this.ContextSpyEng_LengthToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_LengthToolStripMenuItem.Text = "Length";
-            this.ContextSpyEng_LengthToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_LengthToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_EndianessToolStripMenuItem
-            // 
-            this.ContextSpyEng_EndianessToolStripMenuItem.Name = "ContextSpyEng_EndianessToolStripMenuItem";
-            this.ContextSpyEng_EndianessToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_EndianessToolStripMenuItem.Text = "Endianess";
-            this.ContextSpyEng_EndianessToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_EndianessToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_SignedToolStripMenuItem
-            // 
-            this.ContextSpyEng_SignedToolStripMenuItem.Name = "ContextSpyEng_SignedToolStripMenuItem";
-            this.ContextSpyEng_SignedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_SignedToolStripMenuItem.Text = "Signedness";
-            this.ContextSpyEng_SignedToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_SignedToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_GainToolStripMenuItem
-            // 
-            this.ContextSpyEng_GainToolStripMenuItem.Name = "ContextSpyEng_GainToolStripMenuItem";
-            this.ContextSpyEng_GainToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_GainToolStripMenuItem.Text = "Gain";
-            this.ContextSpyEng_GainToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_GainToolStripMenuItem_Click);
-            // 
-            // ContextSpyEng_ZeroToolStripMenuItem
-            // 
-            this.ContextSpyEng_ZeroToolStripMenuItem.Name = "ContextSpyEng_ZeroToolStripMenuItem";
-            this.ContextSpyEng_ZeroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ContextSpyEng_ZeroToolStripMenuItem.Text = "Zero";
-            this.ContextSpyEng_ZeroToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ZeroToolStripMenuItem_Click);
-            // 
-            // Ctrl_SpyDataViewer
+            // Ctrl_CANDataGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Grid_SpyEngineering);
-            this.Name = "Ctrl_SpyDataViewer";
+            this.Name = "Ctrl_CANDataGrid";
             this.Size = new System.Drawing.Size(748, 318);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_SpyEngineering)).EndInit();
             this.Context_SpyEngGrid.ResumeLayout(false);

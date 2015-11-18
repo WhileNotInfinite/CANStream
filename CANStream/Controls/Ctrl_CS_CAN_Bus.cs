@@ -36,26 +36,6 @@ namespace CANStream
 		Grid_Cycle_Eng = 5,
 	}
 
-    //TODO: Remove
-    //public enum Manual_Grid_Columns
-    //{
-    //	None			  = 0x0000,
-    //	Column_ID         = 0x0001,
-    //	Column_RxTx       = 0x0002,
-    //	Column_Period     = 0x0004,
-    //	Column_MuxValue   = 0x0008,
-    //	Column_Start      = 0x0010,
-    //	Column_Length     = 0x0020,
-    //	Column_Endianess  = 0x0040,
-    //	Column_Signedness = 0x0080,
-    //	Column_Gain       = 0x0100,
-    //	Column_Zero       = 0x0200,
-    //	Column_Unit       = 0x0400,
-    //	Column_Comment    = 0x0800,
-    //	All				  = 0x0FFF, //Update value 'All' in case of change
-    //	Default 		  = (Column_ID | Column_RxTx | Column_Period | Column_Unit | Column_Comment),
-    //}
-
 	public enum RecordingMode
 	{
 		Manual  = 0,
@@ -211,16 +191,7 @@ namespace CANStream
         private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
 		private const int SPY_GRID_UPDATE_PERIOD=100;
 		private const int SPY_GRAPH_UPDATE_PERIOD=100;
-
-        //TODO: Remove
-        //private Color GRID_BACK_COLOR=Color.LightBlue;
-        //private const int GRID_MANUAL_VALUE_COL = 11;
-        //private const int GRID_MANUAL_MSG_ID_COL = 0;
-        //private const int GRID_MANUAL_NAME_COL = 4;
-        //private const int GRID_MANUAL_COMMENT_COL = 13;
-        //private const int GRID_MAX_COL_WIDTH = 60;							
-        //private const int GRID_ENG_MANUAL_FILLER_COL = 13;	//Column 'Comment'
-
+        private const int GRID_MAX_COL_WIDTH = 60;
         private const int GRID_RAW_MANUAL_FILLER_COL = 0;	//Column 'ID'
         private const int GRID_RAW_COL_TX_PERIOD = 2;
 		private const int GRID_RAW_COL_TX_BTN = 4;		
@@ -242,8 +213,6 @@ namespace CANStream
 		private bool bManualRunning;
 		private bool bSpyRunning;
 		
-        //TODO: Remove
-		//private Manual_Grid_Columns ManualGridColumnsVisible;
 		private Ctrl_CANDataGrid CurrentSpyViewer;
 		
 		//Cycle control
@@ -355,7 +324,7 @@ namespace CANStream
 				
 		public event EventHandler<ControllerLayoutChangedEventArgs> ControllerLayoutChanged;
 		
-		public event EventHandler<ControllerGridColumnsChangedEventArgs> ControllerGridColumnsChanged; //TODO: What grid ?
+		public event EventHandler<ControllerGridColumnsChangedEventArgs> ControllerGridColumnsChanged;
 		
 		public event EventHandler<ControllerDiagChangedEventArgs> ControllerDiagChanged;
 		
@@ -406,7 +375,7 @@ namespace CANStream
 			
 			CurrentSpyViewer = Grid_ManualDataViewer;
 			
-			Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum.Default);
+			Set_TxGridColumnsVisible(GridCANData_ColumnsEnum.Default);
 			Set_RxGridColumnsVisible(GridCANData_ColumnsEnum.Default);
 			
 			//Initialization of cycle control management
@@ -625,117 +594,441 @@ namespace CANStream
 		{
 			ResetControllerLayout();
 		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Spy control
-		
-		private void Cmd_StartSpyClick(object sender, EventArgs e)
-		{
-			StartSpy();
-			StartManualControl();
-		}
-		
-		private void Cmd_StopSpyClick(object sender, EventArgs e)
-		{
-			StopSpy();
-			StopManualControl();
-		}
-		
-		private void Cmb_SpyCANRateSelectedIndexChanged(object sender, EventArgs e)
-		{
-			switch(Cmb_SpyCANRate.SelectedIndex)
-        	{
-        		case 0: //500 kBit/s
-        			m_Baudrate= TPCANBaudrate.PCAN_BAUD_500K;
-        			break;
-        		case 1: //1000 kBit/s
-        			m_Baudrate= TPCANBaudrate.PCAN_BAUD_1M;
-        			break;
-        	}
-		}
-		
-		private void Cmb_SpyCANRxModeSelectedIndexChanged(object sender, EventArgs e)
-		{
-			SpyMsgRxMode = (SpyCANRxMode)Enum.Parse(typeof(SpyCANRxMode), Cmb_SpyCANRxMode.Text);
-			
-			switch (SpyMsgRxMode)
-			{
-				case SpyCANRxMode.Manual:
-					
-					SpyRxPeriod=0;
-					break;
-					
-				case SpyCANRxMode.Event:
-					
-					SpyRxPeriod=0;
-					break;
-					
-				case SpyCANRxMode.Periodic_1ms:
-					
-					SpyRxPeriod=1;
-					break;
-					
-				case SpyCANRxMode.Periodic_2ms:
-					
-					SpyRxPeriod=2;
-					break;
-					
-				case SpyCANRxMode.Periodic_5ms:
-					
-					SpyRxPeriod=5;
-					break;
-					
-				case SpyCANRxMode.Periodic_10ms:
-					
-					SpyRxPeriod=10;
-					break;
-					
-				case SpyCANRxMode.Periodic_20ms:
-					
-					SpyRxPeriod=20;
-					break;
-					
-				case SpyCANRxMode.Periodic_50ms:
-					
-					SpyRxPeriod=50;
-					break;
-					
-				case SpyCANRxMode.Periodic_100ms:
-					
-					SpyRxPeriod=100;
-					break;
-					
-				case SpyCANRxMode.Periodic_200ms:
-					
-					SpyRxPeriod=200;
-					break;
-					
-				case SpyCANRxMode.Periodic_500ms:
-					
-					SpyRxPeriod=500;
-					break;
-					
-				case SpyCANRxMode.Periodic_1sec:
-					
-					SpyRxPeriod=1000;
-					break;
-			}
-		}
-		
-		#region Manual_SpyDataViewer
-		
-		private void Manual_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
-		{
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, e.ColumnsVisible);
-		}
+
+        #endregion
+
+        #endregion
+
+        #region Manual control
+
+        #region Control commands
+
+        private void Cmd_StartSpyClick(object sender, EventArgs e)
+        {
+            StartSpy();
+            StartManualControl();
+        }
+
+        private void Cmd_StopSpyClick(object sender, EventArgs e)
+        {
+            StopSpy();
+            StopManualControl();
+        }
+
+        private void Cmb_SpyCANRateSelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (Cmb_SpyCANRate.SelectedIndex)
+            {
+                case 0: //500 kBit/s
+                    m_Baudrate = TPCANBaudrate.PCAN_BAUD_500K;
+                    break;
+                case 1: //1000 kBit/s
+                    m_Baudrate = TPCANBaudrate.PCAN_BAUD_1M;
+                    break;
+            }
+        }
+
+        private void Cmb_SpyCANRxModeSelectedIndexChanged(object sender, EventArgs e)
+        {
+            SpyMsgRxMode = (SpyCANRxMode)Enum.Parse(typeof(SpyCANRxMode), Cmb_SpyCANRxMode.Text);
+
+            switch (SpyMsgRxMode)
+            {
+                case SpyCANRxMode.Manual:
+
+                    SpyRxPeriod = 0;
+                    break;
+
+                case SpyCANRxMode.Event:
+
+                    SpyRxPeriod = 0;
+                    break;
+
+                case SpyCANRxMode.Periodic_1ms:
+
+                    SpyRxPeriod = 1;
+                    break;
+
+                case SpyCANRxMode.Periodic_2ms:
+
+                    SpyRxPeriod = 2;
+                    break;
+
+                case SpyCANRxMode.Periodic_5ms:
+
+                    SpyRxPeriod = 5;
+                    break;
+
+                case SpyCANRxMode.Periodic_10ms:
+
+                    SpyRxPeriod = 10;
+                    break;
+
+                case SpyCANRxMode.Periodic_20ms:
+
+                    SpyRxPeriod = 20;
+                    break;
+
+                case SpyCANRxMode.Periodic_50ms:
+
+                    SpyRxPeriod = 50;
+                    break;
+
+                case SpyCANRxMode.Periodic_100ms:
+
+                    SpyRxPeriod = 100;
+                    break;
+
+                case SpyCANRxMode.Periodic_200ms:
+
+                    SpyRxPeriod = 200;
+                    break;
+
+                case SpyCANRxMode.Periodic_500ms:
+
+                    SpyRxPeriod = 500;
+                    break;
+
+                case SpyCANRxMode.Periodic_1sec:
+
+                    SpyRxPeriod = 1000;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Data TX
+
+        #region Data Tx Background Worker
+
+        private void BGWrk_ManualDoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker Worker = sender as BackgroundWorker;
+            RunManualControl(Worker, e);
+        }
+
+        private void BGWrk_ManualProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            SentMsgCounter += e.ProgressPercentage;
+            Txt_MsgCounter.Text = SentMsgCounter.ToString();
+
+            if (TxEngMessages != null)
+            {
+                foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
+                {
+                    if (oMsgEncod.HasVirtualParameters)
+                    {
+                        foreach (CANParameter oParam in oMsgEncod.Parameters)
+                        {
+                            if (oParam.IsVirtual)
+                            {
+                                if (int.Parse(tabControl1.SelectedTab.Tag.ToString()) == 1)
+                                {
+                                    //int iRow = GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
+
+                                    //if (iRow != -1)
+                                    //{
+                                    //  TODO: Make a function in the CtrlSpyDataViewer control to update virtual channels
+                                    //  Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].Value = oParam.DecodedValue.ToString();
+                                    //}
+                                }
+                                else
+                                {
+                                    Set_CycleVirtualSignalValue(oParam.Name, oParam.DecodedValue.ToString(), oParam.VirtualChannelReference);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Engineering Tx data grid
+
+        private void Chk_VirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
+        {
+            //TODO: Test me !
+            bVirtualParamTx = Chk_VirtualParamTxEnabled.Checked;
+            Grid_ManualDataWriter.VirtualChannelsVisible = bVirtualParamTx;
+        }
+
+        private void Grid_ManualDataWriter_GridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
+        {
+            FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, e.ColumnsVisible);
+        }
+
+        private void Grid_ManualDataWriter_GridDataReseted(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Raw data grid
+
+        private void Grid_CANRawDataCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!((e.RowIndex == -1) || bRawMsgGridEdition))
+            {
+                string sTmp = Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                if (!(sTmp.Equals("")))
+                {
+                    bRawMsgGridEdition = true;
+
+                    #region Data validation
+
+                    switch (e.ColumnIndex)
+                    {
+                        case 0: //ID
+
+                            try
+                            {
+                                UInt32 iTmp = UInt32.Parse(sTmp, NumberStyles.HexNumber);
+
+                                if (iTmp >= 0 && iTmp <= 0x7FF)
+                                {
+                                    Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x3}", iTmp).ToUpper();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("ID value must be contained between 0x00 and 0x7FF !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    goto End;
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Invalid ID value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                goto End;
+                            }
+
+                            break;
+
+                        case 1: //DLC
+
+                            try
+                            {
+                                int iTmp = int.Parse(sTmp);
+
+                                if (iTmp < 0 || iTmp > 8)
+                                {
+                                    MessageBox.Show("DLC value must be contained between 1 and 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    goto End;
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Invalid DLC value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                goto End;
+                            }
+
+                            break;
+
+                        case 2: //Period
+
+                            try
+                            {
+                                int iTmp = int.Parse(sTmp);
+
+                                if (iTmp == 0)
+                                {
+                                    Grid_CANRawData.Rows[e.RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value = "Tx";
+                                }
+                                else
+                                {
+                                    Grid_CANRawData.Rows[e.RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value = "";
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Invalid period value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                goto End;
+                            }
+
+                            break;
+
+                        case 3: //Sent
+
+                            break;
+
+                        case 4: //Tx button
+
+                            break;
+
+                        default: //Values
+
+                            try
+                            {
+                                byte iTmp = byte.Parse(sTmp, NumberStyles.HexNumber);
+                                Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x2}", iTmp).ToUpper();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Invalid byte value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x2}", 0).ToUpper();
+                                goto End;
+                            }
+
+                            break;
+                    }
+
+                    #endregion
+
+                    Set_RawMessageFromGridRow(e.RowIndex);
+
+                    End:
+                    bRawMsgGridEdition = false;
+                }
+            }
+        }
+
+        private void Grid_CANRawDataSizeChanged(object sender, EventArgs e)
+        {
+            int ColCnt = 0;
+
+            foreach (DataGridViewColumn oCol in Grid_CANRawData.Columns)
+            {
+                if (oCol.Visible)
+                {
+                    ColCnt++;
+                }
+            }
+
+            int ColWidth = (int)(Grid_CANRawData.Width / ColCnt);
+            if (ColWidth > GRID_MAX_COL_WIDTH) ColWidth = GRID_MAX_COL_WIDTH;
+
+            int TotalWidth = 0;
+
+            foreach (DataGridViewColumn oCol in Grid_CANRawData.Columns)
+            {
+                if (oCol.Visible)
+                {
+
+                    if (TotalWidth + ColWidth >= Grid_CANRawData.Width - 5)
+                    {
+                        ColWidth = Grid_CANRawData.Width - TotalWidth - 5;
+                    }
+
+                    oCol.Width = ColWidth;
+                    TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
+                }
+            }
+
+            if (TotalWidth < Grid_CANRawData.Width - 5)
+            {
+                Grid_CANRawData.Columns[GRID_RAW_MANUAL_FILLER_COL].Width += (Grid_CANRawData.Width - TotalWidth - 5);
+            }
+        }
+
+        private void Grid_CANRawDataCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!((e.RowIndex == -1) || bRawMsgGridEdition))
+            {
+                if (e.ColumnIndex == GRID_RAW_COL_TX_BTN)
+                {
+                    User_RawMessage_Tx(e.RowIndex);
+                }
+            }
+        }
+
+        private void Grid_CANRawData_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                bRawMsgSending = true;
+
+                if (Grid_CANRawData.SelectedCells.Count > 0)
+                {
+                    int iRow = Grid_CANRawData.SelectedCells[0].RowIndex;
+
+                    if (iRow >= 0)
+                    {
+                        if (Grid_CANRawData.Rows[iRow].Cells[GRID_RAW_COL_TX_PERIOD].Value.Equals("0"))
+                        {
+                            User_RawMessage_Tx(iRow);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Grid_CANRawData_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (bRawMsgSending)
+            {
+                e.Cancel = true;
+                bRawMsgSending = false;
+            }
+        }
+
+        #region Context_ManualRawGrid
+
+        private void Ctxt_TxRaw_Add_TSMIClick(object sender, EventArgs e)
+        {
+            Add_RawMessage();
+        }
+
+        private void Ctxt_TxRaw_Del_TSMIClick(object sender, EventArgs e)
+        {
+            Del_RawMessage();
+        }
+
+        private void Ctxt_TxRaw_Clear_TSMIClick(object sender, EventArgs e)
+        {
+            Clear_RawMessages();
+        }
+
+        private void Ctxt_TxRaw_Save_TSMIClick(object sender, EventArgs e)
+        {
+            Save_RawMessages();
+        }
+
+        private void Ctxt_TxRaw_Open_TSMIClick(object sender, EventArgs e)
+        {
+            Open_RawMessages();
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Data RX
+
+        #region Data Rx Background Worker
+
+        private void BGWrk_SpyDoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker Worker = sender as BackgroundWorker;
+            RunSpy(Worker);
+        }
+
+        private void BGWrk_SpyProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            DisplayMessages();
+        }
+
+        private void BGWrk_SpyRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Engineering Rx data grid
+
+        private void Manual_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
+        {
+            FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, e.ColumnsVisible);
+        }
 
         private void Manual_SpyDataViewer_GridDataReseted(object sender, EventArgs e)
         {
             //Force all virtual channels computation after a grid reset in order to pass through the 'bNewValue' filter
-            
             foreach (CS_VirtualChannelsLibrary oLib in VCLibCollection.Libraries)
             {
                 foreach (CS_VirtualChannel oChan in oLib.Channels)
@@ -745,114 +1038,163 @@ namespace CANStream
             }
         }
 
-		#endregion
-		
-		#region Spy graph panel
-		
-		private void ChkLst_ChannelSelItemCheck(object sender, ItemCheckEventArgs e)
-		{
+        #endregion
+
+        #region Spy graph panel
+
+        private void ChkLst_ChannelSelItemCheck(object sender, ItemCheckEventArgs e)
+        {
             oSpySeriesStates.SetSerieState(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
             SpyGraphSeries.SetSerieVisible(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
-			
-			if(!bSpyRunning)
-			{
-				Update_SpyGraph();
-			}
-		}
-		
-		private void Cmd_GraphSpyRecClick(object sender, EventArgs e)
-		{
-			bSpyGraphEnabled=!bSpyGraphEnabled;	
-			
-			if(bSpyGraphEnabled)
-			{
-				Cmd_GraphSpyRec.ImageIndex=0;
-				SpyGraphRestarted=true;
-			}
-			else
-			{
-				Cmd_GraphSpyRec.ImageIndex=1;
-				SpyGraphSeries.RTSeries.Clear();
-			}
-			
-			Cmd_GraphSpyPause.Enabled=bSpyGraphEnabled;
-		}
-		
-		private void Cmd_GraphSpyPauseClick(object sender, EventArgs e)
-		{
-			bSpyGraphFrozen=!bSpyGraphFrozen;
-			
-			if(bSpyGraphFrozen)
-			{
-				Cmd_GraphSpyPause.ImageIndex=1;
-			}
-			else
-			{
-				Cmd_GraphSpyPause.ImageIndex=0;
-			}
-		}
-		
-		private void Txt_SpyGraphYMinKeyDown(object sender, KeyEventArgs e)
-		{
-			if(e.KeyCode.Equals(Keys.Enter))
-			{
-				double Val=0;
-				if(Double.TryParse(Txt_SpyGraphYMin.Text,out Val))
-				{
-					SpyGraphYMin=Val;
-					
-					if(!(Txt_SpyGraphYMax.Text.Equals("")))
-					{
-						Update_SpyGraph();						
-					}
-				}
-			}
-		}
-		
-		private void Txt_SpyGraphYMaxKeyDown(object sender, KeyEventArgs e)
-		{
-			if(e.KeyCode.Equals(Keys.Enter))
-			{
-				double Val=0;
-				if(Double.TryParse(Txt_SpyGraphYMax.Text,out Val))
-				{
-					SpyGraphYMax=Val;
-					
-					if(!(Txt_SpyGraphYMin.Text.Equals("")))
-					{
-						Update_SpyGraph();
-					}
-				}
-			}
-		}
-		
-		private void Txt_SpyGraphTimeWindowKeyDown(object sender, KeyEventArgs e)
-		{
-			if(e.KeyCode.Equals(Keys.Enter))
-			{
-				double Val=0;
-				if(Double.TryParse(Txt_SpyGraphTimeWindow.Text,out Val))
-				{
-					bSpyGraphEnabled=false;
-					
-					SpyGraphSeries.RTSeries.Clear();
-					SpyGraphSeries.BufferSize=(int)((Val*1000)/SPY_GRID_UPDATE_PERIOD);
-					
-					SpyGraphRestarted=true;
-					bSpyGraphEnabled=true;
-				}
-			}
-		}
-		
-		private void Chk_SpyGraphAutoScaleCheckedChanged(object sender, EventArgs e)
-		{
-			Txt_SpyGraphYMin.Enabled=!Chk_SpyGraphAutoScale.Checked;
-			Txt_SpyGraphYMax.Enabled=!Chk_SpyGraphAutoScale.Checked;
-			SpyGraphAutoScale=Chk_SpyGraphAutoScale.Checked;
-			Update_SpyGraph();
-		}
-		
-		#endregion
+
+            if (!bSpyRunning)
+            {
+                Update_SpyGraph();
+            }
+        }
+
+        private void Cmd_GraphSpyRecClick(object sender, EventArgs e)
+        {
+            bSpyGraphEnabled = !bSpyGraphEnabled;
+
+            if (bSpyGraphEnabled)
+            {
+                Cmd_GraphSpyRec.ImageIndex = 0;
+                SpyGraphRestarted = true;
+            }
+            else
+            {
+                Cmd_GraphSpyRec.ImageIndex = 1;
+                SpyGraphSeries.RTSeries.Clear();
+            }
+
+            Cmd_GraphSpyPause.Enabled = bSpyGraphEnabled;
+        }
+
+        private void Cmd_GraphSpyPauseClick(object sender, EventArgs e)
+        {
+            bSpyGraphFrozen = !bSpyGraphFrozen;
+
+            if (bSpyGraphFrozen)
+            {
+                Cmd_GraphSpyPause.ImageIndex = 1;
+            }
+            else
+            {
+                Cmd_GraphSpyPause.ImageIndex = 0;
+            }
+        }
+
+        private void Txt_SpyGraphYMinKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                double Val = 0;
+                if (Double.TryParse(Txt_SpyGraphYMin.Text, out Val))
+                {
+                    SpyGraphYMin = Val;
+
+                    if (!(Txt_SpyGraphYMax.Text.Equals("")))
+                    {
+                        Update_SpyGraph();
+                    }
+                }
+            }
+        }
+
+        private void Txt_SpyGraphYMaxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                double Val = 0;
+                if (Double.TryParse(Txt_SpyGraphYMax.Text, out Val))
+                {
+                    SpyGraphYMax = Val;
+
+                    if (!(Txt_SpyGraphYMin.Text.Equals("")))
+                    {
+                        Update_SpyGraph();
+                    }
+                }
+            }
+        }
+
+        private void Txt_SpyGraphTimeWindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                double Val = 0;
+                if (Double.TryParse(Txt_SpyGraphTimeWindow.Text, out Val))
+                {
+                    bSpyGraphEnabled = false;
+
+                    SpyGraphSeries.RTSeries.Clear();
+                    SpyGraphSeries.BufferSize = (int)((Val * 1000) / SPY_GRID_UPDATE_PERIOD);
+
+                    SpyGraphRestarted = true;
+                    bSpyGraphEnabled = true;
+                }
+            }
+        }
+
+        private void Chk_SpyGraphAutoScaleCheckedChanged(object sender, EventArgs e)
+        {
+            Txt_SpyGraphYMin.Enabled = !Chk_SpyGraphAutoScale.Checked;
+            Txt_SpyGraphYMax.Enabled = !Chk_SpyGraphAutoScale.Checked;
+            SpyGraphAutoScale = Chk_SpyGraphAutoScale.Checked;
+            Update_SpyGraph();
+        }
+
+        #region Context_SpyGraphChannels
+
+        private void CheckAllToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ChkLst_ChannelSel.Items.Count; i++)
+            {
+                ChkLst_ChannelSel.SetItemChecked(i, true);
+            }
+        }
+
+        private void UncheckAllToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < ChkLst_ChannelSel.Items.Count; i++)
+            {
+                ChkLst_ChannelSel.SetItemChecked(i, false);
+            }
+        }
+
+        private void Context_SpyGraph_Filter_TSCmbKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                if (!(Context_SpyGraph_Filter_TSCmb.Text.Equals("")))
+                {
+                    if (!(Context_SpyGraph_Filter_TSCmb.Items.Contains(Context_SpyGraph_Filter_TSCmb.Text)))
+                    {
+                        //FIFO
+                        if (Context_SpyGraph_Filter_TSCmb.Items.Count == 10)
+                        {
+                            Context_SpyGraph_Filter_TSCmb.Items.RemoveAt(9);
+                        }
+
+                        Context_SpyGraph_Filter_TSCmb.Items.Insert(0, Context_SpyGraph_Filter_TSCmb.Text);
+                    }
+                }
+
+                ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
+                FilterSpyGraphSeries();
+            }
+        }
+
+        private void Context_SpyGraph_Filter_TSCmbSelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
+            FilterSpyGraphSeries();
+        }
+
+        #endregion
+
+        #endregion
 
         #region Spy data history panel
 
@@ -892,369 +1234,15 @@ namespace CANStream
 
         #endregion
 
-        #region Context_SpyGraphChannels
-
-        private void CheckAllToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			for(int i=0;i<ChkLst_ChannelSel.Items.Count;i++)
-			{
-				ChkLst_ChannelSel.SetItemChecked(i,true);
-			}
-		}
-		
-		private void UncheckAllToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			for(int i=0;i<ChkLst_ChannelSel.Items.Count;i++)
-			{
-				ChkLst_ChannelSel.SetItemChecked(i,false);
-			}
-		}	
-		
-		private void Context_SpyGraph_Filter_TSCmbKeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode.Equals(Keys.Enter))
-			{
-				if (!(Context_SpyGraph_Filter_TSCmb.Text.Equals("")))
-				{
-					if (!(Context_SpyGraph_Filter_TSCmb.Items.Contains(Context_SpyGraph_Filter_TSCmb.Text)))
-					{
-						//FIFO
-						if (Context_SpyGraph_Filter_TSCmb.Items.Count == 10)
-						{
-							Context_SpyGraph_Filter_TSCmb.Items.RemoveAt(9);
-						}
-						
-						Context_SpyGraph_Filter_TSCmb.Items.Insert(0, Context_SpyGraph_Filter_TSCmb.Text);
-					}
-				}
-				
-				ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
-				FilterSpyGraphSeries();
-			}
-		}
-		
-		private void Context_SpyGraph_Filter_TSCmbSelectedIndexChanged(object sender, EventArgs e)
-		{
-			ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
-			FilterSpyGraphSeries();
-		}
-		
-		#endregion
-		
-		#region BGWrk_Spy
-        
-        private void BGWrk_SpyDoWork(object sender, DoWorkEventArgs e)
-		{
-			BackgroundWorker Worker=sender as BackgroundWorker;
-			RunSpy(Worker);
-		}
-		
-		private void BGWrk_SpyProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			DisplayMessages();
-		}
-		
-		private void BGWrk_SpyRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-			
-		}
-        
         #endregion
-        
-        #region Record trigger
-        
-        private void RecordTrigger_TriggerStatusChanged(object sender, TriggerChangedEventArg e)
-        {
-        	if (RecordMode.Equals(RecordingMode.Trigger))
-        	{
-        		if (e.Status)
-        		{
-        			StartRecording();
-        		}
-        		else
-        		{
-        			StopRecording();
-        		}
-        	}
-        }
-        
-        #endregion
-		
-		#endregion
-		
-		#region Manual control
-		
-		private void Chk_VirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
-		{
-			bVirtualParamTx = Chk_VirtualParamTxEnabled.Checked;
-
-            //TODO: Create a 'VirtualChannelVisible' property in the CtrlSpyViewer control allowing to hide or show virtual channles
-
-            //TODO: Remove old code
-            //if (Grid_CANData.Rows.Count > 0)
-			//{
-			//	for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-			//	{
-			//		if (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly) //If cell 'Value' of a vitual parameter is read-only
-			//		{
-			//			Grid_CANData.Rows[iRow].Visible = bVirtualParamTx;
-			//		}
-			//	}
-			//}
-		}
-	
-		#endregion
-		
-		#region Context_ManualRawGrid
-		
-		private void Ctxt_TxRaw_Add_TSMIClick(object sender, EventArgs e)
-		{
-			Add_RawMessage();
-		}
-		
-		private void Ctxt_TxRaw_Del_TSMIClick(object sender, EventArgs e)
-		{
-			Del_RawMessage();
-		}
-		
-		private void Ctxt_TxRaw_Clear_TSMIClick(object sender, EventArgs e)
-		{
-			Clear_RawMessages();
-		}
-		
-		private void Ctxt_TxRaw_Save_TSMIClick(object sender, EventArgs e)
-		{
-			Save_RawMessages();
-		}
-		
-		private void Ctxt_TxRaw_Open_TSMIClick(object sender, EventArgs e)
-		{
-			Open_RawMessages();
-		}
 
         #endregion
 
-        #region DataGrid Manual CAN Config
+        #region Cycle control
 
-        //TODO: Remove if empty
+        #region Control commands
 
-        #endregion
-
-        #region Grid_CANRawData
-
-        private void Grid_CANRawDataCellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-			if (!((e.RowIndex == -1) || bRawMsgGridEdition))
-			{
-				string sTmp = Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-				
-				if (!(sTmp.Equals("")))
-				{
-					bRawMsgGridEdition = true;
-					
-					#region Data validation
-					
-					switch (e.ColumnIndex)
-					{
-						case 0: //ID
-							
-							try
-							{
-								UInt32 iTmp = UInt32.Parse(sTmp, NumberStyles.HexNumber);
-								
-								if (iTmp >= 0 && iTmp <= 0x7FF)
-								{
-									Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x3}", iTmp).ToUpper();
-								}
-								else
-								{
-									MessageBox.Show("ID value must be contained between 0x00 and 0x7FF !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		        					goto End;
-								}
-							}
-							catch
-							{
-								MessageBox.Show("Invalid ID value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-	        					goto End;
-							}
-							
-							break;
-							
-						case 1: //DLC
-							
-							try
-							{
-								int iTmp = int.Parse(sTmp);
-								
-								if (iTmp < 0 || iTmp > 8)
-		        				{
-		        					MessageBox.Show("DLC value must be contained between 1 and 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		        					goto End;
-		        				}
-							}
-							catch
-							{
-								MessageBox.Show("Invalid DLC value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		        				goto End;
-							}
-							
-							break;
-							
-						case 2: //Period
-							
-							try
-		        			{
-		        				int iTmp = int.Parse(sTmp);
-		        				
-		        				if (iTmp == 0)
-		        				{
-		        					Grid_CANRawData.Rows[e.RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value = "Tx";
-		        				}
-		        				else
-		        				{
-		        					Grid_CANRawData.Rows[e.RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value = "";
-		        				}
-		        			}
-		        			catch
-		        			{
-		        				MessageBox.Show("Invalid period value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		        				goto End;
-		        			}
-							
-							break;
-							
-						case 3: //Sent
-							
-							break;
-						
-						case 4: //Tx button
-							
-							break;
-							
-						default: //Values
-							
-							try
-							{
-								byte iTmp = byte.Parse(sTmp, NumberStyles.HexNumber);
-		        				Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x2}", iTmp).ToUpper();
-							}
-							catch
-							{
-								MessageBox.Show("Invalid byte value format !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-								Grid_CANRawData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Format("{0:x2}", 0).ToUpper();
-		        				goto End;
-							}
-							
-							break;
-					}
-					
-					#endregion
-					
-					Set_RawMessageFromGridRow(e.RowIndex);
-		
-		End:
-					bRawMsgGridEdition = false;
-				}
-			}
-		}
-        
-        private void Grid_CANRawDataSizeChanged(object sender, EventArgs e)
-		{
-        	ResizeGridColumns(Grid_CANRawData, GRID_RAW_MANUAL_FILLER_COL);
-		}
-        
-        private void Grid_CANRawDataCellClick(object sender, DataGridViewCellEventArgs e)
-		{
-			if (!((e.RowIndex == -1) || bRawMsgGridEdition))
-			{
-				if (e.ColumnIndex == GRID_RAW_COL_TX_BTN)
-				{
-					User_RawMessage_Tx(e.RowIndex);
-				}
-			}
-		}
-
-        private void Grid_CANRawData_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                bRawMsgSending = true;
-
-                if (Grid_CANRawData.SelectedCells.Count > 0)
-                {
-                    int iRow = Grid_CANRawData.SelectedCells[0].RowIndex;
-
-                    if (iRow >= 0)
-                    {
-                        if (Grid_CANRawData.Rows[iRow].Cells[GRID_RAW_COL_TX_PERIOD].Value.Equals("0"))
-                        {
-                            User_RawMessage_Tx(iRow);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Grid_CANRawData_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (bRawMsgSending)
-            {
-                e.Cancel = true;
-                bRawMsgSending = false;
-            }
-        }
-
-        #endregion
-        
-        #region Manual BackgroundWorker
-        
-        private void BGWrk_ManualDoWork(object sender, DoWorkEventArgs e)
-		{
-			BackgroundWorker Worker=sender as BackgroundWorker;
-			RunManualControl(Worker,e);
-		}
-		
-		private void BGWrk_ManualProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			SentMsgCounter += e.ProgressPercentage;
-			Txt_MsgCounter.Text = SentMsgCounter.ToString();
-
-            if (TxEngMessages != null)
-            {
-                foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
-                {
-                    if (oMsgEncod.HasVirtualParameters)
-                    {
-                        foreach (CANParameter oParam in oMsgEncod.Parameters)
-                        {
-                            if (oParam.IsVirtual)
-                            {
-                                if (int.Parse(tabControl1.SelectedTab.Tag.ToString()) == 1)
-                                {
-                                    int iRow = GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
-
-                                    if (iRow != -1)
-                                    {
-                                        //TODO: Make a function in the CtrlSpyDataViewer control to update virtual channels
-                                        //Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].Value = oParam.DecodedValue.ToString();
-                                    }
-                                }
-                                else
-                                {
-                                    Set_CycleVirtualSignalValue(oParam.Name, oParam.DecodedValue.ToString(), oParam.VirtualChannelReference);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-		}
-        
-        #endregion
-		
-		#region Cycle control
-		
-		private void Cmd_PlayCycleClick(object sender, EventArgs e)
+        private void Cmd_PlayCycleClick(object sender, EventArgs e)
 		{
 			Txt_CurrentCycleNum.Text="1";
         	PlayCycle();
@@ -1317,10 +1305,12 @@ namespace CANStream
 		{
 			bVirtualParamTx = Chk_CycleVirtualParamTxEnabled.Checked;
 		}
-		
-		#region Cycle_SpyDataViewer
-		
-		private void Cycle_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
+
+        #endregion
+
+        #region Cycle_SpyDataViewer
+
+        private void Cycle_SpyDataViewerEngGridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
 		{
 			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, e.ColumnsVisible);
 		}
@@ -1538,13 +1528,32 @@ namespace CANStream
         	PB_CurrentProgress.Value = CurrentProgress;
         	PB_TotalProgress.Value   = e.ProgressPercentage;
 		}
-        
+
         #endregion
-        
-		#endregion
-				
-		#region TabControl
-        
+
+        #endregion
+
+        #region Record trigger
+
+        private void RecordTrigger_TriggerStatusChanged(object sender, TriggerChangedEventArg e)
+        {
+            if (RecordMode.Equals(RecordingMode.Trigger))
+            {
+                if (e.Status)
+                {
+                    StartRecording();
+                }
+                else
+                {
+                    StopRecording();
+                }
+            }
+        }
+
+        #endregion
+
+        #region TabControl
+
         private void TabControl1SelectedIndexChanged(object sender, EventArgs e)
 		{
         	if(bCANConnected)
@@ -2123,1063 +2132,476 @@ namespace CANStream
         	
         	return("");
         }
-        
-		#endregion
-		
-		#endregion
-		
-		#region Cycle management
-		
-		private void PlayCycle()
+
+        #endregion
+
+        #endregion
+
+        #region Manual control management
+
+        #region Data TX
+
+        #region Engineering data TX
+
+        private void ShowManualCanConfig()
         {
-        	#region Pre-checks
-        	double TVal = 0;
-        	
-        	if (!(double.TryParse(Txt_CycleStart.Text, out TVal)))
-        	{
-        		MessageBox.Show("Cycle start time must be a numeric value !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-        		
-        		bCycleStartEndTxtSetting = true;
-        		Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000,3).ToString();
-        		bCycleStartEndTxtSetting = false;
-        		
-        		return;
-        	}
-        	
-        	TCycleStart = (long)(TVal * 1000);
-        	if (TCycleStart < oCycle.TimeEvents[0].TimeEvent | TCycleStart > oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent)
-        	{
-        		MessageBox.Show("Start time defined is not contained in the cycle !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-        		
-        		bCycleStartEndTxtSetting = true;
-        		Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000,3).ToString();
-        		bCycleStartEndTxtSetting = false;
-        		
-        		return;
-        	}
-        		
-        	if (!(double.TryParse(Txt_CycleEnd.Text, out TVal)))
-        	{
-        		MessageBox.Show("Cycle end time must be a numeric value !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-        		
-        		bCycleStartEndTxtSetting = true;
-        		Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000,3).ToString();
-        		bCycleStartEndTxtSetting = false;
-        		
-        		return;
-        	}
-        	
-        	TCycleEnd = (long)(TVal *1000);
-        	if (TCycleEnd > oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent | TCycleEnd < oCycle.TimeEvents[0].TimeEvent)
-        	{
-        		MessageBox.Show("End time defined is not contained in the cycle !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-        		
-        		bCycleStartEndTxtSetting = true;
-        		Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000,3).ToString();
-        		bCycleStartEndTxtSetting = false;
-        		
-        		return;
-        	}
-        	
-        	if (TCycleStart >= TCycleEnd)
-        	{
-        		MessageBox.Show("End time must be greater than start time !", Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-        		
-        		bCycleStartEndTxtSetting = true;
-        		Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000,3).ToString();
-        		Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000,3).ToString();
-        		bCycleStartEndTxtSetting = false;
-        		
-        		return;
-        	}
-        	#endregion
-        	
-        	if(NumUpDown_CycleCount.Value>0 | Chk_InfinitePlay.Checked)
-        	{
-        		Lbl_CurrentCycleNum.Visible=true;
-	    		Txt_CurrentCycleNum.Visible=true;
-	    		Lbl_CurrentProgress.Visible=true;
-	    		Lbl_TotalProgress.Visible=true;
-	    		PB_CurrentProgress.Visible=true;
-	    		PB_TotalProgress.Visible=true;
-	    		
-	    		Cmd_BreakCycle.Enabled=true;
-	    		Cmd_StopCycle.Enabled=true;
-	    		
-	    		Cmd_PlayCycle.Enabled=false;
-	    		Lbl_CycleCount.Enabled=false;
-	    		NumUpDown_CycleCount.Enabled=false;
-	    		Chk_InfinitePlay.Enabled = false;
-	    		Lbl_CycleStart.Enabled = false;
-        		Lbl_CycleEnd.Enabled = false;
-        		Txt_CycleStart.Enabled = false;
-        		Txt_CycleEnd.Enabled = false;
-	    		
-	    		Txt_CurrentCycleNum.Text=(LoopCnt+1).ToString();
-	    			    		
-	    		bCycleRunning=true;
-	    		
-	    		FireControllerCycleRunningChangedEvent(bCycleRunning);
-	    		
-	    		if (TxEngMessages.Count > 0)
-	    		{
-	    			Split_Cycle_VirtualSig_Graph.Panel1Collapsed = false;
-	    		}
-	    		
-	    		if (Chk_InfinitePlay.Checked)
-	    		{
-	    			BGWrk_Cycle.RunWorkerAsync((bool)true);
-	    		}
-	    		else
-	    		{
-	    			BGWrk_Cycle.RunWorkerAsync((int)NumUpDown_CycleCount.Value);
-	    		}
-        		
-        		//Automatic trace recording //HACK: Remove [acquisition trigger]
-        		if(bRecordingAuto & !bRecording)
-        		{
-        			StartRecording();
-        		}
-        		
-        		//Timer for graphic update enabling
-        		Timer_CycleGraph.Enabled = true;
-        	}
+            Chk_CycleMux.Enabled = false;
+            Chk_CycleMux.Checked = false;
+
+            Chk_VirtualParamTxEnabled.Enabled = false;
+            Chk_VirtualParamTxEnabled.Checked = false;
+
+            if (!(oCanConfig == null))
+            {
+                Grid_ManualDataWriter.Clear_EngGrid();
+                TxEngMessages = new List<CANMessageEncoded>();
+
+                foreach (CANMessage oMessage in oCanConfig.Messages)
+                {
+                    if (oMessage.RxTx == CanMsgRxTx.Tx)
+                    {
+                        CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMessage, oCanConfig.MessageLength / 8);
+
+                        if (!(TxRawMessages == null))
+                        {
+                            if (!(TxRawMessages.ContainsMessageId(oEncodMsg.uMessageId)))
+                            {
+                                TxEngMessages.Add(oEncodMsg);
+                                Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                            }
+                            else
+                            {
+                                MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oEncodMsg.uMessageId) + " is already present in the raw messages", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
+                        }
+                        else
+                        {
+                            TxEngMessages.Add(oEncodMsg);
+                            Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                        }
+                    }
+                }
+
+                FireCanConfigChangedEvent(true);
+            }
         }
-		
-		private void StopCycle()
-		{
-			BGWrk_Cycle.CancelAsync();
-			
-			Cmd_PlayCycle.Enabled=true;
-			Cmd_BreakCycle.Enabled=false;
-			
-			//Timer for graphic update disabling
-			Timer_CycleGraph.Enabled = false;
-			
-			if(!bPauseCycle)
-			{
-				Lbl_CurrentCycleNum.Visible=false;
-				Txt_CurrentCycleNum.Visible=false;
-				Lbl_CurrentProgress.Visible=false;
-				Lbl_TotalProgress.Visible=false;
-				PB_CurrentProgress.Value=0;
-				PB_CurrentProgress.Visible=false;
-				PB_TotalProgress.Value=0;
-				PB_TotalProgress.Visible=false;
-				
-				Cmd_StopCycle.Enabled=false;
-				
-				//Lbl_CycleCount.Enabled=true;
-				//NumUpDown_CycleCount.Enabled=true;
-				Lbl_CycleStart.Enabled = true;
-				Lbl_CycleEnd.Enabled = true;
-				Txt_CycleStart.Enabled = true;
-				Txt_CycleEnd.Enabled = true;
-				Chk_InfinitePlay.Enabled=true;
-				
-				if (!Chk_InfinitePlay.Checked)
-				{
-					Lbl_CycleCount.Enabled=true;
-					NumUpDown_CycleCount.Enabled=true;
-				}
-				
-				bCycleRunning=false;
-				
-				FireControllerCycleRunningChangedEvent(bCycleRunning);
-				
-				//Automatic trace recording
-				if(bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
-				{
-					StopRecording();
-				}
-			}
-		}
-		
-		private void RunCycle(int LoopNumber, bool InfinitePlay, BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
-        {
-        	int LoopIterationCount = (int)oCycle.GetTimeEventCountBetweenTimes(TCycleStart,TCycleEnd);
-        	int TotalInterationCount = LoopIterationCount;
-        	int Progress=0;
-        	int ProgressPrec=0;
-        	
-        	if (!InfinitePlay)
-        	{
-        		TotalInterationCount = LoopIterationCount * LoopNumber;
-        	}
-        	
-        	for(iLoopCurrent=iLoopInitial;iLoopCurrent<LoopNumber;iLoopCurrent++)
-        	{
-	        	int IterationCount = 0;
-        		
-	        	iTimeEventCurrent =  oCycle.GetTimeEventIndex(TCycleStart);
-	        	if (iTimeEventCurrent == -1) return;
-	        	
-	        	//long AbsTime = TCycleStart;
-	        	TimeInCycle = TCycleStart;
-	        	
-	        	if (iTimeEventInitial > 0)
-	        	{
-	        		iTimeEventCurrent = iTimeEventInitial;
-	        		//AbsTime = oCycle.TimeEvents[iTimeEventInitial].TimeEvent;
-	        		TimeInCycle = oCycle.TimeEvents[iTimeEventInitial].TimeEvent;
-	        	}
-	        	
-	        	long EndTime =  TCycleEnd;
-	        	
-	        	//Debug
-    			//DateTime Tic=DateTime.Now;
-	        	
-	        	//while(AbsTime<=EndTime)
-	        	while(TimeInCycle<=EndTime)
-	        	{
-	        		//if(AbsTime == oCycle.TimeEvents[iTimeEventCurrent].TimeEvent) //It's time to send a message
-	        		if(TimeInCycle == oCycle.TimeEvents[iTimeEventCurrent].TimeEvent) //It's time to send a message
-	        		{
-	        			//Debug
-	        			//DateTime Tic=DateTime.Now;
-	        			
-	        			foreach(CANMessageData MsgData in oCycle.TimeEvents[iTimeEventCurrent].MessagesData)
-	        			{
-	        				SendMessage(MsgData);
-	        			}
-	        			
-	        			iTimeEventCurrent++;
-	        			IterationCount++;
-	        			
-	        			if (InfinitePlay)
-	        			{
-	        				Progress=(int)(IterationCount*100/TotalInterationCount);
-	        			}
-	        			else
-	        			{
-	        				Progress=(int)(iLoopCurrent*LoopIterationCount+IterationCount)*100/TotalInterationCount;
-	        			}
-	        			
-	        			if(Progress!=ProgressPrec)
-	        			{
-	        				Worker.ReportProgress(Progress);
-	        				ProgressPrec=Progress;
-	        			}
-	        			
-	        			//Debug
-	        			//DateTime Toc=DateTime.Now;
-	        			//TimeSpan TExec=Toc.Subtract(Tic);
-	        			//int Msec=TExec.Milliseconds;
-	        		}
-	        		
-	        		System.Threading.Thread.Sleep(1); //Wait 1ms
-	        		//AbsTime++;
-	        		TimeInCycle++;
-	        		
-	        		if(Worker.CancellationPending)
-	        		{
-	        			return;
-	        		}
-	        	}
-	        	
-	        	iTimeEventInitial = 0;
-	        	
-	        	if (InfinitePlay)
-	        	{
-	        		iLoopCurrent = 0;
-	        	}
-	        	
-	        	//Debug
-    			//DateTime Toc=DateTime.Now;
-    			//TimeSpan TExec=Toc.Subtract(Tic);
-    			//int Msec=TExec.Milliseconds;
-        	}
-        	
-        	bPauseCycle=false;
-        }
-		
-		private void PlotCycle()
-        {
-        	PlotCycle(false, -1, -1, -1);
-        }
-        
-        private void PlotCycle(bool bRefreshing, double TimeCursorPosition)
-        {
-        	PlotCycle(bRefreshing,TimeCursorPosition, -1, -1);
-        }
-        
-        private void PlotCycle(bool bRefreshing, double TimeCursorPosition, double StartPosistion, double EndPosition)
-        {
-        	if (oCycle.GraphSeries.FormatedSeries.Count > 0)
-        	{
-        		if (!bRefreshing)
-        		{
-        			if (Split_Cycle_VirtualSig_Graph.Panel1Collapsed)
-        			{
-        				Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - 12;
-        			}
-        			else
-        			{
-        				Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - Split_Cycle_VirtualSig_Graph.SplitterDistance - 12;
-        			}
-        			
-        			Graph_Cycle.Height = Split_Cycle_VirtualSig_Graph.Height - 2;
-		        	
-		        	Context_CycleGraph.Items.Clear();
-		        	
-		        	ToolStripMenuItem ItemSetStart = (ToolStripMenuItem) Context_CycleGraph.Items.Add("Set cycle starting point");
-		        	ItemSetStart.Click += new EventHandler(Context_CycleGraphItemSetStart_Click);
-		        	
-		        	ToolStripMenuItem ItemSetEnd = (ToolStripMenuItem) Context_CycleGraph.Items.Add("Set cycle ending point");
-		        	ItemSetEnd.Click += new EventHandler(Context_CycleGraphItemSetEnd_Click);
-		        	
-		        	ToolStripMenuItem ItemSetConfirm = (ToolStripMenuItem) Context_CycleGraph.Items.Add("Confirm cycle start/end points setting");
-		        	ItemSetConfirm.Click += new EventHandler(Context_CycleGraphItemSetConfirm_Click);
-		        	ItemSetConfirm.Visible = false;
-		        	
-		        	ToolStripMenuItem ItemSetCancel = (ToolStripMenuItem) Context_CycleGraph.Items.Add("Cancel cycle start/end points setting");
-		        	ItemSetCancel.Click += new EventHandler(Context_CycleGraphItemSetCancel_Click);
-		        	ItemSetCancel.Visible = false;
-		        	
-		        	ToolStripSeparator Sep = new ToolStripSeparator();
-		        	Context_CycleGraph.Items.Add(Sep);
-        		}
-        		
-	        	CANStreamTools.Draw_CycleGraph(oCycle, Graph_Cycle, TimeCursorPosition, StartPosistion, EndPosition);
-	        	
-	        	if (!bRefreshing)
-	        	{
-		        	foreach(FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
-		        	{
-		        		ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem) Context_CycleGraph.Items.Add(oSerie.Name);
-		        		SerieMenuItem.Checked=oSerie.Visible;
-						SerieMenuItem.Click += new System.EventHandler(Context_CycleGraphMenuItem_Click);
-		        	}
-	        	}
-        	}
-        }
-        
-        private void Set_OldCycleStartEndPoint()
-        {
-        	if (!(double.TryParse(Txt_CycleStart.Text, out TCycleStart_Old)))
-        	{
-        		TCycleStart_Old = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
-        	}
-        	
-        	if (!(double.TryParse(Txt_CycleEnd.Text, out TCycleEnd_Old)))
-        	{
-        		TCycleEnd_Old = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count -1].TimeEvent) / 1000;
-        	}
-        }
-        
-		private void Set_CycleStartEndCursorsFromTextBox()
-        {
-        	double dTCycleStart = 0;
-        	double dTCycleEnd   = 0;
-        	
-        	if (!(double.TryParse(Txt_CycleStart.Text, out dTCycleStart)))
-        	{
-        		dTCycleStart = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
-        	}
-        	
-        	if (!(double.TryParse(Txt_CycleEnd.Text, out dTCycleEnd)))
-        	{
-        		dTCycleEnd = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count -1].TimeEvent) / 1000;
-        	}
-        	
-        	if (dTCycleStart < dTCycleEnd)
-        	{
-        		PlotCycle(true, -1, dTCycleStart, dTCycleEnd);
-        	}
-        }
-		
-		private double GetTimeValueAtPosition(int Position)
-        {
-        	double X = (double) Position;
-        	double X1 = (double) CANStreamConstants.CycleGraphPlotAreaLeft;
-        	double X2 = X1 + ((double)(Graph_Cycle.Width - CANStreamConstants.CycleGraphPlotAreaWidthOffset));
-        	double Y1 = oCycle.GraphSeries.AxisProperties.AxisX.MinValue;
-        	double Y2 = oCycle.GraphSeries.AxisProperties.AxisX.MaxValue;
-        	
-        	double a = (Y2 - Y1) / (X2 - X1);
-        	double b = Y2 - a * X2;
-        	
-        	return(a * X + b);
-        }
-		
-		private void Set_CycleVirtualSignalValue(string Name, string sValue, VirtualParameter VirtualRef)
-		{
-			
-		}
-		
-		private void FireControllerCycleStartEndSettingEvent(int State)
-		{
-			ControllerCycleStartEndSettingEventArgs Args = new ControllerCycleStartEndSettingEventArgs();
-			Args.SettingState = State;
-			OnControllerCycleStartEndSetting(Args);
-		}
-		
-		private void FireControllerCycleRunningChangedEvent(bool bRunning)
-		{
-			ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
-			Args.Running = bRunning;
-			OnControllerCycleRunningChanged(Args);
-		}
-		
-		#endregion
-		
-		#region Manual control management
-		
-		private void ShowManualCanConfig()
-        {
-        	Chk_CycleMux.Enabled = false;
-			Chk_CycleMux.Checked = false;
-        	
-			Chk_VirtualParamTxEnabled.Enabled = false;
-			Chk_VirtualParamTxEnabled.Checked = false;
-			
-        	if(!(oCanConfig==null))
-        	{
-        		//TODO: Make in a function in the Ctrl_SpyDataViewer to clear grid rows
-                //Grid_CANData.Rows.Clear();
-        		int RowsCnt = oCanConfig.GetTxParameterCount();
 
-                //TODO: Make in a function in the Ctrl_SpyDataViewer show Rx frames and signals
-                //TODO: Remove old code
-                //if (RowsCnt > 0) Grid_CANData.Rows.Add(RowsCnt);
-                //else			 return;
-
-                //int iRow=0;
-
-                //		foreach(CANMessage oMsg in oCanConfig.Messages)
-                //		{
-                //			if(oMsg.RxTx.Equals(CanMsgRxTx.Tx))
-                //			{
-                // 			foreach(CANParameter oParam in oMsg.Parameters)
-                // 			{
-                // 				//Cells value
-                // 				Grid_CANData.Rows[iRow].HeaderCell.Value=oMsg.Identifier;          			
-
-                // 				Grid_CANData.Rows[iRow].Cells[0].Value =  oMsg.Identifier + "h";						    //Identifier
-                // 				Grid_CANData.Rows[iRow].Cells[1].Value = oMsg.RxTx.ToString();       			            //RxTx
-                // 				Grid_CANData.Rows[iRow].Cells[2].Value = oMsg.Period.ToString();     			            //Period
-                // 				Grid_CANData.Rows[iRow].Cells[3].Value = oParam.MultiplexerValue.ToString();	            //Mux value
-                // 				Grid_CANData.Rows[iRow].Cells[4].Value = oParam.Name;                			            //Parameter name
-                // 				Grid_CANData.Rows[iRow].Cells[5].Value = oParam.StartBit.ToString(); 			            //Parameter start bit
-                // 				Grid_CANData.Rows[iRow].Cells[6].Value = oParam.Length.ToString();   			            //Parameter bit length
-                // 				Grid_CANData.Rows[iRow].Cells[7].Value = oParam.Endianess.ToString(); 			            //Parameter endianess
-
-                // 				if (oParam.Signed) Grid_CANData.Rows[iRow].Cells[8].Value = "Signed";			            //Parameter signedness
-                // 				else Grid_CANData.Rows[iRow].Cells[8].Value = "Unsigned";
-
-                // 				Grid_CANData.Rows[iRow].Cells[9].Value = oParam.Gain.ToString();     			            //Linearization gain
-                // 				Grid_CANData.Rows[iRow].Cells[10].Value = oParam.Zero.ToString();                           //Linearization zero
-                //                    Grid_CANData.Rows[iRow].Cells[11].Value = oParam.ValueFormat.GetSignalFormatedValue(0);  //Initial value
-                // 				Grid_CANData.Rows[iRow].Cells[12].Value = oParam.Unit;							            //Parameter unit
-                // 				Grid_CANData.Rows[iRow].Cells[13].Value = oParam.Comment;                                   //Parameter comment
-
-                //                    Grid_CANData.Rows[iRow].Cells[11].Tag = oParam;
-
-                //                    //Cells backcolor
-                //                    Color InfoBackColor = Color.Empty;
-                // 				if (oParam.IsVirtual) InfoBackColor=Color.LightGreen;
-                // 				else				  InfoBackColor=Color.LightBlue;
-
-                // 				for (int iCol=0; iCol<Grid_CANData.Rows[iRow].Cells.Count; iCol++)
-                // 				{
-                // 					//Alignment
-                // 					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_COMMENT_COL))
-                // 					{    
-                // 						Grid_CANData.Rows[iRow].Cells[iCol].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                // 					}
-
-                // 					//BackColor
-                // 					if (!(iCol == GRID_MANUAL_NAME_COL || iCol == GRID_MANUAL_VALUE_COL) || oParam.IsVirtual)
-                // 					{
-                // 						Grid_CANData.Rows[iRow].Cells[iCol].Style.BackColor=InfoBackColor;
-                // 					}
-                // 				}
-
-                // 				if (oParam.IsVirtual)
-                //		{
-                // 					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ReadOnly = true;
-                // 					Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].ToolTipText = VCLibCollection.GetVirtualChannelExpression(oParam.VirtualChannelReference.LibraryName, oParam.VirtualChannelReference.ChannelName);
-
-                // 					Chk_VirtualParamTxEnabled.Enabled = true;
-                //Chk_VirtualParamTxEnabled.Checked = true;
-                //		}
-
-                // 				iRow++;
-
-                // 				Grid_CANData.AutoResizeColumns();
-                // 			}
-
-                // 			if ((!oMsg.MultiplexerName.Equals("") && !Chk_CycleMux.Enabled))
-                // 			{
-                // 				Chk_CycleMux.Enabled = true;
-                // 				Chk_CycleMux.Checked = true;
-                // 			}
-                //			}
-                //		}
-
-                InitManualControlMessagesData();
-        		
-        		FireCanConfigChangedEvent(true);
-        	}
-        }
-		
-		private void FilterManualCanConfig(string sFilter)
-		{
-			//TODO: Call the Ctrl_SpyDataViewer filtering method
-            //TODO: Remove old code
-            //foreach (DataGridViewRow oRow in Grid_CANData.Rows)
-			//{
-			//	if ((sFilter.Equals("")) ||(oRow.Cells[GRID_MANUAL_NAME_COL].Value.ToString().ToLower().Contains(sFilter.ToLower())))
-			//	{
-			//		oRow.Visible = true;
-			//	}
-			//	else
-			//	{
-			//		oRow.Visible = false;
-			//	}
-			//}
-		}
-		
-        private void InitManualControlMessagesData()
-        {
-        	TxEngMessages=new List<CANMessageEncoded>();
-        	
-        	foreach(CANMessage oMsgCfg in oCanConfig.Messages)
-        	{
-        		if(oMsgCfg.RxTx.Equals(CanMsgRxTx.Tx))
-        		{
-        			CANMessageEncoded oEncodMsg=new CANMessageEncoded(oMsgCfg,oCanConfig.MessageLength/8);
-        			
-        			if (!(TxRawMessages == null))
-        			{
-        				if (!(TxRawMessages.ContainsMessageId(oEncodMsg.uMessageId)))
-        				{
-        					TxEngMessages.Add(oEncodMsg);
-        				}
-        				else
-        				{
-        					MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oEncodMsg.uMessageId) + " is already present in the raw messages", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        					Hide_MessageParametersRows(oEncodMsg);
-        				}
-        			}
-        			else
-        			{
-        				TxEngMessages.Add(oEncodMsg);
-        			}
-        		}
-        	}
-        	
-        	UpdateManualControlMessagesData();
-        }
-        
-        private void UpdateManualControlMessagesData()
-        {
-        	foreach(CANMessageEncoded oMsgEncod in TxEngMessages)
-        	{
-        		//Get engineering value of each parameter
-        		foreach(CANParameter oParam in oMsgEncod.Parameters)
-        		{
-        			if (!(oParam.IsVirtual))
-        			{
-                        //TODO: Make a function in the Ctrl_SpyDataViewer to retrieve values from the grid
-                        //TODO: Remove old code
-	        //			int iParamRow=GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
-	        			
-	        //			if(iParamRow!=-1)
-	    				//{
-         //                   double EngValue = oParam.ValueFormat.SetSignalFormatedValue(Grid_CANData.Rows[iParamRow].Cells[GRID_MANUAL_VALUE_COL].Value.ToString());
-                            
-         //                   if (!(double.IsNaN(EngValue)))
-         //                   {
-         //                       oParam.DecodedValue = EngValue;
-         //                   }
-         //                   else
-         //                   {
-         //                       MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
-         //                                       Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-         //                   }                            
-	    				//}
-        			}
-        		}
-        		
-        		//Message raw data creation
-        		oMsgEncod.EncodeMessage();
-        	}
-        }
-        
-        private int GetParameterRowIndex(string ParameterName, string MsgId)
-        {
-            //TODO: Verify present methode is still called
-        	//for(int iRow=0;iRow<Grid_CANData.Rows.Count;iRow++)
-        	//{
-         //       if ((Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_MSG_ID_COL].Value.Equals(MsgId))
-         //           && (Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.Equals(ParameterName)))
-        	//	{
-        	//		return(iRow);
-        	//	}
-        	//}
-        	
-        	return(-1);
-        }
-        
         private void StartManualControl()
         {
-        	SentMsgCounter=0;
-        	
-        	Lbl_MsgCounter.Visible=true;
-        	Txt_MsgCounter.Visible=true;
-        	Txt_MsgCounter.Text=SentMsgCounter.ToString();
-        	
-			bManualRunning=true;
-			
-			FireControllerManualRunningChangedEvent(bManualRunning);
-			
-        	BGWrk_Manual.RunWorkerAsync();
-        }
-        
-		private void StopManualControl()
-		{
-			BGWrk_Manual.CancelAsync();
-			
-			bManualRunning=false;
-			
-			FireControllerManualRunningChangedEvent(bManualRunning);
-			
-			Lbl_MsgCounter.Visible=false;
-			Txt_MsgCounter.Visible=false;
-		}
-		
-		private void RunManualControl(BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
-        {
-        	int iTime=0;
-        	int TimeRem=0;
-        	
-        	int MsgCount=0;        	
-        	DateTime TLastMsgCntUpdate= new DateTime();
-        	
-        	while(!(Worker.CancellationPending))
-        	{
-        		//Engineering Messages sending
-        		if (!(TxEngMessages == null))
-        		{
-	        		foreach(CANMessageEncoded oMsgEncod in TxEngMessages)
-	        		{        			
-	        			Math.DivRem(iTime,oMsgEncod.Period,out TimeRem);
-	        			
-	        			if(TimeRem==0) //It's time to send the message
-	        			{
-	        				if (oMsgEncod.HasVirtualParameters)
-	        				{
-	        					foreach (CANParameter oParam in oMsgEncod.Parameters)
-	        					{
-	        						if (oParam.IsVirtual)
-	        						{
-	        							oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
-	        							                                                               oParam.VirtualChannelReference.ChannelName);
-	        						}
-	        					}
-	        					
-	        					oMsgEncod.EncodeMessage();
-	        				}
-	        				
-	        				if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
-	        				{
-		        				if (SendMessage(oMsgEncod.GetPCANMessage()))
-		        				{
-		        					MsgCount++;
-		        					
-		        					if (Chk_CycleMux.Checked)
-		        					{
-		        						oMsgEncod.SetMultiplexer();
-		        					}
-		        				}
-	        				}
-	        			}
-	        		}
-        		}
-        		
-        		//Raw Message sending
-        		if (!(TxRawMessages == null))
-        		{
-	        		foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
-	        		{
-	        			if (oRawMsg.Send && oRawMsg.Period > 0)
-	        			{
-	        				Math.DivRem(iTime,oRawMsg.Period,out TimeRem);
-	        				
-	        				if(TimeRem==0) //It's time to send the message
-	        				{
-	        					if (SendMessage(oRawMsg.GetPCANMessage()))
-	        					{
-	        						MsgCount++;
-	        					}
-	        				}
-	        			}
-	        		}
-        		}
-        		
-        		//Time index increment
-        		if(!(iTime==int.MaxValue)) //int overflow ?
-        		{
-        			iTime++;	
-        		}
-        		else
-        		{
-        			iTime=1; //Reset
-        		}
-        		
-        		//Report progress if needed
-        		TimeSpan TSinceLastUpdate = DateTime.Now.Subtract(TLastMsgCntUpdate);
-        		if (TSinceLastUpdate.TotalMilliseconds >= T_MSG_CNT_UPDATE_PERIOD)
-        		{
-        			TLastMsgCntUpdate = DateTime.Now;
-        			Worker.ReportProgress(MsgCount);
-        			MsgCount = 0;
-        		}
-        	        		
-        		//Wait for 1 ms
-        		System.Threading.Thread.Sleep(1);
-        	}
-        }
-		
-		private bool TxEngMessagesContainsId(UInt32 Id)
-		{
-			if (!(TxEngMessages == null))
-			{
-				foreach (CANMessageEncoded oMsg in TxEngMessages)
-				{
-					if (oMsg.uMessageId == Id)
-					{
-						return(true);
-					}
-				}
-			}
-			
-			return(false);
-		}
-		
-		private void Hide_MessageParametersRows(CANMessageEncoded oMsg)
-		{
-            //TODO: Ensure that a frame ID isn't present in both raw and engineering Tx grids
-            //TODO: Verify if present method is still called
-            //TODO: Remove old code
-            //for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-            //{
-            //	if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
-            //	{
-            //		Grid_CANData.Rows[iRow].Visible = false;
-            //	}
-            //}
+            SentMsgCounter = 0;
+
+            Lbl_MsgCounter.Visible = true;
+            Txt_MsgCounter.Visible = true;
+            Txt_MsgCounter.Text = SentMsgCounter.ToString();
+
+            bManualRunning = true;
+
+            FireControllerManualRunningChangedEvent(bManualRunning);
+
+            BGWrk_Manual.RunWorkerAsync();
         }
 
-        private void Show_MessageParametersRows(string sMsgId)
-		{
-			//TODO: Ensure that a frame ID isn't present in both raw and engineering Tx grids
-            //TODO: Remove old code
-            //if (!(oCanConfig == null) && Grid_CANData.Rows.Count > 0)
-			//{
-			//	CANMessage oMsg = oCanConfig.GetCANMessage(sMsgId, MessageResearchOption.Identifier);
-				
-			//	if (!(oMsg == null))
-			//	{
-			//		if (oMsg.RxTx.Equals(CanMsgRxTx.Tx))
-			//		{						
-			//			for (int iRow = 0; iRow < Grid_CANData.Rows.Count; iRow++)
-			//			{							
-			//				if (oMsg.GetCANParameterIndex(Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_NAME_COL].Value.ToString(), ParameterResearchOption.Name) != -1)
-			//				{
-			//					Grid_CANData.Rows[iRow].Visible = true;
-			//				}
-			//			}
-						
-			//			InitManualControlMessagesData();
-			//		}
-			//	}
-			//}
-		}
-		
-		private void Update_VirtualParameterTxValue(string ParameterName, double Value)
-		{
-		}
-		
-		private void FireControllerManualRunningChangedEvent(bool bRunning)
-		{
-			ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
-			Args.Running = bRunning;
-			OnControllerManualRunningChanged(Args);
-		}
-		
-		#region Manual raw messages
-		
-		private void Show_RawMessage(CAN_RawMessageData oRawMsg, int RowIndex)
-		{
-			if (!(oRawMsg == null || (RowIndex < 0 || RowIndex >= Grid_CANRawData.Rows.Count)))
-			{
-				bRawMsgGridEdition = true;
-				
-				Grid_CANRawData.Rows[RowIndex].Tag = oRawMsg.KeyId;
-				
-				Grid_CANRawData.Rows[RowIndex].Cells[0].Value = string.Format("{0:x3}", oRawMsg.MessageId).ToUpper();
-				Grid_CANRawData.Rows[RowIndex].Cells[1].Value = oRawMsg.DLC.ToString();
-				Grid_CANRawData.Rows[RowIndex].Cells[2].Value = oRawMsg.Period.ToString();
-				Grid_CANRawData.Rows[RowIndex].Cells[3].Value = oRawMsg.Send;
-				
-				if (oRawMsg.Period == 0) Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "Tx";
-				else Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "";
-				
-				
-				int iCell = GRID_RAW_COL_1ST_BYTE;
-				foreach (byte Val in oRawMsg.MsgData)
-				{
-					Grid_CANRawData.Rows[RowIndex].Cells[iCell].Value = string.Format("{0:x2}", Val).ToUpper();
-					iCell++;
-				}
-				
-				while (iCell < GRID_RAW_COL_1ST_BYTE + 5)
-				{
-					Grid_CANRawData.Rows[RowIndex].Cells[iCell].Value = "00";
-					iCell++;
-				}
-				
-				foreach (DataGridViewCell oCell in Grid_CANRawData.Rows[RowIndex].Cells)
-				{
-					oCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-				}
-				
-				bRawMsgGridEdition = false;
-			}
-		}
-		
-		private void Set_RawMessageFromGridRow(int RowIndex)
-		{
-			if (!(RowIndex < 0 || RowIndex >= Grid_CANRawData.Rows.Count || TxRawMessages == null))
-			{
-				DataGridViewRow oRow = Grid_CANRawData.Rows[RowIndex];
-				CAN_RawMessageData oMsg = TxRawMessages.Get_RawMessageAtKeyId((int)oRow.Tag);
-				
-				if (!(oMsg == null))
-				{
-					try
-					{						
-						UInt32 MsgId = UInt32.Parse(oRow.Cells[0].Value.ToString(), NumberStyles.HexNumber);
-						
-						if (oMsg.MessageId != MsgId)
-						{
-							if (!(TxEngMessagesContainsId(MsgId) || TxRawMessages.ContainsMessageId(MsgId)))
-							{
-								oMsg.MessageId = MsgId;
-							}
-							else
-							{
-								MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", MsgId) + " is already present !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-								oRow.Cells[0].Value = string.Format("{0:x3}", oMsg.MessageId);
-								return;
-							}
-						}
-						
-						oMsg.DLC = int.Parse(oRow.Cells[1].Value.ToString());
-						oMsg.Period = int.Parse(oRow.Cells[2].Value.ToString());
-						oMsg.Send = bool.Parse(oRow.Cells[3].Value.ToString());
-						
-						if (oMsg.DLC > 0)
-						{
-							oMsg.MsgData = new byte[oMsg.DLC];
-							
-							int iCell = GRID_RAW_COL_1ST_BYTE;
-							for (int i=0; i<oMsg.DLC; i++)
-							{
-								oMsg.MsgData[i] = byte.Parse(oRow.Cells[iCell].Value.ToString(), NumberStyles.HexNumber);
-								iCell++;
-							}
-						}
-					}
-					catch
-					{
-						MessageBox.Show("Raw message " + (RowIndex + 1).ToString() + " configuration error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					}
-				}
-			}
-		}
-		
-		private void User_RawMessage_Tx(int RowIndex)
-		{
-			if(Grid_CANRawData.Rows[RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value.Equals("Tx"))
-			{
-				if(bManualRunning)
-				{
-					SendMessage(TxRawMessages.Messages[RowIndex].GetPCANMessage());
-				}
-			}
-		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Spy Management
-		
-		private void StartSpy()
+        private void StopManualControl()
         {
-        	if(bCANConnected)
-        	{
-        		//Id filter check
-        		if(!(Txt_SpyIdFilterMin.Text.Equals("") | Txt_SpyIdFilterMax.Text.Equals("")))
-        		{
-        			SpyMsgIdFilterMin=(short)NumberBaseConverter.Hex2Dec(Txt_SpyIdFilterMin.Text);
-        			SpyMsgIdFilterMax=(short)NumberBaseConverter.Hex2Dec(Txt_SpyIdFilterMax.Text);
-        		}
-        		else
-        		{
-        			MessageBox.Show("Message Id filter error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Hand);
-        			return;
-        		}
-        		
-        		//Value grids init
-        		if(bClearSpyGrids)
-        		{
-        			Grid_ManualDataViewer.Clear_EngGrid();
+            BGWrk_Manual.CancelAsync();
+
+            bManualRunning = false;
+
+            FireControllerManualRunningChangedEvent(bManualRunning);
+
+            Lbl_MsgCounter.Visible = false;
+            Txt_MsgCounter.Visible = false;
+        }
+
+        private void RunManualControl(BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
+        {
+            int iTime = 0;
+            int TimeRem = 0;
+
+            int MsgCount = 0;
+            DateTime TLastMsgCntUpdate = new DateTime();
+
+            while (!(Worker.CancellationPending))
+            {
+                //Engineering Messages sending
+                if (!(TxEngMessages == null))
+                {
+                    foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
+                    {
+                        Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
+
+                        if (TimeRem == 0) //It's time to send the message
+                        {
+                            if (oMsgEncod.HasVirtualParameters)
+                            {
+                                foreach (CANParameter oParam in oMsgEncod.Parameters)
+                                {
+                                    if (oParam.IsVirtual)
+                                    {
+                                        oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
+                                                                                                       oParam.VirtualChannelReference.ChannelName);
+                                    }
+                                }
+
+                                oMsgEncod.EncodeMessage();
+                            }
+
+                            if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
+                            {
+                                if (SendMessage(oMsgEncod.GetPCANMessage()))
+                                {
+                                    MsgCount++;
+
+                                    if (Chk_CycleMux.Checked)
+                                    {
+                                        oMsgEncod.SetMultiplexer();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Raw Message sending
+                if (!(TxRawMessages == null))
+                {
+                    foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
+                    {
+                        if (oRawMsg.Send && oRawMsg.Period > 0)
+                        {
+                            Math.DivRem(iTime, oRawMsg.Period, out TimeRem);
+
+                            if (TimeRem == 0) //It's time to send the message
+                            {
+                                if (SendMessage(oRawMsg.GetPCANMessage()))
+                                {
+                                    MsgCount++;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Time index increment
+                if (!(iTime == int.MaxValue)) //int overflow ?
+                {
+                    iTime++;
+                }
+                else
+                {
+                    iTime = 1; //Reset
+                }
+
+                //Report progress if needed
+                TimeSpan TSinceLastUpdate = DateTime.Now.Subtract(TLastMsgCntUpdate);
+                if (TSinceLastUpdate.TotalMilliseconds >= T_MSG_CNT_UPDATE_PERIOD)
+                {
+                    TLastMsgCntUpdate = DateTime.Now;
+                    Worker.ReportProgress(MsgCount);
+                    MsgCount = 0;
+                }
+
+                //Wait for 1 ms
+                System.Threading.Thread.Sleep(1);
+            }
+        }
+
+        private bool TxEngMessagesContainsId(UInt32 Id)
+        {
+            if (!(TxEngMessages == null))
+            {
+                foreach (CANMessageEncoded oMsg in TxEngMessages)
+                {
+                    if (oMsg.uMessageId == Id)
+                    {
+                        return (true);
+                    }
+                }
+            }
+
+            return (false);
+        }
+
+        private void FireControllerManualRunningChangedEvent(bool bRunning)
+        {
+            ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
+            Args.Running = bRunning;
+            OnControllerManualRunningChanged(Args);
+        }
+
+        #endregion
+
+        #region Raw data Tx
+
+        private void Show_RawMessage(CAN_RawMessageData oRawMsg, int RowIndex)
+        {
+            if (!(oRawMsg == null || (RowIndex < 0 || RowIndex >= Grid_CANRawData.Rows.Count)))
+            {
+                bRawMsgGridEdition = true;
+
+                Grid_CANRawData.Rows[RowIndex].Tag = oRawMsg.KeyId;
+
+                Grid_CANRawData.Rows[RowIndex].Cells[0].Value = string.Format("{0:x3}", oRawMsg.MessageId).ToUpper();
+                Grid_CANRawData.Rows[RowIndex].Cells[1].Value = oRawMsg.DLC.ToString();
+                Grid_CANRawData.Rows[RowIndex].Cells[2].Value = oRawMsg.Period.ToString();
+                Grid_CANRawData.Rows[RowIndex].Cells[3].Value = oRawMsg.Send;
+
+                if (oRawMsg.Period == 0) Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "Tx";
+                else Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "";
+
+
+                int iCell = GRID_RAW_COL_1ST_BYTE;
+                foreach (byte Val in oRawMsg.MsgData)
+                {
+                    Grid_CANRawData.Rows[RowIndex].Cells[iCell].Value = string.Format("{0:x2}", Val).ToUpper();
+                    iCell++;
+                }
+
+                while (iCell < GRID_RAW_COL_1ST_BYTE + 5)
+                {
+                    Grid_CANRawData.Rows[RowIndex].Cells[iCell].Value = "00";
+                    iCell++;
+                }
+
+                foreach (DataGridViewCell oCell in Grid_CANRawData.Rows[RowIndex].Cells)
+                {
+                    oCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+
+                bRawMsgGridEdition = false;
+            }
+        }
+
+        private void Set_RawMessageFromGridRow(int RowIndex)
+        {
+            if (!(RowIndex < 0 || RowIndex >= Grid_CANRawData.Rows.Count || TxRawMessages == null))
+            {
+                DataGridViewRow oRow = Grid_CANRawData.Rows[RowIndex];
+                CAN_RawMessageData oMsg = TxRawMessages.Get_RawMessageAtKeyId((int)oRow.Tag);
+
+                if (!(oMsg == null))
+                {
+                    try
+                    {
+                        UInt32 MsgId = UInt32.Parse(oRow.Cells[0].Value.ToString(), NumberStyles.HexNumber);
+
+                        if (oMsg.MessageId != MsgId)
+                        {
+                            if (!(TxEngMessagesContainsId(MsgId) || TxRawMessages.ContainsMessageId(MsgId)))
+                            {
+                                oMsg.MessageId = MsgId;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", MsgId) + " is already present !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                oRow.Cells[0].Value = string.Format("{0:x3}", oMsg.MessageId);
+                                return;
+                            }
+                        }
+
+                        oMsg.DLC = int.Parse(oRow.Cells[1].Value.ToString());
+                        oMsg.Period = int.Parse(oRow.Cells[2].Value.ToString());
+                        oMsg.Send = bool.Parse(oRow.Cells[3].Value.ToString());
+
+                        if (oMsg.DLC > 0)
+                        {
+                            oMsg.MsgData = new byte[oMsg.DLC];
+
+                            int iCell = GRID_RAW_COL_1ST_BYTE;
+                            for (int i = 0; i < oMsg.DLC; i++)
+                            {
+                                oMsg.MsgData[i] = byte.Parse(oRow.Cells[iCell].Value.ToString(), NumberStyles.HexNumber);
+                                iCell++;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Raw message " + (RowIndex + 1).ToString() + " configuration error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void User_RawMessage_Tx(int RowIndex)
+        {
+            if (Grid_CANRawData.Rows[RowIndex].Cells[GRID_RAW_COL_TX_BTN].Value.Equals("Tx"))
+            {
+                if (bManualRunning)
+                {
+                    SendMessage(TxRawMessages.Messages[RowIndex].GetPCANMessage());
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Data Rx
+
+        private void StartSpy()
+        {
+            if (bCANConnected)
+            {
+                //Id filter check
+                if (!(Txt_SpyIdFilterMin.Text.Equals("") | Txt_SpyIdFilterMax.Text.Equals("")))
+                {
+                    SpyMsgIdFilterMin = (short)NumberBaseConverter.Hex2Dec(Txt_SpyIdFilterMin.Text);
+                    SpyMsgIdFilterMax = (short)NumberBaseConverter.Hex2Dec(Txt_SpyIdFilterMax.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Message Id filter error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
+
+                //Value grids init
+                if (bClearSpyGrids)
+                {
+                    Grid_ManualDataViewer.Clear_EngGrid();
 
                     oSpySeriesStates.Clear();
                     SpyGraphSeries.RTSeries.Clear();
-        			
-        			bClearSpyGrids=false;
-        		}
-        		
-        		//Gaphic window init
-        		if(!(oCanConfig==null) && ChkLst_ChannelSel.Visible==false)
-        		{
-        			ChkLst_ChannelSel.Visible = true;
-        			Cmd_GraphSpyRec.Visible = true;
-        			Cmd_GraphSpyPause.Visible = true;
-        			Grp_GraphProperties.Visible = true;
-        			Graph_Spy.Visible = true;
-        		}
-        		
-        		//Spy init
-        		m_LastMsgsList.Clear();
-        		TStartSpy=DateTime.Now;
-        		
-        		//Spy start
-        		if(SpyMsgRxMode.Equals(SpyCANRxMode.Manual))
-        		{	
-        			if (!(VCLibCollection.bLibrariesInitialized))
-        			{
-        				VCLibCollection.InitLibrariesComputation();
-        			}
-        			
-        			ReadMessagesOnce();
-        			DisplayMessages();
-        		}
-        		else
-        		{
-        			//Control enabling/disabling
-	        		Cmb_SpyCANRate.Enabled=false;
-	        		Cmb_SpyCANRxMode.Enabled=false;
-	        		Txt_SpyIdFilterMin.Enabled=false;
-	        		Txt_SpyIdFilterMax.Enabled=false;
-        			Cmd_StartSpy.Enabled=false;
-        			Cmd_StopSpy.Enabled=true;
-        			
-        			if(!(oCanConfig==null))
-        			{
-        				ChkLst_ChannelSel.Visible=true;
-        			}
-        			
-        			//Compile virtual channels
-        			VCLibCollection.InitLibrariesComputation();
-        			
-        			bSpyRunning=true;
-        			
-        			FireControllerSpyRunningChangedEvent(bSpyRunning);
-        			
-        			//Launch spy thread
-        			BGWrk_Spy.RunWorkerAsync();
-        			
-        			//Lauch CAN trace record
-        			if(bRecordingAuto & !bRecording) //HACK: Remove [acquisition trigger]
-		        	//if (RecordMode.Equals(RecordingMode.Auto) && !bRecording) //HACK: Implement acquisition trigger
-        			{
-		        		StartRecording();
-		        	}
-        		}
-        	}
-        }
-		
-		private void StopSpy()
-        {
-        	//Stop spy thread
-        	BGWrk_Spy.CancelAsync();
-        	
-        	bSpyRunning=false;
-        	
-        	//Control enabling/disabling
-    		Cmb_SpyCANRate.Enabled=true;
-    		Cmb_SpyCANRxMode.Enabled=true;
-    		Txt_SpyIdFilterMin.Enabled=true;
-    		Txt_SpyIdFilterMax.Enabled=true;
-			Cmd_StopSpy.Enabled=false;
-			Cmd_StartSpy.Enabled=true;
-			
-			FireControllerSpyRunningChangedEvent(bSpyRunning);
-			
-			RxEventInitialized=false;	
 
-			bClearSpyGrids=true;
+                    bClearSpyGrids = false;
+                }
 
-			//Automatic trace recording
-    		if(bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
-    		//if (RecordMode.Equals(RecordingMode.Auto) && bRecording) //HACK: Implement acquisition trigger
-    		{
-    			StopRecording();
-    		}			
+                //Gaphic window init
+                if (!(oCanConfig == null) && ChkLst_ChannelSel.Visible == false)
+                {
+                    ChkLst_ChannelSel.Visible = true;
+                    Cmd_GraphSpyRec.Visible = true;
+                    Cmd_GraphSpyPause.Visible = true;
+                    Grp_GraphProperties.Visible = true;
+                    Graph_Spy.Visible = true;
+                }
+
+                //Spy init
+                m_LastMsgsList.Clear();
+                TStartSpy = DateTime.Now;
+
+                //Spy start
+                if (SpyMsgRxMode.Equals(SpyCANRxMode.Manual))
+                {
+                    if (!(VCLibCollection.bLibrariesInitialized))
+                    {
+                        VCLibCollection.InitLibrariesComputation();
+                    }
+
+                    ReadMessagesOnce();
+                    DisplayMessages();
+                }
+                else
+                {
+                    //Control enabling/disabling
+                    Cmb_SpyCANRate.Enabled = false;
+                    Cmb_SpyCANRxMode.Enabled = false;
+                    Txt_SpyIdFilterMin.Enabled = false;
+                    Txt_SpyIdFilterMax.Enabled = false;
+                    Cmd_StartSpy.Enabled = false;
+                    Cmd_StopSpy.Enabled = true;
+
+                    if (!(oCanConfig == null))
+                    {
+                        ChkLst_ChannelSel.Visible = true;
+                    }
+
+                    //Compile virtual channels
+                    VCLibCollection.InitLibrariesComputation();
+
+                    bSpyRunning = true;
+
+                    FireControllerSpyRunningChangedEvent(bSpyRunning);
+
+                    //Launch spy thread
+                    BGWrk_Spy.RunWorkerAsync();
+
+                    //Lauch CAN trace record
+                    if (bRecordingAuto & !bRecording) //HACK: Remove [acquisition trigger]
+                                                      //if (RecordMode.Equals(RecordingMode.Auto) && !bRecording) //HACK: Implement acquisition trigger
+                    {
+                        StartRecording();
+                    }
+                }
+            }
         }
-		
-		private void RunSpy(BackgroundWorker Worker)
+
+        private void StopSpy()
         {
-        	while(!Worker.CancellationPending)
-        	{
-        		if(SpyMsgRxMode.Equals(SpyCANRxMode.Event)) //Read messages on Rx event
-        		{
-        			if(!RxEventInitialized)
-        			{
-        				UInt32 iBuffer;
-			            TPCANStatus stsResult;
-			
-			            iBuffer = Convert.ToUInt32(m_ReceiveEvent.SafeWaitHandle.DangerousGetHandle().ToInt32());
-			            // Sets the handle of the Receive-Event.
-			            //
-			            stsResult = PCANBasic.SetValue(m_PcanHandle, TPCANParameter.PCAN_RECEIVE_EVENT, ref iBuffer, sizeof(UInt32));
-			
-			            if(stsResult != TPCANStatus.PCAN_ERROR_OK)
-					    {
-						    FireControllerDiagChangedEvent(stsResult, (int)this.Tag);
-			            	MessageBox.Show(GetFormatedError(stsResult),"Error!",MessageBoxButtons.OK,MessageBoxIcon.Error);
-						    return;
-					    }
-        				
-        				RxEventInitialized=true;
-        			}
-        			
-        			if (m_ReceiveEvent.WaitOne(50))
-        			{
-        				ReadMessagesOnce();
-        				Worker.ReportProgress(100);
-        			}
-        		}
-        		else
-        		{
-        			if(!(SpyMsgRxMode.Equals(SpyCANRxMode.Manual))) //If not manual, read messages each x ms 
-        			{
-        				ReadMessagesOnce();
-        				Worker.ReportProgress(100);
-        				
-        				System.Threading.Thread.Sleep(SpyRxPeriod);
-        			}
-        		}
-        	}
+            //Stop spy thread
+            BGWrk_Spy.CancelAsync();
+
+            bSpyRunning = false;
+
+            //Control enabling/disabling
+            Cmb_SpyCANRate.Enabled = true;
+            Cmb_SpyCANRxMode.Enabled = true;
+            Txt_SpyIdFilterMin.Enabled = true;
+            Txt_SpyIdFilterMax.Enabled = true;
+            Cmd_StopSpy.Enabled = false;
+            Cmd_StartSpy.Enabled = true;
+
+            FireControllerSpyRunningChangedEvent(bSpyRunning);
+
+            RxEventInitialized = false;
+
+            bClearSpyGrids = true;
+
+            //Automatic trace recording
+            if (bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
+                                             //if (RecordMode.Equals(RecordingMode.Auto) && bRecording) //HACK: Implement acquisition trigger
+            {
+                StopRecording();
+            }
         }
-		
-		private void InsertMsgEntry(TPCANMsg newMsg, TPCANTimestamp timeStamp)
+
+        private void RunSpy(BackgroundWorker Worker)
+        {
+            while (!Worker.CancellationPending)
+            {
+                if (SpyMsgRxMode.Equals(SpyCANRxMode.Event)) //Read messages on Rx event
+                {
+                    if (!RxEventInitialized)
+                    {
+                        UInt32 iBuffer;
+                        TPCANStatus stsResult;
+
+                        iBuffer = Convert.ToUInt32(m_ReceiveEvent.SafeWaitHandle.DangerousGetHandle().ToInt32());
+                        // Sets the handle of the Receive-Event.
+                        //
+                        stsResult = PCANBasic.SetValue(m_PcanHandle, TPCANParameter.PCAN_RECEIVE_EVENT, ref iBuffer, sizeof(UInt32));
+
+                        if (stsResult != TPCANStatus.PCAN_ERROR_OK)
+                        {
+                            FireControllerDiagChangedEvent(stsResult, (int)this.Tag);
+                            MessageBox.Show(GetFormatedError(stsResult), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        RxEventInitialized = true;
+                    }
+
+                    if (m_ReceiveEvent.WaitOne(50))
+                    {
+                        ReadMessagesOnce();
+                        Worker.ReportProgress(100);
+                    }
+                }
+                else
+                {
+                    if (!(SpyMsgRxMode.Equals(SpyCANRxMode.Manual))) //If not manual, read messages each x ms 
+                    {
+                        ReadMessagesOnce();
+                        Worker.ReportProgress(100);
+
+                        System.Threading.Thread.Sleep(SpyRxPeriod);
+                    }
+                }
+            }
+        }
+
+        private void InsertMsgEntry(TPCANMsg newMsg, TPCANTimestamp timeStamp)
         {
             MessageStatus msgStsCurrentMsg;
 
@@ -3189,58 +2611,58 @@ namespace CANStream
                 //
                 msgStsCurrentMsg = new MessageStatus(newMsg, timeStamp, Grid_ManualDataViewer.Get_RawMessageCount() - 1);
                 m_LastMsgsList.Add(msgStsCurrentMsg);
-                
-                if(!(oCanConfig == null))
+
+                if (!(oCanConfig == null))
                 {
-                	string sMsgId=msgStsCurrentMsg.IdString.Substring(0,msgStsCurrentMsg.IdString.Length-1);
-                	CANMessage oMsgCfg=oCanConfig.GetCANMessage(sMsgId, MessageResearchOption.Identifier);
-                	
-                	if(!(oMsgCfg == null))
-                	{
-                		CANMessageDecoded oMsgDecoded =new CANMessageDecoded(oMsgCfg,msgStsCurrentMsg.CANMsg);
-                		DecodedMessages.Add(oMsgDecoded);
-                	}
+                    string sMsgId = msgStsCurrentMsg.IdString.Substring(0, msgStsCurrentMsg.IdString.Length - 1);
+                    CANMessage oMsgCfg = oCanConfig.GetCANMessage(sMsgId, MessageResearchOption.Identifier);
+
+                    if (!(oMsgCfg == null))
+                    {
+                        CANMessageDecoded oMsgDecoded = new CANMessageDecoded(oMsgCfg, msgStsCurrentMsg.CANMsg);
+                        DecodedMessages.Add(oMsgDecoded);
+                    }
                 }
             }
         }
-		
-		private void DisplayMessages()
+
+        private void DisplayMessages()
         {
             TimeSpan TSinceLastUpdate = DateTime.Now.Subtract(TLastSpyGridUpdate);
-        	if(!(TSinceLastUpdate.TotalMilliseconds > SPY_GRID_UPDATE_PERIOD))
-        	{
-        		return;
-        	}
-        	
-        	lock (m_LastMsgsList.SyncRoot)
-        	{
+            if (!(TSinceLastUpdate.TotalMilliseconds > SPY_GRID_UPDATE_PERIOD))
+            {
+                return;
+            }
+
+            lock (m_LastMsgsList.SyncRoot)
+            {
                 TLastSpyGridUpdate = DateTime.Now;
                 DecodedMessageCount = 0;
 
-        		foreach(MessageStatus msgStatus in m_LastMsgsList)
-        		{
-        			if(msgStatus.MarkedAsUpdated)
-        			{
-        				msgStatus.MarkedAsUpdated=false;
+                foreach (MessageStatus msgStatus in m_LastMsgsList)
+                {
+                    if (msgStatus.MarkedAsUpdated)
+                    {
+                        msgStatus.MarkedAsUpdated = false;
 
                         CurrentSpyViewer.Update_GridRawData(msgStatus);
 
                         int MsgIndex = -1;
 
-		                if(DecodedMessages.Count>0)
-		                {
-		                	MsgIndex=FindDecodedMessageIndex(msgStatus.IdString);
-		                	
-		                	if(!(MsgIndex == -1))
-		                	{
-		                		DecodedMessages[MsgIndex].UpdateRawMsgBytes(msgStatus.CANMsg.DATA);
-		                		
-		                		if(DecodedMessages[MsgIndex].bMessageDecoded)
-		                		{
+                        if (DecodedMessages.Count > 0)
+                        {
+                            MsgIndex = FindDecodedMessageIndex(msgStatus.IdString);
+
+                            if (!(MsgIndex == -1))
+                            {
+                                DecodedMessages[MsgIndex].UpdateRawMsgBytes(msgStatus.CANMsg.DATA);
+
+                                if (DecodedMessages[MsgIndex].bMessageDecoded)
+                                {
                                     CurrentSpyViewer.Update_GridEngineeringData(msgStatus.IdString, DecodedMessages[MsgIndex]);
 
                                     foreach (CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
-		                			{
+                                    {
                                         if (!(oSpySeriesStates.Contains(oParam.Name)))
                                         {
                                             SpySerieState sSpySerie = new SpySerieState();
@@ -3251,20 +2673,20 @@ namespace CANStream
                                             oSpySeriesStates.AddItem(sSpySerie);
                                             FilterSpyGraphSeries();
                                         }
-		                				
-										//Add Spy graphic sample
-										if(bSpyGraphEnabled)
-										{
-											TimeSpan TSample=DateTime.Now.Subtract(TStartSpy);
-											SpyGraphSeries.AddSerieSamples(oParam.Name,TSample.TotalSeconds,oParam.DecodedValue);
-										}
-										
-										//Set param value in virtual channel variable element table
-										VCLibCollection.UpDateVariableElement(oParam.Name,oParam.DecodedValue);
-		                			}
-		                		}
-		                	}
-		                }
+
+                                        //Add Spy graphic sample
+                                        if (bSpyGraphEnabled)
+                                        {
+                                            TimeSpan TSample = DateTime.Now.Subtract(TStartSpy);
+                                            SpyGraphSeries.AddSerieSamples(oParam.Name, TSample.TotalSeconds, oParam.DecodedValue);
+                                        }
+
+                                        //Set param value in virtual channel variable element table
+                                        VCLibCollection.UpDateVariableElement(oParam.Name, oParam.DecodedValue);
+                                    }
+                                }
+                            }
+                        }
 
                         //Update Spy data history
                         if (Tab_SpyHistory.SelectedTab.Tag.Equals("Data"))
@@ -3295,153 +2717,153 @@ namespace CANStream
                                 }
                             }
                         }
-        			}
+                    }
 
                     DecodedMessageCount++;
-        		}
+                }
 
-        		//Update virtual channels
-        		VCLibCollection.ComputeLibraries();
-        		ShowVirtualChannelValues();
-        		
-        		//Acquisition trigger status update
-        		if (RecordMode.Equals(RecordingMode.Trigger))
-        		{
-        			if (RecordTrigger.Available)
-        			{
-        				//Trigger is firing its 'Trigger status changed' event if the status changed
-        				//Event is caugth and handled thus, record starts or stops
-        				RecordTrigger.UpdateTriggerStatus();
-        			}
-        		}
-        		
-        		//Update graph window
+                //Update virtual channels
+                VCLibCollection.ComputeLibraries();
+                ShowVirtualChannelValues();
+
+                //Acquisition trigger status update
+                if (RecordMode.Equals(RecordingMode.Trigger))
+                {
+                    if (RecordTrigger.Available)
+                    {
+                        //Trigger is firing its 'Trigger status changed' event if the status changed
+                        //Event is caugth and handled thus, record starts or stops
+                        RecordTrigger.UpdateTriggerStatus();
+                    }
+                }
+
+                //Update graph window
                 if (Tab_SpyHistory.SelectedTab.Tag.Equals("Graph"))
                 {
                     Update_SpyGraph();
                 }
-        	}
+            }
         }
-		
-		private int FindDecodedMessageIndex(string MsgId)
-        {
-        	for(int i=0;i<DecodedMessages.Count;i++)
-        	{
-        		if(DecodedMessages[i].Identifier.Equals(MsgId))
-        		{
-        			return(i);
-        		}
-        	}
-        	
-        	return(-1);
-        }
-		
-		private void Update_SpyGraph()
-        {
-        	if((bSpyGraphEnabled == true & bSpyGraphFrozen == false))
-        	{
-	        	if(SpyGraphSeries.RTSeries.Count>0)
-	        	{
-	        		TimeSpan TGraphUpdate=DateTime.Now.Subtract(TLastSpyGraphUpdate);
-	        		
-	        		if(TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
-	        		{
-	        			if(SpyGraphRestarted)
-	        			{
-	        				SetSpyGraphSeriesVisibility();
-	        				SpyGraphRestarted=false;
-	        			}
-	        			
-	        			CANStreamTools.ResetRandomColor();
-	        			
-	        			//Size graph control
-			        	Graph_Spy.Width = Split_Rx_DataGraph.Panel2.Width - 161;
-			        	Graph_Spy.Height = Split_Rx_DataGraph.Panel2.Height - 10;
-			        	
-			        	//Create graphic
-			        	Graph=new XYChart(Graph_Spy.Width,
-				                          	Graph_Spy.Height,
-				                         	CANStreamTools.GetRGBColor(Color.Black),
-				                         	CANStreamTools.GetRGBColor(Color.White),
-				                         	0);
-			        	
-			        	//Create plotting area
-			    		Graph.setPlotArea(40,20,
-			    		                  Graph_Spy.Width-150,
-			    		                  Graph_Spy.Height-70,
-			    		                  CANStreamTools.GetRGBColor(Color.Black),-1,
-			    		                  CANStreamTools.GetRGBColor(Color.LightGray),
-			    		                  CANStreamTools.GetRGBColor(Color.LightGray),
-			    		                  CANStreamTools.GetRGBColor(Color.LightGray));
-			        	
 
-			        	//Create legend
-			        	//Graph.addLegend(Graph_Spy.Width-185,20,true,"Arial",10).setBackground(Chart.Transparent);
-			        	LegendBox Legend =Graph.addLegend(Graph_Spy.Width-100,20,true,"Arial",8);
-			        	Legend.setBackground(Chart.Transparent);
-			        	Legend.setFontColor(CANStreamTools.GetRGBColor(Color.White));
-			        	Legend.setMaxWidth(100);
-			        	
-	        			//Create X axis
-	        			double TMin = Math.Round(SpyGraphSeries.GetMinTimeSampleOverAll(), 1);
-	        			double TMax = Math.Round(SpyGraphSeries.GetMaxTimeSampleOverAll(), 1);
-	        			
-	        			if((TMax-TMin)<(SpyGraphSeries.BufferSize*SPY_GRID_UPDATE_PERIOD)/1000)
-	        			{
-	        				TMax=TMin+((SpyGraphSeries.BufferSize*SPY_GRID_UPDATE_PERIOD)/1000);
-	        			}
-	        			
-	        			double TStep=(TMax-TMin)/10;
-	        			
-		        		Axis AxeX=Graph.xAxis();
-		        		AxeX.setLinearScale(TMin,TMax,TStep);
-		        		AxeX.setRounding(true, true);
-		        		AxeX.setColors(CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White));
-		        		
-		        		
-		        		
-		        		//Set Y Axis
-		        		Axis AxeY=Graph.yAxis();
-		        		AxeY.setColors(CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White),
-		        		               CANStreamTools.GetRGBColor(Color.White));
-		        		
-		        		if(!SpyGraphAutoScale)
-		        		{
-		        			if(SpyGraphYMin < SpyGraphYMax)
-		        			{
-		        				double YStep=(SpyGraphYMax-SpyGraphYMin)/10;
-		        				AxeY.setLinearScale(SpyGraphYMin,SpyGraphYMax,YStep);
-		        			}
-		        		}
-		        		
-		        		//Create series
-		        		foreach(RT_FormatedGraphSerie oSerie in SpyGraphSeries.RTSeries)
-		        		{
-		        			if(oSerie.Visible)
-		        			{
-		        				LineLayer Layer=Graph.addLineLayer();
-		        				
-		        				Layer.addDataSet(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.YValue)
-		        				                 ,CANStreamTools.GetRandomColor()
-		        				                 ,oSerie.Name);
-		        				
-		        				Layer.setXData(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.XValue));
-	        					Layer.setLineWidth(2);
-		        			}
-		        		}
-		        		
-		        		Graph_Spy.Image=Graph.makeImage();
-	        		}
-	        	}
-        	}
+        private int FindDecodedMessageIndex(string MsgId)
+        {
+            for (int i = 0; i < DecodedMessages.Count; i++)
+            {
+                if (DecodedMessages[i].Identifier.Equals(MsgId))
+                {
+                    return (i);
+                }
+            }
+
+            return (-1);
         }
-		
-		private void SetSpyGraphSeriesVisibility()
+
+        private void Update_SpyGraph()
+        {
+            if ((bSpyGraphEnabled == true & bSpyGraphFrozen == false))
+            {
+                if (SpyGraphSeries.RTSeries.Count > 0)
+                {
+                    TimeSpan TGraphUpdate = DateTime.Now.Subtract(TLastSpyGraphUpdate);
+
+                    if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
+                    {
+                        if (SpyGraphRestarted)
+                        {
+                            SetSpyGraphSeriesVisibility();
+                            SpyGraphRestarted = false;
+                        }
+
+                        CANStreamTools.ResetRandomColor();
+
+                        //Size graph control
+                        Graph_Spy.Width = Split_Rx_DataGraph.Panel2.Width - 161;
+                        Graph_Spy.Height = Split_Rx_DataGraph.Panel2.Height - 10;
+
+                        //Create graphic
+                        Graph = new XYChart(Graph_Spy.Width,
+                                              Graph_Spy.Height,
+                                             CANStreamTools.GetRGBColor(Color.Black),
+                                             CANStreamTools.GetRGBColor(Color.White),
+                                             0);
+
+                        //Create plotting area
+                        Graph.setPlotArea(40, 20,
+                                          Graph_Spy.Width - 150,
+                                          Graph_Spy.Height - 70,
+                                          CANStreamTools.GetRGBColor(Color.Black), -1,
+                                          CANStreamTools.GetRGBColor(Color.LightGray),
+                                          CANStreamTools.GetRGBColor(Color.LightGray),
+                                          CANStreamTools.GetRGBColor(Color.LightGray));
+
+
+                        //Create legend
+                        //Graph.addLegend(Graph_Spy.Width-185,20,true,"Arial",10).setBackground(Chart.Transparent);
+                        LegendBox Legend = Graph.addLegend(Graph_Spy.Width - 100, 20, true, "Arial", 8);
+                        Legend.setBackground(Chart.Transparent);
+                        Legend.setFontColor(CANStreamTools.GetRGBColor(Color.White));
+                        Legend.setMaxWidth(100);
+
+                        //Create X axis
+                        double TMin = Math.Round(SpyGraphSeries.GetMinTimeSampleOverAll(), 1);
+                        double TMax = Math.Round(SpyGraphSeries.GetMaxTimeSampleOverAll(), 1);
+
+                        if ((TMax - TMin) < (SpyGraphSeries.BufferSize * SPY_GRID_UPDATE_PERIOD) / 1000)
+                        {
+                            TMax = TMin + ((SpyGraphSeries.BufferSize * SPY_GRID_UPDATE_PERIOD) / 1000);
+                        }
+
+                        double TStep = (TMax - TMin) / 10;
+
+                        Axis AxeX = Graph.xAxis();
+                        AxeX.setLinearScale(TMin, TMax, TStep);
+                        AxeX.setRounding(true, true);
+                        AxeX.setColors(CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White));
+
+
+
+                        //Set Y Axis
+                        Axis AxeY = Graph.yAxis();
+                        AxeY.setColors(CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White),
+                                       CANStreamTools.GetRGBColor(Color.White));
+
+                        if (!SpyGraphAutoScale)
+                        {
+                            if (SpyGraphYMin < SpyGraphYMax)
+                            {
+                                double YStep = (SpyGraphYMax - SpyGraphYMin) / 10;
+                                AxeY.setLinearScale(SpyGraphYMin, SpyGraphYMax, YStep);
+                            }
+                        }
+
+                        //Create series
+                        foreach (RT_FormatedGraphSerie oSerie in SpyGraphSeries.RTSeries)
+                        {
+                            if (oSerie.Visible)
+                            {
+                                LineLayer Layer = Graph.addLineLayer();
+
+                                Layer.addDataSet(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.YValue)
+                                                 , CANStreamTools.GetRandomColor()
+                                                 , oSerie.Name);
+
+                                Layer.setXData(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.XValue));
+                                Layer.setLineWidth(2);
+                            }
+                        }
+
+                        Graph_Spy.Image = Graph.makeImage();
+                    }
+                }
+            }
+        }
+
+        private void SetSpyGraphSeriesVisibility()
         {
             for (int i = 0; i < oSpySeriesStates.ItemCount; i++)
             {
@@ -3453,15 +2875,15 @@ namespace CANStream
                 }
             }
         }
-		
-		private void FilterSpyGraphSeries()
-		{
+
+        private void FilterSpyGraphSeries()
+        {
             string sFilter = (string)ChkLst_ChannelSel.Tag;
 
             //Channel list updating
-			ChkLst_ChannelSel.Items.Clear();
-			
-            for(int i=0;i<oSpySeriesStates.ItemCount;i++)
+            ChkLst_ChannelSel.Items.Clear();
+
+            for (int i = 0; i < oSpySeriesStates.ItemCount; i++)
             {
                 Nullable<SpySerieState> sSerie = oSpySeriesStates.GetItem(i);
 
@@ -3480,13 +2902,13 @@ namespace CANStream
 
             SetSpyGraphSeriesVisibility();
         }
-		
-		private void FireControllerSpyRunningChangedEvent(bool bRunning)
-		{
-			ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
-			Args.Running = bRunning;
-			OnControllerSpyRunningChanged(Args);
-		}
+
+        private void FireControllerSpyRunningChangedEvent(bool bRunning)
+        {
+            ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
+            Args.Running = bRunning;
+            OnControllerSpyRunningChanged(Args);
+        }
 
         #region Spy data history
 
@@ -3501,7 +2923,7 @@ namespace CANStream
         private void ResumeSpyDataHistory()
         {
             bDataHistoryFrozen = false;
-            
+
             TSB_ResumeHistory.Visible = false;
             TSB_FreezeHistory.Visible = true;
         }
@@ -3534,7 +2956,7 @@ namespace CANStream
                     {
                         sw.WriteLine(Lst_SpyDataHistory.Items[i].ToString());
                     }
-                    
+
                     sw.Close();
                     sw.Dispose();
                 }
@@ -3593,21 +3015,410 @@ namespace CANStream
 
         #endregion
 
-        #region Common Manual & Spy
+        #region Common Rx/Tx
 
         private void ResetManualSpyGrids()
         {
-        	//TODO: Make a function in the Ctrl_SpyDataViewer to clear data grid rows
-            //TODO: Remove old code
-            //Grid_CANData.Rows.Clear();
-        	Grid_ManualDataViewer.Clear_EngGrid();
+            Grid_ManualDataWriter.Clear_EngGrid();
+            Grid_ManualDataViewer.Clear_EngGrid();
         }
-        
-		#endregion
-		
-		#region CAN Trace recording management
-		
-		private void MoveTrcFiles()
+
+        #endregion
+
+        #endregion
+
+        #region Cycle management
+
+        private void PlayCycle()
+        {
+            #region Pre-checks
+            double TVal = 0;
+
+            if (!(double.TryParse(Txt_CycleStart.Text, out TVal)))
+            {
+                MessageBox.Show("Cycle start time must be a numeric value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bCycleStartEndTxtSetting = true;
+                Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000, 3).ToString();
+                bCycleStartEndTxtSetting = false;
+
+                return;
+            }
+
+            TCycleStart = (long)(TVal * 1000);
+            if (TCycleStart < oCycle.TimeEvents[0].TimeEvent | TCycleStart > oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent)
+            {
+                MessageBox.Show("Start time defined is not contained in the cycle !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bCycleStartEndTxtSetting = true;
+                Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000, 3).ToString();
+                bCycleStartEndTxtSetting = false;
+
+                return;
+            }
+
+            if (!(double.TryParse(Txt_CycleEnd.Text, out TVal)))
+            {
+                MessageBox.Show("Cycle end time must be a numeric value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bCycleStartEndTxtSetting = true;
+                Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000, 3).ToString();
+                bCycleStartEndTxtSetting = false;
+
+                return;
+            }
+
+            TCycleEnd = (long)(TVal * 1000);
+            if (TCycleEnd > oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent | TCycleEnd < oCycle.TimeEvents[0].TimeEvent)
+            {
+                MessageBox.Show("End time defined is not contained in the cycle !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bCycleStartEndTxtSetting = true;
+                Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000, 3).ToString();
+                bCycleStartEndTxtSetting = false;
+
+                return;
+            }
+
+            if (TCycleStart >= TCycleEnd)
+            {
+                MessageBox.Show("End time must be greater than start time !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bCycleStartEndTxtSetting = true;
+                Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000, 3).ToString();
+                Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000, 3).ToString();
+                bCycleStartEndTxtSetting = false;
+
+                return;
+            }
+            #endregion
+
+            if (NumUpDown_CycleCount.Value > 0 | Chk_InfinitePlay.Checked)
+            {
+                Lbl_CurrentCycleNum.Visible = true;
+                Txt_CurrentCycleNum.Visible = true;
+                Lbl_CurrentProgress.Visible = true;
+                Lbl_TotalProgress.Visible = true;
+                PB_CurrentProgress.Visible = true;
+                PB_TotalProgress.Visible = true;
+
+                Cmd_BreakCycle.Enabled = true;
+                Cmd_StopCycle.Enabled = true;
+
+                Cmd_PlayCycle.Enabled = false;
+                Lbl_CycleCount.Enabled = false;
+                NumUpDown_CycleCount.Enabled = false;
+                Chk_InfinitePlay.Enabled = false;
+                Lbl_CycleStart.Enabled = false;
+                Lbl_CycleEnd.Enabled = false;
+                Txt_CycleStart.Enabled = false;
+                Txt_CycleEnd.Enabled = false;
+
+                Txt_CurrentCycleNum.Text = (LoopCnt + 1).ToString();
+
+                bCycleRunning = true;
+
+                FireControllerCycleRunningChangedEvent(bCycleRunning);
+
+                if (TxEngMessages.Count > 0)
+                {
+                    Split_Cycle_VirtualSig_Graph.Panel1Collapsed = false;
+                }
+
+                if (Chk_InfinitePlay.Checked)
+                {
+                    BGWrk_Cycle.RunWorkerAsync((bool)true);
+                }
+                else
+                {
+                    BGWrk_Cycle.RunWorkerAsync((int)NumUpDown_CycleCount.Value);
+                }
+
+                //Automatic trace recording //HACK: Remove [acquisition trigger]
+                if (bRecordingAuto & !bRecording)
+                {
+                    StartRecording();
+                }
+
+                //Timer for graphic update enabling
+                Timer_CycleGraph.Enabled = true;
+            }
+        }
+
+        private void StopCycle()
+        {
+            BGWrk_Cycle.CancelAsync();
+
+            Cmd_PlayCycle.Enabled = true;
+            Cmd_BreakCycle.Enabled = false;
+
+            //Timer for graphic update disabling
+            Timer_CycleGraph.Enabled = false;
+
+            if (!bPauseCycle)
+            {
+                Lbl_CurrentCycleNum.Visible = false;
+                Txt_CurrentCycleNum.Visible = false;
+                Lbl_CurrentProgress.Visible = false;
+                Lbl_TotalProgress.Visible = false;
+                PB_CurrentProgress.Value = 0;
+                PB_CurrentProgress.Visible = false;
+                PB_TotalProgress.Value = 0;
+                PB_TotalProgress.Visible = false;
+
+                Cmd_StopCycle.Enabled = false;
+
+                Lbl_CycleStart.Enabled = true;
+                Lbl_CycleEnd.Enabled = true;
+                Txt_CycleStart.Enabled = true;
+                Txt_CycleEnd.Enabled = true;
+                Chk_InfinitePlay.Enabled = true;
+
+                if (!Chk_InfinitePlay.Checked)
+                {
+                    Lbl_CycleCount.Enabled = true;
+                    NumUpDown_CycleCount.Enabled = true;
+                }
+
+                bCycleRunning = false;
+
+                FireControllerCycleRunningChangedEvent(bCycleRunning);
+
+                //Automatic trace recording
+                if (bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
+                {
+                    StopRecording();
+                }
+            }
+        }
+
+        private void RunCycle(int LoopNumber, bool InfinitePlay, BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
+        {
+            int LoopIterationCount = (int)oCycle.GetTimeEventCountBetweenTimes(TCycleStart, TCycleEnd);
+            int TotalInterationCount = LoopIterationCount;
+            int Progress = 0;
+            int ProgressPrec = 0;
+
+            if (!InfinitePlay)
+            {
+                TotalInterationCount = LoopIterationCount * LoopNumber;
+            }
+
+            for (iLoopCurrent = iLoopInitial; iLoopCurrent < LoopNumber; iLoopCurrent++)
+            {
+                int IterationCount = 0;
+
+                iTimeEventCurrent = oCycle.GetTimeEventIndex(TCycleStart);
+                if (iTimeEventCurrent == -1) return;
+
+                TimeInCycle = TCycleStart;
+
+                if (iTimeEventInitial > 0)
+                {
+                    iTimeEventCurrent = iTimeEventInitial;
+                    TimeInCycle = oCycle.TimeEvents[iTimeEventInitial].TimeEvent;
+                }
+
+                long EndTime = TCycleEnd;
+
+                //Debug
+                //DateTime Tic=DateTime.Now;
+
+                while (TimeInCycle <= EndTime)
+                {
+                    if (TimeInCycle == oCycle.TimeEvents[iTimeEventCurrent].TimeEvent) //It's time to send a message
+                    {
+                        //Debug
+                        //DateTime Tic=DateTime.Now;
+
+                        foreach (CANMessageData MsgData in oCycle.TimeEvents[iTimeEventCurrent].MessagesData)
+                        {
+                            SendMessage(MsgData);
+                        }
+
+                        iTimeEventCurrent++;
+                        IterationCount++;
+
+                        if (InfinitePlay)
+                        {
+                            Progress = (int)(IterationCount * 100 / TotalInterationCount);
+                        }
+                        else
+                        {
+                            Progress = (int)(iLoopCurrent * LoopIterationCount + IterationCount) * 100 / TotalInterationCount;
+                        }
+
+                        if (Progress != ProgressPrec)
+                        {
+                            Worker.ReportProgress(Progress);
+                            ProgressPrec = Progress;
+                        }
+
+                        //Debug
+                        //DateTime Toc=DateTime.Now;
+                        //TimeSpan TExec=Toc.Subtract(Tic);
+                        //int Msec=TExec.Milliseconds;
+                    }
+
+                    System.Threading.Thread.Sleep(1); //Wait 1ms
+                                                      //AbsTime++;
+                    TimeInCycle++;
+
+                    if (Worker.CancellationPending)
+                    {
+                        return;
+                    }
+                }
+
+                iTimeEventInitial = 0;
+
+                if (InfinitePlay)
+                {
+                    iLoopCurrent = 0;
+                }
+
+                //Debug
+                //DateTime Toc=DateTime.Now;
+                //TimeSpan TExec=Toc.Subtract(Tic);
+                //int Msec=TExec.Milliseconds;
+            }
+
+            bPauseCycle = false;
+        }
+
+        private void PlotCycle()
+        {
+            PlotCycle(false, -1, -1, -1);
+        }
+
+        private void PlotCycle(bool bRefreshing, double TimeCursorPosition)
+        {
+            PlotCycle(bRefreshing, TimeCursorPosition, -1, -1);
+        }
+
+        private void PlotCycle(bool bRefreshing, double TimeCursorPosition, double StartPosistion, double EndPosition)
+        {
+            if (oCycle.GraphSeries.FormatedSeries.Count > 0)
+            {
+                if (!bRefreshing)
+                {
+                    if (Split_Cycle_VirtualSig_Graph.Panel1Collapsed)
+                    {
+                        Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - 12;
+                    }
+                    else
+                    {
+                        Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - Split_Cycle_VirtualSig_Graph.SplitterDistance - 12;
+                    }
+
+                    Graph_Cycle.Height = Split_Cycle_VirtualSig_Graph.Height - 2;
+
+                    Context_CycleGraph.Items.Clear();
+
+                    ToolStripMenuItem ItemSetStart = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle starting point");
+                    ItemSetStart.Click += new EventHandler(Context_CycleGraphItemSetStart_Click);
+
+                    ToolStripMenuItem ItemSetEnd = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle ending point");
+                    ItemSetEnd.Click += new EventHandler(Context_CycleGraphItemSetEnd_Click);
+
+                    ToolStripMenuItem ItemSetConfirm = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Confirm cycle start/end points setting");
+                    ItemSetConfirm.Click += new EventHandler(Context_CycleGraphItemSetConfirm_Click);
+                    ItemSetConfirm.Visible = false;
+
+                    ToolStripMenuItem ItemSetCancel = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Cancel cycle start/end points setting");
+                    ItemSetCancel.Click += new EventHandler(Context_CycleGraphItemSetCancel_Click);
+                    ItemSetCancel.Visible = false;
+
+                    ToolStripSeparator Sep = new ToolStripSeparator();
+                    Context_CycleGraph.Items.Add(Sep);
+                }
+
+                CANStreamTools.Draw_CycleGraph(oCycle, Graph_Cycle, TimeCursorPosition, StartPosistion, EndPosition);
+
+                if (!bRefreshing)
+                {
+                    foreach (FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
+                    {
+                        ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem)Context_CycleGraph.Items.Add(oSerie.Name);
+                        SerieMenuItem.Checked = oSerie.Visible;
+                        SerieMenuItem.Click += new System.EventHandler(Context_CycleGraphMenuItem_Click);
+                    }
+                }
+            }
+        }
+
+        private void Set_OldCycleStartEndPoint()
+        {
+            if (!(double.TryParse(Txt_CycleStart.Text, out TCycleStart_Old)))
+            {
+                TCycleStart_Old = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
+            }
+
+            if (!(double.TryParse(Txt_CycleEnd.Text, out TCycleEnd_Old)))
+            {
+                TCycleEnd_Old = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
+            }
+        }
+
+        private void Set_CycleStartEndCursorsFromTextBox()
+        {
+            double dTCycleStart = 0;
+            double dTCycleEnd = 0;
+
+            if (!(double.TryParse(Txt_CycleStart.Text, out dTCycleStart)))
+            {
+                dTCycleStart = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
+            }
+
+            if (!(double.TryParse(Txt_CycleEnd.Text, out dTCycleEnd)))
+            {
+                dTCycleEnd = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
+            }
+
+            if (dTCycleStart < dTCycleEnd)
+            {
+                PlotCycle(true, -1, dTCycleStart, dTCycleEnd);
+            }
+        }
+
+        private double GetTimeValueAtPosition(int Position)
+        {
+            double X = (double)Position;
+            double X1 = (double)CANStreamConstants.CycleGraphPlotAreaLeft;
+            double X2 = X1 + ((double)(Graph_Cycle.Width - CANStreamConstants.CycleGraphPlotAreaWidthOffset));
+            double Y1 = oCycle.GraphSeries.AxisProperties.AxisX.MinValue;
+            double Y2 = oCycle.GraphSeries.AxisProperties.AxisX.MaxValue;
+
+            double a = (Y2 - Y1) / (X2 - X1);
+            double b = Y2 - a * X2;
+
+            return (a * X + b);
+        }
+
+        private void Set_CycleVirtualSignalValue(string Name, string sValue, VirtualParameter VirtualRef)
+        {
+
+        }
+
+        private void FireControllerCycleStartEndSettingEvent(int State)
+        {
+            ControllerCycleStartEndSettingEventArgs Args = new ControllerCycleStartEndSettingEventArgs();
+            Args.SettingState = State;
+            OnControllerCycleStartEndSetting(Args);
+        }
+
+        private void FireControllerCycleRunningChangedEvent(bool bRunning)
+        {
+            ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
+            Args.Running = bRunning;
+            OnControllerCycleRunningChanged(Args);
+        }
+
+        #endregion
+
+        #region CAN Trace recording management
+
+        private void MoveTrcFiles()
         {
 			//Move the PCAN trace file from the recording folder (exe path) to the stack folder (...\User\Records\Stack)
         	
@@ -3730,54 +3541,7 @@ namespace CANStream
         #endregion
 		
 		#region Misc
-				
-		private void ResizeGridColumns(DataGridView oGrid, int FillerColumn)
-		{
-			//TODO: Use grid columns resizing method of the Ctrl_SpyDataViewer
-            //TODO: Remove old code
-            //int ColCnt = GetGridColumnsVisibleCount(oGrid);
-        	
-			//int ColWidth = (int)(oGrid.Width / ColCnt);
-			//if (ColWidth > GRID_MAX_COL_WIDTH) ColWidth = GRID_MAX_COL_WIDTH;
-			
-   //     	int TotalWidth = 0;
-        	
-   //     	foreach (DataGridViewColumn oCol in oGrid.Columns)
-   //     	{
-   //     		if (oCol.Visible)
-   //     		{
-        			
-   //     			if (TotalWidth + ColWidth >= oGrid.Width - 5)
-   //     			{
-   //     				ColWidth = oGrid.Width - TotalWidth - 5;
-   //     			}
-        			
-   //     			oCol.Width = ColWidth;
-   //     			TotalWidth += oCol.Width; //May be different to ColWidth since 'minimum width' property of each column has been set
-   //     		}
-   //     	}
-        	
-   //     	if (TotalWidth < oGrid.Width - 5)
-   //     	{
-   //     		oGrid.Columns[FillerColumn].Width += (oGrid.Width - TotalWidth - 5);
-   //     	}
-		}
-		
-		private int GetGridColumnsVisibleCount(DataGridView oGrid)
-		{
-			int ColVisible = 0;
-			
-			foreach (DataGridViewColumn oCol in oGrid.Columns)
-			{
-				if (oCol.Visible)
-				{
-					ColVisible++;
-				}
-			}
-			
-			return(ColVisible);
-		}
-		
+
 		private string Get_ConfigBackupFileName()
 		{
 			string FinalName = "";
@@ -3815,7 +3579,7 @@ namespace CANStream
 			OnControllerLayoutChanged(Args);
 		}
 		
-		private void FireControllerGridColumnsChangedEvent(CANControllerGrid CurrentGrid, object ColsVisible)
+		private void FireControllerGridColumnsChangedEvent(CANControllerGrid CurrentGrid, GridCANData_ColumnsEnum ColsVisible)
 		{
 			ControllerGridColumnsChangedEventArgs Args = new ControllerGridColumnsChangedEventArgs();
 			Args.Grid = CurrentGrid;
@@ -3955,322 +3719,286 @@ namespace CANStream
             }
 		}
 
-		#endregion
-		
-		#region Cycle Management
-		
-		public void Set_Cycle(CANStreamCycle CycleToSet)
-		{
-			if (!(CycleToSet == null))
-			{
-				oCycle = CycleToSet;
-				
-				Lbl_CycleFile.Text="Cycle file: " + oCycle.Name;
-				rTxt_CycleComments.Text=oCycle.Comment;
-				
-				if (!(oCycle.oCanNodesMap == null))
-				{
-					if (UpDateCANConfig(oCycle.oCanNodesMap))
-					{
-						Lbl_CanConfig.Text = "CAN Configuration: " + oCycle.oCanNodesMap.Name;
-        				
-						//Create virtual parmaters messages list
-						TxEngMessages = new List<CANMessageEncoded>();
-						foreach (CANMessage oMsg in oCycle.oCanNodesMap.Messages)
-						{
-							if (oMsg.RxTx.Equals(CanMsgRxTx.Tx) && oMsg.ContainsVirtualParameters())
-							{
-								CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMsg.Clone(), oCycle.oCanNodesMap.MessageLength/8);
-								oEncodMsg.Parameters.Clear();
-								
-								foreach (CANParameter oParam in oMsg.Parameters)
-								{
-									if (oParam.IsVirtual)
-									{
-										oEncodMsg.Parameters.Add(oParam.Clone());
-									}
-								}
-								
-								TxEngMessages.Add(oEncodMsg);
-							}
-						}
-						
-						oCycle.CreateGraphicSeries();
-						if (oCycle.GraphSeries.Series.Count > 0)
-						{
-							PlotCycle();
-						}
-						else
-						{
-							MessageBox.Show("Cycle does contain data but they cannot be plotted since no cycle message identifier match with the embedded CAN configuration identifiers.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-						}
-							
-						bCycleStartEndTxtSetting = true;
-						Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000,3).ToString();
-						Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000,3).ToString();
-						bCycleStartEndTxtSetting = false;
-						
-						//HostForm.ActiveControllerCycleLoaded();
-						
-						//ControllerCycleLoaded event firing
-						OnControllerCycleLoaded(new EventArgs());
-							
-					}
-				}
-				else
-				{
-					MessageBox.Show("No CAN mapping embedded into the cycle ! Cycle loading abort.",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-				}
-			}
-		}
-		
-		public void Set_CycleStartingPoint()
+        #endregion
+
+        #region Manual control management
+
+        #region Data TX
+
+        public bool IsManualWorkerBusy()
         {
-        	bCycleStartSet=true;
-        	Set_OldCycleStartEndPoint();
-        	
-        	//Menu strip item status updating
-        	FireControllerCycleStartEndSettingEvent(0);
-        	
-        	//Context_CycleGraph items status updating
-        	Context_CycleGraph.Items[0].Visible = false;		//Set starting point
-        	Context_CycleGraph.Items[1].Visible = false;		//Set ending point
-        	Context_CycleGraph.Items[2].Visible = true;			//Confirm start/end points
-        	Context_CycleGraph.Items[3].Visible = true;			//Cancel start/end points
+            return (BGWrk_Manual.IsBusy);
         }
-        
+
+        #region Manual raw messages
+
+        public void Add_RawMessage()
+        {
+            CAN_RawMessageData oMsg = new CAN_RawMessageData();
+
+            oMsg.KeyId = NextRawMessageKeyId;
+            NextRawMessageKeyId++;
+
+            if (TxRawMessages == null) TxRawMessages = new CAN_RawMessageList();
+            TxRawMessages.Messages.Add(oMsg);
+
+            Grid_CANRawData.Rows.Add();
+
+            Show_RawMessage(oMsg, Grid_CANRawData.Rows.Count - 1);
+        }
+
+        public void Del_RawMessage()
+        {
+            if (!(Grid_CANRawData.SelectedCells == null))
+            {
+                if (!(TxRawMessages == null))
+                {
+                    int Key = (int)Grid_CANRawData.Rows[Grid_CANRawData.SelectedCells[0].RowIndex].Tag;
+                    CAN_RawMessageData oMsg = TxRawMessages.Get_RawMessageAtKeyId(Key);
+
+                    if (!(oMsg == null))
+                    {
+                        UInt32 MsgId = oMsg.MessageId;
+                        TxRawMessages.Messages.Remove(oMsg);
+
+                        //TODO: Add the current message in the engineering Tx grid if its ID is present in the CAN Configu
+                        //Show_MessageParametersRows (string.Format("{0:x}", MsgId));
+                    }
+                }
+
+                Grid_CANRawData.Rows.RemoveAt(Grid_CANRawData.SelectedCells[0].RowIndex);
+            }
+        }
+
+        public void Clear_RawMessages()
+        {
+            DialogResult Rep = MessageBox.Show("Do you really want to delete all raw messages ?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (Rep.Equals(DialogResult.Yes))
+            {
+                Grid_CANRawData.Rows.Clear();
+                TxRawMessages = null;
+                NextRawMessageKeyId = 0;
+                ShowManualCanConfig();
+            }
+        }
+
+        public void Save_RawMessages()
+        {
+            if (!(TxRawMessages == null))
+            {
+                if (TxRawMessages.Messages.Count > 0)
+                {
+                    saveFileDialog1.FileName = "";
+                    saveFileDialog1.Filter = "Raw message data file|*.rmd";
+                    saveFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
+
+                    if (saveFileDialog1.ShowDialog().Equals(DialogResult.OK))
+                    {
+                        TxRawMessages.Save_RawMessagesList(saveFileDialog1.FileName);
+                    }
+                }
+            }
+        }
+
+        public void Open_RawMessages()
+        {
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Raw message data file|*.rmd";
+            openFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
+
+            if (openFileDialog1.ShowDialog().Equals(DialogResult.OK))
+            {
+                TxRawMessages = new CAN_RawMessageList();
+                NextRawMessageKeyId = 0;
+
+                Grid_CANRawData.Rows.Clear();
+
+                if (TxRawMessages.Load_RawMessagesList(openFileDialog1.FileName))
+                {
+                    foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
+                    {
+                        if (!(TxEngMessagesContainsId(oRawMsg.MessageId)))
+                        {
+                            oRawMsg.KeyId = NextRawMessageKeyId;
+                            NextRawMessageKeyId++;
+
+                            Grid_CANRawData.Rows.Add();
+                            Show_RawMessage(oRawMsg, Grid_CANRawData.Rows.Count - 1);
+                        }
+                        else
+                        {
+                            oRawMsg.Send = false;
+                            MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oRawMsg.MessageId) + " is already present in the CAN configuration loaded !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Raw message data file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Data RX
+
+        public bool IsSpyWorkerBusy()
+        {
+            return (BGWrk_Spy.IsBusy);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Cycle Management
+
+        public void Set_Cycle(CANStreamCycle CycleToSet)
+        {
+            if (!(CycleToSet == null))
+            {
+                oCycle = CycleToSet;
+
+                Lbl_CycleFile.Text = "Cycle file: " + oCycle.Name;
+                rTxt_CycleComments.Text = oCycle.Comment;
+
+                if (!(oCycle.oCanNodesMap == null))
+                {
+                    if (UpDateCANConfig(oCycle.oCanNodesMap))
+                    {
+                        Lbl_CanConfig.Text = "CAN Configuration: " + oCycle.oCanNodesMap.Name;
+
+                        //Create virtual parmaters messages list
+                        TxEngMessages = new List<CANMessageEncoded>();
+                        foreach (CANMessage oMsg in oCycle.oCanNodesMap.Messages)
+                        {
+                            if (oMsg.RxTx.Equals(CanMsgRxTx.Tx) && oMsg.ContainsVirtualParameters())
+                            {
+                                CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMsg.Clone(), oCycle.oCanNodesMap.MessageLength / 8);
+                                oEncodMsg.Parameters.Clear();
+
+                                foreach (CANParameter oParam in oMsg.Parameters)
+                                {
+                                    if (oParam.IsVirtual)
+                                    {
+                                        oEncodMsg.Parameters.Add(oParam.Clone());
+                                    }
+                                }
+
+                                TxEngMessages.Add(oEncodMsg);
+                            }
+                        }
+
+                        oCycle.CreateGraphicSeries();
+                        if (oCycle.GraphSeries.Series.Count > 0)
+                        {
+                            PlotCycle();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cycle does contain data but they cannot be plotted since no cycle message identifier match with the embedded CAN configuration identifiers.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                        bCycleStartEndTxtSetting = true;
+                        Txt_CycleStart.Text = Math.Round((double)(oCycle.TimeEvents[0].TimeEvent) / 1000, 3).ToString();
+                        Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000, 3).ToString();
+                        bCycleStartEndTxtSetting = false;
+
+                        //HostForm.ActiveControllerCycleLoaded();
+
+                        //ControllerCycleLoaded event firing
+                        OnControllerCycleLoaded(new EventArgs());
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No CAN mapping embedded into the cycle ! Cycle loading abort.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+        public void Set_CycleStartingPoint()
+        {
+            bCycleStartSet = true;
+            Set_OldCycleStartEndPoint();
+
+            //Menu strip item status updating
+            FireControllerCycleStartEndSettingEvent(0);
+
+            //Context_CycleGraph items status updating
+            Context_CycleGraph.Items[0].Visible = false;        //Set starting point
+            Context_CycleGraph.Items[1].Visible = false;        //Set ending point
+            Context_CycleGraph.Items[2].Visible = true;         //Confirm start/end points
+            Context_CycleGraph.Items[3].Visible = true;			//Cancel start/end points
+        }
+
         public void Set_CycleEndingPoint()
         {
-        	bCycleEndSet = true;
-        	Set_OldCycleStartEndPoint();
+            bCycleEndSet = true;
+            Set_OldCycleStartEndPoint();
 
-        	//Menu strip item status updating
-        	FireControllerCycleStartEndSettingEvent(0);
-        	
-        	//Context_CycleGraph items status updating
-        	Context_CycleGraph.Items[0].Visible = false;		//Set starting point
-        	Context_CycleGraph.Items[1].Visible = false;		//Set ending point
-        	Context_CycleGraph.Items[2].Visible = true;			//Confirm start/end points
-        	Context_CycleGraph.Items[3].Visible = true;			//Cancel start/end points
+            //Menu strip item status updating
+            FireControllerCycleStartEndSettingEvent(0);
+
+            //Context_CycleGraph items status updating
+            Context_CycleGraph.Items[0].Visible = false;        //Set starting point
+            Context_CycleGraph.Items[1].Visible = false;        //Set ending point
+            Context_CycleGraph.Items[2].Visible = true;         //Confirm start/end points
+            Context_CycleGraph.Items[3].Visible = true;			//Cancel start/end points
         }
-        
+
         public void Confirm_CycleStartEndPoints()
         {
-        	bCycleStartSet = false;
-        	bCycleEndSet = false;
-        	
-        	//Menu strip item status updating
-        	FireControllerCycleStartEndSettingEvent(1);
-        	
-        	//Context_CycleGraph items status updating
-        	Context_CycleGraph.Items[0].Visible = true;			//Set starting point
-        	Context_CycleGraph.Items[1].Visible = true;			//Set ending point
-        	Context_CycleGraph.Items[2].Visible = false;		//Confirm start/end points
-        	Context_CycleGraph.Items[3].Visible = false;		//Cancel start/end points
+            bCycleStartSet = false;
+            bCycleEndSet = false;
+
+            //Menu strip item status updating
+            FireControllerCycleStartEndSettingEvent(1);
+
+            //Context_CycleGraph items status updating
+            Context_CycleGraph.Items[0].Visible = true;         //Set starting point
+            Context_CycleGraph.Items[1].Visible = true;         //Set ending point
+            Context_CycleGraph.Items[2].Visible = false;        //Confirm start/end points
+            Context_CycleGraph.Items[3].Visible = false;		//Cancel start/end points
         }
-        
+
         public void Cancel_CycleStartEndPoints()
         {
-        	bCycleStartSet = false;
-        	bCycleEndSet = false;
-        	
-        	bCycleStartEndTxtSetting = true;
-        	Txt_CycleStart.Text = Math.Round(TCycleStart_Old, 3).ToString();
-        	Txt_CycleEnd.Text = Math.Round(TCycleEnd_Old, 3).ToString();
-        	bCycleStartEndTxtSetting = false;
-        	
-        	PlotCycle(false, -1, TCycleStart_Old, TCycleEnd_Old);
-        	
-        	//Menu strip item status updating
-        	FireControllerCycleStartEndSettingEvent(1);
-        	
-        	//Context_CycleGraph items status updating
-        	Context_CycleGraph.Items[0].Visible = true;			//Set starting point
-        	Context_CycleGraph.Items[1].Visible = true;			//Set ending point
-        	Context_CycleGraph.Items[2].Visible = false;		//Confirm start/end points
-        	Context_CycleGraph.Items[3].Visible = false;		//Cancel start/end points
+            bCycleStartSet = false;
+            bCycleEndSet = false;
+
+            bCycleStartEndTxtSetting = true;
+            Txt_CycleStart.Text = Math.Round(TCycleStart_Old, 3).ToString();
+            Txt_CycleEnd.Text = Math.Round(TCycleEnd_Old, 3).ToString();
+            bCycleStartEndTxtSetting = false;
+
+            PlotCycle(false, -1, TCycleStart_Old, TCycleEnd_Old);
+
+            //Menu strip item status updating
+            FireControllerCycleStartEndSettingEvent(1);
+
+            //Context_CycleGraph items status updating
+            Context_CycleGraph.Items[0].Visible = true;         //Set starting point
+            Context_CycleGraph.Items[1].Visible = true;         //Set ending point
+            Context_CycleGraph.Items[2].Visible = false;        //Confirm start/end points
+            Context_CycleGraph.Items[3].Visible = false;		//Cancel start/end points
         }
-		
+
         public bool IsCycleWorkerBusy()
         {
-        	return(BGWrk_Cycle.IsBusy);
+            return (BGWrk_Cycle.IsBusy);
         }
-        
-		#endregion
-		
-		#region Manual control management
-		
-		public int Get_Grid_CANDataRowsCount()
-		{
-            //TODO: Create a method in the Ctrl_SpyDataViewer returning the signals rows count
-            //return (Grid_CANData.Rows.Count);
-            return (-1); //TODO: Remove
-		}
-		
-		public bool IsManualWorkerBusy()
-		{
-			return(BGWrk_Manual.IsBusy);
-		}
-		
-		#region Manual raw messages
-		
-		public void Add_RawMessage()
-		{
-			CAN_RawMessageData oMsg = new CAN_RawMessageData();
-			
-			oMsg.KeyId = NextRawMessageKeyId;
-			NextRawMessageKeyId++;
-			
-			if (TxRawMessages == null) TxRawMessages = new CAN_RawMessageList();
-			TxRawMessages.Messages.Add(oMsg);
-			
-			Grid_CANRawData.Rows.Add();
-			
-			Show_RawMessage(oMsg, Grid_CANRawData.Rows.Count - 1);
-		}
-		
-		public void Del_RawMessage()
-		{
-			if (!(Grid_CANRawData.SelectedCells == null))
-			{
-				if (!(TxRawMessages == null))
-				{
-					int Key = (int)Grid_CANRawData.Rows[Grid_CANRawData.SelectedCells[0].RowIndex].Tag;
-					CAN_RawMessageData oMsg = TxRawMessages.Get_RawMessageAtKeyId(Key);
-					
-					if (!(oMsg == null))
-					{
-						UInt32 MsgId = oMsg.MessageId;
-						TxRawMessages.Messages.Remove(oMsg);
-						Show_MessageParametersRows (string.Format("{0:x}", MsgId));
-					}
-				}
-				
-				Grid_CANRawData.Rows.RemoveAt(Grid_CANRawData.SelectedCells[0].RowIndex);
-			}
-		}
-		
-		public void Clear_RawMessages()
-		{
-			DialogResult Rep = MessageBox.Show("Do you really want to delete all raw messages ?", Application.ProductName,MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-			
-			if (Rep.Equals(DialogResult.Yes))
-			{
-				Grid_CANRawData.Rows.Clear();
-				TxRawMessages = null;
-				NextRawMessageKeyId = 0;
-				ShowManualCanConfig();
-			}
-		}
-		
-		public void Save_RawMessages()
-		{
-			if (!(TxRawMessages == null))
-			{
-				if (TxRawMessages.Messages.Count > 0)
-				{
-					saveFileDialog1.FileName = "";
-					saveFileDialog1.Filter = "Raw message data file|*.rmd";
-					saveFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
-					
-					if (saveFileDialog1.ShowDialog().Equals(DialogResult.OK))
-					{
-						TxRawMessages.Save_RawMessagesList(saveFileDialog1.FileName);
-					}
-				}
-			}
-		}
-		
-		public void Open_RawMessages()
-		{
-			openFileDialog1.FileName = "";
-			openFileDialog1.Filter = "Raw message data file|*.rmd";
-			openFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
-			
-			if (openFileDialog1.ShowDialog().Equals(DialogResult.OK))
-			{
-				TxRawMessages = new CAN_RawMessageList();
-				NextRawMessageKeyId = 0;
-				
-				Grid_CANRawData.Rows.Clear();
-				
-				if (TxRawMessages.Load_RawMessagesList(openFileDialog1.FileName))
-				{
-					foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
-					{
-						if (!(TxEngMessagesContainsId(oRawMsg.MessageId)))
-						{
-							oRawMsg.KeyId = NextRawMessageKeyId;
-							NextRawMessageKeyId++;
-							
-							Grid_CANRawData.Rows.Add();
-							Show_RawMessage(oRawMsg, Grid_CANRawData.Rows.Count - 1);
-						}
-						else
-						{
-							oRawMsg.Send = false;
-							MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oRawMsg.MessageId) + " is already present in the CAN configuration loaded !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-						}
-					}
-				}
-				else
-				{
-					MessageBox.Show("Raw message data file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				}
-			}
-		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Spy control management
-		
-		public bool IsSpyWorkerBusy()
-		{
-			return(BGWrk_Spy.IsBusy);
-		}
-		
-		#endregion
-		
-		#region Common Manual & Spy
-		
-        //TODO: Remove region if empty
 
-		public void HideActiveRow()
-        {
-			//TODO: Verify if still needed since 'Show/Hide' rows feature is about to be removed
-            //TODO: Remove old code
-            //if (Grid_CANData.ContainsFocus)
-			//{
-			//	if (Grid_CANData.CurrentCell != null)
-			//	{
-			//		Grid_CANData.Rows[Grid_CANData.CurrentCell.RowIndex].Visible = false;
-			//	}
-			//}
-        }
-		
-		public void ShowHiddenRows()
-        {
-            //TODO: Verify if still needed since 'Show/Hide' rows feature is about to be removed
-            //TODO: Remove old code
-            //if (Grid_CANData.ContainsFocus)
-			//{
-			//	foreach (DataGridViewRow oRow in Grid_CANData.Rows)
-			//	{
-			//		if (!oRow.Visible)
-			//		{
-			//			oRow.Visible = true;
-			//		}
-			//	}
-			//}
-        }
-		
-		#endregion
-		
-		#region CAN Trace recording management
-		
-		public void StartRecording()
+        #endregion
+
+        #region CAN Trace recording management
+
+        public void StartRecording()
         {
         	UInt32 iBuffer=(uint)PCANBasic.PCAN_PARAMETER_ON;
         	TPCANStatus stsResult=PCANBasic.SetValue(m_PcanHandle,TPCANParameter.PCAN_TRACE_STATUS,ref iBuffer,sizeof(UInt32));
@@ -4333,25 +4061,18 @@ namespace CANStream
 
         #region Manual mode
 
-        //TODO: Remove old code
-        //public Manual_Grid_Columns Get_ManualGridColumnsVisible()
-		//{
-		//	return(ManualGridColumnsVisible);
-		//}
-		
         public GridCANData_ColumnsEnum Get_TxGridColumnsVisible()
         {
-            //TODO: Replace all 'Get_ManualGridColumnsVisible' method calls by calls to this method
             return (Grid_ManualDataWriter.eGridColumnsVisible);
         }
 
-        public void Set_ManualGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
+        public void Set_TxGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
             Grid_ManualDataWriter.eGridColumnsVisible = eColumnsVisible;
-            FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, (object)eColumnsVisible);
+            FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Manual, eColumnsVisible);
         }
 
-        public GridCANData_ColumnsEnum Get_SpyEngGridColumnsVisible()
+        public GridCANData_ColumnsEnum Get_RxGridColumnsVisible()
 		{
 			return(Grid_ManualDataViewer.eGridColumnsVisible);
 		}
@@ -4359,7 +4080,7 @@ namespace CANStream
 		public void Set_RxGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
 			Grid_ManualDataViewer.eGridColumnsVisible = eColumnsVisible;
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, (object)eColumnsVisible);
+			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_SpyEng, eColumnsVisible);
 		}
 
         #endregion
@@ -4374,7 +4095,7 @@ namespace CANStream
 		public void Set_CycleEngGridColumnsVisible(GridCANData_ColumnsEnum eColumnsVisible)
 		{
 			Cycle_SpyDataViewer.eGridColumnsVisible = eColumnsVisible;
-			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, (object)eColumnsVisible);
+			FireControllerGridColumnsChangedEvent(CANControllerGrid.Grid_Cycle_Eng, eColumnsVisible);
 		}
 
         #endregion
@@ -4470,7 +4191,7 @@ namespace CANStream
 			Split_RxTx.Panel1Collapsed = !oLayout.TxPanelVisible;
 			Split_Tx_EngRaw.Panel1Collapsed = !oLayout.EngDataTxPanelVisible;
 			Split_Tx_EngRaw.Panel2Collapsed = !oLayout.RawDataTxPanelVisible;
-			Set_ManualGridColumnsVisible(oLayout.eEngDataTxColumns);
+			Set_TxGridColumnsVisible(oLayout.eEngDataTxColumns);
 			
 			Split_RxTx.Panel2Collapsed = !oLayout.RxPanelVisible;
 			Split_Rx_DataGraph.Panel1Collapsed = !oLayout.DataRxPanelVisible;
@@ -4622,7 +4343,7 @@ namespace CANStream
 	public class ControllerGridColumnsChangedEventArgs : EventArgs
 	{
 		public CANControllerGrid Grid {get; set;}
-		public object ColumnsVisible {get; set;}
+		public GridCANData_ColumnsEnum ColumnsVisible {get; set;}
 	}
 	
 	public class ControllerDiagChangedEventArgs : EventArgs

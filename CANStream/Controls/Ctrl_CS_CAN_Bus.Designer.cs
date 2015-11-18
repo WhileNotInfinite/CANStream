@@ -544,6 +544,9 @@ namespace CANStream
             this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
             this.Grid_ManualDataWriter.Size = new System.Drawing.Size(444, 405);
             this.Grid_ManualDataWriter.TabIndex = 9;
+            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
+            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
+            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
             // 
             // Grid_CANRawData
             // 
@@ -759,6 +762,7 @@ namespace CANStream
             this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
             this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 276);
             this.Grid_ManualDataViewer.TabIndex = 0;
+            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
             this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
             this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
             // 
@@ -1328,6 +1332,7 @@ namespace CANStream
             this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
             this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
             this.Cycle_SpyDataViewer.TabIndex = 0;
+            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
             this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
             // 
             // Graph_Cycle

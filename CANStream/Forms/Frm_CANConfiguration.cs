@@ -2755,6 +2755,8 @@ namespace CANStream
 
         private void ShowParameterMinMax()
         {
+            //TODO: Use the 'GetParameterMinMax' methode of the 'CANParameter' class in order to not have duplicated code
+
             if (!(Txt_ParamLength.Text.Equals("")))
             {
                 int BitLength = 0;
