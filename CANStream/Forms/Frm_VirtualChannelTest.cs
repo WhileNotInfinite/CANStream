@@ -160,14 +160,19 @@ namespace CANStream
 		{
 			SetChannelExpression();
 		}
-		
-		#endregion
-		
-		#endregion
-		
-		#region Private methods
-		
-		private void EvaluateChannel()
+
+        #endregion
+
+        private void Chk_FormatedResult_CheckedChanged(object sender, EventArgs e)
+        {
+            EvaluateChannel();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void EvaluateChannel()
 		{
 			if (!(oChannel == null))
 			{
@@ -195,8 +200,33 @@ namespace CANStream
 						
 				if (!(oChannel.InError))
 				{
-					Txt_Result.Text = oChannel.Value.ToString();
-					rTxt_ErrorLog.Text = "";
+                    if (Chk_FormatedResult.Checked)
+                    {
+                        Txt_Result.Text = oChannel.ValueFormat.GetSignalFormatedValue(oChannel.Value);
+
+                        //Process parameter alarms
+                        Nullable<SignalAlarmValue> sAlarm = oChannel.Alarms.GetAlarmProperties(oChannel.Alarms.ProcessAlarms(oChannel.Value));
+
+                        if (sAlarm.HasValue) //Apply alarm style
+                        {
+                            Txt_Result.BackColor = sAlarm.Value.BackColor;
+                            Txt_Result.ForeColor = sAlarm.Value.ForeColor;
+                        }
+                        else //Apply default style if no alarm
+                        {
+                            Txt_Result.BackColor = SystemColors.HotTrack;
+                            Txt_Result.ForeColor = SystemColors.Info;
+                        }
+                    }
+                    else
+                    {
+                        Txt_Result.Text = oChannel.Value.ToString();
+
+                        Txt_Result.BackColor = SystemColors.HotTrack;
+                        Txt_Result.ForeColor = SystemColors.Info;
+                    }
+
+                    rTxt_ErrorLog.Text = "";
 					rTxt_ErrorLog.BackColor = SystemColors.Control;
 				}
 				else
@@ -242,7 +272,7 @@ namespace CANStream
 			
 			bExprModified =  false;
 		}
-		
-		#endregion
-	}
+
+        #endregion
+    }
 }

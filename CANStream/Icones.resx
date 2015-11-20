@@ -9455,4 +9455,22 @@
   <data name="Enumeration_Del_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\remove-a-blue-mark-icone-9732-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Collapse_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\restauration-vue-icone-8456-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Expand_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\fullscreen-gtk-icone-7340-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Filter_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\filtre-entonnoir-icone-6583-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Grid_Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TreeView_Minus.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Grid_Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TreeView_Plus.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Grid_NoAction2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Grid_NoAction2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

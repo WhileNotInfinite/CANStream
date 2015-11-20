@@ -462,16 +462,6 @@ namespace CANStream
         
         #region View
 		
-		private void TSMI_HideSelectedRowsClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null)) ActiveCanBus.HideActiveRow();
-		}
-		
-		private void TSMI_ShowHiddenRowsClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null)) ActiveCanBus.ShowHiddenRows();
-		}
-        
 		#region Controller layout
 		
 		#region Spy and manual
@@ -522,26 +512,6 @@ namespace CANStream
 			}
 		}
 		
-		#region Message Rx Data
-		
-		private void TSMI_Layout_Manual_Rx_Data_EngClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				ActiveCanBus.Switch_Manual_Rx_Data_Eng_Panel();
-			}
-		}
-		
-		private void TSMI_Layout_Manual_Rx_Data_RawClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				ActiveCanBus.Switch_Manual_Rx_Data_Raw_Panel();
-			}
-		}
-		
-		#endregion
-		
 		private void TSMI_Layout_Manual_Rx_GraphClick(object sender, EventArgs e)
 		{
 			if (!(ActiveCanBus == null))
@@ -563,26 +533,6 @@ namespace CANStream
 				ActiveCanBus.Switch_Cycle_Data_Panel();
 			}
 		}
-		
-		#region Cycle Data
-		
-		private void TSMI_Layout_Cycle_Data_EngClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				ActiveCanBus.Switch_Cycle_Data_Eng_Panel();
-			}
-		}
-		
-		private void TSMI_Layout_Cycle_Data_RawClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				ActiveCanBus.Switch_Cycle_Data_Raw_Panel();
-			}
-		}
-		
-		#endregion
 		
 		private void TSMI_Layout_Cycle_GraphClick(object sender, EventArgs e)
 		{
@@ -612,506 +562,198 @@ namespace CANStream
 		
 		private void TSMI_Columns_Manual_Tx_ShowAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_ManualGridColumnsVisible(Manual_Grid_Columns.All);
+			ActiveCanBus.Set_TxGridColumnsVisible(GridCANData_ColumnsEnum.All);
 		}
 		
 		private void TSMI_Columns_Manual_Tx_HideAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_ManualGridColumnsVisible(Manual_Grid_Columns.None);
+			ActiveCanBus.Set_TxGridColumnsVisible(GridCANData_ColumnsEnum.None);
 		}
 		
 		private void TSMI_Columns_Manual_Tx_IDClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_ID.Checked = !TSMI_Columns_Manual_Tx_ID.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_ID.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_ID;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_ID;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}	
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_ID);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_RxTxClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_RxTx.Checked = !TSMI_Columns_Manual_Tx_RxTx.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_RxTx.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_RxTx;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_RxTx;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}			
-		}
-		
-		private void TSMI_Columns_Manual_Tx_PeriodClick(object sender, EventArgs e)
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RxTx);
+        }
+
+        private void TSMI_Columns_Manual_Tx_Value_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Value);
+        }
+
+        private void TSMI_Columns_Manual_Tx_RawValue_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RawValue);
+        }
+
+        private void TSMI_Columns_Manual_Tx_Min_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Min);
+        }
+
+        private void TSMI_Columns_Manual_Tx_Max_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Max);
+        }
+
+        private void TSMI_Columns_Manual_Tx_UnitClick(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Unit);
+        }
+
+        private void TSMI_Columns_Manual_Tx_PeriodClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Period.Checked = !TSMI_Columns_Manual_Tx_Period.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Period);
+        }
 				
-				if (TSMI_Columns_Manual_Tx_Period.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Period;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Period;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}	
-		}
-		
-		private void TSMI_Columns_Manual_Tx_MuxValClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Mux.Checked = !TSMI_Columns_Manual_Tx_Mux.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Mux.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_MuxValue;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_MuxValue;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
-		
 		private void TSMI_Columns_Manual_Tx_StartClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Start.Checked = !TSMI_Columns_Manual_Tx_Start.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Start.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Start;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Start;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Start);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_LengthClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Length.Checked = !TSMI_Columns_Manual_Tx_Length.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Length.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Length;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Length;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Length);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_EndianessClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Endianess.Checked = !TSMI_Columns_Manual_Tx_Endianess.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Endianess.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Endianess;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Endianess;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Endianess);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_SignednessClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Signedness.Checked = !TSMI_Columns_Manual_Tx_Signedness.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Signedness.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Signedness;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Signedness;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Signedness);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_GainClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Gain.Checked = !TSMI_Columns_Manual_Tx_Gain.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Gain.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Gain;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Gain;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Gain);
+        }
 		
 		private void TSMI_Columns_Manual_Tx_ZeroClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Zero.Checked = !TSMI_Columns_Manual_Tx_Zero.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Zero.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Zero;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Zero;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Tx_UnitClick(object sender, EventArgs e)
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Zero);
+        }
+
+        private void TSMI_Columns_Manual_Tx_Count_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Count);
+        }
+
+        private void TSMI_Columns_Manual_Tx_DLC_Click(object sender, EventArgs e)
+        {
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_DLC);
+        }
+
+        private void TSMI_Columns_Manual_Tx_CommentClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Unit.Checked = !TSMI_Columns_Manual_Tx_Unit.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Unit.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Unit;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Unit;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Tx_CommentClick(object sender, EventArgs e)
+            ManualTxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Comment);
+        }
+
+        #endregion
+
+        #region Manual Rx
+
+        private void TSMI_Columns_Manual_Rx_Eng_ShowAllClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Tx_Comment.Checked = !TSMI_Columns_Manual_Tx_Comment.Checked;
-				Manual_Grid_Columns eColumns = ActiveCanBus.Get_ManualGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Tx_Comment.Checked)
-				{
-					eColumns |= Manual_Grid_Columns.Column_Comment;
-				}
-				else
-				{
-					eColumns -= Manual_Grid_Columns.Column_Comment;
-				}
-				
-				ActiveCanBus.Set_ManualGridColumnsVisible(eColumns);
-			}
-		}
-		
-		#endregion
-		
-		#region Manual Rx
-		
-		#region Spy eng grid columns
-		
-		private void TSMI_Columns_Manual_Rx_Eng_ShowAllClick(object sender, EventArgs e)
-		{
-			ActiveCanBus.Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns.All);
+			ActiveCanBus.Set_RxGridColumnsVisible(GridCANData_ColumnsEnum.All);
 		}
 		
 		private void TSMI_Columns_Manual_Rx_Eng_HideAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_SpyEngGridColumnsVisible(SpyEngineering_Grid_Columns.None);
+			ActiveCanBus.Set_RxGridColumnsVisible(GridCANData_ColumnsEnum.None);
 		}
 		
 		private void TSMI_Columns_Manual_Rx_Eng_IDClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_ID.Checked = !TSMI_Columns_Manual_Rx_Eng_ID.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_ID.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_ID;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_ID;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Eng_ValueClick(object sender, EventArgs e)
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_ID);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_RxTx_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RxTx);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_ValueClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_Value.Checked = !TSMI_Columns_Manual_Rx_Eng_Value.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_Value.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Value;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Value;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Value);
+        }
 		
 		private void TSMI_Columns_Manual_Rx_Eng_RawValClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_RawVal.Checked = !TSMI_Columns_Manual_Rx_Eng_RawVal.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_RawVal.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_RawValue;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_RawValue;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RawValue);
+        }
 		
 		private void TSMI_Columns_Manual_Rx_Eng_MinClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_Min.Checked = !TSMI_Columns_Manual_Rx_Eng_Min.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_Min.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Min;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Min;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Min);
+        }
 		
 		private void TSMI_Columns_Manual_Rx_Eng_MaxClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_Max.Checked = !TSMI_Columns_Manual_Rx_Eng_Max.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_Max.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Max;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Max;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Max);
+        }
 		
 		private void TSMI_Columns_Manual_Rx_Eng_UnitClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_Unit.Checked = !TSMI_Columns_Manual_Rx_Eng_Unit.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_Unit.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Unit;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Unit;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
-		
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Unit);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Period_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Period);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Start_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Start);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Length_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Length);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Endianess_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Endianess);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Signed_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Signedness);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Gain_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Gain);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Zero_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Zero);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_Count_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Count);
+        }
+
+        private void TSMI_Columns_Manual_Rx_Eng_DLC_Click(object sender, EventArgs e)
+        {
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_DLC);
+        }
+
 		private void TSMI_Columns_Manual_Rx_Eng_CommentClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Eng_Comment.Checked = !TSMI_Columns_Manual_Rx_Eng_Comment.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_SpyEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Eng_Comment.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Comment;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Comment;
-				}
-				
-				ActiveCanBus.Set_SpyEngGridColumnsVisible(eColumns);
-			}
-		}
-	
-		#endregion
-		
-		#region Spy raw grid columns
-		
-		private void TSMI_Columns_Manual_Rx_Raw_ShowAllClick(object sender, EventArgs e)
-		{
-			ActiveCanBus.Set_SpyRawGridColumnsVisible(SpyRaw_Grid_Columns.All);
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Raw_HideAllClick(object sender, EventArgs e)
-		{
-			ActiveCanBus.Set_SpyRawGridColumnsVisible(SpyRaw_Grid_Columns.None);
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Raw_DLCClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Raw_DLC.Checked = !TSMI_Columns_Manual_Rx_Raw_DLC.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_SpyRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Raw_DLC.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_DLC;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_DLC;
-				}
-				
-				ActiveCanBus.Set_SpyRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Raw_DataClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Raw_Data.Checked = !TSMI_Columns_Manual_Rx_Raw_Data.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_SpyRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Raw_Data.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Data;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Data;
-				}
-				
-				ActiveCanBus.Set_SpyRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Raw_PeriodClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Raw_Period.Checked = !TSMI_Columns_Manual_Rx_Raw_Period.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_SpyRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Raw_Period.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Period;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Period;
-				}
-				
-				ActiveCanBus.Set_SpyRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Manual_Rx_Raw_CountClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Manual_Rx_Raw_Count.Checked = !TSMI_Columns_Manual_Rx_Raw_Count.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_SpyRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Manual_Rx_Raw_Count.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Count;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Count;
-				}
-				
-				ActiveCanBus.Set_SpyRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		#endregion
-		
+            ManualRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Comment);
+        }
+			
 		#endregion
 		
 		#endregion
@@ -1122,247 +764,98 @@ namespace CANStream
 		
 		private void TSMI_Columns_Cycle_Eng_ShowAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_CycleEngGridColumnsVisible(SpyEngineering_Grid_Columns.All);
+			ActiveCanBus.Set_CycleEngGridColumnsVisible(GridCANData_ColumnsEnum.All);
 		}
 		
 		private void TSMI_Columns_Cycle_Eng_HideAllClick(object sender, EventArgs e)
 		{
-			ActiveCanBus.Set_CycleEngGridColumnsVisible(SpyEngineering_Grid_Columns.None);
+			ActiveCanBus.Set_CycleEngGridColumnsVisible(GridCANData_ColumnsEnum.None);
 		}
 		
 		private void TSMI_Columns_Cycle_Eng_IDClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_ID.Checked = !TSMI_Columns_Cycle_Eng_ID.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_ID.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_ID;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_ID;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Cycle_Eng_ValueClick(object sender, EventArgs e)
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_ID);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_RxTx_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RxTx);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_ValueClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_Value.Checked = !TSMI_Columns_Cycle_Eng_Value.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_Value.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Value;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Value;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Value);
+        }
 		
 		private void TSMI_Columns_Cycle_Eng_RawValClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_RawVal.Checked = !TSMI_Columns_Cycle_Eng_RawVal.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_RawVal.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_RawValue;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_RawValue;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_RawValue);
+        }
 		
 		private void TSMI_Columns_Cycle_Eng_MinClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_Min.Checked = !TSMI_Columns_Cycle_Eng_Min.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_Min.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Min;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Min;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Min);
+        }
 		
 		private void TSMI_Columns_Cycle_Eng_MaxClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_Max.Checked = !TSMI_Columns_Cycle_Eng_Max.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_Max.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Max;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Max;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Max);
+        }
 		
 		private void TSMI_Columns_Cycle_Eng_UnitClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_Unit.Checked = !TSMI_Columns_Cycle_Eng_Unit.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_Unit.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Unit;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Unit;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Unit);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Period_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Period);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Start_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Start);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Length_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Length);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Endianess_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Endianess);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Signedness_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Signedness);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Gain_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Gain);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Zero_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Zero);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_Count_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Count);
+        }
+
+        private void TSMI_Columns_Cycle_Eng_DLC_Click(object sender, EventArgs e)
+        {
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_DLC);
+        }
 		
 		private void TSMI_Columns_Cycle_Eng_CommentClick(object sender, EventArgs e)
 		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Eng_Comment.Checked = !TSMI_Columns_Cycle_Eng_Comment.Checked;
-				SpyEngineering_Grid_Columns eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Eng_Comment.Checked)
-				{
-					eColumns |= SpyEngineering_Grid_Columns.Column_Comment;
-				}
-				else
-				{
-					eColumns -= SpyEngineering_Grid_Columns.Column_Comment;
-				}
-				
-				ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
-			}
-		}
-		
-		#endregion
-		
-		#region Raw data
-		
-		private void TSMI_Columns_Cycle_Raw_ShowAllClick(object sender, EventArgs e)
-		{
-			ActiveCanBus.Set_CycleRawGridColumnsVisible(SpyRaw_Grid_Columns.All);
-		}
-		
-		private void TSMI_Columns_Cycle_Raw_HideAllClick(object sender, EventArgs e)
-		{
-			ActiveCanBus.Set_CycleRawGridColumnsVisible(SpyRaw_Grid_Columns.None);
-		}
-		
-		private void TSMI_Columns_Cycle_Raw_DLCClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Raw_DLC.Checked = !TSMI_Columns_Cycle_Raw_DLC.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_CycleRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Raw_DLC.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_DLC;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_DLC;
-				}
-				
-				ActiveCanBus.Set_CycleRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Cycle_Raw_DataClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Raw_Data.Checked = !TSMI_Columns_Cycle_Raw_Data.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_CycleRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Raw_DLC.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Data;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Data;
-				}
-				
-				ActiveCanBus.Set_CycleRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Cycle_Raw_PeriodClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Raw_Period.Checked = !TSMI_Columns_Cycle_Raw_Period.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_CycleRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Raw_Period.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Period;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Period;
-				}
-				
-				ActiveCanBus.Set_CycleRawGridColumnsVisible(eColumns);
-			}
-		}
-		
-		private void TSMI_Columns_Cycle_Raw_CountClick(object sender, EventArgs e)
-		{
-			if (!(ActiveCanBus == null))
-			{
-				TSMI_Columns_Cycle_Raw_Count.Checked = !TSMI_Columns_Cycle_Raw_Count.Checked;
-				SpyRaw_Grid_Columns eColumns = ActiveCanBus.Get_CycleRawGridColumnsVisible();
-				
-				if (TSMI_Columns_Cycle_Raw_Count.Checked)
-				{
-					eColumns |= SpyRaw_Grid_Columns.Column_Count;
-				}
-				else
-				{
-					eColumns -= SpyRaw_Grid_Columns.Column_Count;
-				}
-				
-				ActiveCanBus.Set_CycleRawGridColumnsVisible(eColumns);
-			}
-		}
+            CycleRxColumnTSMIChanged((ToolStripMenuItem)sender, GridCANData_ColumnsEnum.Column_Comment);
+        }
 		
 		#endregion
 		
@@ -1605,18 +1098,11 @@ namespace CANStream
         	
         	TSMI_Layout_Manual_Rx.Checked = e.Manual_Rx_Panel_Visible;
         	
-        		TSMI_Layout_Manual_Rx_Data.Checked = e.Manual_Rx_Panel_Data_Visible;
-        		
-        			TSMI_Layout_Manual_Rx_Data_Eng.Checked = e.Manual_Rx_Panel_Data_Eng_Visible;
-        			TSMI_Layout_Manual_Rx_Data_Raw.Checked = e.Manual_Rx_Panel_Data_Raw_Visible;
-        		
+        		TSMI_Layout_Manual_Rx_Data.Checked = e.Manual_Rx_Panel_Data_Visible;        		
         		TSMI_Layout_Manual_Rx_Graph.Checked = e.Manual_Rx_Panel_Graph_Visible;
         	
         	TSMI_Layout_Cycle_Data.Checked = e.Cycle_Panel_Data_Visible;
-        	
-        		TSMI_Layout_Cycle_Data_Eng.Checked = e.Cycle_Panel_Data_Eng_Visible;
-        		TSMI_Layout_Cycle_Data_Raw.Checked = e.Cycle_Panel_Data_Raw_Visible;
-        	
+        	        	
         	TSMI_Layout_Cycle_Graph.Checked = e.Cycle_Panel_Graph_Visible;
         }
         
@@ -2001,12 +1487,12 @@ namespace CANStream
         		}
         		else
         		{
-        			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout());
+        			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout(CtrlCanBus.Size));
         		}
         	}
         	else
     		{
-    			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout());
+    			CtrlCanBus.SetControllerLayout(new Ctrl_CS_CAN_Bus_Layout(CtrlCanBus.Size));
     		}
         	
     		CanControllerCount++;
@@ -2132,9 +1618,8 @@ namespace CANStream
 						TSMI_Columns_Manual.Enabled = true;
 						TSMI_Columns_Cycle.Enabled = false;
 						
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_Manual, (object)ActiveCanBus.Get_ManualGridColumnsVisible());
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_SpyRaw, (object)ActiveCanBus.Get_SpyRawGridColumnsVisible());
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_SpyEng, (object)ActiveCanBus.Get_SpyEngGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_Manual, ActiveCanBus.Get_TxGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_SpyEng, ActiveCanBus.Get_RxGridColumnsVisible());
 						
 						CANMessagesConfiguration oActiveCanCfg = ActiveCanBus.Get_BusCANConfiguration();
 						
@@ -2171,8 +1656,7 @@ namespace CANStream
 						TSMI_Columns_Manual.Enabled = false;
 						TSMI_Columns_Cycle.Enabled = true;
 						
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_Cycle_Raw, (object)ActiveCanBus.Get_CycleRawGridColumnsVisible());
-						UpdateGridsColumnsStates(CANControllerGrid.Grid_Cycle_Eng, (object)ActiveCanBus.Get_CycleEngGridColumnsVisible());
+						UpdateGridsColumnsStates(CANControllerGrid.Grid_Cycle_Eng, ActiveCanBus.Get_CycleEngGridColumnsVisible());
 						
         				break;
         		}
@@ -2200,7 +1684,67 @@ namespace CANStream
         	
         	return(null);
         }
-        
+
+        private void ManualTxColumnTSMIChanged(ToolStripMenuItem oMenuItem, GridCANData_ColumnsEnum eTSMIColumn)
+        {
+            if (!(ActiveCanBus == null))
+            {
+                oMenuItem.Checked = !oMenuItem.Checked;
+                GridCANData_ColumnsEnum eColumns = ActiveCanBus.Get_TxGridColumnsVisible();
+
+                if (oMenuItem.Checked)
+                {
+                    eColumns |= eTSMIColumn;
+                }
+                else
+                {
+                    eColumns -= eTSMIColumn;
+                }
+
+                ActiveCanBus.Set_TxGridColumnsVisible(eColumns);
+            }
+        }
+
+        private void ManualRxColumnTSMIChanged(ToolStripMenuItem oMenuItem, GridCANData_ColumnsEnum eTSMIColumn)
+        {
+            if (!(ActiveCanBus == null))
+            {
+                oMenuItem.Checked = !oMenuItem.Checked;
+                GridCANData_ColumnsEnum eColumns = ActiveCanBus.Get_RxGridColumnsVisible();
+
+                if (oMenuItem.Checked)
+                {
+                    eColumns |= eTSMIColumn;
+                }
+                else
+                {
+                    eColumns -= eTSMIColumn;
+                }
+
+                ActiveCanBus.Set_RxGridColumnsVisible(eColumns);
+            }
+        }
+
+        private void CycleRxColumnTSMIChanged(ToolStripMenuItem oMenuItem, GridCANData_ColumnsEnum eTSMIColumn)
+        {
+            if (!(ActiveCanBus == null))
+            {
+                oMenuItem.Checked = !oMenuItem.Checked;
+                GridCANData_ColumnsEnum eColumns = ActiveCanBus.Get_CycleEngGridColumnsVisible();
+
+                if (oMenuItem.Checked)
+                {
+                    eColumns |= eTSMIColumn;
+                }
+                else
+                {
+                    eColumns -= eTSMIColumn;
+                }
+
+                ActiveCanBus.Set_CycleEngGridColumnsVisible(eColumns);
+            }
+        }
+
         private void Save_ControllerLayout()
         {
         	string LayoutsPath = CANStreamTools.CsDataPath + "\\Layouts.xml";
@@ -2853,85 +2397,78 @@ namespace CANStream
         		CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Record User Information");
         }
         
-        private void UpdateGridsColumnsStates(CANControllerGrid eGrid, object eColVisible)
+        private void UpdateGridsColumnsStates(CANControllerGrid eGrid, GridCANData_ColumnsEnum eColVisible)
         {
-        	switch (eGrid)
+            switch (eGrid)
         	{
         		case CANControllerGrid.Grid_Manual:
         			
         			{
-        				Manual_Grid_Columns eColumnsVisible = (Manual_Grid_Columns)eColVisible;
-        				
-        				TSMI_Columns_Manual_Tx_ID.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_ID);
-			        	TSMI_Columns_Manual_Tx_RxTx.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_RxTx);
-			        	TSMI_Columns_Manual_Tx_Period.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Period);
-			        	TSMI_Columns_Manual_Tx_Mux.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_MuxValue);
-			        	TSMI_Columns_Manual_Tx_Start.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Start);
-			        	TSMI_Columns_Manual_Tx_Length.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Length);
-			        	TSMI_Columns_Manual_Tx_Endianess.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Endianess);
-			        	TSMI_Columns_Manual_Tx_Signedness.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Signedness);
-			        	TSMI_Columns_Manual_Tx_Gain.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Gain);
-			        	TSMI_Columns_Manual_Tx_Zero.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Zero);
-			        	TSMI_Columns_Manual_Tx_Unit.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Unit);
-			        	TSMI_Columns_Manual_Tx_Comment.Checked = eColumnsVisible.HasFlag(Manual_Grid_Columns.Column_Comment);
-        			}
+                        TSMI_Columns_Manual_Tx_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Manual_Tx_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Manual_Tx_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+                        TSMI_Columns_Manual_Tx_RawValue.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+                        TSMI_Columns_Manual_Tx_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+                        TSMI_Columns_Manual_Tx_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+                        TSMI_Columns_Manual_Tx_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Manual_Tx_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Manual_Tx_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Manual_Tx_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Manual_Tx_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Manual_Tx_Signedness.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Manual_Tx_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Manual_Tx_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Manual_Tx_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Manual_Tx_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Manual_Tx_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
+                    }
         			
         			break;
         			
         		case CANControllerGrid.Grid_SpyEng:
         			
-        			{
-        				SpyEngineering_Grid_Columns eColumnsVisible = (SpyEngineering_Grid_Columns)eColVisible;
-        				
-        				TSMI_Columns_Manual_Rx_Eng_ID.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_ID);
-			        	TSMI_Columns_Manual_Rx_Eng_Value.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Value);
-			        	TSMI_Columns_Manual_Rx_Eng_RawVal.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RawValue);
-			        	TSMI_Columns_Manual_Rx_Eng_Min.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Min);
-			        	TSMI_Columns_Manual_Rx_Eng_Max.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Max);
-			        	TSMI_Columns_Manual_Rx_Eng_Unit.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Unit);
-			        	TSMI_Columns_Manual_Rx_Eng_Comment.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Comment);	
-        			}
-        			
-        			break;
-        			
-        		case CANControllerGrid.Grid_SpyRaw:
-        			
-        			{
-        				SpyRaw_Grid_Columns eColumnsVisible = (SpyRaw_Grid_Columns)eColVisible;
-        				
-        				TSMI_Columns_Manual_Rx_Raw_DLC.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_DLC);
-			        	TSMI_Columns_Manual_Rx_Raw_Data.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Data);
-			        	TSMI_Columns_Manual_Rx_Raw_Period.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Period);
-			        	TSMI_Columns_Manual_Rx_Raw_Count.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Count);
+        			{        				
+        				TSMI_Columns_Manual_Rx_Eng_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Manual_Rx_Eng_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Manual_Rx_Eng_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+			        	TSMI_Columns_Manual_Rx_Eng_RawVal.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+			        	TSMI_Columns_Manual_Rx_Eng_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+			        	TSMI_Columns_Manual_Rx_Eng_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+			        	TSMI_Columns_Manual_Rx_Eng_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Manual_Rx_Eng_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Manual_Rx_Eng_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Manual_Rx_Eng_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Manual_Rx_Eng_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Manual_Rx_Eng_Signed.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Manual_Rx_Eng_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Manual_Rx_Eng_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Manual_Rx_Eng_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Manual_Rx_Eng_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Manual_Rx_Eng_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);	
         			}
         			
         			break;
         			
         		case CANControllerGrid.Grid_Cycle_Eng:
         			
-        			{
-        				SpyEngineering_Grid_Columns eColumnsVisible = (SpyEngineering_Grid_Columns)eColVisible;
-        				
-        				TSMI_Columns_Cycle_Eng_ID.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_ID);
-			        	TSMI_Columns_Cycle_Eng_Value.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Value);
-			        	TSMI_Columns_Cycle_Eng_RawVal.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_RawValue);
-			        	TSMI_Columns_Cycle_Eng_Min.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Min);
-			        	TSMI_Columns_Cycle_Eng_Max.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Max);
-			        	TSMI_Columns_Cycle_Eng_Unit.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Unit);
-			        	TSMI_Columns_Cycle_Eng_Comment.Checked = eColumnsVisible.HasFlag(SpyEngineering_Grid_Columns.Column_Comment);
-        			}
-        			
-        			break;
-        			
-        		case CANControllerGrid.Grid_Cycle_Raw:
-        			
-        			{
-        				SpyRaw_Grid_Columns eColumnsVisible = (SpyRaw_Grid_Columns)eColVisible;
-        				
-        				TSMI_Columns_Cycle_Raw_DLC.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_DLC);
-			        	TSMI_Columns_Cycle_Raw_Data.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Data);
-			        	TSMI_Columns_Cycle_Raw_Period.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Period);
-			        	TSMI_Columns_Cycle_Raw_Count.Checked = eColumnsVisible.HasFlag(SpyRaw_Grid_Columns.Column_Count);
+        			{        				
+        				TSMI_Columns_Cycle_Eng_ID.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_ID);
+                        TSMI_Columns_Cycle_Eng_RxTx.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RxTx);
+                        TSMI_Columns_Cycle_Eng_Value.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Value);
+			        	TSMI_Columns_Cycle_Eng_RawVal.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_RawValue);
+			        	TSMI_Columns_Cycle_Eng_Min.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Min);
+			        	TSMI_Columns_Cycle_Eng_Max.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Max);
+			        	TSMI_Columns_Cycle_Eng_Unit.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Unit);
+                        TSMI_Columns_Cycle_Eng_Period.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Period);
+                        TSMI_Columns_Cycle_Eng_Start.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Start);
+                        TSMI_Columns_Cycle_Eng_Length.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Length);
+                        TSMI_Columns_Cycle_Eng_Endianess.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Endianess);
+                        TSMI_Columns_Cycle_Eng_Signedness.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Signedness);
+                        TSMI_Columns_Cycle_Eng_Gain.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Gain);
+                        TSMI_Columns_Cycle_Eng_Zero.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Zero);
+                        TSMI_Columns_Cycle_Eng_Count.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Count);
+                        TSMI_Columns_Cycle_Eng_DLC.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_DLC);
+			        	TSMI_Columns_Cycle_Eng_Comment.Checked = eColVisible.HasFlag(GridCANData_ColumnsEnum.Column_Comment);
         			}
         			
         			break;
@@ -3172,7 +2709,7 @@ namespace CANStream
         		}
         	}
         }
-        
+
         #endregion
 
         #endregion

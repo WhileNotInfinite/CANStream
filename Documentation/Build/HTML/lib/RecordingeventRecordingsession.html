@@ -1,0 +1,92 @@
+﻿<html>
+	
+<head>
+	<title>Recording event &amp; Recording session</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="file, xml, structure, session, record, event, logging, storage, directory, folder, data">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("RecordingeventRecordingsession");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Recording event &amp; Recording session</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Datalogging.html">Data logging</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Datalogging.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Datafilestoragestructure.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Recordingeventcreationedition.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">Until you have only three, four or five data files it is fairly easy to remember and identify what those file are. Imagine now that you have fifty of those data files! It becomes a kind of tricky to figure out what file is the file corresponding to the test you are looking for, especially if you are looking for an old record.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">To assist you with file archiving and make data files research a way easier, CANStream uses the ‘Event\Session’ structure for data storage.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">With such structure, data files are not stored in a unique folder. A folder is created for each </span><a class="rvts22" href="Recordingeventcreationedition.html">event</a><span class="rvts6"> and sub-folders are created for every </span><a class="rvts22" href="Recordingsessioncreationedition.html">session</a><span class="rvts6">. Then data files are placed into their respective session folder.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Term ‘event’ should be considered as a major group. Let’s say ‘CANStream documentation’. Inside this event we have multiple ‘sessions’ each of them corresponding to a specific topic. Let’s say that we have three sessions ‘Manual mode’, ‘Cycle mode’ and ‘Virtual channel’.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Thanks to this structure, we know that all data of the ‘CANStream documentation’ folder are data that have been generated for the documentation. Then, session folders indicate for what exact part of the documentation, data files have been recorded.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">On the top of that, for every session of every event, CANStream creates an XML file containing information about the session or event. An event/session XML file contains the name of the event or session, its date and description and optionally a bunch of user information. This list of user information can be anything the final user has found useful to identify and track data files. In our example (CANStream documentation) we can set the CANStream release name and the name of the CAN configuration that have been used. Number and content of user information is actually unlimited so you can have how many you want and write whatever you want.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Name of both current recording event and current session is shown in the main form </span><a class="rvts22" href="Statusbar.html">status bar</a><span class="rvts6">.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Record_Event_06.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com">Easy EPub and documentation editor</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

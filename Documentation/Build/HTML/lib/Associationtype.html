@@ -1,0 +1,113 @@
+﻿<html>
+	
+<head>
+	<title>Association type</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="cycle, creation, easy, association, data, signal, built-in, parameter, channel, default, value, save, properties, list">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("Associationtype");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">Association type</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="Cyclemode1.html">Cycle mode</a> &rsaquo;&rsaquo; <a href="Cyclecreation.html">Cycle creation</a> &rsaquo;&rsaquo; <a href="Easycyclecreation.html">Easy cycle creation</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Easycyclecreation.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="Cycledataassociation.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="Advancedcyclecreation.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts6">Main purpose of an association file is to associate </span><a class="rvts22" href="CANsignalproperties.html">CAN parameters</a><span class="rvts6"> with data channel. Actually, a CAN parameter can be associated with something else than a data channel.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">There are four types of association:</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">None</span><span class="rvts6">: CAN parameter isn’t associated, its value will zero in the cycle</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">AcqData</span><span class="rvts6">: CAN parameter is associated to a data channel. CAN parameter values in the cycle will be values of the data channel.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Built-in signal</span><span class="rvts6">: CAN parameter is associated to a </span><a class="rvts22" href="Builtinsignals.html">built-in signal</a><span class="rvts6">. CAN parameter values in the cycle will be values of the built-in signal</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts6"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Fixed value</span><span class="rvts6">: CAN parameter is associated to a fix value. CAN parameter values in the cycle will be the value defined all the time.</span></li>
+</ul></ul>
+<p class="rvps2"><span class="rvts32"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Click on ‘Association type’ cell of a CAN parameter and pick up the association that you want to use.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_05.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Once the association type defined, select the data channel or built-in signal in the corresponding cell.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_06.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_07.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">For a ‘Fixed value’ association simply type a value into the ‘Default value’ cell.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/Cycle_Data_Association_08.png"></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Several CAN parameters can be associated with the same data channel or built-in signal.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2"><span class="rvts6">Once all associations are set click the ‘Save’ </span><img alt="" style="padding : 1px;" src="lib/File_Save_32.png"><span class="rvts6"> button of the tool bar to save the association file.</span></p>
+<p class="rvps2"><span class="rvts6"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts6"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/create-epub-ebooks">Full-featured EBook editor</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+

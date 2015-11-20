@@ -718,11 +718,6 @@ namespace CANStream
 		public string Unit;
 		
 		/// <summary>
-		/// Virtual channel decimal rounding
-		/// </summary>
-		public int Decimals;
-		
-		/// <summary>
 		/// Virtual channel computation enabled flag
 		/// </summary>
 		public bool Enabled;
@@ -731,11 +726,21 @@ namespace CANStream
 		/// Virtual channel default value for CAN Tx
 		/// </summary>
 		public double DefaultValue;
-		
-		/// <summary>
-		/// Virtual channel equation
-		/// </summary>
-		public string Expression;
+
+        /// <summary>
+        /// Virtual channel value format properties
+        /// </summary>
+        public SignalFormatProperties ValueFormat;
+
+        /// <summary>
+        /// Virtual channel alarms properties
+        /// </summary>
+        public SignalAlarmsProperties Alarms;
+
+        /// <summary>
+        /// Virtual channel equation
+        /// </summary>
+        public string Expression;
 		
 		/// <summary>
 		/// Parent library reference of the channel
@@ -777,6 +782,14 @@ namespace CANStream
 		/// Flag to force channel computation even if its variables values did not change since last computation
 		/// </summary>
 		public bool bForceComputation;
+
+        /// <summary>
+        /// Flag to force next channel computation even if its variables values did not change since last computation
+        /// </summary>
+        /// <remarks>
+        /// The flag is self reseted after channel computation
+        /// </remarks>
+        public bool bForceNextComputation;
 		
 		/// <summary>
 		/// Flag indicating whether the channel value has been computed
@@ -800,10 +813,11 @@ namespace CANStream
 			Name = "";
 			Comment = "";
 			Unit = "";
-			Decimals = 0;
 			Expression = "";
 			Enabled = true;
-			DefaultValue = 0;
+            ValueFormat = new SignalFormatProperties();
+            Alarms = new SignalAlarmsProperties();
+            DefaultValue = 0;
 			ParentLibrary = null;
 			
 			FleeExprContext = null;
@@ -817,6 +831,7 @@ namespace CANStream
 			HasDependent = false;
 			bNewValue = false;
 			bForceComputation = false;
+            bForceNextComputation = false;
 		}
 		
 		#region Public methods
@@ -887,19 +902,21 @@ namespace CANStream
 			try
 			{
 				bComputed = false;
-				
-				if (UpDateFleeContextVariable() | bForceComputation)
+
+                if (UpDateFleeContextVariable() | bForceComputation | bForceNextComputation)
 				{
-					Value = Math.Round(Flee_Expression.Evaluate(),Decimals);
-					InError = false;
+                    Value = Flee_Expression.Evaluate();
+                    InError = false;
 					bNewValue=true;
 					bComputed = true;
+                    bForceNextComputation = false;
 				}
 			}
 			catch (ExpressionCompileException FleeExcep)
 			{
 				InError = true;
 				bNewValue=true;
+                bForceNextComputation = false;
 				ErrorMsg = FleeExcep.Message;
 			}
 		}
@@ -990,11 +1007,16 @@ namespace CANStream
 		/// Library read only flag
 		/// </summary>
 		public bool ReadOnly;
-		
-		/// <summary>
-		/// Virtual channels collection of the library
-		/// </summary>
-		public List<CS_VirtualChannel> Channels;
+
+        /// <summary>
+        /// Library computation enabled flag
+        /// </summary>
+        public bool Enabled;
+
+        /// <summary>
+        /// Virtual channels collection of the library
+        /// </summary>
+        public List<CS_VirtualChannel> Channels;
 		
 		/// <summary>
 		/// Flag indicating whether the library has been modified since it has been loaded into the virtual channel editor
@@ -1023,6 +1045,7 @@ namespace CANStream
 			Name = "";
 			Comment = "";
 			ReadOnly =  false;
+            Enabled = true;
 			Channels = new List<CS_VirtualChannel>();
 			
 			FilePath = "";
@@ -1089,8 +1112,12 @@ namespace CANStream
 			XmlAttribute xAtrReadOnly = oXmlLib.CreateAttribute("ReadOnly");
 			xAtrReadOnly.Value = ReadOnly.ToString();
 			xLibrary.Attributes.Append(xAtrReadOnly);
-			
-			XmlElement xLibComment = oXmlLib.CreateElement("LibraryComment");
+
+            XmlAttribute xAtrEnabled = oXmlLib.CreateAttribute("Enabled");
+            xAtrEnabled.Value = Enabled.ToString();
+            xLibrary.Attributes.Append(xAtrEnabled);
+
+            XmlElement xLibComment = oXmlLib.CreateElement("LibraryComment");
 			xLibComment.InnerText =  Comment;
 			xLibrary.AppendChild(xLibComment);
 			
@@ -1110,15 +1137,15 @@ namespace CANStream
 				xAtrChanUnit.Value = oVChan.Unit;
 				xVirtual.Attributes.Append(xAtrChanUnit);
 				
-				XmlAttribute xAtrChanDec = oXmlLib.CreateAttribute("Decimal");
-				xAtrChanDec.Value = oVChan.Decimals.ToString();
-				xVirtual.Attributes.Append(xAtrChanDec);
-				
 				XmlAttribute xAtrChanEnabled = oXmlLib.CreateAttribute("Enabled");
 				xAtrChanEnabled.Value = oVChan.Enabled.ToString();
 				xVirtual.Attributes.Append(xAtrChanEnabled);
-				
-				XmlElement xChanComment =  oXmlLib.CreateElement("Comment");
+
+                xVirtual.AppendChild(oVChan.ValueFormat.GetSignalFormatXmlNode(oXmlLib, "ValueFormat"));
+
+                xVirtual.AppendChild(oVChan.Alarms.GetSignalAlarmsXmlNode(oXmlLib, "ChannelAlarms"));
+
+                XmlElement xChanComment =  oXmlLib.CreateElement("Comment");
 				xChanComment.InnerText =  oVChan.Comment;
 				xVirtual.AppendChild(xChanComment);
 				
@@ -1168,8 +1195,9 @@ namespace CANStream
 				{
 					Name = xLibrary.Attributes["Name"].Value;
 					ReadOnly = Convert.ToBoolean(xLibrary.Attributes["ReadOnly"].Value);
-					
-					XmlNode xComment = xLibrary.SelectSingleNode("LibraryComment");
+                    Enabled = Convert.ToBoolean(xLibrary.Attributes["Enabled"].Value);
+
+                    XmlNode xComment = xLibrary.SelectSingleNode("LibraryComment");
 					if (!(xComment == null))
 					{
 						Comment = xComment.InnerText;
@@ -1203,14 +1231,20 @@ namespace CANStream
 							{
 								oChannel.Enabled = true;
 							}
-							
-							int dec = 0;
-							if(int.TryParse(xChannel.Attributes["Decimal"].Value, out dec))
-							{
-								oChannel.Decimals =  dec;
-							}
-							
-							XmlNode xChanComment =  xChannel.SelectSingleNode("Comment");
+
+                            XmlNode xChanFormat = xChannel.SelectSingleNode("ValueFormat");
+                            if (!(xChanFormat == null))
+                            {
+                                oChannel.ValueFormat.ReadSignalFormatXmlNode(xChanFormat);
+                            }
+
+                            XmlNode xChanAlarms = xChannel.SelectSingleNode("ChannelAlarms");
+                            if (!(xChanAlarms == null))
+                            {
+                                oChannel.Alarms.ReadSignalAlarmsXmlNode(xChanAlarms);
+                            }
+
+                            XmlNode xChanComment =  xChannel.SelectSingleNode("Comment");
 							if (!(xChanComment == null))
 							{
 								oChannel.Comment = xChanComment.InnerText;
@@ -1332,11 +1366,12 @@ namespace CANStream
 				CS_VirtualChannel oClone = new CS_VirtualChannel();
 				
 				oClone.Comment = OrigialChannel.Comment;
-				oClone.Decimals = OrigialChannel.Decimals;
 				oClone.Expression = OrigialChannel.Expression;
 				oClone.Name = OrigialChannel.Name;
 				oClone.Unit = OrigialChannel.Unit;
-				
+                oClone.ValueFormat = OrigialChannel.ValueFormat.Get_Clone();
+                oClone.Alarms = OrigialChannel.Alarms.Get_Clone();
+
 				return(oClone);
 			}
 			
@@ -1590,7 +1625,7 @@ namespace CANStream
 				
 				if (!(oChan == null))
 				{
-					if (!(oChan.InError))
+					if (!(oChan.InError || double.IsNaN(oChan.Value)))
 					{
 						return(oChan.Value);
 					}
@@ -1652,13 +1687,16 @@ namespace CANStream
 			//1st pass: Compile all channels of all libraries
 			foreach (CS_VirtualChannelsLibrary oLib in Libraries)
 			{
-				foreach (CS_VirtualChannel oChan in oLib.Channels)
-				{
-					if (oChan.Enabled)
-					{
-						oChan.InterpreteExpression(); //Virtual channel expression compilation
-					}
-				}
+                if (oLib.Enabled)
+                {
+                    foreach (CS_VirtualChannel oChan in oLib.Channels)
+                    {
+                        if (oChan.Enabled)
+                        {
+                            oChan.InterpreteExpression(); //Virtual channel expression compilation
+                        }
+                    }
+                }
 			}
 			
 			//2nd pass: Create the computation order list
@@ -1704,18 +1742,21 @@ namespace CANStream
 		/// </summary>
 		public void ComputeLibraries()
 		{
-			if (VC_ComputationList.Length > 0)
-			{
-				foreach (CS_VirtualChannel oChan in VC_ComputationList)
-				{
-					oChan.ComputeChannelValue();
-					
-					if ((!oChan.InError) && oChan.bComputed && oChan.HasDependent)
-					{
-						UpDateVariableElement(oChan.Name,oChan.Value);
-					}
-				}
-			}
+            if (!(VC_ComputationList == null))
+            {
+                if (VC_ComputationList.Length > 0)
+                {
+                    foreach (CS_VirtualChannel oChan in VC_ComputationList)
+                    {
+                        oChan.ComputeChannelValue();
+
+                        if ((!oChan.InError) && oChan.bComputed && oChan.HasDependent)
+                        {
+                            UpDateVariableElement(oChan.Name, oChan.Value);
+                        }
+                    }
+                }
+            }
 		}
 		
 		#endregion

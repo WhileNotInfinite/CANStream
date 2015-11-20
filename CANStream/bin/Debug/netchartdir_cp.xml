@@ -206,7 +206,7 @@ The AngularAxis class represents angular axes in polar charts.
 </member>
 <member name="T:ChartDirector.WinViewPortEventArgs">
 <summary>
-WinViewPortEventArgs is a subclass of System.EventArgs. It provides information about view port changed events.
+WinViewPortEventArgs is a subclass of System.EventArgs. It provides information about viewport changed events.
 </summary>
 </member>
 <member name="T:ChartDirector.StepLineLayer">
@@ -251,7 +251,7 @@ The LineLayer class represents line layers. LineLayer is a subclass of "Layer".
 </member>
 <member name="T:ChartDirector.LinearMeter">
 <summary>
-The LinearMeter class represents linear meters. LinearMeter is a subclass of "BaseMeter".
+The LinearMeter class represents linear meters
 </summary>
 </member>
 <member name="T:ChartDirector.WebHotSpotEventArgs">
@@ -267,6 +267,11 @@ The PolarVectorLayer class represents polar vector layers. PolarVectorLayer is a
 <member name="T:ChartDirector.BarLayer">
 <summary>
 The BarLayer class represents bar layers. BarLayer is a subclass of "Layer".
+</summary>
+</member>
+<member name="T:ChartDirector.WinViewPortControl">
+<summary>
+The WinViewPortControl is a Windows Forms control to let the user visualize and manipulate the viewport managed by the "WinChartViewer". It is a subclass of the .NET PictureBox control.
 </summary>
 </member>
 <member name="T:ChartDirector.PlotArea">
@@ -292,6 +297,11 @@ The PieChart class represents pie charts. PieChart is a subclass of "BaseChart".
 <member name="T:ChartDirector.PolarAreaLayer">
 <summary>
 The PolarAreaLayer class represents polar area layers. PolarAreaLayer is a subclass of "PolarLayer".
+</summary>
+</member>
+<member name="T:ChartDirector.WebViewPortControl">
+<summary>
+The WebViewPortControl is a Web Forms control derived from the ASP.NET Image control. It is the server counterpart of the browser side "JsViewPortControl", which provides a user interface for visualization of the viewport in relation to the "full range", and support interactive moving and resizing of the viewport.
 </summary>
 </member>
 <member name="T:ChartDirector.DrawArea">
@@ -389,7 +399,7 @@ A true value means the display is updated immediately or as soon as possible. A 
 </member>
 <member name="M:ChartDirector.WinChartViewer.validateViewPort">
 <summary>
-Ensures the view port left, top, width and height are within valid ranges and adjusts them if necessary.
+Ensures the viewport left, top, width and height are within valid ranges and adjusts them if necessary.
 </summary>
 </member>
 <member name="M:ChartDirector.WinChartViewer.updateViewPort(System.Boolean,System.Boolean)">
@@ -405,7 +415,7 @@ A boolean value to indicate if the image map needs to be updated.
 </member>
 <member name="M:ChartDirector.WinChartViewer.setFullRange(System.String,System.Double,System.Double)">
 <summary>
-Defines the full range of a view port data scale.
+Defines the full range of a viewport data scale.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -419,7 +429,7 @@ The maximum value of the data scale.
 </member>
 <member name="M:ChartDirector.WinChartViewer.setFullRange(System.String,System.DateTime,System.DateTime)">
 <summary>
-Defines the full range of a view port data scale.
+Defines the full range of a viewport data scale.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -431,26 +441,94 @@ The minimum value of the data scale.
 The maximum value of the data scale.
 </param>
 </member>
+<member name="M:ChartDirector.WinChartViewer.updateFullRangeH(System.String,System.Double,System.Double,System.Int32)">
+<summary>
+Updates the full range of a horizontal viewport data scale.
+</summary>
+<param name="id">
+The name of the horizontal data scale.
+</param>
+<param name="minValue">
+The new minimum value of the data scale.
+</param>
+<param name="maxValue">
+The new maximum value of the data scale.
+</param>
+<param name="updateType">
+The method to update the viewport. Must be one of "ViewPortNoUpdate", "KeepVisibleRange", "ScrollWithMax" or "ScrollWithMin".
+</param>
+</member>
+<member name="M:ChartDirector.WinChartViewer.updateFullRangeH(System.String,System.DateTime,System.DateTime,System.Int32)">
+<summary>
+Updates the full range of a horizontal viewport data scale.
+</summary>
+<param name="id">
+The name of the horizontal data scale.
+</param>
+<param name="minValue">
+The new minimum value of the data scale.
+</param>
+<param name="maxValue">
+The new maximum value of the data scale.
+</param>
+<param name="updateType">
+The method to update the viewport. Must be one of "ViewPortNoUpdate", "KeepVisibleRange", "ScrollWithMax" or "ScrollWithMin".
+</param>
+</member>
+<member name="M:ChartDirector.WinChartViewer.updateFullRangeV(System.String,System.Double,System.Double,System.Int32)">
+<summary>
+Updates the full range of a vertical viewport data scale.
+</summary>
+<param name="id">
+The name of the vertical data scale.
+</param>
+<param name="minValue">
+The new minimum value of the data scale.
+</param>
+<param name="maxValue">
+The new maximum value of the data scale.
+</param>
+<param name="updateType">
+The method to update the viewport. Must be one of "ViewPortNoUpdate", "KeepVisibleRange", "ScrollWithMax" or "ScrollWithMin".
+</param>
+</member>
+<member name="M:ChartDirector.WinChartViewer.updateFullRangeV(System.String,System.DateTime,System.DateTime,System.Int32)">
+<summary>
+Updates the full range of a vertical viewport data scale.
+</summary>
+<param name="id">
+The name of the vertical data scale.
+</param>
+<param name="minValue">
+The new minimum value of the data scale.
+</param>
+<param name="maxValue">
+The new maximum value of the data scale.
+</param>
+<param name="updateType">
+The method to update the viewport. Must be one of "ViewPortNoUpdate", "KeepVisibleRange", "ScrollWithMax" or "ScrollWithMin".
+</param>
+</member>
 <member name="M:ChartDirector.WinChartViewer.getValueAtViewPort(System.String,System.Double)">
 <summary>
-Converts a view port coordinate to a value of the specified data scale.
+Converts a viewport coordinate to a value of the specified data scale.
 </summary>
 <param name="id">
 The name of the data scale.
 </param>
 <param name="vpCoor">
-The view port coordinate.
+The viewport coordinate.
 </param>
 </member>
 <member name="M:ChartDirector.WinChartViewer.getValueAtViewPort(System.String,System.Double,System.Boolean)">
 <summary>
-Converts a view port coordinate to a value of the specified data scale.
+Converts a viewport coordinate to a value of the specified data scale.
 </summary>
 <param name="id">
 The name of the data scale.
 </param>
 <param name="vpCoor">
-The view port coordinate.
+The viewport coordinate.
 </param>
 <param name="isLogScale">
 true if the conversion is based on a logarithmic scale. false if the conversion is based on a non-logarithmic scale.
@@ -458,7 +536,7 @@ true if the conversion is based on a logarithmic scale. false if the conversion 
 </member>
 <member name="M:ChartDirector.WinChartViewer.getViewPortAtValue(System.String,System.Double)">
 <summary>
-Converts a value of the specified data scale to a view port coordinate.
+Converts a value of the specified data scale to a viewport coordinate.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -469,7 +547,7 @@ The value to be converted.
 </member>
 <member name="M:ChartDirector.WinChartViewer.getViewPortAtValue(System.String,System.Double,System.Boolean)">
 <summary>
-Converts a value of the specified data scale to a view port coordinate.
+Converts a value of the specified data scale to a viewport coordinate.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -483,7 +561,7 @@ true if the conversion is based on a logarithmic scale. false if the conversion 
 </member>
 <member name="M:ChartDirector.WinChartViewer.syncLinearAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a linear "Axis" with the part of the data scale in view port.
+Synchronizes a linear "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -494,7 +572,7 @@ The "Axis" object to synchronize with.
 </member>
 <member name="M:ChartDirector.WinChartViewer.syncLogAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a logarithmic "Axis" with the part of the data scale in view port.
+Synchronizes a logarithmic "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -505,7 +583,7 @@ The "Axis" object to synchronize with.
 </member>
 <member name="M:ChartDirector.WinChartViewer.syncDateAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a date/time "Axis" with the part of the data scale in view port.
+Synchronizes a date/time "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -513,6 +591,33 @@ The name of the data scale.
 <param name="axis">
 The "Axis" object to synchronize with.
 </param>
+</member>
+<member name="M:ChartDirector.WinViewPortControl.setMouseMargin(System.Int32,System.Int32)">
+<summary>
+Sets the margin around the viewport border for mouse drag.
+</summary>
+<param name="mouseMargin">
+The margin around the viewport border within which dragging of the border can start. The margin is in pixel unit. The default is 4 pixels.
+</param>
+<param name="cornerMargin">
+The margin around the viewport corner within which dragging of the corner can start. The margin is in pixel unit. The default is 8 pixels.
+</param>
+</member>
+<member name="M:ChartDirector.WinViewPortControl.setCursor(System.Int32,System.Windows.Forms.Cursor)">
+<summary>
+Sets the mouse cursors to be used at various parts of the control.
+</summary>
+<param name="position">
+The mouse cursor position to be set, which must be one of "Left", "Right", "Top" and "Bottom" for the 4 borders, and "TopLeft", "TopRight", "BottomLeft", "BottomRight" for the 4 corners, "Center" for inside the viewport and 0 for outside the viewport.
+</param>
+<param name="cursor">
+The mouse cursor to use at the specified position.
+</param>
+</member>
+<member name="M:ChartDirector.WinViewPortControl.updateDisplay">
+<summary>
+Updates the display.
+</summary>
 </member>
 <member name="M:ChartDirector.Box.setPos(System.Int32,System.Int32)">
 <summary>
@@ -566,7 +671,7 @@ The background color of the box.
 The border color of the box.
 </param>
 <param name="raisedEffect">
-The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument is also used to support "Chart.glassEffect", "Chart.softLighting" and "Chart.cylinderEffect" effects.
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
 </param>
 </member>
 <member name="M:ChartDirector.Box.setRoundedCorners">
@@ -1180,6 +1285,56 @@ The radius of the bottom-right rounded corner in pixels. -1 means it is the same
 The radius of the bottom-left rounded corner in pixels. -1 means it is the same as the radius of the top-left corner.
 </param>
 </member>
+<member name="M:ChartDirector.BaseChart.setThickFrame(System.Int32)">
+<summary>
+Sets a thick frame around the chart.
+</summary>
+<param name="thickness">
+The frame thickness.
+</param>
+</member>
+<member name="M:ChartDirector.BaseChart.setThickFrame(System.Int32,System.Int32)">
+<summary>
+Sets a thick frame around the chart.
+</summary>
+<param name="thickness">
+The frame thickness.
+</param>
+<param name="frameColor">
+The frame color. The default value of -1 means the frame color is the same as the outer edge color.
+</param>
+</member>
+<member name="M:ChartDirector.BaseChart.setThickFrame(System.Int32,System.Int32,System.Int32)">
+<summary>
+Sets a thick frame around the chart.
+</summary>
+<param name="thickness">
+The frame thickness.
+</param>
+<param name="frameColor">
+The frame color. The default value of -1 means the frame color is the same as the outer edge color.
+</param>
+<param name="outerEdgeColor">
+The outer edge color. The default value of -1 means the outer edge color is the same as the current edge color, which can be set in the chart constructor or in "BaseChart.setBackground".
+</param>
+</member>
+<member name="M:ChartDirector.BaseChart.setThickFrame(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Sets a thick frame around the chart.
+</summary>
+<param name="thickness">
+The frame thickness.
+</param>
+<param name="frameColor">
+The frame color. The default value of -1 means the frame color is the same as the outer edge color.
+</param>
+<param name="outerEdgeColor">
+The outer edge color. The default value of -1 means the outer edge color is the same as the current edge color, which can be set in the chart constructor or in "BaseChart.setBackground".
+</param>
+<param name="innerEdgeColor">
+The inner edge color. The default value of -1 means the inner edge color is the same as the frame color.
+</param>
+</member>
 <member name="M:ChartDirector.BaseChart.setDropShadow">
 <summary>
 Adds a drop shadow to the chart.
@@ -1280,10 +1435,10 @@ A list of directories, separated with semi- colons
 </member>
 <member name="M:ChartDirector.BaseChart.setTransparentColor(System.Int32)">
 <summary>
-Specifies a certain color to mean transparent when creating a raster image output, or to include alpha transparency channel in the output.
+Specifies a certain color to mean transparent when creating a raster image output.
 </summary>
 <param name="c">
-The color that is designated as the transparent color. If -1 is used, the full alpha transparency channel will be included in the final output.
+The color that is designated as the transparent color. If -1 is used, the alpha channel will be included in the final output if the output image format supports it.
 </param>
 </member>
 <member name="M:ChartDirector.BaseChart.setAntiAlias">
@@ -1307,7 +1462,7 @@ Controls whether anti-alias is used when drawing lines, shapes and text.
 A true value enables anti-alias when drawing lines and shapes. A false value disables anti-alias when drawing lines and shapes
 </param>
 <param name="textAntiAlias">
-The text anti-alias mode, which must be one of "AutoAntiAlias", "AntiAlias" or "NoAntiAlias".
+The text anti-alias mode, which must be one of "NoAntiAlias", "AntiAlias", "AutoAntiAlias", "ClearTypeColor" or "ClearTypeMono".
 </param>
 </member>
 <member name="M:ChartDirector.BaseChart.addTitle(System.String)">
@@ -2811,8 +2966,16 @@ A constant representing the format of the image.
 </member>
 <member name="M:ChartDirector.BaseChart.enableVectorOutput">
 <summary>
-Enables true vector graphics output.
+This method is deprecated. It has no effect and may be removed in future versions of ChartDirector.
 </summary>
+</member>
+<member name="M:ChartDirector.BaseChart.setOutputOptions(System.String)">
+<summary>
+Sets output format options for the next chart output. Currently, only SVG, SVGZ and PDF output formats support output options.
+</summary>
+<param name="options">
+A list of options delimited by semicolons.
+</param>
 </member>
 <member name="M:ChartDirector.BaseChart.makeChart(System.String)">
 <summary>
@@ -2850,7 +3013,7 @@ Generates the chart in internal format and return a "DrawArea" object to allow a
 </member>
 <member name="M:ChartDirector.BaseChart.makeSession(System.Web.SessionState.HttpSessionState,System.String)">
 <summary>
-Generates the chart as an image and save it to a session variable.
+Generates the chart as an image, saves it to a session variable and returns query parameters for loading the image.
 </summary>
 <param name="sess">
 The session object of an IIS Active Server Page.
@@ -2861,7 +3024,7 @@ The name of the session variable used to store the chart image. If there are mul
 </member>
 <member name="M:ChartDirector.BaseChart.makeSession(System.Web.SessionState.HttpSessionState,System.String,System.Int32)">
 <summary>
-Generates the chart as an image and save it to a session variable.
+Generates the chart as an image, saves it to a session variable and returns query parameters for loading the image.
 </summary>
 <param name="sess">
 The session object of an IIS Active Server Page.
@@ -2870,7 +3033,7 @@ The session object of an IIS Active Server Page.
 The name of the session variable used to store the chart image. If there are multiple chart images in the same web page, each image must use a different name.
 </param>
 <param name="imageFormat">
-A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG" or "SVGZ".
+A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG", "SVGZ" or "PDF".
 </param>
 </member>
 <member name="M:ChartDirector.BaseChart.makeTmpFile(System.String)">
@@ -2889,7 +3052,7 @@ Generates the chart as an image and save it to a temporary file, and automatical
 The directory to store the temporary file and to remove old files.
 </param>
 <param name="imageFormat">
-A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG" or "SVGZ".
+A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG", "SVGZ" or "PDF".
 </param>
 </member>
 <member name="M:ChartDirector.BaseChart.makeTmpFile(System.String,System.Int32,System.Int32)">
@@ -2900,7 +3063,7 @@ Generates the chart as an image and save it to a temporary file, and automatical
 The directory to store the temporary file and to remove old files.
 </param>
 <param name="imageFormat">
-A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG" or "SVGZ".
+A constant representing the format of the image. Must be one of the predefined constants "PNG", "JPG", "GIF", "BMP", "WMP", "SVG", "SVGZ" or "PDF".
 </param>
 <param name="lifeTime">
 The life time of files in seconds. Older files will be deleted. A negative value disables automatic temporary file removal.
@@ -2984,7 +3147,7 @@ This parameter is reserved for future use. Please do not use it.
 </member>
 <member name="M:ChartDirector.BaseChart.getChartMetrics">
 <summary>
-Gets the chart metrics for passing to "WebChartViewer.ChartMetrics" to support view ports for web applications.
+Gets the chart metrics for passing to "WebChartViewer.ChartMetrics" to support viewports for web applications.
 </summary>
 </member>
 <member name="M:ChartDirector.LegendBox.addKey(System.String,System.Int32)">
@@ -3228,7 +3391,7 @@ Sets the default border color of the legend icon.
 The border color.
 </param>
 <param name="raisedEffect">
-The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument is also used to support "Chart.glassEffect", "Chart.softLighting" and "Chart.cylinderEffect" effects.
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
 </param>
 </member>
 <member name="M:ChartDirector.LegendBox.setLineStyleKey">
@@ -3437,10 +3600,10 @@ Gets the number of charts in the MultiChart.
 </member>
 <member name="M:ChartDirector.MultiChart.setMainChart(ChartDirector.BaseChart)">
 <summary>
-Sets the chart that receives view port mouse actions (for zooming and scrolling support).
+Sets the chart that receives viewport mouse actions (for zooming and scrolling support).
 </summary>
 <param name="c">
-The chart that is to receive view port mouse actions.
+The chart that is to receive viewport mouse actions.
 </param>
 </member>
 <member name="M:ChartDirector.PieChart.#ctor(System.Int32,System.Int32)">
@@ -6803,6 +6966,25 @@ The type of condition to test. Must be one of the condition types in the above t
 The operand for condition types that need an operand.
 </param>
 </member>
+<member name="M:ChartDirector.Axis.setLabelAlignment(System.Int32)">
+<summary>
+Sets the alignment of the axis labels relative to their associated ticks.
+</summary>
+<param name="alignment">
+The alignment of the label relative to the associated tick.
+</param>
+</member>
+<member name="M:ChartDirector.Axis.setLabelAlignment(System.Int32,System.Int32)">
+<summary>
+Sets the alignment of the axis labels relative to their associated ticks.
+</summary>
+<param name="alignment">
+The alignment of the label relative to the associated tick.
+</param>
+<param name="minLabelSpace">
+The minimum space in pixels that must be available at the plot area border in order to display the label
+</param>
+</member>
 <member name="M:ChartDirector.Axis.setLabelGap(System.Int32)">
 <summary>
 Sets the distance between the axis labels and the ticks on the axis.
@@ -8048,6 +8230,39 @@ The color to use if a value falls below the minimum value of the axis scale. -1 
 The color to use if a value exceeds the maximum value of the axis scale. -1 means the overflowColor is the same color at the maximum value.
 </param>
 </member>
+<member name="M:ChartDirector.ColorAxis.setColorScale(System.Double[])">
+<summary>
+Sets the axis scale and the associated colors.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+</member>
+<member name="M:ChartDirector.ColorAxis.setColorScale(System.Double[],System.Int32)">
+<summary>
+Sets the axis scale and the associated colors.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="underflowColor">
+The color to use if a value falls below the minimum value of the axis scale. -1 means the underflowColor is the same color at the minimum value.
+</param>
+</member>
+<member name="M:ChartDirector.ColorAxis.setColorScale(System.Double[],System.Int32,System.Int32)">
+<summary>
+Sets the axis scale and the associated colors.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="underflowColor">
+The color to use if a value falls below the minimum value of the axis scale. -1 means the underflowColor is the same color at the minimum value.
+</param>
+<param name="overflowColor">
+The color to use if a value exceeds the maximum value of the axis scale. -1 means the overflowColor is the same color at the maximum value.
+</param>
+</member>
 <member name="M:ChartDirector.ColorAxis.setLevels(System.Int32)">
 <summary>
 Sets the maximum number of contour intervals on the axis.
@@ -8085,7 +8300,7 @@ Sets the border color and 3D border effect of the axis stem.
 The edge color of the axis stem.
 </param>
 <param name="raisedEffect">
-The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument is also used to support "Chart.glassEffect", "Chart.softLighting" and "Chart.cylinderEffect" effects.
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
 </param>
 </member>
 <member name="M:ChartDirector.ColorAxis.setBoundingBox(System.Int32)">
@@ -8118,7 +8333,7 @@ The background color of the bounding box.
 The border color of the bounding box.
 </param>
 <param name="raisedEffect">
-The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument is also used to support "Chart.glassEffect", "Chart.softLighting" and "Chart.cylinderEffect" effects.
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
 </param>
 </member>
 <member name="M:ChartDirector.ColorAxis.setBoxMargin(System.Int32)">
@@ -8771,7 +8986,7 @@ Sets the default border color and lighting effect for the data representation.
 The border color.
 </param>
 <param name="lightingEffect">
-Specifies the 3D bevel border width or special shading effects as described in the above table.
+Specifies the 3D bevel or border width, flat border effect, or other special shading effects as described in the above table.
 </param>
 </member>
 <member name="M:ChartDirector.Layer.setLegendOrder(System.Int32)">
@@ -9796,6 +10011,61 @@ The overlapping ratio between adjacent bars in a bar group. Should be between 0 
 If this value is true, the first data set will be on top of the second data during overlapping, and the second data set will be on top of the third data set, and so on. If this value is false, then the overlapping order will be reversed.
 </param>
 </member>
+<member name="M:ChartDirector.BarLayer.setRoundedCorners">
+<summary>
+Configures rounded corners for rectangular bars.
+</summary>
+</member>
+<member name="M:ChartDirector.BarLayer.setRoundedCorners(System.Int32)">
+<summary>
+Configures rounded corners for rectangular bars.
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BarLayer.setRoundedCorners(System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for rectangular bars.
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BarLayer.setRoundedCorners(System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for rectangular bars.
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+<param name="r3">
+The third radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BarLayer.setRoundedCorners(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for rectangular bars.
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+<param name="r3">
+The third radius. See description above on how this radius value is used.
+</param>
+<param name="r4">
+The fourth radius. See description above on how this radius value is used.
+</param>
+</member>
 <member name="M:ChartDirector.BarLayer.setBarShape(System.Int32)">
 <summary>
 Sets the shape of the bar(s) using built-in shapes.
@@ -10379,6 +10649,61 @@ Sets the symbol width by specifying the pixel width of the symbols.
 The width of the symbols in pixels.
 </param>
 </member>
+<member name="M:ChartDirector.BaseBoxLayer.setRoundedCorners">
+<summary>
+Configures rounded corners for the boxes. This method currently is only supported by the "BoxWhiskerLayer".
+</summary>
+</member>
+<member name="M:ChartDirector.BaseBoxLayer.setRoundedCorners(System.Int32)">
+<summary>
+Configures rounded corners for the boxes. This method currently is only supported by the "BoxWhiskerLayer".
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BaseBoxLayer.setRoundedCorners(System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for the boxes. This method currently is only supported by the "BoxWhiskerLayer".
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BaseBoxLayer.setRoundedCorners(System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for the boxes. This method currently is only supported by the "BoxWhiskerLayer".
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+<param name="r3">
+The third radius. See description above on how this radius value is used.
+</param>
+</member>
+<member name="M:ChartDirector.BaseBoxLayer.setRoundedCorners(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures rounded corners for the boxes. This method currently is only supported by the "BoxWhiskerLayer".
+</summary>
+<param name="r1">
+The first radius. See description above on how this radius value is used.
+</param>
+<param name="r2">
+The second radius. See description above on how this radius value is used.
+</param>
+<param name="r3">
+The third radius. See description above on how this radius value is used.
+</param>
+<param name="r4">
+The fourth radius. See description above on how this radius value is used.
+</param>
+</member>
 <member name="M:ChartDirector.BaseBoxLayer.setMinImageMapSize(System.Int32)">
 <summary>
 Sets the minimum height (or width if the x-axis and y-axis are swapped with "XYChart.swapXY") of the hot spots defined by the image map.
@@ -10427,6 +10752,60 @@ The color to be used on a "down" day. -1 means it is the same as the riseColor.
 </param>
 <param name="leadValue">
 The lead value to act as the closing pricing before the first day, so as to determine if the first day is an "up" or "down" day.
+</param>
+</member>
+<member name="M:ChartDirector.CandleStickLayer.setColors(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures the colors for candlesticks.
+</summary>
+<param name="upFillColor">
+The fill color for "up" trading sessions.
+</param>
+<param name="upLineColor">
+The line color for "up" trading sessions.
+</param>
+<param name="downFillColor">
+The fill color for "down" trading sessions.
+</param>
+<param name="downLineColor">
+The line color for "down" trading sessions.
+</param>
+</member>
+<member name="M:ChartDirector.CandleStickLayer.setExtraColors(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures additional colors for candlesticks.
+</summary>
+<param name="upDownFillColor">
+The fill color for "up/down" days.
+</param>
+<param name="upDownLineColor">
+The line color for "up/down" days.
+</param>
+<param name="downDownFillColor">
+The fill color for "down/down" days.
+</param>
+<param name="downDownLineColor">
+The line color for "down/down" days.
+</param>
+</member>
+<member name="M:ChartDirector.CandleStickLayer.setExtraColors(System.Int32,System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Configures additional colors for candlesticks.
+</summary>
+<param name="upDownFillColor">
+The fill color for "up/down" days.
+</param>
+<param name="upDownLineColor">
+The line color for "up/down" days.
+</param>
+<param name="downDownFillColor">
+The fill color for "down/down" days.
+</param>
+<param name="downDownLineColor">
+The line color for "down/down" days.
+</param>
+<param name="leadValue">
+The closing price before the first trading session, which is used to determine if the first trading session is "up" or "down" according to the alternative definition.
 </param>
 </member>
 <member name="M:ChartDirector.BoxWhiskerLayer.setBoxColor(System.Int32,System.Int32)">
@@ -10735,6 +11114,17 @@ The color used to fill the symbol. -1 means the color of the data set will be us
 </param>
 <param name="edgeColor">
 The edge color used to draw the edge of the symbol. -1 means the edge color of the data set will be used.
+</param>
+</member>
+<member name="M:ChartDirector.DataSet.setSymbolOffset(System.Int32,System.Int32)">
+<summary>
+Offset the symbols in the x and y directions in pixel unit.
+</summary>
+<param name="xOffset">
+The x offset in pixels. A positive value mean shifting to the right.
+</param>
+<param name="yOffset">
+The y offset in pixels. A positive value mean shifting to the bottom.
 </param>
 </member>
 <member name="M:ChartDirector.DataSet.getLegendIcon">
@@ -11165,6 +11555,34 @@ Sets the position of the z-axis.
 </summary>
 <param name="pos">
 The position of the z-axis, which must be either "Left" or "Right".
+</param>
+</member>
+<member name="M:ChartDirector.ThreeDChart.getXCoor(System.Double,System.Double,System.Double)">
+<summary>
+Gets the x pixel coordinate of a point given its x, y and z data values.
+</summary>
+<param name="x">
+The x data value of the point.
+</param>
+<param name="y">
+The y data value of the point.
+</param>
+<param name="z">
+The z data value of the point.
+</param>
+</member>
+<member name="M:ChartDirector.ThreeDChart.getYCoor(System.Double,System.Double,System.Double)">
+<summary>
+Gets the y pixel coordinate of a point given its x, y and z data values.
+</summary>
+<param name="x">
+The x data value of the point.
+</param>
+<param name="y">
+The y data value of the point.
+</param>
+<param name="z">
+The z data value of the point.
 </param>
 </member>
 <member name="M:ChartDirector.SurfaceChart.#ctor(System.Int32,System.Int32)">
@@ -11824,6 +12242,17 @@ The color used to fill the symbol. -1 means that the color is automatically sele
 </param>
 <param name="edgeColor">
 The edge color used to draw the edge of the symbol. -1 means using "LineColor" as the edge color.
+</param>
+</member>
+<member name="M:ChartDirector.ThreeDScatterGroup.setSymbolOffset(System.Int32,System.Int32)">
+<summary>
+Offset the symbols in the x and y directions in pixel unit.
+</summary>
+<param name="xOffset">
+The x offset in pixels. A positive value mean shifting to the right.
+</param>
+<param name="yOffset">
+The y offset in pixels. A positive value mean shifting to the bottom.
 </param>
 </member>
 <member name="M:ChartDirector.ThreeDScatterGroup.setDropLine(System.Int32)">
@@ -12614,6 +13043,17 @@ The color used to fill the symbol. -1 means the color of the data representation
 </param>
 <param name="edgeColor">
 The edge color used to draw the edge of the symbol. -1 means the border color of the data representation will be used.
+</param>
+</member>
+<member name="M:ChartDirector.PolarLayer.setSymbolOffset(System.Int32,System.Int32)">
+<summary>
+Offset the symbols in the x and y directions in pixel unit.
+</summary>
+<param name="xOffset">
+The x offset in pixels. A positive value mean shifting to the right.
+</param>
+<param name="yOffset">
+The y offset in pixels. A positive value mean shifting to the bottom.
 </param>
 </member>
 <member name="M:ChartDirector.PolarLayer.setSymbolScale(System.Double[])">
@@ -14256,7 +14696,7 @@ The border color. To disable border, set the edgeColor the same as the fillColor
 The fill color. To disable filling, set the fillColor to Transparent.
 </param>
 <param name="raisedEffect">
-The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument is also used to support "Chart.glassEffect", "Chart.softLighting" and "Chart.cylinderEffect" effects.
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
 </param>
 </member>
 <member name="M:ChartDirector.DrawArea.polygon(System.Object[],System.Int32,System.Int32)">
@@ -15530,8 +15970,16 @@ The blur factor to use for "re-sampling".
 </member>
 <member name="M:ChartDirector.DrawArea.enableVectorOutput">
 <summary>
-Enables true vector graphics output.
+This method is deprecated. It has no effect and may be removed in future versions of ChartDirector.
 </summary>
+</member>
+<member name="M:ChartDirector.DrawArea.setOutputOptions(System.String)">
+<summary>
+Sets output format options for the next chart output. Currently, only SVG, SVGZ and PDF output formats support output options.
+</summary>
+<param name="options">
+A list of options delimited by semicolons.
+</param>
 </member>
 <member name="M:ChartDirector.DrawArea.outImage(System.String)">
 <summary>
@@ -15674,7 +16122,7 @@ Writes the DrawArea to a SVG or SVGZ image file.
 The filename of the output image file.
 </param>
 <param name="options">
-A text string specifying optional parameters for the SVG output. Currently, the only supported text string is "compress", which means to create a SVGZ (compressed SVG) instead of a regular SVG.
+This parameter is deprecated. Please use "DrawArea.setOutputOptions" to set optional output parameters.
 </param>
 </member>
 <member name="M:ChartDirector.DrawArea.outSVG">
@@ -15692,8 +16140,26 @@ Writes the DrawArea as a SVG or SVGZ image to memory.
 Writes the DrawArea as a SVG or SVGZ image to memory.
 </summary>
 <param name="options">
-A text string specifying optional parameters for the SVG output. Currently, the only supported text string is "compress", which means to create a SVGZ (compressed SVG) instead of a regular SVG.
+This parameter is deprecated. Please use "DrawArea.setOutputOptions" to set optional output parameters.
 </param>
+</member>
+<member name="M:ChartDirector.DrawArea.outPDF(System.String)">
+<summary>
+Writes the DrawArea to a PDF image file.
+</summary>
+<param name="filename">
+The filename of the output image file.
+</param>
+</member>
+<member name="M:ChartDirector.DrawArea.outPDF">
+<summary>
+Writes the DrawArea as a PDF image to memory.
+</summary>
+</member>
+<member name="M:ChartDirector.DrawArea.outPDF2">
+<summary>
+Writes the DrawArea as a PDF image to memory.
+</summary>
 </member>
 <member name="M:ChartDirector.DrawArea.setPaletteMode(System.Int32)">
 <summary>
@@ -15713,10 +16179,10 @@ The dithering method to use in case dithering is necessary.
 </member>
 <member name="M:ChartDirector.DrawArea.setTransparentColor(System.Int32)">
 <summary>
-Specifies a certain color to mean transparent when creating a raster image output, or to include alpha transparency channel in the output.
+Specifies a certain color to mean transparent when creating a raster image output.
 </summary>
 <param name="c">
-The color that is designated as the transparent color. If -1 is used, the full alpha transparency channel will be included in the final output.
+The color that is designated as the transparent color. If -1 is used, the alpha channel will be included in the final output if the output image format supports it.
 </param>
 </member>
 <member name="M:ChartDirector.DrawArea.setAntiAlias">
@@ -15740,7 +16206,7 @@ Controls whether anti-alias is used when drawing lines, shapes and text.
 A true value enables anti-alias when drawing lines and shapes. A false value disables anti-alias when drawing lines and shapes
 </param>
 <param name="textAntiAlias">
-The text anti-alias mode, which must be one of "AutoAntiAlias", "AntiAlias" or "NoAntiAlias".
+The text anti-alias mode, which must be one of "NoAntiAlias", "AntiAlias", "AutoAntiAlias", "ClearTypeColor" or "ClearTypeMono".
 </param>
 </member>
 <member name="M:ChartDirector.DrawArea.setInterlace(System.Boolean)">
@@ -16668,6 +17134,54 @@ An array of numbers used to decide whether the corresponding elements in the Arr
 The value used to replace the elements that are not selected.
 </param>
 </member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfSecond">
+<summary>
+Selects the elements of the ArrayMath object that represents a different second from the previous element.
+</summary>
+</member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfSecond(System.Int32)">
+<summary>
+Selects the elements of the ArrayMath object that represents a different second from the previous element.
+</summary>
+<param name="majorTickStep">
+The tick step. A value of n means one tick per n seconds.
+</param>
+</member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfSecond(System.Int32,System.Double)">
+<summary>
+Selects the elements of the ArrayMath object that represents a different second from the previous element.
+</summary>
+<param name="majorTickStep">
+The tick step. A value of n means one tick per n seconds.
+</param>
+<param name="initialMargin">
+The margin for the first data point. The first data point will be selected if it is within initialMargin number of seconds from beginning of the second it represents. The default is 0.1 second.
+</param>
+</member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfMinute">
+<summary>
+Selects the elements of the ArrayMath object that represents a different minute from the previous element.
+</summary>
+</member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfMinute(System.Int32)">
+<summary>
+Selects the elements of the ArrayMath object that represents a different minute from the previous element.
+</summary>
+<param name="majorTickStep">
+The tick step. A value of n means one tick per n minutes.
+</param>
+</member>
+<member name="M:ChartDirector.ArrayMath.selectStartOfMinute(System.Int32,System.Double)">
+<summary>
+Selects the elements of the ArrayMath object that represents a different minute from the previous element.
+</summary>
+<param name="majorTickStep">
+The tick step. A value of n means one tick per n minutes.
+</param>
+<param name="initialMargin">
+The margin for the first data point. The first data point will be selected if it is within initialMargin number of seconds from beginning of the minute it represents. The default is 5 seconds.
+</param>
+</member>
 <member name="M:ChartDirector.ArrayMath.selectStartOfHour">
 <summary>
 Selects the elements of the ArrayMath object that represents a different hour from the previous element.
@@ -17154,7 +17668,7 @@ Aggregates a data array by merging groups of elements, similar to the GROUP BY c
 The array to be aggregated.
 </param>
 <param name="aggregateMethod">
-The method to aggregate the data, which must be one of "AggregateSum", "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
+The method to aggregate the data, which must be one of "AggregateSum",  "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
 </param>
 </member>
 <member name="M:ChartDirector.ArrayMath.aggregate(System.Double[],System.Int32,System.Double)">
@@ -17165,7 +17679,7 @@ Aggregates a data array by merging groups of elements, similar to the GROUP BY c
 The array to be aggregated.
 </param>
 <param name="aggregateMethod">
-The method to aggregate the data, which must be one of "AggregateSum", "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
+The method to aggregate the data, which must be one of "AggregateSum",  "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
 </param>
 <param name="param">
 The aggregation parameter, if needed. Currently, only "AggregatePercentile" needs a parameter to specify the percentile used.
@@ -17179,7 +17693,7 @@ Aggregates a data array by merging groups of elements, similar to the GROUP BY c
 The array to be aggregated.
 </param>
 <param name="aggregateMethod">
-The method to aggregate the data, which must be one of "AggregateSum", "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
+The method to aggregate the data, which must be one of "AggregateSum",  "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
 </param>
 </member>
 <member name="M:ChartDirector.ArrayMath.aggregate(System.DateTime[],System.Int32,System.Double)">
@@ -17190,7 +17704,7 @@ Aggregates a data array by merging groups of elements, similar to the GROUP BY c
 The array to be aggregated.
 </param>
 <param name="aggregateMethod">
-The method to aggregate the data, which must be one of "AggregateSum", "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
+The method to aggregate the data, which must be one of "AggregateSum",  "AggregateAvg", "AggregateStdDev", "AggregateMin", "AggregateMed", "AggregateMax", "AggregatePercentile", "AggregateFirst", "AggregateLast", "AggregateCount".
 </param>
 <param name="param">
 The aggregation parameter, if needed. Currently, only "AggregatePercentile" needs a parameter to specify the percentile used.
@@ -17512,7 +18026,7 @@ The seed to be used in the random number generator.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries(System.Int32,System.Double,System.Double)">
 <summary>
-Gets an array of random number.
+Gets an array of independent random numbers.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17526,7 +18040,7 @@ The maximum value of the random number.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries(System.Int32,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17543,7 +18057,7 @@ The maximum change between two consecutive numbers.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries(System.Int32,System.Double,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17563,7 +18077,7 @@ The minimum allowed value of the numbers.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries(System.Int32,System.Double,System.Double,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17586,7 +18100,7 @@ The maximum allowed value of the numbers.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries2(System.Int32,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17603,7 +18117,7 @@ The maximum change between two consecutive numbers.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries2(System.Int32,System.Double,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17623,7 +18137,7 @@ The minimum allowed value of the numbers.
 </member>
 <member name="M:ChartDirector.RanSeries.getSeries2(System.Int32,System.Double,System.Double,System.Double,System.Double,System.Double)">
 <summary>
-Gets an array of numbers that fluctuate randomly.
+Gets an array of numbers in which the difference between adjacent numbers is random.
 </summary>
 <param name="len">
 The number of random values to get.
@@ -17642,6 +18156,37 @@ The minimum allowed value of the numbers.
 </param>
 <param name="upperLimit">
 The maximum allowed value of the numbers.
+</param>
+</member>
+<member name="M:ChartDirector.RanSeries.get2DSeries(System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Gets an array of random numbers representing points on a 2D grid in which the difference between neighbouring points is random.
+</summary>
+<param name="xLen">
+The number of points in the grid in the x direction.
+</param>
+<param name="yLen">
+The number of points in the grid in the y direction.
+</param>
+<param name="minValue">
+The minimum value of the random number.
+</param>
+<param name="maxValue">
+The maximum value of the random number.
+</param>
+</member>
+<member name="M:ChartDirector.RanSeries.getGaussianSeries(System.Int32,System.Double,System.Double)">
+<summary>
+Gets an array of independent random numbers that are gaussian distributed.
+</summary>
+<param name="len">
+The number of random values to get.
+</param>
+<param name="mean">
+The mean of the gaussian distribution.
+</param>
+<param name="stdDev">
+The standard deviation of the gaussian distribution.
 </param>
 </member>
 <member name="M:ChartDirector.RanSeries.getDateSeries(System.Int32,System.DateTime,System.Double)">
@@ -17978,12 +18523,105 @@ An array of numbers to be used as the labels on the meter scale.
 The format string for formatting the numbers. An empty string means the format will be automatically determined.
 </param>
 </member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[])">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+</member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[],System.Int32)">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="startPos">
+The position of the starting point of the color scale. For an angular meter, the position refers to the radius, and the default is the meter scale radius (see "AngularMeter.setMeter"). For a linear meter, the position refers to the x or y coordinate depending on whether the meter is vertical or horizontal, and the default is the leftX or topY coordinate of the meter scale (see "LinearMeter.setMeter").
+</param>
+</member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[],System.Int32,System.Int32)">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="startPos">
+The position of the starting point of the color scale. For an angular meter, the position refers to the radius, and the default is the meter scale radius (see "AngularMeter.setMeter"). For a linear meter, the position refers to the x or y coordinate depending on whether the meter is vertical or horizontal, and the default is the leftX or topY coordinate of the meter scale (see "LinearMeter.setMeter").
+</param>
+<param name="startWidth">
+The width at the starting point of the color scale. A positive value means the width is in the direction of increasing "position", while a negative value means decreasing "position". Please refer to the description of <b>startPos</b> on the meaning of "position" for various types of meters. The default is the length of the major tick (see "BaseMeter.setTickLength").
+</param>
+</member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[],System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="startPos">
+The position of the starting point of the color scale. For an angular meter, the position refers to the radius, and the default is the meter scale radius (see "AngularMeter.setMeter"). For a linear meter, the position refers to the x or y coordinate depending on whether the meter is vertical or horizontal, and the default is the leftX or topY coordinate of the meter scale (see "LinearMeter.setMeter").
+</param>
+<param name="startWidth">
+The width at the starting point of the color scale. A positive value means the width is in the direction of increasing "position", while a negative value means decreasing "position". Please refer to the description of <b>startPos</b> on the meaning of "position" for various types of meters. The default is the length of the major tick (see "BaseMeter.setTickLength").
+</param>
+<param name="endPos">
+The position of the ending point of the color scale. Please refer to the description of <b>startPos</b> above on how the position parameter is interpreted. The default is for the ending position to be equal to the starting position.
+</param>
+</member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[],System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="startPos">
+The position of the starting point of the color scale. For an angular meter, the position refers to the radius, and the default is the meter scale radius (see "AngularMeter.setMeter"). For a linear meter, the position refers to the x or y coordinate depending on whether the meter is vertical or horizontal, and the default is the leftX or topY coordinate of the meter scale (see "LinearMeter.setMeter").
+</param>
+<param name="startWidth">
+The width at the starting point of the color scale. A positive value means the width is in the direction of increasing "position", while a negative value means decreasing "position". Please refer to the description of <b>startPos</b> on the meaning of "position" for various types of meters. The default is the length of the major tick (see "BaseMeter.setTickLength").
+</param>
+<param name="endPos">
+The position of the ending point of the color scale. Please refer to the description of <b>startPos</b> above on how the position parameter is interpreted. The default is for the ending position to be equal to the starting position.
+</param>
+<param name="endWidth">
+The width at the ending point of the color scale. Please refer to the description of <b>startWidth</b> above on how the width parameter is interpreted. The default is for the ending width to be equal to the starting width.
+</param>
+</member>
+<member name="M:ChartDirector.BaseMeter.addColorScale(System.Double[],System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a color scale to the meter.
+</summary>
+<param name="colorStops">
+An array of numbers alternating between values and colors. If the number count is even, the array will define a continuous color scale, otherwise it will define a step color scale.
+</param>
+<param name="startPos">
+The position of the starting point of the color scale. For an angular meter, the position refers to the radius, and the default is the meter scale radius (see "AngularMeter.setMeter"). For a linear meter, the position refers to the x or y coordinate depending on whether the meter is vertical or horizontal, and the default is the leftX or topY coordinate of the meter scale (see "LinearMeter.setMeter").
+</param>
+<param name="startWidth">
+The width at the starting point of the color scale. A positive value means the width is in the direction of increasing "position", while a negative value means decreasing "position". Please refer to the description of <b>startPos</b> on the meaning of "position" for various types of meters. The default is the length of the major tick (see "BaseMeter.setTickLength").
+</param>
+<param name="endPos">
+The position of the ending point of the color scale. Please refer to the description of <b>startPos</b> above on how the position parameter is interpreted. The default is for the ending position to be equal to the starting position.
+</param>
+<param name="endWidth">
+The width at the ending point of the color scale. Please refer to the description of <b>startWidth</b> above on how the width parameter is interpreted. The default is for the ending width to be equal to the starting width.
+</param>
+<param name="edgeColor">
+The edge color of the color scale. The default is to have no edge.
+</param>
+</member>
 <member name="M:ChartDirector.BaseMeter.addPointer(System.Double)">
 <summary>
 Adds a pointer to the meter.
 </summary>
 <param name="value">
-The value that the pointer will point to.
+The value that the pointer points to.
 </param>
 </member>
 <member name="M:ChartDirector.BaseMeter.addPointer(System.Double,System.Int32)">
@@ -17991,7 +18629,7 @@ The value that the pointer will point to.
 Adds a pointer to the meter.
 </summary>
 <param name="value">
-The value that the pointer will point to.
+The value that the pointer points to.
 </param>
 <param name="fillColor">
 The fill color of the pointer.
@@ -18002,7 +18640,7 @@ The fill color of the pointer.
 Adds a pointer to the meter.
 </summary>
 <param name="value">
-The value that the pointer will point to.
+The value that the pointer points to.
 </param>
 <param name="fillColor">
 The fill color of the pointer.
@@ -18323,6 +18961,192 @@ The start angle of the meter. The angle is measured in degrees clockwise, with 0
 The end angle of the meter. The angle is measured in degrees clockwise, with 0 being the upward pointing direction.
 </param>
 </member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+<param name="edgeWidth">
+The edge width of the circle segment. A positive width means the edge is internal to the circle segment. A negative width means the edge is external to the circle segment.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+<param name="edgeWidth">
+The edge width of the circle segment. A positive width means the edge is internal to the circle segment. A negative width means the edge is external to the circle segment.
+</param>
+<param name="edgeColor">
+The edge color. The default value of -1 means the edge color is the same as the fill color.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+<param name="edgeWidth">
+The edge width of the circle segment. A positive width means the edge is internal to the circle segment. A negative width means the edge is external to the circle segment.
+</param>
+<param name="edgeColor">
+The edge color. The default value of -1 means the edge color is the same as the fill color.
+</param>
+<param name="scaleRadius">
+The radius of the meter scale. ChartDirector uses this value to compute the extra angular span the circle segment must have in order to maintain proper margin at the chord side. This argument is usually not necessary as ChartDirector already know the scale radius from the meter configuration. This argument can be used if you would like to use a "fake" scale radius to draw the scale background for special effects.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+<param name="edgeWidth">
+The edge width of the circle segment. A positive width means the edge is internal to the circle segment. A negative width means the edge is external to the circle segment.
+</param>
+<param name="edgeColor">
+The edge color. The default value of -1 means the edge color is the same as the fill color.
+</param>
+<param name="scaleRadius">
+The radius of the meter scale. ChartDirector uses this value to compute the extra angular span the circle segment must have in order to maintain proper margin at the chord side. This argument is usually not necessary as ChartDirector already know the scale radius from the meter configuration. This argument can be used if you would like to use a "fake" scale radius to draw the scale background for special effects.
+</param>
+<param name="startAngle">
+The start angle of the meter scale. ChartDirector uses this value to compute start angle of the circle segment. This argument is usually not necessary as ChartDirector already know the start angle from the meter configuration. This argument can be used if you would like to use a "fake" angle to draw the scale background for special effects.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addScaleBackground(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Adds a background to the meter scale.
+</summary>
+<param name="bgRadius">
+The radius of the circle segment to be used as the scale background.
+</param>
+<param name="fillColor">
+The fill color of the circle segment (the background color).
+</param>
+<param name="edgeWidth">
+The edge width of the circle segment. A positive width means the edge is internal to the circle segment. A negative width means the edge is external to the circle segment.
+</param>
+<param name="edgeColor">
+The edge color. The default value of -1 means the edge color is the same as the fill color.
+</param>
+<param name="scaleRadius">
+The radius of the meter scale. ChartDirector uses this value to compute the extra angular span the circle segment must have in order to maintain proper margin at the chord side. This argument is usually not necessary as ChartDirector already know the scale radius from the meter configuration. This argument can be used if you would like to use a "fake" scale radius to draw the scale background for special effects.
+</param>
+<param name="startAngle">
+The start angle of the meter scale. ChartDirector uses this value to compute start angle of the circle segment. This argument is usually not necessary as ChartDirector already know the start angle from the meter configuration. This argument can be used if you would like to use a "fake" angle to draw the scale background for special effects.
+</param>
+<param name="endAngle">
+The end angle of the meter scale. ChartDirector uses this value to compute end angle of the circle segment. This argument is usually not necessary as ChartDirector already know the end angle from the meter configuration. This argument can be used if you would like to use a "fake" angle to draw the scale background for special effects.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare">
+<summary>
+Adds glare effect to the meter.
+</summary>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare(System.Double)">
+<summary>
+Adds glare effect to the meter.
+</summary>
+<param name="radius">
+The radius of the face of the meter. The default is the meter scale radius as set by "AngularMeter.setMeter".
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare(System.Double,System.Double)">
+<summary>
+Adds glare effect to the meter.
+</summary>
+<param name="radius">
+The radius of the face of the meter. The default is the meter scale radius as set by "AngularMeter.setMeter".
+</param>
+<param name="span">
+The angular span of the arc that divides the face into two parts. The dividing arc intersects with the face border at two points. The angular span is defined as center angle of these two points (that is, the angle subtended at the meter center by these two points).
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare(System.Double,System.Double,System.Double)">
+<summary>
+Adds glare effect to the meter.
+</summary>
+<param name="radius">
+The radius of the face of the meter. The default is the meter scale radius as set by "AngularMeter.setMeter".
+</param>
+<param name="span">
+The angular span of the arc that divides the face into two parts. The dividing arc intersects with the face border at two points. The angular span is defined as center angle of these two points (that is, the angle subtended at the meter center by these two points).
+</param>
+<param name="rotate">
+By default, the glare will be symmetrically with respect to the vertical axis. This argument can be used to rotate the glare clockwise in degrees.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare(System.Double,System.Double,System.Double,System.Double)">
+<summary>
+Adds glare effect to the meter.
+</summary>
+<param name="radius">
+The radius of the face of the meter. The default is the meter scale radius as set by "AngularMeter.setMeter".
+</param>
+<param name="span">
+The angular span of the arc that divides the face into two parts. The dividing arc intersects with the face border at two points. The angular span is defined as center angle of these two points (that is, the angle subtended at the meter center by these two points).
+</param>
+<param name="rotate">
+By default, the glare will be symmetrically with respect to the vertical axis. This argument can be used to rotate the glare clockwise in degrees.
+</param>
+<param name="glareRadius">
+The radius of the arc that divides the face into two parts. A positive value means the arc will result in a convex glare, while a negative means concave glare. The default is equal to 1.5 times of the face radius.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addGlare(System.Double,System.Double,System.Double,System.Double,System.Double)">
+<summary>
+Adds glare effect to the meter.
+</summary>
+<param name="radius">
+The radius of the face of the meter. The default is the meter scale radius as set by "AngularMeter.setMeter".
+</param>
+<param name="span">
+The angular span of the arc that divides the face into two parts. The dividing arc intersects with the face border at two points. The angular span is defined as center angle of these two points (that is, the angle subtended at the meter center by these two points).
+</param>
+<param name="rotate">
+By default, the glare will be symmetrically with respect to the vertical axis. This argument can be used to rotate the glare clockwise in degrees.
+</param>
+<param name="glareRadius">
+The radius of the arc that divides the face into two parts. A positive value means the arc will result in a convex glare, while a negative means concave glare. The default is equal to 1.5 times of the face radius.
+</param>
+<param name="intensity">
+The intensity of the glare, which must be from 0 to 1. A value of 0 means no glare, while a value of 1 means the glare will be 100% white.
+</param>
+</member>
 <member name="M:ChartDirector.AngularMeter.addZone(System.Double,System.Double,System.Int32,System.Int32,System.Int32)">
 <summary>
 Adds a colored zone to the meter.
@@ -18502,9 +19326,231 @@ The fill color of the ring sector.
 The edge color of the ring sector. The default is the same as the fill color.
 </param>
 </member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32,System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="endOffset">
+The distance between the ending point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer(System.Double,System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="endOffset">
+The distance between the ending point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="widthRatio">
+The width of the pointer relative to the default width. NoValue means the width is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32,System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="endOffset">
+The distance between the ending point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.addPointer2(System.Double,System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double)">
+<summary>
+Adds a new style pointer to the meter.
+</summary>
+<param name="value">
+The value that the pointer points to.
+</param>
+<param name="fillColor">
+The fill color of the pointer.
+</param>
+<param name="edgeColor">
+The edge color of the pointer. -1 means the edge color is the same as the fill color.
+</param>
+<param name="pointerType">
+The pointer shape. Please refer to "MeterPointer.setShapeAndOffset" for the available shapes.
+</param>
+<param name="startOffset">
+The distance between the starting point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="endOffset">
+The distance between the ending point of the pointer with the meter center, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined. Please refer to "MeterPointer.setShapeAndOffset" for more information about this argument.
+</param>
+<param name="widthRatio">
+The width of the pointer relative to the default width. NoValue means the width is automatically determined.
+</param>
+</member>
 <member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32)">
 <summary>
-Set the radius and color of the pointer cap.
+Sets the radius and color of a classical pointer cap.
 </summary>
 <param name="radius">
 The radius of pointer cap circle in pixels.
@@ -18515,7 +19561,7 @@ The fill color of the pointer cap circle.
 </member>
 <member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32,System.Int32)">
 <summary>
-Set the radius and color of the pointer cap.
+Sets the radius and color of a classical pointer cap.
 </summary>
 <param name="radius">
 The radius of pointer cap circle in pixels.
@@ -18525,6 +19571,281 @@ The fill color of the pointer cap circle.
 </param>
 <param name="edgeColor">
 The edge color of the pointer cap circle.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap(System.Int32)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+<param name="frontRadiusRatio">
+The radius of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.11.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap(System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+<param name="frontRadiusRatio">
+The radius of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.11.
+</param>
+<param name="frontEdgeWidthRatio">
+The edge width of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.01.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32,System.Int32)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32,System.Int32,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32,System.Int32,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+<param name="frontRadiusRatio">
+The radius of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.11.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.setCap2(System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Double,System.Double)">
+<summary>
+Configures the meter to use new style pointer cap.
+</summary>
+<param name="backColor">
+The fill color of the back circle.
+</param>
+<param name="frontColor">
+The fill color of the front circle.
+</param>
+<param name="frontEdgeColor">
+The edge color of the front circle.
+</param>
+<param name="lightingRatio">
+By default, lighting effect is applied to the back circle and the edge of the front circle, such that the bottom-right side will appear to be darkened. This argument configures how bright the bottom-right side is. The default value is 0.2, which means the bottom-right side is 20% as bright as the top-left side. Setting this argument to 1 disables the lighting effect.
+</param>
+<param name="backRadiusRatio">
+The radius of the back circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.15.
+</param>
+<param name="frontRadiusRatio">
+The radius of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.11.
+</param>
+<param name="frontEdgeWidthRatio">
+The edge width of the front circle, expressed as a ratio to the meter scale radius (set with "AngularMeter.setMeter"). The default is 0.01.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.relativeRadialGradient(System.Double[])">
+<summary>
+Creates a radial gradient color relative to the meter center and radius.
+</summary>
+<param name="gradient">
+An numeric array defining the color stops. Please refer to the description above for details.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.relativeRadialGradient(System.Double[],System.Double)">
+<summary>
+Creates a radial gradient color relative to the meter center and radius.
+</summary>
+<param name="gradient">
+An numeric array defining the color stops. Please refer to the description above for details.
+</param>
+<param name="radius">
+The reference radius of the radial gradient. The default is the meter scale radius (set by "AngularMeter.setMeter").
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.relativeLinearGradient(System.Double[])">
+<summary>
+Creates a linear gradient color relative to the meter center and radius.
+</summary>
+<param name="gradient">
+An numeric array defining the color stops. Please refer to the description above for details.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.relativeLinearGradient(System.Double[],System.Double)">
+<summary>
+Creates a linear gradient color relative to the meter center and radius.
+</summary>
+<param name="gradient">
+An numeric array defining the color stops. Please refer to the description above for details.
+</param>
+<param name="angle">
+The direction of the linear gradient line. It is specified as a clockwise angle in degrees, with 0 being the upward pointing direction.
+</param>
+</member>
+<member name="M:ChartDirector.AngularMeter.relativeLinearGradient(System.Double[],System.Double,System.Double)">
+<summary>
+Creates a linear gradient color relative to the meter center and radius.
+</summary>
+<param name="gradient">
+An numeric array defining the color stops. Please refer to the description above for details.
+</param>
+<param name="angle">
+The direction of the linear gradient line. It is specified as a clockwise angle in degrees, with 0 being the upward pointing direction.
+</param>
+<param name="radius">
+The reference radius to define the relative distance. The default is the meter scale radius (set by "AngularMeter.setMeter").
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setPos(System.Double)">
@@ -18570,7 +19891,7 @@ Sets the shape of the meter pointer to one of the built-in shapes.
 One of the predefined pointer shape constants to specify the pointer shape to use.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setShape(System.Int32,System.Double,System.Double)">
@@ -18581,10 +19902,10 @@ Sets the shape of the meter pointer to one of the built-in shapes.
 One of the predefined pointer shape constants to specify the pointer shape to use.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 <param name="widthRatio">
-The width ratio applies to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
+The width ratio to be applied to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setShape(System.Int32[])">
@@ -18603,7 +19924,7 @@ Sets the shape of the meter pointer to a custom polygon.
 An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setShape(System.Int32[],System.Double,System.Double)">
@@ -18614,10 +19935,10 @@ Sets the shape of the meter pointer to a custom polygon.
 An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 <param name="widthRatio">
-The width ratio applies to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
+The width ratio to be applied to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setShape2(System.Int32[])">
@@ -18636,7 +19957,7 @@ Sets the shape of the meter pointer to a custom polygon.
 An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setShape2(System.Int32[],System.Double,System.Double)">
@@ -18647,10 +19968,160 @@ Sets the shape of the meter pointer to a custom polygon.
 An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
 </param>
 <param name="lengthRatio">
-The length ratio applies to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
+The length ratio to be applied to the pointer. NoValue means the lengthRatio is not modified. The default is 1.0 for angular meters and 0.75 for linear meters.
 </param>
 <param name="widthRatio">
-The width ratio applies to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
+The width ratio to be applied to the pointer. NoValue means the widthRatio is not modified. The default is 1.0.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32)">
+<summary>
+Sets the shape of new style angular meter pointers.
+</summary>
+<param name="pointerType">
+Should be "TriangularPointer2" for new style triangular pointer, and "LinePointer2" for new style line pointer.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers.
+</summary>
+<param name="pointerType">
+Should be "TriangularPointer2" for new style triangular pointer, and "LinePointer2" for new style line pointer.
+</param>
+<param name="startOffset">
+The radius the pointer starts at, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32,System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers.
+</summary>
+<param name="pointerType">
+Should be "TriangularPointer2" for new style triangular pointer, and "LinePointer2" for new style line pointer.
+</param>
+<param name="startOffset">
+The radius the pointer starts at, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined.
+</param>
+<param name="endOffset">
+he radius the pointer ends at, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32,System.Double,System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers.
+</summary>
+<param name="pointerType">
+Should be "TriangularPointer2" for new style triangular pointer, and "LinePointer2" for new style line pointer.
+</param>
+<param name="startOffset">
+The radius the pointer starts at, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined.
+</param>
+<param name="endOffset">
+he radius the pointer ends at, expressed as a ratio to the scale radius. NoValue means the radius is automatically determined.
+</param>
+<param name="widthRatio">
+The width of the pointer relative to the default width. NoValue means the width is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32[])">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32[],System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32[],System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="endOffset">
+The position of the ending point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset(System.Int32[],System.Double,System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="endOffset">
+The position of the ending point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="widthRatio">
+The width of the pointer relative to the default width. NoValue means the width is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset2(System.Int32[])">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset2(System.Int32[],System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset2(System.Int32[],System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="endOffset">
+The position of the ending point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+</member>
+<member name="M:ChartDirector.MeterPointer.setShapeAndOffset2(System.Int32[],System.Double,System.Double,System.Double)">
+<summary>
+Sets the shape of new style angular meter pointers to a custom polygon.
+</summary>
+<param name="pointerCoor">
+An array of numbers x0, y0, x1, y1, x2, y2, ..., representing the coordinates the polygon vertices.
+</param>
+<param name="startOffset">
+The position of the starting point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="endOffset">
+The position of the ending point as a ratio to the scale radius. NoValue means the position is automatically determined.
+</param>
+<param name="widthRatio">
+The width of the pointer relative to the default width. NoValue means the width is automatically determined.
 </param>
 </member>
 <member name="M:ChartDirector.MeterPointer.setZOrder(System.Int32)">
@@ -18813,7 +20284,58 @@ The color of the pointer rail.
 The line width of the the pointer rail in pixels.
 </param>
 <param name="railOffset">
-The gap between the pointer rail and the plot area in pixels. A negative value will mean the pointer rail may move within the plot area.
+The gap between the pointer rail and the meter scale in pixels. A negative value means the pointer rail is inside the meter scale region.
+</param>
+</member>
+<member name="M:ChartDirector.LinearMeter.addBar(System.Double,System.Double,System.Int32)">
+<summary>
+Adds a bar to the meter.
+</summary>
+<param name="startValue">
+The start value of the bar.
+</param>
+<param name="endValue">
+The end value of the bar.
+</param>
+<param name="color">
+The color of the bar.
+</param>
+</member>
+<member name="M:ChartDirector.LinearMeter.addBar(System.Double,System.Double,System.Int32,System.Int32)">
+<summary>
+Adds a bar to the meter.
+</summary>
+<param name="startValue">
+The start value of the bar.
+</param>
+<param name="endValue">
+The end value of the bar.
+</param>
+<param name="color">
+The color of the bar.
+</param>
+<param name="raisedEffect">
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
+</param>
+</member>
+<member name="M:ChartDirector.LinearMeter.addBar(System.Double,System.Double,System.Int32,System.Int32,System.Int32)">
+<summary>
+Adds a bar to the meter.
+</summary>
+<param name="startValue">
+The start value of the bar.
+</param>
+<param name="endValue">
+The end value of the bar.
+</param>
+<param name="color">
+The color of the bar.
+</param>
+<param name="raisedEffect">
+The 3D border width. For positive values, the border will appear raised. For negative values, the border will appear depressed. A zero value means the border will appear flat. This argument can also be used to specify "Chart.glassEffect", "Chart.softLighting", "Chart.cylinderEffect" or "Chart.flatBorder" effects.
+</param>
+<param name="roundedCorners">
+The radius for the two corners at the end position of the bar.
 </param>
 </member>
 <member name="M:ChartDirector.LinearMeter.addZone(System.Double,System.Double,System.Int32)">
@@ -20415,7 +21937,7 @@ The fill color when the indicator falls below the lower threshold line.
 </member>
 <member name="M:ChartDirector.WebChartViewer.OnPageInit(System.Web.UI.Page)">
 <summary>
-Connects the WebChartViewer system to the Web Form to support dynamically created WebChartViewer controls.
+Handles the Web Form Init event to support dynamically created WebChartViewer or "WebViewPortControl".
 </summary>
 <param name="currentPage">
 The current Web Form.
@@ -20434,25 +21956,6 @@ Creates a special URL to represent post back operation for use in image maps.
 An arbitrary string that will become the "cookie" attribute of "WebHotSpotEventArgs" when the "WebChartViewer.ClickHotSpot" event is fired.
 </param>
 </member>
-<member name="M:ChartDirector.WebChartViewer.MakeDelayedMap(System.String)">
-<summary>
-Creates a delayed image map suitable for use in "JsChartViewer".
-</summary>
-<param name="imageMap">
-The image map to be converted to a delayed image map.
-</param>
-</member>
-<member name="M:ChartDirector.WebChartViewer.MakeDelayedMap(System.String,System.Boolean)">
-<summary>
-Creates a delayed image map suitable for use in "JsChartViewer".
-</summary>
-<param name="imageMap">
-The image map to be converted to a delayed image map.
-</param>
-<param name="compress">
-Use HTTP compression if the browser supports it.
-</param>
-</member>
 <member name="M:ChartDirector.WebChartViewer.IsPartialUpdateRequest(System.Web.UI.Page)">
 <summary>
 Checks if the current HTTP Request is a partial update request (AJAX request) sent using "JsChartViewer.partialUpdate".
@@ -20468,6 +21971,11 @@ Checks if the current HTTP request is a stream update request sent using "JsChar
 <param name="currentPage">
 The current Web Form.
 </param>
+</member>
+<member name="M:ChartDirector.WebChartViewer.IsAttachmentRequest">
+<summary>
+Checks if the current partial update request (AJAX request) is an attachment request sent using "JsChartViewer.partialUpdateAsAttachment".
+</summary>
 </member>
 <member name="M:ChartDirector.WebChartViewer.IsViewPortChangedEvent(System.Web.UI.Page)">
 <summary>
@@ -20516,8 +22024,27 @@ The delay time in milliseconds, after which the pop up message will automaticall
 </member>
 <member name="M:ChartDirector.WebChartViewer.StreamChart">
 <summary>
-Sends the chart image out as a MIME stream of image type.
+Sends the chart image out as a MIME stream.
 </summary>
+</member>
+<member name="M:ChartDirector.WebChartViewer.StreamChart(System.String)">
+<summary>
+Sends the chart image out as a MIME stream.
+</summary>
+<param name="filename">
+The suggested filename to use when user saves the chart image as a file on the browser side.
+</param>
+</member>
+<member name="M:ChartDirector.WebChartViewer.StreamChart(System.String,System.Boolean)">
+<summary>
+Sends the chart image out as a MIME stream.
+</summary>
+<param name="filename">
+The suggested filename to use when user saves the chart image as a file on the browser side.
+</param>
+<param name="asAttachment">
+Specifies whether the stream is an attachment.
+</param>
 </member>
 <member name="M:ChartDirector.WebChartViewer.SetCustomAttr(System.String,System.String)">
 <summary>
@@ -20540,7 +22067,7 @@ The attribute key.
 </member>
 <member name="M:ChartDirector.WebChartViewer.setFullRange(System.String,System.Double,System.Double)">
 <summary>
-Defines the full range of a view port data scale.
+Defines the full range of a viewport data scale.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20554,7 +22081,7 @@ The maximum value of the data scale.
 </member>
 <member name="M:ChartDirector.WebChartViewer.setFullRange(System.String,System.DateTime,System.DateTime)">
 <summary>
-Defines the full range of a view port data scale.
+Defines the full range of a viewport data scale.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20568,24 +22095,24 @@ The maximum value of the data scale.
 </member>
 <member name="M:ChartDirector.WebChartViewer.getValueAtViewPort(System.String,System.Double)">
 <summary>
-Converts a view port coordinate to a value of the specified data scale.
+Converts a viewport coordinate to a value of the specified data scale.
 </summary>
 <param name="id">
 The name of the data scale.
 </param>
 <param name="vpCoor">
-The view port coordinate.
+The viewport coordinate.
 </param>
 </member>
 <member name="M:ChartDirector.WebChartViewer.getValueAtViewPort(System.String,System.Double,System.Boolean)">
 <summary>
-Converts a view port coordinate to a value of the specified data scale.
+Converts a viewport coordinate to a value of the specified data scale.
 </summary>
 <param name="id">
 The name of the data scale.
 </param>
 <param name="vpCoor">
-The view port coordinate.
+The viewport coordinate.
 </param>
 <param name="isLogScale">
 true if the conversion is based on a logarithmic scale. false if the conversion is based on a non-logarithmic scale.
@@ -20593,7 +22120,7 @@ true if the conversion is based on a logarithmic scale. false if the conversion 
 </member>
 <member name="M:ChartDirector.WebChartViewer.getViewPortAtValue(System.String,System.Double)">
 <summary>
-Converts a value of the specified data scale to a view port coordinate.
+Converts a value of the specified data scale to a viewport coordinate.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20604,7 +22131,7 @@ The value to be converted.
 </member>
 <member name="M:ChartDirector.WebChartViewer.getViewPortAtValue(System.String,System.Double,System.Boolean)">
 <summary>
-Converts a value of the specified data scale to a view port coordinate.
+Converts a value of the specified data scale to a viewport coordinate.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20618,7 +22145,7 @@ true if the conversion is based on a logarithmic scale. false if the conversion 
 </member>
 <member name="M:ChartDirector.WebChartViewer.syncLinearAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a linear "Axis" with the part of the data scale in view port.
+Synchronizes a linear "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20629,7 +22156,7 @@ The "Axis" object to synchronize with.
 </member>
 <member name="M:ChartDirector.WebChartViewer.syncLogAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a logarithmic "Axis" with the part of the data scale in view port.
+Synchronizes a logarithmic "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20640,7 +22167,7 @@ The "Axis" object to synchronize with.
 </member>
 <member name="M:ChartDirector.WebChartViewer.syncDateAxisWithViewPort(System.String,ChartDirector.Axis)">
 <summary>
-Synchronizes a date/time "Axis" with the part of the data scale in view port.
+Synchronizes a date/time "Axis" with the part of the data scale in viewport.
 </summary>
 <param name="id">
 The name of the data scale.
@@ -20651,12 +22178,12 @@ The "Axis" object to synchronize with.
 </member>
 <member name="M:ChartDirector.Chart.ClearTypeColor">
 <summary>
-Gets a value to represent that standard ClearType technology be used for font rendering.
+Gets a value to represent that standard ClearType technology be used for drawing text.
 </summary>
 </member>
 <member name="M:ChartDirector.Chart.ClearTypeColor(System.Double)">
 <summary>
-Gets a value to represent that standard ClearType technology be used for font rendering.
+Gets a value to represent that standard ClearType technology be used for drawing text.
 </summary>
 <param name="gamma">
 Specifies the level of gamma correction used for ClearType font rendering. This is usually a number between 1 to 2.5. A value of 0 means the default gamma level.
@@ -20664,12 +22191,12 @@ Specifies the level of gamma correction used for ClearType font rendering. This 
 </member>
 <member name="M:ChartDirector.Chart.ClearTypeMono">
 <summary>
-Gets a value to represent that hardware independent ClearType  technology be used for font rendering.
+Gets a value to represent that monochrome ClearType technology be used for drawing text.
 </summary>
 </member>
 <member name="M:ChartDirector.Chart.ClearTypeMono(System.Double)">
 <summary>
-Gets a value to represent that hardware independent ClearType  technology be used for font rendering.
+Gets a value to represent that monochrome ClearType technology be used for drawing text.
 </summary>
 <param name="gamma">
 Specifies the level of gamma correction used for ClearType font rendering. This is usually a number between 1 to 2.5. A value of 0 means the default gamma level.
@@ -21152,6 +22679,14 @@ The specular reflection coefficient of the Phong lighting model.
 The shininess coefficient of the Phong lighting model.
 </param>
 </member>
+<member name="M:ChartDirector.Chart.flatBorder(System.Int32)">
+<summary>
+Specifies a flat border of a given width.
+</summary>
+<param name="width">
+The border width. A positive value means the border is drawn inside the box or bar. A negative value means the border is outside the box or bar.
+</param>
+</member>
 <member name="M:ChartDirector.Chart.phongLighting">
 <summary>
 Sets the parameters for the phong lighting effect.
@@ -21203,7 +22738,7 @@ The number of points the polygon has.
 Gets the shape id that represents a '+' shape.
 </summary>
 <param name="width">
-The percentage width of the arms of the a '+' relative to the entire shape. Must be between 0 and 1.
+The width of the arms of the a '+' as a ratio to the size of the shape. Must be between 0 and 1.
 </param>
 </member>
 <member name="M:ChartDirector.Chart.Cross2Shape(System.Double)">
@@ -21211,7 +22746,62 @@ The percentage width of the arms of the a '+' relative to the entire shape. Must
 Gets the shape id that represents a 'X' shape.
 </summary>
 <param name="width">
-The percentage width of the arms of the a 'X' relative to the entire shape. Must be between 0 and 1.
+The width of the arms of the a 'X' as a ratio to the size of the shape. Must be between 0 and 1.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.ArrowShape">
+<summary>
+Gets the shape id that represents an arrow shape.
+</summary>
+</member>
+<member name="M:ChartDirector.Chart.ArrowShape(System.Double)">
+<summary>
+Gets the shape id that represents an arrow shape.
+</summary>
+<param name="angle">
+The clockwise angle of the arrow relative to the upward pointing position.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.ArrowShape(System.Double,System.Double)">
+<summary>
+Gets the shape id that represents an arrow shape.
+</summary>
+<param name="angle">
+The clockwise angle of the arrow relative to the upward pointing position.
+</param>
+<param name="widthRatio">
+The width of the base of the arrow head as a ratio to the height of the entire arrow. Must be between 0 and 1.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.ArrowShape(System.Double,System.Double,System.Double)">
+<summary>
+Gets the shape id that represents an arrow shape.
+</summary>
+<param name="angle">
+The clockwise angle of the arrow relative to the upward pointing position.
+</param>
+<param name="widthRatio">
+The width of the base of the arrow head as a ratio to the height of the entire arrow. Must be between 0 and 1.
+</param>
+<param name="stemWidthRatio">
+The width of the arrow stem as a ratio to the width of the base of the arrow head. Must be between 0 and 1.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.ArrowShape(System.Double,System.Double,System.Double,System.Double)">
+<summary>
+Gets the shape id that represents an arrow shape.
+</summary>
+<param name="angle">
+The clockwise angle of the arrow relative to the upward pointing position.
+</param>
+<param name="widthRatio">
+The width of the base of the arrow head as a ratio to the height of the entire arrow. Must be between 0 and 1.
+</param>
+<param name="stemWidthRatio">
+The width of the arrow stem as a ratio to the width of the base of the arrow head. Must be between 0 and 1.
+</param>
+<param name="stemLengthRatio">
+The length of the arrow stem as a ratio to the height of the entire arrow. Must be between 0 and 1.
 </param>
 </member>
 <member name="M:ChartDirector.Chart.PolynomialRegression(System.Int32)">
@@ -21220,6 +22810,54 @@ Sets the degree of the polynomial regression to be used in a trend layer.
 </summary>
 <param name="n">
 The degree of the polynomial.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.StartOfSecondFilter">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new second in a date/time series.
+</summary>
+</member>
+<member name="M:ChartDirector.Chart.StartOfSecondFilter(System.Int32)">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new second in a date/time series.
+</summary>
+<param name="labelStep">
+For dates/times that matches the start of second criteria, picks only 1 out of every "labelStep" number of elements. For example, if this argument is 3, only 1 of every 3 elements that at at the start of second will be selected.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.StartOfSecondFilter(System.Int32,System.Double)">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new second in a date/time series.
+</summary>
+<param name="labelStep">
+For dates/times that matches the start of second criteria, picks only 1 out of every "labelStep" number of elements. For example, if this argument is 3, only 1 of every 3 elements that at at the start of second will be selected.
+</param>
+<param name="initialMargin">
+If the first label is "near" the exact starting instance of the current second to within the ratio specified in the initial margin, it will be considered to have matched the start of second criteria.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.StartOfMinuteFilter">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new minute in a date/time series.
+</summary>
+</member>
+<member name="M:ChartDirector.Chart.StartOfMinuteFilter(System.Int32)">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new minute in a date/time series.
+</summary>
+<param name="labelStep">
+For dates/times that matches the start of minute criteria, picks only 1 out of every "labelStep" number of elements. For example, if this argument is 3, only 1 of every 3 elements that at at the start of minute will be selected.
+</param>
+</member>
+<member name="M:ChartDirector.Chart.StartOfMinuteFilter(System.Int32,System.Double)">
+<summary>
+Creates a data filter that matches date/times that represent the start of a new minute in a date/time series.
+</summary>
+<param name="labelStep">
+For dates/times that matches the start of minute criteria, picks only 1 out of every "labelStep" number of elements. For example, if this argument is 3, only 1 of every 3 elements that at at the start of minute will be selected.
+</param>
+<param name="initialMargin">
+If the first label is "near" the exact starting instance of the current minute to within the ratio specified in the initial margin, it will be considered to have matched the start of minute criteria.
 </param>
 </member>
 <member name="M:ChartDirector.Chart.StartOfHourFilter">
@@ -21411,7 +23049,7 @@ The number of elements to copy.
 </member>
 <member name="P:ChartDirector.WinChartViewer.Chart">
 <summary>
-Gets or sets a "BaseChart" object to be used with the ChartViewer.
+Gets or sets a "BaseChart" object to be used with the WinChartViewer.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.Image">
@@ -21421,7 +23059,7 @@ Gets or sets the chart image to view.
 </member>
 <member name="P:ChartDirector.WinChartViewer.ChartSizeMode">
 <summary>
-Determine the sizing method of the WinChartViewer control.
+Determine the sizing method of the chart image.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ImageMap">
@@ -21456,42 +23094,42 @@ Gets or sets the length of time (in milliseconds) that must transpire before sub
 </member>
 <member name="P:ChartDirector.WinChartViewer.ChartMouseX">
 <summary>
-Gets the mouse cursor x-coordinate in the chart pixel coordinate system.
+Gets the mouse  x-coordinate in the chart pixel coordinate system.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ChartMouseY">
 <summary>
-Gets the mouse cursor y-coordinate in the chart pixel coordinate system.
+Gets the mouse  y-coordinate in the chart pixel coordinate system.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.PlotAreaMouseX">
 <summary>
-Gets the mouse cursor x-coordinate on the plot area in the chart pixel coordinate system.
+Gets the mouse  x-coordinate on the plot area in the chart pixel coordinate system.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.PlotAreaMouseY">
 <summary>
-Gets the mouse cursor y-coordinate on the plot area in the chart pixel coordinate system.
+Gets the mouse  y-coordinate on the plot area in the chart pixel coordinate system.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ViewPortLeft">
 <summary>
-Gets or sets the position of the left side of the view port.
+Gets or sets the position of the left side of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ViewPortTop">
 <summary>
-Gets or sets the position of the top side of the view port.
+Gets or sets the position of the top side of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ViewPortWidth">
 <summary>
-Gets or sets the width of the view port.
+Gets or sets the width of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ViewPortHeight">
 <summary>
-Gets or sets the height of the view port.
+Gets or sets the height of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.MouseUsage">
@@ -21519,24 +23157,34 @@ Gets or sets the magnification ratio for each zoom in click of the mouse.
 Gets or sets the magnification ratio for each zoom out click of the mouse.
 </summary>
 </member>
+<member name="P:ChartDirector.WinChartViewer.MouseWheelZoomRatio">
+<summary>
+Gets or sets the magnification ratio for each mouse wheel event.
+</summary>
+</member>
+<member name="P:ChartDirector.WinChartViewer.MouseWheelAutoFocus">
+<summary>
+Determines whether to automatically grab the focus to support mouse wheel zooming.
+</summary>
+</member>
 <member name="P:ChartDirector.WinChartViewer.ZoomInWidthLimit">
 <summary>
-Gets or sets the view port width at maximum zoom in.
+Gets or sets the viewport width at maximum zoom in.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ZoomOutWidthLimit">
 <summary>
-Gets or sets the view port width at maximum zoom out.
+Gets or sets the viewport width at maximum zoom out.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ZoomInHeightLimit">
 <summary>
-Gets or sets the view port height at maximum zoom in.
+Gets or sets the viewport height at maximum zoom in.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.ZoomOutHeightLimit">
 <summary>
-Gets or sets the view port height at maximum zoom out.
+Gets or sets the viewport height at maximum zoom out.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.MinimumDrag">
@@ -21592,6 +23240,11 @@ Gets or sets the minimum gap interval between two ViewPortChanged events in mill
 <member name="P:ChartDirector.WinChartViewer.IsMouseOnPlotArea">
 <summary>
 Checks if the mouse cursor is on the extended plot area.
+</summary>
+</member>
+<member name="P:ChartDirector.WinChartViewer.IsMouseDragging">
+<summary>
+Checks if the mouse is dragging on the plot area.
 </summary>
 </member>
 <member name="P:ChartDirector.WinChartViewer.IsInMouseMoveEvent">
@@ -21666,7 +23319,7 @@ This event occurs when the mouse cursor is over a hot spot on the chart image an
 </member>
 <member name="E:ChartDirector.WinChartViewer.ViewPortChanged">
 <summary>
-This event occurs when the view port is changed through mouse actions, or when "WinChartViewer.updateViewPort" is called.
+This event occurs when the viewport is changed through mouse actions, or when "WinChartViewer.updateViewPort" is called.
 </summary>
 </member>
 <member name="E:ChartDirector.WinChartViewer.SelectionChanged">
@@ -21701,22 +23354,87 @@ Determines if the selection rectangle is visible.
 </member>
 <member name="P:ChartDirector.WinSelectionEventArgs.ViewPortLeft">
 <summary>
-Gets the position of the left edge of the selection rectangle in view port units.
+Gets the position of the left edge of the selection rectangle in viewport units.
 </summary>
 </member>
 <member name="P:ChartDirector.WinSelectionEventArgs.ViewPortTop">
 <summary>
-Gets the position of the top edge of the selection rectangle in view port units.
+Gets the position of the top edge of the selection rectangle in viewport units.
 </summary>
 </member>
 <member name="P:ChartDirector.WinSelectionEventArgs.ViewPortWidth">
 <summary>
-Gets the width of the selection rectangle in view port units.
+Gets the width of the selection rectangle in viewport units.
 </summary>
 </member>
 <member name="P:ChartDirector.WinSelectionEventArgs.ViewPortHeight">
 <summary>
-Gets the height of the selection rectangle in view port units.
+Gets the height of the selection rectangle in viewport units.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.DragInsideToMove">
+<summary>
+Enables or disables  dragging inside the viewport to move it.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.DragBorderToResize">
+<summary>
+Enables or disables  dragging the viewport border to resize it.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.DragOutsideToSelect">
+<summary>
+Enables or disables  dragging outside the viewport to select a new viewport.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ClickToCenter">
+<summary>
+Enables or disables  centering the viewport at the clicked point.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ViewPortExternalColor">
+<summary>
+Gets or sets the  fill color for the region outside the viewport.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ViewPortFillColor">
+<summary>
+Gets or sets the  fill color for the region inside the viewport.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ViewPortBorderColor">
+<summary>
+Gets or sets the  viewport border color.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ViewPortBorderWidth">
+<summary>
+Gets or sets the  viewport border width.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.SelectionBorderColor">
+<summary>
+Gets or sets the  border color of the selection box.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.SelectionBorderWidth">
+<summary>
+Gets or sets the  border width of the selection box.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.ChartSizeMode">
+<summary>
+Determine the sizing method of the chart image.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.Chart">
+<summary>
+Gets or sets the "BaseChart" object for displaying in the control. The chart usually is an overall chart that includes the full data range.
+</summary>
+</member>
+<member name="P:ChartDirector.WinViewPortControl.Viewer">
+<summary>
+Gets or Sets the "WinChartViewer" object to be associated with the WinViewPortControl.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.Image">
@@ -21741,7 +23459,12 @@ Gets or sets the chart metrics of the chart.
 </member>
 <member name="P:ChartDirector.WebChartViewer.ChartSizeMode">
 <summary>
-Determine the sizing method of the WebChartViewer control.
+Determines the sizing method of the WebChartViewer control.
+</summary>
+</member>
+<member name="P:ChartDirector.WebChartViewer.ContentDisposition">
+<summary>
+The suggested filename to use when user saves the chart image as a file on the browser side.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ImageSessionId">
@@ -21751,22 +23474,22 @@ The session variable name used to temporarily store the chart image.
 </member>
 <member name="P:ChartDirector.WebChartViewer.ViewPortLeft">
 <summary>
-Gets or sets the position of the left side of the view port.
+Gets or sets the position of the left side of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ViewPortTop">
 <summary>
-Gets or sets the position of the top side of the view port.
+Gets or sets the position of the top side of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ViewPortWidth">
 <summary>
-Gets or sets the width of the view port.
+Gets or sets the width of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ViewPortHeight">
 <summary>
-Gets or sets the height of the view port.
+Gets or sets the height of the viewport.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.MouseUsage">
@@ -21796,22 +23519,22 @@ Gets or sets the magnification ratio for each zoom out click of the mouse.
 </member>
 <member name="P:ChartDirector.WebChartViewer.ZoomInWidthLimit">
 <summary>
-Gets or sets the view port width at maximum zoom in.
+Gets or sets the viewport width at maximum zoom in.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ZoomOutWidthLimit">
 <summary>
-Gets or sets the view port width at maximum zoom out.
+Gets or sets the viewport width at maximum zoom out.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ZoomInHeightLimit">
 <summary>
-Gets or sets the view port height at maximum zoom in.
+Gets or sets the viewport height at maximum zoom in.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.ZoomOutHeightLimit">
 <summary>
-Gets or sets the view port height at maximum zoom out.
+Gets or sets the viewport height at maximum zoom out.
 </summary>
 </member>
 <member name="P:ChartDirector.WebChartViewer.MinimumDrag">
@@ -21856,7 +23579,7 @@ This event occurs when the mouse is clicked on a hot spot of the chart image.
 </member>
 <member name="E:ChartDirector.WebChartViewer.ViewPortChanged">
 <summary>
-This event occurs when the view port is changed by mouse actions in the browser side Javascript ChartViewer ("JsChartViewer").
+This event occurs when the viewport is changed by mouse actions in the browser side Javascript ChartViewer ("JsChartViewer").
 </summary>
 </member>
 <member name="P:ChartDirector.WebHotSpotEventArgs.Item">
@@ -21867,6 +23590,31 @@ Gets or sets the value of the specified attribute. In C#, this property is the i
 <member name="P:ChartDirector.WebHotSpotEventArgs.AttrValues">
 <summary>
 Gets a Hashtable containing all attributes and values associated with the hot spot.
+</summary>
+</member>
+<member name="P:ChartDirector.WebViewPortControl.Image">
+<summary>
+Represents the "overall chart" image.
+</summary>
+</member>
+<member name="P:ChartDirector.WebViewPortControl.ChartSizeMode">
+<summary>
+Determines the sizing method of the WebViewPortControl control.
+</summary>
+</member>
+<member name="P:ChartDirector.WebViewPortControl.ContentDisposition">
+<summary>
+The suggested filename to use when user saves the chart image as a file on the browser side.
+</summary>
+</member>
+<member name="P:ChartDirector.WebViewPortControl.ImageSessionId">
+<summary>
+The session variable name used to temporarily store the chart image.
+</summary>
+</member>
+<member name="P:ChartDirector.WebViewPortControl.ChartMetrics">
+<summary>
+Gets or sets the chart metrics of the chart.
 </summary>
 </member>
 <member name="F:ChartDirector.Chart.NoValue">
@@ -22204,6 +23952,16 @@ A constant equals to 4 to represent the line style meter pointer.
 A constant equals to 5 to represent the pencil style meter pointer.
 </summary>
 </member>
+<member name="F:ChartDirector.Chart.TriangularPointer2">
+<summary>
+A constant equals to 6 to represent the new triangular style meter pointer.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.LinePointer2">
+<summary>
+A constant equals to 7 to represent the new line style meter pointer.
+</summary>
+</member>
 <member name="F:ChartDirector.Chart.PNG">
 <summary>
 A constant equals to 0 to represent the PNG image format.
@@ -22219,14 +23977,14 @@ A constant equals to 1 to represent the GIF image format.
 A constant equals to 2 to represent the JPG image format.
 </summary>
 </member>
-<member name="F:ChartDirector.Chart.BMP">
-<summary>
-A constant equals to 4 to represent the BMP image format.
-</summary>
-</member>
 <member name="F:ChartDirector.Chart.WMP">
 <summary>
 A constant equals to 3 to represent the WAP bitmap image format.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.BMP">
+<summary>
+A constant equals to 4 to represent the BMP image format.
 </summary>
 </member>
 <member name="F:ChartDirector.Chart.SVG">
@@ -22236,7 +23994,12 @@ A constant equals to 5 to represent the SVG image format.
 </member>
 <member name="F:ChartDirector.Chart.SVGZ">
 <summary>
-A constant equals to 5 to represent the compressed SVG image format.
+A constant equals to 6 to represent the compressed SVG image format.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.PDF">
+<summary>
+A constant equals to 7 to represent the PDF image format.
 </summary>
 </member>
 <member name="F:ChartDirector.Chart.NoAntiAlias">
@@ -22647,6 +24410,26 @@ A constant equals to 12 to represent  a Blackman graphical re-sampling filter.
 <member name="F:ChartDirector.Chart.BesselFilter">
 <summary>
 A constant equals to 13 to represent  a Bessel graphical re-sampling filter.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.ViewPortNoUpdate">
+<summary>
+A constant equals to   0 to represent  that the viewport  position and size should remain unchanged.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.KeepVisibleRange">
+<summary>
+A constant equals to   1 to represent  that the viewport  should be adjusted to keep the axis end points unchanged.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.ScrollWithMax">
+<summary>
+A constant equals to   2 to represent  that the viewport  should be adjusted to keep the distance from the axis end points to the upper full range unchanged.
+</summary>
+</member>
+<member name="F:ChartDirector.Chart.ScrollWithMin">
+<summary>
+A constant equals to   3 to represent  that the viewport  should be adjusted so keep the distance from the axis end points to the lower full range unchanged.
 </summary>
 </member>
 </members>

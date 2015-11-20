@@ -253,6 +253,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Collapse_16 {
+            get {
+                object obj = ResourceManager.GetObject("Collapse_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Columns_16 {
             get {
                 object obj = ResourceManager.GetObject("Columns_16", resourceCulture);
@@ -453,6 +463,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Expand_16 {
+            get {
+                object obj = ResourceManager.GetObject("Expand_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Export_File_16 {
             get {
                 object obj = ResourceManager.GetObject("Export_File_16", resourceCulture);
@@ -553,9 +573,49 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Filter_16 {
+            get {
+                object obj = ResourceManager.GetObject("Filter_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Graph {
             get {
                 object obj = ResourceManager.GetObject("Graph", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grid_Collapse {
+            get {
+                object obj = ResourceManager.GetObject("Grid_Collapse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grid_Expand {
+            get {
+                object obj = ResourceManager.GetObject("Grid_Expand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grid_NoAction2 {
+            get {
+                object obj = ResourceManager.GetObject("Grid_NoAction2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

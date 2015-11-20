@@ -22,7 +22,7 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>flee.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <NoWin32Manifest>False</NoWin32Manifest>
     <DelaySign>False</DelaySign>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
@@ -43,6 +43,7 @@
     <NoWarn>41999,42016</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>None</DebugType>
@@ -51,6 +52,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <NoWarn>41999,42016</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <Optimize>true</Optimize>
@@ -75,6 +77,7 @@
     <NoWarn>41999,42016</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Demo_Dbg' ">
     <Optimize>False</Optimize>
@@ -87,6 +90,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <NoWarn>41999,42016</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Demo' ">
     <Optimize>true</Optimize>
@@ -100,6 +104,7 @@
     <NoWarn>41999,42016</NoWarn>
     <WarningsAsErrors>42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug_NoLicense' ">
     <Optimize>False</Optimize>

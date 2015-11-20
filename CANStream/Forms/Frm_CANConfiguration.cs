@@ -127,7 +127,7 @@ namespace CANStream
         private void Frm_CANConfiguration_Load(object sender, EventArgs e)
         {
             Cmb_ValueFormat.Items.Clear();
-            Cmb_ValueFormat.Items.AddRange(Enum.GetNames(typeof(CanParameterValueFormat)));
+            Cmb_ValueFormat.Items.AddRange(Enum.GetNames(typeof(SignalValueFormat)));
 
             ShowConfiguration();
         }
@@ -520,13 +520,13 @@ namespace CANStream
         {
             if (!(bParameterEdition))
             {
-                CanParameterValueFormat eFormat;
+                SignalValueFormat eFormat;
 
                 if (Enum.TryParse(Cmb_ValueFormat.Text, out eFormat))
                 {
                     switch (eFormat)
                     {
-                        case CanParameterValueFormat.Decimal:
+                        case SignalValueFormat.Decimal:
 
                             Lbl_Decimals.Enabled = true;
                             Txt_Decimals.Enabled = true;
@@ -535,7 +535,7 @@ namespace CANStream
 
                             break;
 
-                        case CanParameterValueFormat.Enum:
+                        case SignalValueFormat.Enum:
 
                             Lbl_Decimals.Enabled = false;
                             Txt_Decimals.Text = "";
@@ -1218,69 +1218,11 @@ namespace CANStream
             					oActiveParameter = oActiveMessage.GetCANParameter(nItem.Text, ParameterResearchOption.Name);
 
             					if (!(oActiveParameter == null))
-            					{
-            						bParameterEdition = true;
-            						
-            						tabControl1.SelectedTab = Tab_Parameter;
-            						Grp_ParameterForm.Enabled = true;
-
-            						Txt_ParamName.Text = oActiveParameter.Name;
-            						Txt_ParamStartBit.Text = oActiveParameter.StartBit.ToString();
-            						Txt_ParamLength.Text = oActiveParameter.Length.ToString();
-            						Cmb_ParamEndianess.Text = oActiveParameter.Endianess.ToString();
-            						Chk_Signed.Checked = oActiveParameter.Signed;
-            						Txt_ParamUnit.Text = oActiveParameter.Unit;
-            						Txt_ParamGain.Text = oActiveParameter.Gain.ToString();
-            						Txt_ParamZero.Text = oActiveParameter.Zero.ToString();
-            						Txt_ParamComment.Text=oActiveParameter.Comment;
-
-            						if (oActiveParameter.IsMultiplexed)
-            						{
-            							CreatMultiplexerIdList(oActiveMessage);
-            							Chk_MuxParameter.Checked=true;
-            							Cmb_ParamMultiplexerName.Text = oActiveMessage.MultiplexerName;
-            							Cmb_ParamMultiplexerValue.Text = oActiveParameter.MultiplexerValue.ToString();
-            						}
-            						else
-            						{
-            							Grp_ParamMultiplexer.Enabled = false;
-            						}
-									
-            						if (oActiveParameter.IsVirtual)
-            						{
-            							Lbl_VirtualRef.Visible = true;
-            							Txt_VirtualRef.Visible = true;
-            							Cmd_VirtualRef.Visible = true;
-            							
-            							Txt_VirtualRef.Text = oActiveParameter.VirtualChannelReference.LibraryName + "::" + oActiveParameter.VirtualChannelReference.ChannelName;
-            							Txt_VirtualRef.Tag = oActiveParameter.VirtualChannelReference;
-            						}
-
-                                    Cmb_ValueFormat.SelectedIndex = (int)oActiveParameter.ValueFormat.FormatType;
-
-                                    if (oActiveParameter.ValueFormat.FormatType.Equals(CanParameterValueFormat.Decimal))
-                                    {
-                                        Txt_Decimals.Enabled = true;
-                                        Txt_Decimals.Text = oActiveParameter.ValueFormat.Decimals.ToString();
-                                    }
-
-                                    if (oActiveParameter.ValueFormat.FormatType.Equals(CanParameterValueFormat.Enum))
-                                    {
-                                        Cmd_EnumDefinition.Enabled = true;
-                                    }
-
-                                    Chk_AlarmsEnabled.Checked = oActiveParameter.Alarms.Enabled;
-                                    Chk_WarningMin.Checked = oActiveParameter.Alarms.WarningLimitMin.Enabled;
-                                    Chk_WarningMax.Checked = oActiveParameter.Alarms.WarningLimitMax.Enabled;
-                                    Chk_AlarmMin.Checked = oActiveParameter.Alarms.AlarmLimitMin.Enabled;
-                                    Chk_AlarmMax.Checked = oActiveParameter.Alarms.AlarmLimitMax.Enabled;
-
-                                    ShowParameterMinMax();
+                                {
+                                    ShowCANParameterProperties();
                                     Cmd_CreateParameter.Text = "Modify";
-            						
-            						bParameterEdition = false;
-            					}
-            				}
+                                }
+                            }
             			}
             			
             			break;
@@ -1289,7 +1231,70 @@ namespace CANStream
                 Show_MsgMap(oActiveMessage);
             }
         }
-		
+
+        private void ShowCANParameterProperties()
+        {
+            bParameterEdition = true;
+
+            tabControl1.SelectedTab = Tab_Parameter;
+            Grp_ParameterForm.Enabled = true;
+
+            Txt_ParamName.Text = oActiveParameter.Name;
+            Txt_ParamStartBit.Text = oActiveParameter.StartBit.ToString();
+            Txt_ParamLength.Text = oActiveParameter.Length.ToString();
+            Cmb_ParamEndianess.Text = oActiveParameter.Endianess.ToString();
+            Chk_Signed.Checked = oActiveParameter.Signed;
+            Txt_ParamUnit.Text = oActiveParameter.Unit;
+            Txt_ParamGain.Text = oActiveParameter.Gain.ToString();
+            Txt_ParamZero.Text = oActiveParameter.Zero.ToString();
+            Txt_ParamComment.Text = oActiveParameter.Comment;
+
+            if (oActiveParameter.IsMultiplexed)
+            {
+                CreatMultiplexerIdList(oActiveMessage);
+                Chk_MuxParameter.Checked = true;
+                Cmb_ParamMultiplexerName.Text = oActiveMessage.MultiplexerName;
+                Cmb_ParamMultiplexerValue.Text = oActiveParameter.MultiplexerValue.ToString();
+            }
+            else
+            {
+                Grp_ParamMultiplexer.Enabled = false;
+            }
+
+            if (oActiveParameter.IsVirtual)
+            {
+                Lbl_VirtualRef.Visible = true;
+                Txt_VirtualRef.Visible = true;
+                Cmd_VirtualRef.Visible = true;
+
+                Txt_VirtualRef.Text = oActiveParameter.VirtualChannelReference.LibraryName + "::" + oActiveParameter.VirtualChannelReference.ChannelName;
+                Txt_VirtualRef.Tag = oActiveParameter.VirtualChannelReference;
+            }
+
+            Cmb_ValueFormat.SelectedIndex = (int)oActiveParameter.ValueFormat.FormatType;
+
+            if (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Decimal))
+            {
+                Txt_Decimals.Enabled = true;
+                Txt_Decimals.Text = oActiveParameter.ValueFormat.Decimals.ToString();
+            }
+
+            if (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
+            {
+                Cmd_EnumDefinition.Enabled = true;
+            }
+
+            Chk_AlarmsEnabled.Checked = oActiveParameter.Alarms.Enabled;
+            Chk_WarningMin.Checked = oActiveParameter.Alarms.WarningLimitMin.Enabled;
+            Chk_WarningMax.Checked = oActiveParameter.Alarms.WarningLimitMax.Enabled;
+            Chk_AlarmMin.Checked = oActiveParameter.Alarms.AlarmLimitMin.Enabled;
+            Chk_AlarmMax.Checked = oActiveParameter.Alarms.AlarmLimitMax.Enabled;
+
+            ShowParameterMinMax();
+
+            bParameterEdition = false;
+        }
+
         private void ShowCANBusProperties()
         {
         	Cmb_BusRate.Text = oCANConfig.CanRate.ToString();
@@ -2118,6 +2123,7 @@ namespace CANStream
 
             //Set default properties
             oActiveParameter = new CANParameter();
+            oActiveParameter.IsVirtual = bVirtual;
 
             bParameterEdition = true;
             
@@ -2258,9 +2264,9 @@ namespace CANStream
                 int Length = 0;
                 if (int.TryParse(Txt_ParamLength.Text, out Length))
                 {
-                    if (Length < 0)
+                    if (Length <= 0)
                     {
-                        MessageBox.Show("Parameter bit length must be positive !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Parameter bit length must be greater or equal to one !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 
@@ -2437,7 +2443,7 @@ namespace CANStream
                 {
                     switch (oParameter.ValueFormat.FormatType)
                     {
-                        case CanParameterValueFormat.Decimal:
+                        case SignalValueFormat.Decimal:
 
                             if (!(Txt_Decimals.Text.Equals("")))
                             {
@@ -2455,7 +2461,7 @@ namespace CANStream
 
                             break;
 
-                        case CanParameterValueFormat.Enum:
+                        case SignalValueFormat.Enum:
 
                             if (!(EnumList == null))
                             {
@@ -2749,6 +2755,8 @@ namespace CANStream
 
         private void ShowParameterMinMax()
         {
+            //TODO: Use the 'GetParameterMinMax' methode of the 'CANParameter' class in order to not have duplicated code
+
             if (!(Txt_ParamLength.Text.Equals("")))
             {
                 int BitLength = 0;
@@ -3242,12 +3250,67 @@ namespace CANStream
         	}
         }
         
-        public void SetVirtualChannelReference(VirtualParameter sReference, string Unit, string Comment)
+        public void SetVirtualChannelReference(VirtualParameter sReference, CS_VirtualChannel oVirtualChan)
         {
-        	Txt_VirtualRef.Text = sReference.LibraryName + "::" + sReference.ChannelName;
-        	Txt_VirtualRef.Tag = sReference;
-        	Txt_ParamUnit.Text = Unit;
-        	Txt_ParamComment.Text = Comment;
+            //Set CAN parameter virtual channel reference
+            oActiveParameter.VirtualChannelReference.ChannelName = sReference.ChannelName;
+            oActiveParameter.VirtualChannelReference.LibraryName = sReference.LibraryName;
+
+            if (!(oVirtualChan == null))
+            {
+                if (oActiveParameter.ValueFormat.FormatType == SignalValueFormat.Auto && oVirtualChan.ValueFormat.FormatType != SignalValueFormat.Auto)
+                {
+                    if (MessageBox.Show("The virtual channel has some of its value format properties set.\nDo you want retrieve those properties ?",
+                                        Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+                    {
+                        //Set CAN parameter value format properties retrieved from the virtual channel value format props
+                        oActiveParameter.ValueFormat.FormatType = oVirtualChan.ValueFormat.FormatType;
+                        oActiveParameter.ValueFormat.Decimals = oVirtualChan.ValueFormat.Decimals;
+
+                        oActiveParameter.ValueFormat.Enums.Clear();
+                        foreach (EnumerationValue sEnum in oVirtualChan.ValueFormat.Enums)
+                        {
+                            EnumerationValue sNewEnum = new EnumerationValue();
+                            sNewEnum.Value = sEnum.Value;
+                            sNewEnum.Text = sEnum.Text;
+
+                            oActiveParameter.ValueFormat.Enums.Add(sNewEnum);
+                        }
+                    }
+                }
+
+                if (oActiveParameter.Alarms.Enabled == false && oVirtualChan.Alarms.Enabled == true)
+                {
+                    if (MessageBox.Show("The virtual channel has some of its alarms properties set.\nDo you want retrieve those properties ?",
+                                        Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+                    {
+                        //Set CAN parameter alarm properties retrieved from the virtual channel alarm props
+                        oActiveParameter.Alarms.Enabled = oVirtualChan.Alarms.Enabled;
+
+                        oActiveParameter.Alarms.WarningLimitMin.Enabled = oVirtualChan.Alarms.WarningLimitMin.Enabled;
+                        oActiveParameter.Alarms.WarningLimitMin.Value = oVirtualChan.Alarms.WarningLimitMin.Value;
+                        oActiveParameter.Alarms.WarningLimitMin.BackColor = oVirtualChan.Alarms.WarningLimitMin.BackColor;
+                        oActiveParameter.Alarms.WarningLimitMin.ForeColor = oVirtualChan.Alarms.WarningLimitMin.ForeColor;
+
+                        oActiveParameter.Alarms.WarningLimitMax.Enabled = oVirtualChan.Alarms.WarningLimitMax.Enabled;
+                        oActiveParameter.Alarms.WarningLimitMax.Value = oVirtualChan.Alarms.WarningLimitMax.Value;
+                        oActiveParameter.Alarms.WarningLimitMax.BackColor = oVirtualChan.Alarms.WarningLimitMax.BackColor;
+                        oActiveParameter.Alarms.WarningLimitMax.ForeColor = oVirtualChan.Alarms.WarningLimitMax.ForeColor;
+
+                        oActiveParameter.Alarms.AlarmLimitMin.Enabled = oVirtualChan.Alarms.AlarmLimitMin.Enabled;
+                        oActiveParameter.Alarms.AlarmLimitMin.Value = oVirtualChan.Alarms.AlarmLimitMin.Value;
+                        oActiveParameter.Alarms.AlarmLimitMin.BackColor = oVirtualChan.Alarms.AlarmLimitMin.BackColor;
+                        oActiveParameter.Alarms.AlarmLimitMin.ForeColor = oVirtualChan.Alarms.AlarmLimitMin.ForeColor;
+
+                        oActiveParameter.Alarms.AlarmLimitMax.Enabled = oVirtualChan.Alarms.AlarmLimitMax.Enabled;
+                        oActiveParameter.Alarms.AlarmLimitMax.Value = oVirtualChan.Alarms.AlarmLimitMax.Value;
+                        oActiveParameter.Alarms.AlarmLimitMax.BackColor = oVirtualChan.Alarms.AlarmLimitMax.BackColor;
+                        oActiveParameter.Alarms.AlarmLimitMax.ForeColor = oVirtualChan.Alarms.AlarmLimitMax.ForeColor;
+                    }
+                }
+            }
+
+            ShowCANParameterProperties();
         }
 
         #endregion

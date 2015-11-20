@@ -1,0 +1,113 @@
+﻿<html>
+	
+<head>
+	<title>CAN signal properties</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc Personal Edition 4.6.2.573">
+	<meta name="keywords" content="CAN, channel, parameter, node, bit, start, length, endianess, signedness, sign, gain, zero, offset, unit, name, comment, multiplex, mux, linearization, MSB, LSB, least, most, significant, Intel, Motorola">
+	
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<style type="text/css">
+		#topic_header
+		{
+			background-color: #EFEFEF;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/hnd.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			if (top.frames.length == 0)
+			{
+				var sTopicUrl = top.location.href.substring(top.location.href.lastIndexOf("/") + 1, top.location.href.length);
+				top.location.href = "CANStream User Guide.html?" + sTopicUrl;
+			}
+			else if (top && top.FrameTOC && top.FrameTOC.SelectTocItem)
+			{
+				top.FrameTOC.SelectTocItem("CANsignalproperties");
+			}
+		});
+	</script>
+	
+	</head>
+
+<body>
+
+<div id="topic_header">
+			<div id="topic_header_content">
+				<h1 id="topic_header_text">CAN signal properties</h1>
+				
+				<div id="topic_breadcrumb">
+					<a href="CANFramesconfiguration.html">CAN Frames configuration</a> &rsaquo;&rsaquo; <a href="Singlebusconfiguration.html">Single bus configuration</a> &rsaquo;&rsaquo; </div>
+				</div>
+			<div id="topic_header_nav">
+				<a href="Singlebusconfiguration.html"><img src="img/arrow_up.png" alt="Parent"/></a>
+				
+				<a href="CANmessageproperties.html"><img src="img/arrow_left.png" alt="Previous"/></a>
+				
+				<a href="CANConfigurationtreeview.html"><img src="img/arrow_right.png" alt="Next"/></a>
+				
+				</div>
+			<div class="clear"></div>
+		</div>
+	<div id="topic_content">
+		
+<p></p>
+<p class="rvps2"><span class="rvts11">Once your message created, add some parameters (signals) to it by clicking the </span><span class="rvts19">‘</span><span class="rvts11">New parameter' button </span><img alt="" style="padding : 1px;" src="lib/CAN_Parameter_32.png"><span class="rvts11">.</span></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><img alt="" style="padding : 1px;" src="lib/CAN_Config_04.png"></p>
+<p class="rvps2"><span class="rvts11"><br/></span></p>
+<p class="rvps2"><span class="rvts14">A CAN parameter has several important properties that need to be set with attention.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Start bit</span><span class="rvts14">: The index of the bit in the frame where the parameter starts. Whether parameter endianess is MSB or LSB (see below for details) start bit will be different.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts14"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Length</span><span class="rvts14">: The number of bits use by the parameter in the frame.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts26"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Endianess</span><span class="rvts14">: How the parameter engineering (or physical) value is encoded inside its bits. There two different endianesses, MSB first (Most significant byte first) also known as Motorola format and LSB first (Least significant byte first) also known as Intel format.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts14"><br/></span></p>
+<p class="rvps8"><span class="rvts14">There are tons of documentation available on the web describing in great details the difference between those two formats. Basically, for a given value, let's say 50 000, its encoded value will be 0xC350 in MSB format, while it will be 0x50C3 in LSB format.</span></p>
+<p class="rvps7"><span class="rvts14"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Signedness</span><span class="rvts14">: Indicating whether parameter sign (positive or negative) is considered for the parameter value encoding.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts26"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Gain and Zero</span><span class="rvts14">: Those are values used to scale the parameter value from the raw to the engineering format</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts26"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Name, unit and comment</span><span class="rvts14">: Those properties are not essential but it may ease parameters identification and value exploitation.</span></li>
+</ul></ul>
+<p class="rvps7"><span class="rvts26"><br/></span></p>
+<ul style="text-indent: 0px; margin-left: 24px; list-style-position: outside; list-style-type: disc;"><ul style="text-indent: 0px; margin-left: 48px; list-style-position: outside; list-style-type: circle;">
+<li style="margin-left: 0px" class="rvps7"><span class="rvts24">Multiplexed parameter</span><span class="rvts14">: Use those settings if you want multiplex your message. See the </span><span class="rvts25">‘</span><span class="rvts14">Multiplexed parameter' section for more details.</span></li>
+</ul></ul>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2"><span class="rvts14">Once all properties set, click the </span><span class="rvts25">‘</span><span class="rvts14">Create' button to add the parameter to the current </span><a class="rvts27" href="CANmessageproperties.html">message</a><span class="rvts14">.</span></p>
+<p class="rvps2"><span class="rvts14"><br/></span></p>
+<p class="rvps2" style="page-break-before: always;"><span class="rvts14"><br/></span></p>
+<p></p>
+<p class="rvps4"><span class="rvts12">Created with the Personal Edition of HelpNDoc: </span><a class="rvts13" href="http://www.helpndoc.com/feature-tour/create-ebooks-for-amazon-kindle">Produce Kindle eBooks easily</a></p>
+</div>
+	
+	<div id="topic_footer">
+
+			<div id="topic_footer_content">
+				Copyright &copy; &lt;Dates&gt; by &lt;Authors&gt;. All Rights Reserved.</div>
+		</div>
+	</body>
+	
+</html>
+
