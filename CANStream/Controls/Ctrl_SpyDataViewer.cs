@@ -367,6 +367,38 @@ namespace CANStream
 
         #region Grid_SpyEngineering
 
+        private void Grid_SpyEngineering_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (!(Grid_SpyEngineering.CurrentCell.Tag == null))
+            {
+                CANParameter oParam = (CANParameter)Grid_SpyEngineering.CurrentCell.Tag;
+
+                if (oParam.ValueFormat.FormatType == SignalValueFormat.Enum)
+                {
+                    ListBox oList = new ListBox();
+                    Rectangle CellRect = Grid_SpyEngineering.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+                    oList.Visible = false;
+                    Grid_SpyEngineering.Controls.Add(oList);
+
+                    oList.Location = CellRect.Location;
+                    oList.Width = CellRect.Width;
+                    oList.Height = CellRect.Height * 2;
+                    oList.Tag = Grid_SpyEngineering.CurrentCell;
+
+                    oList.Items.AddRange(oParam.ValueFormat.GetEnumerationNames());
+
+                    oList.SelectedIndexChanged += new EventHandler(EnumList_SelectedIndexChanged);
+                    oList.LostFocus += new EventHandler(EnumList_LostFocus);
+                    oList.KeyDown += new KeyEventHandler(EnumList_KeyDown);
+
+                    oList.Visible = true;
+                    oList.Focus();
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void Grid_SpyEngineering_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == GRID_SPYENG_ENG_VALUE && e.RowIndex >= 0 && bCellValueChangedEventEnabled)
@@ -453,6 +485,39 @@ namespace CANStream
                 }
             }
         }
+
+        #region EnumList
+
+        private void EnumList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox oList = (ListBox)sender;
+
+            if (!(oList.Tag == null))
+            {
+                DataGridViewCell oCell = (DataGridViewCell)oList.Tag;
+                oCell.Value = oList.SelectedItem.ToString();
+            }
+
+            Grid_SpyEngineering.Controls.Remove(oList);
+        }
+
+        private void EnumList_LostFocus(object sender, EventArgs e)
+        {
+            ListBox oList = (ListBox)sender;
+            Grid_SpyEngineering.Controls.Remove(oList);
+
+        }
+
+        private void EnumList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData.Equals(Keys.Escape))
+            {
+                ListBox oList = (ListBox)sender;
+                Grid_SpyEngineering.Controls.Remove(oList);
+            }
+        }
+
+        #endregion
 
         #endregion
 
