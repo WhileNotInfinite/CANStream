@@ -193,20 +193,25 @@ namespace CANStream
 		{
 			if (!(ContextTabPage == null))
 			{
-				Rectangle TabRec = Tab_Viewers.GetTabRect(ContextTabPage.TabIndex);
-				
-				TextBox TxtNewName = new TextBox();
-				TxtNewName.KeyDown += new KeyEventHandler(TxtNewName_KeyDown);
-				TxtNewName.LostFocus += new EventHandler(TxtNewName_LostFocus);
-				
-				TxtNewName.Location = this.PointToScreen(TabRec.Location);
-				TxtNewName.Size = new Size(TabRec.Width * 2, TabRec.Height);
-				TxtNewName.Text = ContextTabPage.Text;
-				TxtNewName.SelectAll();
-			
-				this.Controls.Add(TxtNewName);
-				TxtNewName.BringToFront();
-				TxtNewName.Focus();
+                int PageIndex = GetPageIndex(ContextTabPage);
+
+                if (PageIndex != -1)
+                {
+                    Rectangle TabRec = Tab_Viewers.GetTabRect(PageIndex);
+
+                    TextBox TxtNewName = new TextBox();
+                    TxtNewName.KeyDown += new KeyEventHandler(TxtNewName_KeyDown);
+                    TxtNewName.LostFocus += new EventHandler(TxtNewName_LostFocus);
+
+                    TxtNewName.Location = this.PointToScreen(TabRec.Location);
+                    TxtNewName.Size = new Size(TabRec.Width * 2, TabRec.Height);
+                    TxtNewName.Text = ContextTabPage.Text;
+                    TxtNewName.SelectAll();
+
+                    this.Controls.Add(TxtNewName);
+                    TxtNewName.BringToFront();
+                    TxtNewName.Focus();
+                }
 			}
 			
 		}
@@ -643,6 +648,19 @@ namespace CANStream
             }
 
             return (BaseName + " " + Indice.ToString());
+        }
+
+        private int GetPageIndex(TabPage oPage)
+        {
+            for (int iPage = 0; iPage < Tab_Viewers.TabPages.Count; iPage++)
+            {
+                if (Tab_Viewers.TabPages[iPage].Equals(oPage))
+                {
+                    return (iPage);
+                }
+            }
+
+            return (-1);
         }
 
 		#endregion
