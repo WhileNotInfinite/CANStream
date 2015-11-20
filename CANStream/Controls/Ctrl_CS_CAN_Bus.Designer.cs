@@ -66,7 +66,6 @@ namespace CANStream
             this.TabPg_SpyAndManual = new System.Windows.Forms.TabPage();
             this.Split_RxTx = new System.Windows.Forms.SplitContainer();
             this.Split_Tx_EngRaw = new System.Windows.Forms.SplitContainer();
-            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
             this.Grid_CANRawData = new System.Windows.Forms.DataGridView();
             this.GridCol_Raw_Tx_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridCol_Raw_Tx_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,7 +88,6 @@ namespace CANStream
             this.Ctxt_TxRaw_Save_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctxt_TxRaw_Open_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Split_Rx_DataGraph = new System.Windows.Forms.SplitContainer();
-            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
             this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
             this.Graph_Spy = new ChartDirector.WinChartViewer();
@@ -142,7 +140,6 @@ namespace CANStream
             this.TabPg_Cycle = new System.Windows.Forms.TabPage();
             this.Panel_Cycle = new System.Windows.Forms.Panel();
             this.Split_Cycle_VirtualSig_Graph = new System.Windows.Forms.SplitContainer();
-            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Graph_Cycle = new ChartDirector.WinChartViewer();
             this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -176,6 +173,9 @@ namespace CANStream
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
+            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
+            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -534,20 +534,6 @@ namespace CANStream
             this.Split_Tx_EngRaw.SplitterDistance = 410;
             this.Split_Tx_EngRaw.TabIndex = 0;
             // 
-            // Grid_ManualDataWriter
-            // 
-            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(3, 3);
-            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
-            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(444, 405);
-            this.Grid_ManualDataWriter.TabIndex = 9;
-            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
-            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
-            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
-            // 
             // Grid_CANRawData
             // 
             this.Grid_CANRawData.AllowUserToAddRows = false;
@@ -751,20 +737,6 @@ namespace CANStream
             this.Split_Rx_DataGraph.Size = new System.Drawing.Size(514, 538);
             this.Split_Rx_DataGraph.SplitterDistance = 276;
             this.Split_Rx_DataGraph.TabIndex = 0;
-            // 
-            // Grid_ManualDataViewer
-            // 
-            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(2, 0);
-            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
-            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 276);
-            this.Grid_ManualDataViewer.TabIndex = 0;
-            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
-            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
-            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
             // 
             // Tab_SpyHistory
             // 
@@ -1321,20 +1293,6 @@ namespace CANStream
             this.Split_Cycle_VirtualSig_Graph.TabIndex = 0;
             this.Split_Cycle_VirtualSig_Graph.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.Split_Cycle_VirtualSig_GraphSplitterMoved);
             // 
-            // Cycle_SpyDataViewer
-            // 
-            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
-            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
-            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
-            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
-            this.Cycle_SpyDataViewer.TabIndex = 0;
-            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
-            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
-            // 
             // Graph_Cycle
             // 
             this.Graph_Cycle.ChartSizeMode = ChartDirector.WinChartSizeMode.StretchImage;
@@ -1662,6 +1620,52 @@ namespace CANStream
             this.BGWrk_Spy.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_SpyDoWork);
             this.BGWrk_Spy.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_SpyProgressChanged);
             this.BGWrk_Spy.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_SpyRunWorkerCompleted);
+            // 
+            // Grid_ManualDataWriter
+            // 
+            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataWriter.DataMode = CANStream.GridDataMode.DataTx;
+            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(0, 2);
+            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
+            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(444, 405);
+            this.Grid_ManualDataWriter.TabIndex = 9;
+            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
+            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
+            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
+            this.Grid_ManualDataWriter.GridTxParameterValueChanged += new System.EventHandler<CANStream.GridTxParameterValueChangedEventArgs>(this.Grid_ManualDataWriter_GridTxParameterValueChanged);
+            // 
+            // Grid_ManualDataViewer
+            // 
+            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(2, 0);
+            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
+            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 276);
+            this.Grid_ManualDataViewer.TabIndex = 0;
+            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
+            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
+            // 
+            // Cycle_SpyDataViewer
+            // 
+            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cycle_SpyDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
+            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
+            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
+            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
+            this.Cycle_SpyDataViewer.TabIndex = 0;
+            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
+            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
             // 
             // Ctrl_CS_CAN_Bus
             // 

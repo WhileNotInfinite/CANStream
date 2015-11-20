@@ -1625,7 +1625,7 @@ namespace CANStream
 				
 				if (!(oChan == null))
 				{
-					if (!(oChan.InError))
+					if (!(oChan.InError || double.IsNaN(oChan.Value)))
 					{
 						return(oChan.Value);
 					}
@@ -1742,18 +1742,21 @@ namespace CANStream
 		/// </summary>
 		public void ComputeLibraries()
 		{
-			if (VC_ComputationList.Length > 0)
-			{
-				foreach (CS_VirtualChannel oChan in VC_ComputationList)
-				{
-					oChan.ComputeChannelValue();
-					
-					if ((!oChan.InError) && oChan.bComputed && oChan.HasDependent)
-					{
-						UpDateVariableElement(oChan.Name,oChan.Value);
-					}
-				}
-			}
+            if (!(VC_ComputationList == null))
+            {
+                if (VC_ComputationList.Length > 0)
+                {
+                    foreach (CS_VirtualChannel oChan in VC_ComputationList)
+                    {
+                        oChan.ComputeChannelValue();
+
+                        if ((!oChan.InError) && oChan.bComputed && oChan.HasDependent)
+                        {
+                            UpDateVariableElement(oChan.Name, oChan.Value);
+                        }
+                    }
+                }
+            }
 		}
 		
 		#endregion

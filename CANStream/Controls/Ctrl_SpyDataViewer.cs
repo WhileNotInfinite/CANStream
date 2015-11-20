@@ -45,6 +45,12 @@ namespace CANStream
         Default = (Column_Value | Column_Min | Column_Max | Column_Unit | Column_Comment),
     }
 
+    public enum GridDataMode
+    {
+        DataRx = 0,
+        DataTx = 1,
+    }
+
     /// <summary>
     /// Grid row data type enumeration
     /// </summary>
@@ -122,7 +128,7 @@ namespace CANStream
 		private const int GRID_ENG_SPY_FILLER_COL = GRID_SPYENG_COMMENT;	//Column 'Comment' 		
 		
 		#endregion
-		
+	    
 		#region Public events
 		
 		[Category("Appearance"), Browsable(true), Description("Occurs when a column of the engineering data grid column is hidden or shown")]
@@ -131,11 +137,14 @@ namespace CANStream
         [Category("Appearance"), Browsable(true), Description("Occurs when the CAN data grid is reset")]
         public event EventHandler<EventArgs> GridDataReseted;
 
-		#endregion
-		
-		#region Control properties
-		
-		[Category("Appearance"), Browsable(true), Description("Data grid columns visible")]
+        [Category("Action"), Browsable(true), Description("Occurs when content a Tx CAN parameter value is changed")]
+        public event EventHandler<GridTxParameterValueChangedEventArgs> GridTxParameterValueChanged;
+
+        #endregion
+
+        #region Control properties
+
+        [Category("Appearance"), Browsable(true), Description("Data grid columns visible")]
 		public GridCANData_ColumnsEnum eGridColumnsVisible
 		{
 			get
@@ -162,12 +171,15 @@ namespace CANStream
                 ShowHide_VirtualChannel(value);
             }
         }
-        	
-		#endregion
-		
-		#region Private members
 
-		private GridCANData_ColumnsEnum SpyEngGridColumnsVisible;
+        [Category("Data"), Browsable(true), Description("Data Rx/Tx mode grid")]
+        public GridDataMode DataMode { get; set; }
+
+        #endregion
+
+        #region Private members
+
+        private GridCANData_ColumnsEnum SpyEngGridColumnsVisible;
         private GridSortingMode eItemsSortingMode;
         private GridSortingDirection eItemsSortingDirection;
         
@@ -194,12 +206,23 @@ namespace CANStream
 
             bCellValueChangedEventEnabled = true;
         }
-		
-		#region Control events
-		
-		#region Context_SpyEngGrid
 
-		private void ContextSpyEng_ResetTSMenuItemClick(object sender, EventArgs e)
+        #region Control events
+
+        private void Ctrl_CANDataGrid_Load(object sender, EventArgs e)
+        {
+            if (DataMode == GridDataMode.DataTx)
+            {
+                this.Grid_SpyEngineering.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellValueChanged);
+
+                Lbl_GridTitle.Text = "Data Transmitted";
+                Lbl_GridTitle.ForeColor = Color.Red;
+            }
+        }
+
+        #region Context_SpyEngGrid
+
+        private void ContextSpyEng_ResetTSMenuItemClick(object sender, EventArgs e)
 		{
             Clear_EngGrid();
 		}
@@ -377,10 +400,23 @@ namespace CANStream
                                 oCurrentCell.Style.ForeColor = Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_NAME].Style.ForeColor;
                             }
 
-                            CANMessageEncoded oMsgEncoder = (CANMessageEncoded)((((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow()).Cells[GRID_SPYENG_ENG_VALUE].Tag);
+                            DataGridViewRow oMsgRow = ((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow();
+                            CANMessageEncoded oMsgEncoder = (CANMessageEncoded)oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag;
+                            //CANMessageEncoded oMsgEncoder = (CANMessageEncoded)((((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow()).Cells[GRID_SPYENG_ENG_VALUE].Tag);
                             oMsgEncoder.EncodeMessage();
 
                             Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
+                            oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oMsgEncoder.GetMessageBytesString();
+
+                            //GridTxParameterValueChanged event firing
+                            GridTxParameterValueChangedEventArgs EvtArg = new GridTxParameterValueChangedEventArgs();
+
+                            EvtArg.MessageId = oMsgEncoder.uMessageId;
+                            EvtArg.ParameterName = oParam.Name;
+                            EvtArg.ParameterValue = oParam.DecodedValue;
+                            EvtArg.MultiplexerValue = oParam.MultiplexerValue;
+
+                            OnGridTxParameterValueChanged(EvtArg);
                         }
                     }
                     else
@@ -536,15 +572,15 @@ namespace CANStream
         private DataGridViewRow Add_RawDataRow(CANMessage oMessage, int MessageLen)
         {
             //TODO: remove 'MessageLen' arg and use the DLC property of the CAN message instead when it will be available
-            return (Add_RawDataRow(oMessage.Identifier, MessageLen.ToString(), oMessage.Name, oMessage.RxTx.ToString(), oMessage.Comment));
+            return (Add_RawDataRow(oMessage.Identifier, MessageLen.ToString(), oMessage.Name, oMessage.RxTx.ToString(), oMessage.Period.ToString(), oMessage.Comment));
         }
 
         private DataGridViewRow Add_RawDataRow(MessageStatus oRawMsg)
         {
-            return (Add_RawDataRow(oRawMsg.IdString, oRawMsg.CANMsg.LEN.ToString(), "", "", ""));
+            return (Add_RawDataRow(oRawMsg.IdString, oRawMsg.CANMsg.LEN.ToString(), "", "", "", ""));
         }
 
-        private DataGridViewRow Add_RawDataRow(string MsgId, string MsgLen, string MsgName, string MsgRxTx, string MsgComment)
+        private DataGridViewRow Add_RawDataRow(string MsgId, string MsgLen, string MsgName, string MsgRxTx, string MsgPeriod, string MsgComment)
         {
             //Add the row to the grid
             Grid_SpyEngineering.Rows.Add();
@@ -555,6 +591,7 @@ namespace CANStream
             oRow.Cells[GRID_SPYENG_MSG_ID].Value = MsgId;
             oRow.Cells[GRID_SPYENG_MSG_RXTX].Value = MsgRxTx;
             oRow.Cells[GRID_SPYENG_NAME].Value = MsgName;
+            oRow.Cells[GRID_SPYENG_PERIOD].Value = MsgPeriod;
             oRow.Cells[GRID_SPYENG_DLC].Value = MsgLen;
             oRow.Cells[GRID_SPYENG_COMMENT].Value = MsgComment;
 
@@ -574,6 +611,8 @@ namespace CANStream
             //Create engineering data root group
             Grid_SpyEngineering.Rows.Add();
             DataGridViewRow oRootGrpRow = Grid_SpyEngineering.Rows[Grid_SpyEngineering.Rows.Count - 1];
+
+            oRootGrpRow.Cells[GRID_SPYENG_ENG_VALUE].Value = "";
             oRootGrpRow.Visible = false;
 
             //Collapsing properties creation
@@ -968,6 +1007,8 @@ namespace CANStream
                 oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag = oMsgEncoder;
                 oMsgEncoder.EncodeMessage();
 
+                oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oMsgEncoder.GetMessageBytesString();
+
                 foreach (CANParameter oParam in oMsgEncoder.Parameters)
                 {
                     DataGridViewRow oParamRow = null;
@@ -1029,6 +1070,61 @@ namespace CANStream
                 }
 
                 bCellValueChangedEventEnabled = true;
+            }
+        }
+
+        public void Update_TxVirtualParameters(string MsgId, CANParameter oParam)
+        {
+            DataGridViewRow oMsgRow = Get_RawDataRow(MsgId);
+
+            if (!(oMsgRow == null))
+            {
+                CollapsableGridRowProperties oMsgRowProps = (CollapsableGridRowProperties)oMsgRow.Tag;
+
+                DataGridViewRow oGrpRow = null;
+
+                if (oParam.IsMultiplexed)
+                {
+                    foreach (DataGridViewRow oChildRow in oMsgRowProps.Children)
+                    {
+                        if(oChildRow.Cells[GRID_SPYENG_ENG_VALUE].Value.ToString().Equals(oParam.MultiplexerValue.ToString()))
+                        {
+                            oGrpRow = oChildRow;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    oGrpRow = oMsgRowProps.Children[0];
+                }
+
+                if (!(oGrpRow == null))
+                {
+                    CollapsableGridRowProperties oGrpRowProps = (CollapsableGridRowProperties)oGrpRow.Tag;
+
+                    foreach(DataGridViewRow oParamRow in oGrpRowProps.Children)
+                    {
+                        if (oParamRow.Cells[GRID_SPYENG_NAME].Value.ToString().Equals(oParam.Name))
+                        {
+                            oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Update_TxMessageCount()
+        {
+            foreach(DataGridViewRow oRow in Grid_SpyEngineering.Rows)
+            {
+                CollapsableGridRowProperties oRowProps = (CollapsableGridRowProperties)oRow.Tag;
+
+                if (oRowProps.RowDataType== GridRowDataType.RawData)
+                {
+                    oRow.Cells[GRID_SPYENG_COUNT].Value = ((CANMessageEncoded)oRow.Cells[GRID_SPYENG_ENG_VALUE].Tag).TxCount.ToString();
+                }
             }
         }
 
@@ -1500,6 +1596,15 @@ namespace CANStream
             }
         }
 
+        protected virtual void OnGridTxParameterValueChanged(GridTxParameterValueChangedEventArgs e)
+        {
+            EventHandler<GridTxParameterValueChangedEventArgs> Handler = GridTxParameterValueChanged;
+            if(Handler != null)
+            {
+                Handler(this, e);
+            }
+        }
+
         #endregion
     }
 
@@ -1515,7 +1620,7 @@ namespace CANStream
         public UInt32 MessageId { get; set; }
         public long MultiplexerValue { get; set; }
         public string ParameterName { get; set; }
-        public double ParameterValue { get; set};
+        public double ParameterValue { get; set; }
     }
 
     #endregion

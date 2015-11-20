@@ -7,8 +7,9 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>CANStream</RootNamespace>
     <AssemblyName>CANStream</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <ApplicationIcon>..\Ressources\Icones\CANConfiguration_xcc.ico</ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
@@ -87,12 +88,27 @@
     <DefineConstants>DEBUG;TRACE;NO_LIC</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_NoLicense|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo_Dbg|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel">
       <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="netchartdir_cp">
-      <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\chartdir_net\ChartDirector\NetWinCharts\bin\netchartdir_cp.dll</HintPath>
+      <HintPath>..\Dependencies\ChartDirector\netchartdir_cp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -422,6 +438,7 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="app.config" />
     <None Include="Resources\Grid_NoAction2.png" />
     <None Include="Resources\TreeView_Minus.gif" />
     <None Include="Resources\TreeView_Plus.gif" />
@@ -446,7 +463,7 @@
       <Name>Ctrl_GraphWindow</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SD_AppLicense\SD_AppLicence\SD_AppLicence.csproj">
-      <Project>{043AD182-2573-4289-8860-DFE9E3101074}</Project>
+      <Project>{043ad182-2573-4289-8860-dfe9e3101074}</Project>
       <Name>SD_AppLicence</Name>
     </ProjectReference>
     <ProjectReference Include="..\Flee_Lib\FLEE_Lib.vbproj">

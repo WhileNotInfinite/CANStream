@@ -1832,29 +1832,13 @@ namespace CANStream
 	
 	public class CANMessageEncoded:CANMessage
 	{
-        #region Public properties
-
-        //TODO: Remove ???
-        public Byte[] MessageData
-        {
-            get
-            {
-                return (ByteMessageData);
-            }
-
-            set
-            {
-                ByteMessageData = value;
-            }
-        }
-
-        #endregion
-
         #region Public members
 
         public UInt32 uMessageId;
 		public bool HasVirtualParameters;
-		
+
+        public ulong TxCount;
+
 		#endregion
 		
 		#region Private members
@@ -1895,7 +1879,9 @@ namespace CANStream
 				}
 				
 				InitMultiplexer();
-			}
+
+                TxCount = 0;
+            }
 		}
 		
 		#region Public methodes
@@ -2016,6 +2002,23 @@ namespace CANStream
 				}
 			}
 		}
+
+        public string GetMessageBytesString()
+        {
+            string BytesString = "";
+
+            for (int iByte = 0; iByte < MsgByteLength; iByte++)
+            {
+                BytesString += string.Format("{0:X2}", ByteMessageData[iByte]);
+
+                if (iByte < (MsgByteLength - 1))
+                {
+                    BytesString += " ";
+                }
+            }
+
+            return (BytesString);
+        }
 
 		#endregion
 		

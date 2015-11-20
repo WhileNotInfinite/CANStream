@@ -138,3 +138,52 @@ G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.exe
 G:\Git\CANStream_USB\CANStream\obj\Debug_NoLicense\CANStream.pdb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_ParamEnumerationEdition.resources
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_CANDataGrid.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.csprojResolveAssemblyReference.cache
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_CS_CAN_Bus.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordEventInformation.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordSessionInfo.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_RecordUserInformations.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Ctrl_CANDataGrid.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Dlg_DBCTransmitterSelection.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_About.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_BuiltInSignal.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CANConfiguration.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_ContextualList.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleDataAssociation.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleCreation.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleEdition.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_CycleRecordImport.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataBrowser.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataViewer.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_DataViewer_EventSession_Info.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_EventDetails.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_ParamEnumerationEdition.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordEventEdition.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordSessionEdition.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_RecordEventSessionSelection.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_TrcFileSelection.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_VirtualChannel.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Frm_VirtualChannelTest.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Icones.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.MainForm.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.Properties.Resources.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.csproj.GenerateResource.Cache
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream.exe.config
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow Release note.txt
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream Release notes.txt
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream.exe
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ciloci.Flee.dll
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.dll
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\netchartdir_cp.dll
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\SD_AppLicence.dll
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\stdole.dll
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.xml
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\SD_AppLicence.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ciloci.Flee.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\Ciloci.Flee.xml
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\netchartdir_cp.xml
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.exe
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.pdb

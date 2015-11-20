@@ -723,15 +723,9 @@ namespace CANStream
                         {
                             if (oParam.IsVirtual)
                             {
-                                if (int.Parse(tabControl1.SelectedTab.Tag.ToString()) == 1)
+                                if (tabControl1.SelectedTab == TabPg_SpyAndManual)
                                 {
-                                    //int iRow = GetParameterRowIndex(oParam.Name, oMsgEncod.Identifier);
-
-                                    //if (iRow != -1)
-                                    //{
-                                    //  TODO: Make a function in the CtrlSpyDataViewer control to update virtual channels
-                                    //  Grid_CANData.Rows[iRow].Cells[GRID_MANUAL_VALUE_COL].Value = oParam.DecodedValue.ToString();
-                                    //}
+                                    Grid_ManualDataWriter.Update_TxVirtualParameters(oMsgEncod.Identifier, oParam);
                                 }
                                 else
                                 {
@@ -741,6 +735,8 @@ namespace CANStream
                         }
                     }
                 }
+
+                Grid_ManualDataWriter.Update_TxMessageCount();
             }
         }
 
@@ -753,6 +749,13 @@ namespace CANStream
             //TODO: Test me !
             bVirtualParamTx = Chk_VirtualParamTxEnabled.Checked;
             Grid_ManualDataWriter.VirtualChannelsVisible = bVirtualParamTx;
+        }
+
+        private void Grid_ManualDataWriter_GridTxParameterValueChanged(object sender, GridTxParameterValueChangedEventArgs e)
+        {
+            //TODO: Add CAN parameter message ID and multiplexer value
+            VCLibCollection.UpDateVariableElement(e.ParameterName, e.ParameterValue);
+            VCLibCollection.ComputeLibraries();
         }
 
         private void Grid_ManualDataWriter_GridColumnsVisibleChanged(object sender, GridColVisibleChangedEventArgs e)
@@ -2160,29 +2163,44 @@ namespace CANStream
                 {
                     if (oMessage.RxTx == CanMsgRxTx.Tx)
                     {
-                        CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMessage, oCanConfig.MessageLength / 8);
+                        AddTxEngineeringMessage(oMessage);
 
-                        if (!(TxRawMessages == null))
+                        if (!oMessage.MultiplexerName.Equals("") && !Chk_CycleMux.Enabled)
                         {
-                            if (!(TxRawMessages.ContainsMessageId(oEncodMsg.uMessageId)))
-                            {
-                                TxEngMessages.Add(oEncodMsg);
-                                Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
-                            }
-                            else
-                            {
-                                MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oEncodMsg.uMessageId) + " is already present in the raw messages", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
+                            Chk_CycleMux.Enabled = true;
                         }
-                        else
+
+                        if (oMessage.ContainsVirtualParameters() && !Chk_VirtualParamTxEnabled.Enabled)
                         {
-                            TxEngMessages.Add(oEncodMsg);
-                            Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                            Chk_VirtualParamTxEnabled.Enabled = true;
                         }
                     }
                 }
 
                 FireCanConfigChangedEvent(true);
+            }
+        }
+
+        private void AddTxEngineeringMessage(CANMessage oMessage)
+        {
+            CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMessage, oCanConfig.MessageLength / 8);
+
+            if (!(TxRawMessages == null))
+            {
+                if (!(TxRawMessages.ContainsMessageId(oEncodMsg.uMessageId)))
+                {
+                    TxEngMessages.Add(oEncodMsg);
+                    Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                }
+                else
+                {
+                    MessageBox.Show("Message identifier 0x" + string.Format("{0:x3}", oEncodMsg.uMessageId) + " is already present in the raw messages", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                TxEngMessages.Add(oEncodMsg);
+                Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
             }
         }
 
@@ -2251,6 +2269,8 @@ namespace CANStream
                                 if (SendMessage(oMsgEncod.GetPCANMessage()))
                                 {
                                     MsgCount++;
+
+                                    if(!(oMsgEncod.TxCount==ulong.MaxValue)) oMsgEncod.TxCount++;
 
                                     if (Chk_CycleMux.Checked)
                                     {
@@ -3761,8 +3781,19 @@ namespace CANStream
                         UInt32 MsgId = oMsg.MessageId;
                         TxRawMessages.Messages.Remove(oMsg);
 
-                        //TODO: Add the current message in the engineering Tx grid if its ID is present in the CAN Configu
-                        //Show_MessageParametersRows (string.Format("{0:x}", MsgId));
+                        //TODO: Test me !
+                        if (!(oCanConfig == null))
+                        {
+                            CANMessage oEngMsg = oCanConfig.GetCANMessage(string.Format("{0:X}", MsgId), MessageResearchOption.Identifier);
+
+                            if (!(oEngMsg==null))
+                            {
+                                if(oEngMsg.RxTx== CanMsgRxTx.Tx)
+                                {
+                                    AddTxEngineeringMessage(oEngMsg);
+                                }
+                            }
+                        }
                     }
                 }
 

@@ -37,24 +37,24 @@ namespace CANStream
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Grid_SpyEngineering = new System.Windows.Forms.DataGridView();
             this.Grid_Eng_Collapse_State = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,7 +105,7 @@ namespace CANStream
             this.ContextSpyEng_countToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_dlcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextSpyEng_commentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Lbl_GridTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_SpyEngineering)).BeginInit();
             this.Context_SpyEngGrid.SuspendLayout();
             this.SuspendLayout();
@@ -148,14 +148,13 @@ namespace CANStream
             this.Grid_SpyEngineering.Size = new System.Drawing.Size(746, 300);
             this.Grid_SpyEngineering.TabIndex = 12;
             this.Grid_SpyEngineering.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellDoubleClick);
-            this.Grid_SpyEngineering.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellValueChanged);
             this.Grid_SpyEngineering.SizeChanged += new System.EventHandler(this.Grid_SpyEngineeringSizeChanged);
             // 
             // Grid_Eng_Collapse_State
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "System.Drawing.Bitmap";
-            this.Grid_Eng_Collapse_State.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.NullValue = "System.Drawing.Bitmap";
+            this.Grid_Eng_Collapse_State.DefaultCellStyle = dataGridViewCellStyle19;
             this.Grid_Eng_Collapse_State.HeaderText = "";
             this.Grid_Eng_Collapse_State.Name = "Grid_Eng_Collapse_State";
             this.Grid_Eng_Collapse_State.ReadOnly = true;
@@ -164,8 +163,8 @@ namespace CANStream
             // 
             // Column6
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle20;
             this.Column6.HeaderText = "ID";
             this.Column6.MinimumWidth = 30;
             this.Column6.Name = "Column6";
@@ -174,8 +173,8 @@ namespace CANStream
             // 
             // Grid_Eng_RxTx
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_RxTx.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_RxTx.DefaultCellStyle = dataGridViewCellStyle21;
             this.Grid_Eng_RxTx.HeaderText = "RxTx";
             this.Grid_Eng_RxTx.MinimumWidth = 40;
             this.Grid_Eng_RxTx.Name = "Grid_Eng_RxTx";
@@ -192,8 +191,8 @@ namespace CANStream
             // 
             // RawValue
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.RawValue.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RawValue.DefaultCellStyle = dataGridViewCellStyle22;
             this.RawValue.HeaderText = "Raw value";
             this.RawValue.MinimumWidth = 30;
             this.RawValue.Name = "RawValue";
@@ -203,8 +202,8 @@ namespace CANStream
             // 
             // Column8
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle23;
             this.Column8.HeaderText = "Value";
             this.Column8.MinimumWidth = 150;
             this.Column8.Name = "Column8";
@@ -213,8 +212,8 @@ namespace CANStream
             // 
             // Column9
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle24;
             this.Column9.HeaderText = "Min";
             this.Column9.MinimumWidth = 40;
             this.Column9.Name = "Column9";
@@ -223,8 +222,8 @@ namespace CANStream
             // 
             // Column10
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle25;
             this.Column10.HeaderText = "Max";
             this.Column10.MinimumWidth = 40;
             this.Column10.Name = "Column10";
@@ -233,8 +232,8 @@ namespace CANStream
             // 
             // SpyEng_Unit
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SpyEng_Unit.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Unit.DefaultCellStyle = dataGridViewCellStyle26;
             this.SpyEng_Unit.HeaderText = "Unit";
             this.SpyEng_Unit.MinimumWidth = 20;
             this.SpyEng_Unit.Name = "SpyEng_Unit";
@@ -243,8 +242,8 @@ namespace CANStream
             // 
             // Grid_Eng_Period
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Period.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Period.DefaultCellStyle = dataGridViewCellStyle27;
             this.Grid_Eng_Period.HeaderText = "Period";
             this.Grid_Eng_Period.Name = "Grid_Eng_Period";
             this.Grid_Eng_Period.ReadOnly = true;
@@ -252,8 +251,8 @@ namespace CANStream
             // 
             // Grid_Eng_Start
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Start.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Start.DefaultCellStyle = dataGridViewCellStyle28;
             this.Grid_Eng_Start.HeaderText = "Start";
             this.Grid_Eng_Start.MinimumWidth = 40;
             this.Grid_Eng_Start.Name = "Grid_Eng_Start";
@@ -262,8 +261,8 @@ namespace CANStream
             // 
             // Grid_Eng_Length
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Length.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Length.DefaultCellStyle = dataGridViewCellStyle29;
             this.Grid_Eng_Length.HeaderText = "Length";
             this.Grid_Eng_Length.MinimumWidth = 40;
             this.Grid_Eng_Length.Name = "Grid_Eng_Length";
@@ -272,8 +271,8 @@ namespace CANStream
             // 
             // Grid_Eng_Endianess
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Endianess.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Endianess.DefaultCellStyle = dataGridViewCellStyle30;
             this.Grid_Eng_Endianess.HeaderText = "Endianess";
             this.Grid_Eng_Endianess.MinimumWidth = 40;
             this.Grid_Eng_Endianess.Name = "Grid_Eng_Endianess";
@@ -282,8 +281,8 @@ namespace CANStream
             // 
             // Grid_Eng_Signed
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Signed.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Signed.DefaultCellStyle = dataGridViewCellStyle31;
             this.Grid_Eng_Signed.HeaderText = "Signed";
             this.Grid_Eng_Signed.MinimumWidth = 40;
             this.Grid_Eng_Signed.Name = "Grid_Eng_Signed";
@@ -292,8 +291,8 @@ namespace CANStream
             // 
             // Grid_Eng_Gain
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Gain.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Gain.DefaultCellStyle = dataGridViewCellStyle32;
             this.Grid_Eng_Gain.HeaderText = "Gain";
             this.Grid_Eng_Gain.MinimumWidth = 40;
             this.Grid_Eng_Gain.Name = "Grid_Eng_Gain";
@@ -302,8 +301,8 @@ namespace CANStream
             // 
             // Grid_Eng_Zero
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Zero.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Zero.DefaultCellStyle = dataGridViewCellStyle33;
             this.Grid_Eng_Zero.HeaderText = "Zero";
             this.Grid_Eng_Zero.MinimumWidth = 40;
             this.Grid_Eng_Zero.Name = "Grid_Eng_Zero";
@@ -312,8 +311,8 @@ namespace CANStream
             // 
             // Grid_Eng_Count
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_Count.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_Count.DefaultCellStyle = dataGridViewCellStyle34;
             this.Grid_Eng_Count.HeaderText = "Count";
             this.Grid_Eng_Count.MinimumWidth = 40;
             this.Grid_Eng_Count.Name = "Grid_Eng_Count";
@@ -322,8 +321,8 @@ namespace CANStream
             // 
             // Grid_Eng_DLC
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Grid_Eng_DLC.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Grid_Eng_DLC.DefaultCellStyle = dataGridViewCellStyle35;
             this.Grid_Eng_DLC.HeaderText = "DLC";
             this.Grid_Eng_DLC.MinimumWidth = 30;
             this.Grid_Eng_DLC.Name = "Grid_Eng_DLC";
@@ -332,8 +331,8 @@ namespace CANStream
             // 
             // SpyEng_Comment
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SpyEng_Comment.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SpyEng_Comment.DefaultCellStyle = dataGridViewCellStyle36;
             this.SpyEng_Comment.HeaderText = "Comment";
             this.SpyEng_Comment.MinimumWidth = 20;
             this.SpyEng_Comment.Name = "SpyEng_Comment";
@@ -574,25 +573,26 @@ namespace CANStream
             this.ContextSpyEng_commentToolStripMenuItem.Text = "Comment";
             this.ContextSpyEng_commentToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_commentToolStripMenuItemClick);
             // 
-            // label2
+            // Lbl_GridTitle
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 14);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Data Received";
+            this.Lbl_GridTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_GridTitle.ForeColor = System.Drawing.Color.Blue;
+            this.Lbl_GridTitle.Location = new System.Drawing.Point(0, 0);
+            this.Lbl_GridTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.Lbl_GridTitle.Name = "Lbl_GridTitle";
+            this.Lbl_GridTitle.Size = new System.Drawing.Size(100, 14);
+            this.Lbl_GridTitle.TabIndex = 13;
+            this.Lbl_GridTitle.Text = "Data Received";
             // 
             // Ctrl_CANDataGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Lbl_GridTitle);
             this.Controls.Add(this.Grid_SpyEngineering);
             this.Name = "Ctrl_CANDataGrid";
             this.Size = new System.Drawing.Size(748, 318);
+            this.Load += new System.EventHandler(this.Ctrl_CANDataGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_SpyEngineering)).EndInit();
             this.Context_SpyEngGrid.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -622,7 +622,7 @@ namespace CANStream
         private System.Windows.Forms.ToolStripMenuItem ContextSpyEng_periodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ContextSpyEng_countToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ContextSpyEng_dlcToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Lbl_GridTitle;
         private System.Windows.Forms.DataGridViewImageColumn Grid_Eng_Collapse_State;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Grid_Eng_RxTx;
