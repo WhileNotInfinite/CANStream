@@ -18,6 +18,7 @@ namespace CANStream
 
         private int NextEnumValue;
         private bool FrmClosing;
+        private bool FrmMessageBox;
         
         #endregion
 
@@ -30,6 +31,7 @@ namespace CANStream
 
             NextEnumValue = 0;
             FrmClosing = false;
+            FrmMessageBox = false;
 
             Show_EnumValues();
         }
@@ -43,7 +45,7 @@ namespace CANStream
 
         private void Frm_ParamEnumerationEdition_Deactivate(object sender, EventArgs e)
         {
-            if (!(FrmClosing))
+            if (!(FrmClosing || FrmMessageBox))
             {
                 MessageBox.Show("Please apply or cancel changes prior to switch to another window.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Activate();
@@ -226,12 +228,16 @@ namespace CANStream
 
         private void Clear_EnumValues()
         {
+            FrmMessageBox = true;
+
             if (MessageBox.Show("Do you really want clear all values of the enumeration ?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
             {
                 oCurrentFormat.Enums = new List<EnumerationValue>();
                 Grid_Enum.Rows.Clear();
                 NextEnumValue = 0;
             }
+
+            FrmMessageBox = false;
         }
 
         private bool EnumValueExists(int EnumValue)
