@@ -178,6 +178,9 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip_Commands = new System.Windows.Forms.ToolTip(this.components);
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
+            this.Txt_NoRxTimeout = new System.Windows.Forms.TextBox();
+            this.Lbl_NoRxUnit = new System.Windows.Forms.Label();
+            this.Lbl_NoRxTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
             this.Split_Tree_Props.Panel1.SuspendLayout();
             this.Split_Tree_Props.Panel2.SuspendLayout();
@@ -767,6 +770,9 @@
             // 
             // Grp_MessageForm
             // 
+            this.Grp_MessageForm.Controls.Add(this.Lbl_NoRxTitle);
+            this.Grp_MessageForm.Controls.Add(this.Lbl_NoRxUnit);
+            this.Grp_MessageForm.Controls.Add(this.Txt_NoRxTimeout);
             this.Grp_MessageForm.Controls.Add(this.Txt_MsgComment);
             this.Grp_MessageForm.Controls.Add(this.label8);
             this.Grp_MessageForm.Controls.Add(this.Cmd_CancelNewMessage);
@@ -790,17 +796,17 @@
             // 
             // Txt_MsgComment
             // 
-            this.Txt_MsgComment.Location = new System.Drawing.Point(78, 102);
+            this.Txt_MsgComment.Location = new System.Drawing.Point(99, 129);
             this.Txt_MsgComment.Multiline = true;
             this.Txt_MsgComment.Name = "Txt_MsgComment";
-            this.Txt_MsgComment.Size = new System.Drawing.Size(264, 73);
+            this.Txt_MsgComment.Size = new System.Drawing.Size(243, 73);
             this.Txt_MsgComment.TabIndex = 13;
             this.Txt_MsgComment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 105);
+            this.label8.Location = new System.Drawing.Point(18, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 31;
@@ -846,10 +852,11 @@
             // 
             // Txt_MsgPeriod
             // 
-            this.Txt_MsgPeriod.Location = new System.Drawing.Point(78, 68);
+            this.Txt_MsgPeriod.Location = new System.Drawing.Point(99, 68);
             this.Txt_MsgPeriod.Name = "Txt_MsgPeriod";
-            this.Txt_MsgPeriod.Size = new System.Drawing.Size(101, 20);
+            this.Txt_MsgPeriod.Size = new System.Drawing.Size(80, 20);
             this.Txt_MsgPeriod.TabIndex = 12;
+            this.Txt_MsgPeriod.TextChanged += new System.EventHandler(this.Txt_MsgPeriod_TextChanged);
             this.Txt_MsgPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // label3
@@ -883,6 +890,7 @@
             this.Radio_Rx.TabStop = true;
             this.Radio_Rx.Text = "Rx";
             this.Radio_Rx.UseVisualStyleBackColor = true;
+            this.Radio_Rx.CheckedChanged += new System.EventHandler(this.Radio_Rx_CheckedChanged);
             // 
             // Txt_MsgIdentifier
             // 
@@ -903,9 +911,9 @@
             // 
             // Txt_MsgName
             // 
-            this.Txt_MsgName.Location = new System.Drawing.Point(78, 13);
+            this.Txt_MsgName.Location = new System.Drawing.Point(99, 13);
             this.Txt_MsgName.Name = "Txt_MsgName";
-            this.Txt_MsgName.Size = new System.Drawing.Size(264, 20);
+            this.Txt_MsgName.Size = new System.Drawing.Size(243, 20);
             this.Txt_MsgName.TabIndex = 8;
             this.Txt_MsgName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
@@ -1119,6 +1127,7 @@
             this.Txt_AlarmMax.Name = "Txt_AlarmMax";
             this.Txt_AlarmMax.Size = new System.Drawing.Size(76, 20);
             this.Txt_AlarmMax.TabIndex = 42;
+            this.Txt_AlarmMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // Txt_AlarmMin
             // 
@@ -1127,6 +1136,7 @@
             this.Txt_AlarmMin.Name = "Txt_AlarmMin";
             this.Txt_AlarmMin.Size = new System.Drawing.Size(76, 20);
             this.Txt_AlarmMin.TabIndex = 36;
+            this.Txt_AlarmMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // Txt_WarningMax
             // 
@@ -1135,6 +1145,7 @@
             this.Txt_WarningMax.Name = "Txt_WarningMax";
             this.Txt_WarningMax.Size = new System.Drawing.Size(76, 20);
             this.Txt_WarningMax.TabIndex = 40;
+            this.Txt_WarningMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // Lbl_Alarms_Forecolor
             // 
@@ -1208,6 +1219,7 @@
             this.Txt_WarningMin.Name = "Txt_WarningMin";
             this.Txt_WarningMin.Size = new System.Drawing.Size(76, 20);
             this.Txt_WarningMin.TabIndex = 38;
+            this.Txt_WarningMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // Cmd_EnumDefinition
             // 
@@ -1228,6 +1240,7 @@
             this.Txt_Decimals.Name = "Txt_Decimals";
             this.Txt_Decimals.Size = new System.Drawing.Size(45, 20);
             this.Txt_Decimals.TabIndex = 31;
+            this.Txt_Decimals.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_ParameterTextBoxKeyDown);
             // 
             // Lbl_Decimals
             // 
@@ -1716,6 +1729,32 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // Txt_NoRxTimeout
+            // 
+            this.Txt_NoRxTimeout.Location = new System.Drawing.Point(99, 94);
+            this.Txt_NoRxTimeout.Name = "Txt_NoRxTimeout";
+            this.Txt_NoRxTimeout.Size = new System.Drawing.Size(80, 20);
+            this.Txt_NoRxTimeout.TabIndex = 32;
+            this.Txt_NoRxTimeout.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
+            // 
+            // Lbl_NoRxUnit
+            // 
+            this.Lbl_NoRxUnit.AutoSize = true;
+            this.Lbl_NoRxUnit.Location = new System.Drawing.Point(185, 97);
+            this.Lbl_NoRxUnit.Name = "Lbl_NoRxUnit";
+            this.Lbl_NoRxUnit.Size = new System.Drawing.Size(145, 13);
+            this.Lbl_NoRxUnit.TabIndex = 33;
+            this.Lbl_NoRxUnit.Text = "ms (0 to disable NoTx check)";
+            // 
+            // Lbl_NoRxTitle
+            // 
+            this.Lbl_NoRxTitle.AutoSize = true;
+            this.Lbl_NoRxTitle.Location = new System.Drawing.Point(18, 97);
+            this.Lbl_NoRxTitle.Name = "Lbl_NoRxTitle";
+            this.Lbl_NoRxTitle.Size = new System.Drawing.Size(75, 13);
+            this.Lbl_NoRxTitle.TabIndex = 34;
+            this.Lbl_NoRxTitle.Text = "NoRx Timeout";
+            // 
             // Frm_CANConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1920,5 +1959,8 @@
         private System.Windows.Forms.CheckBox Chk_AlarmMax;
         private System.Windows.Forms.ColorDialog Dlg_SelectColor;
         private System.Windows.Forms.Label Lbl_ParamMinMax;
+        private System.Windows.Forms.Label Lbl_NoRxTitle;
+        private System.Windows.Forms.Label Lbl_NoRxUnit;
+        private System.Windows.Forms.TextBox Txt_NoRxTimeout;
     }
 }

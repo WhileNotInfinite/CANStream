@@ -1607,6 +1607,18 @@ namespace CANStream
             }
         }
 
+        public void Set_NoRxMessage(string MsgId)
+        {
+            DataGridViewRow oRawDataRow = Get_RawDataRow(MsgId);
+
+            if (!(oRawDataRow == null))
+            {
+                //Refresh variable fields of the raw message
+                oRawDataRow.Cells[GRID_SPYENG_ENG_VALUE].Value = "NO-RX";
+                oRawDataRow.Cells[GRID_SPYENG_PERIOD].Value = "inf";
+            }
+        }
+
         public int Get_RawMessageCount()
         {
             int RawMsgCnt = 0;

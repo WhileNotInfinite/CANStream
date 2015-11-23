@@ -1237,6 +1237,11 @@ namespace CANStream
 
         #endregion
 
+        private void Timer_NoRx_Tick(object sender, EventArgs e)
+        {
+            CheckMessagesRxTimeout();
+        }
+
         #endregion
 
         #endregion
@@ -2536,6 +2541,7 @@ namespace CANStream
 
                     //Launch spy thread
                     BGWrk_Spy.RunWorkerAsync();
+                    Timer_NoRx.Enabled = true;
 
                     //Lauch CAN trace record
                     if (bRecordingAuto & !bRecording) //HACK: Remove [acquisition trigger]
@@ -2550,6 +2556,7 @@ namespace CANStream
         private void StopSpy()
         {
             //Stop spy thread
+            Timer_NoRx.Enabled = false;
             BGWrk_Spy.CancelAsync();
 
             bSpyRunning = false;
@@ -2761,6 +2768,24 @@ namespace CANStream
                 if (Tab_SpyHistory.SelectedTab.Tag.Equals("Graph"))
                 {
                     Update_SpyGraph();
+                }
+            }
+        }
+
+        private void CheckMessagesRxTimeout()
+        {
+            if (DecodedMessages.Count > 0)
+            {
+                foreach (CANMessageDecoded oMsg in DecodedMessages)
+                {
+                    if (oMsg.NoRxTimeOut > 0)
+                    {
+                        TimeSpan TSinceLastRx = DateTime.Now.Subtract(oMsg.LastRxDate);
+                        if (TSinceLastRx.TotalMilliseconds >= oMsg.NoRxTimeOut)
+                        {
+                            CurrentSpyViewer.Set_NoRxMessage(oMsg.Identifier);
+                        }
+                    }
                 }
             }
         }

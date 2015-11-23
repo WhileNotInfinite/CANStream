@@ -281,6 +281,7 @@ namespace CANStream
         public string Comment;
 		public CanMsgRxTx RxTx;
 		public int Period;
+        public int NoRxTimeOut;
 		public string MultiplexerName;
 		
 		public List<CANParameter> Parameters;
@@ -294,6 +295,7 @@ namespace CANStream
 			Comment = "";
 			RxTx= CanMsgRxTx.Tx;
 			Period=1;
+            NoRxTimeOut = 0;
 			MultiplexerName = "";
 			Parameters=new List<CANParameter>();
 			
@@ -771,6 +773,10 @@ namespace CANStream
 				XmlElement xPeriod=oXmlDoc.CreateElement("Period");
 				xPeriod.InnerText=Message.Period.ToString();
 				xMessage.AppendChild(xPeriod);
+
+                XmlElement xNoRx = oXmlDoc.CreateElement("NoRxTimeout");
+                xNoRx.InnerText = Message.NoRxTimeOut.ToString();
+                xMessage.AppendChild(xNoRx);
 				
 				XmlElement xMux=oXmlDoc.CreateElement("Multiplexer");
 				xMux.InnerText=Message.MultiplexerName;
@@ -998,7 +1004,26 @@ namespace CANStream
 					{
 						return(false);
 					}
-					
+
+                    //NoRx Timeout
+                    XmlNode xNoRx = xMessage.SelectSingleNode("NoRxTimeout");
+                    if (!(xNoRx == null))
+                    {
+                        int NoRxTimeout = 0;
+                        if (int.TryParse(xNoRx.InnerText, out NoRxTimeout))
+                        {
+                            oMessage.NoRxTimeOut = NoRxTimeout;
+                        }
+                        else
+                        {
+                            return (false);
+                        }
+                    }
+                    else
+                    {
+                        //Nothing to do: This node may not exist since it is a new feature of release 2.1.0.3
+                    }
+
 					//Multiplexer
 					XmlNode xMsgMux=xMessage.SelectSingleNode("Multiplexer");
 					if(!(xMsgMux==null))
@@ -1610,13 +1635,14 @@ namespace CANStream
 		#region public members
 		
 		public bool bMessageDecoded;
-		
+        public DateTime LastRxDate;
+        
 		#endregion
 		
 		#region private members
 		
-		TPCANMsg MsgRaw;
-		
+		private TPCANMsg MsgRaw;
+        
 		#endregion
 		
 		public CANMessageDecoded(CANMessage MessageCfg, TPCANMsg RawMessage)
@@ -1627,9 +1653,11 @@ namespace CANStream
 				Identifier=MessageCfg.Identifier +"h";
 				RxTx= MessageCfg.RxTx;
 				Period=MessageCfg.Period;
+                NoRxTimeOut = MessageCfg.NoRxTimeOut;
 				Comment=MessageCfg.Comment;
 				Parameters=MessageCfg.Parameters;
                 MultiplexerName = MessageCfg.MultiplexerName;
+                LastRxDate = DateTime.Now;
 			}
 			
 			if(RawMessage.DATA.Length>0)
@@ -1647,9 +1675,11 @@ namespace CANStream
 				Identifier=MessageCfg.Identifier +"h";
 				RxTx= MessageCfg.RxTx;
 				Period=MessageCfg.Period;
+                NoRxTimeOut = MessageCfg.NoRxTimeOut;
 				Comment=MessageCfg.Comment;
 				Parameters=MessageCfg.Parameters;
                 MultiplexerName = MessageCfg.MultiplexerName;
+                LastRxDate = DateTime.Now;
 			}
 			
 			if (Record.MessageData.Length>0)
@@ -1665,7 +1695,8 @@ namespace CANStream
 		
 		public void UpdateRawMsgBytes(byte[] Data)
 		{
-			MsgRaw.DATA=Data;
+            LastRxDate = DateTime.Now;
+            MsgRaw.DATA=Data;
 			DecodeMessage();
 		}
 		

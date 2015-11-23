@@ -422,7 +422,27 @@ namespace CANStream
         {
             ResetMessageForm();
         }
-        
+
+        private void Radio_Rx_CheckedChanged(object sender, EventArgs e)
+        {
+            Lbl_NoRxTitle.Enabled = Radio_Rx.Checked;
+            Txt_NoRxTimeout.Enabled = Radio_Rx.Checked;
+            Lbl_NoRxUnit.Enabled = Radio_Rx.Checked;
+        }
+
+        private void Txt_MsgPeriod_TextChanged(object sender, EventArgs e)
+        {
+            if (!(Txt_MsgPeriod.Text.Equals("")))
+            {
+                int Period = 0;
+
+                if(int.TryParse(Txt_MsgPeriod.Text,out Period))
+                {
+                    Txt_NoRxTimeout.Text = Math.Abs(Period * 200).ToString();
+                }
+            }
+        }
+
         private void Generic_MessageTextBoxKeyDown(object sender, KeyEventArgs e)
         {
         	if (e.KeyCode.Equals(Keys.Enter))
@@ -971,7 +991,7 @@ namespace CANStream
                 }
             }
             
-            TV_Messages.ExpandAll();
+            TV_Messages.CollapseAll();
             
             TV_Messages.ResumeLayout(true);
             
@@ -1164,6 +1184,7 @@ namespace CANStream
             					Txt_MsgName.Text = oActiveMessage.Name;
             					Txt_MsgIdentifier.Text = oActiveMessage.Identifier;
             					Txt_MsgPeriod.Text = oActiveMessage.Period.ToString();
+                                Txt_NoRxTimeout.Text = oActiveMessage.NoRxTimeOut.ToString();
             					Txt_MsgComment.Text = oActiveMessage.Comment;
 
             					if (oActiveMessage.RxTx.Equals(CanMsgRxTx.Rx))
@@ -1800,8 +1821,10 @@ namespace CANStream
             Txt_MsgIdentifier.Text = "";
             Txt_MsgPeriod.Text = "1000";
             Radio_Tx.Checked = true;
+
+            Txt_NoRxTimeout.Text = "0";
             
-            if (oMultipleControllersCfg == null) //Standard configuration: single controller
+            if (oMultipleControllersCfg == null) //sStandard configuration: single controller
             {
             	nController = null;
             }
@@ -1946,6 +1969,41 @@ namespace CANStream
                 return;
             }
             
+            //NoRx Timeout
+            if (oMessage.RxTx == CanMsgRxTx.Rx)
+            {
+                if (!(Txt_NoRxTimeout.Text.Equals("")))
+                {
+                    int NoRxTimeout = 0;
+                    if (int.TryParse(Txt_NoRxTimeout.Text, out NoRxTimeout))
+                    {
+                        if (NoRxTimeout != 0)
+                        {
+                            if (NoRxTimeout < 200)
+                            {
+                                MessageBox.Show("The message NoRx timeout must be greater or equal to 200 ms !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return;
+                            }
+                        }
+
+                        oMessage.NoRxTimeOut = NoRxTimeout;
+                    }
+                    else
+                    {
+                        MessageBox.Show("The message NoRx timeout must be a number !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                else
+                {
+                    oMessage.NoRxTimeOut = 0;
+                }
+            }
+            else
+            {
+                oMessage.NoRxTimeOut = 0;
+            }
+
             //Comment
             oMessage.Comment=Txt_MsgComment.Text;
 
@@ -1991,9 +2049,14 @@ namespace CANStream
             Txt_MsgIdentifier.Text = "";
             Radio_Tx.Checked = true;
             Txt_MsgPeriod.Text = "";
+            Txt_NoRxTimeout.Text = "";
             Txt_MsgComment.Text = "";
             Grp_MessageForm.Enabled = false;
             Cmd_CreateMessage.Text = "Create";
+
+            Lbl_NoRxTitle.Enabled = false;
+            Txt_NoRxTimeout.Enabled = false;
+            Lbl_NoRxUnit.Enabled = false;
         }
 		
         private void Import_DBC_File()
