@@ -187,3 +187,4 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\netchartdir_cp.xml
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.exe
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\obj\Debug_NoLicense\CANStream.pdb
+C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\CANStream.exe.config

@@ -40,8 +40,10 @@ namespace CANStream
 		#else
 		private const int CANSTREAM_APPID = 148;
 		#endif
-		
-		private const int NB_CAN_CONTROLLER_MAX = 8;
+
+        private const int NB_CAN_CONTROLLER_MAX = 8;
+
+        private const int CAN_CONFIG_HISTORY_DEPTH = 10;
 		
 		#endregion
 		
@@ -51,9 +53,9 @@ namespace CANStream
 		
 		private int CanControllerCount;
 		private Ctrl_CS_CAN_Bus ActiveCanBus;
-		
+
 		private CS_RecordEvent oRecordEvent;
-		
+
 		private bool bConverting;
 		private DateTime TLastDiag;
 		
@@ -78,7 +80,9 @@ namespace CANStream
 			
 			CANStreamTools.MyDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			CANStreamTools.CsDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\CANStream";
-			
+
+            ShowCanConfigHistory(LoadCanConfigHistory());
+
 			//Initial controls enabling/disabling
 			Cycle_openToolStripMenuItem.Enabled=false;
 			CANConfig_openToolStripMenuItem.Enabled=true;
@@ -204,7 +208,24 @@ namespace CANStream
 		{
         	LoadCANConfiguration();
 		}
-        
+
+        private void CanConfigHistoryItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveCanBus != null)
+            {
+                CANMessagesConfiguration oNewCfg = new CANMessagesConfiguration();
+
+                if (oNewCfg.ReadCANConfigurationFile(((ToolStripItem)sender).Tag.ToString()))
+                {
+                    ActiveCanBus.Set_BusCANConfiguration(oNewCfg);
+                }
+                else
+                {
+                    MessageBox.Show("CAN Configuration file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void CANConfig_editToolStripMenuItemClick(object sender, EventArgs e)
 		{
         	EditCurrentCanConfiguration();
@@ -1393,11 +1414,82 @@ namespace CANStream
         	
         	return(oLicence.LicenseValid);
         }
-        
+
+        #region CAN Config history
+
+        private List<string> LoadCanConfigHistory()
+        {
+            object CanCfgHistoryRegKey = null;
+            int CanCfgIndex = 1;
+
+            List<string> CanConfigHistory = new List<string>();
+
+            do
+            {
+                CanCfgHistoryRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\Can Configuration history", CanCfgIndex.ToString(), null);
+
+                if (CanCfgHistoryRegKey != null)
+                {
+                    CanConfigHistory.Add(CanCfgHistoryRegKey.ToString());
+                    CanCfgIndex++;
+                }
+            }
+            while (CanCfgHistoryRegKey != null);
+
+            return (CanConfigHistory);
+        }
+
+        private void WriteCanConfigHistory(List<string> CanConfigHistory)
+        {
+            if (CanConfigHistory.Count > 0)
+            {
+                int CanCfgIndex = 1;
+
+                foreach (string sCanCfg in CanConfigHistory)
+                {
+                    Registry.SetValue(CANStreamConstants.CS_REG_KEY + "\\Can Configuration history", CanCfgIndex.ToString(), sCanCfg);
+                    CanCfgIndex++;
+                }
+            }
+        }
+
+        private void UpdateCanConfigHistory(string ConfigPath)
+        {
+            List<string> CanConfigHistory = LoadCanConfigHistory();
+
+            if (!(CanConfigHistory.Contains(ConfigPath)))
+            {
+                CanConfigHistory.Insert(0, ConfigPath);
+
+                if (CanConfigHistory.Count > CAN_CONFIG_HISTORY_DEPTH)
+                {
+                    CanConfigHistory.RemoveAt(CAN_CONFIG_HISTORY_DEPTH);
+                }
+
+                ShowCanConfigHistory(CanConfigHistory);
+                WriteCanConfigHistory(CanConfigHistory);
+            }
+        }
+
+        private void ShowCanConfigHistory(List<string> CanConfigHistory)
+        {
+            CANConfig_recentToolStripMenuItem.DropDownItems.Clear();
+
+            foreach (string sCanCfg in CanConfigHistory)
+            {
+                ToolStripItem oItem = CANConfig_recentToolStripMenuItem.DropDownItems.Add(Path.GetFileName(sCanCfg));
+                oItem.Tag = sCanCfg;
+
+                oItem.Click+= new EventHandler(CanConfigHistoryItem_Click);
+            }
+        }
+
         #endregion
-        
+
+        #endregion
+
         #region CAN Controllers
-        
+
         private void Add_CANController()
         {
         	if (CanControllerCount < NB_CAN_CONTROLLER_MAX)
@@ -1868,6 +1960,8 @@ namespace CANStream
         			{
         				Load_ControllersConfiguration(openFileDialog1.FileName);
         			}
+
+                    UpdateCanConfigHistory(openFileDialog1.FileName);
         		}
         	}
         }
