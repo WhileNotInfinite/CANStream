@@ -933,6 +933,26 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Special_Paste_16 {
+            get {
+                object obj = ResourceManager.GetObject("Special_Paste_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Special_Paste_32 {
+            get {
+                object obj = ResourceManager.GetObject("Special_Paste_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Spy_and_Manual_16 {
             get {
                 object obj = ResourceManager.GetObject("Spy_and_Manual_16", resourceCulture);
