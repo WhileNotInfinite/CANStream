@@ -104,19 +104,26 @@ namespace CANStream
 
             if (TimeValue > Time[Time.Count - 1] * 1000)
             {
-                return (false);
+                TimeValue = TimeValue - (TimeValue / ((long)(Time[Time.Count - 1] * 1000))) * ((long)(Time[Time.Count - 1] * 1000));
+                //return (false);
             }
 
-            for (int i = 0; i < Time[Time.Count - 1] * 1000; i++)
+            //for (int i = 0; i < Time[Time.Count - 1] * 1000; i++)
+            for (int i = 0; i < Time.Count; i++)
             {
-                if (Time[i] * 1000 > TimeValue)
+                if (Time[i] * 1000 == TimeValue)
+                {
+                    DataValue = oChan.Samples[i];
+                    return (true);
+                }
+                else if (Time[i] * 1000 > TimeValue)
                 {
                     DataValue = oChan.Samples[i - 1];
-                    break;
+                    return (true);
                 }
             }
 
-            return (true);
+            return (false);
         }
         
         public bool ChannelExists(string ChannelName)

@@ -74,6 +74,8 @@ namespace CANStream
 		private List<VirtualVariable> VirtualVariablesTable;
 		string sCyclePath;
 		private int ParameterCnt;
+
+        private bool bCycleCreated;
 		
 		#endregion
 		
@@ -796,7 +798,9 @@ namespace CANStream
 		private void BGWrk_CycleMakeDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorker Worker = sender as BackgroundWorker;
-			Make_Cycle(Worker, e.Argument.ToString());
+            bCycleCreated = false;
+
+            bCycleCreated = Make_Cycle(Worker, e.Argument.ToString());
 		}
 		
 		private void BGWrk_CycleMakeProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -822,10 +826,17 @@ namespace CANStream
 			
 			if (!e.Cancelled)
 			{
-				MessageBox.Show("Cycle created !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-				
+                if (bCycleCreated)
+                {
+                    MessageBox.Show("Cycle created !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("An error occured during cycle creation !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
 				//Update cycle graph
-				if (!(oCycle ==  null))
+				if ((!(oCycle ==  null)) && (bCycleCreated))
 				{
 					oCycle.CreateGraphicSeries();
 					
@@ -1922,7 +1933,7 @@ namespace CANStream
 			if (sCyclePath.Equals(""))
 			{
 				Dlg_SaveFile.FileName = "";
-				Dlg_SaveFile.Filter = "CAN Strem cycle|*.csc";
+				Dlg_SaveFile.Filter = "CAN Stream cycle|*.csc";
 				Dlg_SaveFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Cycles";
 				
 				if (Dlg_SaveFile.ShowDialog().Equals(DialogResult.OK))
@@ -1949,7 +1960,7 @@ namespace CANStream
 			BGWrk_CycleMake.RunWorkerAsync(sCyclePath);
 		}
 		
-		private void Make_Cycle(BackgroundWorker worker, string CyclePath)
+		private bool Make_Cycle(BackgroundWorker worker, string CyclePath)
 		{
 			oCycle = new CANStreamCycle();
 			
@@ -1967,7 +1978,7 @@ namespace CANStream
 			
 			for (long iTime = 0; iTime < TotalTime; iTime++)
 			{
-				if (worker.CancellationPending) return;
+                if (worker.CancellationPending) return (true);
 				
 				//Active cycle part
 				if (iTime < (long)(oCycleCfg.PreCycleProperties.TimeLength * 1000))
@@ -2039,7 +2050,7 @@ namespace CANStream
                         }
                         else
                         {
-                        	return;
+                            return (false);
                         }
                     }
                     
@@ -2055,6 +2066,7 @@ namespace CANStream
 			}
 			
 			oCycle.WriteStreamCycle(CyclePath);
+            return (true);
 		}
 		
 		private List<string> GetMessagesForTimeEvent(long TimeValue)

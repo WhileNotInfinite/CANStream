@@ -41,3 +41,4 @@ Flee_Lib/obj/Debug/
 CANStream/bin/Debug/
 CANStream/obj/Debug_NoLicense/
 .vs/CANStream/v14/.suo
+*.bak
