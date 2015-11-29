@@ -224,7 +224,23 @@ namespace CANStream
 
         private void ContextSpyEng_ResetTSMenuItemClick(object sender, EventArgs e)
 		{
-            Clear_EngGrid();
+            switch (DataMode)
+            {
+                case GridDataMode.DataRx:
+
+                    Clear_EngGrid();
+                    break;
+
+                case GridDataMode.DataTx:
+
+                    Reset_TxGridValues();
+                    break;
+
+                default:
+
+                    //Nothing to do
+                    break;
+            }
 		}
 		
         private void ContextSpyEng_CollapseRowsTSMenuItem_Click(object sender, EventArgs e)
@@ -631,6 +647,35 @@ namespace CANStream
 			Arg.ColumnsVisible = SpyEngGridColumnsVisible;
 			OnEngGridColumnsVisibleChanged(Arg);
 		}
+
+        private void Reset_TxGridValues()
+        {
+            foreach (DataGridViewRow oRow in Grid_SpyEngineering.Rows)
+            {
+                CollapsableGridRowProperties oRowProps = (CollapsableGridRowProperties)oRow.Tag;
+
+                if (oRowProps.RowDataType== GridRowDataType.RawData)
+                {
+                    foreach(DataGridViewRow oGrpRow in oRowProps.Children)
+                    {
+                        CollapsableGridRowProperties oGrpRowProps = (CollapsableGridRowProperties)oGrpRow.Tag;
+
+                        if (oGrpRowProps.RowDataType== GridRowDataType.RootGroup || oGrpRowProps.RowDataType== GridRowDataType.Multiplexer)
+                        {
+                            foreach(DataGridViewRow oSignalRow in oGrpRowProps.Children)
+                            {
+                                CollapsableGridRowProperties oSignalRowProps = (CollapsableGridRowProperties)oSignalRow.Tag;
+
+                                if (oSignalRowProps.RowDataType == GridRowDataType.EngineeringData)
+                                {
+                                    oSignalRow.Cells[GRID_SPYENG_ENG_VALUE].Value = "0";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         #region Collapsable grid functions
 
