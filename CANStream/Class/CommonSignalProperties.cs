@@ -463,26 +463,26 @@ namespace CANStream
             WarningLimitMin = new SignalAlarmValue();
             WarningLimitMin.Enabled = false;
             WarningLimitMin.Value = 0;
-            WarningLimitMin.BackColor = System.Drawing.SystemColors.Window;
-            WarningLimitMin.ForeColor = System.Drawing.Color.Orange;
+            WarningLimitMin.BackColor = System.Drawing.Color.Orange;
+            WarningLimitMin.ForeColor = System.Drawing.Color.Black;
 
             WarningLimitMax = new SignalAlarmValue();
             WarningLimitMax.Enabled = false;
             WarningLimitMax.Value = 0;
-            WarningLimitMax.BackColor = System.Drawing.SystemColors.Window;
-            WarningLimitMax.ForeColor = System.Drawing.Color.Orange;
+            WarningLimitMax.BackColor = System.Drawing.Color.Orange;
+            WarningLimitMax.ForeColor = System.Drawing.Color.Black;
 
             AlarmLimitMin = new SignalAlarmValue();
             AlarmLimitMin.Enabled = false;
             AlarmLimitMin.Value = 0;
-            AlarmLimitMin.BackColor = System.Drawing.SystemColors.Window;
-            AlarmLimitMin.ForeColor = System.Drawing.Color.Red;
+            AlarmLimitMin.BackColor = System.Drawing.Color.Red;
+            AlarmLimitMin.ForeColor = System.Drawing.Color.White;
 
             AlarmLimitMax = new SignalAlarmValue();
             AlarmLimitMax.Enabled = false;
             AlarmLimitMax.Value = 0;
-            AlarmLimitMax.BackColor = System.Drawing.SystemColors.Window;
-            AlarmLimitMax.ForeColor = System.Drawing.Color.Red;
+            AlarmLimitMax.BackColor = System.Drawing.Color.Red;
+            AlarmLimitMax.ForeColor = System.Drawing.Color.White;
         }
 
         #region Public methodes
