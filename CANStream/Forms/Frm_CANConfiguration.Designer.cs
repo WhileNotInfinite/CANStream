@@ -87,6 +87,9 @@
             this.label23 = new System.Windows.Forms.Label();
             this.Tab_Message = new System.Windows.Forms.TabPage();
             this.Grp_MessageForm = new System.Windows.Forms.GroupBox();
+            this.Lbl_NoRxTitle = new System.Windows.Forms.Label();
+            this.Lbl_NoRxUnit = new System.Windows.Forms.Label();
+            this.Txt_NoRxTimeout = new System.Windows.Forms.TextBox();
             this.Txt_MsgComment = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.Cmd_CancelNewMessage = new System.Windows.Forms.Button();
@@ -178,9 +181,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip_Commands = new System.Windows.Forms.ToolTip(this.components);
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
-            this.Txt_NoRxTimeout = new System.Windows.Forms.TextBox();
-            this.Lbl_NoRxUnit = new System.Windows.Forms.Label();
-            this.Lbl_NoRxTitle = new System.Windows.Forms.Label();
+            this.TSB_PasteSpecial = new System.Windows.Forms.ToolStripButton();
+            this.specialPasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
             this.Split_Tree_Props.Panel1.SuspendLayout();
             this.Split_Tree_Props.Panel2.SuspendLayout();
@@ -287,13 +289,14 @@
             this.cutToolStripMenuItem,
             this.copyToolStripMenuItem,
             this.pasteToolStripMenuItem,
+            this.specialPasteToolStripMenuItem,
             this.toolStripMenuItem2,
             this.deleteToolStripMenuItem,
             this.toolStripMenuItem3,
             this.expandAllToolStripMenuItem,
             this.collapseAllToolStripMenuItem});
             this.Context_TV_Messages.Name = "Context_TV_Messages";
-            this.Context_TV_Messages.Size = new System.Drawing.Size(227, 292);
+            this.Context_TV_Messages.Size = new System.Drawing.Size(227, 336);
             this.Context_TV_Messages.Opening += new System.ComponentModel.CancelEventHandler(this.Context_TV_MessagesOpening);
             // 
             // AddCanControllertoolStripMenuItem
@@ -793,6 +796,32 @@
             this.Grp_MessageForm.Size = new System.Drawing.Size(348, 360);
             this.Grp_MessageForm.TabIndex = 15;
             this.Grp_MessageForm.TabStop = false;
+            // 
+            // Lbl_NoRxTitle
+            // 
+            this.Lbl_NoRxTitle.AutoSize = true;
+            this.Lbl_NoRxTitle.Location = new System.Drawing.Point(18, 97);
+            this.Lbl_NoRxTitle.Name = "Lbl_NoRxTitle";
+            this.Lbl_NoRxTitle.Size = new System.Drawing.Size(75, 13);
+            this.Lbl_NoRxTitle.TabIndex = 34;
+            this.Lbl_NoRxTitle.Text = "NoRx Timeout";
+            // 
+            // Lbl_NoRxUnit
+            // 
+            this.Lbl_NoRxUnit.AutoSize = true;
+            this.Lbl_NoRxUnit.Location = new System.Drawing.Point(185, 97);
+            this.Lbl_NoRxUnit.Name = "Lbl_NoRxUnit";
+            this.Lbl_NoRxUnit.Size = new System.Drawing.Size(145, 13);
+            this.Lbl_NoRxUnit.TabIndex = 33;
+            this.Lbl_NoRxUnit.Text = "ms (0 to disable NoTx check)";
+            // 
+            // Txt_NoRxTimeout
+            // 
+            this.Txt_NoRxTimeout.Location = new System.Drawing.Point(99, 94);
+            this.Txt_NoRxTimeout.Name = "Txt_NoRxTimeout";
+            this.Txt_NoRxTimeout.Size = new System.Drawing.Size(80, 20);
+            this.Txt_NoRxTimeout.TabIndex = 32;
+            this.Txt_NoRxTimeout.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
             // 
             // Txt_MsgComment
             // 
@@ -1570,6 +1599,7 @@
             this.TSB_Cut,
             this.TSB_Copy,
             this.TSB_Paste,
+            this.TSB_PasteSpecial,
             this.toolStripSeparator2,
             this.TSB_ImportDBC,
             this.TSB_NewController,
@@ -1729,31 +1759,24 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Txt_NoRxTimeout
+            // TSB_PasteSpecial
             // 
-            this.Txt_NoRxTimeout.Location = new System.Drawing.Point(99, 94);
-            this.Txt_NoRxTimeout.Name = "Txt_NoRxTimeout";
-            this.Txt_NoRxTimeout.Size = new System.Drawing.Size(80, 20);
-            this.Txt_NoRxTimeout.TabIndex = 32;
-            this.Txt_NoRxTimeout.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Generic_MessageTextBoxKeyDown);
+            this.TSB_PasteSpecial.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_PasteSpecial.Image = global::CANStream.Icones.Special_Paste_32;
+            this.TSB_PasteSpecial.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_PasteSpecial.Name = "TSB_PasteSpecial";
+            this.TSB_PasteSpecial.Size = new System.Drawing.Size(36, 36);
+            this.TSB_PasteSpecial.Text = "toolStripButton1";
+            this.TSB_PasteSpecial.ToolTipText = "Special paste";
+            this.TSB_PasteSpecial.Click += new System.EventHandler(this.TSB_PasteSpecial_Click);
             // 
-            // Lbl_NoRxUnit
+            // specialPasteToolStripMenuItem
             // 
-            this.Lbl_NoRxUnit.AutoSize = true;
-            this.Lbl_NoRxUnit.Location = new System.Drawing.Point(185, 97);
-            this.Lbl_NoRxUnit.Name = "Lbl_NoRxUnit";
-            this.Lbl_NoRxUnit.Size = new System.Drawing.Size(145, 13);
-            this.Lbl_NoRxUnit.TabIndex = 33;
-            this.Lbl_NoRxUnit.Text = "ms (0 to disable NoTx check)";
-            // 
-            // Lbl_NoRxTitle
-            // 
-            this.Lbl_NoRxTitle.AutoSize = true;
-            this.Lbl_NoRxTitle.Location = new System.Drawing.Point(18, 97);
-            this.Lbl_NoRxTitle.Name = "Lbl_NoRxTitle";
-            this.Lbl_NoRxTitle.Size = new System.Drawing.Size(75, 13);
-            this.Lbl_NoRxTitle.TabIndex = 34;
-            this.Lbl_NoRxTitle.Text = "NoRx Timeout";
+            this.specialPasteToolStripMenuItem.Image = global::CANStream.Icones.Special_Paste_16;
+            this.specialPasteToolStripMenuItem.Name = "specialPasteToolStripMenuItem";
+            this.specialPasteToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.specialPasteToolStripMenuItem.Text = "Special paste";
+            this.specialPasteToolStripMenuItem.Click += new System.EventHandler(this.specialPasteToolStripMenuItem_Click);
             // 
             // Frm_CANConfiguration
             // 
@@ -1962,5 +1985,7 @@
         private System.Windows.Forms.Label Lbl_NoRxTitle;
         private System.Windows.Forms.Label Lbl_NoRxUnit;
         private System.Windows.Forms.TextBox Txt_NoRxTimeout;
+        private System.Windows.Forms.ToolStripMenuItem specialPasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton TSB_PasteSpecial;
     }
 }

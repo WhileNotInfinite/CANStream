@@ -83,6 +83,8 @@ namespace CANStream
         private MainForm FrmParent;
         
         private int CellColorId;
+
+        private SpecialPasteObjectType eSpecialPastObjType;
         
         #endregion
         
@@ -99,7 +101,9 @@ namespace CANStream
             ReloadMainFormCanCfg =  false;
             CanControllerId = -1;
             FrmParent =  null;
-            
+
+            eSpecialPastObjType = SpecialPasteObjectType.Unknown;
+
             tabControl1.TabPages.Remove(Tab_Controller);
         }
         
@@ -116,7 +120,9 @@ namespace CANStream
             ReloadMainFormCanCfg=CurrentConfig;
             CanControllerId = ControllerId;
             FrmParent=FrmMain;
-            
+
+            eSpecialPastObjType = SpecialPasteObjectType.Unknown;
+
             tabControl1.TabPages.Remove(Tab_Controller);
         }
 
@@ -191,7 +197,12 @@ namespace CANStream
         {
             PasteItem();
         }
-		
+
+        private void TSB_PasteSpecial_Click(object sender, EventArgs e)
+        {
+            SpecialPasteItem();
+        }
+
         private void TSB_ImportDBCClick(object sender, EventArgs e)
         {
         	Import_DBC_File();
@@ -278,6 +289,11 @@ namespace CANStream
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PasteItem();
+        }
+        
+        private void specialPasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpecialPasteItem();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1400,6 +1416,7 @@ namespace CANStream
             		case ConfigurationItemType.Controller:
             			
             			oClipObject.ClipboardObject = oMultipleControllersCfg.Get_BusController(TV_Messages.SelectedNode.Text).Clone();
+                        eSpecialPastObjType = SpecialPasteObjectType.Unknown;
             			break;
             			
             		case ConfigurationItemType.Message:
@@ -1410,6 +1427,8 @@ namespace CANStream
             			{
             				oClipObject.ClipboardObjectCANCfgSrcIndex = oMultipleControllersCfg.Get_BusControllerId(TV_Messages.SelectedNode.Parent.Text);
             			}
+
+                        eSpecialPastObjType = SpecialPasteObjectType.Message;
             			
             			break;
             			
@@ -1423,9 +1442,14 @@ namespace CANStream
             			}
             			
                 		oClipObject.ParamClipBoardParentMessageName = oActiveMessage.Name;
+
+                        eSpecialPastObjType = SpecialPasteObjectType.Parameter;
+
             			break;
 
                     default:
+
+                        eSpecialPastObjType = SpecialPasteObjectType.Unknown;
 
                         return;
             	}
@@ -1630,7 +1654,13 @@ namespace CANStream
             	}
             }
         }
-        
+
+        private void SpecialPasteItem()
+        {
+            Frm_CANConfiguration_SpecialPaste frm = new Frm_CANConfiguration_SpecialPaste(eSpecialPastObjType, this);
+            frm.Show();
+        }
+
         private TreeNode FindCanParameterNode(string ParamName)
         {
         	foreach (TreeNode n in TV_Messages.Nodes)
@@ -3374,6 +3404,161 @@ namespace CANStream
             }
 
             ShowCANParameterProperties();
+        }
+
+        public void MakeSpecialPaste(SpecialPasteItems ePasteItem)
+        {
+            CANConfigClipboardObject oClipObject = null;
+            IDataObject ClipDataObj = Clipboard.GetDataObject();
+            string sFormat = typeof(CANConfigClipboardObject).FullName;
+
+            if (ClipDataObj.GetDataPresent(sFormat))
+            {
+            	oClipObject = ClipDataObj.GetData(sFormat) as CANConfigClipboardObject;
+
+                if (!(oClipObject == null))
+                {
+                    if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANMessage)))
+                    {
+                        CANMessage oMsgClip = (CANMessage)oClipObject.ClipboardObject;
+
+                        if (oActiveMessage != null)
+                        {
+                            switch (ePasteItem)
+                            {
+                                case SpecialPasteItems.RxTx:
+
+                                    oActiveMessage.RxTx = oMsgClip.RxTx;
+                                    break;
+
+                                case SpecialPasteItems.DLC:
+
+                                    //TODO: Add DLC when it will be available
+                                    break;
+
+                                case SpecialPasteItems.Period:
+
+                                    oActiveMessage.Period = oMsgClip.Period;
+                                    break;
+
+                                case SpecialPasteItems.NoRxTimeout:
+
+                                    oActiveMessage.NoRxTimeOut = oMsgClip.NoRxTimeOut;
+                                    break;
+
+                                case SpecialPasteItems.Comment:
+
+                                    oActiveMessage.Comment = oMsgClip.Comment;
+                                    break;
+
+                                default:
+
+                                    //Nothing to do
+                                    break;
+                            }
+
+                            ShowConfigurationItem(TV_Messages.SelectedNode);
+                        }
+                    }
+                    else if (oClipObject.ClipboardObject.GetType().Equals(typeof(CANParameter)))
+                    {
+                        CANParameter oParamClip = (CANParameter)oClipObject.ClipboardObject;
+
+                        if (oActiveParameter != null)
+                        {
+                            switch (ePasteItem)
+                            {
+                                case SpecialPasteItems.Endianess:
+
+                                    oActiveParameter.Endianess = oParamClip.Endianess;
+                                    break;
+
+                                case SpecialPasteItems.Signedness:
+
+                                    oActiveParameter.Signed = oParamClip.Signed;
+                                    break;
+
+                                case SpecialPasteItems.Linearization:
+
+                                    oActiveParameter.Gain = oParamClip.Gain;
+                                    oActiveParameter.Zero = oParamClip.Zero;
+                                    break;
+
+                                case SpecialPasteItems.VirtualChannel:
+
+                                    oActiveParameter.VirtualChannelReference.ChannelName = oParamClip.VirtualChannelReference.ChannelName;
+                                    oActiveParameter.VirtualChannelReference.LibraryName = oParamClip.VirtualChannelReference.LibraryName;
+                                    break;
+
+                                case SpecialPasteItems.Format:
+
+                                    oActiveParameter.ValueFormat.FormatType = oParamClip.ValueFormat.FormatType;
+                                    oActiveParameter.ValueFormat.Decimals = oParamClip.ValueFormat.Decimals;
+
+                                    oActiveParameter.ValueFormat.Enums.Clear();
+
+                                    if (oParamClip.ValueFormat.FormatType == SignalValueFormat.Enum)
+                                    {
+                                        foreach (EnumerationValue sClipEnum in oParamClip.ValueFormat.Enums)
+                                        {
+                                            EnumerationValue eEnum = new EnumerationValue();
+
+                                            eEnum.Value = sClipEnum.Value;
+                                            eEnum.Text = sClipEnum.Text;
+
+                                            oActiveParameter.ValueFormat.Enums.Add(eEnum);
+                                        }
+                                    }
+
+                                    break;
+
+                                case SpecialPasteItems.Alarms:
+
+                                    oActiveParameter.Alarms.Enabled = oParamClip.Alarms.Enabled;
+
+                                    oActiveParameter.Alarms.WarningLimitMin.Enabled = oParamClip.Alarms.WarningLimitMin.Enabled;
+                                    oActiveParameter.Alarms.WarningLimitMin.Value = oParamClip.Alarms.WarningLimitMin.Value;
+                                    oActiveParameter.Alarms.WarningLimitMin.BackColor = oParamClip.Alarms.WarningLimitMin.BackColor;
+                                    oActiveParameter.Alarms.WarningLimitMin.ForeColor = oParamClip.Alarms.WarningLimitMin.ForeColor;
+
+                                    oActiveParameter.Alarms.WarningLimitMax.Enabled = oParamClip.Alarms.WarningLimitMax.Enabled;
+                                    oActiveParameter.Alarms.WarningLimitMax.Value = oParamClip.Alarms.WarningLimitMax.Value;
+                                    oActiveParameter.Alarms.WarningLimitMax.BackColor = oParamClip.Alarms.WarningLimitMax.BackColor;
+                                    oActiveParameter.Alarms.WarningLimitMax.ForeColor = oParamClip.Alarms.WarningLimitMax.ForeColor;
+
+                                    oActiveParameter.Alarms.AlarmLimitMin.Enabled = oParamClip.Alarms.AlarmLimitMin.Enabled;
+                                    oActiveParameter.Alarms.AlarmLimitMin.Value = oParamClip.Alarms.AlarmLimitMin.Value;
+                                    oActiveParameter.Alarms.AlarmLimitMin.BackColor = oParamClip.Alarms.AlarmLimitMin.BackColor;
+                                    oActiveParameter.Alarms.AlarmLimitMin.ForeColor = oParamClip.Alarms.AlarmLimitMin.ForeColor;
+
+                                    oActiveParameter.Alarms.AlarmLimitMax.Enabled = oParamClip.Alarms.AlarmLimitMax.Enabled;
+                                    oActiveParameter.Alarms.AlarmLimitMax.Value = oParamClip.Alarms.AlarmLimitMax.Value;
+                                    oActiveParameter.Alarms.AlarmLimitMax.BackColor = oParamClip.Alarms.AlarmLimitMax.BackColor;
+                                    oActiveParameter.Alarms.AlarmLimitMax.ForeColor = oParamClip.Alarms.AlarmLimitMax.ForeColor;
+
+                                    break;
+
+                                case SpecialPasteItems.Unit:
+
+                                    oActiveParameter.Unit = oParamClip.Unit;
+                                    break;
+
+                                case SpecialPasteItems.Comment:
+
+                                    oActiveParameter.Comment = oParamClip.Comment;
+                                    break;
+
+                                default:
+
+                                    //Nothing to do
+                                    break;
+                            }
+
+                            ShowConfigurationItem(TV_Messages.SelectedNode);
+                        }
+                    }
+                }
+            }
         }
 
         #endregion

@@ -200,6 +200,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Frm_CANConfiguration.resx</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Frm_CANConfiguration_SpecialPaste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_CANConfiguration_SpecialPaste.Designer.cs">
+      <DependentUpon>Frm_CANConfiguration_SpecialPaste.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Frm_CANConfiguration_VirtualChannelReference.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -354,6 +360,9 @@
       <DependentUpon>Frm_CANConfiguration.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Frm_CANConfiguration1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CANConfiguration_SpecialPaste.resx">
+      <DependentUpon>Frm_CANConfiguration_SpecialPaste.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_CANConfiguration_VirtualChannelReference.resx">
       <DependentUpon>Frm_CANConfiguration_VirtualChannelReference.cs</DependentUpon>
