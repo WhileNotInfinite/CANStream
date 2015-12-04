@@ -347,7 +347,14 @@ namespace CANStream
                         CopyItem(false);
                         break;
                     case Keys.V: //Paste
-                        PasteItem();
+                        if (e.Shift)
+                        {
+                            SpecialPasteItem();
+                        }
+                        else
+                        {
+                            PasteItem();
+                        }
                         break;
                 }
             }
