@@ -272,7 +272,10 @@
             this.Controls.Add(this.Lbl_CANMessage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Frm_CANConfiguration_SpecialPaste";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Special paste";
+            this.Deactivate += new System.EventHandler(this.Frm_CANConfiguration_SpecialPaste_Deactivate);
             this.Load += new System.EventHandler(this.Frm_CANConfiguration_SpecialPaste_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

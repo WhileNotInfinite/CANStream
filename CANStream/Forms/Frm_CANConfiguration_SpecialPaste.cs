@@ -103,6 +103,11 @@ namespace CANStream
             }
         }
 
+        private void Frm_CANConfiguration_SpecialPaste_Deactivate(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void Cmd_Apply_Click(object sender, EventArgs e)
         {
             SpecialPasteItems ePastItem = SpecialPasteItems.None;

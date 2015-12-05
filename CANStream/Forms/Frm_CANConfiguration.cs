@@ -1664,7 +1664,33 @@ namespace CANStream
 
         private void SpecialPasteItem()
         {
+            const int FrmCursorPosOffset = 5;
+
             Frm_CANConfiguration_SpecialPaste frm = new Frm_CANConfiguration_SpecialPaste(eSpecialPastObjType, this);
+
+            Point FrmLoc = new Point();
+            Screen Src = Screen.FromControl(this);
+
+            if (Cursor.Position.X + FrmCursorPosOffset + frm.Width < Src.Bounds.Right)
+            {
+                FrmLoc.X = Cursor.Position.X + FrmCursorPosOffset;
+            }
+            else
+            {
+                FrmLoc.X = Cursor.Position.X - (FrmCursorPosOffset + frm.Width);
+            }
+
+            if (Cursor.Position.Y + FrmCursorPosOffset + frm.Height < Src.Bounds.Bottom)
+            {
+                FrmLoc.Y = Cursor.Position.Y + FrmCursorPosOffset;
+            }
+            else
+            {
+                FrmLoc.Y = Cursor.Position.Y - (FrmCursorPosOffset + frm.Height);
+            }
+
+            //frm.Location = new Point(Cursor.Position.X + 5, Cursor.Position.Y + 5);
+            frm.Location = FrmLoc;
             frm.Show();
         }
 
