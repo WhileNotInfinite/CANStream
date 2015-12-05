@@ -1398,7 +1398,7 @@ namespace CANStream
         
         private bool CheckLicence()
         {
-        	AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, CANSTREAM_APPID, Application.ProductVersion);
+        	AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, CANSTREAM_APPID, Application.ProductVersion, TextRessouces.LicenseRequestEmail, true);
         	
         	if (oLicence.LicenseValid)
         	{

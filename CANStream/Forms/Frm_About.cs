@@ -52,7 +52,7 @@ namespace CANStream
 		
 		private void Cmd_LicenceRequestClick(object sender, EventArgs e)
 		{
-			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion);
+			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion, TextRessouces.LicenseRequestEmail, false);
 
             oLicence.EditorMailAddress = TextRessouces.LicenseRequestEmail;
             oLicence.RequestLicence();
@@ -69,9 +69,9 @@ namespace CANStream
 		
 		private void GetLicenceInformation()
 		{
-			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion);
-			
-			if (oLicence.LicenseValid)
+			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion, TextRessouces.LicenseRequestEmail, false);
+
+            if (oLicence.LicenseValid)
 			{
 				Txt_LicenceValid.Text = "Yes";	
 			}
