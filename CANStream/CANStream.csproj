@@ -328,6 +328,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TextRessouces.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextRessouces.resx</DependentUpon>
+    </Compile>
     <Compile Include="Tools\CANStreamTools.cs" />
     <Compile Include="Tools\NumberBaseConverter.cs" />
   </ItemGroup>
@@ -425,6 +430,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextRessouces.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TextRessouces.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

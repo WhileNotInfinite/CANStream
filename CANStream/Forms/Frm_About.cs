@@ -53,7 +53,9 @@ namespace CANStream
 		private void Cmd_LicenceRequestClick(object sender, EventArgs e)
 		{
 			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion);
-			oLicence.RequestLicence();
+
+            oLicence.EditorMailAddress = TextRessouces.LicenseRequestEmail;
+            oLicence.RequestLicence();
 		}
 		
 		private void Cmd_OKClick(object sender, EventArgs e)
