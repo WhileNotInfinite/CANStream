@@ -169,14 +169,15 @@ namespace CANStream
             this.Lbl_CanConfig = new System.Windows.Forms.Label();
             this.Lbl_CycleFile = new System.Windows.Forms.Label();
             this.Img_TabControl = new System.Windows.Forms.ImageList(this.components);
-            this.Timer_CycleGraph = new System.Windows.Forms.Timer(this.components);
             this.Timer_CheckDevice = new System.Windows.Forms.Timer(this.components);
-            this.BGWrk_Cycle = new System.ComponentModel.BackgroundWorker();
             this.BGWrk_Manual = new System.ComponentModel.BackgroundWorker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Timer_NoRx = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.TSLblDbg_AvgTaskTime = new System.Windows.Forms.ToolStripLabel();
+            this.TSLblDbg_AvgCallDelay = new System.Windows.Forms.ToolStripLabel();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -227,7 +228,10 @@ namespace CANStream
             this.TSB_StopCANTraceRecording,
             this.TSB_RecordSelection,
             this.toolStripSeparator1,
-            this.TSSB_View});
+            this.TSSB_View,
+            this.toolStripSeparator4,
+            this.TSLblDbg_AvgTaskTime,
+            this.TSLblDbg_AvgCallDelay});
             this.CtrlMain_ToolStrip.Location = new System.Drawing.Point(0, 0);
             this.CtrlMain_ToolStrip.Name = "CtrlMain_ToolStrip";
             this.CtrlMain_ToolStrip.Size = new System.Drawing.Size(978, 25);
@@ -1631,23 +1635,10 @@ namespace CANStream
             this.Img_TabControl.Images.SetKeyName(0, "personal.png");
             this.Img_TabControl.Images.SetKeyName(1, "windows-movie-maker-icone-8672-16.png");
             // 
-            // Timer_CycleGraph
-            // 
-            this.Timer_CycleGraph.Interval = 50;
-            this.Timer_CycleGraph.Tick += new System.EventHandler(this.Timer_CycleGraphTick);
-            // 
             // Timer_CheckDevice
             // 
             this.Timer_CheckDevice.Interval = 5000;
             this.Timer_CheckDevice.Tick += new System.EventHandler(this.Timer_CheckDeviceTick);
-            // 
-            // BGWrk_Cycle
-            // 
-            this.BGWrk_Cycle.WorkerReportsProgress = true;
-            this.BGWrk_Cycle.WorkerSupportsCancellation = true;
-            this.BGWrk_Cycle.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_CycleDoWork);
-            this.BGWrk_Cycle.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_CycleProgressChanged);
-            this.BGWrk_Cycle.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_CycleRunWorkerCompleted);
             // 
             // BGWrk_Manual
             // 
@@ -1672,6 +1663,26 @@ namespace CANStream
             // 
             this.Timer_NoRx.Interval = 200;
             this.Timer_NoRx.Tick += new System.EventHandler(this.Timer_NoRx_Tick);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator4.Visible = false;
+            // 
+            // TSLblDbg_AvgTaskTime
+            // 
+            this.TSLblDbg_AvgTaskTime.Name = "TSLblDbg_AvgTaskTime";
+            this.TSLblDbg_AvgTaskTime.Size = new System.Drawing.Size(86, 22);
+            this.TSLblDbg_AvgTaskTime.Text = "toolStripLabel1";
+            this.TSLblDbg_AvgTaskTime.Visible = false;
+            // 
+            // TSLblDbg_AvgCallDelay
+            // 
+            this.TSLblDbg_AvgCallDelay.Name = "TSLblDbg_AvgCallDelay";
+            this.TSLblDbg_AvgCallDelay.Size = new System.Drawing.Size(86, 22);
+            this.TSLblDbg_AvgCallDelay.Text = "toolStripLabel2";
+            this.TSLblDbg_AvgCallDelay.Visible = false;
             // 
             // Ctrl_CS_CAN_Bus
             // 
@@ -1796,10 +1807,8 @@ namespace CANStream
 		private System.Windows.Forms.ContextMenuStrip Context_SpyGraphChannels;
 		private System.ComponentModel.BackgroundWorker BGWrk_Spy;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.ComponentModel.BackgroundWorker BGWrk_Manual;
-		private System.ComponentModel.BackgroundWorker BGWrk_Cycle;
-		private System.Windows.Forms.Timer Timer_CheckDevice;
-		private System.Windows.Forms.Timer Timer_CycleGraph;
+        private System.ComponentModel.BackgroundWorker BGWrk_Manual;
+        private System.Windows.Forms.Timer Timer_CheckDevice;
 		private System.Windows.Forms.Label Lbl_CycleFile;
 		private System.Windows.Forms.Label Lbl_CanConfig;
 		private System.Windows.Forms.Label label1;
@@ -1865,5 +1874,8 @@ namespace CANStream
         private System.Windows.Forms.ToolStripButton TSB_RecordSelection;
         private Ctrl_CANDataGrid Grid_ManualDataWriter;
         private System.Windows.Forms.Timer Timer_NoRx;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripLabel TSLblDbg_AvgTaskTime;
+        private System.Windows.Forms.ToolStripLabel TSLblDbg_AvgCallDelay;
     }
 }

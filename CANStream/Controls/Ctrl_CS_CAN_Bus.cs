@@ -13,10 +13,12 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text; //StringBuilder
+using System.Threading;
 using System.Xml;
 using System.Windows.Forms;
 
 using ChartDirector;
+using MicroSecondLibrary;
 
 //PCANBasic includes
 using Peak.Can.Basic;
@@ -189,8 +191,12 @@ namespace CANStream
         #region private constants
 
         private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
+
 		private const int SPY_GRID_UPDATE_PERIOD=100;
 		private const int SPY_GRAPH_UPDATE_PERIOD=100;
+
+        private const int CYCLE_REPORT_PROGRESS_PERIOD = 60; //ms
+        
         private const int GRID_MAX_COL_WIDTH = 60;
         private const int GRID_RAW_MANUAL_FILLER_COL = 0;	//Column 'ID'
         private const int GRID_RAW_COL_TX_PERIOD = 2;
@@ -209,27 +215,36 @@ namespace CANStream
 		private CANMessagesConfiguration oCanConfig;
 		
 		private bool bCANConnected;
-		private bool bCycleRunning;
+		private bool bCycleRunning; //TODO: Verify it is correctly to true and false
 		private bool bManualRunning;
 		private bool bSpyRunning;
 		
 		private Ctrl_CANDataGrid CurrentSpyViewer;
 		
 		//Cycle control
+        MicroSecondTimer oCycleScheduler;
+        private int LoopNumber;
+        private bool InfinitePlay;
+        private int ProgessTimeCounter;
+        private CycleSchedulerProgress_Delegate CycleSchedulerProgressCaller;
+        private CycleSchedulerTaskEnd_Delegate CycleSchedulerTaskEndCaller;
 		private bool bPauseCycle;
-		private int iLoopInitial;
-		private int iLoopCurrent;
-		private int LoopCnt;
-		private int iTimeEventInitial;
-		private int iTimeEventCurrent;
-		private long TCycleStart;
-		private long TCycleEnd;
-		private long TimeInCycle;
+        private int iLoopCurrent;
+        private int iTimeEventInitial;
+        private int iTimeEventCurrent;
+        private long TCycleStart;
+        private long TCycleEnd;
+        private long TimeInCycle;
 		private bool bCycleStartSet;
 		private bool bCycleEndSet;
 		private bool bCycleStartEndTxtSetting;
 		private double TCycleStart_Old;
 		private double TCycleEnd_Old;
+#if DEBUG
+        private long TExecMax;
+        private long TLateMax;
+#endif
+
 		
 		//Spy control
 		private SpyCANRxMode SpyMsgRxMode;
@@ -379,13 +394,18 @@ namespace CANStream
 			Set_RxGridColumnsVisible(GridCANData_ColumnsEnum.Default);
 			
 			//Initialization of cycle control management
-			iLoopInitial=0;
+            oCycleScheduler = null;
 			iTimeEventInitial=0;
 			TimeInCycle = 0;
-			Timer_CycleGraph.Enabled = false;
+            bCycleRunning = false;
+            bPauseCycle = false;
 			bCycleStartSet = false;
 			bCycleEndSet = false;
 			bCycleStartEndTxtSetting = false;
+#if DEBUG
+            TExecMax = 0;
+            TLateMax = 0;
+#endif
 			
 			//Initialization of CAN spy control
 			SpyMsgRxMode = SpyCANRxMode.Event;
@@ -499,8 +519,10 @@ namespace CANStream
 		
 		private void TSB_CAN_LinkOnClick(object sender, EventArgs e)
 		{
-			if(BGWrk_Cycle.IsBusy)
-			{
+			//TODO: Remove
+            //if(BGWrk_Cycle.IsBusy)
+			if (bCycleRunning)
+            {
 				bPauseCycle=false;
 				StopCycle();
 			}
@@ -1252,19 +1274,28 @@ namespace CANStream
 
         private void Cmd_PlayCycleClick(object sender, EventArgs e)
 		{
-			Txt_CurrentCycleNum.Text="1";
-        	PlayCycle();
-        	StartSpy();
-        	StartManualControl();
+            if (!bPauseCycle)
+            {
+                Txt_CurrentCycleNum.Text = "1";
+                StartCycle();
+                StartSpy();
+                StartManualControl();
+            }
+            else
+            {
+                Cmd_PlayCycle.Enabled = false;
+                Cmd_BreakCycle.Enabled = true;
+                
+                bPauseCycle = false;
+            }
 		}
 		
 		private void Cmd_BreakCycleClick(object sender, EventArgs e)
 		{
 			bPauseCycle=true;
-        	StopCycle();
-        	
-        	iLoopInitial=iLoopCurrent;
-        	iTimeEventInitial=iTimeEventCurrent;
+
+            Cmd_PlayCycle.Enabled = true;
+            Cmd_BreakCycle.Enabled = false;
 		}
 		
 		private void Cmd_StopCycleClick(object sender, EventArgs e)
@@ -1274,7 +1305,6 @@ namespace CANStream
         	StopSpy();
         	StopManualControl();
         	
-        	iLoopInitial=0;
 			iTimeEventInitial=0;
 		}
 		
@@ -1298,15 +1328,6 @@ namespace CANStream
         	{
         		Set_CycleStartEndCursorsFromTextBox();
         	}
-		}
-		
-		private void Timer_CycleGraphTick(object sender, EventArgs e)
-		{
-			double TimeCurrent  = ((double)TimeInCycle ) / 1000;
-        	double dTStartCycle = ((double) TCycleStart) / 1000;
-        	double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-        		
-        	PlotCycle(true, TimeCurrent, dTStartCycle, dTEndCycle);
 		}
 		
 		private void Chk_CycleVirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
@@ -1432,113 +1453,6 @@ namespace CANStream
         
         #endregion
         
-        #region Cycle BackgroundWorker
-        
-        private void BGWrk_CycleDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-		{
-			BackgroundWorker Worker=sender as BackgroundWorker;
-			
-			if (e.Argument.GetType().Equals(typeof(bool)))
-			{
-				RunCycle(2,true,Worker,e);
-			}
-			else
-			{
-				RunCycle((int)e.Argument,false,Worker,e);
-			}
-			
-			//RunCycle((int)e.Argument,Worker,e);
-		}
-        
-        private void BGWrk_CycleRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-        	//Timer for graphic update disabling
-        	Timer_CycleGraph.Enabled = false;
-        	
-        	if(!bPauseCycle)
-        	{
-	        	iLoopInitial=0;
-				iLoopCurrent=0;
-				LoopCnt = 0;
-	        	iTimeEventInitial=0;
-	        	iTimeEventCurrent=0;
-				
-	        	Lbl_CurrentCycleNum.Visible=false;
-				Txt_CurrentCycleNum.Text="";
-	    		Txt_CurrentCycleNum.Visible=false;
-	    		Lbl_CurrentProgress.Visible=false;
-	    		Lbl_TotalProgress.Visible=false;
-	    		PB_CurrentProgress.Visible=false;
-	    		PB_CurrentProgress.Value = 0;
-	    		PB_TotalProgress.Visible=false;
-	    		PB_TotalProgress.Value = 0;
-	    		
-	    		Cmd_BreakCycle.Enabled=false;
-	    		Cmd_StopCycle.Enabled=false;
-	    		
-	    		Cmd_PlayCycle.Enabled=true;
-	    		Lbl_CycleStart.Enabled = true;
-        		Lbl_CycleEnd.Enabled = true;
-        		Txt_CycleStart.Enabled = true;
-        		Txt_CycleEnd.Enabled = true;
-	    		Chk_InfinitePlay.Enabled = true;
-	    		
-	    		if (!Chk_InfinitePlay.Checked)
-	    		{
-	    			Lbl_CycleCount.Enabled=true;
-	    			NumUpDown_CycleCount.Enabled=true;
-	    		}
-	    			    		
-	    		bCycleRunning=false;
-	    		
-	    		StopManualControl();
-	    		StopSpy();
-	    		
-	    		FireControllerCycleRunningChangedEvent(bCycleRunning);
-	    		
-	    		//Automatic trace recording //HACK: Remove [acquisition trigger]
-        		if(bRecordingAuto & bRecording)
-        		{
-        			StopRecording();
-        		}
-        		
-        		double dTStartCycle = ((double) TCycleStart) / 1000;
-        		double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-        		
-        		PlotCycle(true, -1, dTStartCycle, dTEndCycle);
-        	}
-		}
-        
-        private void BGWrk_CycleProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-        	int CurrentProgress = 0;
-        	
-        	if (Chk_InfinitePlay.Checked)
-        	{
-        		CurrentProgress = e.ProgressPercentage;
-        	}
-        	else
-        	{
-        		CurrentProgress = e.ProgressPercentage*(int)NumUpDown_CycleCount.Value;
-        	}
-        	
-        	while(CurrentProgress>100)
-        	{
-				CurrentProgress=CurrentProgress-100;        		
-        	}
-        	
-        	if(CurrentProgress<PB_CurrentProgress.Value)
-        	{
-        		LoopCnt++;
-        		Txt_CurrentCycleNum.Text = (LoopCnt +1).ToString();
-        	}
-        	
-        	PB_CurrentProgress.Value = CurrentProgress;
-        	PB_TotalProgress.Value   = e.ProgressPercentage;
-		}
-
-        #endregion
-
         #endregion
 
         #region Record trigger
@@ -2955,6 +2869,7 @@ namespace CANStream
             OnControllerSpyRunningChanged(Args);
         }
 
+
         #region Spy data history
 
         private void FreezeSpyDataHistory()
@@ -3074,7 +2989,7 @@ namespace CANStream
 
         #region Cycle management
 
-        private void PlayCycle()
+        private void StartCycle()
         {
             #region Pre-checks
             double TVal = 0;
@@ -3159,8 +3074,6 @@ namespace CANStream
                 Txt_CycleStart.Enabled = false;
                 Txt_CycleEnd.Enabled = false;
 
-                Txt_CurrentCycleNum.Text = (LoopCnt + 1).ToString();
-
                 bCycleRunning = true;
 
                 FireControllerCycleRunningChangedEvent(bCycleRunning);
@@ -3170,14 +3083,14 @@ namespace CANStream
                     Split_Cycle_VirtualSig_Graph.Panel1Collapsed = false;
                 }
 
-                if (Chk_InfinitePlay.Checked)
-                {
-                    BGWrk_Cycle.RunWorkerAsync((bool)true);
-                }
-                else
-                {
-                    BGWrk_Cycle.RunWorkerAsync((int)NumUpDown_CycleCount.Value);
-                }
+                LoopNumber = (int)NumUpDown_CycleCount.Value;
+                InfinitePlay = Chk_InfinitePlay.Checked;
+
+                iTimeEventInitial = oCycle.GetTimeEventIndex(TCycleStart);
+                iTimeEventCurrent = iTimeEventInitial;
+                TimeInCycle = TCycleStart;
+
+                RunCycleScheduler();
 
                 //Automatic trace recording //HACK: Remove [acquisition trigger]
                 if (bRecordingAuto & !bRecording)
@@ -3185,151 +3098,218 @@ namespace CANStream
                     StartRecording();
                 }
 
-                //Timer for graphic update enabling
-                Timer_CycleGraph.Enabled = true;
+#if DEBUG
+                toolStripSeparator4.Visible = true;
+                TSLblDbg_AvgCallDelay.Visible = true;
+                TSLblDbg_AvgTaskTime.Visible = true;
+
+                TSLblDbg_AvgCallDelay.Text = "";
+                TSLblDbg_AvgTaskTime.Text = "";
+#endif
             }
         }
 
         private void StopCycle()
         {
-            BGWrk_Cycle.CancelAsync();
-
             Cmd_PlayCycle.Enabled = true;
             Cmd_BreakCycle.Enabled = false;
+            Cmd_StopCycle.Enabled = false;
 
-            //Timer for graphic update disabling
-            Timer_CycleGraph.Enabled = false;
+            Lbl_CurrentCycleNum.Visible = false;
+            Txt_CurrentCycleNum.Visible = false;
+            Lbl_CurrentProgress.Visible = false;
+            Lbl_TotalProgress.Visible = false;
+            PB_CurrentProgress.Value = 0;
+            PB_CurrentProgress.Visible = false;
+            PB_TotalProgress.Value = 0;
+            PB_TotalProgress.Visible = false;
 
-            if (!bPauseCycle)
+            Lbl_CycleStart.Enabled = true;
+            Lbl_CycleEnd.Enabled = true;
+            Txt_CycleStart.Enabled = true;
+            Txt_CycleEnd.Enabled = true;
+            Chk_InfinitePlay.Enabled = true;
+
+            if (!Chk_InfinitePlay.Checked)
             {
-                Lbl_CurrentCycleNum.Visible = false;
-                Txt_CurrentCycleNum.Visible = false;
-                Lbl_CurrentProgress.Visible = false;
-                Lbl_TotalProgress.Visible = false;
-                PB_CurrentProgress.Value = 0;
-                PB_CurrentProgress.Visible = false;
-                PB_TotalProgress.Value = 0;
-                PB_TotalProgress.Visible = false;
+                Lbl_CycleCount.Enabled = true;
+                NumUpDown_CycleCount.Enabled = true;
+            }
 
-                Cmd_StopCycle.Enabled = false;
+            oCycleScheduler.Enabled = false;
+            oCycleScheduler.Abort();
+            OnCycleScheduderTaskEnd();
 
-                Lbl_CycleStart.Enabled = true;
-                Lbl_CycleEnd.Enabled = true;
-                Txt_CycleStart.Enabled = true;
-                Txt_CycleEnd.Enabled = true;
-                Chk_InfinitePlay.Enabled = true;
+            bCycleRunning = false;
 
-                if (!Chk_InfinitePlay.Checked)
-                {
-                    Lbl_CycleCount.Enabled = true;
-                    NumUpDown_CycleCount.Enabled = true;
-                }
+            FireControllerCycleRunningChangedEvent(bCycleRunning);
 
-                bCycleRunning = false;
-
-                FireControllerCycleRunningChangedEvent(bCycleRunning);
-
-                //Automatic trace recording
-                if (bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
-                {
-                    StopRecording();
-                }
+            //Automatic trace recording
+            if (bRecordingAuto & bRecording) //HACK: Remove [acquisition trigger]
+            {
+                StopRecording();
             }
         }
 
-        private void RunCycle(int LoopNumber, bool InfinitePlay, BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
+        #region Cycle Scheduler methods
+
+        private void RunCycleScheduler()
         {
-            int LoopIterationCount = (int)oCycle.GetTimeEventCountBetweenTimes(TCycleStart, TCycleEnd);
-            int TotalInterationCount = LoopIterationCount;
-            int Progress = 0;
-            int ProgressPrec = 0;
+            oCycleScheduler = new MicroSecondTimer(1000); //1 tick every millisecond 
 
-            if (!InfinitePlay)
-            {
-                TotalInterationCount = LoopIterationCount * LoopNumber;
-            }
+            oCycleScheduler.MicroTimerElapsed += new MicroSecondTimer.MicroSecondTimerElapsedEventHandler(CycleSchedulerTick);
+            CycleSchedulerProgressCaller = new CycleSchedulerProgress_Delegate(OnCycleShedulerProgressChanged);
+            CycleSchedulerTaskEndCaller = new CycleSchedulerTaskEnd_Delegate(OnCycleScheduderTaskEnd);
 
-            for (iLoopCurrent = iLoopInitial; iLoopCurrent < LoopNumber; iLoopCurrent++)
-            {
-                int IterationCount = 0;
+            ProgessTimeCounter = 0;
 
-                iTimeEventCurrent = oCycle.GetTimeEventIndex(TCycleStart);
-                if (iTimeEventCurrent == -1) return;
-
-                TimeInCycle = TCycleStart;
-
-                if (iTimeEventInitial > 0)
-                {
-                    iTimeEventCurrent = iTimeEventInitial;
-                    TimeInCycle = oCycle.TimeEvents[iTimeEventInitial].TimeEvent;
-                }
-
-                long EndTime = TCycleEnd;
-
-                //Debug
-                //DateTime Tic=DateTime.Now;
-
-                while (TimeInCycle <= EndTime)
-                {
-                    if (TimeInCycle == oCycle.TimeEvents[iTimeEventCurrent].TimeEvent) //It's time to send a message
-                    {
-                        //Debug
-                        //DateTime Tic=DateTime.Now;
-
-                        foreach (CANMessageData MsgData in oCycle.TimeEvents[iTimeEventCurrent].MessagesData)
-                        {
-                            SendMessage(MsgData);
-                        }
-
-                        iTimeEventCurrent++;
-                        IterationCount++;
-
-                        if (InfinitePlay)
-                        {
-                            Progress = (int)(IterationCount * 100 / TotalInterationCount);
-                        }
-                        else
-                        {
-                            Progress = (int)(iLoopCurrent * LoopIterationCount + IterationCount) * 100 / TotalInterationCount;
-                        }
-
-                        if (Progress != ProgressPrec)
-                        {
-                            Worker.ReportProgress(Progress);
-                            ProgressPrec = Progress;
-                        }
-
-                        //Debug
-                        //DateTime Toc=DateTime.Now;
-                        //TimeSpan TExec=Toc.Subtract(Tic);
-                        //int Msec=TExec.Milliseconds;
-                    }
-
-                    System.Threading.Thread.Sleep(1); //Wait 1ms
-                                                      //AbsTime++;
-                    TimeInCycle++;
-
-                    if (Worker.CancellationPending)
-                    {
-                        return;
-                    }
-                }
-
-                iTimeEventInitial = 0;
-
-                if (InfinitePlay)
-                {
-                    iLoopCurrent = 0;
-                }
-
-                //Debug
-                //DateTime Toc=DateTime.Now;
-                //TimeSpan TExec=Toc.Subtract(Tic);
-                //int Msec=TExec.Milliseconds;
-            }
-
-            bPauseCycle = false;
+            oCycleScheduler.Enabled = true;
         }
+
+        private void CycleSchedulerTick(object sender, MicroSecondTimerEventArgs e)
+        {
+            if (!bPauseCycle) //Cycle player not in pause
+            {
+                if (TimeInCycle == oCycle.TimeEvents[iTimeEventCurrent].TimeEvent) //It's time to send a message
+                {
+                    foreach (CANMessageData MsgData in oCycle.TimeEvents[iTimeEventCurrent].MessagesData)
+                    {
+                        SendMessage(MsgData);
+                    }
+
+                    iTimeEventCurrent++;
+                }
+
+                TimeInCycle++;
+
+                if (TimeInCycle > TCycleEnd)
+                {
+                    iLoopCurrent++;
+
+                    if (iLoopCurrent < LoopNumber | InfinitePlay)
+                    {
+                        iTimeEventCurrent = iTimeEventInitial;
+                        TimeInCycle = TCycleStart;
+
+#if DEBUG
+                        TExecMax = 0;
+                        TLateMax = 0;
+#endif
+                    }
+                    else
+                    {
+                        Invoke(CycleSchedulerTaskEndCaller);
+                        ((MicroSecondTimer)sender).Enabled = false;
+                        ((MicroSecondTimer)sender).Abort();
+                    }
+                }
+
+                ProgessTimeCounter++;
+
+                if (ProgessTimeCounter == CYCLE_REPORT_PROGRESS_PERIOD)
+                {
+                    ProgessTimeCounter = 0;
+                    Invoke(CycleSchedulerProgressCaller, new object[] { TimeInCycle });
+                }
+            }
+
+#if DEBUG
+            TExecMax = ((TExecMax * (e.TimerCount - 1)) + e.CallbackFunctionExecutionTime) / e.TimerCount;
+            TLateMax = ((TLateMax * (e.TimerCount - 1)) + e.TimerLateBy) / e.TimerCount;
+#endif
+        }
+
+        #region Cycle scheduler delegates
+
+        private delegate void CycleSchedulerProgress_Delegate(long tCycle);
+
+        private delegate void CycleSchedulerTaskEnd_Delegate();
+
+        #endregion
+
+        #region Cycle scheduler events methodes
+
+        private void OnCycleShedulerProgressChanged(long tCycle)
+        {
+            PB_CurrentProgress.Value = (int)((tCycle - TCycleStart) * 100 / (TCycleEnd - TCycleStart));
+            Txt_CurrentCycleNum.Text = (iLoopCurrent + 1).ToString();
+
+            if (InfinitePlay)
+            {
+                PB_TotalProgress.Value = PB_CurrentProgress.Value;
+            }
+            else
+            {
+                PB_TotalProgress.Value = (int)(iLoopCurrent * 100 / LoopNumber);
+            }
+
+            //PlotCycle(true,
+            //          ((double)tCycle) / 1000,
+            //          ((double)TCycleStart) / 1000,
+            //          ((double)TCycleEnd) / 1000);
+        }
+
+        private void OnCycleScheduderTaskEnd()
+        {
+            iLoopCurrent = 0;
+            LoopNumber = 0;
+            iTimeEventInitial = 0;
+            iTimeEventCurrent = 0;
+
+            Lbl_CurrentCycleNum.Visible = false;
+            Txt_CurrentCycleNum.Text = "";
+            Txt_CurrentCycleNum.Visible = false;
+            Lbl_CurrentProgress.Visible = false;
+            Lbl_TotalProgress.Visible = false;
+            PB_CurrentProgress.Visible = false;
+            PB_CurrentProgress.Value = 0;
+            PB_TotalProgress.Visible = false;
+            PB_TotalProgress.Value = 0;
+
+            Cmd_BreakCycle.Enabled = false;
+            Cmd_StopCycle.Enabled = false;
+
+            Cmd_PlayCycle.Enabled = true;
+            Lbl_CycleStart.Enabled = true;
+            Lbl_CycleEnd.Enabled = true;
+            Txt_CycleStart.Enabled = true;
+            Txt_CycleEnd.Enabled = true;
+            Chk_InfinitePlay.Enabled = true;
+
+            if (!Chk_InfinitePlay.Checked)
+            {
+                Lbl_CycleCount.Enabled = true;
+                NumUpDown_CycleCount.Enabled = true;
+            }
+
+            oCycleScheduler = null;
+            bCycleRunning = false;
+
+            StopManualControl();
+            StopSpy();
+
+            FireControllerCycleRunningChangedEvent(bCycleRunning);
+
+            //Automatic trace recording //HACK: Remove [acquisition trigger]
+            if (bRecordingAuto & bRecording)
+            {
+                StopRecording();
+            }
+
+            double dTStartCycle = ((double)TCycleStart) / 1000;
+            double dTEndCycle = ((double)TCycleEnd) / 1000;
+
+            PlotCycle(true, -1, dTStartCycle, dTEndCycle);
+
+#if DEBUG
+            TSLblDbg_AvgTaskTime.Text = "Avg task time = " + TExecMax.ToString() + "µs";
+            TSLblDbg_AvgCallDelay.Text = "Avg task call delay = " + TLateMax.ToString() + "µs";
+#endif
+        }
+
+        #endregion
+
+        #endregion
 
         private void PlotCycle()
         {
@@ -4047,7 +4027,9 @@ namespace CANStream
 
         public bool IsCycleWorkerBusy()
         {
-            return (BGWrk_Cycle.IsBusy);
+            //TODO: Remove
+            //return (BGWrk_Cycle.IsBusy);
+            return (bCycleRunning);
         }
 
         #endregion
