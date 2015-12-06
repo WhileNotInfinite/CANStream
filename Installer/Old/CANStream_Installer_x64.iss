@@ -5,10 +5,10 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{D2287E8C-6EDC-4A55-BCAA-0BFB0CEFF7AF}
+AppId={{73B3B4F9-1471-4AA4-B6B9-D730345EAA8C}
 AppName=CANStream
-AppVersion=2.0.0
-AppVerName=CANStream 2.0.0
+AppVersion=2.1.0
+AppVerName=CANStream 2.1.0
 AppPublisher=Cobalt Solutions
 ChangesAssociations=yes
 DefaultDirName={pf}\CANStream
@@ -34,7 +34,10 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: ..\Release\Confuser\Outputs\Release\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release\netchartdir.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\Documentation\Build\CANStream user guide.chm; DestDir: "{app}"; Flags: ignoreversion
 
 ;Version Win 32

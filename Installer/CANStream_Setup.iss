@@ -5,10 +5,35 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{D2287E8C-6EDC-4A55-BCAA-0BFB0CEFF7AF}
+AppId={{14F40509-EF1A-4FAE-97BC-0011E3720173}
+
+#ifdef DEMO
+
 AppName=CANStream DEMO
-AppVersion=2.0.0
-AppVerName=CANStream DEMO 2.0.0
+AppVerName=CANStream DEMO 2.1.0
+OutputDir=bin\Demo
+
+#ifdef WIN32
+OutputBaseFilename=CANStream_DEMO_Setup_Win32
+#else
+OutputBaseFilename=CANStream_DEMO_Setup_x64
+#endif
+
+#else
+
+AppName=CANStream
+AppVerName=CANStream 2.1.0
+OutputDir=bin\Release
+
+#ifdef WIN32
+OutputBaseFilename=CANStream_Setup_Win32
+#else
+OutputBaseFilename=CANStream_Setup_x64
+#endif
+
+#endif
+
+AppVersion=2.1.0
 AppPublisher=Cobalt Solutions
 ChangesAssociations=yes
 DefaultDirName={pf}\CANStream
@@ -16,9 +41,6 @@ DefaultGroupName=CANStream
 AllowNoIcons=yes
 LicenseFile=License Agreements.txt
 InfoAfterFile=..\CANStream\bin\Release\CANStream Release notes.txt
-OutputDir=bin\Demo
-;OutputBaseFilename=CANStream_DEMO_Setup_Win32
-OutputBaseFilename=CANStream_DEMO_Setup_x64
 SetupIconFile=Icons\adept-installer-icone-6127.ico
 Compression=lzma
 SolidCompression=yes
@@ -33,16 +55,30 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
+#ifdef DEMO
 Source: ..\Release\Confuser\Outputs\Demo\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release\netchartdir.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
+#else
+Source: ..\Release\Confuser\Outputs\Release\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
+#endif
+
 Source: ..\Documentation\Build\CANStream user guide.chm; DestDir: "{app}"; Flags: ignoreversion
 
+#ifdef WIN32
 ;Version Win 32
-;Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
-
+Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
+#else
 ;Version x64
 Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\SysWOW64"; Flags: onlyifdoesntexist uninsneveruninstall
 Source: ..\PCAN-Basic API\x64\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
+#endif
 
 ; Icons files
 Source: ..\Ressources\Icones\BuiltInSignalsLibrary_cbs.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion

@@ -1,5 +1,5 @@
-<project outputDir="C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\Release\Confuser\Outputs\Release" baseDir="C:\Users\Vincent\Documents\SharpDevelop Projects\CANStream\CANStream\bin\Release" xmlns="http://confuser.codeplex.com">
-  <rule pattern="true" preset="normal" inherit="false">
+<project outputDir="C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\Release\Confuser\Outputs\Release" baseDir="C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Release" xmlns="http://confuser.codeplex.com">
+  <rule pattern="true" preset="normal">
     <protection id="anti ildasm" />
     <protection id="anti tamper" />
     <protection id="constants" />
@@ -12,8 +12,33 @@
     <protection id="rename" />
   </rule>
   <packer id="compressor" />
-  <module path="CANStream.exe" />
-  <module path="Ciloci.Flee.dll" />
-  <module path="Ctrl_GraphWindow.dll" />
-  <module path="SD_AppLicence.dll" />
+  <module path="CANStream.exe">
+    <rule pattern="true" preset="normal">
+      <protection id="anti ildasm" />
+      <protection id="anti tamper" />
+      <protection id="constants" />
+      <protection id="ctrl flow" />
+      <protection id="anti dump" />
+      <protection id="anti debug" />
+      <protection id="invalid metadata" />
+      <protection id="ref proxy" />
+      <protection id="resources" />
+      <protection id="rename" />
+      <protection id="anti ildasm" />
+    </rule>
+  </module>
+  <module path="SD_AppLicence.dll">
+    <rule pattern="true" preset="aggressive">
+      <protection id="anti ildasm" />
+      <protection id="anti tamper" />
+      <protection id="constants" />
+      <protection id="ctrl flow" />
+      <protection id="anti dump" />
+      <protection id="anti debug" />
+      <protection id="invalid metadata" />
+      <protection id="ref proxy" />
+      <protection id="resources" />
+      <protection id="rename" />
+    </rule>
+  </module>
 </project>

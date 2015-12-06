@@ -5,10 +5,10 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{DC4378AB-D89A-4069-BC89-943DE2C6DF18}
-AppName=CANStream
-AppVersion=2.0.0
-AppVerName=CANStream 2.0.0
+AppId={{FDC61295-1C15-4160-B2FC-7C29C36C9506}
+AppName=CANStream DEMO
+AppVersion=2.1.0
+AppVerName=CANStream DEMO 2.1.0
 AppPublisher=Cobalt Solutions
 ChangesAssociations=yes
 DefaultDirName={pf}\CANStream
@@ -16,9 +16,9 @@ DefaultGroupName=CANStream
 AllowNoIcons=yes
 LicenseFile=License Agreements.txt
 InfoAfterFile=..\CANStream\bin\Release\CANStream Release notes.txt
-OutputDir=bin\Release
-OutputBaseFilename=CANStream_Setup_Win32
-;OutputBaseFilename=CANStream_Setup_x64
+OutputDir=bin\Demo
+OutputBaseFilename=CANStream_DEMO_Setup_Win32
+;OutputBaseFilename=CANStream_DEMO_Setup_x64
 SetupIconFile=Icons\adept-installer-icone-6127.ico
 Compression=lzma
 SolidCompression=yes
@@ -33,8 +33,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: ..\Release\Confuser\Outputs\Release\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release\netchartdir.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\Release\Confuser\Outputs\Demo\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\Documentation\Build\CANStream user guide.chm; DestDir: "{app}"; Flags: ignoreversion
 
 ;Version Win 32

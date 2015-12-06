@@ -5,10 +5,10 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{D2287E8C-6EDC-4A55-BCAA-0BFB0CEFF7AF}
+AppId={{BC47719E-FA92-4F4D-81A1-C8ECE74C5DD7}
 AppName=CANStream DEMO
-AppVersion=2.0.0
-AppVerName=CANStream DEMO 2.0.0
+AppVersion=2.1.0
+AppVerName=CANStream DEMO 2.1.0
 AppPublisher=Cobalt Solutions
 ChangesAssociations=yes
 DefaultDirName={pf}\CANStream
@@ -17,8 +17,8 @@ AllowNoIcons=yes
 LicenseFile=License Agreements.txt
 InfoAfterFile=..\CANStream\bin\Release\CANStream Release notes.txt
 OutputDir=bin\Demo
-OutputBaseFilename=CANStream_DEMO_Setup_Win32
-;OutputBaseFilename=CANStream_DEMO_Setup_x64
+;OutputBaseFilename=CANStream_DEMO_Setup_Win32
+OutputBaseFilename=CANStream_DEMO_Setup_x64
 SetupIconFile=Icons\adept-installer-icone-6127.ico
 Compression=lzma
 SolidCompression=yes
@@ -34,15 +34,18 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: ..\Release\Confuser\Outputs\Demo\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release\netchartdir.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Demo\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\Documentation\Build\CANStream user guide.chm; DestDir: "{app}"; Flags: ignoreversion
 
 ;Version Win 32
-Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
+;Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
 
 ;Version x64
-;Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\SysWOW64"; Flags: onlyifdoesntexist uninsneveruninstall
-;Source: ..\PCAN-Basic API\x64\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: ..\PCAN-Basic API\Win32\PCANBasic.dll; DestDir: "{win}\SysWOW64"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: ..\PCAN-Basic API\x64\PCANBasic.dll; DestDir: "{win}\System32"; Flags: onlyifdoesntexist uninsneveruninstall
 
 ; Icons files
 Source: ..\Ressources\Icones\BuiltInSignalsLibrary_cbs.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion

@@ -42,3 +42,12 @@ CANStream/bin/Debug/
 CANStream/obj/Debug_NoLicense/
 .vs/CANStream/v14/.suo
 *.bak
+CANStream/bin/Demo/CANStream.exe
+Flee_Lib/obj/
+CANStream/obj/
+Installer/bin/Release/CANStream_Setup_x64.exe
+Installer/bin/
+Release/Confuser/Outputs/
+Release/Output/
+CANStream/bin/
+Flee_Lib/bin/
