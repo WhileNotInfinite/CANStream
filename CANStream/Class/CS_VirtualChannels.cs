@@ -1195,7 +1195,15 @@ namespace CANStream
 				{
 					Name = xLibrary.Attributes["Name"].Value;
 					ReadOnly = Convert.ToBoolean(xLibrary.Attributes["ReadOnly"].Value);
-                    Enabled = Convert.ToBoolean(xLibrary.Attributes["Enabled"].Value);
+
+                    if (!(xLibrary.Attributes.GetNamedItem("Enabled") == null)) //For backward compatiblity, 'Enabled' library attribute being a new feature of CS 2.1.0.3
+                    {
+                        Enabled = Convert.ToBoolean(xLibrary.Attributes["Enabled"].Value);
+                    }
+                    else
+                    {
+                        Enabled = true;
+                    }
 
                     XmlNode xComment = xLibrary.SelectSingleNode("LibraryComment");
 					if (!(xComment == null))
