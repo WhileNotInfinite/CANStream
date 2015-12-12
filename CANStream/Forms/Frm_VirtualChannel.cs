@@ -650,6 +650,11 @@ namespace CANStream
 					AddLibrary(oActiveLibrary);
 					bFrmMain_ReloadLibraries =  true;
 				}
+                else
+                {
+                    MessageBox.Show("An error occured while loading the virtual channels library !\nThe file might be corrupted or written by a later version of CANStream.",
+                                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 			}
 		}
 		

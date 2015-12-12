@@ -2,6 +2,83 @@
 #				CANStream release notes						#
 #############################################################
 
+10/25/2015: VERSION 2.1.0.3
+----------------------------
+
+	New features
+		
+		#53: Add a recent CAN Config item to the main form menustrip
+		#56: NO-RX signal value
+		#58: Review tab order of CAN paramter definition form
+		#59: Group multiplexed signals in the CAN configuration tree view
+		#63: Add Frame name into frames Rx/Tx grids
+		#67: Use collapsable grid view for Rx/Tx signals grids
+		#69: Add the format property to the virtual channel object
+		#70: Add the alarm property to the virtual channel object
+		#71: Disabling a virtual channel library
+		#75: Automatic virtual channel function argument separator setting
+		#76: Add clarifications about arguments separator of a virtual channel function
+		#78: Move default data Rx/Tx spliter position closer to 50% of the screen
+		#81: Use virtual channel format and alarms properties for virtual CAN Tx parameter
+		#85: CAN Parameter special paste
+		#96: Show special paste window next to the cursor
+		#97: Add a keyboard short cut for special paste
+		#98: Change default signals warning/alarm colors
+		#100: Set Licence object email address
+		#101: Update Licence class constructor call
+
+	Bug fixes
+	
+		#64: Wrong eng data display
+		#66: CANStream closing dead lock
+		#74: Some virtual channels disapear after a Rx data grid content reset
+		#77: Unusable virtual channel function list
+		#79: Help command is pointing to an imcomplete documentation
+		#83: Crash on data viewer page renaming
+		#84: Enum clearing infinite loop
+		#86: Manual Tx data grid columns not resized at startup
+		#91: Grid Data Tx reset
+		#92: Advanced cycle creator crash
+
+	Known issues
+
+	
+09/14/2015: VERSION 2.1.0.0
+----------------------------
+
+	New features
+		
+		#16: Add a message box if a trace file hasn't been converted after a conversion request
+		#17: Filter items in all windows
+		#18: Return to the current data folder when re-opening the data browser
+		#22: Use current bus CAN config for record conversion
+		#23: Show data file size with appropriate unit
+		#24: Add the possibility to copy/paste a page in the data viewer
+		#25: Virtual channels in data viewer
+		#26: Make CAN signal research function into the CAN config editor
+		#27: Disable sorting functions of the CAN frame mapping grid of the CAN config editor
+		#30: Allow trace file deleting
+		#33: Allow file deleting from data browser
+		#35: Create a shortcut for data file conversion selection
+		#36: Make CAN config editor panels resizable
+		#40: Allow trace record conversion without stopping the current mode
+		#42: Allow Copy/Paste of CAN frames and signals accross different CAN config
+		#47: Automatically adjust cycle counter box size
+		#48: Support enums for engineering signal value
+		#49: Add CAN parameter value alarm/warning feature
+		#50: Give a way to cancel a CAN config form closing
+		#51: Show CAN parameter Min/Max values while editing parameter properties
+
+	Bug fixes
+	
+		#5: Data viewer book 'Save as' windows shows the entire book file path
+		#43: Fixed signals of a multiplexed frame aren't decoded if multiplexer isn't defined in the CAN config
+		#45: Wrong default recording event/session
+		#46: Refresh data browser doesn't work
+		#52: Spy graph doesn't work anymore
+
+	Known issues
+	
 01/25/2015: VERSION 2.0.0.1
 ----------------------------
 
