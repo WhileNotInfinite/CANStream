@@ -32,18 +32,29 @@ namespace CANStream
 	/// Description of MainForm.
 	/// </summary>
 	public partial class MainForm : Form
-	{	
-		#region Private contants
-		
-		#if DEMO
+	{
+        #region Private enums
+
+        private enum HistoryElements
+        {
+            None                = 0,
+            CanConfiguration    = 1,
+            Cycle               = 2,
+        }
+
+        #endregion
+
+        #region Private contants
+
+#if DEMO
 		private const int CANSTREAM_APPID = 151;	
-		#else
-		private const int CANSTREAM_APPID = 148;
+#else
+        private const int CANSTREAM_APPID = 148;
 		#endif
 
         private const int NB_CAN_CONTROLLER_MAX = 8;
 
-        private const int CAN_CONFIG_HISTORY_DEPTH = 10;
+        private const int ELEMENTS_HISTORY_DEPTH = 10;
 		
 		#endregion
 		
@@ -81,10 +92,11 @@ namespace CANStream
 			CANStreamTools.MyDocumentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			CANStreamTools.CsDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\CANStream";
 
-            ShowCanConfigHistory(LoadCanConfigHistory());
+            ShowElementsistory(LoadElementsHistory(HistoryElements.CanConfiguration), HistoryElements.CanConfiguration);
+            ShowElementsistory(LoadElementsHistory(HistoryElements.Cycle), HistoryElements.Cycle);
 
-			//Initial controls enabling/disabling
-			Cycle_openToolStripMenuItem.Enabled=false;
+            //Initial controls enabling/disabling
+            Cycle_openToolStripMenuItem.Enabled=false;
 			CANConfig_openToolStripMenuItem.Enabled=true;
 			CANConfig_editToolStripMenuItem.Enabled=false;
 			importDBCToolStripMenuItem.Enabled=true;
@@ -218,7 +230,7 @@ namespace CANStream
                 if (oNewCfg.ReadCANConfigurationFile(((ToolStripItem)sender).Tag.ToString()))
                 {
                     ActiveCanBus.Set_BusCANConfiguration(oNewCfg);
-                    UpdateCanConfigHistory(((ToolStripItem)sender).Tag.ToString());
+                    UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.CanConfiguration);
                 }
                 else
                 {
@@ -309,8 +321,27 @@ namespace CANStream
         	LoadCycle();
 		}
         
+        private void CycleHistoryItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveCanBus != null)
+            {
+                CANStreamCycle oCycle = new CANStreamCycle();
+
+                if (oCycle.ReadStreamCycle(((ToolStripItem)sender).Tag.ToString()))
+                {
+                    ActiveCanBus.Set_Cycle(oCycle);
+                    UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.Cycle);
+                }
+                else
+                {
+                    MessageBox.Show("Cycle file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                    
+            }
+        }
+
         #region Set start/end points
-        
+
         private void Cycle_SetStartPoint_TSMIClick(object sender, EventArgs e)
 		{
         	if (!(ActiveCanBus == null)) ActiveCanBus.Set_CycleStartingPoint();
@@ -1416,74 +1447,139 @@ namespace CANStream
         	return(oLicence.LicenseValid);
         }
 
-        #region CAN Config history
+        #region CAN Config & Cycle history
 
-        private List<string> LoadCanConfigHistory()
+        private List<string> LoadElementsHistory(HistoryElements eHistoryItem)
         {
-            object CanCfgHistoryRegKey = null;
-            int CanCfgIndex = 1;
+            object ElementsHistoryRegKey = null;
+            int ElementIndex = 1;
 
-            List<string> CanConfigHistory = new List<string>();
+            List<string> ElementsHistory = new List<string>();
+
+            string HistoryRegKey = "";
+
+            switch(eHistoryItem)
+            {
+                case HistoryElements.CanConfiguration:
+
+                    HistoryRegKey = "\\Can Configuration history";
+                    break;
+
+                case HistoryElements.Cycle:
+
+                    HistoryRegKey = "\\Cycle history";
+                    break;
+
+                default:
+                    return (null);
+            }
 
             do
             {
-                CanCfgHistoryRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\Can Configuration history", CanCfgIndex.ToString(), null);
+                ElementsHistoryRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + HistoryRegKey, ElementIndex.ToString(), null);
 
-                if (CanCfgHistoryRegKey != null)
+                if (ElementsHistoryRegKey != null)
                 {
-                    CanConfigHistory.Add(CanCfgHistoryRegKey.ToString());
-                    CanCfgIndex++;
+                    ElementsHistory.Add(ElementsHistoryRegKey.ToString());
+                    ElementIndex++;
                 }
             }
-            while (CanCfgHistoryRegKey != null);
+            while (ElementsHistoryRegKey != null);
 
-            return (CanConfigHistory);
+            return (ElementsHistory);
         }
 
-        private void WriteCanConfigHistory(List<string> CanConfigHistory)
+        private void WriteElementsHistory(List<string> ElementsHistory, HistoryElements eHistoryItem)
         {
-            if (CanConfigHistory.Count > 0)
+            if (ElementsHistory.Count > 0)
             {
-                int CanCfgIndex = 1;
+                string HistoryRegKey = "";
 
-                foreach (string sCanCfg in CanConfigHistory)
+                switch (eHistoryItem)
                 {
-                    Registry.SetValue(CANStreamConstants.CS_REG_KEY + "\\Can Configuration history", CanCfgIndex.ToString(), sCanCfg);
-                    CanCfgIndex++;
+                    case HistoryElements.CanConfiguration:
+
+                        HistoryRegKey = "\\Can Configuration history";
+                        break;
+
+                    case HistoryElements.Cycle:
+
+                        HistoryRegKey = "\\Cycle history";
+                        break;
+
+                    default:
+                        return;
+                }
+
+                int ElementIndex = 1;
+
+                foreach (string sElement in ElementsHistory)
+                {
+                    Registry.SetValue(CANStreamConstants.CS_REG_KEY + HistoryRegKey, ElementIndex.ToString(), sElement);
+                    ElementIndex++;
                 }
             }
         }
 
-        private void UpdateCanConfigHistory(string ConfigPath)
+        private void UpdateElementsHistory(string ElementPath, HistoryElements eHistoryItem)
         {
-            List<string> CanConfigHistory = LoadCanConfigHistory();
+            List<string> ElementsHistory = LoadElementsHistory(eHistoryItem);
 
-            if (CanConfigHistory.Contains(ConfigPath))
+            if (ElementsHistory.Contains(ElementPath))
             {
-                CanConfigHistory.Remove(ConfigPath);
+                ElementsHistory.Remove(ElementPath);
             }
 
-            CanConfigHistory.Insert(0, ConfigPath);
+            ElementsHistory.Insert(0, ElementPath);
 
-            if (CanConfigHistory.Count > CAN_CONFIG_HISTORY_DEPTH)
+            if (ElementsHistory.Count > ELEMENTS_HISTORY_DEPTH)
             {
-                CanConfigHistory.RemoveAt(CAN_CONFIG_HISTORY_DEPTH);
+                ElementsHistory.RemoveAt(ELEMENTS_HISTORY_DEPTH);
             }
 
-            ShowCanConfigHistory(CanConfigHistory);
-            WriteCanConfigHistory(CanConfigHistory);
+            ShowElementsistory(ElementsHistory, eHistoryItem);
+            WriteElementsHistory(ElementsHistory, eHistoryItem);
         }
 
-        private void ShowCanConfigHistory(List<string> CanConfigHistory)
+        private void ShowElementsistory(List<string> ElementsHistory, HistoryElements eHistoryItem)
         {
-            CANConfig_recentToolStripMenuItem.DropDownItems.Clear();
+            ToolStripMenuItem HistoryMenuItem = null;
 
-            foreach (string sCanCfg in CanConfigHistory)
+            switch (eHistoryItem)
             {
-                ToolStripItem oItem = CANConfig_recentToolStripMenuItem.DropDownItems.Add(Path.GetFileName(sCanCfg));
-                oItem.Tag = sCanCfg;
+                case HistoryElements.CanConfiguration:
 
-                oItem.Click+= new EventHandler(CanConfigHistoryItem_Click);
+                    HistoryMenuItem = CANConfig_recentToolStripMenuItem;
+                    break;
+
+                case HistoryElements.Cycle:
+
+                    HistoryMenuItem = Cycle_recentToolStripMenuItem;
+                    break;
+
+                default:
+                    return;
+            }
+
+            HistoryMenuItem.DropDownItems.Clear();
+
+            foreach (string sElement in ElementsHistory)
+            {
+                ToolStripItem oItem = HistoryMenuItem.DropDownItems.Add(Path.GetFileName(sElement));
+                oItem.Tag = sElement;
+
+                switch (eHistoryItem)
+                {
+                    case HistoryElements.CanConfiguration:
+
+                        oItem.Click += new EventHandler(CanConfigHistoryItem_Click);
+                        break;
+
+                    case HistoryElements.Cycle:
+
+                        oItem.Click += new EventHandler(CycleHistoryItem_Click);
+                        break;
+                }
             }
         }
 
@@ -1964,7 +2060,7 @@ namespace CANStream
         				Load_ControllersConfiguration(openFileDialog1.FileName);
         			}
 
-                    UpdateCanConfigHistory(openFileDialog1.FileName);
+                    UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.CanConfiguration);
         		}
         	}
         }
@@ -2052,10 +2148,11 @@ namespace CANStream
         			if(oCycle.ReadStreamCycle(openFileDialog1.FileName))
         			{
         				ActiveCanBus.Set_Cycle(oCycle);
-        			}
+                        UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.Cycle);
+                    }
         			else
         			{
-        				MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+        				MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Error);
         			}
         		}
         	}

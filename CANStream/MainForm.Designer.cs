@@ -58,6 +58,7 @@ namespace CANStream
             this.Cycle_new_AdvancedCreation_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Cycle_new_RecordReplay_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Cycle_openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Cycle_recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Cycle_SetStartEndPoints_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Cycle_SetStartPoint_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Cycle_SetEndPoint_TSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -336,6 +337,7 @@ namespace CANStream
             this.cycleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Cycle_newToolStripMenuItem,
             this.Cycle_openToolStripMenuItem,
+            this.Cycle_recentToolStripMenuItem,
             this.Cycle_SetStartEndPoints_ToolStripMenuItem,
             this.toolStripMenuItem1,
             this.toolsToolStripMenuItem});
@@ -385,6 +387,12 @@ namespace CANStream
             this.Cycle_openToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.Cycle_openToolStripMenuItem.Text = "Open";
             this.Cycle_openToolStripMenuItem.Click += new System.EventHandler(this.Cycle_openToolStripMenuItemClick);
+            // 
+            // Cycle_recentToolStripMenuItem
+            // 
+            this.Cycle_recentToolStripMenuItem.Name = "Cycle_recentToolStripMenuItem";
+            this.Cycle_recentToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.Cycle_recentToolStripMenuItem.Text = "Recent";
             // 
             // Cycle_SetStartEndPoints_ToolStripMenuItem
             // 
@@ -1719,5 +1727,6 @@ namespace CANStream
         private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Tx_Count;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Columns_Manual_Tx_DLC;
         private System.Windows.Forms.ToolStripMenuItem CANConfig_recentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Cycle_recentToolStripMenuItem;
     }
 }
