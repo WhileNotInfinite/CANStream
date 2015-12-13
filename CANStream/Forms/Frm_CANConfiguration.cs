@@ -835,6 +835,7 @@ namespace CANStream
             ShowConfiguration();
             ConfigurationModified = false;
             tabControl1.TabPages.Remove(Tab_Controller);
+            SetWindowTitle("");
         }
 
         private void OpenConfiguration()
@@ -864,7 +865,8 @@ namespace CANStream
 	                {
 	                    ShowConfiguration();
 	                    ConfigurationModified = false;
-	                }
+                        SetWindowTitle(Path.GetFileNameWithoutExtension(openFileDialog1.FileName));
+                    }
 	                else
 	                {
 	                    MessageBox.Show("CAN configuration file loading error !\nCheck the file.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -879,7 +881,8 @@ namespace CANStream
             		{
             			ShowMultipleControllersConfiguration();
             			ConfigurationModified = false;
-            		}
+                        SetWindowTitle(Path.GetFileNameWithoutExtension(openFileDialog1.FileName));
+                    }
             		else
             		{
 	                    MessageBox.Show("Multiple CAN bus Configuration file loading error !\nCheck the file.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -921,9 +924,10 @@ namespace CANStream
             	}
                 
                 ConfigurationModified = false;
-                
-               	//Main form CAN Configuration reloading if specified
-               	if(ReloadMainFormCanCfg & !(FrmParent==null))
+                SetWindowTitle(Path.GetFileNameWithoutExtension(saveFileDialog1.FileName));
+
+                //Main form CAN Configuration reloading if specified
+                if (ReloadMainFormCanCfg & !(FrmParent==null))
                	{
                		if (oMultipleControllersCfg == null)
                		{
@@ -1367,6 +1371,18 @@ namespace CANStream
             }
 
             return (null);
+        }
+
+        private void SetWindowTitle(string CfgName)
+        {
+            if(!(CfgName.Equals("")))
+            {
+                this.Text = "CAN Messages Configuration: " + CfgName;
+            }
+            else
+            {
+                this.Text = "CAN Messages Configuration";
+            }
         }
 
         #endregion
