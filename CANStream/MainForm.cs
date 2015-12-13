@@ -40,6 +40,7 @@ namespace CANStream
             None                = 0,
             CanConfiguration    = 1,
             Cycle               = 2,
+            DataViewer          = 3,
         }
 
         #endregion
@@ -94,6 +95,7 @@ namespace CANStream
 
             ShowElementsistory(LoadElementsHistory(HistoryElements.CanConfiguration), HistoryElements.CanConfiguration);
             ShowElementsistory(LoadElementsHistory(HistoryElements.Cycle), HistoryElements.Cycle);
+            ShowElementsistory(LoadElementsHistory(HistoryElements.DataViewer), HistoryElements.DataViewer);
 
             //Initial controls enabling/disabling
             Cycle_openToolStripMenuItem.Enabled=false;
@@ -507,8 +509,15 @@ namespace CANStream
 		private void Tools_DataViewer_Open_TSMenuItemClick(object sender, EventArgs e)
 		{
 			LoadDataViewer();
+
 		}
-        		
+        
+        private void DataViewerHistoryItem_Click(object sender, EventArgs e)
+        {
+            OpenDataViewer(((ToolStripItem)sender).Tag.ToString());
+            UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.DataViewer);
+        }
+
         #endregion
         
         #endregion
@@ -1447,7 +1456,7 @@ namespace CANStream
         	return(oLicence.LicenseValid);
         }
 
-        #region CAN Config & Cycle history
+        #region CAN Config, Cycle & Data Viewers history
 
         private List<string> LoadElementsHistory(HistoryElements eHistoryItem)
         {
@@ -1468,6 +1477,11 @@ namespace CANStream
                 case HistoryElements.Cycle:
 
                     HistoryRegKey = "\\Cycle history";
+                    break;
+
+                case HistoryElements.DataViewer:
+
+                    HistoryRegKey = "\\DataViewer history";
                     break;
 
                 default:
@@ -1505,6 +1519,11 @@ namespace CANStream
                     case HistoryElements.Cycle:
 
                         HistoryRegKey = "\\Cycle history";
+                        break;
+
+                    case HistoryElements.DataViewer:
+
+                        HistoryRegKey = "\\DataViewer history";
                         break;
 
                     default:
@@ -1557,6 +1576,11 @@ namespace CANStream
                     HistoryMenuItem = Cycle_recentToolStripMenuItem;
                     break;
 
+                case HistoryElements.DataViewer:
+
+                    HistoryMenuItem = Tools_DataViewer_Recent_TSMenuItem;
+                    break;
+
                 default:
                     return;
             }
@@ -1579,6 +1603,12 @@ namespace CANStream
 
                         oItem.Click += new EventHandler(CycleHistoryItem_Click);
                         break;
+
+                    case HistoryElements.DataViewer:
+
+                        oItem.Click += new EventHandler(DataViewerHistoryItem_Click);
+                        break;
+
                 }
             }
         }
@@ -2549,7 +2579,8 @@ namespace CANStream
     		if (openFileDialog1.ShowDialog().Equals(DialogResult.OK))
     		{
     			OpenDataViewer(openFileDialog1.FileName);
-    		}
+                UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.DataViewer);
+            }
         }
         
         private void OpenDataViewer(string fPath)
