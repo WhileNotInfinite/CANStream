@@ -41,6 +41,7 @@ namespace CANStream
             this.cANConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CANConfig_newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CANConfig_openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CANConfig_recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CANConfig_editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.importDBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -193,7 +194,6 @@ namespace CANStream
             this.Context_TabControllers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeCANBusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BGWrk_RecordConversion = new System.ComponentModel.BackgroundWorker();
-            this.CANConfig_recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FrmMain_MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.Tab_CAN_Controllers.SuspendLayout();
@@ -233,7 +233,7 @@ namespace CANStream
             // 
             this.CANConfig_newToolStripMenuItem.Image = global::CANStream.Icones.File_New_16;
             this.CANConfig_newToolStripMenuItem.Name = "CANConfig_newToolStripMenuItem";
-            this.CANConfig_newToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_newToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_newToolStripMenuItem.Text = "New";
             this.CANConfig_newToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_newToolStripMenuItem_Click);
             // 
@@ -241,28 +241,34 @@ namespace CANStream
             // 
             this.CANConfig_openToolStripMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.CANConfig_openToolStripMenuItem.Name = "CANConfig_openToolStripMenuItem";
-            this.CANConfig_openToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_openToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_openToolStripMenuItem.Text = "Open";
             this.CANConfig_openToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_openToolStripMenuItemClick);
+            // 
+            // CANConfig_recentToolStripMenuItem
+            // 
+            this.CANConfig_recentToolStripMenuItem.Name = "CANConfig_recentToolStripMenuItem";
+            this.CANConfig_recentToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.CANConfig_recentToolStripMenuItem.Text = "Recent";
             // 
             // CANConfig_editToolStripMenuItem
             // 
             this.CANConfig_editToolStripMenuItem.Image = global::CANStream.Icones.Edit_16;
             this.CANConfig_editToolStripMenuItem.Name = "CANConfig_editToolStripMenuItem";
-            this.CANConfig_editToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.CANConfig_editToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_editToolStripMenuItem.Text = "Edit";
             this.CANConfig_editToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_editToolStripMenuItemClick);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(162, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(161, 6);
             // 
             // importDBCToolStripMenuItem
             // 
             this.importDBCToolStripMenuItem.Image = global::CANStream.Icones.DBC_Import_16;
             this.importDBCToolStripMenuItem.Name = "importDBCToolStripMenuItem";
-            this.importDBCToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.importDBCToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.importDBCToolStripMenuItem.Text = "Import DBC";
             this.importDBCToolStripMenuItem.Click += new System.EventHandler(this.ImportDBCToolStripMenuItemClick);
             // 
@@ -277,7 +283,7 @@ namespace CANStream
             this.openMessageListToolStripMenuItem});
             this.rawMessagesTxToolStripMenuItem.Image = global::CANStream.Icones.Raw_Data;
             this.rawMessagesTxToolStripMenuItem.Name = "rawMessagesTxToolStripMenuItem";
-            this.rawMessagesTxToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.rawMessagesTxToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.rawMessagesTxToolStripMenuItem.Text = "Raw messages Tx";
             // 
             // addMessageToolStripMenuItem
@@ -479,6 +485,7 @@ namespace CANStream
             this.startRecordingToolStripMenuItem.Enabled = false;
             this.startRecordingToolStripMenuItem.Image = global::CANStream.Icones.Start_Record;
             this.startRecordingToolStripMenuItem.Name = "startRecordingToolStripMenuItem";
+            this.startRecordingToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.startRecordingToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.startRecordingToolStripMenuItem.Text = "Start recording";
             this.startRecordingToolStripMenuItem.Click += new System.EventHandler(this.StartRecordingToolStripMenuItemClick);
@@ -488,6 +495,7 @@ namespace CANStream
             this.stopRecordingToolStripMenuItem.Enabled = false;
             this.stopRecordingToolStripMenuItem.Image = global::CANStream.Icones.Stop_Recording;
             this.stopRecordingToolStripMenuItem.Name = "stopRecordingToolStripMenuItem";
+            this.stopRecordingToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.stopRecordingToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.stopRecordingToolStripMenuItem.Text = "Stop recording";
             this.stopRecordingToolStripMenuItem.Click += new System.EventHandler(this.StopRecordingToolStripMenuItemClick);
@@ -626,6 +634,7 @@ namespace CANStream
             // 
             this.selectRecordsToConvertToolStripMenuItem.Image = global::CANStream.Icones.User_Selection_16;
             this.selectRecordsToConvertToolStripMenuItem.Name = "selectRecordsToConvertToolStripMenuItem";
+            this.selectRecordsToConvertToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
             this.selectRecordsToConvertToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.selectRecordsToConvertToolStripMenuItem.Text = "Select records to convert";
             this.selectRecordsToConvertToolStripMenuItem.Click += new System.EventHandler(this.SelectRecordsToConvertToolStripMenuItemClick);
@@ -653,7 +662,7 @@ namespace CANStream
             this.builtinSignalsToolStripMenuItem,
             this.Tools_DataViewer_TSMenuItem});
             this.Tools_TSMenuItem.Name = "Tools_TSMenuItem";
-            this.Tools_TSMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.Tools_TSMenuItem.Size = new System.Drawing.Size(47, 20);
             this.Tools_TSMenuItem.Text = "Tools";
             // 
             // virtualChannelsToolStripMenuItem
@@ -716,7 +725,7 @@ namespace CANStream
             this.TSMI_Layout_Reset});
             this.TSMI_Layout.Image = global::CANStream.Icones.Controller_Layout;
             this.TSMI_Layout.Name = "TSMI_Layout";
-            this.TSMI_Layout.Size = new System.Drawing.Size(157, 22);
+            this.TSMI_Layout.Size = new System.Drawing.Size(156, 22);
             this.TSMI_Layout.Text = "Layout";
             // 
             // TSMI_Layout_Manual
@@ -736,7 +745,8 @@ namespace CANStream
             this.TSMI_Layout_Manual_Tx_Raw});
             this.TSMI_Layout_Manual_Tx.Image = global::CANStream.Icones.Message_Tx;
             this.TSMI_Layout_Manual_Tx.Name = "TSMI_Layout_Manual_Tx";
-            this.TSMI_Layout_Manual_Tx.Size = new System.Drawing.Size(140, 22);
+            this.TSMI_Layout_Manual_Tx.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.TSMI_Layout_Manual_Tx.Size = new System.Drawing.Size(159, 22);
             this.TSMI_Layout_Manual_Tx.Text = "Messages Tx";
             this.TSMI_Layout_Manual_Tx.Click += new System.EventHandler(this.TSMI_Layout_Manual_TxClick);
             // 
@@ -744,7 +754,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Manual_Tx_Eng.Image = global::CANStream.Icones.Engineering_Data;
             this.TSMI_Layout_Manual_Tx_Eng.Name = "TSMI_Layout_Manual_Tx_Eng";
-            this.TSMI_Layout_Manual_Tx_Eng.Size = new System.Drawing.Size(191, 22);
+            this.TSMI_Layout_Manual_Tx_Eng.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.TSMI_Layout_Manual_Tx_Eng.Size = new System.Drawing.Size(210, 22);
             this.TSMI_Layout_Manual_Tx_Eng.Text = "Engineering messages";
             this.TSMI_Layout_Manual_Tx_Eng.Click += new System.EventHandler(this.TSMI_Layout_Manual_Tx_EngClick);
             // 
@@ -752,7 +763,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Manual_Tx_Raw.Image = global::CANStream.Icones.Raw_Data;
             this.TSMI_Layout_Manual_Tx_Raw.Name = "TSMI_Layout_Manual_Tx_Raw";
-            this.TSMI_Layout_Manual_Tx_Raw.Size = new System.Drawing.Size(191, 22);
+            this.TSMI_Layout_Manual_Tx_Raw.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.TSMI_Layout_Manual_Tx_Raw.Size = new System.Drawing.Size(210, 22);
             this.TSMI_Layout_Manual_Tx_Raw.Text = "Raw messages";
             this.TSMI_Layout_Manual_Tx_Raw.Click += new System.EventHandler(this.TSMI_Layout_Manual_Tx_RawClick);
             // 
@@ -763,7 +775,8 @@ namespace CANStream
             this.TSMI_Layout_Manual_Rx_Graph});
             this.TSMI_Layout_Manual_Rx.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_Layout_Manual_Rx.Name = "TSMI_Layout_Manual_Rx";
-            this.TSMI_Layout_Manual_Rx.Size = new System.Drawing.Size(140, 22);
+            this.TSMI_Layout_Manual_Rx.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.TSMI_Layout_Manual_Rx.Size = new System.Drawing.Size(159, 22);
             this.TSMI_Layout_Manual_Rx.Text = "Messages Rx";
             this.TSMI_Layout_Manual_Rx.Click += new System.EventHandler(this.TSMI_Layout_Manual_RxClick);
             // 
@@ -771,7 +784,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Manual_Rx_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_Layout_Manual_Rx_Data.Name = "TSMI_Layout_Manual_Rx_Data";
-            this.TSMI_Layout_Manual_Rx_Data.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_Layout_Manual_Rx_Data.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.TSMI_Layout_Manual_Rx_Data.Size = new System.Drawing.Size(125, 22);
             this.TSMI_Layout_Manual_Rx_Data.Text = "Data";
             this.TSMI_Layout_Manual_Rx_Data.Click += new System.EventHandler(this.TSMI_Layout_Manual_Rx_DataClick);
             // 
@@ -779,7 +793,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Manual_Rx_Graph.Image = global::CANStream.Icones.Graph;
             this.TSMI_Layout_Manual_Rx_Graph.Name = "TSMI_Layout_Manual_Rx_Graph";
-            this.TSMI_Layout_Manual_Rx_Graph.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_Layout_Manual_Rx_Graph.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.TSMI_Layout_Manual_Rx_Graph.Size = new System.Drawing.Size(125, 22);
             this.TSMI_Layout_Manual_Rx_Graph.Text = "Graph";
             this.TSMI_Layout_Manual_Rx_Graph.Click += new System.EventHandler(this.TSMI_Layout_Manual_Rx_GraphClick);
             // 
@@ -797,7 +812,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Cycle_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_Layout_Cycle_Data.Name = "TSMI_Layout_Cycle_Data";
-            this.TSMI_Layout_Cycle_Data.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_Layout_Cycle_Data.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.TSMI_Layout_Cycle_Data.Size = new System.Drawing.Size(125, 22);
             this.TSMI_Layout_Cycle_Data.Text = "Data";
             this.TSMI_Layout_Cycle_Data.Click += new System.EventHandler(this.TSMI_Layout_Cycle_DataClick);
             // 
@@ -805,7 +821,8 @@ namespace CANStream
             // 
             this.TSMI_Layout_Cycle_Graph.Image = global::CANStream.Icones.Graph;
             this.TSMI_Layout_Cycle_Graph.Name = "TSMI_Layout_Cycle_Graph";
-            this.TSMI_Layout_Cycle_Graph.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_Layout_Cycle_Graph.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.TSMI_Layout_Cycle_Graph.Size = new System.Drawing.Size(125, 22);
             this.TSMI_Layout_Cycle_Graph.Text = "Graph";
             this.TSMI_Layout_Cycle_Graph.Click += new System.EventHandler(this.TSMI_Layout_Cycle_GraphClick);
             // 
@@ -818,6 +835,7 @@ namespace CANStream
             // 
             this.TSMI_Layout_Reset.Image = global::CANStream.Icones.Controller_Layout;
             this.TSMI_Layout_Reset.Name = "TSMI_Layout_Reset";
+            this.TSMI_Layout_Reset.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.TSMI_Layout_Reset.Size = new System.Drawing.Size(159, 22);
             this.TSMI_Layout_Reset.Text = "Reset";
             this.TSMI_Layout_Reset.Click += new System.EventHandler(this.TSMI_Layout_ResetClick);
@@ -829,7 +847,7 @@ namespace CANStream
             this.TSMI_Columns_Cycle});
             this.TSMI_Columns.Image = global::CANStream.Icones.Columns_16;
             this.TSMI_Columns.Name = "TSMI_Columns";
-            this.TSMI_Columns.Size = new System.Drawing.Size(157, 22);
+            this.TSMI_Columns.Size = new System.Drawing.Size(156, 22);
             this.TSMI_Columns.Text = "Tables columns";
             // 
             // TSMI_Columns_Manual
@@ -1516,12 +1534,6 @@ namespace CANStream
             this.BGWrk_RecordConversion.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_RecordConversionDoWork);
             this.BGWrk_RecordConversion.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_RecordConversionProgressChanged);
             this.BGWrk_RecordConversion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_RecordConversionRunWorkerCompleted);
-            // 
-            // CANConfig_recentToolStripMenuItem
-            // 
-            this.CANConfig_recentToolStripMenuItem.Name = "CANConfig_recentToolStripMenuItem";
-            this.CANConfig_recentToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.CANConfig_recentToolStripMenuItem.Text = "Recent";
             // 
             // MainForm
             // 
