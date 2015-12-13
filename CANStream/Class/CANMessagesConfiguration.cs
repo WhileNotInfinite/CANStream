@@ -250,15 +250,15 @@ namespace CANStream
                 {
                     UInt64 RawMax = (UInt64)(Math.Pow(2, Length - 1) - 1);
 
-                    MinMax[1] = (double)RawMax * Gain + Zero;
+                    MinMax[1] = (double)RawMax * Math.Abs(Gain) + Zero;
                     MinMax[0] = MinMax[1] * -1;
                 }
                 else
                 {
                     UInt64 RawMax = (UInt64)(Math.Pow(2, Length) - 1);
 
-                    MinMax[0] = (double)0 * Gain + Zero;
-                    MinMax[1] = (double)RawMax * Gain + Zero;
+                    MinMax[0] = (double)0 * Math.Abs(Gain) + Zero;
+                    MinMax[1] = (double)RawMax * Math.Abs(Gain) + Zero;
                 }
             }
 
@@ -2123,10 +2123,15 @@ namespace CANStream
 			
 			//Engineering to raw value conversion
 			UInt64 RawVal = 0;
-			
+
+            if (Parameter.Gain < 0)
+            {
+                ClipEngValue *= -1;
+            }
+
 			if (Parameter.Signed)
 			{
-                RawVal = Convert.ToUInt64((Math.Abs(ClipEngValue) - Parameter.Zero) / Parameter.Gain);
+                RawVal = Convert.ToUInt64((Math.Abs(ClipEngValue) - Parameter.Zero) / Math.Abs(Parameter.Gain));
 
                 if (ClipEngValue < 0)
                 {
@@ -2136,7 +2141,7 @@ namespace CANStream
             }
 			else
 			{
-				RawVal = Convert.ToUInt64((ClipEngValue - Parameter.Zero) / Parameter.Gain);
+                RawVal = Convert.ToUInt64((ClipEngValue - Parameter.Zero) / Math.Abs(Parameter.Gain));
 			}
 			
 			for (int iByte = 0; iByte < ByteLen; iByte++)
