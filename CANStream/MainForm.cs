@@ -218,6 +218,7 @@ namespace CANStream
                 if (oNewCfg.ReadCANConfigurationFile(((ToolStripItem)sender).Tag.ToString()))
                 {
                     ActiveCanBus.Set_BusCANConfiguration(oNewCfg);
+                    UpdateCanConfigHistory(((ToolStripItem)sender).Tag.ToString());
                 }
                 else
                 {
@@ -1457,18 +1458,20 @@ namespace CANStream
         {
             List<string> CanConfigHistory = LoadCanConfigHistory();
 
-            if (!(CanConfigHistory.Contains(ConfigPath)))
+            if (CanConfigHistory.Contains(ConfigPath))
             {
-                CanConfigHistory.Insert(0, ConfigPath);
-
-                if (CanConfigHistory.Count > CAN_CONFIG_HISTORY_DEPTH)
-                {
-                    CanConfigHistory.RemoveAt(CAN_CONFIG_HISTORY_DEPTH);
-                }
-
-                ShowCanConfigHistory(CanConfigHistory);
-                WriteCanConfigHistory(CanConfigHistory);
+                CanConfigHistory.Remove(ConfigPath);
             }
+
+            CanConfigHistory.Insert(0, ConfigPath);
+
+            if (CanConfigHistory.Count > CAN_CONFIG_HISTORY_DEPTH)
+            {
+                CanConfigHistory.RemoveAt(CAN_CONFIG_HISTORY_DEPTH);
+            }
+
+            ShowCanConfigHistory(CanConfigHistory);
+            WriteCanConfigHistory(CanConfigHistory);
         }
 
         private void ShowCanConfigHistory(List<string> CanConfigHistory)
