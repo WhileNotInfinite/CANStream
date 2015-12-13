@@ -1410,10 +1410,41 @@ namespace CANStream
             			break;
             			
             		case ConfigurationItemType.Parameter:
-            			
-            			string MsgName = nItem.Parent.Text.Substring(0, nItem.Parent.Text.IndexOf("[") - 1);
-	                    DeleteParameter(MsgName, nItem.Text);
-	                    Show_MsgMap(oActiveMessage);
+
+                        TreeNode nMessage = null;
+                        TreeNode nMux = null;
+
+                        switch ((ConfigurationItemType)nItem.Parent.Tag)
+                        {
+                            case ConfigurationItemType.Message:
+
+                                nMessage = nItem.Parent;
+                                break;
+
+                            case ConfigurationItemType.Multiplexer:
+
+                                nMessage = nItem.Parent.Parent;
+                                nMux = nItem.Parent;
+                                break;
+
+                            default:
+
+                                MessageBox.Show("Unknown item parent type !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                        }
+
+                        string MsgName = nMessage.Text.Substring(0, nMessage.Text.IndexOf("[") - 1);
+                        DeleteParameter(MsgName, nItem.Text);
+
+                        if (!(nMux == null))
+                        {
+                            if (nMux.Nodes.Count == 0)
+                            {
+                                TV_Messages.Nodes.Remove(nMux);
+                            }
+                        }
+
+                        Show_MsgMap(oActiveMessage);
             			break;
 
                     default:
