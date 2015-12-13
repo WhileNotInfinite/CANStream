@@ -429,6 +429,19 @@ namespace CANStream
 
                     double EngVal = oParam.ValueFormat.SetSignalFormatedValue(oCurrentCell.Value.ToString());
 
+                    { //New context to not keep 'EngValRange' all the way through
+
+                        double[] EngValRange = oParam.GetParameterMinMax();
+
+                        if (EngVal < EngValRange[0] || EngVal > EngValRange[1])
+                        {
+                            MessageBox.Show("The value entered is out of " + oParam.Name + " signal range [" + EngValRange[0].ToString() + " - " + EngValRange[1].ToString() + "] !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+                            bCellValueChangedEventEnabled = true;
+                            return;
+                        }
+                    }
+
                     if (!(double.IsNaN(EngVal)))
                     {
                         if (oParam.DecodedValue != EngVal)
@@ -450,7 +463,6 @@ namespace CANStream
 
                             DataGridViewRow oMsgRow = ((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow();
                             CANMessageEncoded oMsgEncoder = (CANMessageEncoded)oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag;
-                            //CANMessageEncoded oMsgEncoder = (CANMessageEncoded)((((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow()).Cells[GRID_SPYENG_ENG_VALUE].Tag);
                             oMsgEncoder.EncodeMessage();
 
                             Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
