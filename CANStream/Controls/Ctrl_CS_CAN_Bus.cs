@@ -194,8 +194,9 @@ namespace CANStream
         private const int GRID_MAX_COL_WIDTH = 60;
         private const int GRID_RAW_MANUAL_FILLER_COL = 0;	//Column 'ID'
         private const int GRID_RAW_COL_TX_PERIOD = 2;
-		private const int GRID_RAW_COL_TX_BTN = 4;		
-		private const int GRID_RAW_COL_1ST_BYTE = 5;
+		private const int GRID_RAW_COL_TX_BTN = 4;
+        private const int GRID_RAW_COL_TX_COUNT = 5;
+        private const int GRID_RAW_COL_1ST_BYTE = 6;
         
 		#endregion
 		
@@ -741,6 +742,15 @@ namespace CANStream
                 }
 
                 Grid_ManualDataWriter.Update_TxMessageCount();
+
+                //Update raw message TX count
+                if (Grid_CANRawData.Rows.Count > 0)
+                {
+                    for (int iRow = 0; iRow < Grid_CANRawData.Rows.Count; iRow++)
+                    {
+                        Grid_CANRawData.Rows[iRow].Cells[GRID_RAW_COL_TX_COUNT].Value = TxRawMessages.Messages[iRow].TxCount.ToString();
+                    }
+                }
             }
         }
 
@@ -2297,6 +2307,7 @@ namespace CANStream
                             {
                                 if (SendMessage(oRawMsg.GetPCANMessage()))
                                 {
+                                    oRawMsg.TxCount++;
                                 }
                             }
                         }
@@ -2365,6 +2376,7 @@ namespace CANStream
                 Grid_CANRawData.Rows[RowIndex].Cells[1].Value = oRawMsg.DLC.ToString();
                 Grid_CANRawData.Rows[RowIndex].Cells[2].Value = oRawMsg.Period.ToString();
                 Grid_CANRawData.Rows[RowIndex].Cells[3].Value = oRawMsg.Send;
+                Grid_CANRawData.Rows[RowIndex].Cells[GRID_RAW_COL_TX_COUNT].Value = oRawMsg.TxCount.ToString();
 
                 if (oRawMsg.Period == 0) Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "Tx";
                 else Grid_CANRawData.Rows[RowIndex].Cells[4].Value = "";
@@ -2449,7 +2461,10 @@ namespace CANStream
             {
                 if (bManualRunning)
                 {
-                    SendMessage(TxRawMessages.Messages[RowIndex].GetPCANMessage());
+                    if (SendMessage(TxRawMessages.Messages[RowIndex].GetPCANMessage()))
+                    {
+                        TxRawMessages.Messages[RowIndex].TxCount++;
+                    }
                 }
             }
         }

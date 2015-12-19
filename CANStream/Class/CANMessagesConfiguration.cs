@@ -2194,6 +2194,7 @@ namespace CANStream
 		public int Period;
 		public bool Send;
 		public byte[] MsgData;
+        public long TxCount;
 		
 		#endregion
 		
@@ -2205,7 +2206,8 @@ namespace CANStream
 			Period = 0;
 			Send = true;
 			MsgData = new byte[DLC];
-		}
+            TxCount = 0;
+        }
 		
 		#region Public methode
 		
