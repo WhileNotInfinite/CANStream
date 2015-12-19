@@ -1408,43 +1408,65 @@ namespace CANStream
             			DeleteMessage(nItem.Text.Substring(0, nItem.Text.IndexOf("[") - 1));
                    		ClearGridParam();
             			break;
-            			
-            		case ConfigurationItemType.Parameter:
 
-                        TreeNode nMessage = null;
-                        TreeNode nMux = null;
+                    case ConfigurationItemType.Multiplexer:
 
-                        switch ((ConfigurationItemType)nItem.Parent.Tag)
                         {
-                            case ConfigurationItemType.Message:
+                            string MsgName = nItem.Parent.Text.Substring(0, nItem.Parent.Text.IndexOf("[") - 1);
 
-                                nMessage = nItem.Parent;
-                                break;
-
-                            case ConfigurationItemType.Multiplexer:
-
-                                nMessage = nItem.Parent.Parent;
-                                nMux = nItem.Parent;
-                                break;
-
-                            default:
-
-                                MessageBox.Show("Unknown item parent type !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                        }
-
-                        string MsgName = nMessage.Text.Substring(0, nMessage.Text.IndexOf("[") - 1);
-                        DeleteParameter(MsgName, nItem.Text);
-
-                        if (!(nMux == null))
-                        {
-                            if (nMux.Nodes.Count == 0)
+                            int iSep = nItem.Text.IndexOf("=");
+                            if (iSep != -1)
                             {
-                                TV_Messages.Nodes.Remove(nMux);
+                                long MuxVal = -1;
+                                if (long.TryParse(nItem.Text.Substring(iSep + 1, nItem.Text.Length - (iSep + 1)).Trim(), out MuxVal))
+                                {
+                                    DeleteMultiplexerParameters(MsgName, MuxVal);
+                                    TV_Messages.Nodes.Remove(nItem);
+                                }
                             }
                         }
 
-                        Show_MsgMap(oActiveMessage);
+                        break;
+
+            		case ConfigurationItemType.Parameter:
+
+                        {
+                            TreeNode nMessage = null;
+                            TreeNode nMux = null;
+
+                            switch ((ConfigurationItemType)nItem.Parent.Tag)
+                            {
+                                case ConfigurationItemType.Message:
+
+                                    nMessage = nItem.Parent;
+                                    break;
+
+                                case ConfigurationItemType.Multiplexer:
+
+                                    nMessage = nItem.Parent.Parent;
+                                    nMux = nItem.Parent;
+                                    break;
+
+                                default:
+
+                                    MessageBox.Show("Unknown item parent type !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                            }
+
+                            string MsgName = nMessage.Text.Substring(0, nMessage.Text.IndexOf("[") - 1);
+                            DeleteParameter(MsgName, nItem.Text);
+
+                            if (!(nMux == null))
+                            {
+                                if (nMux.Nodes.Count == 0)
+                                {
+                                    TV_Messages.Nodes.Remove(nMux);
+                                }
+                            }
+
+                            Show_MsgMap(oActiveMessage);
+                        }
+
             			break;
 
                     default:
@@ -2153,6 +2175,32 @@ namespace CANStream
             TV_Messages.Nodes.Remove(TV_Messages.SelectedNode);
         }
         
+        private void  DeleteMultiplexerParameters(string MessageName, long MultiplexerValue)
+        {
+            CANMessage oMsg = oCANConfig.GetCANMessage(MessageName, MessageResearchOption.Name);
+
+            if (oMsg != null)
+            {
+                List<CANParameter> MuxParameters = new List<CANParameter>();
+
+                foreach(CANParameter oParam in oMsg.Parameters)
+                {
+                    if (oParam.IsMultiplexed && oParam.MultiplexerValue == MultiplexerValue)
+                    {
+                        MuxParameters.Add(oParam);
+                    }
+                }
+
+                if (MuxParameters.Count>0)
+                {
+                    foreach(CANParameter oMuxParam in MuxParameters)
+                    {
+                        oMsg.Parameters.Remove(oMuxParam);
+                    }
+                }
+            }
+        }
+
         private void ResetMessageForm()
         {
             Txt_MsgName.Text = "";
