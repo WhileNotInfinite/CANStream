@@ -667,7 +667,10 @@ namespace CANStream
 				if (!(FilePath.Equals("")))
 				{
 					oActiveLibrary.WriteLibraryFile(FilePath);
-				}
+
+                    //Set flag to make the main form reloading libraries
+                    bFrmMain_ReloadLibraries = true;
+                }
 			}
 		}
 		
