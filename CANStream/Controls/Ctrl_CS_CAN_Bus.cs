@@ -255,7 +255,6 @@ namespace CANStream
 
         //Manual control
         private List<CANMessageEncoded> TxEngMessages;
-		private long SentMsgCounter;
 		private bool bRawMsgGridEdition;
 		private int NextRawMessageKeyId;
 		private CAN_RawMessageList TxRawMessages;
@@ -411,7 +410,6 @@ namespace CANStream
             ChkLst_ChannelSel.Tag = "";
 			
 			//Initialization of manual control management
-			SentMsgCounter = 0;
 			bRawMsgGridEdition = false;
 			NextRawMessageKeyId = 0;
 			TxRawMessages = null;
@@ -710,8 +708,14 @@ namespace CANStream
 
         private void BGWrk_ManualProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            SentMsgCounter += e.ProgressPercentage;
-            Txt_MsgCounter.Text = SentMsgCounter.ToString();
+            if (Pic_ManualRunning.Image == Icones.LED_Green_48)
+            {
+                Pic_ManualRunning.Image = Icones.LED_Blue_48;
+            }
+            else
+            {
+                Pic_ManualRunning.Image = Icones.LED_Green_48;
+            }
 
             if (TxEngMessages != null)
             {
@@ -2211,11 +2215,8 @@ namespace CANStream
 
         private void StartManualControl()
         {
-            SentMsgCounter = 0;
-
-            Lbl_MsgCounter.Visible = true;
-            Txt_MsgCounter.Visible = true;
-            Txt_MsgCounter.Text = SentMsgCounter.ToString();
+            Pic_ManualRunning.Image = Icones.LED_Blue_48;
+            Pic_ManualRunning.Visible = true;
 
             bManualRunning = true;
 
@@ -2232,8 +2233,7 @@ namespace CANStream
 
             FireControllerManualRunningChangedEvent(bManualRunning);
 
-            Lbl_MsgCounter.Visible = false;
-            Txt_MsgCounter.Visible = false;
+            Pic_ManualRunning.Visible = false;
         }
 
         private void RunManualControl(BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
@@ -2241,7 +2241,6 @@ namespace CANStream
             int iTime = 0;
             int TimeRem = 0;
 
-            int MsgCount = 0;
             DateTime TLastMsgCntUpdate = new DateTime();
 
             while (!(Worker.CancellationPending))
@@ -2273,8 +2272,6 @@ namespace CANStream
                             {
                                 if (SendMessage(oMsgEncod.GetPCANMessage()))
                                 {
-                                    MsgCount++;
-
                                     if(!(oMsgEncod.TxCount==ulong.MaxValue)) oMsgEncod.TxCount++;
 
                                     if (Chk_CycleMux.Checked)
@@ -2300,7 +2297,6 @@ namespace CANStream
                             {
                                 if (SendMessage(oRawMsg.GetPCANMessage()))
                                 {
-                                    MsgCount++;
                                 }
                             }
                         }
@@ -2322,8 +2318,7 @@ namespace CANStream
                 if (TSinceLastUpdate.TotalMilliseconds >= T_MSG_CNT_UPDATE_PERIOD)
                 {
                     TLastMsgCntUpdate = DateTime.Now;
-                    Worker.ReportProgress(MsgCount);
-                    MsgCount = 0;
+                    Worker.ReportProgress(0);
                 }
 
                 //Wait for 1 ms

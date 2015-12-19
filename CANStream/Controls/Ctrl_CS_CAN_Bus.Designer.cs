@@ -126,8 +126,6 @@ namespace CANStream
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Chk_VirtualParamTxEnabled = new System.Windows.Forms.CheckBox();
             this.Chk_CycleMux = new System.Windows.Forms.CheckBox();
-            this.Lbl_MsgCounter = new System.Windows.Forms.Label();
-            this.Txt_MsgCounter = new System.Windows.Forms.TextBox();
             this.Cmb_SpyCANRate = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.Txt_SpyIdFilterMax = new System.Windows.Forms.TextBox();
@@ -177,6 +175,7 @@ namespace CANStream
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Timer_NoRx = new System.Windows.Forms.Timer(this.components);
+            this.Pic_ManualRunning = new System.Windows.Forms.PictureBox();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -212,6 +211,7 @@ namespace CANStream
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_ManualRunning)).BeginInit();
             this.SuspendLayout();
             // 
             // CtrlMain_ToolStrip
@@ -1097,7 +1097,7 @@ namespace CANStream
             // TSLbl_IdFilterTo
             // 
             this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
-            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(21, 22);
+            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(20, 22);
             this.TSLbl_IdFilterTo.Text = "To";
             // 
             // TSTxt_IdFilterTo
@@ -1113,10 +1113,9 @@ namespace CANStream
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.Pic_ManualRunning);
             this.groupBox4.Controls.Add(this.Chk_VirtualParamTxEnabled);
             this.groupBox4.Controls.Add(this.Chk_CycleMux);
-            this.groupBox4.Controls.Add(this.Lbl_MsgCounter);
-            this.groupBox4.Controls.Add(this.Txt_MsgCounter);
             this.groupBox4.Controls.Add(this.Cmb_SpyCANRate);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.Txt_SpyIdFilterMax);
@@ -1154,29 +1153,6 @@ namespace CANStream
             this.Chk_CycleMux.TabIndex = 20;
             this.Chk_CycleMux.Text = "Cycle Multiplexers";
             this.Chk_CycleMux.UseVisualStyleBackColor = true;
-            // 
-            // Lbl_MsgCounter
-            // 
-            this.Lbl_MsgCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lbl_MsgCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_MsgCounter.Location = new System.Drawing.Point(716, 30);
-            this.Lbl_MsgCounter.Name = "Lbl_MsgCounter";
-            this.Lbl_MsgCounter.Size = new System.Drawing.Size(121, 22);
-            this.Lbl_MsgCounter.TabIndex = 19;
-            this.Lbl_MsgCounter.Text = "Sent messages";
-            this.Lbl_MsgCounter.Visible = false;
-            // 
-            // Txt_MsgCounter
-            // 
-            this.Txt_MsgCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Txt_MsgCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_MsgCounter.Location = new System.Drawing.Point(843, 24);
-            this.Txt_MsgCounter.Name = "Txt_MsgCounter";
-            this.Txt_MsgCounter.ReadOnly = true;
-            this.Txt_MsgCounter.Size = new System.Drawing.Size(112, 29);
-            this.Txt_MsgCounter.TabIndex = 18;
-            this.Txt_MsgCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Txt_MsgCounter.Visible = false;
             // 
             // Cmb_SpyCANRate
             // 
@@ -1673,6 +1649,16 @@ namespace CANStream
             this.Timer_NoRx.Interval = 200;
             this.Timer_NoRx.Tick += new System.EventHandler(this.Timer_NoRx_Tick);
             // 
+            // Pic_ManualRunning
+            // 
+            this.Pic_ManualRunning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Pic_ManualRunning.Location = new System.Drawing.Point(907, 10);
+            this.Pic_ManualRunning.Name = "Pic_ManualRunning";
+            this.Pic_ManualRunning.Size = new System.Drawing.Size(48, 48);
+            this.Pic_ManualRunning.TabIndex = 22;
+            this.Pic_ManualRunning.TabStop = false;
+            this.Pic_ManualRunning.Visible = false;
+            // 
             // Ctrl_CS_CAN_Bus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1722,6 +1708,7 @@ namespace CANStream
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_ManualRunning)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1836,8 +1823,6 @@ namespace CANStream
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.ComboBox Cmb_SpyCANRate;
 		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.TextBox Txt_MsgCounter;
-		private System.Windows.Forms.Label Lbl_MsgCounter;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.ToolStripButton TSB_StopCANTraceRecording;
 		private System.Windows.Forms.ToolStripButton TSB_StartCANTraceRecording;
@@ -1865,5 +1850,6 @@ namespace CANStream
         private System.Windows.Forms.ToolStripButton TSB_RecordSelection;
         private Ctrl_CANDataGrid Grid_ManualDataWriter;
         private System.Windows.Forms.Timer Timer_NoRx;
+        private System.Windows.Forms.PictureBox Pic_ManualRunning;
     }
 }
