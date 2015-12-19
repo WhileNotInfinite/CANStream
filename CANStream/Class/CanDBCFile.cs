@@ -665,7 +665,8 @@ namespace CANStream
 				CANMessage oCSMsg=new CANMessage();
 				
 				oCSMsg.Identifier=NumberBaseConverter.Dec2Hex(oFrame.Identifier);
-				oCSMsg.Name=oFrame.Name;
+                oCSMsg.DLC = oFrame.ByteLength;
+                oCSMsg.Name=oFrame.Name;
 				oCSMsg.Comment=oFrame.GetNodeComments();
 				oCSMsg.Period=1000; //Default value
 				

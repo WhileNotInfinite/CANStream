@@ -278,6 +278,7 @@ namespace CANStream
 		
 		public string Name;
         public string Identifier;
+        public int DLC;
         public string Comment;
 		public CanMsgRxTx RxTx;
 		public int Period;
@@ -292,6 +293,7 @@ namespace CANStream
 		{
 			Name="";
 			Identifier="0";
+            DLC = 8;
 			Comment = "";
 			RxTx= CanMsgRxTx.Tx;
 			Period=1;
@@ -440,6 +442,7 @@ namespace CANStream
         	
         	oClone.Comment = Comment;
         	oClone.Identifier = Identifier;
+            oClone.DLC = DLC;
         	oClone.MultiplexerName = MultiplexerName;
         	oClone.Name = Name;
         	oClone.Period = Period;
@@ -761,6 +764,10 @@ namespace CANStream
 				XmlAttribute xAtrIdentifier=oXmlDoc.CreateAttribute("Identifier");
                 xAtrIdentifier.Value = Message.Identifier;
 				xMessage.Attributes.Append(xAtrIdentifier);
+
+                XmlAttribute xAtrDLC = oXmlDoc.CreateAttribute("DLC");
+                xAtrDLC.Value = Message.DLC.ToString();
+                xMessage.Attributes.Append(xAtrDLC);
 				
 				XmlElement xComment=oXmlDoc.CreateElement("MsgComment");
 				xComment.InnerText=Message.Comment;
@@ -959,7 +966,26 @@ namespace CANStream
 					{
 						return(false);
 					}
-					
+
+                    //DLC
+                    XmlAttribute xAtrDLC = xMessage.Attributes["DLC"]; //New feature of CANStream 2.2.0.0
+                    if (!(xAtrDLC == null))
+                    {
+                        int DLC = 0;
+                        if (int.TryParse(xAtrDLC.Value, out DLC))
+                        {
+                            oMessage.DLC = DLC;
+                        }
+                        else
+                        {
+                            return (false);
+                        }
+                    }
+                    else
+                    {
+                        oMessage.DLC = 8;
+                    }
+
 					//Comment
 					XmlNode xComment=xMessage.SelectSingleNode("MsgComment");
 					if(!(xComment==null))

@@ -1210,7 +1210,8 @@ namespace CANStream
 
             					Txt_MsgName.Text = oActiveMessage.Name;
             					Txt_MsgIdentifier.Text = oActiveMessage.Identifier;
-            					Txt_MsgPeriod.Text = oActiveMessage.Period.ToString();
+                                Txt_MsgDLC.Text = oActiveMessage.DLC.ToString();
+                                Txt_MsgPeriod.Text = oActiveMessage.Period.ToString();
                                 Txt_NoRxTimeout.Text = oActiveMessage.NoRxTimeOut.ToString();
             					Txt_MsgComment.Text = oActiveMessage.Comment;
 
@@ -1951,6 +1952,7 @@ namespace CANStream
 
             Txt_MsgName.Text = "Message " + (oCANConfig.Messages.Count + 1).ToString();
             Txt_MsgIdentifier.Text = "";
+            Txt_MsgDLC.Text = "8";
             Txt_MsgPeriod.Text = "1000";
             Radio_Tx.Checked = true;
 
@@ -2061,6 +2063,34 @@ namespace CANStream
             else
             {
                 MessageBox.Show("The message must have an identifier !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            //DLC
+            if (!(Txt_MsgDLC.Text.Equals("")))
+            {
+                int DLC = 0;
+                if (int.TryParse(Txt_MsgDLC.Text, out DLC))
+                {
+                    if ((DLC >= 1) && (DLC <= 8))
+                    {
+                        oMessage.DLC = DLC;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Message DLC must contained between 1 and 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Message DLC must be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("The message must have a DLC !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -2205,6 +2235,7 @@ namespace CANStream
         {
             Txt_MsgName.Text = "";
             Txt_MsgIdentifier.Text = "";
+            Txt_MsgDLC.Text = "";
             Radio_Tx.Checked = true;
             Txt_MsgPeriod.Text = "";
             Txt_NoRxTimeout.Text = "";

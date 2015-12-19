@@ -48,6 +48,7 @@
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.specialPasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -170,6 +171,7 @@
             this.TSB_Cut = new System.Windows.Forms.ToolStripButton();
             this.TSB_Copy = new System.Windows.Forms.ToolStripButton();
             this.TSB_Paste = new System.Windows.Forms.ToolStripButton();
+            this.TSB_PasteSpecial = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TSB_ImportDBC = new System.Windows.Forms.ToolStripButton();
             this.TSB_NewController = new System.Windows.Forms.ToolStripButton();
@@ -181,8 +183,9 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip_Commands = new System.Windows.Forms.ToolTip(this.components);
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
-            this.TSB_PasteSpecial = new System.Windows.Forms.ToolStripButton();
-            this.specialPasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Txt_MsgDLC = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Tree_Props)).BeginInit();
             this.Split_Tree_Props.Panel1.SuspendLayout();
             this.Split_Tree_Props.Panel2.SuspendLayout();
@@ -296,7 +299,7 @@
             this.expandAllToolStripMenuItem,
             this.collapseAllToolStripMenuItem});
             this.Context_TV_Messages.Name = "Context_TV_Messages";
-            this.Context_TV_Messages.Size = new System.Drawing.Size(227, 336);
+            this.Context_TV_Messages.Size = new System.Drawing.Size(227, 314);
             this.Context_TV_Messages.Opening += new System.ComponentModel.CancelEventHandler(this.Context_TV_MessagesOpening);
             // 
             // AddCanControllertoolStripMenuItem
@@ -399,6 +402,14 @@
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // specialPasteToolStripMenuItem
+            // 
+            this.specialPasteToolStripMenuItem.Image = global::CANStream.Icones.Special_Paste_16;
+            this.specialPasteToolStripMenuItem.Name = "specialPasteToolStripMenuItem";
+            this.specialPasteToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.specialPasteToolStripMenuItem.Text = "Special paste";
+            this.specialPasteToolStripMenuItem.Click += new System.EventHandler(this.specialPasteToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -773,6 +784,9 @@
             // 
             // Grp_MessageForm
             // 
+            this.Grp_MessageForm.Controls.Add(this.label26);
+            this.Grp_MessageForm.Controls.Add(this.Txt_MsgDLC);
+            this.Grp_MessageForm.Controls.Add(this.label25);
             this.Grp_MessageForm.Controls.Add(this.Lbl_NoRxTitle);
             this.Grp_MessageForm.Controls.Add(this.Lbl_NoRxUnit);
             this.Grp_MessageForm.Controls.Add(this.Txt_NoRxTimeout);
@@ -800,7 +814,7 @@
             // Lbl_NoRxTitle
             // 
             this.Lbl_NoRxTitle.AutoSize = true;
-            this.Lbl_NoRxTitle.Location = new System.Drawing.Point(18, 97);
+            this.Lbl_NoRxTitle.Location = new System.Drawing.Point(17, 120);
             this.Lbl_NoRxTitle.Name = "Lbl_NoRxTitle";
             this.Lbl_NoRxTitle.Size = new System.Drawing.Size(75, 13);
             this.Lbl_NoRxTitle.TabIndex = 34;
@@ -809,7 +823,7 @@
             // Lbl_NoRxUnit
             // 
             this.Lbl_NoRxUnit.AutoSize = true;
-            this.Lbl_NoRxUnit.Location = new System.Drawing.Point(185, 97);
+            this.Lbl_NoRxUnit.Location = new System.Drawing.Point(184, 120);
             this.Lbl_NoRxUnit.Name = "Lbl_NoRxUnit";
             this.Lbl_NoRxUnit.Size = new System.Drawing.Size(145, 13);
             this.Lbl_NoRxUnit.TabIndex = 33;
@@ -817,7 +831,7 @@
             // 
             // Txt_NoRxTimeout
             // 
-            this.Txt_NoRxTimeout.Location = new System.Drawing.Point(99, 94);
+            this.Txt_NoRxTimeout.Location = new System.Drawing.Point(98, 117);
             this.Txt_NoRxTimeout.Name = "Txt_NoRxTimeout";
             this.Txt_NoRxTimeout.Size = new System.Drawing.Size(80, 20);
             this.Txt_NoRxTimeout.TabIndex = 32;
@@ -825,7 +839,7 @@
             // 
             // Txt_MsgComment
             // 
-            this.Txt_MsgComment.Location = new System.Drawing.Point(99, 129);
+            this.Txt_MsgComment.Location = new System.Drawing.Point(98, 152);
             this.Txt_MsgComment.Multiline = true;
             this.Txt_MsgComment.Name = "Txt_MsgComment";
             this.Txt_MsgComment.Size = new System.Drawing.Size(243, 73);
@@ -835,7 +849,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 129);
+            this.label8.Location = new System.Drawing.Point(17, 152);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 31;
@@ -873,7 +887,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(185, 71);
+            this.label4.Location = new System.Drawing.Point(184, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(20, 13);
             this.label4.TabIndex = 23;
@@ -881,7 +895,7 @@
             // 
             // Txt_MsgPeriod
             // 
-            this.Txt_MsgPeriod.Location = new System.Drawing.Point(99, 68);
+            this.Txt_MsgPeriod.Location = new System.Drawing.Point(98, 91);
             this.Txt_MsgPeriod.Name = "Txt_MsgPeriod";
             this.Txt_MsgPeriod.Size = new System.Drawing.Size(80, 20);
             this.Txt_MsgPeriod.TabIndex = 12;
@@ -891,7 +905,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 71);
+            this.label3.Location = new System.Drawing.Point(17, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 21;
@@ -1684,6 +1698,17 @@
             this.TSB_Paste.ToolTipText = "Paste";
             this.TSB_Paste.Click += new System.EventHandler(this.TSB_Paste_Click);
             // 
+            // TSB_PasteSpecial
+            // 
+            this.TSB_PasteSpecial.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_PasteSpecial.Image = global::CANStream.Icones.Special_Paste_32;
+            this.TSB_PasteSpecial.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_PasteSpecial.Name = "TSB_PasteSpecial";
+            this.TSB_PasteSpecial.Size = new System.Drawing.Size(36, 36);
+            this.TSB_PasteSpecial.Text = "toolStripButton1";
+            this.TSB_PasteSpecial.ToolTipText = "Special paste";
+            this.TSB_PasteSpecial.Click += new System.EventHandler(this.TSB_PasteSpecial_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -1759,24 +1784,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // TSB_PasteSpecial
+            // label25
             // 
-            this.TSB_PasteSpecial.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_PasteSpecial.Image = global::CANStream.Icones.Special_Paste_32;
-            this.TSB_PasteSpecial.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_PasteSpecial.Name = "TSB_PasteSpecial";
-            this.TSB_PasteSpecial.Size = new System.Drawing.Size(36, 36);
-            this.TSB_PasteSpecial.Text = "toolStripButton1";
-            this.TSB_PasteSpecial.ToolTipText = "Special paste";
-            this.TSB_PasteSpecial.Click += new System.EventHandler(this.TSB_PasteSpecial_Click);
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(18, 68);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(28, 13);
+            this.label25.TabIndex = 35;
+            this.label25.Text = "DLC";
             // 
-            // specialPasteToolStripMenuItem
+            // Txt_MsgDLC
             // 
-            this.specialPasteToolStripMenuItem.Image = global::CANStream.Icones.Special_Paste_16;
-            this.specialPasteToolStripMenuItem.Name = "specialPasteToolStripMenuItem";
-            this.specialPasteToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.specialPasteToolStripMenuItem.Text = "Special paste";
-            this.specialPasteToolStripMenuItem.Click += new System.EventHandler(this.specialPasteToolStripMenuItem_Click);
+            this.Txt_MsgDLC.Location = new System.Drawing.Point(98, 65);
+            this.Txt_MsgDLC.Name = "Txt_MsgDLC";
+            this.Txt_MsgDLC.Size = new System.Drawing.Size(80, 20);
+            this.Txt_MsgDLC.TabIndex = 36;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(185, 68);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(32, 13);
+            this.label26.TabIndex = 37;
+            this.label26.Text = "bytes";
             // 
             // Frm_CANConfiguration
             // 
@@ -1987,5 +2018,8 @@
         private System.Windows.Forms.TextBox Txt_NoRxTimeout;
         private System.Windows.Forms.ToolStripMenuItem specialPasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton TSB_PasteSpecial;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox Txt_MsgDLC;
+        private System.Windows.Forms.Label label25;
     }
 }
