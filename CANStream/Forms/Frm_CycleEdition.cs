@@ -2153,7 +2153,7 @@ namespace CANStream
         	}
         	
         	//Encode the message
-        	CANMessageEncoded oMsgEncoded=new CANMessageEncoded(oMsgDef, oCycleCfg.CanConfiguration.MessageLength/8);
+        	CANMessageEncoded oMsgEncoded=new CANMessageEncoded(oMsgDef);
         	oMsgEncoded.EncodeMessage();
         	
         	return(oMsgEncoded.GetCANMessageData());

@@ -742,39 +742,6 @@ namespace CANStream
         {
             oCANConfig.CanRate = int.Parse(Cmb_BusRate.Text);
         }
-
-        private void Txt_MsgLength_TextChanged(object sender, EventArgs e)
-        {
-            if (!(Txt_MsgLength.Text.Equals("")))
-            {
-                int Len = 0;
-                if (int.TryParse(Txt_MsgLength.Text, out Len))
-                {
-                	int Rem8=0;
-                	Math.DivRem(Len,8,out Rem8);
-                	
-                	if(Rem8==0)
-                	{
-                		if(Len<=64)
-                		{
-                			oCANConfig.MessageLength = Len;
-                		}
-                		else
-                		{
-                			MessageBox.Show("The maximum message length is 64 bits (8 bytes) !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                		}
-                	}
-                	else
-                	{
-                		MessageBox.Show("The message length must be a multiple of 8 !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                	}
-                }
-                else
-                {
-                    MessageBox.Show("The message length must be a number !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-        }
         
         private void Txt_ConfigNameTextChanged(object sender, EventArgs e)
         {
@@ -953,7 +920,6 @@ namespace CANStream
             ResetControllerForm();
 
             Cmb_BusRate.Text = oCANConfig.CanRate.ToString();
-            Txt_MsgLength.Text = oCANConfig.MessageLength.ToString();
 			Txt_ConfigName.Text = oCANConfig.Name;
             
 			TV_Messages.SuspendLayout();
@@ -1041,7 +1007,6 @@ namespace CANStream
             ResetControllerForm();
 
             Cmb_BusRate.Text = oMultipleControllersCfg.Controllers[0].CanRate.ToString();
-            Txt_MsgLength.Text = oMultipleControllersCfg.Controllers[0].MessageLength.ToString();
             
             TV_Messages.SuspendLayout();
             
@@ -1130,7 +1095,6 @@ namespace CANStream
             oCANConfig = oMultipleControllersCfg.Controllers[0];
             
             Cmb_BusRate.Text = oCANConfig.CanRate.ToString();
-            Txt_MsgLength.Text = oCANConfig.MessageLength.ToString();
 			Txt_ConfigName.Text = oCANConfig.Name;
             
 			foreach (TreeNode n in TV_Messages.Nodes)
@@ -1347,7 +1311,6 @@ namespace CANStream
         private void ShowCANBusProperties()
         {
         	Cmb_BusRate.Text = oCANConfig.CanRate.ToString();
-            Txt_MsgLength.Text = oCANConfig.MessageLength.ToString();
 			Txt_ConfigName.Text = oCANConfig.Name;
         }
         
@@ -2470,7 +2433,7 @@ namespace CANStream
                         return;
                     }
 
-                    if (StartBit >= oCANConfig.MessageLength)
+                    if (StartBit >= oActiveMessage.DLC)
                     {
                         MessageBox.Show("Parameter start bit is higher than message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -2522,7 +2485,7 @@ namespace CANStream
                         return;
                     }
 
-                    if (Length > oCANConfig.MessageLength)
+                    if (Length > oActiveMessage.DLC)
                     {
                         MessageBox.Show("Parameter bit length can't be bigger than message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -2530,8 +2493,7 @@ namespace CANStream
 					
                     oParameter.Length = Length;
                     
-                    //if (oParameter.StartBit + Length > oCANConfig.MessageLength)
-                    if (oParameter.GetParameterEndBit() > oCANConfig.MessageLength)
+                    if (oParameter.GetParameterEndBit() > oActiveMessage.DLC)
                     {
                         MessageBox.Show("Parameter end bit is higher than the message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
@@ -2986,7 +2948,7 @@ namespace CANStream
 	        					break;
 	        			}
         				
-        				if (!(NewStart < 0 || NewStart > oCANConfig.MessageLength))
+        				if (!(NewStart < 0 || NewStart > oActiveMessage.DLC))
         				{
         					Txt_ParamStartBit.Text = NewStart.ToString();
         				}
@@ -3185,8 +3147,8 @@ namespace CANStream
         {
         	if (!(oMsg == null))
         	{
-	        	//Grid initialization
-	        	int MsgByteCnt = oCANConfig.MessageLength/8;
+                //Grid initialization
+                int MsgByteCnt = oMsg.DLC;
 	        	
 	        	CellColorId = 0;
 	        	

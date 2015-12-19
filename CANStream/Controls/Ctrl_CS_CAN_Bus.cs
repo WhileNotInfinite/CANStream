@@ -2202,14 +2202,14 @@ namespace CANStream
 
         private void AddTxEngineeringMessage(CANMessage oMessage)
         {
-            CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMessage, oCanConfig.MessageLength / 8);
+            CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMessage);
 
             if (!(TxRawMessages == null))
             {
                 if (!(TxRawMessages.ContainsMessageId(oEncodMsg.uMessageId)))
                 {
                     TxEngMessages.Add(oEncodMsg);
-                    Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                    Grid_ManualDataWriter.Add_TxMessage(oEncodMsg);
                 }
                 else
                 {
@@ -2219,7 +2219,7 @@ namespace CANStream
             else
             {
                 TxEngMessages.Add(oEncodMsg);
-                Grid_ManualDataWriter.Add_TxMessage(oEncodMsg, (int)(oCanConfig.MessageLength / 8)); //TODO: Use CAN frame DLC property when it will be available
+                Grid_ManualDataWriter.Add_TxMessage(oEncodMsg);
             }
         }
 
@@ -3944,7 +3944,7 @@ namespace CANStream
                         {
                             if (oMsg.RxTx.Equals(CanMsgRxTx.Tx) && oMsg.ContainsVirtualParameters())
                             {
-                                CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMsg.Clone(), oCycle.oCanNodesMap.MessageLength / 8);
+                                CANMessageEncoded oEncodMsg = new CANMessageEncoded(oMsg.Clone());
                                 oEncodMsg.Parameters.Clear();
 
                                 foreach (CANParameter oParam in oMsg.Parameters)

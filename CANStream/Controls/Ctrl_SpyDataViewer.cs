@@ -691,10 +691,9 @@ namespace CANStream
 
         #region Collapsable grid functions
 
-        private DataGridViewRow Add_RawDataRow(CANMessage oMessage, int MessageLen)
+        private DataGridViewRow Add_RawDataRow(CANMessage oMessage)
         {
-            //TODO: remove 'MessageLen' arg and use the DLC property of the CAN message instead when it will be available
-            return (Add_RawDataRow(oMessage.Identifier, MessageLen.ToString(), oMessage.Name, oMessage.RxTx.ToString(), oMessage.Period.ToString(), oMessage.Comment));
+            return (Add_RawDataRow(oMessage.Identifier, oMessage.DLC.ToString(), oMessage.Name, oMessage.RxTx.ToString(), oMessage.Period.ToString(), oMessage.Comment));
         }
 
         private DataGridViewRow Add_RawDataRow(MessageStatus oRawMsg)
@@ -1115,7 +1114,7 @@ namespace CANStream
 
         #region Data Tx grid methodes
 
-        public void Add_TxMessage(CANMessageEncoded oMsgEncoder, int MsgLen)
+        public void Add_TxMessage(CANMessageEncoded oMsgEncoder)
         {
             //TODO: Remove 'MsgLen' prop and use the DLC property of the CAN message instead when it will be availble
 
@@ -1123,7 +1122,7 @@ namespace CANStream
             {
                 bCellValueChangedEventEnabled = false;
 
-                DataGridViewRow oMsgRow = Add_RawDataRow(oMsgEncoder, MsgLen);
+                DataGridViewRow oMsgRow = Add_RawDataRow(oMsgEncoder);
                 CollapsableGridRowProperties oMsgRowProps = (CollapsableGridRowProperties)oMsgRow.Tag;
 
                 oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag = oMsgEncoder;

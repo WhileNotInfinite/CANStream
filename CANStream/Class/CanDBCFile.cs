@@ -648,7 +648,6 @@ namespace CANStream
 			
 			//Bus Baud rate
 			oXCC.CanRate=Rate;
-			oXCC.MessageLength=GetMaxNodeByteLength() * 8;
 			
 			//Config name
 			oXCC.Name="DBC:";
@@ -858,25 +857,6 @@ namespace CANStream
 			}
 			
 			return(TxtOut);
-		}
-		
-		/// <summary>
-		/// Get the maximum node byte length
-		/// </summary>
-		/// <returns>Maximum node byte length</returns>
-		private int GetMaxNodeByteLength()
-		{
-			int Len=0;
-			
-			foreach(DBCFrame oNode in Frames)
-			{
-				if(oNode.ByteLength>Len)
-				{
-					Len=oNode.ByteLength;
-				}
-			}
-			
-			return(Len);
 		}
 		
 		#endregion

@@ -331,7 +331,7 @@ namespace CANStream
         	}
         	
         	//Encode the message
-        	CANMessageEncoded oMsgEncoded=new CANMessageEncoded(oMsgDef,oCanConfig.MessageLength/8);
+        	CANMessageEncoded oMsgEncoded=new CANMessageEncoded(oMsgDef);
         	oMsgEncoded.EncodeMessage();
         	
         	return(oMsgEncoded.GetCANMessageData());

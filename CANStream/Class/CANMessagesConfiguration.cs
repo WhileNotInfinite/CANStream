@@ -609,7 +609,6 @@ namespace CANStream
 		public string Name;
 		public string ConfigFilePath;
 		public int CanRate;
-		public int MessageLength;
 		
 		public List<CANMessage> Messages;
 		
@@ -620,7 +619,6 @@ namespace CANStream
 			Name="";
 			ConfigFilePath = "";
 			CanRate=1000;
-			MessageLength=64;
 			Messages=new List<CANMessage>();
 		}
 		
@@ -741,10 +739,6 @@ namespace CANStream
 		{
 			XmlElement xConfig = oXmlDoc.CreateElement(NodeName);
 			
-            XmlAttribute xAtrMessageLength = oXmlDoc.CreateAttribute("MessageLength");
-            xAtrMessageLength.Value = MessageLength.ToString();
-            xConfig.Attributes.Append(xAtrMessageLength);
-
             XmlAttribute xAtrBusRate = oXmlDoc.CreateAttribute("CAN_Rate");
             xAtrBusRate.Value = CanRate.ToString();
             xConfig.Attributes.Append(xAtrBusRate);
@@ -888,24 +882,6 @@ namespace CANStream
 		public bool ReadCANConfigurationXmlNode(XmlNode xConfig)
 		{
 			Messages=new List<CANMessage>();
-
-			XmlAttribute xAtrMessageLength = xConfig.Attributes["MessageLength"];
-			if (!(xAtrMessageLength == null))
-			{
-				int MsgLen = 0;
-				if (int.TryParse(xAtrMessageLength.Value, out MsgLen))
-				{
-					MessageLength = MsgLen;
-				}
-				else
-				{
-					return (false);
-				}
-			}
-			else
-			{
-				return (false);
-			}
 
 			XmlAttribute xAtrBusRate = xConfig.Attributes["CAN_Rate"];
 			if (!(xAtrBusRate == null))
@@ -1442,7 +1418,6 @@ namespace CANStream
         	
         	oClone.CanRate = CanRate;
         	oClone.ConfigFilePath = ConfigFilePath;
-        	oClone.MessageLength = MessageLength;
         	oClone.Name = Name;
         	
         	foreach(CANMessage oMsg in Messages)
@@ -1495,7 +1470,6 @@ namespace CANStream
 		{
 			this.CanRate = oCanCfg.CanRate;
 			this.ConfigFilePath = oCanCfg.ConfigFilePath;
-			this.MessageLength = oCanCfg.MessageLength;
 			this.Name = oCanCfg.Name;
 			
 			this.Messages = new List<CANMessage>();
@@ -1905,16 +1879,16 @@ namespace CANStream
 		private CANParameter oMultiplexer;
 		
 		private byte[] ByteMessageData;
-		private int MsgByteLength;
 		
 		#endregion
 		
-		public CANMessageEncoded(CANMessage MessageCfg, int ByteMsgLength)
+		public CANMessageEncoded(CANMessage MessageCfg)
 		{
 			if(!(MessageCfg==null))
 			{
 				Name=MessageCfg.Name;
 				Identifier=MessageCfg.Identifier +"h";
+                DLC = MessageCfg.DLC;
 				RxTx= MessageCfg.RxTx;
 				Period=MessageCfg.Period;
 				Comment=MessageCfg.Comment;
@@ -1922,8 +1896,7 @@ namespace CANStream
 				Parameters=MessageCfg.Parameters;
 				
 				uMessageId=(UInt32)NumberBaseConverter.Hex2Dec(MessageCfg.Identifier);
-				ByteMessageData=new byte[ByteMsgLength];
-				MsgByteLength = ByteMsgLength;
+				ByteMessageData=new byte[MessageCfg.DLC];
 				
 				HasVirtualParameters = false;
 				foreach (CANParameter oParam in Parameters)
@@ -1983,7 +1956,7 @@ namespace CANStream
 		
 		public void EncodeMessage()
 		{
-			ByteMessageData = new byte[MsgByteLength];
+			ByteMessageData = new byte[DLC];
 			
 			foreach(CANParameter oParam in Parameters)
 			{                
@@ -2064,11 +2037,11 @@ namespace CANStream
         {
             string BytesString = "";
 
-            for (int iByte = 0; iByte < MsgByteLength; iByte++)
+            for (int iByte = 0; iByte < DLC; iByte++)
             {
                 BytesString += string.Format("{0:X2}", ByteMessageData[iByte]);
 
-                if (iByte < (MsgByteLength - 1))
+                if (iByte < (DLC - 1))
                 {
                     BytesString += " ";
                 }
