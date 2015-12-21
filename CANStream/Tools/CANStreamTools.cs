@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Drawing;
 
+using Ctrl_GraphWindow;
+
 using ChartDirector;
 using NumberBaseConversion;
 
@@ -254,7 +256,9 @@ namespace CANStream
         {
         	CurrentColorId=-1;
         }
-        
+
+        #region Cycle plotting methods for ChartDirector
+
         public static void Draw_CycleGraph(CANStreamCycle oCycle, WinChartViewer oChart)
         {
         	Draw_CycleGraph(oCycle, oChart, -1, -1, -1);
@@ -328,7 +332,38 @@ namespace CANStream
     		//Graphic display
     		oChart.Image=Graph.makeImage();
         }
-        
+
+        #endregion
+
+        #region Cycle plotting methods for Ctrl_GraphWindow
+       
+        public static GraphWindowProperties Get_CycleGraphicSetup(CANStreamCycle oCycle)
+        {
+            GraphWindowProperties oGraphProps = new GraphWindowProperties();
+
+            if (!(oCycle.oCanNodesMap==null))
+            {
+                oGraphProps.GraphLayoutMode = GraphicWindowLayoutModes.Parallel;
+
+                foreach (CANMessage oMsg in oCycle.oCanNodesMap.Messages)
+                {
+                    if (oMsg.RxTx == CanMsgRxTx.Tx)
+                    {
+                        foreach (CANParameter oParam in oMsg.Parameters)
+                        {
+                            oGraphProps.Create_Serie(oParam.Name);
+                        }
+                    }
+                }
+
+                return (oGraphProps);
+            }
+
+            return (null);
+        }
+
+        #endregion
+
         public static void Init_RecordConversionOption(string BasePath)
         {
         	TraceConversionOptions = new RecordConversionOption();

@@ -11,6 +11,8 @@ using NumberBaseConversion;
 using Peak.Can.Basic;
 using TPCANHandle = System.Byte;
 
+using Ctrl_GraphWindow;
+
 namespace CANStream
 {
     /// <summary>
@@ -335,6 +337,53 @@ namespace CANStream
             return (true);
         }
         
+        public GW_DataFile CreateCycleGraphData()
+        {
+            GW_DataFile oGraphData = new GW_DataFile();
+            oGraphData.DataSamplingMode = SamplingMode.MultipleRates;
+
+            if (!(oCanNodesMap == null))
+            {
+                foreach (CycleTimeEvent TxEvent in TimeEvents)
+                {
+                    foreach (CANMessageData MsgData in TxEvent.MessagesData)
+                    {
+                        CANMessage MsgCfg = oCanNodesMap.GetCANMessage(NumberBaseConverter.Dec2Hex(MsgData.uMessageId), MessageResearchOption.Identifier);
+
+                        if (!(MsgCfg == null))
+                        {
+                            TPCANMsg sTPMsg = new TPCANMsg();
+                            sTPMsg.DATA = MsgData.byteMessageData;
+
+                            CANMessageDecoded oMsgDecoded = new CANMessageDecoded(MsgCfg, sTPMsg);
+
+                            if (oMsgDecoded.bMessageDecoded)
+                            {
+                                foreach (CANParameter oParam in oMsgDecoded.Parameters)
+                                {
+                                    GW_DataChannel oGraphChan = oGraphData.Get_DataChannel(oParam.Name);
+
+                                    if (oGraphChan == null)
+                                    {
+                                        oGraphChan = new GW_DataChannel(oParam.Name, SamplingMode.MultipleRates);
+                                        oGraphData.Channels.Add(oGraphChan);
+                                    }
+
+                                    SerieSample sSample = new SerieSample();
+                                    sSample.SampleTime = (double)TxEvent.TimeEvent / 1000;
+                                    sSample.SampleValue = oParam.DecodedValue;
+
+                                    oGraphChan.Add_ChannelValue(sSample);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return (oGraphData);
+        }
+
         /// <summary>
         /// Create the graphic series of the cycle
         /// </summary>

@@ -13,6 +13,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
+using Ctrl_GraphWindow;
+
 namespace CANStream
 {
 	/// <summary>
@@ -2276,21 +2278,33 @@ namespace CANStream
 		{
 			if (!(oCycle ==  null))
 			{
-				if (oCycle.GraphSeries.FormatedSeries.Count > 0)
-				{
-					Chart_Cycle.Width = Grp_Graph.Width - 10;
-					Chart_Cycle.Height = Grp_Graph.Height -25;
-					Context_Graph.Items.Clear();
-					
-					CANStreamTools.Draw_CycleGraph(oCycle, Chart_Cycle);
-					
-					foreach (FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
-					{
-						ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem) Context_Graph.Items.Add(oSerie.Name);
-						SerieMenuItem.Checked=oSerie.Visible;
-						SerieMenuItem.Click += new System.EventHandler(Context_GraphMenuItem_Click);
-					}
-				}
+                GraphWindowProperties oGraphicProps = CANStreamTools.Get_CycleGraphicSetup(oCycle);
+                GW_DataFile oGraphicData = oCycle.CreateCycleGraphData();
+
+                if (!((oGraphicProps == null) || (oGraphicData == null)))
+                {
+                    CycleGraphicCtrl.Set_DataFile(oGraphicData);
+                    CycleGraphicCtrl.Properties = oGraphicProps;
+                    CycleGraphicCtrl.Refresh_Graphic();
+                }
+
+                //if (oCycle.GraphSeries.FormatedSeries.Count > 0)
+				//{
+                    //TODO: Old code, remove
+                    //CANStreamTools.Draw_CycleGraph(oCycle, Chart_Cycle);
+                    //Chart_Cycle.Width = Grp_Graph.Width - 10;
+                    //Chart_Cycle.Height = Grp_Graph.Height - 25;
+
+                    //TODO: Decide whether or not we still need the contextual menu
+                    //Context_Graph.Items.Clear();
+
+                    //foreach (FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
+					//{
+					//	ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem) Context_Graph.Items.Add(oSerie.Name);
+					//	SerieMenuItem.Checked=oSerie.Visible;
+					//	SerieMenuItem.Click += new System.EventHandler(Context_GraphMenuItem_Click);
+					//}
+				//}
 			}
 		}
 		

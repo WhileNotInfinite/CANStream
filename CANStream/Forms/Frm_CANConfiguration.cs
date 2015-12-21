@@ -2485,15 +2485,15 @@ namespace CANStream
                         return;
                     }
 
-                    if (Length > oActiveMessage.DLC)
+                    if (Length > (oActiveMessage.DLC * 8))
                     {
                         MessageBox.Show("Parameter bit length can't be bigger than message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
 					
                     oParameter.Length = Length;
-                    
-                    if (oParameter.GetParameterEndBit() > oActiveMessage.DLC)
+
+                    if (oParameter.GetParameterEndBit() > (oActiveMessage.DLC * 8))
                     {
                         MessageBox.Show("Parameter end bit is higher than the message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
