@@ -522,10 +522,20 @@ namespace CANStream
 			LV_Files.Items.Clear();
 			UpDate_FileList(ActivePath, oSession, oEvent);
 		}
-		
-		private TreeNode FindEventNode(string EventPath)
+
+        private TreeNode FindEventNode(string EventPath)
+        {
+            return (FindEventNode(EventPath, null));
+        }
+
+        private TreeNode FindEventNode(string EventPath, TreeNodeCollection ChildenNodes)
 		{
-			foreach (TreeNode nFolder in TV_Folders.Nodes)
+            if (ChildenNodes == null)
+            {
+                ChildenNodes = TV_Folders.Nodes;
+            }
+
+            foreach (TreeNode nFolder in ChildenNodes)
 			{
 				if (nFolder.Tag.ToString().Equals(EventPath))
 				{
@@ -535,7 +545,7 @@ namespace CANStream
 				{
 					if (nFolder.Nodes.Count > 0)
 					{
-						TreeNode nSubFolder = FindEventNode(EventPath);
+						TreeNode nSubFolder = FindEventNode(EventPath, nFolder.Nodes);
 						
 						if (!(nSubFolder == null))
 						{
