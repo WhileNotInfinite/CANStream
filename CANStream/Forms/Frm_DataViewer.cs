@@ -732,7 +732,18 @@ namespace CANStream
 			
 			foreach (GW_DataFile oFile in oDataFiles)
 			{
-				for (int iSample = 0; iSample < oFile.Time.Values.Count; iSample++)
+                if(bFirstSample)
+                {
+                    oConcatData.StepTimeMin = oFile.StepTimeMin;
+                    oConcatData.StepTimeMax = oFile.StepTimeMax;
+                }
+                else
+                {
+                    if (oFile.StepTimeMin < oConcatData.StepTimeMin) oConcatData.StepTimeMin = oFile.StepTimeMin;
+                    if (oFile.StepTimeMax > oConcatData.StepTimeMax) oConcatData.StepTimeMax = oFile.StepTimeMax;
+                }
+
+                for (int iSample = 0; iSample < oFile.Time.Values.Count; iSample++)
 				{
 					//Time value
 					if (!bFirstSample) //Not the first sample of the concatenated data file
