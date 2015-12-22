@@ -566,8 +566,8 @@ namespace CANStream
 				int FilesLoadedCount = 0;
 				
 				ParentViewer.Reset_FileList(LV_Files.SelectedItems.Count);
-				
-				for (int iFile=0; iFile < LV_Files.SelectedItems.Count; iFile++)
+
+                for (int iFile=0; iFile < LV_Files.SelectedItems.Count; iFile++)
 				{
 					object[] FileTag = (object[])LV_Files.SelectedItems[iFile].Tag;
 					

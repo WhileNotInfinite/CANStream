@@ -964,6 +964,8 @@ namespace CANStream
 			{
 				DataFilePathes = new string[FileCount];
 			}
+
+            RecordEvents.Clear();
 		}
 		
 		public void Set_DataFilePath(string fPath, int Index, CS_RecordSession oSession, CS_RecordEvent oEvent)
@@ -993,7 +995,7 @@ namespace CANStream
 				}
 			}    
 		}
-		
+
 		public void Show_Data()
 		{
 			Load_DataFiles();
