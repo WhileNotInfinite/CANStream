@@ -74,11 +74,11 @@ namespace CANStream
             this.PostCycle_Source = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.PostCycle_Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grp_Graph = new System.Windows.Forms.GroupBox();
+            this.CycleGraphicCtrl = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
             this.Img_GrdElement_TreeView = new System.Windows.Forms.ImageList(this.components);
             this.BGWrk_CycleMake = new System.ComponentModel.BackgroundWorker();
-            this.CycleGraphicCtrl = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Context_Graph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -259,7 +259,7 @@ namespace CANStream
             // 
             this.splitContainer1.Panel2.Controls.Add(this.Grp_Graph);
             this.splitContainer1.Size = new System.Drawing.Size(849, 423);
-            this.splitContainer1.SplitterDistance = 406;
+            this.splitContainer1.SplitterDistance = 405;
             this.splitContainer1.TabIndex = 2;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer1SplitterMoved);
             // 
@@ -279,7 +279,7 @@ namespace CANStream
             this.Grp_Elements.Controls.Add(this.Grid_CycleElements);
             this.Grp_Elements.Location = new System.Drawing.Point(3, 3);
             this.Grp_Elements.Name = "Grp_Elements";
-            this.Grp_Elements.Size = new System.Drawing.Size(400, 417);
+            this.Grp_Elements.Size = new System.Drawing.Size(399, 417);
             this.Grp_Elements.TabIndex = 0;
             this.Grp_Elements.TabStop = false;
             this.Grp_Elements.Text = "Cycle elements";
@@ -421,7 +421,7 @@ namespace CANStream
             this.PostCycle_Data});
             this.Grid_CycleElements.Location = new System.Drawing.Point(6, 91);
             this.Grid_CycleElements.Name = "Grid_CycleElements";
-            this.Grid_CycleElements.Size = new System.Drawing.Size(388, 320);
+            this.Grid_CycleElements.Size = new System.Drawing.Size(387, 320);
             this.Grid_CycleElements.TabIndex = 0;
             this.Grid_CycleElements.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CycleElementsCellClick);
             this.Grid_CycleElements.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CycleElementsCellValueChanged);
@@ -472,10 +472,29 @@ namespace CANStream
             this.Grp_Graph.Controls.Add(this.CycleGraphicCtrl);
             this.Grp_Graph.Location = new System.Drawing.Point(3, 3);
             this.Grp_Graph.Name = "Grp_Graph";
-            this.Grp_Graph.Size = new System.Drawing.Size(433, 417);
+            this.Grp_Graph.Size = new System.Drawing.Size(434, 417);
             this.Grp_Graph.TabIndex = 0;
             this.Grp_Graph.TabStop = false;
             this.Grp_Graph.Text = "Graph";
+            // 
+            // CycleGraphicCtrl
+            // 
+            this.CycleGraphicCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CycleGraphicCtrl.ChannelListEnabled = false;
+            this.CycleGraphicCtrl.CursorEnabled = true;
+            this.CycleGraphicCtrl.EditGraphicConfigurationEnable = false;
+            this.CycleGraphicCtrl.LegendEnabled = true;
+            this.CycleGraphicCtrl.Location = new System.Drawing.Point(6, 19);
+            this.CycleGraphicCtrl.Name = "CycleGraphicCtrl";
+            this.CycleGraphicCtrl.OpenFileVisible = false;
+            this.CycleGraphicCtrl.PrintEnabled = false;
+            this.CycleGraphicCtrl.Size = new System.Drawing.Size(418, 392);
+            this.CycleGraphicCtrl.SnapShotEnabled = false;
+            this.CycleGraphicCtrl.TabIndex = 0;
+            this.CycleGraphicCtrl.ToolBarVisible = true;
+            this.CycleGraphicCtrl.ZoomEnabled = true;
             // 
             // Img_GrdElement_TreeView
             // 
@@ -492,25 +511,6 @@ namespace CANStream
             this.BGWrk_CycleMake.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_CycleMakeDoWork);
             this.BGWrk_CycleMake.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_CycleMakeProgressChanged);
             this.BGWrk_CycleMake.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_CycleMakeRunWorkerCompleted);
-            // 
-            // CycleGraphicCtrl
-            // 
-            this.CycleGraphicCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CycleGraphicCtrl.ChannelListEnabled = false;
-            this.CycleGraphicCtrl.CursorEnabled = true;
-            this.CycleGraphicCtrl.EditGraphicConfigurationEnable = false;
-            this.CycleGraphicCtrl.LegendEnabled = true;
-            this.CycleGraphicCtrl.Location = new System.Drawing.Point(6, 19);
-            this.CycleGraphicCtrl.Name = "CycleGraphicCtrl";
-            this.CycleGraphicCtrl.OpenFileVisible = false;
-            this.CycleGraphicCtrl.PrintEnabled = false;
-            this.CycleGraphicCtrl.Size = new System.Drawing.Size(417, 392);
-            this.CycleGraphicCtrl.SnapShotEnabled = false;
-            this.CycleGraphicCtrl.TabIndex = 0;
-            this.CycleGraphicCtrl.ToolBarVisible = false;
-            this.CycleGraphicCtrl.ZoomEnabled = true;
             // 
             // Context_Graph
             // 
