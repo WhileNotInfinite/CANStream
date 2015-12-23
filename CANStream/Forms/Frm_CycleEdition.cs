@@ -2287,24 +2287,6 @@ namespace CANStream
                     CycleGraphicCtrl.Properties = oGraphicProps;
                     CycleGraphicCtrl.Refresh_Graphic();
                 }
-
-                //if (oCycle.GraphSeries.FormatedSeries.Count > 0)
-				//{
-                    //TODO: Old code, remove
-                    //CANStreamTools.Draw_CycleGraph(oCycle, Chart_Cycle);
-                    //Chart_Cycle.Width = Grp_Graph.Width - 10;
-                    //Chart_Cycle.Height = Grp_Graph.Height - 25;
-
-                    //TODO: Decide whether or not we still need the contextual menu
-                    //Context_Graph.Items.Clear();
-
-                    //foreach (FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
-					//{
-					//	ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem) Context_Graph.Items.Add(oSerie.Name);
-					//	SerieMenuItem.Checked=oSerie.Visible;
-					//	SerieMenuItem.Click += new System.EventHandler(Context_GraphMenuItem_Click);
-					//}
-				//}
 			}
 		}
 		

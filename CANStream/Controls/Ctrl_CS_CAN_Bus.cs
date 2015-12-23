@@ -16,7 +16,8 @@ using System.Text; //StringBuilder
 using System.Xml;
 using System.Windows.Forms;
 
-using ChartDirector;
+using Ctrl_GraphWindow;
+using ChartDirector; //TODO: Remove
 
 //PCANBasic includes
 using Peak.Can.Basic;
@@ -1302,7 +1303,8 @@ namespace CANStream
 		{
 			if (!bCycleStartEndTxtSetting)
         	{
-        		Set_CycleStartEndCursorsFromTextBox();
+                //TODO: Hack for Ctrl_GraphWindow
+                //Set_CycleStartEndCursorsFromTextBox();
         	}
 		}
 		
@@ -1310,7 +1312,8 @@ namespace CANStream
 		{
 			if (!bCycleStartEndTxtSetting)
         	{
-        		Set_CycleStartEndCursorsFromTextBox();
+                //TODO: Hack for Ctrl_GraphWindow
+                //Set_CycleStartEndCursorsFromTextBox();
         	}
 		}
 		
@@ -1319,8 +1322,9 @@ namespace CANStream
 			double TimeCurrent  = ((double)TimeInCycle ) / 1000;
         	double dTStartCycle = ((double) TCycleStart) / 1000;
         	double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-        		
-        	PlotCycle(true, TimeCurrent, dTStartCycle, dTEndCycle);
+
+            //TODO: Hack for Ctrl_GraphWindow	
+            //PlotCycle(true, TimeCurrent, dTStartCycle, dTEndCycle);
 		}
 		
 		private void Chk_CycleVirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
@@ -1367,20 +1371,23 @@ namespace CANStream
         	Item.Checked=!Item.Checked;
         	
         	oCycle.GraphSeries.SetFormatedSerieVisible(Item.Text,Item.Checked);
-        	
-        	PlotCycle();
+
+            //TODO: Hack for Ctrl_GraphWindow
+            //PlotCycle();
         }
-        
+
         #endregion
-		
+
         #region Graph_Cycle
-        
+
         private void Graph_CycleMouseClick(object sender, MouseEventArgs e)
 		{
         	//Cycle starting point setting
         	if (bCycleStartSet)
         	{
-        		double dStartPos = GetTimeValueAtPosition(e.Location.X);
+                //TODO: Hack for Ctrl_GraphWindow
+                double dStartPos = 0;
+                //double dStartPos = GetTimeValueAtPosition(e.Location.X);
         		
         		double dEndPos = 0;
         		if (!(double.TryParse(Txt_CycleEnd.Text, out dEndPos)))
@@ -1393,15 +1400,18 @@ namespace CANStream
         			bCycleStartEndTxtSetting = true;
         			Txt_CycleStart.Text = Math.Round(dStartPos, 3).ToString();
         			bCycleStartEndTxtSetting = false;
-        			
-        			PlotCycle(true, -1, dStartPos, dEndPos);
+
+                    //TODO: Hack for Ctrl_GraphWindow
+                    //PlotCycle(true, -1, dStartPos, dEndPos);
         		}
         	}
         	
         	//Cycle ending point setting
         	if (bCycleEndSet)
         	{
-        		double dEndPos = GetTimeValueAtPosition(e.Location.X);
+                //TODO: Hack for Ctrl_GraphWindow
+                double dEndPos = 0;
+                //double dEndPos = GetTimeValueAtPosition(e.Location.X);
         		
         		double dStartPos = 0;
         		if (!(double.TryParse(Txt_CycleStart.Text, out dStartPos)))
@@ -1414,8 +1424,9 @@ namespace CANStream
         			bCycleStartEndTxtSetting = true;
         			Txt_CycleEnd.Text = Math.Round(dEndPos, 3).ToString();
         			bCycleStartEndTxtSetting = false;
-        			
-        			PlotCycle(true, -1, dStartPos, dEndPos);
+
+                    //TODO: Hack for Ctrl_GraphWindow
+                    //PlotCycle(true, -1, dStartPos, dEndPos);
         		}
         	}
 		}
@@ -1441,7 +1452,8 @@ namespace CANStream
         
         private void Split_Cycle_VirtualSig_GraphSplitterMoved(object sender, SplitterEventArgs e)
 		{
-        	if (!(oCycle == null)) PlotCycle();
+            //TODO: Hack for Ctrl_GraphWindow
+            //if (!(oCycle == null)) PlotCycle();
 		}
         
         #endregion
@@ -1518,8 +1530,9 @@ namespace CANStream
         		
         		double dTStartCycle = ((double) TCycleStart) / 1000;
         		double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-        		
-        		PlotCycle(true, -1, dTStartCycle, dTEndCycle);
+
+                //TODO: Hack for Ctrl_GraphWindow
+                //PlotCycle(true, -1, dTStartCycle, dTEndCycle);
         	}
 		}
         
@@ -3341,6 +3354,12 @@ namespace CANStream
             bPauseCycle = false;
         }
 
+        #region Old cycle graph plotting methods
+
+        //TODO: Remove Old cycle graph plotting methods
+
+        /*
+
         private void PlotCycle()
         {
             PlotCycle(false, -1, -1, -1);
@@ -3449,6 +3468,10 @@ namespace CANStream
 
             return (a * X + b);
         }
+
+        */
+
+        #endregion
 
         private void Set_CycleVirtualSignalValue(string Name, string sValue, VirtualParameter VirtualRef)
         {
@@ -3959,10 +3982,13 @@ namespace CANStream
                             }
                         }
 
-                        oCycle.CreateGraphicSeries();
-                        if (oCycle.GraphSeries.Series.Count > 0)
+                        GW_DataFile oCycleGraphData = oCycle.CreateCycleGraphData();
+                        GraphWindowProperties oGraphicProps = CANStreamTools.Get_CycleGraphicSetup(oCycle);
+                        if (!((oGraphicProps == null) || (oCycleGraphData == null)))
                         {
-                            PlotCycle();
+                            Graph_Cycle.Set_DataFile(oCycleGraphData);
+                            Graph_Cycle.Properties = oGraphicProps;
+                            Graph_Cycle.Refresh_Graphic();
                         }
                         else
                         {
@@ -3991,7 +4017,9 @@ namespace CANStream
         public void Set_CycleStartingPoint()
         {
             bCycleStartSet = true;
-            Set_OldCycleStartEndPoint();
+
+            //TODO: Hack for Ctrl_GraphWindow
+            //Set_OldCycleStartEndPoint();
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(0);
@@ -4006,7 +4034,9 @@ namespace CANStream
         public void Set_CycleEndingPoint()
         {
             bCycleEndSet = true;
-            Set_OldCycleStartEndPoint();
+
+            //TODO: Hack for Ctrl_GraphWindow
+            //Set_OldCycleStartEndPoint();
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(0);
@@ -4043,7 +4073,8 @@ namespace CANStream
             Txt_CycleEnd.Text = Math.Round(TCycleEnd_Old, 3).ToString();
             bCycleStartEndTxtSetting = false;
 
-            PlotCycle(false, -1, TCycleStart_Old, TCycleEnd_Old);
+            //TODO: Hack for Ctrl_GraphWindow
+            //PlotCycle(false, -1, TCycleStart_Old, TCycleEnd_Old);
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(1);
