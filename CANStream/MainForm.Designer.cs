@@ -96,6 +96,7 @@ namespace CANStream
             this.Tools_DataViewer_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_DataViewer_New_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_DataViewer_Open_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Tools_DataViewer_Recent_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Layout = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Layout_Manual = new System.Windows.Forms.ToolStripMenuItem();
@@ -195,7 +196,6 @@ namespace CANStream
             this.Context_TabControllers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeCANBusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BGWrk_RecordConversion = new System.ComponentModel.BackgroundWorker();
-            this.Tools_DataViewer_Recent_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FrmMain_MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.Tab_CAN_Controllers.SuspendLayout();
@@ -705,7 +705,7 @@ namespace CANStream
             // 
             this.Tools_DataViewer_New_TSMenuItem.Image = global::CANStream.Icones.CANStream_DataViewer_16;
             this.Tools_DataViewer_New_TSMenuItem.Name = "Tools_DataViewer_New_TSMenuItem";
-            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.Tools_DataViewer_New_TSMenuItem.Size = new System.Drawing.Size(110, 22);
             this.Tools_DataViewer_New_TSMenuItem.Text = "New";
             this.Tools_DataViewer_New_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_New_TSMenuItemClick);
             // 
@@ -713,9 +713,15 @@ namespace CANStream
             // 
             this.Tools_DataViewer_Open_TSMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.Tools_DataViewer_Open_TSMenuItem.Name = "Tools_DataViewer_Open_TSMenuItem";
-            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.Tools_DataViewer_Open_TSMenuItem.Size = new System.Drawing.Size(110, 22);
             this.Tools_DataViewer_Open_TSMenuItem.Text = "Open";
             this.Tools_DataViewer_Open_TSMenuItem.Click += new System.EventHandler(this.Tools_DataViewer_Open_TSMenuItemClick);
+            // 
+            // Tools_DataViewer_Recent_TSMenuItem
+            // 
+            this.Tools_DataViewer_Recent_TSMenuItem.Name = "Tools_DataViewer_Recent_TSMenuItem";
+            this.Tools_DataViewer_Recent_TSMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.Tools_DataViewer_Recent_TSMenuItem.Text = "Recent";
             // 
             // ViewtoolStripMenuItem
             // 
@@ -1544,12 +1550,6 @@ namespace CANStream
             this.BGWrk_RecordConversion.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_RecordConversionDoWork);
             this.BGWrk_RecordConversion.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_RecordConversionProgressChanged);
             this.BGWrk_RecordConversion.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_RecordConversionRunWorkerCompleted);
-            // 
-            // Tools_DataViewer_Recent_TSMenuItem
-            // 
-            this.Tools_DataViewer_Recent_TSMenuItem.Name = "Tools_DataViewer_Recent_TSMenuItem";
-            this.Tools_DataViewer_Recent_TSMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.Tools_DataViewer_Recent_TSMenuItem.Text = "Recent";
             // 
             // MainForm
             // 

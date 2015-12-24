@@ -107,8 +107,8 @@ namespace CANStream
         /// <summary>
         /// Graphic series of the cycle
         /// </summary>
-        public GraphicSeries GraphSeries;
-        
+        public GraphicSeries GraphSeries; //TODO: Remove
+
         #endregion
 
         public CANStreamCycle()

@@ -1827,9 +1827,10 @@ namespace CANStream
         				
         				//cycleToolStripMenuItem
         				Cycle_openToolStripMenuItem.Enabled=false;
-        				
-        				//cANConfigurationToolStripMenuItem
-	        			CANConfig_openToolStripMenuItem.Enabled=true;
+                        Cycle_recentToolStripMenuItem.Enabled = false;
+
+                        //cANConfigurationToolStripMenuItem
+                        CANConfig_openToolStripMenuItem.Enabled=true;
 						importDBCToolStripMenuItem.Enabled=true;
 						CANConfig_editToolStripMenuItem.Enabled = false;
 						
@@ -1865,9 +1866,10 @@ namespace CANStream
         				
         				//cycleToolStripMenuItem
         				Cycle_openToolStripMenuItem.Enabled=true;
-        				
-        				//cANConfigurationToolStripMenuItem
-	        			CANConfig_openToolStripMenuItem.Enabled=false;
+                        Cycle_recentToolStripMenuItem.Enabled = true;
+
+                        //cANConfigurationToolStripMenuItem
+                        CANConfig_openToolStripMenuItem.Enabled=false;
 						CANConfig_editToolStripMenuItem.Enabled=false;
 						importDBCToolStripMenuItem.Enabled=false;
         				

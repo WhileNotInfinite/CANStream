@@ -145,6 +145,7 @@ namespace CANStream
             this.Split_Cycle_VirtualSig_Graph = new System.Windows.Forms.SplitContainer();
             this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Graph_Cycle = new Ctrl_GraphWindow.Ctrl_WaveForm();
+            this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Chk_CycleVirtualParamTxEnabled = new System.Windows.Forms.CheckBox();
             this.Txt_CycleEnd = new System.Windows.Forms.TextBox();
@@ -169,7 +170,6 @@ namespace CANStream
             this.Lbl_CanConfig = new System.Windows.Forms.Label();
             this.Lbl_CycleFile = new System.Windows.Forms.Label();
             this.Img_TabControl = new System.Windows.Forms.ImageList(this.components);
-            this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Timer_CycleGraph = new System.Windows.Forms.Timer(this.components);
             this.Timer_CheckDevice = new System.Windows.Forms.Timer(this.components);
             this.BGWrk_Cycle = new System.ComponentModel.BackgroundWorker();
@@ -1321,7 +1321,6 @@ namespace CANStream
             this.Split_Cycle_VirtualSig_Graph.Size = new System.Drawing.Size(961, 439);
             this.Split_Cycle_VirtualSig_Graph.SplitterDistance = 302;
             this.Split_Cycle_VirtualSig_Graph.TabIndex = 0;
-            this.Split_Cycle_VirtualSig_Graph.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.Split_Cycle_VirtualSig_GraphSplitterMoved);
             // 
             // Cycle_SpyDataViewer
             // 
@@ -1344,6 +1343,7 @@ namespace CANStream
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Graph_Cycle.ChannelListEnabled = false;
+            this.Graph_Cycle.ContextMenuStrip = this.Context_CycleGraph;
             this.Graph_Cycle.CursorEnabled = true;
             this.Graph_Cycle.EditGraphicConfigurationEnable = false;
             this.Graph_Cycle.LegendEnabled = false;
@@ -1357,6 +1357,12 @@ namespace CANStream
             this.Graph_Cycle.TabIndex = 0;
             this.Graph_Cycle.ToolBarVisible = false;
             this.Graph_Cycle.ZoomEnabled = false;
+            this.Graph_Cycle.ControlPreviewKeyDown += new System.EventHandler<System.Windows.Forms.PreviewKeyDownEventArgs>(this.Graph_Cycle_ControlPreviewKeyDown);
+            // 
+            // Context_CycleGraph
+            // 
+            this.Context_CycleGraph.Name = "Context_CycleGraph";
+            this.Context_CycleGraph.Size = new System.Drawing.Size(61, 4);
             // 
             // groupBox2
             // 
@@ -1630,11 +1636,6 @@ namespace CANStream
             this.Img_TabControl.TransparentColor = System.Drawing.Color.Transparent;
             this.Img_TabControl.Images.SetKeyName(0, "personal.png");
             this.Img_TabControl.Images.SetKeyName(1, "windows-movie-maker-icone-8672-16.png");
-            // 
-            // Context_CycleGraph
-            // 
-            this.Context_CycleGraph.Name = "Context_CycleGraph";
-            this.Context_CycleGraph.Size = new System.Drawing.Size(61, 4);
             // 
             // Timer_CycleGraph
             // 

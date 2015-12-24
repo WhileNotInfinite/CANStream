@@ -69,6 +69,13 @@ namespace CANStream
 			Periodic_1sec  = 11,
 		}
 
+        private enum CycleGraphCursorMode
+        {
+            Normal          = 0,
+            StartingPoint   = 1,
+            EndingPoint     = 2,
+        }
+
         #endregion
 
         #region Private Structures
@@ -1303,8 +1310,7 @@ namespace CANStream
 		{
 			if (!bCycleStartEndTxtSetting)
         	{
-                //TODO: Hack for Ctrl_GraphWindow
-                //Set_CycleStartEndCursorsFromTextBox();
+                Set_CycleStartEndCursorsFromTextBox();
         	}
 		}
 		
@@ -1312,19 +1318,13 @@ namespace CANStream
 		{
 			if (!bCycleStartEndTxtSetting)
         	{
-                //TODO: Hack for Ctrl_GraphWindow
-                //Set_CycleStartEndCursorsFromTextBox();
+                Set_CycleStartEndCursorsFromTextBox();
         	}
 		}
 		
 		private void Timer_CycleGraphTick(object sender, EventArgs e)
 		{
-			double TimeCurrent  = ((double)TimeInCycle ) / 1000;
-        	double dTStartCycle = ((double) TCycleStart) / 1000;
-        	double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-
-            //TODO: Hack for Ctrl_GraphWindow	
-            //PlotCycle(true, TimeCurrent, dTStartCycle, dTEndCycle);
+            Graph_Cycle.Set_MainCursorAtAbscisse(((double)TimeInCycle) / 1000);
 		}
 		
 		private void Chk_CycleVirtualParamTxEnabledCheckedChanged(object sender, EventArgs e)
@@ -1369,97 +1369,43 @@ namespace CANStream
         {
         	ToolStripMenuItem Item = (ToolStripMenuItem) sender;
         	Item.Checked=!Item.Checked;
-        	
-        	oCycle.GraphSeries.SetFormatedSerieVisible(Item.Text,Item.Checked);
 
-            //TODO: Hack for Ctrl_GraphWindow
-            //PlotCycle();
+            GraphSerieProperties oSerieProps = Graph_Cycle.Properties.Get_SerieAtKey((int)Item.Tag);
+
+            if(oSerieProps!=null)
+            {
+                oSerieProps.Visible = Item.Checked;
+                Graph_Cycle.Refresh_Graphic();
+            }
         }
 
         #endregion
 
         #region Graph_Cycle
 
-        private void Graph_CycleMouseClick(object sender, MouseEventArgs e)
-		{
-        	//Cycle starting point setting
-        	if (bCycleStartSet)
-        	{
-                //TODO: Hack for Ctrl_GraphWindow
-                double dStartPos = 0;
-                //double dStartPos = GetTimeValueAtPosition(e.Location.X);
-        		
-        		double dEndPos = 0;
-        		if (!(double.TryParse(Txt_CycleEnd.Text, out dEndPos)))
-        		{
-        			dEndPos = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
-        		}
-        		
-        		if (dStartPos < dEndPos)
-        		{
-        			bCycleStartEndTxtSetting = true;
-        			Txt_CycleStart.Text = Math.Round(dStartPos, 3).ToString();
-        			bCycleStartEndTxtSetting = false;
+        private void Graph_Cycle_ControlPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (bCycleStartSet | bCycleEndSet) //Start/end points setting ?
+            {
+                switch (e.KeyCode) //Confirm or cancel ?
+                {
+                    case Keys.Enter: //Confirm
 
-                    //TODO: Hack for Ctrl_GraphWindow
-                    //PlotCycle(true, -1, dStartPos, dEndPos);
-        		}
-        	}
-        	
-        	//Cycle ending point setting
-        	if (bCycleEndSet)
-        	{
-                //TODO: Hack for Ctrl_GraphWindow
-                double dEndPos = 0;
-                //double dEndPos = GetTimeValueAtPosition(e.Location.X);
-        		
-        		double dStartPos = 0;
-        		if (!(double.TryParse(Txt_CycleStart.Text, out dStartPos)))
-        		{
-        			dStartPos = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
-        		}
-        		
-        		if (dStartPos < dEndPos)
-        		{
-        			bCycleStartEndTxtSetting = true;
-        			Txt_CycleEnd.Text = Math.Round(dEndPos, 3).ToString();
-        			bCycleStartEndTxtSetting = false;
+                        Confirm_CycleStartEndPoints();
+                        break;
 
-                    //TODO: Hack for Ctrl_GraphWindow
-                    //PlotCycle(true, -1, dStartPos, dEndPos);
-        		}
-        	}
-		}
-        
-        private void Graph_CyclePreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-		{
-        	if (bCycleStartSet | bCycleEndSet) //Start/end points setting ?
-        	{
-        		switch (e.KeyCode) //Confirm or cancel ?
-        		{
-        			case Keys.Enter: //Confirm
-        				
-        				Confirm_CycleStartEndPoints();
-        				break;
-        				
-        			case Keys.Escape: //Cancel
-        				
-        				Cancel_CycleStartEndPoints();
-        				break;
-        		}
-        	}
-		}
-        
-        private void Split_Cycle_VirtualSig_GraphSplitterMoved(object sender, SplitterEventArgs e)
-		{
-            //TODO: Hack for Ctrl_GraphWindow
-            //if (!(oCycle == null)) PlotCycle();
-		}
-        
+                    case Keys.Escape: //Cancel
+
+                        Cancel_CycleStartEndPoints();
+                        break;
+                }
+            }
+        }
+
         #endregion
-        
+
         #region Cycle BackgroundWorker
-        
+
         private void BGWrk_CycleDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
 			BackgroundWorker Worker=sender as BackgroundWorker;
@@ -1528,11 +1474,8 @@ namespace CANStream
         			StopRecording();
         		}
         		
-        		double dTStartCycle = ((double) TCycleStart) / 1000;
-        		double dTEndCycle   = ((double) TCycleEnd  ) / 1000;
-
-                //TODO: Hack for Ctrl_GraphWindow
-                //PlotCycle(true, -1, dTStartCycle, dTEndCycle);
+                Graph_Cycle.Properties.Cursor = new GraphCursorProperties();
+                Graph_Cycle.Refresh_Graphic();
         	}
 		}
         
@@ -3209,6 +3152,10 @@ namespace CANStream
                 }
 
                 //Timer for graphic update enabling
+                Graph_Cycle.Properties.Cursor.AbscisseValuePostion = ScreenPositions.Invisible;
+                Graph_Cycle.Properties.Cursor.Mode = GraphicCursorMode.VerticalLine;
+                Graph_Cycle.Properties.Cursor.ShowCursorAbscisseValue = false;
+
                 Timer_CycleGraph.Enabled = true;
             }
         }
@@ -3354,88 +3301,158 @@ namespace CANStream
             bPauseCycle = false;
         }
 
-        #region Old cycle graph plotting methods
-
-        //TODO: Remove Old cycle graph plotting methods
-
-        /*
-
-        private void PlotCycle()
+        private void Set_GraphCycleContextMenu()
         {
-            PlotCycle(false, -1, -1, -1);
-        }
+            Context_CycleGraph.Items.Clear();
 
-        private void PlotCycle(bool bRefreshing, double TimeCursorPosition)
-        {
-            PlotCycle(bRefreshing, TimeCursorPosition, -1, -1);
-        }
+            ToolStripMenuItem ItemSetStart = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle starting point");
+            ItemSetStart.Image = Icones.Cycle_Start_16;
+            ItemSetStart.Click += new EventHandler(Context_CycleGraphItemSetStart_Click);
 
-        private void PlotCycle(bool bRefreshing, double TimeCursorPosition, double StartPosistion, double EndPosition)
-        {
-            if (oCycle.GraphSeries.FormatedSeries.Count > 0)
+            ToolStripMenuItem ItemSetEnd = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle ending point");
+            ItemSetEnd.Image = Icones.Cycle_End_16;
+            ItemSetEnd.Click += new EventHandler(Context_CycleGraphItemSetEnd_Click);
+
+            ToolStripMenuItem ItemSetConfirm = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Confirm cycle start/end points setting");
+            ItemSetConfirm.Click += new EventHandler(Context_CycleGraphItemSetConfirm_Click);
+            ItemSetConfirm.Visible = false;
+
+            ToolStripMenuItem ItemSetCancel = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Cancel cycle start/end points setting");
+            ItemSetCancel.Click += new EventHandler(Context_CycleGraphItemSetCancel_Click);
+            ItemSetCancel.Visible = false;
+
+            ToolStripSeparator Sep = new ToolStripSeparator();
+            Context_CycleGraph.Items.Add(Sep);
+
+            foreach(GraphSerieProperties oSerieProps in Graph_Cycle.Properties.SeriesProperties)
             {
-                if (!bRefreshing)
+                ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem)Context_CycleGraph.Items.Add(oSerieProps.Name);
+
+                SerieMenuItem.Tag = oSerieProps.KeyId;
+                SerieMenuItem.Checked = oSerieProps.Visible;
+
+                SerieMenuItem.Click += new System.EventHandler(Context_CycleGraphMenuItem_Click);
+            }
+        }
+
+        private void Set_CycleGraphCursor(CycleGraphCursorMode eCursorMode)
+        {
+            switch (eCursorMode)
+            {
+                case CycleGraphCursorMode.StartingPoint:
+
+                    Graph_Cycle.Properties.Cursor = new GraphCursorProperties();
+                    Graph_Cycle.Properties.Cursor.Mode = GraphicCursorMode.VerticalLine;
+                    Graph_Cycle.Properties.Cursor.Style.LineColor = Color.Green;
+                    Graph_Cycle.Properties.Cursor.Style.LineWidth = 2;
+                    Graph_Cycle.Properties.Cursor.CursorValueForeColor = Color.Green;
+                    Graph_Cycle.Properties.Cursor.CursorTitle = "Start";
+                    Graph_Cycle.Properties.Cursor.CursorTitleForeColor = Color.Green;
+
+                    break;
+
+                case CycleGraphCursorMode.EndingPoint:
+
+                    Graph_Cycle.Properties.Cursor = new GraphCursorProperties();
+                    Graph_Cycle.Properties.Cursor.Mode = GraphicCursorMode.VerticalLine;
+                    Graph_Cycle.Properties.Cursor.Style.LineColor = Color.Red;
+                    Graph_Cycle.Properties.Cursor.Style.LineWidth = 2;
+                    Graph_Cycle.Properties.Cursor.CursorValueForeColor = Color.Red;
+                    Graph_Cycle.Properties.Cursor.CursorTitle = "End";
+                    Graph_Cycle.Properties.Cursor.CursorTitleForeColor = Color.Red;
+
+                    break;
+
+                default:
+
+                    Graph_Cycle.Properties.Cursor = new GraphCursorProperties(); //Return to default cursor properties
+                    break;
+            }
+        }
+
+        private GraphReferenceLine Get_CycleGraphReferenceLine(string LineTitle)
+        {
+            foreach(GraphReferenceLine oRefLine in Graph_Cycle.Properties.AbscisseAxis.ReferenceLines)
+            {
+                if(oRefLine.ReferenceTitle.Equals(LineTitle))
                 {
-                    if (Split_Cycle_VirtualSig_Graph.Panel1Collapsed)
-                    {
-                        Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - 12;
-                    }
-                    else
-                    {
-                        Graph_Cycle.Width = Split_Cycle_VirtualSig_Graph.Width - Split_Cycle_VirtualSig_Graph.SplitterDistance - 12;
-                    }
-
-                    Graph_Cycle.Height = Split_Cycle_VirtualSig_Graph.Height - 2;
-
-                    Context_CycleGraph.Items.Clear();
-
-                    ToolStripMenuItem ItemSetStart = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle starting point");
-                    ItemSetStart.Click += new EventHandler(Context_CycleGraphItemSetStart_Click);
-
-                    ToolStripMenuItem ItemSetEnd = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Set cycle ending point");
-                    ItemSetEnd.Click += new EventHandler(Context_CycleGraphItemSetEnd_Click);
-
-                    ToolStripMenuItem ItemSetConfirm = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Confirm cycle start/end points setting");
-                    ItemSetConfirm.Click += new EventHandler(Context_CycleGraphItemSetConfirm_Click);
-                    ItemSetConfirm.Visible = false;
-
-                    ToolStripMenuItem ItemSetCancel = (ToolStripMenuItem)Context_CycleGraph.Items.Add("Cancel cycle start/end points setting");
-                    ItemSetCancel.Click += new EventHandler(Context_CycleGraphItemSetCancel_Click);
-                    ItemSetCancel.Visible = false;
-
-                    ToolStripSeparator Sep = new ToolStripSeparator();
-                    Context_CycleGraph.Items.Add(Sep);
-                }
-
-                CANStreamTools.Draw_CycleGraph(oCycle, Graph_Cycle, TimeCursorPosition, StartPosistion, EndPosition);
-
-                if (!bRefreshing)
-                {
-                    foreach (FormatedGraphSerie oSerie in oCycle.GraphSeries.FormatedSeries)
-                    {
-                        ToolStripMenuItem SerieMenuItem = (ToolStripMenuItem)Context_CycleGraph.Items.Add(oSerie.Name);
-                        SerieMenuItem.Checked = oSerie.Visible;
-                        SerieMenuItem.Click += new System.EventHandler(Context_CycleGraphMenuItem_Click);
-                    }
+                    return (oRefLine);
                 }
             }
+
+            return (null);
         }
 
-        private void Set_OldCycleStartEndPoint()
+        private void Set_CycleStartEndReferenceLine(string Title, double Value)
         {
-            if (!(double.TryParse(Txt_CycleStart.Text, out TCycleStart_Old)))
+            GraphReferenceLine oRefLine = null;
+
+            if (Title.Equals("Start"))
             {
-                TCycleStart_Old = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
+                oRefLine = Get_CycleGraphReferenceLine("Start");
+
+                if (Value > 0)
+                {
+                    if (oRefLine == null)
+                    {
+                        oRefLine = new GraphReferenceLine();
+
+                        oRefLine.ReferenceTitle = "Start";
+                        oRefLine.ReferenceStyle.LineColor = Color.Green;
+
+                        Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Add(oRefLine);
+                    }
+                }
+                else
+                {
+                    if(!(oRefLine==null))
+                    {
+                        Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Remove(oRefLine);
+                    }
+
+                    oRefLine = null;
+                }
+            }
+            else if (Title.Equals("End"))
+            {
+                oRefLine = Get_CycleGraphReferenceLine("End");
+
+                if (Value < (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000)
+                {
+                    if (oRefLine == null)
+                    {
+                        oRefLine = new GraphReferenceLine();
+
+                        oRefLine.ReferenceTitle = "End";
+                        oRefLine.ReferenceStyle.LineColor = Color.Red;
+
+                        Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Add(oRefLine);
+                    }
+                }
+                else
+                {
+                    if (!(oRefLine == null))
+                    {
+                        Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Remove(oRefLine);
+                    }
+
+                    oRefLine = null;
+                }
             }
 
-            if (!(double.TryParse(Txt_CycleEnd.Text, out TCycleEnd_Old)))
+            if(!(oRefLine==null))
             {
-                TCycleEnd_Old = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
+                oRefLine.ReferenceTitlePosition = ScreenPositions.Bottom;
+                oRefLine.ReferenceValuePosition = ScreenPositions.Top;
+                oRefLine.ReferenceValue = Value;
             }
+
+            Graph_Cycle.Refresh_Graphic();
         }
 
         private void Set_CycleStartEndCursorsFromTextBox()
         {
+            //TODO: Test me
             double dTCycleStart = 0;
             double dTCycleEnd = 0;
 
@@ -3451,27 +3468,23 @@ namespace CANStream
 
             if (dTCycleStart < dTCycleEnd)
             {
-                PlotCycle(true, -1, dTCycleStart, dTCycleEnd);
+                Set_CycleStartEndReferenceLine("Start", dTCycleStart);
+                Set_CycleStartEndReferenceLine("End", dTCycleEnd);
             }
         }
 
-        private double GetTimeValueAtPosition(int Position)
+        private void Set_OldCycleStartEndPoint()
         {
-            double X = (double)Position;
-            double X1 = (double)CANStreamConstants.CycleGraphPlotAreaLeft;
-            double X2 = X1 + ((double)(Graph_Cycle.Width - CANStreamConstants.CycleGraphPlotAreaWidthOffset));
-            double Y1 = oCycle.GraphSeries.AxisProperties.AxisX.MinValue;
-            double Y2 = oCycle.GraphSeries.AxisProperties.AxisX.MaxValue;
+            if (!(double.TryParse(Txt_CycleStart.Text, out TCycleStart_Old)))
+            {
+                TCycleStart_Old = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
+            }
 
-            double a = (Y2 - Y1) / (X2 - X1);
-            double b = Y2 - a * X2;
-
-            return (a * X + b);
+            if (!(double.TryParse(Txt_CycleEnd.Text, out TCycleEnd_Old)))
+            {
+                TCycleEnd_Old = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
+            }
         }
-
-        */
-
-        #endregion
 
         private void Set_CycleVirtualSignalValue(string Name, string sValue, VirtualParameter VirtualRef)
         {
@@ -3989,6 +4002,8 @@ namespace CANStream
                             Graph_Cycle.Set_DataFile(oCycleGraphData);
                             Graph_Cycle.Properties = oGraphicProps;
                             Graph_Cycle.Refresh_Graphic();
+
+                            Set_GraphCycleContextMenu();
                         }
                         else
                         {
@@ -4018,8 +4033,19 @@ namespace CANStream
         {
             bCycleStartSet = true;
 
-            //TODO: Hack for Ctrl_GraphWindow
-            //Set_OldCycleStartEndPoint();
+            //Previous starting/ending points saving
+            Set_OldCycleStartEndPoint();
+
+            //Remove existing 'Start' reference line if it exists
+            GraphReferenceLine oStartRefLine = Get_CycleGraphReferenceLine("Start");
+            if (!(oStartRefLine == null))
+            {
+                Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Remove(oStartRefLine);
+                Graph_Cycle.Refresh_Graphic();
+            }
+
+            //Graphic curor change
+            Set_CycleGraphCursor(CycleGraphCursorMode.StartingPoint);
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(0);
@@ -4035,8 +4061,19 @@ namespace CANStream
         {
             bCycleEndSet = true;
 
-            //TODO: Hack for Ctrl_GraphWindow
-            //Set_OldCycleStartEndPoint();
+            //Previous starting/ending points saving
+            Set_OldCycleStartEndPoint();
+
+            //Remove existing 'End' reference line if it exists
+            GraphReferenceLine oEndRefLine = Get_CycleGraphReferenceLine("End");
+            if(!(oEndRefLine==null))
+            {
+                Graph_Cycle.Properties.AbscisseAxis.ReferenceLines.Remove(oEndRefLine);
+                Graph_Cycle.Refresh_Graphic();
+            }
+
+            //Graphic curor change
+            Set_CycleGraphCursor(CycleGraphCursorMode.EndingPoint);
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(0);
@@ -4050,11 +4087,81 @@ namespace CANStream
 
         public void Confirm_CycleStartEndPoints()
         {
+            if (bCycleStartSet)
+            {
+                if (!(double.IsNaN(Graph_Cycle.MainCursorAbscisse)))
+                {
+                    double dEndPos = 0;
+                    if (!(double.TryParse(Txt_CycleEnd.Text, out dEndPos)))
+                    {
+                        dEndPos = (double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000;
+                    }
+
+                    if (Graph_Cycle.MainCursorAbscisse < dEndPos)
+                    {
+                        bCycleStartEndTxtSetting = true;
+                        Txt_CycleStart.Text = Math.Round(Graph_Cycle.MainCursorAbscisse, 3).ToString();
+                        bCycleStartEndTxtSetting = false;
+
+                        Set_CycleStartEndReferenceLine("Start", Graph_Cycle.MainCursorAbscisse);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The cycle starting point cannot be set after the ending point !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                else
+                {
+                    //Cursor is out of graphic frame => Set 0 as starting point
+                    bCycleStartEndTxtSetting = true;
+                    Txt_CycleStart.Text = "0.0";
+                    bCycleStartEndTxtSetting = false;
+                }
+            }
+
+            if (bCycleEndSet)
+            {
+                if (!(double.IsNaN(Graph_Cycle.MainCursorAbscisse)))
+                {
+                    double dStartPos = 0;
+                    if (!(double.TryParse(Txt_CycleStart.Text, out dStartPos)))
+                    {
+                        dStartPos = (double)(oCycle.TimeEvents[0].TimeEvent) / 1000;
+                    }
+
+
+                    if (dStartPos < Graph_Cycle.MainCursorAbscisse)
+                    {
+                        bCycleStartEndTxtSetting = true;
+                        Txt_CycleEnd.Text = Math.Round(Graph_Cycle.MainCursorAbscisse, 3).ToString();
+                        bCycleStartEndTxtSetting = false;
+
+                        Set_CycleStartEndReferenceLine("End", Graph_Cycle.MainCursorAbscisse);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The cycle ending point cannot be set before the starting point !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                else
+                {
+                    //Cursor is out of graphic frame => Set last cycle time event as ending point
+                    bCycleStartEndTxtSetting = true;
+                    Txt_CycleEnd.Text = Math.Round((double)(oCycle.TimeEvents[oCycle.TimeEvents.Count - 1].TimeEvent) / 1000, 3).ToString();
+                    bCycleStartEndTxtSetting = false;
+                }
+            }
+
             bCycleStartSet = false;
             bCycleEndSet = false;
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(1);
+
+            //Graphic curor change
+            Set_CycleGraphCursor(CycleGraphCursorMode.Normal);
 
             //Context_CycleGraph items status updating
             Context_CycleGraph.Items[0].Visible = true;         //Set starting point
@@ -4065,6 +4172,16 @@ namespace CANStream
 
         public void Cancel_CycleStartEndPoints()
         {
+            if (bCycleStartSet)
+            {
+                Set_CycleStartEndReferenceLine("Start", TCycleStart_Old);
+            }
+
+            if(bCycleEndSet)
+            {
+                Set_CycleStartEndReferenceLine("End", TCycleEnd_Old);
+            }
+
             bCycleStartSet = false;
             bCycleEndSet = false;
 
@@ -4073,8 +4190,8 @@ namespace CANStream
             Txt_CycleEnd.Text = Math.Round(TCycleEnd_Old, 3).ToString();
             bCycleStartEndTxtSetting = false;
 
-            //TODO: Hack for Ctrl_GraphWindow
-            //PlotCycle(false, -1, TCycleStart_Old, TCycleEnd_Old);
+            //Graphic curor change
+            Set_CycleGraphCursor(CycleGraphCursorMode.Normal);
 
             //Menu strip item status updating
             FireControllerCycleStartEndSettingEvent(1);
