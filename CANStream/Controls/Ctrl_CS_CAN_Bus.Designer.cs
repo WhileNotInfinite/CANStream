@@ -94,25 +94,7 @@ namespace CANStream
             this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
             this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
-            this.Graph_Spy = new ChartDirector.WinChartViewer();
-            this.Cmd_GraphSpyRec = new System.Windows.Forms.Button();
-            this.Img_Cmd_GraphSpyRec = new System.Windows.Forms.ImageList(this.components);
-            this.ChkLst_ChannelSel = new System.Windows.Forms.CheckedListBox();
-            this.Context_SpyGraphChannels = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.checkAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_SpyGraph_Filter_TSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.Context_SpyGraph_Filter_TSCmb = new System.Windows.Forms.ToolStripComboBox();
-            this.Cmd_GraphSpyPause = new System.Windows.Forms.Button();
-            this.Img_Cmd_GraphSpyPause = new System.Windows.Forms.ImageList(this.components);
-            this.Grp_GraphProperties = new System.Windows.Forms.GroupBox();
-            this.Txt_SpyGraphTimeWindow = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.Txt_SpyGraphYMax = new System.Windows.Forms.TextBox();
-            this.Txt_SpyGraphYMin = new System.Windows.Forms.TextBox();
-            this.Chk_SpyGraphAutoScale = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Graph_SpyData = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Tab_SpyHistory_Data = new System.Windows.Forms.TabPage();
             this.Lst_SpyDataHistory = new System.Windows.Forms.ListBox();
             this.TS_SpyDataHistory = new System.Windows.Forms.ToolStrip();
@@ -197,9 +179,6 @@ namespace CANStream
             this.Split_Rx_DataGraph.SuspendLayout();
             this.Tab_SpyHistory.SuspendLayout();
             this.Tab_SpyHistory_Graph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Graph_Spy)).BeginInit();
-            this.Context_SpyGraphChannels.SuspendLayout();
-            this.Grp_GraphProperties.SuspendLayout();
             this.Tab_SpyHistory_Data.SuspendLayout();
             this.TS_SpyDataHistory.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -764,7 +743,7 @@ namespace CANStream
             // 
             this.Split_Rx_DataGraph.Panel2.Controls.Add(this.Tab_SpyHistory);
             this.Split_Rx_DataGraph.Size = new System.Drawing.Size(514, 538);
-            this.Split_Rx_DataGraph.SplitterDistance = 276;
+            this.Split_Rx_DataGraph.SplitterDistance = 215;
             this.Split_Rx_DataGraph.TabIndex = 0;
             // 
             // Grid_ManualDataViewer
@@ -776,7 +755,7 @@ namespace CANStream
             this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
             this.Grid_ManualDataViewer.Location = new System.Drawing.Point(2, 0);
             this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
-            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 276);
+            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(509, 215);
             this.Grid_ManualDataViewer.TabIndex = 0;
             this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
             this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
@@ -794,210 +773,40 @@ namespace CANStream
             this.Tab_SpyHistory.Multiline = true;
             this.Tab_SpyHistory.Name = "Tab_SpyHistory";
             this.Tab_SpyHistory.SelectedIndex = 0;
-            this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 256);
+            this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 317);
             this.Tab_SpyHistory.TabIndex = 10;
             // 
             // Tab_SpyHistory_Graph
             // 
             this.Tab_SpyHistory_Graph.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_SpyHistory_Graph.Controls.Add(this.Graph_Spy);
-            this.Tab_SpyHistory_Graph.Controls.Add(this.Cmd_GraphSpyRec);
-            this.Tab_SpyHistory_Graph.Controls.Add(this.ChkLst_ChannelSel);
-            this.Tab_SpyHistory_Graph.Controls.Add(this.Cmd_GraphSpyPause);
-            this.Tab_SpyHistory_Graph.Controls.Add(this.Grp_GraphProperties);
+            this.Tab_SpyHistory_Graph.Controls.Add(this.Graph_SpyData);
             this.Tab_SpyHistory_Graph.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Graph.Name = "Tab_SpyHistory_Graph";
             this.Tab_SpyHistory_Graph.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(485, 248);
+            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(485, 309);
             this.Tab_SpyHistory_Graph.TabIndex = 0;
             this.Tab_SpyHistory_Graph.Tag = "Graph";
             this.Tab_SpyHistory_Graph.Text = "Graphic";
             // 
-            // Graph_Spy
+            // Graph_SpyData
             // 
-            this.Graph_Spy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_Spy.ChartSizeMode = ChartDirector.WinChartSizeMode.StretchImage;
-            this.Graph_Spy.Location = new System.Drawing.Point(164, 0);
-            this.Graph_Spy.Name = "Graph_Spy";
-            this.Graph_Spy.Size = new System.Drawing.Size(318, 245);
-            this.Graph_Spy.TabIndex = 3;
-            this.Graph_Spy.TabStop = false;
-            this.Graph_Spy.Visible = false;
-            // 
-            // Cmd_GraphSpyRec
-            // 
-            this.Cmd_GraphSpyRec.ImageIndex = 0;
-            this.Cmd_GraphSpyRec.ImageList = this.Img_Cmd_GraphSpyRec;
-            this.Cmd_GraphSpyRec.Location = new System.Drawing.Point(95, 0);
-            this.Cmd_GraphSpyRec.Name = "Cmd_GraphSpyRec";
-            this.Cmd_GraphSpyRec.Size = new System.Drawing.Size(32, 32);
-            this.Cmd_GraphSpyRec.TabIndex = 9;
-            this.Cmd_GraphSpyRec.UseVisualStyleBackColor = true;
-            this.Cmd_GraphSpyRec.Visible = false;
-            this.Cmd_GraphSpyRec.Click += new System.EventHandler(this.Cmd_GraphSpyRecClick);
-            // 
-            // Img_Cmd_GraphSpyRec
-            // 
-            this.Img_Cmd_GraphSpyRec.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Img_Cmd_GraphSpyRec.ImageStream")));
-            this.Img_Cmd_GraphSpyRec.TransparentColor = System.Drawing.Color.Transparent;
-            this.Img_Cmd_GraphSpyRec.Images.SetKeyName(0, "stop-icone-5072-16.png");
-            this.Img_Cmd_GraphSpyRec.Images.SetKeyName(1, "media-recorder-icone-9075-16.png");
-            // 
-            // ChkLst_ChannelSel
-            // 
-            this.ChkLst_ChannelSel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ChkLst_ChannelSel.ContextMenuStrip = this.Context_SpyGraphChannels;
-            this.ChkLst_ChannelSel.FormattingEnabled = true;
-            this.ChkLst_ChannelSel.Location = new System.Drawing.Point(6, 39);
-            this.ChkLst_ChannelSel.Name = "ChkLst_ChannelSel";
-            this.ChkLst_ChannelSel.Size = new System.Drawing.Size(152, 79);
-            this.ChkLst_ChannelSel.TabIndex = 5;
-            this.ChkLst_ChannelSel.Visible = false;
-            this.ChkLst_ChannelSel.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ChkLst_ChannelSelItemCheck);
-            // 
-            // Context_SpyGraphChannels
-            // 
-            this.Context_SpyGraphChannels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkAllToolStripMenuItem,
-            this.uncheckAllToolStripMenuItem,
-            this.Context_SpyGraph_Filter_TSMI});
-            this.Context_SpyGraphChannels.Name = "Context_SpyGraphChannels";
-            this.Context_SpyGraphChannels.Size = new System.Drawing.Size(136, 70);
-            // 
-            // checkAllToolStripMenuItem
-            // 
-            this.checkAllToolStripMenuItem.Name = "checkAllToolStripMenuItem";
-            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.checkAllToolStripMenuItem.Text = "Check all";
-            this.checkAllToolStripMenuItem.Click += new System.EventHandler(this.CheckAllToolStripMenuItemClick);
-            // 
-            // uncheckAllToolStripMenuItem
-            // 
-            this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.uncheckAllToolStripMenuItem.Text = "Uncheck all";
-            this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.UncheckAllToolStripMenuItemClick);
-            // 
-            // Context_SpyGraph_Filter_TSMI
-            // 
-            this.Context_SpyGraph_Filter_TSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Context_SpyGraph_Filter_TSCmb});
-            this.Context_SpyGraph_Filter_TSMI.Name = "Context_SpyGraph_Filter_TSMI";
-            this.Context_SpyGraph_Filter_TSMI.Size = new System.Drawing.Size(135, 22);
-            this.Context_SpyGraph_Filter_TSMI.Text = "Filter";
-            // 
-            // Context_SpyGraph_Filter_TSCmb
-            // 
-            this.Context_SpyGraph_Filter_TSCmb.Name = "Context_SpyGraph_Filter_TSCmb";
-            this.Context_SpyGraph_Filter_TSCmb.Size = new System.Drawing.Size(121, 23);
-            this.Context_SpyGraph_Filter_TSCmb.SelectedIndexChanged += new System.EventHandler(this.Context_SpyGraph_Filter_TSCmbSelectedIndexChanged);
-            this.Context_SpyGraph_Filter_TSCmb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Context_SpyGraph_Filter_TSCmbKeyDown);
-            // 
-            // Cmd_GraphSpyPause
-            // 
-            this.Cmd_GraphSpyPause.ImageIndex = 0;
-            this.Cmd_GraphSpyPause.ImageList = this.Img_Cmd_GraphSpyPause;
-            this.Cmd_GraphSpyPause.Location = new System.Drawing.Point(126, 0);
-            this.Cmd_GraphSpyPause.Name = "Cmd_GraphSpyPause";
-            this.Cmd_GraphSpyPause.Size = new System.Drawing.Size(32, 32);
-            this.Cmd_GraphSpyPause.TabIndex = 8;
-            this.Cmd_GraphSpyPause.UseVisualStyleBackColor = true;
-            this.Cmd_GraphSpyPause.Visible = false;
-            this.Cmd_GraphSpyPause.Click += new System.EventHandler(this.Cmd_GraphSpyPauseClick);
-            // 
-            // Img_Cmd_GraphSpyPause
-            // 
-            this.Img_Cmd_GraphSpyPause.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Img_Cmd_GraphSpyPause.ImageStream")));
-            this.Img_Cmd_GraphSpyPause.TransparentColor = System.Drawing.Color.Transparent;
-            this.Img_Cmd_GraphSpyPause.Images.SetKeyName(0, "break-icone-9058-16.png");
-            this.Img_Cmd_GraphSpyPause.Images.SetKeyName(1, "play-icone-6427-16.png");
-            // 
-            // Grp_GraphProperties
-            // 
-            this.Grp_GraphProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Grp_GraphProperties.Controls.Add(this.Txt_SpyGraphTimeWindow);
-            this.Grp_GraphProperties.Controls.Add(this.label11);
-            this.Grp_GraphProperties.Controls.Add(this.Txt_SpyGraphYMax);
-            this.Grp_GraphProperties.Controls.Add(this.Txt_SpyGraphYMin);
-            this.Grp_GraphProperties.Controls.Add(this.Chk_SpyGraphAutoScale);
-            this.Grp_GraphProperties.Controls.Add(this.label10);
-            this.Grp_GraphProperties.Controls.Add(this.label9);
-            this.Grp_GraphProperties.Location = new System.Drawing.Point(6, 125);
-            this.Grp_GraphProperties.Name = "Grp_GraphProperties";
-            this.Grp_GraphProperties.Size = new System.Drawing.Size(152, 120);
-            this.Grp_GraphProperties.TabIndex = 4;
-            this.Grp_GraphProperties.TabStop = false;
-            this.Grp_GraphProperties.Text = "Graphic properties";
-            this.Grp_GraphProperties.Visible = false;
-            // 
-            // Txt_SpyGraphTimeWindow
-            // 
-            this.Txt_SpyGraphTimeWindow.Location = new System.Drawing.Point(78, 19);
-            this.Txt_SpyGraphTimeWindow.Name = "Txt_SpyGraphTimeWindow";
-            this.Txt_SpyGraphTimeWindow.Size = new System.Drawing.Size(56, 20);
-            this.Txt_SpyGraphTimeWindow.TabIndex = 6;
-            this.Txt_SpyGraphTimeWindow.Text = "30";
-            this.Txt_SpyGraphTimeWindow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Txt_SpyGraphTimeWindow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_SpyGraphTimeWindowKeyDown);
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(6, 22);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(85, 16);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "Time window";
-            // 
-            // Txt_SpyGraphYMax
-            // 
-            this.Txt_SpyGraphYMax.Enabled = false;
-            this.Txt_SpyGraphYMax.Location = new System.Drawing.Point(78, 71);
-            this.Txt_SpyGraphYMax.Name = "Txt_SpyGraphYMax";
-            this.Txt_SpyGraphYMax.Size = new System.Drawing.Size(56, 20);
-            this.Txt_SpyGraphYMax.TabIndex = 4;
-            this.Txt_SpyGraphYMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Txt_SpyGraphYMax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_SpyGraphYMaxKeyDown);
-            // 
-            // Txt_SpyGraphYMin
-            // 
-            this.Txt_SpyGraphYMin.Enabled = false;
-            this.Txt_SpyGraphYMin.Location = new System.Drawing.Point(78, 45);
-            this.Txt_SpyGraphYMin.Name = "Txt_SpyGraphYMin";
-            this.Txt_SpyGraphYMin.Size = new System.Drawing.Size(56, 20);
-            this.Txt_SpyGraphYMin.TabIndex = 3;
-            this.Txt_SpyGraphYMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Txt_SpyGraphYMin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_SpyGraphYMinKeyDown);
-            // 
-            // Chk_SpyGraphAutoScale
-            // 
-            this.Chk_SpyGraphAutoScale.Checked = true;
-            this.Chk_SpyGraphAutoScale.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Chk_SpyGraphAutoScale.Location = new System.Drawing.Point(6, 99);
-            this.Chk_SpyGraphAutoScale.Name = "Chk_SpyGraphAutoScale";
-            this.Chk_SpyGraphAutoScale.Size = new System.Drawing.Size(76, 15);
-            this.Chk_SpyGraphAutoScale.TabIndex = 2;
-            this.Chk_SpyGraphAutoScale.Text = "Auto scale";
-            this.Chk_SpyGraphAutoScale.UseVisualStyleBackColor = true;
-            this.Chk_SpyGraphAutoScale.CheckedChanged += new System.EventHandler(this.Chk_SpyGraphAutoScaleCheckedChanged);
-            // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(6, 74);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 16);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Y Max";
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(6, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 16);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Y Min";
+            this.Graph_SpyData.ChannelListEnabled = false;
+            this.Graph_SpyData.CursorEnabled = false;
+            this.Graph_SpyData.EditGraphicConfigurationEnable = false;
+            this.Graph_SpyData.LegendEnabled = false;
+            this.Graph_SpyData.Location = new System.Drawing.Point(0, 0);
+            this.Graph_SpyData.Name = "Graph_SpyData";
+            this.Graph_SpyData.OpenFileVisible = false;
+            this.Graph_SpyData.PrintEnabled = false;
+            this.Graph_SpyData.ShortcutKeysEnabled = false;
+            this.Graph_SpyData.Size = new System.Drawing.Size(485, 309);
+            this.Graph_SpyData.SnapShotEnabled = false;
+            this.Graph_SpyData.TabIndex = 0;
+            this.Graph_SpyData.ToolBarVisible = true;
+            this.Graph_SpyData.ZoomEnabled = false;
             // 
             // Tab_SpyHistory_Data
             // 
@@ -1007,7 +816,7 @@ namespace CANStream
             this.Tab_SpyHistory_Data.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Data.Name = "Tab_SpyHistory_Data";
             this.Tab_SpyHistory_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(485, 248);
+            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(485, 309);
             this.Tab_SpyHistory_Data.TabIndex = 1;
             this.Tab_SpyHistory_Data.Tag = "Data";
             this.Tab_SpyHistory_Data.Text = "Data";
@@ -1020,7 +829,7 @@ namespace CANStream
             this.Lst_SpyDataHistory.FormattingEnabled = true;
             this.Lst_SpyDataHistory.Location = new System.Drawing.Point(3, 31);
             this.Lst_SpyDataHistory.Name = "Lst_SpyDataHistory";
-            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(479, 212);
+            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(479, 264);
             this.Lst_SpyDataHistory.TabIndex = 1;
             // 
             // TS_SpyDataHistory
@@ -1707,10 +1516,6 @@ namespace CANStream
             this.Split_Rx_DataGraph.ResumeLayout(false);
             this.Tab_SpyHistory.ResumeLayout(false);
             this.Tab_SpyHistory_Graph.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Graph_Spy)).EndInit();
-            this.Context_SpyGraphChannels.ResumeLayout(false);
-            this.Grp_GraphProperties.ResumeLayout(false);
-            this.Grp_GraphProperties.PerformLayout();
             this.Tab_SpyHistory_Data.ResumeLayout(false);
             this.Tab_SpyHistory_Data.PerformLayout();
             this.TS_SpyDataHistory.ResumeLayout(false);
@@ -1732,8 +1537,6 @@ namespace CANStream
             this.PerformLayout();
 
 		}
-		private System.Windows.Forms.ToolStripComboBox Context_SpyGraph_Filter_TSCmb;
-		private System.Windows.Forms.ToolStripMenuItem Context_SpyGraph_Filter_TSMI;
 		private System.Windows.Forms.ImageList Img_TabControl;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_SpyManual;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_CyclePlayer_Graph;
@@ -1762,18 +1565,6 @@ namespace CANStream
 		private System.Windows.Forms.ToolStripMenuItem Ctxt_TxRaw_Add_TSMI;
 		private System.Windows.Forms.ContextMenuStrip Context_ManualRawGrid;
 		private System.Windows.Forms.DataGridView Grid_CANRawData;
-		private System.Windows.Forms.Button Cmd_GraphSpyPause;
-		private System.Windows.Forms.Button Cmd_GraphSpyRec;
-		private System.Windows.Forms.CheckedListBox ChkLst_ChannelSel;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.CheckBox Chk_SpyGraphAutoScale;
-		private System.Windows.Forms.TextBox Txt_SpyGraphYMin;
-		private System.Windows.Forms.TextBox Txt_SpyGraphYMax;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.TextBox Txt_SpyGraphTimeWindow;
-		private System.Windows.Forms.GroupBox Grp_GraphProperties;
-		private ChartDirector.WinChartViewer Graph_Spy;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages_Graph;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages_Data;
 		private System.Windows.Forms.ToolStripMenuItem TSMI_RxMessages;
@@ -1781,12 +1572,7 @@ namespace CANStream
 		private System.Windows.Forms.ToolStripSplitButton TSSB_View;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.CheckBox Chk_CycleMux;
-		private System.Windows.Forms.ImageList Img_Cmd_GraphSpyRec;
-		private System.Windows.Forms.ImageList Img_Cmd_GraphSpyPause;
 		private System.Windows.Forms.ContextMenuStrip Context_CycleGraph;
-		private System.Windows.Forms.ToolStripMenuItem uncheckAllToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem checkAllToolStripMenuItem;
-		private System.Windows.Forms.ContextMenuStrip Context_SpyGraphChannels;
 		private System.ComponentModel.BackgroundWorker BGWrk_Spy;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.ComponentModel.BackgroundWorker BGWrk_Manual;
@@ -1871,5 +1657,6 @@ namespace CANStream
         private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_B6;
         private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_B7;
         private Ctrl_GraphWindow.Ctrl_WaveForm Graph_Cycle;
+        private Ctrl_GraphWindow.Ctrl_WaveForm Graph_SpyData;
     }
 }

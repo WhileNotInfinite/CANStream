@@ -416,7 +416,6 @@ namespace CANStream
 			Cmb_SpyCANRxMode.Text = SpyCANRxMode.Event.ToString();
 
             oSpySeriesStates = new SpySerieStateCollection();
-            ChkLst_ChannelSel.Tag = "";
 			
 			//Initialization of manual control management
 			bRawMsgGridEdition = false;
@@ -1065,159 +1064,7 @@ namespace CANStream
 
         #endregion
 
-        #region Spy graph panel
-
-        private void ChkLst_ChannelSelItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            oSpySeriesStates.SetSerieState(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
-            SpyGraphSeries.SetSerieVisible(ChkLst_ChannelSel.Items[e.Index].ToString(), e.NewValue.Equals(CheckState.Checked));
-
-            if (!bSpyRunning)
-            {
-                Update_SpyGraph();
-            }
-        }
-
-        private void Cmd_GraphSpyRecClick(object sender, EventArgs e)
-        {
-            bSpyGraphEnabled = !bSpyGraphEnabled;
-
-            if (bSpyGraphEnabled)
-            {
-                Cmd_GraphSpyRec.ImageIndex = 0;
-                SpyGraphRestarted = true;
-            }
-            else
-            {
-                Cmd_GraphSpyRec.ImageIndex = 1;
-                SpyGraphSeries.RTSeries.Clear();
-            }
-
-            Cmd_GraphSpyPause.Enabled = bSpyGraphEnabled;
-        }
-
-        private void Cmd_GraphSpyPauseClick(object sender, EventArgs e)
-        {
-            bSpyGraphFrozen = !bSpyGraphFrozen;
-
-            if (bSpyGraphFrozen)
-            {
-                Cmd_GraphSpyPause.ImageIndex = 1;
-            }
-            else
-            {
-                Cmd_GraphSpyPause.ImageIndex = 0;
-            }
-        }
-
-        private void Txt_SpyGraphYMinKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.Enter))
-            {
-                double Val = 0;
-                if (Double.TryParse(Txt_SpyGraphYMin.Text, out Val))
-                {
-                    SpyGraphYMin = Val;
-
-                    if (!(Txt_SpyGraphYMax.Text.Equals("")))
-                    {
-                        Update_SpyGraph();
-                    }
-                }
-            }
-        }
-
-        private void Txt_SpyGraphYMaxKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.Enter))
-            {
-                double Val = 0;
-                if (Double.TryParse(Txt_SpyGraphYMax.Text, out Val))
-                {
-                    SpyGraphYMax = Val;
-
-                    if (!(Txt_SpyGraphYMin.Text.Equals("")))
-                    {
-                        Update_SpyGraph();
-                    }
-                }
-            }
-        }
-
-        private void Txt_SpyGraphTimeWindowKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.Enter))
-            {
-                double Val = 0;
-                if (Double.TryParse(Txt_SpyGraphTimeWindow.Text, out Val))
-                {
-                    bSpyGraphEnabled = false;
-
-                    SpyGraphSeries.RTSeries.Clear();
-                    SpyGraphSeries.BufferSize = (int)((Val * 1000) / SPY_GRID_UPDATE_PERIOD);
-
-                    SpyGraphRestarted = true;
-                    bSpyGraphEnabled = true;
-                }
-            }
-        }
-
-        private void Chk_SpyGraphAutoScaleCheckedChanged(object sender, EventArgs e)
-        {
-            Txt_SpyGraphYMin.Enabled = !Chk_SpyGraphAutoScale.Checked;
-            Txt_SpyGraphYMax.Enabled = !Chk_SpyGraphAutoScale.Checked;
-            SpyGraphAutoScale = Chk_SpyGraphAutoScale.Checked;
-            Update_SpyGraph();
-        }
-
-        #region Context_SpyGraphChannels
-
-        private void CheckAllToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            for (int i = 0; i < ChkLst_ChannelSel.Items.Count; i++)
-            {
-                ChkLst_ChannelSel.SetItemChecked(i, true);
-            }
-        }
-
-        private void UncheckAllToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            for (int i = 0; i < ChkLst_ChannelSel.Items.Count; i++)
-            {
-                ChkLst_ChannelSel.SetItemChecked(i, false);
-            }
-        }
-
-        private void Context_SpyGraph_Filter_TSCmbKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.Enter))
-            {
-                if (!(Context_SpyGraph_Filter_TSCmb.Text.Equals("")))
-                {
-                    if (!(Context_SpyGraph_Filter_TSCmb.Items.Contains(Context_SpyGraph_Filter_TSCmb.Text)))
-                    {
-                        //FIFO
-                        if (Context_SpyGraph_Filter_TSCmb.Items.Count == 10)
-                        {
-                            Context_SpyGraph_Filter_TSCmb.Items.RemoveAt(9);
-                        }
-
-                        Context_SpyGraph_Filter_TSCmb.Items.Insert(0, Context_SpyGraph_Filter_TSCmb.Text);
-                    }
-                }
-
-                ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
-                FilterSpyGraphSeries();
-            }
-        }
-
-        private void Context_SpyGraph_Filter_TSCmbSelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChkLst_ChannelSel.Tag = Context_SpyGraph_Filter_TSCmb.Text;
-            FilterSpyGraphSeries();
-        }
-
-        #endregion
+        #region Spy graph panel 
 
         #endregion
 
@@ -2459,14 +2306,15 @@ namespace CANStream
                 }
 
                 //Gaphic window init
-                if (!(oCanConfig == null) && ChkLst_ChannelSel.Visible == false)
-                {
-                    ChkLst_ChannelSel.Visible = true;
-                    Cmd_GraphSpyRec.Visible = true;
-                    Cmd_GraphSpyPause.Visible = true;
-                    Grp_GraphProperties.Visible = true;
-                    Graph_Spy.Visible = true;
-                }
+                //TODO: Hack for Ctrl_GraphWindow
+                //if (!(oCanConfig == null) && ChkLst_ChannelSel.Visible == false)
+                //{
+                //    ChkLst_ChannelSel.Visible = true;
+                //    Cmd_GraphSpyRec.Visible = true;
+                //    Cmd_GraphSpyPause.Visible = true;
+                //    Grp_GraphProperties.Visible = true;
+                //    Graph_Spy.Visible = true;
+                //}
 
                 //Spy init
                 m_LastMsgsList.Clear();
@@ -2495,7 +2343,8 @@ namespace CANStream
 
                     if (!(oCanConfig == null))
                     {
-                        ChkLst_ChannelSel.Visible = true;
+                        //TODO: Hack for Ctrl_GraphWindow
+                        //ChkLst_ChannelSel.Visible = true;
                     }
 
                     //Compile virtual channels
@@ -2779,6 +2628,8 @@ namespace CANStream
 
                     if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
                     {
+                        //TODO: Hack for Ctrl_GraphWindow
+                        /*
                         if (SpyGraphRestarted)
                         {
                             SetSpyGraphSeriesVisibility();
@@ -2869,6 +2720,7 @@ namespace CANStream
                         }
 
                         Graph_Spy.Image = Graph.makeImage();
+                        */
                     }
                 }
             }
@@ -2889,6 +2741,9 @@ namespace CANStream
 
         private void FilterSpyGraphSeries()
         {
+            //TODO: Is this method still called ?
+            //TODO: Hack for Ctrl_GraphWindow
+            /*
             string sFilter = (string)ChkLst_ChannelSel.Tag;
 
             //Channel list updating
@@ -2912,6 +2767,7 @@ namespace CANStream
             }
 
             SetSpyGraphSeriesVisibility();
+            */
         }
 
         private void FireControllerSpyRunningChangedEvent(bool bRunning)
