@@ -775,6 +775,7 @@ namespace CANStream
             this.Tab_SpyHistory.SelectedIndex = 0;
             this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 317);
             this.Tab_SpyHistory.TabIndex = 10;
+            this.Tab_SpyHistory.SelectedIndexChanged += new System.EventHandler(this.Tab_SpyHistory_SelectedIndexChanged);
             // 
             // Tab_SpyHistory_Graph
             // 

@@ -13,7 +13,6 @@ using System.Drawing;
 
 using Ctrl_GraphWindow;
 
-using ChartDirector;
 using NumberBaseConversion;
 
 namespace CANStream

@@ -17,7 +17,6 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 
 using SD_AppLicence;
-using ChartDirector;
 
 //PCANBasic includes
 using Peak.Can.Basic;

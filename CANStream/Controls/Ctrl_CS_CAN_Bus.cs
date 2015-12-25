@@ -17,7 +17,6 @@ using System.Xml;
 using System.Windows.Forms;
 
 using Ctrl_GraphWindow;
-using ChartDirector; //TODO: Remove
 
 //PCANBasic includes
 using Peak.Can.Basic;
@@ -78,122 +77,6 @@ namespace CANStream
 
         #endregion
 
-        #region Private Structures
-
-        private struct SpySerieState
-        {
-            public string Name;
-            public bool Checked;
-        }
-
-        #endregion
-
-        #region Private Classes
-
-        private class SpySerieStateCollection
-        {
-            #region Private members
-
-            private List<SpySerieState> SeriesState;
-
-            #endregion
-
-            #region Properties
-
-            public int ItemCount
-            {
-                get
-                {
-                    return (SeriesState.Count);
-                }
-
-                private set
-                {
-                    //Noting
-                }
-            }
-
-            #endregion
-
-            public SpySerieStateCollection()
-            {
-                SeriesState = new List<SpySerieState>();
-            }
-
-            #region Public methodes
-
-            public void Clear()
-            {
-                SeriesState.Clear();
-            }
-
-            public void AddItem(Nullable<SpySerieState> SpySerie)
-            {
-                if(SpySerie.HasValue)
-                {
-                    SeriesState.Add(SpySerie.Value);
-                }
-            }
-
-            public Nullable<SpySerieState> GetItem(int Index)
-            {
-                if (Index >= 0 && Index < SeriesState.Count)
-                {
-                    return (SeriesState[Index]);
-                }
-
-                return (null);
-            }
-
-            public bool Contains(string Name)
-            {
-                foreach(SpySerieState sSerie in SeriesState)
-                {
-                    if(sSerie.Name.Equals(Name))
-                    {
-                        return (true);
-                    }
-                }
-
-                return (false);
-            }
-
-            public bool GetSerieState(string Name)
-            {
-                foreach (SpySerieState sSerie in SeriesState)
-                {
-                    if (sSerie.Name.Equals(Name))
-                    {
-                        return (sSerie.Checked);
-                    }
-                }
-
-                return (false);
-            }
-
-            public void SetSerieState(string Name, bool State)
-            {
-                for (int i = 0; i < SeriesState.Count; i++)
-                {
-                    if (SeriesState[i].Name.Equals(Name))
-                    {
-                        SpySerieState sSerie = new SpySerieState();
-
-                        sSerie.Name = SeriesState[i].Name;
-                        sSerie.Checked = State;
-
-                        SeriesState[i] = sSerie;
-
-                        break;
-                    }
-                }
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region private constants
 
         private const int T_MSG_CNT_UPDATE_PERIOD=500; //ms
@@ -249,18 +132,12 @@ namespace CANStream
 		private DateTime TLastSpyGridUpdate;
 		private DateTime TStartSpy;
 		private DateTime TLastSpyGraphUpdate;
-		private RT_GraphicSeries SpyGraphSeries;
-		private bool bSpyGraphEnabled;
-		private bool bSpyGraphFrozen;
-		private double SpyGraphYMin;
-		private double SpyGraphYMax;
-		private bool SpyGraphAutoScale;
-		private bool SpyGraphRestarted;
-		private bool bClearSpyGrids;
+        private GW_DataFile SpyGraphData;
+        private bool bSpyGraphEnabled;
+        private bool bClearSpyGrids;
 		private Int16 SpyMsgIdFilterMin;
 		private Int16 SpyMsgIdFilterMax;
         private bool bDataHistoryFrozen;
-        private SpySerieStateCollection oSpySeriesStates;
 
         //Manual control
         private List<CANMessageEncoded> TxEngMessages;
@@ -276,9 +153,7 @@ namespace CANStream
 		
 		//Virtual channels
 		private CS_VCLibrariesCollection VCLibCollection;
-		
-		private XYChart Graph;
-		
+				
 		#endregion
 		
 		#region PCANBasic members
@@ -400,22 +275,13 @@ namespace CANStream
 			DecodedMessages=new List<CANMessageDecoded>();
 			TLastSpyGridUpdate=DateTime.Now;
 			TLastSpyGraphUpdate=DateTime.Now;
-			SpyGraphSeries=new RT_GraphicSeries();
-			SpyGraphSeries.BufferSize=(int)(30000/SPY_GRID_UPDATE_PERIOD);
-			bSpyGraphEnabled=true;
-			bSpyGraphFrozen=false;
-			SpyGraphYMin=0;
-			SpyGraphYMax=0;
-			SpyGraphAutoScale=true;
-			SpyGraphRestarted=false;
+            ResetSpyGraph(true);
+            bSpyGraphEnabled =true;
             bDataHistoryFrozen = false;
             TSTxt_IdFilterFrom.Tag = (uint)0x0;
             TSTxt_IdFilterTo.Tag = (uint)0x7ff;
-			
 			Cmb_SpyCANRate.SelectedIndex = 1; //1000 kBit/s
 			Cmb_SpyCANRxMode.Text = SpyCANRxMode.Event.ToString();
-
-            oSpySeriesStates = new SpySerieStateCollection();
 			
 			//Initialization of manual control management
 			bRawMsgGridEdition = false;
@@ -1064,6 +930,13 @@ namespace CANStream
 
         #endregion
 
+        #region Graph/History multitabs panel
+
+        private void Tab_SpyHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bSpyGraphEnabled = (Tab_SpyHistory.SelectedTab == Tab_SpyHistory_Graph);
+        }
+
         #region Spy graph panel 
 
         #endregion
@@ -1101,6 +974,8 @@ namespace CANStream
         {
             CheckIdFilter(TSTxt_IdFilterTo);
         }
+
+        #endregion
 
         #endregion
 
@@ -1464,8 +1339,8 @@ namespace CANStream
         		
         		SetActiveCANConfig();
         		ShowManualCanConfig();
-        		
-        	}
+                ResetSpyGraph(true);
+            }
         	else
         	{
         		FireCanConfigChangedEvent(false);
@@ -2298,23 +2173,12 @@ namespace CANStream
                 if (bClearSpyGrids)
                 {
                     Grid_ManualDataViewer.Clear_EngGrid();
-
-                    oSpySeriesStates.Clear();
-                    SpyGraphSeries.RTSeries.Clear();
-
                     bClearSpyGrids = false;
                 }
 
+
                 //Gaphic window init
-                //TODO: Hack for Ctrl_GraphWindow
-                //if (!(oCanConfig == null) && ChkLst_ChannelSel.Visible == false)
-                //{
-                //    ChkLst_ChannelSel.Visible = true;
-                //    Cmd_GraphSpyRec.Visible = true;
-                //    Cmd_GraphSpyPause.Visible = true;
-                //    Grp_GraphProperties.Visible = true;
-                //    Graph_Spy.Visible = true;
-                //}
+                ResetSpyGraph(false);
 
                 //Spy init
                 m_LastMsgsList.Clear();
@@ -2340,12 +2204,6 @@ namespace CANStream
                     Txt_SpyIdFilterMax.Enabled = false;
                     Cmd_StartSpy.Enabled = false;
                     Cmd_StopSpy.Enabled = true;
-
-                    if (!(oCanConfig == null))
-                    {
-                        //TODO: Hack for Ctrl_GraphWindow
-                        //ChkLst_ChannelSel.Visible = true;
-                    }
 
                     //Compile virtual channels
                     VCLibCollection.InitLibrariesComputation();
@@ -2505,22 +2363,23 @@ namespace CANStream
 
                                     foreach (CANParameter oParam in DecodedMessages[MsgIndex].Parameters)
                                     {
-                                        if (!(oSpySeriesStates.Contains(oParam.Name)))
-                                        {
-                                            SpySerieState sSpySerie = new SpySerieState();
-
-                                            sSpySerie.Name = oParam.Name;
-                                            sSpySerie.Checked = false;
-
-                                            oSpySeriesStates.AddItem(sSpySerie);
-                                            FilterSpyGraphSeries();
-                                        }
-
-                                        //Add Spy graphic sample
                                         if (bSpyGraphEnabled)
                                         {
-                                            TimeSpan TSample = DateTime.Now.Subtract(TStartSpy);
-                                            SpyGraphSeries.AddSerieSamples(oParam.Name, TSample.TotalSeconds, oParam.DecodedValue);
+                                            GW_DataChannel oDataChan = SpyGraphData.Get_DataChannel(oParam.Name);
+
+                                            //Create the data channel if it does not exist yet
+                                            if (oDataChan == null)
+                                            {
+                                                oDataChan = new GW_DataChannel(oParam.Name, SamplingMode.MultipleRates);
+                                                SpyGraphData.Channels.Add(oDataChan);
+                                            }
+
+                                            //Add Spy graphic sample
+                                            SerieSample sNewSample = new SerieSample();
+                                            sNewSample.SampleTime = DateTime.Now.Subtract(TStartSpy).TotalSeconds;
+                                            sNewSample.SampleValue = oParam.DecodedValue;
+
+                                            oDataChan.Add_ChannelValue(sNewSample);
                                         }
 
                                         //Set param value in virtual channel variable element table
@@ -2580,7 +2439,7 @@ namespace CANStream
                 }
 
                 //Update graph window
-                if (Tab_SpyHistory.SelectedTab.Tag.Equals("Graph"))
+                if (bSpyGraphEnabled)
                 {
                     Update_SpyGraph();
                 }
@@ -2620,154 +2479,27 @@ namespace CANStream
 
         private void Update_SpyGraph()
         {
-            if ((bSpyGraphEnabled == true & bSpyGraphFrozen == false))
+            TimeSpan TGraphUpdate = DateTime.Now.Subtract(TLastSpyGraphUpdate);
+
+            if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
             {
-                if (SpyGraphSeries.RTSeries.Count > 0)
-                {
-                    TimeSpan TGraphUpdate = DateTime.Now.Subtract(TLastSpyGraphUpdate);
-
-                    if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
-                    {
-                        //TODO: Hack for Ctrl_GraphWindow
-                        /*
-                        if (SpyGraphRestarted)
-                        {
-                            SetSpyGraphSeriesVisibility();
-                            SpyGraphRestarted = false;
-                        }
-
-                        CANStreamTools.ResetRandomColor();
-
-                        //Size graph control
-                        Graph_Spy.Width = Split_Rx_DataGraph.Panel2.Width - 161;
-                        Graph_Spy.Height = Split_Rx_DataGraph.Panel2.Height - 10;
-
-                        //Create graphic
-                        Graph = new XYChart(Graph_Spy.Width,
-                                              Graph_Spy.Height,
-                                             CANStreamTools.GetRGBColor(Color.Black),
-                                             CANStreamTools.GetRGBColor(Color.White),
-                                             0);
-
-                        //Create plotting area
-                        Graph.setPlotArea(40, 20,
-                                          Graph_Spy.Width - 150,
-                                          Graph_Spy.Height - 70,
-                                          CANStreamTools.GetRGBColor(Color.Black), -1,
-                                          CANStreamTools.GetRGBColor(Color.LightGray),
-                                          CANStreamTools.GetRGBColor(Color.LightGray),
-                                          CANStreamTools.GetRGBColor(Color.LightGray));
-
-
-                        //Create legend
-                        //Graph.addLegend(Graph_Spy.Width-185,20,true,"Arial",10).setBackground(Chart.Transparent);
-                        LegendBox Legend = Graph.addLegend(Graph_Spy.Width - 100, 20, true, "Arial", 8);
-                        Legend.setBackground(Chart.Transparent);
-                        Legend.setFontColor(CANStreamTools.GetRGBColor(Color.White));
-                        Legend.setMaxWidth(100);
-
-                        //Create X axis
-                        double TMin = Math.Round(SpyGraphSeries.GetMinTimeSampleOverAll(), 1);
-                        double TMax = Math.Round(SpyGraphSeries.GetMaxTimeSampleOverAll(), 1);
-
-                        if ((TMax - TMin) < (SpyGraphSeries.BufferSize * SPY_GRID_UPDATE_PERIOD) / 1000)
-                        {
-                            TMax = TMin + ((SpyGraphSeries.BufferSize * SPY_GRID_UPDATE_PERIOD) / 1000);
-                        }
-
-                        double TStep = (TMax - TMin) / 10;
-
-                        Axis AxeX = Graph.xAxis();
-                        AxeX.setLinearScale(TMin, TMax, TStep);
-                        AxeX.setRounding(true, true);
-                        AxeX.setColors(CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White));
-
-
-
-                        //Set Y Axis
-                        Axis AxeY = Graph.yAxis();
-                        AxeY.setColors(CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White),
-                                       CANStreamTools.GetRGBColor(Color.White));
-
-                        if (!SpyGraphAutoScale)
-                        {
-                            if (SpyGraphYMin < SpyGraphYMax)
-                            {
-                                double YStep = (SpyGraphYMax - SpyGraphYMin) / 10;
-                                AxeY.setLinearScale(SpyGraphYMin, SpyGraphYMax, YStep);
-                            }
-                        }
-
-                        //Create series
-                        foreach (RT_FormatedGraphSerie oSerie in SpyGraphSeries.RTSeries)
-                        {
-                            if (oSerie.Visible)
-                            {
-                                LineLayer Layer = Graph.addLineLayer();
-
-                                Layer.addDataSet(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.YValue)
-                                                 , CANStreamTools.GetRandomColor()
-                                                 , oSerie.Name);
-
-                                Layer.setXData(oSerie.Get_PlotBuffer(RT_FormatedGraphSerie.BufferName.XValue));
-                                Layer.setLineWidth(2);
-                            }
-                        }
-
-                        Graph_Spy.Image = Graph.makeImage();
-                        */
-                    }
-                }
+                SpyGraphData.FIFO_TimeBuffer();
+                Graph_SpyData.Refresh_Graphic();
             }
         }
 
-        private void SetSpyGraphSeriesVisibility()
+        private void ResetSpyGraph(bool FullReset)
         {
-            for (int i = 0; i < oSpySeriesStates.ItemCount; i++)
+            SpyGraphData = new GW_DataFile();
+            SpyGraphData.DataSamplingMode = SamplingMode.MultipleRates;
+            SpyGraphData.TimeBufferSize = 30; //30 seconds of time buffer depth
+
+            Graph_SpyData.Set_DataFile(SpyGraphData);
+
+            if (FullReset)
             {
-                Nullable<SpySerieState> sSerie = oSpySeriesStates.GetItem(i);
-
-                if (sSerie.HasValue)
-                {
-                    SpyGraphSeries.SetSerieVisible(sSerie.Value.Name, sSerie.Value.Checked);
-                }
+                Graph_SpyData.Properties = new GraphWindowProperties();
             }
-        }
-
-        private void FilterSpyGraphSeries()
-        {
-            //TODO: Is this method still called ?
-            //TODO: Hack for Ctrl_GraphWindow
-            /*
-            string sFilter = (string)ChkLst_ChannelSel.Tag;
-
-            //Channel list updating
-            ChkLst_ChannelSel.Items.Clear();
-
-            for (int i = 0; i < oSpySeriesStates.ItemCount; i++)
-            {
-                Nullable<SpySerieState> sSerie = oSpySeriesStates.GetItem(i);
-
-                if (sSerie.HasValue)
-                {
-                    if ((sFilter.Equals("")) || (sSerie.Value.Name.ToLower().Contains(sFilter.ToLower())))
-                    {
-                        ChkLst_ChannelSel.Items.Add(sSerie.Value.Name, oSpySeriesStates.GetSerieState(sSerie.Value.Name));
-                    }
-                    else
-                    {
-                        oSpySeriesStates.SetSerieState(sSerie.Value.Name, false);
-                    }
-                }
-            }
-
-            SetSpyGraphSeriesVisibility();
-            */
         }
 
         private void FireControllerSpyRunningChangedEvent(bool bRunning)
@@ -3452,34 +3184,40 @@ namespace CANStream
         {
         	foreach(CS_VirtualChannelsLibrary oLib in VCLibCollection.Libraries)
             {
-        		foreach(CS_VirtualChannel oChan in oLib.Channels)
+        		foreach(CS_VirtualChannel oVirtualChan in oLib.Channels)
         		{
-        			if (oChan.bNewValue && oChan.bComputed)
+        			if (oVirtualChan.bNewValue && oVirtualChan.bComputed)
         			{
-	        			oChan.bNewValue=false;
+	        			oVirtualChan.bNewValue=false;
 
-                        CurrentSpyViewer.Update_GridVirtualChannel(oLib.Name, oChan);
-	        			
-	        			if (!(oSpySeriesStates.Contains(oChan.Name)))
-        				{
-                            SpySerieState sSpySerie = new SpySerieState();
+                        CurrentSpyViewer.Update_GridVirtualChannel(oLib.Name, oVirtualChan);
 
-                            sSpySerie.Name = oChan.Name;
-                            sSpySerie.Checked = false;
+                        if (bSpyGraphEnabled)
+                        {
+                            string VirtualChannel_GraphSerie_Name = oLib.Name + "::" + oVirtualChan.Name;
 
-                            oSpySeriesStates.AddItem(sSpySerie);
-                            FilterSpyGraphSeries();
-                        }
-        			}
-        			
-        			//Add Spy graphic sample
-        			if (!oChan.InError)
-        			{
-    					if(bSpyGraphEnabled & oChan.Value.GetType().Equals(typeof(double)))
-						{
-							TimeSpan TSample=DateTime.Now.Subtract(TStartSpy);
-							SpyGraphSeries.AddSerieSamples(oChan.Name,TSample.TotalSeconds,oChan.Value);
-						}
+                            GW_DataChannel oDataChan = SpyGraphData.Get_DataChannel(VirtualChannel_GraphSerie_Name);
+
+                            //Create the data channel if it does not exist yet
+                            if (oDataChan == null)
+                            {
+                                oDataChan = new GW_DataChannel(VirtualChannel_GraphSerie_Name, SamplingMode.MultipleRates);
+                                SpyGraphData.Channels.Add(oDataChan);
+                            }
+
+                            //Add Spy graphic sample
+                            if (!oVirtualChan.InError)
+                            {
+                                if (oVirtualChan.Value.GetType().Equals(typeof(double)))
+                                {
+                                    SerieSample sNewSample = new SerieSample();
+                                    sNewSample.SampleTime = DateTime.Now.Subtract(TStartSpy).TotalSeconds;
+                                    sNewSample.SampleValue = oVirtualChan.Value;
+
+                                    oDataChan.Add_ChannelValue(sNewSample);
+                                }
+                            }
+                        }   
         			}
         		}
         	}

@@ -107,9 +107,6 @@
     <Reference Include="Microsoft.Office.Interop.Excel">
       <HintPath>C:\Users\Vincent\Documents\Visual Studio 2013\Outils\Controls\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
-    <Reference Include="netchartdir_cp">
-      <HintPath>..\Dependencies\ChartDirector\netchartdir_cp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
