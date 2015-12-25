@@ -88,12 +88,7 @@ namespace CANStream
         /// Comments attached to the cycle
         /// </summary>
         public string Comment;
-
-        /// <summary>
-        /// CAN Configuration file path used by the cycle
-        /// </summary>
-        //public string CANConfigurationFilePath;
-
+        
         /// <summary>
         /// List of time events of the cycle
         /// </summary>
@@ -104,18 +99,12 @@ namespace CANStream
         /// </summary>
         public CANMessagesConfiguration oCanNodesMap;
         
-        /// <summary>
-        /// Graphic series of the cycle
-        /// </summary>
-        public GraphicSeries GraphSeries; //TODO: Remove
-
         #endregion
 
         public CANStreamCycle()
         {
             Name = "";
             Comment = "";
-            //CANConfigurationFilePath = "";
             oCanNodesMap = null;
             TimeEvents = new List<CycleTimeEvent>();
         }
@@ -337,6 +326,10 @@ namespace CANStream
             return (true);
         }
         
+        /// <summary>
+        /// Create the graphic data file of the current cycle for the Ctrl_GraphWindow control
+        /// </summary>
+        /// <returns>Ctrl_GraphWindow data file</returns>
         public GW_DataFile CreateCycleGraphData()
         {
             GW_DataFile oGraphData = new GW_DataFile();
@@ -383,44 +376,7 @@ namespace CANStream
 
             return (oGraphData);
         }
-
-        /// <summary>
-        /// Create the graphic series of the cycle
-        /// </summary>
-        public void CreateGraphicSeries()
-        {
-        	GraphSeries=new GraphicSeries();
-        	
-        	if (!(oCanNodesMap == null))
-        	{
-        		foreach(CycleTimeEvent TxEvent in TimeEvents)
-        		{
-        			foreach(CANMessageData MsgData in TxEvent.MessagesData)
-        			{
-        				CANMessage MsgCfg = oCanNodesMap.GetCANMessage(NumberBaseConverter.Dec2Hex(MsgData.uMessageId), MessageResearchOption.Identifier);
-        				
-        				if(!(MsgCfg==null))
-        				{
-        					TPCANMsg sTPMsg = new TPCANMsg();
-        					sTPMsg.DATA = MsgData.byteMessageData;
-        					
-        					CANMessageDecoded oMsgDecoded= new CANMessageDecoded(MsgCfg, sTPMsg);
-        					
-        					if (oMsgDecoded.bMessageDecoded)
-        					{
-        						foreach (CANParameter oParam in oMsgDecoded.Parameters)
-        						{
-        							GraphSeries.AddGraphicSerieSample(oParam.Name, (double)TxEvent.TimeEvent / 1000, oParam.DecodedValue);
-        						}
-        					}
-        				}
-        			}
-        		}
-        		
-        		GraphSeries.ProcessGraphicSeries();
-        	}
-        }
-		
+        
         /// <summary>
         /// Return the number of time events between two time events given as argument
         /// </summary>

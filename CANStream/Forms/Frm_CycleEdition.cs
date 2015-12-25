@@ -838,34 +838,11 @@ namespace CANStream
                 }
 
 				//Update cycle graph
-				if ((!(oCycle ==  null)) && (bCycleCreated))
-				{
-					oCycle.CreateGraphicSeries();
-					
-					if (!(oCycle.GraphSeries.FormatedSeries == null))
-					{
-						Plot_Cycle();
-					}
-					else
-					{
-						MessageBox.Show("The cycle doesn't contain any data to plot !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-					}
-				}
+                if(bCycleCreated)
+                {
+                    Plot_Cycle();
+                }
 			}
-		}
-		
-		#endregion
-		
-		#region Context_Graph
-		
-		private void Context_GraphMenuItem_Click(object sender, EventArgs e)
-		{
-			ToolStripMenuItem Item = (ToolStripMenuItem) sender;
-        	Item.Checked=!Item.Checked;
-        	
-        	oCycle.GraphSeries.SetFormatedSerieVisible(Item.Text,Item.Checked);
-        	
-        	Plot_Cycle();
 		}
 		
 		#endregion
@@ -2286,6 +2263,10 @@ namespace CANStream
                     CycleGraphicCtrl.Set_DataFile(oGraphicData);
                     CycleGraphicCtrl.Properties = oGraphicProps;
                     CycleGraphicCtrl.Refresh_Graphic();
+                }
+                else
+                {
+                    MessageBox.Show("The cycle does not contain any data to trace !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 			}
 		}

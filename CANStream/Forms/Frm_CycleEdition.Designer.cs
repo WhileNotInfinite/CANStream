@@ -79,7 +79,6 @@ namespace CANStream
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
             this.Img_GrdElement_TreeView = new System.Windows.Forms.ImageList(this.components);
             this.BGWrk_CycleMake = new System.ComponentModel.BackgroundWorker();
-            this.Context_Graph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -490,6 +489,7 @@ namespace CANStream
             this.CycleGraphicCtrl.Name = "CycleGraphicCtrl";
             this.CycleGraphicCtrl.OpenFileVisible = false;
             this.CycleGraphicCtrl.PrintEnabled = false;
+            this.CycleGraphicCtrl.ShortcutKeysEnabled = true;
             this.CycleGraphicCtrl.Size = new System.Drawing.Size(418, 392);
             this.CycleGraphicCtrl.SnapShotEnabled = false;
             this.CycleGraphicCtrl.TabIndex = 0;
@@ -511,11 +511,6 @@ namespace CANStream
             this.BGWrk_CycleMake.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_CycleMakeDoWork);
             this.BGWrk_CycleMake.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_CycleMakeProgressChanged);
             this.BGWrk_CycleMake.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_CycleMakeRunWorkerCompleted);
-            // 
-            // Context_Graph
-            // 
-            this.Context_Graph.Name = "Context_Graph";
-            this.Context_Graph.Size = new System.Drawing.Size(61, 4);
             // 
             // Frm_CycleEdition
             // 
@@ -591,6 +586,5 @@ namespace CANStream
 		private System.Windows.Forms.ToolStripButton TSB_New;
 		private System.Windows.Forms.ToolStrip toolStrip1;
         private Ctrl_GraphWindow.Ctrl_WaveForm CycleGraphicCtrl;
-        private System.Windows.Forms.ContextMenuStrip Context_Graph;
     }
 }
