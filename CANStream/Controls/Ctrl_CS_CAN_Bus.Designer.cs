@@ -802,6 +802,7 @@ namespace CANStream
             this.Graph_SpyData.Name = "Graph_SpyData";
             this.Graph_SpyData.OpenFileVisible = false;
             this.Graph_SpyData.PrintEnabled = false;
+            this.Graph_SpyData.RealTimeGraphic = true;
             this.Graph_SpyData.ShortcutKeysEnabled = false;
             this.Graph_SpyData.Size = new System.Drawing.Size(485, 309);
             this.Graph_SpyData.SnapShotEnabled = false;
@@ -1161,6 +1162,7 @@ namespace CANStream
             this.Graph_Cycle.Name = "Graph_Cycle";
             this.Graph_Cycle.OpenFileVisible = false;
             this.Graph_Cycle.PrintEnabled = false;
+            this.Graph_Cycle.RealTimeGraphic = false;
             this.Graph_Cycle.ShortcutKeysEnabled = false;
             this.Graph_Cycle.Size = new System.Drawing.Size(646, 430);
             this.Graph_Cycle.SnapShotEnabled = false;

@@ -12,21 +12,21 @@
          <Members>
           <Member Name="#.ctor(System.IO.TextReader)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\Parsing" File="ExpressionParser.vb" Line="63">'ExpressionParser.New(TextReader)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;ExpressionParser..ctor(TextReader)&#xD;&#xA;ExpressionParser.CreatePatterns():Void&#xD;&#xA;RecursiveDescentParser.AddPattern(ProductionPattern):Void</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#.ctor(System.IO.TextReader,Ciloci.Flee.PerCederberg.Grammatica.Runtime.Analyzer)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\Parsing" File="ExpressionParser.vb" Line="76">'ExpressionParser.New(TextReader, Analyzer)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;ExpressionParser..ctor(TextReader, Analyzer)&#xD;&#xA;ExpressionParser.CreatePatterns():Void&#xD;&#xA;RecursiveDescentParser.AddPattern(ProductionPattern):Void</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#.ctor(System.IO.TextReader,Ciloci.Flee.PerCederberg.Grammatica.Runtime.Analyzer,Ciloci.Flee.ExpressionContext)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
              <Issue Certainty="95" Level="CriticalWarning" Path="C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\Parsing" File="ExpressionParser.vb" Line="52">'ExpressionParser.New(TextReader, Analyzer, ExpressionContext)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;ExpressionParser..ctor(TextReader, Analyzer, ExpressionContext)&#xD;&#xA;ExpressionParser.CreatePatterns():Void&#xD;&#xA;RecursiveDescentParser.AddPattern(ProductionPattern):Void</Issue>
             </Message>
            </Messages>
@@ -39,7 +39,7 @@
        <Types>
         <Type Name="CircularReferenceException" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+          <Message TypeName="ImplementISerializableCorrectly" Category="Microsoft.Usage" CheckId="CA2240" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
            <Issue Certainty="60" Level="Error">Add an implementation of GetObjectData to type 'CircularReferenceException'.</Issue>
           </Message>
          </Messages>
@@ -50,14 +50,14 @@
        <Types>
         <Type Name="ParserCreationException" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+          <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="Error">Add [Serializable] to 'ParserCreationException' as this type implements ISerializable.</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="Tokenizer" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
            <Issue Name="NonBreaking" Certainty="95" Level="CriticalError">Implement IDisposable on 'Tokenizer' because it creates members of the following IDisposable types: 'LookAheadReader'.</Issue>
           </Message>
          </Messages>
@@ -68,7 +68,7 @@
        <Types>
         <Type Name="RegExpException" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Status="Active" Created="2015-08-07 21:58:03Z" FixCategory="NonBreaking">
+          <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Status="Active" Created="2015-12-25 13:42:26Z" FixCategory="NonBreaking">
            <Issue Certainty="95" Level="Error">Add [Serializable] to 'RegExpException' as this type implements ISerializable.</Issue>
           </Message>
          </Messages>
