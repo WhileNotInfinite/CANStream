@@ -794,7 +794,7 @@ namespace CANStream
             this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_SpyData.ChannelListEnabled = false;
+            this.Graph_SpyData.ChannelListEnabled = true;
             this.Graph_SpyData.CursorEnabled = false;
             this.Graph_SpyData.EditGraphicConfigurationEnable = false;
             this.Graph_SpyData.LegendEnabled = false;

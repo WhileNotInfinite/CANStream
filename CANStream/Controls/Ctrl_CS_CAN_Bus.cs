@@ -2375,6 +2375,7 @@ namespace CANStream
                                             {
                                                 oDataChan = new GW_DataChannel(oParam.Name, SamplingMode.MultipleRates);
                                                 SpyGraphData.Channels.Add(oDataChan);
+                                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name);
                                             }
 
                                             //Add Spy graphic sample
@@ -2487,7 +2488,9 @@ namespace CANStream
             if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
             {
                 SpyGraphData.FIFO_TimeBuffer();
-                Graph_SpyData.Refresh_Graphic(GraphDrawingStages.XAxis_Values);
+                //TODO: Work here
+                Graph_SpyData.Refresh_Graphic(GraphDrawingStages.XAxis_Values); //It does not work
+                //Graph_SpyData.Refresh_Graphic(GraphDrawingStages.Scratch); //It works
             }
         }
 
@@ -2502,6 +2505,7 @@ namespace CANStream
             if (FullReset)
             {
                 Graph_SpyData.Properties = new GraphWindowProperties();
+                Graph_SpyData.Clear_ChannelList();
             }
         }
 
