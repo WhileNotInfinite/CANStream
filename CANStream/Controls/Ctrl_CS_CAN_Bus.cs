@@ -582,13 +582,15 @@ namespace CANStream
 
         private void BGWrk_ManualProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (Pic_ManualRunning.Image == Icones.LED_Green_48)
+            if ((bool)Pic_ManualRunning.Tag == false)
             {
                 Pic_ManualRunning.Image = Icones.LED_Blue_48;
+                Pic_ManualRunning.Tag = true;
             }
             else
             {
                 Pic_ManualRunning.Image = Icones.LED_Green_48;
+                Pic_ManualRunning.Tag = false;
             }
 
             if (TxEngMessages != null)
@@ -1905,6 +1907,7 @@ namespace CANStream
         {
             Pic_ManualRunning.Image = Icones.LED_Blue_48;
             Pic_ManualRunning.Visible = true;
+            Pic_ManualRunning.Tag = false;
 
             bManualRunning = true;
 
