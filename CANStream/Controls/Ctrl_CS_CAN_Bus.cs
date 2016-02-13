@@ -2488,9 +2488,7 @@ namespace CANStream
             if (TGraphUpdate.TotalMilliseconds > SPY_GRAPH_UPDATE_PERIOD)
             {
                 SpyGraphData.FIFO_TimeBuffer();
-                //TODO: Work here
-                Graph_SpyData.Refresh_Graphic(GraphDrawingStages.XAxis_Values); //It does not work
-                //Graph_SpyData.Refresh_Graphic(GraphDrawingStages.Scratch); //It works
+                Graph_SpyData.Refresh_Graphic(GraphDrawingStages.XAxis_Values);
             }
         }
 
