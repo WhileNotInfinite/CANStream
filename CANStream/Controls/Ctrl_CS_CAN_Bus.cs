@@ -2489,6 +2489,8 @@ namespace CANStream
             {
                 SpyGraphData.FIFO_TimeBuffer();
                 Graph_SpyData.Refresh_Graphic(GraphDrawingStages.XAxis_Values);
+
+                TLastSpyGraphUpdate = DateTime.Now;
             }
         }
 
