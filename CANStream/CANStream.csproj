@@ -134,6 +134,7 @@
     <Compile Include="Class\CycleDataAssociation.cs" />
     <Compile Include="Class\CycleEditionConfiguration.cs" />
     <Compile Include="Class\GraphicSeries.cs" />
+    <Compile Include="MicroSecondTimer\MicroSecondLibrary.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
     <Compile Include="Class\CommonSignalProperties.cs" />

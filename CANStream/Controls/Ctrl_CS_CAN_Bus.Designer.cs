@@ -152,9 +152,7 @@ namespace CANStream
             this.Lbl_CanConfig = new System.Windows.Forms.Label();
             this.Lbl_CycleFile = new System.Windows.Forms.Label();
             this.Img_TabControl = new System.Windows.Forms.ImageList(this.components);
-            this.Timer_CycleGraph = new System.Windows.Forms.Timer(this.components);
             this.Timer_CheckDevice = new System.Windows.Forms.Timer(this.components);
-            this.BGWrk_Cycle = new System.ComponentModel.BackgroundWorker();
             this.BGWrk_Manual = new System.ComponentModel.BackgroundWorker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
@@ -1449,23 +1447,10 @@ namespace CANStream
             this.Img_TabControl.Images.SetKeyName(0, "personal.png");
             this.Img_TabControl.Images.SetKeyName(1, "windows-movie-maker-icone-8672-16.png");
             // 
-            // Timer_CycleGraph
-            // 
-            this.Timer_CycleGraph.Interval = 50;
-            this.Timer_CycleGraph.Tick += new System.EventHandler(this.Timer_CycleGraphTick);
-            // 
             // Timer_CheckDevice
             // 
             this.Timer_CheckDevice.Interval = 5000;
             this.Timer_CheckDevice.Tick += new System.EventHandler(this.Timer_CheckDeviceTick);
-            // 
-            // BGWrk_Cycle
-            // 
-            this.BGWrk_Cycle.WorkerReportsProgress = true;
-            this.BGWrk_Cycle.WorkerSupportsCancellation = true;
-            this.BGWrk_Cycle.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_CycleDoWork);
-            this.BGWrk_Cycle.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_CycleProgressChanged);
-            this.BGWrk_Cycle.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrk_CycleRunWorkerCompleted);
             // 
             // BGWrk_Manual
             // 
@@ -1579,9 +1564,7 @@ namespace CANStream
 		private System.ComponentModel.BackgroundWorker BGWrk_Spy;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.ComponentModel.BackgroundWorker BGWrk_Manual;
-		private System.ComponentModel.BackgroundWorker BGWrk_Cycle;
 		private System.Windows.Forms.Timer Timer_CheckDevice;
-		private System.Windows.Forms.Timer Timer_CycleGraph;
 		private System.Windows.Forms.Label Lbl_CycleFile;
 		private System.Windows.Forms.Label Lbl_CanConfig;
 		private System.Windows.Forms.Label label1;
