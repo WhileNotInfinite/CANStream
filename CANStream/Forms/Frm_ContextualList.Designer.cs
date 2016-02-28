@@ -51,6 +51,7 @@ namespace CANStream
             this.LV_Items.Location = new System.Drawing.Point(4, 3);
             this.LV_Items.MultiSelect = false;
             this.LV_Items.Name = "LV_Items";
+            this.LV_Items.ShowItemToolTips = true;
             this.LV_Items.Size = new System.Drawing.Size(178, 208);
             this.LV_Items.SmallImageList = this.Img_LVItems;
             this.LV_Items.Sorting = System.Windows.Forms.SortOrder.Ascending;
@@ -94,5 +95,5 @@ namespace CANStream
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ImageList Img_LVItems;
 		private System.Windows.Forms.ListView LV_Items;
-	}
+    }
 }

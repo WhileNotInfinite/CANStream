@@ -59,7 +59,8 @@ namespace CANStream
 
                     foreach(ExpressionFunctionInfo sFuncInfo in FuncListInfo)
                     {
-                        LV_Items.Items.Add(sFuncInfo.Name, 1);
+                        ListViewItem It = LV_Items.Items.Add(sFuncInfo.Name, 1);
+                        It.ToolTipText = sFuncInfo.FunctionExample;
                     }
                 }
 				else //List of elements (CAN parameters, virtual channels, built-in signals)
@@ -132,12 +133,12 @@ namespace CANStream
 		{
 			SendSelectionToParentForm();
 		}
-		
-		#endregion
-		
-		#region Private methods
-		
-		private void SendSelectionToParentForm()
+
+        #endregion
+
+        #region Private methods
+
+        private void SendSelectionToParentForm()
 		{
 			if (!(LV_Items.SelectedItems == null))
 			{
@@ -189,6 +190,9 @@ namespace CANStream
             return (-1);
         }
 
+
         #endregion
+
+        
     }
 }

@@ -46,6 +46,7 @@ namespace CANStream
     {
         public string Name;
         public int ArgumentCount;
+        public string FunctionExample;
     }
 
     #endregion
@@ -1663,46 +1664,77 @@ namespace CANStream
 		private ExpressionFunctionInfo[] Create_VC_FunctionList()
 		{
 			List<ExpressionFunctionInfo> Funcs = new List<ExpressionFunctionInfo>();
-			
-			Type t = typeof(Math);
-			System.Reflection.MethodInfo[] MethodsInfo =  t.GetMethods();
-			
-			foreach(System.Reflection.MethodInfo mInfo in MethodsInfo)
-			{
-                ExpressionFunctionInfo sFuncInfo = new ExpressionFunctionInfo();
 
-                sFuncInfo.Name = mInfo.Name;
-                sFuncInfo.ArgumentCount = mInfo.GetParameters().Length;
+            List<ExpressionFunctionInfo> MathFuncs = GetLibraryMethodsInfo(typeof(Math));
+            Funcs.AddRange(MathFuncs);
 
-                if (!(Funcs.Contains(sFuncInfo)))
-				{
-					Funcs.Add(sFuncInfo);
-				}
-			}
-			
-			t = typeof(CS_BuiltIn_Func);
-			MethodsInfo = t.GetMethods();
-			
-			foreach(System.Reflection.MethodInfo mInfo in MethodsInfo)
-			{
-                ExpressionFunctionInfo sFuncInfo = new ExpressionFunctionInfo();
-
-                sFuncInfo.Name = mInfo.Name;
-                sFuncInfo.ArgumentCount = mInfo.GetParameters().Length;
-
-                if (!(Funcs.Contains(sFuncInfo)))
-				{
-					Funcs.Add(sFuncInfo);
-				}
-			}
+            List<ExpressionFunctionInfo> CS_BuiltInFuncs = GetLibraryMethodsInfo(typeof(CS_BuiltIn_Func));
+            Funcs.AddRange(CS_BuiltInFuncs);
 
             Funcs.Sort(delegate (ExpressionFunctionInfo a1, ExpressionFunctionInfo a2) { return string.Compare(a1.Name, a2.Name); });
 			
 			return(Funcs.ToArray());
-			
 		}
 
-        
+        private List<ExpressionFunctionInfo> GetLibraryMethodsInfo(Type LibraryType)
+        {
+            List<ExpressionFunctionInfo> Funcs = new List<ExpressionFunctionInfo>();
+
+            System.Reflection.MethodInfo[] MethodsInfo = LibraryType.GetMethods();
+
+            foreach (System.Reflection.MethodInfo mInfo in MethodsInfo)
+            {
+                ExpressionFunctionInfo sFuncInfo = new ExpressionFunctionInfo();
+
+                sFuncInfo.Name = mInfo.Name;
+                System.Reflection.ParameterInfo[] MethodParams = mInfo.GetParameters();
+
+                if (!(MethodHasOutParameter(MethodParams)) && (MethodParams.Length>0))
+                {
+                    sFuncInfo.FunctionExample = GetMethodExample(MethodParams, mInfo.Name);
+                    sFuncInfo.ArgumentCount = MethodParams.Length;
+
+                    if (!(Funcs.Contains(sFuncInfo)))
+                    {
+                        Funcs.Add(sFuncInfo);
+                    }
+                }
+            }
+
+            return (Funcs);
+        }
+
+        private bool MethodHasOutParameter(System.Reflection.ParameterInfo[] MethodParameters)
+        {
+            foreach(System.Reflection.ParameterInfo oParamInfo in MethodParameters)
+            {
+                if(oParamInfo.IsOut)
+                {
+                    return (true);
+                }
+            }
+
+            return (false);
+        }
+
+        private string GetMethodExample(System.Reflection.ParameterInfo[] MethodParameters, string MethodName)
+        {
+            string Example = "Y = " + MethodName + "(";
+
+            for(int i=0; i<MethodParameters.Length; i++)
+            {
+                if(i>0)
+                {
+                    Example += "; ";
+                }
+
+                Example += MethodParameters[i].Name;
+            }
+
+            Example += ")";
+
+            return (Example);
+        }
 
         #endregion
 
