@@ -120,7 +120,7 @@ namespace CANStream
 		
 		#endregion
 		
-		#region Unit conversion function
+		#region Unit conversion functions
 		
 		#region Angle unit
 		
@@ -647,22 +647,31 @@ namespace CANStream
 		{
 			return(A*1000);
 		}
-		
-		#endregion
-		
-		#endregion
-		
-		#endregion
-	}
-	
-	#endregion
-	
-	#region Virtual channel computation classes
-	
-	/// <summary>
-	/// Virtual channel variable element structure
-	/// </summary>
-	public class CS_VC_Variable
+
+        #endregion
+
+        #endregion
+
+        #region Mathematical functions
+
+        public static double fmod(double A, double B)
+        {
+            return (A % B);
+        }
+
+        #endregion
+
+        #endregion
+    }
+
+    #endregion
+
+    #region Virtual channel computation classes
+
+    /// <summary>
+    /// Virtual channel variable element structure
+    /// </summary>
+    public class CS_VC_Variable
 	{
 		#region Public members
 		
