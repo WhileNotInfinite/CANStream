@@ -189,14 +189,22 @@ namespace CANStream
 		/// Receive-Event
 		/// </summary>
 		private System.Threading.AutoResetEvent m_ReceiveEvent;
-		
-		#endregion
-		
-		#endregion
-		
-		#region Public events
-		
-		public event EventHandler<ControllerModeChangedEventArgs> ControllerModeChanged;
+
+        #endregion
+
+        #endregion
+
+        #region Private delegates
+
+        private delegate void TxFrameReceivedWarningDelegateHandler(int MsgId, string Source);
+
+        private TxFrameReceivedWarningDelegateHandler TxFrameReceivedWarningHandler;
+
+        #endregion
+
+        #region Public events
+
+        public event EventHandler<ControllerModeChangedEventArgs> ControllerModeChanged;
 		
 		public event EventHandler<ControllerCANConfigChangedEventArgs> ControllerCanConfigChanged;
 		
@@ -290,9 +298,12 @@ namespace CANStream
             TSTxt_IdFilterTo.Tag = (uint)0x7ff;
 			Cmb_SpyCANRate.SelectedIndex = 1; //1000 kBit/s
 			Cmb_SpyCANRxMode.Text = SpyCANRxMode.Event.ToString();
-			
-			//Initialization of manual control management
-			bRawMsgGridEdition = false;
+
+            //Initialization of CAN spy control delegate methods
+            TxFrameReceivedWarningHandler = new TxFrameReceivedWarningDelegateHandler(TxFrameReceivedWarningTask);
+
+            //Initialization of manual control management
+            bRawMsgGridEdition = false;
 			NextRawMessageKeyId = 0;
 			TxRawMessages = null;
 			bVirtualParamTx = false;
@@ -1858,33 +1869,36 @@ namespace CANStream
                     {
                         foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
                         {
-                            Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
-
-                            if (TimeRem == 0) //It's time to send the message
+                            if (oMsgEncod.Send)
                             {
-                                if (oMsgEncod.HasVirtualParameters)
+                                Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
+
+                                if (TimeRem == 0) //It's time to send the message
                                 {
-                                    foreach (CANParameter oParam in oMsgEncod.Parameters)
+                                    if (oMsgEncod.HasVirtualParameters)
                                     {
-                                        if (oParam.IsVirtual)
+                                        foreach (CANParameter oParam in oMsgEncod.Parameters)
                                         {
-                                            oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
-                                                                                                           oParam.VirtualChannelReference.ChannelName);
+                                            if (oParam.IsVirtual)
+                                            {
+                                                oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
+                                                                                                               oParam.VirtualChannelReference.ChannelName);
+                                            }
                                         }
+
+                                        oMsgEncod.EncodeMessage();
                                     }
 
-                                    oMsgEncod.EncodeMessage();
-                                }
-
-                                if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
-                                {
-                                    if (SendMessage(oMsgEncod.GetPCANMessage()))
+                                    if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
                                     {
-                                        if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
-
-                                        if (Chk_CycleMux.Checked)
+                                        if (SendMessage(oMsgEncod.GetPCANMessage()))
                                         {
-                                            oMsgEncod.SetMultiplexer();
+                                            if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
+
+                                            if (Chk_CycleMux.Checked)
+                                            {
+                                                oMsgEncod.SetMultiplexer();
+                                            }
                                         }
                                     }
                                 }
@@ -2243,6 +2257,44 @@ namespace CANStream
                         CANMessageDecoded oMsgDecoded = new CANMessageDecoded(oMsgCfg, msgStsCurrentMsg.CANMsg);
                         DecodedMessages.Add(oMsgDecoded);
                     }
+
+                    //Check whether th id of the received message is contained in the TX messages list
+                    if (!DataRxOnly)
+                    {
+                        bool IsTxList = false;
+                        string Src = "";
+
+                        if (TxEngMessages != null)
+                        {
+                            foreach (CANMessageEncoded TxMsg in TxEngMessages)
+                            {
+                                if (TxMsg.uMessageId == newMsg.ID)
+                                {
+                                    IsTxList = true;
+                                    Src = "engineering";
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!IsTxList && TxRawMessages != null) //Not in engeeniring TX messages list, search in raw TX messages list
+                        {
+                            foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
+                            {
+                                if (oRawMsg.MessageId == newMsg.ID)
+                                {
+                                    IsTxList = true;
+                                    Src = "raw";
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (IsTxList) //Raise the warning
+                        {
+                            this.BeginInvoke(TxFrameReceivedWarningHandler, new object[] { newMsg.ID, Src });
+                        }
+                    }
                 }
             }
         }
@@ -2432,6 +2484,56 @@ namespace CANStream
             ControllerRunningChangedEventArgs Args = new ControllerRunningChangedEventArgs();
             Args.Running = bRunning;
             OnControllerSpyRunningChanged(Args);
+        }
+
+        private void TxFrameReceivedWarningTask(int MsgId, string Source)
+        {
+            string Txt = "CAN Frame ID 0x" + MsgId.ToString("X4")
+                        + " has been received in the RX buffer while the same frame ID is present in the "
+                        + Source + " TX frames list"
+                        + "\nThere is a risk of frame collusion, what do you want to do ?";
+
+            RxFrameInTxListDialogResult Res = Dlg_RxFrameInTxListWarning.Show(Txt);
+
+            switch(Res)
+            {
+                case RxFrameInTxListDialogResult.DisableTxFrame:
+
+                    if(Source.Equals("engineering"))
+                    {
+                        foreach(CANMessageEncoded oEngFrame in TxEngMessages)
+                        {
+                            if (oEngFrame.uMessageId == MsgId)
+                            {
+                                oEngFrame.Send = false;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (CAN_RawMessageData oRawFrame in TxRawMessages.Messages)
+                        {
+                            if (oRawFrame.MessageId == MsgId)
+                            {
+                                oRawFrame.Send = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    break;
+
+                case RxFrameInTxListDialogResult.GoRxOnly:
+
+                    Switch_RxOnly();
+                    break;
+
+                default:
+
+                    //Nothing to do
+                    break;
+            }
         }
 
         #region Spy data history

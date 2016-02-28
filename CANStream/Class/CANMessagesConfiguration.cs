@@ -1870,11 +1870,17 @@ namespace CANStream
 
         public ulong TxCount;
 
-		#endregion
-		
-		#region Private members
-		
-		private List<long> MuxTable;
+        #endregion
+
+        #region Internal members
+
+        internal bool Send;
+
+        #endregion
+
+        #region Private members
+
+        private List<long> MuxTable;
 		private int MuxIndex;
 		private CANParameter oMultiplexer;
 		
@@ -1897,8 +1903,9 @@ namespace CANStream
 				
 				uMessageId=(UInt32)NumberBaseConverter.Hex2Dec(MessageCfg.Identifier);
 				ByteMessageData=new byte[MessageCfg.DLC];
-				
-				HasVirtualParameters = false;
+                Send = true;
+
+                HasVirtualParameters = false;
 				foreach (CANParameter oParam in Parameters)
 				{
 					if (oParam.IsVirtual)

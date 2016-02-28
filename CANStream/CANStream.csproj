@@ -134,6 +134,12 @@
     <Compile Include="Class\CycleDataAssociation.cs" />
     <Compile Include="Class\CycleEditionConfiguration.cs" />
     <Compile Include="Class\GraphicSeries.cs" />
+    <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.Designer.cs">
+      <DependentUpon>Dlg_RxFrameInTxListWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="MicroSecondTimer\MicroSecondLibrary.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
@@ -352,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Dlg_DBCTransmitterSelection.resx">
       <DependentUpon>Dlg_DBCTransmitterSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Dlg_RxFrameInTxListWarning.resx">
+      <DependentUpon>Dlg_RxFrameInTxListWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_About.resx">
       <DependentUpon>Frm_About.cs</DependentUpon>
