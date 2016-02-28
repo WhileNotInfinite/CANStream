@@ -1174,7 +1174,9 @@ namespace CANStream
         
         private void ActiveBusController_ControllerDiagChanged(object sender, ControllerDiagChangedEventArgs e)
         {
-        	if (!(e.BusIndex == (int)ActiveCanBus.Tag))
+            if (ActiveCanBus == null) return;
+
+            if (!(e.BusIndex == (int)ActiveCanBus.Tag))
         	{
         		return;
         	}
