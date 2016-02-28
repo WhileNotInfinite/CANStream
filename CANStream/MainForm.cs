@@ -1119,35 +1119,44 @@ namespace CANStream
         
         private void ActiveBusController_ControllerCycleRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-            SetCANControlsRunningCommands(e.Running);
+            if ((Ctrl_CS_CAN_Bus)sender == ActiveCanBus)
+            {
+                SetCANControlsRunningCommands(e.Running);
 
-            if (e.Running)
-        	{
-        		TSS_Lbl_PCAN_Diag_Title.Visible = false;
-        		TSS_Lbl_PCAN_Diag_Text.Visible = false;
-        	}
+                if (e.Running)
+                {
+                    TSS_Lbl_PCAN_Diag_Title.Visible = false;
+                    TSS_Lbl_PCAN_Diag_Text.Visible = false;
+                }
+            }
         }
         
         private void ActiveBusController_ControllerManualRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-            SetCANControlsRunningCommands(e.Running);
+            if ((Ctrl_CS_CAN_Bus)sender == ActiveCanBus)
+            {
+                SetCANControlsRunningCommands(e.Running);
 
-            if (e.Running)
-        	{
-        		TSS_Lbl_PCAN_Diag_Title.Visible = false;
-        		TSS_Lbl_PCAN_Diag_Text.Visible = false;
-        	}
+                if (e.Running)
+                {
+                    TSS_Lbl_PCAN_Diag_Title.Visible = false;
+                    TSS_Lbl_PCAN_Diag_Text.Visible = false;
+                }
+            }
         }
         
         private void ActiveBusController_ControllerSpyRunningChanged(object sender, ControllerRunningChangedEventArgs e)
         {
-            SetCANControlsRunningCommands(e.Running);
+            if ((Ctrl_CS_CAN_Bus)sender == ActiveCanBus)
+            {
+                SetCANControlsRunningCommands(e.Running);
 
-            if (e.Running)
-        	{
-        		TSS_Lbl_PCAN_Diag_Title.Visible = false;
-        		TSS_Lbl_PCAN_Diag_Text.Visible = false;
-        	}
+                if (e.Running)
+                {
+                    TSS_Lbl_PCAN_Diag_Title.Visible = false;
+                    TSS_Lbl_PCAN_Diag_Text.Visible = false;
+                }
+            }
         }
         
         private void ActiveBusController_LayoutChanged(object sender, ControllerLayoutChangedEventArgs e)
@@ -1887,9 +1896,10 @@ namespace CANStream
 						
         				break;
         		}
-        		
-				FrmMain_MenuStrip.Enabled = !(ActiveCanBus.IsCycleWorkerBusy() || ActiveCanBus.IsManualWorkerBusy() || ActiveCanBus.IsSpyWorkerBusy());
-        	}
+
+                SetCANControlsRunningCommands((ActiveCanBus.IsCycleWorkerBusy() || ActiveCanBus.IsManualWorkerBusy() || ActiveCanBus.IsSpyWorkerBusy()));
+
+            }
         	//else not supposed to happen...
         }
         
