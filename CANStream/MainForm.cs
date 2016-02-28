@@ -1588,26 +1588,29 @@ namespace CANStream
 
             foreach (string sElement in ElementsHistory)
             {
-                ToolStripItem oItem = HistoryMenuItem.DropDownItems.Add(Path.GetFileName(sElement));
-                oItem.Tag = sElement;
-
-                switch (eHistoryItem)
+                if (File.Exists(sElement))
                 {
-                    case HistoryElements.CanConfiguration:
+                    ToolStripItem oItem = HistoryMenuItem.DropDownItems.Add(Path.GetFileName(sElement));
+                    oItem.Tag = sElement;
 
-                        oItem.Click += new EventHandler(CanConfigHistoryItem_Click);
-                        break;
+                    switch (eHistoryItem)
+                    {
+                        case HistoryElements.CanConfiguration:
 
-                    case HistoryElements.Cycle:
+                            oItem.Click += new EventHandler(CanConfigHistoryItem_Click);
+                            break;
 
-                        oItem.Click += new EventHandler(CycleHistoryItem_Click);
-                        break;
+                        case HistoryElements.Cycle:
 
-                    case HistoryElements.DataViewer:
+                            oItem.Click += new EventHandler(CycleHistoryItem_Click);
+                            break;
 
-                        oItem.Click += new EventHandler(DataViewerHistoryItem_Click);
-                        break;
+                        case HistoryElements.DataViewer:
 
+                            oItem.Click += new EventHandler(DataViewerHistoryItem_Click);
+                            break;
+
+                    }
                 }
             }
         }
