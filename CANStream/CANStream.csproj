@@ -454,6 +454,8 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\sender-mail-address-icone-8786-32.png" />
+    <None Include="Resources\all-mail-address-icone-7791-32.png" />
     <None Include="Resources\ledgreen-icone-4983-48.png" />
     <None Include="Resources\balle-bleu-diode-led-icone-8413-48.png" />
     <None Include="app.config" />

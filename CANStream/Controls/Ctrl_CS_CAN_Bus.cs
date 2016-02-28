@@ -152,6 +152,7 @@ namespace CANStream
 		private CAN_RawMessageList TxRawMessages;
 		private bool bVirtualParamTx;
         private bool bRawMsgSending;
+        private bool DataRxOnly;
 		
 		//CAN trace record
 		private bool bRecording;
@@ -216,7 +217,9 @@ namespace CANStream
 		public event EventHandler<ControllerGridColumnsChangedEventArgs> ControllerGridColumnsChanged;
 		
 		public event EventHandler<ControllerDiagChangedEventArgs> ControllerDiagChanged;
-		
+
+        public event EventHandler<ControllerRxOnlyModeChangedEventArgs> ControllerRxOnlyModeChanged;
+
 		#endregion
 		
 		#region Public properties
@@ -294,6 +297,8 @@ namespace CANStream
 			TxRawMessages = null;
 			bVirtualParamTx = false;
             bRawMsgSending = false;
+            DataRxOnly = false;
+            ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Data TX Enabled");
 
             //Trace recording init
             RecordMode = RecordingMode.Manual;
@@ -490,6 +495,11 @@ namespace CANStream
         {
             StopSpy();
             StopManualControl();
+        }
+
+        private void Cmd_RxOnly_Click(object sender, EventArgs e)
+        {
+            Switch_RxOnly();
         }
 
         private void Cmb_SpyCANRateSelectedIndexChanged(object sender, EventArgs e)
@@ -1407,9 +1417,10 @@ namespace CANStream
 					Chk_CycleVirtualParamTxEnabled.Enabled = true;
 					Chk_CycleVirtualParamTxEnabled.Checked = true;
 				}
-				
-				//Spy & Manual control panel
-				Cmd_StartSpy.Enabled=true;
+
+                //Spy & Manual control panel
+                Cmd_StartSpy.Enabled = true;
+                Cmd_RxOnly.Enabled = true;
 			}
 			else
 			{
@@ -1428,7 +1439,8 @@ namespace CANStream
 				//Spy & Manual control panel
 				Cmd_StartSpy.Enabled=false;
 				Cmd_StopSpy.Enabled=false;
-			}
+                Cmd_RxOnly.Enabled = false;
+            }
 		}
 		
 		private void InitCANCommunication()
@@ -1839,59 +1851,62 @@ namespace CANStream
 
             while (!(Worker.CancellationPending))
             {
-                //Engineering Messages sending
-                if (!(TxEngMessages == null))
+                if (!DataRxOnly) //Data TX enabled
                 {
-                    foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
+                    //Engineering Messages sending
+                    if (!(TxEngMessages == null))
                     {
-                        Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
-
-                        if (TimeRem == 0) //It's time to send the message
+                        foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
                         {
-                            if (oMsgEncod.HasVirtualParameters)
+                            Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
+
+                            if (TimeRem == 0) //It's time to send the message
                             {
-                                foreach (CANParameter oParam in oMsgEncod.Parameters)
+                                if (oMsgEncod.HasVirtualParameters)
                                 {
-                                    if (oParam.IsVirtual)
+                                    foreach (CANParameter oParam in oMsgEncod.Parameters)
                                     {
-                                        oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
-                                                                                                       oParam.VirtualChannelReference.ChannelName);
+                                        if (oParam.IsVirtual)
+                                        {
+                                            oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
+                                                                                                           oParam.VirtualChannelReference.ChannelName);
+                                        }
                                     }
+
+                                    oMsgEncod.EncodeMessage();
                                 }
 
-                                oMsgEncod.EncodeMessage();
-                            }
-
-                            if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
-                            {
-                                if (SendMessage(oMsgEncod.GetPCANMessage()))
+                                if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
                                 {
-                                    if(!(oMsgEncod.TxCount==ulong.MaxValue)) oMsgEncod.TxCount++;
-
-                                    if (Chk_CycleMux.Checked)
+                                    if (SendMessage(oMsgEncod.GetPCANMessage()))
                                     {
-                                        oMsgEncod.SetMultiplexer();
+                                        if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
+
+                                        if (Chk_CycleMux.Checked)
+                                        {
+                                            oMsgEncod.SetMultiplexer();
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
 
-                //Raw Message sending
-                if (!(TxRawMessages == null))
-                {
-                    foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
+                    //Raw Message sending
+                    if (!(TxRawMessages == null))
                     {
-                        if (oRawMsg.Send && oRawMsg.Period > 0)
+                        foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
                         {
-                            Math.DivRem(iTime, oRawMsg.Period, out TimeRem);
-
-                            if (TimeRem == 0) //It's time to send the message
+                            if (oRawMsg.Send && oRawMsg.Period > 0)
                             {
-                                if (SendMessage(oRawMsg.GetPCANMessage()))
+                                Math.DivRem(iTime, oRawMsg.Period, out TimeRem);
+
+                                if (TimeRem == 0) //It's time to send the message
                                 {
-                                    oRawMsg.TxCount++;
+                                    if (SendMessage(oRawMsg.GetPCANMessage()))
+                                    {
+                                        oRawMsg.TxCount++;
+                                    }
                                 }
                             }
                         }
@@ -3321,6 +3336,15 @@ namespace CANStream
 			}
 		}
 		
+        protected virtual void OnControllerRxOnlyModeChanged(ControllerRxOnlyModeChangedEventArgs e)
+        {
+            EventHandler<ControllerRxOnlyModeChangedEventArgs> Handler = ControllerRxOnlyModeChanged;
+            if (Handler != null)
+            {
+                Handler(this, e);
+            }
+        }
+
 		#endregion
 		
 		#region Public methodes
@@ -3357,6 +3381,27 @@ namespace CANStream
         public bool IsManualWorkerBusy()
         {
             return (BGWrk_Manual.IsBusy);
+        }
+
+        public void Switch_RxOnly()
+        {
+            DataRxOnly = !DataRxOnly;
+
+            if (DataRxOnly)
+            {
+                Cmd_RxOnly.Image = Icones.RX_Only_32;
+                ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Data RX Only");
+            }
+            else
+            {
+                Cmd_RxOnly.Image = Icones.RXTX_32;
+                ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Data TX Enabled");
+            }
+
+            //Event firing
+            ControllerRxOnlyModeChangedEventArgs Args = new ControllerRxOnlyModeChangedEventArgs();
+            Args.RxOnly = DataRxOnly;
+            OnControllerRxOnlyModeChanged(Args);
         }
 
         #region Manual raw messages
@@ -4104,6 +4149,11 @@ namespace CANStream
 		public int BusIndex {get; set;}
 	}
 	
+    public class ControllerRxOnlyModeChangedEventArgs : EventArgs
+    {
+        public bool RxOnly { get; set; }
+    }
+
 	#endregion	
 	
 	#region Other classes

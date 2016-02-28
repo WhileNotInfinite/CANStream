@@ -953,6 +953,26 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RX_Only_32 {
+            get {
+                object obj = ResourceManager.GetObject("RX_Only_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RXTX_32 {
+            get {
+                object obj = ResourceManager.GetObject("RXTX_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Special_Paste_16 {
             get {
                 object obj = ResourceManager.GetObject("Special_Paste_16", resourceCulture);
