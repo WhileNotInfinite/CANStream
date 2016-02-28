@@ -555,7 +555,9 @@ namespace CANStream
 
         private void ResizeGridColumns(DataGridView oGrid, int FillerColumn)
 		{
-			int ColCnt = GetGridColumnsVisibleCount(oGrid);
+            const int WIDTH_OFFSET = 25;
+
+            int ColCnt = GetGridColumnsVisibleCount(oGrid);
         	
 			int ColWidth = (int)(oGrid.Width / ColCnt);
 			if (ColWidth > GRID_MAX_COL_WIDTH) ColWidth = GRID_MAX_COL_WIDTH;
@@ -566,9 +568,9 @@ namespace CANStream
         	{
                 if (oCol.Visible && oCol.Index > 0)
                 {
-                    if (TotalWidth + ColWidth >= oGrid.Width - 5)
+                    if (TotalWidth + ColWidth >= oGrid.Width - WIDTH_OFFSET)
                     {
-                        ColWidth = oGrid.Width - TotalWidth - 5;
+                        ColWidth = oGrid.Width - TotalWidth - WIDTH_OFFSET;
                     }
 
                     oCol.Width = ColWidth;
@@ -576,9 +578,9 @@ namespace CANStream
                 }
         	}
         	
-        	if (TotalWidth < oGrid.Width - 5)
+        	if (TotalWidth < oGrid.Width - WIDTH_OFFSET)
         	{
-        		oGrid.Columns[FillerColumn].Width += (oGrid.Width - TotalWidth - 5);
+        		oGrid.Columns[FillerColumn].Width += (oGrid.Width - TotalWidth - WIDTH_OFFSET);
         	}
 		}
 		
