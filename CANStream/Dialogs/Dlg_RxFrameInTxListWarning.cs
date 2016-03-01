@@ -65,7 +65,7 @@ namespace CANStream
         {
             MsgBox = new Dlg_RxFrameInTxListWarning();
 
-            MsgBox.Lbl_Text.Text = Text;
+            MsgBox.Txt_Text.Text = Text;
 
             MsgBox.ShowDialog();
             return (MsgBox.Result);

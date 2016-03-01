@@ -196,7 +196,7 @@ namespace CANStream
 
         #region Private delegates
 
-        private delegate void TxFrameReceivedWarningDelegateHandler(int MsgId, string Source);
+        private delegate void TxFrameReceivedWarningDelegateHandler(uint MsgId, string Source);
 
         private TxFrameReceivedWarningDelegateHandler TxFrameReceivedWarningHandler;
 
@@ -2486,7 +2486,7 @@ namespace CANStream
             OnControllerSpyRunningChanged(Args);
         }
 
-        private void TxFrameReceivedWarningTask(int MsgId, string Source)
+        private void TxFrameReceivedWarningTask(uint MsgId, string Source)
         {
             string Txt = "CAN Frame ID 0x" + MsgId.ToString("X4")
                         + " has been received in the RX buffer while the same frame ID is present in the "

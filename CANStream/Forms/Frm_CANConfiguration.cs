@@ -2433,7 +2433,7 @@ namespace CANStream
                         return;
                     }
 
-                    if (StartBit >= oActiveMessage.DLC)
+                    if (StartBit >= (oActiveMessage.DLC * 8))
                     {
                         MessageBox.Show("Parameter start bit is higher than message length !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;

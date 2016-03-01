@@ -29,22 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dlg_RxFrameInTxListWarning));
-            this.Lbl_Text = new System.Windows.Forms.Label();
             this.Cmd_GoRxOnly = new System.Windows.Forms.Button();
             this.Cmd_DisableTxFrame = new System.Windows.Forms.Button();
             this.Cmd_Ignore = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Txt_Text = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Lbl_Text
-            // 
-            this.Lbl_Text.AutoSize = true;
-            this.Lbl_Text.Location = new System.Drawing.Point(12, 12);
-            this.Lbl_Text.Name = "Lbl_Text";
-            this.Lbl_Text.Size = new System.Drawing.Size(35, 13);
-            this.Lbl_Text.TabIndex = 0;
-            this.Lbl_Text.Text = "label1";
             // 
             // Cmd_GoRxOnly
             // 
@@ -85,16 +76,26 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // Txt_Text
+            // 
+            this.Txt_Text.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Txt_Text.Location = new System.Drawing.Point(12, 12);
+            this.Txt_Text.Multiline = true;
+            this.Txt_Text.Name = "Txt_Text";
+            this.Txt_Text.ReadOnly = true;
+            this.Txt_Text.Size = new System.Drawing.Size(421, 48);
+            this.Txt_Text.TabIndex = 5;
+            // 
             // Dlg_RxFrameInTxListWarning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 109);
+            this.Controls.Add(this.Txt_Text);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Cmd_Ignore);
             this.Controls.Add(this.Cmd_DisableTxFrame);
             this.Controls.Add(this.Cmd_GoRxOnly);
-            this.Controls.Add(this.Lbl_Text);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -107,11 +108,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label Lbl_Text;
         private System.Windows.Forms.Button Cmd_GoRxOnly;
         private System.Windows.Forms.Button Cmd_DisableTxFrame;
         private System.Windows.Forms.Button Cmd_Ignore;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox Txt_Text;
     }
 }
