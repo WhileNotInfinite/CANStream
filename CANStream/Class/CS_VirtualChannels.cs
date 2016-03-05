@@ -912,13 +912,16 @@ namespace CANStream
 			{
 				bComputed = false;
 
-                if (UpDateFleeContextVariable() | bForceComputation | bForceNextComputation)
+                if (bForceComputation | bForceNextComputation)
 				{
-                    Value = Flee_Expression.Evaluate();
-                    InError = false;
-					bNewValue=true;
-					bComputed = true;
-                    bForceNextComputation = false;
+                    if (UpDateFleeContextVariable())
+                    {
+                        Value = Flee_Expression.Evaluate();
+                        InError = false;
+                        bNewValue = true;
+                        bComputed = true;
+                        bForceNextComputation = false;
+                    }
 				}
 			}
 			catch (ExpressionCompileException FleeExcep)
