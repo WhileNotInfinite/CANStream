@@ -2510,6 +2510,7 @@ namespace CANStream
                             if (oEngFrame.uMessageId == MsgId)
                             {
                                 oEngFrame.Send = false;
+                                Grid_ManualDataWriter.Disable_TxMessage(oEngFrame);
                                 break;
                             }
                         }
@@ -3497,11 +3498,21 @@ namespace CANStream
             {
                 Cmd_RxOnly.Image = Icones.RX_Only_32;
                 ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Listen Only");
+
+                foreach(CANMessageEncoded oMsg in TxEngMessages)
+                {
+                    Grid_ManualDataWriter.Disable_TxMessage(oMsg);
+                }
             }
             else
             {
                 Cmd_RxOnly.Image = Icones.RXTX_32;
                 ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Data TX Enabled");
+
+                foreach (CANMessageEncoded oMsg in TxEngMessages)
+                {
+                    Grid_ManualDataWriter.Enable_TxMessage(oMsg);
+                }
             }
 
             //Event firing

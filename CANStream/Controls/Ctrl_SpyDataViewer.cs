@@ -1108,6 +1108,80 @@ namespace CANStream
             }
         }
 
+        #region Data Tx grid methodes
+
+        private void Enable_Disable_TxMessage(CANMessageEncoded oMsgEncoder, bool bEnable)
+        {
+            foreach (DataGridViewRow oRow in Grid_SpyEngineering.Rows)
+            {
+                if (oRow.Cells[GRID_SPYENG_ENG_VALUE].Tag != null)
+                {
+                    if (oRow.Cells[GRID_SPYENG_ENG_VALUE].Tag.GetType().Equals(typeof(CANMessageEncoded)))
+                    {
+                        if (((CANMessageEncoded)oRow.Cells[GRID_SPYENG_ENG_VALUE].Tag).uMessageId == oMsgEncoder.uMessageId)
+                        {
+                            CollapsableGridRowProperties oMsgRowProps = (CollapsableGridRowProperties)oRow.Tag;
+
+                            foreach (DataGridViewRow oChildRow in oMsgRowProps.Children)
+                            {
+                                if (bEnable)
+                                {
+                                    Color_GridRow(oChildRow, Color.Blue, Color.White);
+                                }
+                                else
+                                {
+                                    Color_GridRow(oChildRow, Color.DarkGray, Color.LightGray);
+                                }
+
+                                CollapsableGridRowProperties oChildRowProps = (CollapsableGridRowProperties)oChildRow.Tag;
+
+                                int iRow = 0;
+                                foreach (DataGridViewRow oGranChildRow in oChildRowProps.Children)
+                                {
+                                    oGranChildRow.Cells[GRID_SPYENG_ENG_VALUE].ReadOnly = !bEnable;
+
+                                    if (bEnable)
+                                    {
+                                        if (iRow % 2 == 0)
+                                        {
+                                            Color_GridRow(oGranChildRow, Color.LightBlue, Color.Black);
+                                        }
+                                        else
+                                        {
+                                            Color_GridRow(oGranChildRow, Color.White, Color.Black);
+                                        }
+
+                                        iRow++;
+                                    }
+                                    else
+                                    {
+                                        Color_GridRow(oGranChildRow, Color.DarkGray, Color.LightGray);
+                                    }
+                                }
+                            }
+
+                            if (bEnable)
+                            {
+                                oRow.Cells[GRID_SPYENG_NAME].Value = oMsgEncoder.Name;
+                                Color_GridRow(oRow, Color.DarkBlue, Color.White);
+                                oMsgRowProps.ExpandChildren();
+                            }
+                            else
+                            {
+                                oRow.Cells[GRID_SPYENG_NAME].Value += " (Disabled)";
+                                Color_GridRow(oRow, Color.Gray, Color.LightGray);
+                                oMsgRowProps.CollapseChildren();
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #endregion
@@ -1249,6 +1323,16 @@ namespace CANStream
                     oRow.Cells[GRID_SPYENG_COUNT].Value = ((CANMessageEncoded)oRow.Cells[GRID_SPYENG_ENG_VALUE].Tag).TxCount.ToString();
                 }
             }
+        }
+
+        public void Disable_TxMessage(CANMessageEncoded oMsgEncoder)
+        {
+            Enable_Disable_TxMessage(oMsgEncoder, false);
+        }
+
+        public void Enable_TxMessage(CANMessageEncoded oMsgEncoder)
+        {
+            Enable_Disable_TxMessage(oMsgEncoder, true);
         }
 
         #endregion
