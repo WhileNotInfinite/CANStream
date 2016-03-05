@@ -39,7 +39,7 @@
             // 
             // Cmd_GoRxOnly
             // 
-            this.Cmd_GoRxOnly.Location = new System.Drawing.Point(382, 74);
+            this.Cmd_GoRxOnly.Location = new System.Drawing.Point(382, 66);
             this.Cmd_GoRxOnly.Name = "Cmd_GoRxOnly";
             this.Cmd_GoRxOnly.Size = new System.Drawing.Size(105, 23);
             this.Cmd_GoRxOnly.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             // Cmd_DisableTxFrame
             // 
-            this.Cmd_DisableTxFrame.Location = new System.Drawing.Point(271, 74);
+            this.Cmd_DisableTxFrame.Location = new System.Drawing.Point(271, 66);
             this.Cmd_DisableTxFrame.Name = "Cmd_DisableTxFrame";
             this.Cmd_DisableTxFrame.Size = new System.Drawing.Size(105, 23);
             this.Cmd_DisableTxFrame.TabIndex = 2;
@@ -59,7 +59,7 @@
             // 
             // Cmd_Ignore
             // 
-            this.Cmd_Ignore.Location = new System.Drawing.Point(160, 74);
+            this.Cmd_Ignore.Location = new System.Drawing.Point(160, 66);
             this.Cmd_Ignore.Name = "Cmd_Ignore";
             this.Cmd_Ignore.Size = new System.Drawing.Size(105, 23);
             this.Cmd_Ignore.TabIndex = 3;
@@ -90,16 +90,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 109);
+            this.ClientSize = new System.Drawing.Size(499, 99);
             this.Controls.Add(this.Txt_Text);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Cmd_Ignore);
             this.Controls.Add(this.Cmd_DisableTxFrame);
             this.Controls.Add(this.Cmd_GoRxOnly);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Dlg_RxFrameInTxListWarning";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CAN Frame collusion warning";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

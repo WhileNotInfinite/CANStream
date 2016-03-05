@@ -247,10 +247,12 @@ namespace CANStream
             }
         }
 
-		#endregion
-		
-		#region Public members
-		
+        #endregion
+
+        #region Public members
+
+        public string BusName;
+
 		//CAN trace record
 		public bool bRecordingAuto; //HACK: Remove [acquisition trigger]
 		public bool bConversionAuto;
@@ -1783,6 +1785,7 @@ namespace CANStream
             {
                 Grid_ManualDataWriter.Clear_EngGrid();
                 TxEngMessages = new List<CANMessageEncoded>();
+                DataRxOnly = false;
 
                 foreach (CANMessage oMessage in oCanConfig.Messages)
                 {
@@ -2259,7 +2262,7 @@ namespace CANStream
                     }
 
                     //Check whether th id of the received message is contained in the TX messages list
-                    if (!DataRxOnly)
+                    if (!DataRxOnly && this.Equals(HostForm.GetActiveCanBus()))
                     {
                         bool IsTxList = false;
                         string Src = "";
@@ -2292,7 +2295,7 @@ namespace CANStream
 
                         if (IsTxList) //Raise the warning
                         {
-                            this.BeginInvoke(TxFrameReceivedWarningHandler, new object[] { newMsg.ID, Src });
+                            this.Invoke(TxFrameReceivedWarningHandler, new object[] { newMsg.ID, Src });
                         }
                     }
                 }
@@ -2489,13 +2492,14 @@ namespace CANStream
         private void TxFrameReceivedWarningTask(uint MsgId, string Source)
         {
             string Txt = "CAN Frame ID 0x" + MsgId.ToString("X4")
-                        + " has been received in the RX buffer while the same frame ID is present in the "
-                        + Source + " TX frames list"
-                        + "\nThere is a risk of frame collusion, what do you want to do ?";
+                        + " has been received in the RX buffer of controller " + this.BusName
+                        + " while the same frame ID is present in the "
+                        + Source + " TX frames list\n\n"
+                        + "There is a risk of frame collusion, what do you want to do ?";
 
             RxFrameInTxListDialogResult Res = Dlg_RxFrameInTxListWarning.Show(Txt);
 
-            switch(Res)
+            switch (Res)
             {
                 case RxFrameInTxListDialogResult.DisableTxFrame:
 
@@ -3492,7 +3496,7 @@ namespace CANStream
             if (DataRxOnly)
             {
                 Cmd_RxOnly.Image = Icones.RX_Only_32;
-                ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Data RX Only");
+                ToolTip_CmdRxOnly.SetToolTip(Cmd_RxOnly, "Listen Only");
             }
             else
             {

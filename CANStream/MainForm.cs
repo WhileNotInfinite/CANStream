@@ -1681,9 +1681,10 @@ namespace CANStream
         	TabNewCtrl.TabIndex = CanControllerCount;
         	
     		Ctrl_CS_CAN_Bus CtrlCanBus = new Ctrl_CS_CAN_Bus(this, oRecordEvent);
-    		TabNewCtrl.Controls.Add(CtrlCanBus);   		
-    		
-    		CtrlCanBus.Location = new Point(0, 0);
+    		TabNewCtrl.Controls.Add(CtrlCanBus);
+
+            CtrlCanBus.BusName = TabNewCtrl.Text;
+            CtrlCanBus.Location = new Point(0, 0);
     		CtrlCanBus.Size = new Size(TabNewCtrl.Width, TabNewCtrl.Height);
     		CtrlCanBus.Anchor = (AnchorStyles)(AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom);
     		CtrlCanBus.Tag = CanControllerCount;
@@ -2741,6 +2742,11 @@ namespace CANStream
         
         #region CAN Configuration
        
+        public Ctrl_CS_CAN_Bus GetActiveCanBus()
+        {
+            return (ActiveCanBus);
+        }
+
         public void ReloadCanConfig(string CfgPath, int ControllerId)
         {
         	CANMessagesConfiguration oCanCfg = new CANMessagesConfiguration();
