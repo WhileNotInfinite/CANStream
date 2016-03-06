@@ -278,7 +278,6 @@ namespace CANStream
 						string[] StrRecord=Line.Split(Char.Parse(" "));
 						
 						//Remove empty cells
-						if(1==1) //Just to create a new context in order to play with temporary variables
 						{
 							//Count empty cells
 							int EmptyCnt=0;
@@ -311,9 +310,7 @@ namespace CANStream
 						
 						oRecord.RecordIndex=long.Parse(StrRecord[0].Substring(0,StrRecord[0].Length-1));
 						oRecord.TimeOffset=double.Parse(StrRecord[1]);
-						
-						//oRecord.MessageType=(CanMsgRxTx)Enum.Parse(typeof(CanMsgRxTx),StrRecord[2]);
-						
+												
 						CanMsgRxTx Test;
 						if(Enum.TryParse(StrRecord[2],out Test))
 						{

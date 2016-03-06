@@ -3933,18 +3933,18 @@ namespace CANStream
 		
 		public void StopRecording()
 		{
-			UInt32 iBuffer=(uint)PCANBasic.PCAN_PARAMETER_OFF;
-			TPCANStatus stsResult=PCANBasic.SetValue(m_PcanHandle,TPCANParameter.PCAN_TRACE_STATUS,ref iBuffer,sizeof(UInt32));
+            UInt32 iBuffer = (uint)PCANBasic.PCAN_PARAMETER_OFF;
+            TPCANStatus stsResult = PCANBasic.SetValue(m_PcanHandle, TPCANParameter.PCAN_TRACE_STATUS, ref iBuffer, sizeof(UInt32));
 			
 			if(stsResult==TPCANStatus.PCAN_ERROR_OK)
 			{
 				bRecording=false;
-				
-				TSB_StartCANTraceRecording.Enabled=true;
+
+                TSB_StartCANTraceRecording.Enabled=true;
 				TSB_StopCANTraceRecording.Enabled=false;
 				
 				MoveTrcFiles();
-			}
+            }
 			else
 			{
 				FireControllerDiagChangedEvent(stsResult, (int)this.Tag);
