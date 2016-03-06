@@ -146,6 +146,10 @@ namespace CANStream
         private bool bDataHistoryFrozen;
 
         //Manual control
+        private MicroSecondTimer oManualTxScheduler;
+        private ulong ManualTxSchedulerTimeCounter;
+        private int ManualTxProgressReport;
+        private ManualTxSchedulerProgress_Delegate ManualTxSchedulerProgressCaller;
         private List<CANMessageEncoded> TxEngMessages;
 		private bool bRawMsgGridEdition;
 		private int NextRawMessageKeyId;
@@ -305,6 +309,7 @@ namespace CANStream
             TxFrameReceivedWarningHandler = new TxFrameReceivedWarningDelegateHandler(TxFrameReceivedWarningTask);
 
             //Initialization of manual control management
+            oManualTxScheduler = null;
             bRawMsgGridEdition = false;
 			NextRawMessageKeyId = 0;
 			TxRawMessages = null;
@@ -1771,6 +1776,164 @@ namespace CANStream
 
         #region Data TX
 
+        #region Manual TX Scheduler methods
+
+        #region Manual TX scheduler delegates
+
+        private delegate void ManualTxSchedulerProgress_Delegate();
+
+        #endregion
+
+        #region Manual TX scheduler events methodes
+
+        private void OnManualTxShedulerProgressChanged()
+        {
+            if ((bool)Pic_ManualRunning.Tag == false)
+            {
+                Pic_ManualRunning.Image = Icones.LED_Blue_48;
+                Pic_ManualRunning.Tag = true;
+            }
+            else
+            {
+                Pic_ManualRunning.Image = Icones.LED_Green_48;
+                Pic_ManualRunning.Tag = false;
+            }
+
+            if (TxEngMessages != null)
+            {
+                foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
+                {
+                    if (oMsgEncod.HasVirtualParameters)
+                    {
+                        foreach (CANParameter oParam in oMsgEncod.Parameters)
+                        {
+                            if (oParam.IsVirtual)
+                            {
+                                if (tabControl1.SelectedTab == TabPg_SpyAndManual)
+                                {
+                                    Grid_ManualDataWriter.Update_TxVirtualParameters(oMsgEncod.Identifier, oParam);
+                                }
+                                else
+                                {
+                                    Set_CycleVirtualSignalValue(oParam.Name, oParam.DecodedValue.ToString(), oParam.VirtualChannelReference);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Grid_ManualDataWriter.Update_TxMessageCount();
+
+                //Update raw message TX count
+                if (Grid_CANRawData.Rows.Count > 0)
+                {
+                    for (int iRow = 0; iRow < Grid_CANRawData.Rows.Count; iRow++)
+                    {
+                        Grid_CANRawData.Rows[iRow].Cells[GRID_RAW_COL_TX_COUNT].Value = TxRawMessages.Messages[iRow].TxCount.ToString();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        private void RunManualTxScheduler()
+        {
+            oManualTxScheduler = new MicroSecondTimer(1000);  //1 tick every millisecond
+
+            oManualTxScheduler.MicroTimerElapsed += new MicroSecondTimer.MicroSecondTimerElapsedEventHandler(ManualTxSchedulerTick);
+            ManualTxSchedulerProgressCaller = new ManualTxSchedulerProgress_Delegate(OnManualTxShedulerProgressChanged);
+
+            ManualTxSchedulerTimeCounter = 0;
+            ManualTxProgressReport = 0;
+
+            oManualTxScheduler.Enabled = true;
+        }
+
+        private void ManualTxSchedulerTick(object sender, MicroSecondTimerEventArgs e)
+        {
+            if (!DataRxOnly) //Data TX enabled
+            {
+                //Engineering Messages sending
+                if (!(TxEngMessages == null))
+                {
+                    foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
+                    {
+                        if (oMsgEncod.Send)
+                        {
+                            if ((ManualTxSchedulerTimeCounter % (ulong)oMsgEncod.Period) == 0) //It's time to send the message
+                            {
+                                if (oMsgEncod.HasVirtualParameters)
+                                {
+                                    foreach (CANParameter oParam in oMsgEncod.Parameters)
+                                    {
+                                        if (oParam.IsVirtual)
+                                        {
+                                            oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
+                                                                                                           oParam.VirtualChannelReference.ChannelName);
+                                        }
+                                    }
+
+                                    oMsgEncod.EncodeMessage();
+                                }
+
+                                if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
+                                {
+                                    if (SendMessage(oMsgEncod.GetPCANMessage()))
+                                    {
+                                        if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
+
+                                        if (Chk_CycleMux.Checked)
+                                        {
+                                            oMsgEncod.SetMultiplexer();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Raw Message sending
+                if (!(TxRawMessages == null))
+                {
+                    foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
+                    {
+                        if (oRawMsg.Send && oRawMsg.Period > 0)
+                        {
+                            if ((ManualTxSchedulerTimeCounter % (ulong)oRawMsg.Period) == 0) //It's time to send the message
+                            {
+                                if (SendMessage(oRawMsg.GetPCANMessage()))
+                                {
+                                    oRawMsg.TxCount++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Time index increment
+            if (ManualTxSchedulerTimeCounter < ulong.MaxValue) //ulong overflow ?
+            {
+                ManualTxSchedulerTimeCounter++;
+            }
+            else
+            {
+                ManualTxSchedulerTimeCounter = 0; //Reset
+            }
+
+            //Report progress if needed
+            ManualTxProgressReport++;
+            if (ManualTxProgressReport == T_MSG_CNT_UPDATE_PERIOD)
+            {
+                ManualTxProgressReport = 0;
+                Invoke(ManualTxSchedulerProgressCaller);
+            }
+        }
+
+        #endregion
+
         #region Engineering data TX
 
         private void ShowManualCanConfig()
@@ -1842,12 +2005,15 @@ namespace CANStream
 
             FireControllerManualRunningChangedEvent(bManualRunning);
 
-            BGWrk_Manual.RunWorkerAsync();
+            RunManualTxScheduler();
+            //BGWrk_Manual.RunWorkerAsync();
         }
 
         private void StopManualControl()
         {
-            BGWrk_Manual.CancelAsync();
+            //BGWrk_Manual.CancelAsync();
+            oManualTxScheduler.Enabled = false;
+            oManualTxScheduler.Abort();
 
             bManualRunning = false;
 
@@ -2813,6 +2979,8 @@ namespace CANStream
             }
         }
 
+        #region Cycle Scheduler methods
+
         #region Cycle scheduler delegates
 
         private delegate void CycleSchedulerProgress_Delegate(long tCycle);
@@ -2894,8 +3062,6 @@ namespace CANStream
         }
 
         #endregion
-
-        #region Cycle Scheduler methods
 
         private void RunCycleScheduler()
         {
