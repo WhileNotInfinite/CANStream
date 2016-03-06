@@ -59,13 +59,11 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: ..\Release\Confuser\Outputs\Demo\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Demo\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Demo\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Demo\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Demo\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
 #else
 Source: ..\Release\Confuser\Outputs\Release\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Release\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Release\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release\netchartdir_cp.dll; DestDir: "{app}"; Flags: ignoreversion
 Source: ..\CANStream\bin\Release\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
 #endif
 

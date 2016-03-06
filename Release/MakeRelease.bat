@@ -7,7 +7,7 @@
 echo off
 
 echo Path setting
-set PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\7-Zip;C:\Users\Marti\Documents\Vincent\Dev\Tools\ConfuserEx_bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+set PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5;C:\Program Files\7-Zip;C:\Users\Marti\Documents\Vincent\Dev\Tools\ConfuserEx_bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319
 
 :: dir ...\CANStream
 cd..
@@ -24,6 +24,7 @@ Msbuild.exe CANStream.sln /p:Configuration=Demo /p:Platform="Any CPU"
 echo Confuser outputs directory cleaning
 
 cd Release\Confuser\Outputs
+
 RMDIR Release /S /Q
 RMDIR Demo /S /Q
 
@@ -44,11 +45,6 @@ cd ..\..\..\Installer
 
 RMDIR bin\Release /S /Q
 RMDIR bin\Demo /S /Q
-
-::compil32 /cc CANStream_Installer_Win32.iss
-::compil32 /cc CANStream_Installer_x64.iss
-::compil32 /cc CANStream_Demo_Installer_Win32.iss
-::compil32 /cc CANStream_Demo_Installer_x64.iss
 
 iscc "CANStream_Setup.iss"
 iscc /dWIN32 "CANStream_Setup.iss"
