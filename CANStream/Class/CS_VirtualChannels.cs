@@ -911,18 +911,17 @@ namespace CANStream
 			try
 			{
 				bComputed = false;
+                bool HasDataToCompute = UpDateFleeContextVariable();
 
-                if (bForceComputation | bForceNextComputation)
+
+                if (HasDataToCompute | bForceComputation | bForceNextComputation)
 				{
-                    if (UpDateFleeContextVariable())
-                    {
-                        Value = Flee_Expression.Evaluate();
-                        InError = false;
-                        bNewValue = true;
-                        bComputed = true;
-                        bForceNextComputation = false;
-                    }
-				}
+                    Value = Flee_Expression.Evaluate();
+                    InError = false;
+                    bNewValue = true;
+                    bComputed = HasDataToCompute;
+                    bForceNextComputation = false;
+                }
 			}
 			catch (ExpressionCompileException FleeExcep)
 			{

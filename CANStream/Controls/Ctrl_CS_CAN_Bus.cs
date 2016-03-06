@@ -3277,6 +3277,7 @@ namespace CANStream
                             {
                                 oDataChan = new GW_DataChannel(VirtualChannel_GraphSerie_Name, SamplingMode.MultipleRates);
                                 SpyGraphData.Channels.Add(oDataChan);
+                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name);
                             }
 
                             //Add Spy graphic sample
