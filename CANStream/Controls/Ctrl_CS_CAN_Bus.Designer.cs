@@ -154,7 +154,6 @@ namespace CANStream
             this.Lbl_CycleFile = new System.Windows.Forms.Label();
             this.Img_TabControl = new System.Windows.Forms.ImageList(this.components);
             this.Timer_CheckDevice = new System.Windows.Forms.Timer(this.components);
-            this.BGWrk_Manual = new System.ComponentModel.BackgroundWorker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BGWrk_Spy = new System.ComponentModel.BackgroundWorker();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -1466,13 +1465,6 @@ namespace CANStream
             this.Timer_CheckDevice.Interval = 5000;
             this.Timer_CheckDevice.Tick += new System.EventHandler(this.Timer_CheckDeviceTick);
             // 
-            // BGWrk_Manual
-            // 
-            this.BGWrk_Manual.WorkerReportsProgress = true;
-            this.BGWrk_Manual.WorkerSupportsCancellation = true;
-            this.BGWrk_Manual.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrk_ManualDoWork);
-            this.BGWrk_Manual.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BGWrk_ManualProgressChanged);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -1577,7 +1569,6 @@ namespace CANStream
 		private System.Windows.Forms.ContextMenuStrip Context_CycleGraph;
 		private System.ComponentModel.BackgroundWorker BGWrk_Spy;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.ComponentModel.BackgroundWorker BGWrk_Manual;
 		private System.Windows.Forms.Timer Timer_CheckDevice;
 		private System.Windows.Forms.Label Lbl_CycleFile;
 		private System.Windows.Forms.Label Lbl_CanConfig;

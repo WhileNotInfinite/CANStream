@@ -405,7 +405,7 @@ namespace CANStream
 				StopCycle();
 			}
 			
-			if(BGWrk_Manual.IsBusy)
+			if(bManualRunning)
 			{
 				StopManualControl();
 			}
@@ -604,65 +604,6 @@ namespace CANStream
         #endregion
 
         #region Data TX
-
-        #region Data Tx Background Worker
-
-        private void BGWrk_ManualDoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker Worker = sender as BackgroundWorker;
-            RunManualControl(Worker, e);
-        }
-
-        private void BGWrk_ManualProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if ((bool)Pic_ManualRunning.Tag == false)
-            {
-                Pic_ManualRunning.Image = Icones.LED_Blue_48;
-                Pic_ManualRunning.Tag = true;
-            }
-            else
-            {
-                Pic_ManualRunning.Image = Icones.LED_Green_48;
-                Pic_ManualRunning.Tag = false;
-            }
-
-            if (TxEngMessages != null)
-            {
-                foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
-                {
-                    if (oMsgEncod.HasVirtualParameters)
-                    {
-                        foreach (CANParameter oParam in oMsgEncod.Parameters)
-                        {
-                            if (oParam.IsVirtual)
-                            {
-                                if (tabControl1.SelectedTab == TabPg_SpyAndManual)
-                                {
-                                    Grid_ManualDataWriter.Update_TxVirtualParameters(oMsgEncod.Identifier, oParam);
-                                }
-                                else
-                                {
-                                    Set_CycleVirtualSignalValue(oParam.Name, oParam.DecodedValue.ToString(), oParam.VirtualChannelReference);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Grid_ManualDataWriter.Update_TxMessageCount();
-
-                //Update raw message TX count
-                if (Grid_CANRawData.Rows.Count > 0)
-                {
-                    for (int iRow = 0; iRow < Grid_CANRawData.Rows.Count; iRow++)
-                    {
-                        Grid_CANRawData.Rows[iRow].Cells[GRID_RAW_COL_TX_COUNT].Value = TxRawMessages.Messages[iRow].TxCount.ToString();
-                    }
-                }
-            }
-        }
-
-        #endregion
 
         #region Engineering Tx data grid
 
@@ -2006,12 +1947,10 @@ namespace CANStream
             FireControllerManualRunningChangedEvent(bManualRunning);
 
             RunManualTxScheduler();
-            //BGWrk_Manual.RunWorkerAsync();
         }
 
         private void StopManualControl()
         {
-            //BGWrk_Manual.CancelAsync();
             oManualTxScheduler.Enabled = false;
             oManualTxScheduler.Abort();
 
@@ -2020,103 +1959,6 @@ namespace CANStream
             FireControllerManualRunningChangedEvent(bManualRunning);
 
             Pic_ManualRunning.Visible = false;
-        }
-
-        private void RunManualControl(BackgroundWorker Worker, System.ComponentModel.DoWorkEventArgs e)
-        {
-            int iTime = 0;
-            int TimeRem = 0;
-
-            DateTime TLastMsgCntUpdate = new DateTime();
-
-            while (!(Worker.CancellationPending))
-            {
-                if (!DataRxOnly) //Data TX enabled
-                {
-                    //Engineering Messages sending
-                    if (!(TxEngMessages == null))
-                    {
-                        foreach (CANMessageEncoded oMsgEncod in TxEngMessages)
-                        {
-                            if (oMsgEncod.Send)
-                            {
-                                Math.DivRem(iTime, oMsgEncod.Period, out TimeRem);
-
-                                if (TimeRem == 0) //It's time to send the message
-                                {
-                                    if (oMsgEncod.HasVirtualParameters)
-                                    {
-                                        foreach (CANParameter oParam in oMsgEncod.Parameters)
-                                        {
-                                            if (oParam.IsVirtual)
-                                            {
-                                                oParam.DecodedValue = VCLibCollection.GetLastCANTxChannelValue(oParam.VirtualChannelReference.LibraryName,
-                                                                                                               oParam.VirtualChannelReference.ChannelName);
-                                            }
-                                        }
-
-                                        oMsgEncod.EncodeMessage();
-                                    }
-
-                                    if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
-                                    {
-                                        if (SendMessage(oMsgEncod.GetPCANMessage()))
-                                        {
-                                            if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
-
-                                            if (Chk_CycleMux.Checked)
-                                            {
-                                                oMsgEncod.SetMultiplexer();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    //Raw Message sending
-                    if (!(TxRawMessages == null))
-                    {
-                        foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
-                        {
-                            if (oRawMsg.Send && oRawMsg.Period > 0)
-                            {
-                                Math.DivRem(iTime, oRawMsg.Period, out TimeRem);
-
-                                if (TimeRem == 0) //It's time to send the message
-                                {
-                                    if (SendMessage(oRawMsg.GetPCANMessage()))
-                                    {
-                                        oRawMsg.TxCount++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                //Time index increment
-                if (!(iTime == int.MaxValue)) //int overflow ?
-                {
-                    iTime++;
-                }
-                else
-                {
-                    iTime = 1; //Reset
-                }
-
-                //Report progress if needed
-                TimeSpan TSinceLastUpdate = DateTime.Now.Subtract(TLastMsgCntUpdate);
-                if (TSinceLastUpdate.TotalMilliseconds >= T_MSG_CNT_UPDATE_PERIOD)
-                {
-                    TLastMsgCntUpdate = DateTime.Now;
-                    Worker.ReportProgress(0);
-                }
-
-                //Wait for 1 ms
-                System.Threading.Thread.Sleep(1);
-            }
         }
 
         private bool TxEngMessagesContainsId(UInt32 Id)
@@ -3653,7 +3495,7 @@ namespace CANStream
 
         public bool IsManualWorkerBusy()
         {
-            return (BGWrk_Manual.IsBusy);
+            return (bManualRunning);
         }
 
         public void Switch_RxOnly()
