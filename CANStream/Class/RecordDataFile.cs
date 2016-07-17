@@ -283,7 +283,6 @@ namespace CANStream
 			}
 		}
 		
-		
 		/// <summary>
 		/// Read a Record data file in ascii format
 		/// </summary>

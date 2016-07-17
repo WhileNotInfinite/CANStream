@@ -12,33 +12,8 @@
     <protection id="rename" />
   </rule>
   <packer id="compressor" />
-  <module path="CANStream.exe">
-    <rule pattern="true" preset="normal">
-      <protection id="anti ildasm" />
-      <protection id="anti tamper" />
-      <protection id="constants" />
-      <protection id="ctrl flow" />
-      <protection id="anti dump" />
-      <protection id="anti debug" />
-      <protection id="invalid metadata" />
-      <protection id="ref proxy" />
-      <protection id="resources" />
-      <protection id="rename" />
-      <protection id="anti ildasm" />
-    </rule>
-  </module>
-  <module path="SD_AppLicence.dll">
-    <rule pattern="true" preset="aggressive">
-      <protection id="anti ildasm" />
-      <protection id="anti tamper" />
-      <protection id="constants" />
-      <protection id="ctrl flow" />
-      <protection id="anti dump" />
-      <protection id="anti debug" />
-      <protection id="invalid metadata" />
-      <protection id="ref proxy" />
-      <protection id="resources" />
-      <protection id="rename" />
-    </rule>
-  </module>
+  <module path="CANStream.exe" />
+  <module path="SD_AppLicence.dll" />
+  <module path="Ciloci.Flee.dll" />
+  <module path="Ctrl_GraphWindow.dll" />
 </project>

@@ -283,3 +283,4 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Deb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Debug\netchartdir_cp.xml
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug\CANStream.exe
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug\CANStream.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream.exe.config
