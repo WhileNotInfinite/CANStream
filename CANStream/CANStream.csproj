@@ -21,6 +21,7 @@
     <WarningLevel>4</WarningLevel>
     <SignAssembly>False</SignAssembly>
     <DelaySign>False</DelaySign>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,7 +34,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -500,7 +500,7 @@
       <Project>{23726D07-E40C-42E4-B676-24837B2D8896}</Project>
       <Name>Ctrl_GraphWindow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SD_AppLicence\SD_AppLicence\SD_AppLicence.csproj">
+    <ProjectReference Include="..\..\SD_AppLicense\SD_AppLicence\SD_AppLicence.csproj">
       <Project>{043ad182-2573-4289-8860-dfe9e3101074}</Project>
       <Name>SD_AppLicence</Name>
     </ProjectReference>

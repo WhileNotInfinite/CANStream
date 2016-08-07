@@ -88,5 +88,3 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\Flee_Lib\
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.dll
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.xml
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.pdb
-C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.dll.CodeAnalysisLog.xml
-C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.dll.lastcodeanalysissucceeded

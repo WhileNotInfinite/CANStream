@@ -74,19 +74,26 @@ namespace CANStream
 					{
 						if (!(Pathes[i].Equals("")))
 						{
-							//Cmb_RootFolder.Items.Insert(0, Pathes[i]);
 							Cmb_RootFolder.Items.Add(Pathes[i]);
 						}
 					}
-					
-					Cmb_RootFolder.SelectedIndex = 0;
 				}
 			}
 			
 			if (!(IntialFolder.Equals("")))
 			{
-				Refresh_Browser(IntialFolder);
+                if (Directory.Exists(IntialFolder))
+                {
+                    Reset_RootPath(IntialFolder);
+                    //Refresh_Browser(IntialFolder);
+                    return;
+                }
 			}
+
+            if (Cmb_RootFolder.Items.Count > 0)
+            {
+                Cmb_RootFolder.SelectedIndex = 0;
+            }
 		}
 		
 		private void Frm_DataBrowserFormClosing(object sender, FormClosingEventArgs e)
@@ -123,7 +130,20 @@ namespace CANStream
 		private void Cmb_RootFolderSelectedIndexChanged(object sender, EventArgs e)
 		{
 			RootPath = Cmb_RootFolder.Text;
-			UpDate_FolderTree(RootPath);
+
+            if (Cmb_RootFolder.SelectedIndex != 0)
+            {
+                Cmb_RootFolder.SelectedIndexChanged -= new System.EventHandler(this.Cmb_RootFolderSelectedIndexChanged);
+
+                Cmb_RootFolder.Items.RemoveAt(Cmb_RootFolder.SelectedIndex);
+                Cmb_RootFolder.Items.Insert(0, RootPath);
+                Cmb_RootFolder.Text = RootPath;
+
+                Cmb_RootFolder.SelectedIndexChanged += new System.EventHandler(this.Cmb_RootFolderSelectedIndexChanged);
+            }
+
+            LV_Files.Items.Clear();
+            UpDate_FolderTree(RootPath);
 		}
 		
 		#region TV_Folders
@@ -298,8 +318,8 @@ namespace CANStream
 							nDir.Tag = oSubDir.FullName;
 						}
 					}
-					
-					UpDate_FileList(oDirInfo.FullName, null, null);
+
+                    UpDate_FileList(oDirInfo.FullName, null, null);
 				}
 			}
 		}
@@ -472,17 +492,20 @@ namespace CANStream
 			if (iFolder < ActivePathFolders.Length -1)
 			{
 				TreeNode nFolder = TV_Folders.Nodes[ActivePathFolders[iFolder]];
-				
-				while (iFolder < ActivePathFolders.Length)
-				{
-					Extend_FolderNode(nFolder);
-					iFolder++;
-					
-					if (iFolder < ActivePathFolders.Length)
-					{
-						nFolder = nFolder.Nodes[ActivePathFolders[iFolder]];
-					}
-				}
+
+                if (!(nFolder == null))
+                {
+                    while (iFolder < ActivePathFolders.Length)
+                    {
+                        Extend_FolderNode(nFolder);
+                        iFolder++;
+
+                        if (iFolder < ActivePathFolders.Length)
+                        {
+                            nFolder = nFolder.Nodes[ActivePathFolders[iFolder]];
+                        }
+                    }
+                }
 			}
 			
 			CS_RecordEvent oEvent = null;
@@ -522,6 +545,22 @@ namespace CANStream
 			LV_Files.Items.Clear();
 			UpDate_FileList(ActivePath, oSession, oEvent);
 		}
+
+        private void Reset_RootPath(string InitialPath)
+        {
+            if (Cmb_RootFolder.Items.Count > 0)
+            {
+                for (int iPath = 0; iPath < Cmb_RootFolder.Items.Count; iPath++)
+                {
+                    if (InitialPath.Contains(Cmb_RootFolder.Items[iPath].ToString()))
+                    {
+                        Cmb_RootFolder.SelectedIndex = iPath;
+                        Refresh_Browser(InitialPath);
+                        return;
+                    }
+                }
+            }
+        }
 
         private TreeNode FindEventNode(string EventPath)
         {
