@@ -273,6 +273,13 @@ namespace CANStream
                         foreach (CANParameter oParam in oMsg.Parameters)
                         {
                             oGraphProps.Create_Serie(oParam.Name);
+
+                            GraphSerieProperties oSerieProps = oGraphProps.Get_SerieByName(oParam.Name);
+
+                            if(!(oSerieProps==null))
+                            {
+                                oSerieProps.YAxis.AxisTitleVisible = true;
+                            }
                         }
                     }
                 }

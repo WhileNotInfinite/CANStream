@@ -3708,6 +3708,20 @@ namespace CANStream
                         GraphWindowProperties oGraphicProps = CANStreamTools.Get_CycleGraphicSetup(oCycle);
                         if (!((oGraphicProps == null) || (oCycleGraphData == null)))
                         {
+                            //Hide all not moving channels
+                            foreach (GW_DataChannel oCycleGraphChan in oCycleGraphData.Channels)
+                            {
+                                if (oCycleGraphChan.Min == oCycleGraphChan.Max)
+                                {
+                                    GraphSerieProperties oSerieProps = oGraphicProps.Get_SerieByName(oCycleGraphChan.Name);
+
+                                    if(!(oSerieProps==null))
+                                    {
+                                        oSerieProps.Visible = false;
+                                    }
+                                }
+                            }
+
                             Graph_Cycle.Set_DataFile(oCycleGraphData);
                             Graph_Cycle.Properties = oGraphicProps;
                             Graph_Cycle.Refresh_Graphic();

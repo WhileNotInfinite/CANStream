@@ -149,17 +149,17 @@ namespace CANStream
         	
         	bool FirstLine = true;
             StreamReader SR = new StreamReader(FilePath);
-            
+
             while (!(SR.EndOfStream))
             {
             	string Line = SR.ReadLine();
-            		
-            	//Separator detection
-            	if(FirstLine)
+
+                //Separator detection
+                if (FirstLine)
             	{
             		if(Line.Contains(",")) //Comma separator
             		{
-            			Seperator=",";
+            			Seperator=","; //TODO: Comma could be a decimal separator
             		}
             		else if(Line.Contains(";")) //Semi column separator
             		{
@@ -234,6 +234,15 @@ namespace CANStream
 	                        }
                     	}
                     }
+                }
+            }
+
+            //Check whether all data channels have the same number of samples than the time
+            foreach(ImportDataChannel oImportChan in Channels)
+            {
+                if (oImportChan.Samples.Count != Time.Count)
+                {
+                    return (false);
                 }
             }
 

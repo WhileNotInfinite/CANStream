@@ -326,15 +326,19 @@ namespace CANStream
         {
             if (ActiveCanBus != null)
             {
+                Cursor = Cursors.WaitCursor;
+
                 CANStreamCycle oCycle = new CANStreamCycle();
 
                 if (oCycle.ReadStreamCycle(((ToolStripItem)sender).Tag.ToString()))
                 {
                     ActiveCanBus.Set_Cycle(oCycle);
                     UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.Cycle);
+                    Cursor = Cursors.Default;
                 }
                 else
                 {
+                    Cursor = Cursors.Default;
                     MessageBox.Show("Cycle file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                     
@@ -2190,16 +2194,20 @@ namespace CANStream
         		
         		if(openFileDialog1.ShowDialog().Equals(DialogResult.OK))
         		{
-        			CANStreamCycle oCycle=new CANStreamCycle();
-        			
+                    Cursor = Cursors.WaitCursor;
+
+                    CANStreamCycle oCycle=new CANStreamCycle();
+
         			if(oCycle.ReadStreamCycle(openFileDialog1.FileName))
         			{
         				ActiveCanBus.Set_Cycle(oCycle);
                         UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.Cycle);
+                        Cursor = Cursors.Default;
                     }
         			else
         			{
-        				MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        Cursor = Cursors.Default;
+                        MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Error);
         			}
         		}
         	}
