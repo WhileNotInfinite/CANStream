@@ -579,6 +579,8 @@ namespace CANStream
                             break;
 
                         case SignalValueFormat.Enum:
+                        case SignalValueFormat.Button:
+                        case SignalValueFormat.Checkbox:
 
                             Lbl_Decimals.Enabled = false;
                             Txt_Decimals.Text = "";
@@ -606,8 +608,36 @@ namespace CANStream
 
         private void Cmd_EnumDefinition_Click(object sender, EventArgs e)
         {
-            Frm_ParamEnumerationEdition Frm = new Frm_ParamEnumerationEdition(oActiveParameter.ValueFormat);
-            Frm.Show();
+            SignalValueFormat eFormat;
+
+            if (Enum.TryParse(Cmb_ValueFormat.Text, out eFormat))
+            {
+                switch (eFormat)
+                {
+                    case SignalValueFormat.Enum:
+
+                        {
+                            Frm_ParamEnumerationEdition Frm = new Frm_ParamEnumerationEdition(oActiveParameter.ValueFormat);
+                            Frm.Show();
+                        }
+
+                        break;
+
+                    case SignalValueFormat.Button:
+                    case SignalValueFormat.Checkbox:
+
+                        {
+                            Frm_ParamControlFormatProperties Frm = new Frm_ParamControlFormatProperties(oActiveParameter.ValueFormat, eFormat);
+                            Frm.Show();
+                        }
+
+                        break;
+
+                    default:
+
+                        return;
+                }
+            }
         }
 
         #endregion
@@ -1292,7 +1322,9 @@ namespace CANStream
                 Txt_Decimals.Text = oActiveParameter.ValueFormat.Decimals.ToString();
             }
 
-            if (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
+            if ((oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Enum))
+                || (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Button))
+                || (oActiveParameter.ValueFormat.FormatType.Equals(SignalValueFormat.Checkbox)))
             {
                 Cmd_EnumDefinition.Enabled = true;
             }

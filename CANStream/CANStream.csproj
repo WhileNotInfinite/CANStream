@@ -149,6 +149,12 @@
     <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.Designer.cs">
       <DependentUpon>Dlg_RxFrameInTxListWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Frm_ParamControlFormatProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_ParamControlFormatProperties.Designer.cs">
+      <DependentUpon>Frm_ParamControlFormatProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="MicroSecondTimer\MicroSecondLibrary.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
     <Compile Include="Class\RecordDataFile.cs" />
@@ -414,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_EventDetails.resx">
       <DependentUpon>Frm_EventDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_ParamControlFormatProperties.resx">
+      <DependentUpon>Frm_ParamControlFormatProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_ParamEnumerationEdition.resx">
       <DependentUpon>Frm_ParamEnumerationEdition.cs</DependentUpon>

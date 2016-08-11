@@ -148,7 +148,10 @@ namespace CANStream
             this.Grid_SpyEngineering.Size = new System.Drawing.Size(746, 300);
             this.Grid_SpyEngineering.TabIndex = 12;
             this.Grid_SpyEngineering.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_SpyEngineering_CellBeginEdit);
+            this.Grid_SpyEngineering.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellContentClick);
             this.Grid_SpyEngineering.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellDoubleClick);
+            this.Grid_SpyEngineering.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_SpyEngineering_CellMouseDown);
+            this.Grid_SpyEngineering.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_SpyEngineering_CellMouseUp);
             this.Grid_SpyEngineering.SizeChanged += new System.EventHandler(this.Grid_SpyEngineeringSizeChanged);
             // 
             // Grid_Eng_Collapse_State

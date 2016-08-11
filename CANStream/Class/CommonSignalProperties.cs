@@ -27,6 +27,12 @@ namespace CANStream
 
         /// <summary>Signal value format enumeration</summary>
         Enum = 4,
+
+        /// <summary>Signal value format push button</summary>
+        Button = 5,
+
+        /// <summary>Signal value format check box</summary>
+        Checkbox = 6,
     }
 
     /// <summary>
@@ -86,6 +92,22 @@ namespace CANStream
         public System.Drawing.Color BackColor;
     }
 
+    /// <summary>
+    /// Signal control format properties
+    /// </summary>
+    [Serializable]
+    public struct SignalControlFormatProperties
+    {
+        /// <summary>Control displayed text</summary>
+        public string Text;
+
+        /// <summary>Control 'ON' value (while pressed or checked)</summary>
+        public int On_Value;
+
+        /// <summary>Control 'OFF' value (while not pressed or not checked)</summary>
+        public int Off_Value;
+    }
+
     #endregion
 
     #region SignalFormatProperties class definition
@@ -113,6 +135,9 @@ namespace CANStream
         /// <summary>Value format enumeration</summary>
         public List<EnumerationValue> Enums;
 
+        /// <summary>Control properties for 'Button' or 'Checkbox' formats</summary>
+        public Nullable<SignalControlFormatProperties> sControlProperties;
+
         #endregion
 
         /// <summary>
@@ -123,6 +148,7 @@ namespace CANStream
             FormatType = SignalValueFormat.Auto;
             Decimals = 2;
             Enums = new List<EnumerationValue>();
+            sControlProperties = null;
         }
 
         #region Private methodes
@@ -174,6 +200,17 @@ namespace CANStream
                 oClone.Enums.Add(sEnum);
             }
 
+            if(!(sControlProperties==null))
+            {
+                SignalControlFormatProperties sCtrlProps = new SignalControlFormatProperties();
+
+                sCtrlProps.Text = sControlProperties.Value.Text;
+                sCtrlProps.On_Value = sControlProperties.Value.On_Value;
+                sCtrlProps.Off_Value = sControlProperties.Value.Off_Value;
+
+                oClone.sControlProperties = sCtrlProps;
+            }
+
             return (oClone);
         }
 
@@ -211,6 +248,11 @@ namespace CANStream
                 case SignalValueFormat.Hexadecimal:
 
                     sValue = "0x" + ((int)ValIn).ToString("X");
+                    break;
+
+                default:
+
+                    sValue = Math.Round(ValIn, AutoDecNumbers).ToString();
                     break;
             }
 
@@ -258,6 +300,11 @@ namespace CANStream
                         }
 
                         DecodValue = (double)(int.Parse(FormatedValue, System.Globalization.NumberStyles.HexNumber));
+                        break;
+
+                    default:
+
+                        DecodValue = Convert.ToDouble(FormatedValue);
                         break;
                 }
             }
@@ -307,24 +354,54 @@ namespace CANStream
             xFormatDec.InnerText = Decimals.ToString();
             xSignalFormat.AppendChild(xFormatDec);
 
-            if (Enums.Count > 0)
+            switch (FormatType)
             {
-                XmlElement xFormatEnums = oXmlDoc.CreateElement("FormatEnums");
-                xSignalFormat.AppendChild(xFormatEnums);
+                case SignalValueFormat.Enum:
 
-                foreach (EnumerationValue sEnum in Enums)
-                {
-                    XmlElement xEnum = oXmlDoc.CreateElement("Enumeration");
-                    xFormatEnums.AppendChild(xEnum);
+                    if (Enums.Count > 0)
+                    {
+                        XmlElement xFormatEnums = oXmlDoc.CreateElement("FormatEnums");
+                        xSignalFormat.AppendChild(xFormatEnums);
 
-                    XmlElement xEnumVal = oXmlDoc.CreateElement("EnumValue");
-                    xEnumVal.InnerText = sEnum.Value.ToString();
-                    xEnum.AppendChild(xEnumVal);
+                        foreach (EnumerationValue sEnum in Enums)
+                        {
+                            XmlElement xEnum = oXmlDoc.CreateElement("Enumeration");
+                            xFormatEnums.AppendChild(xEnum);
 
-                    XmlElement xEnumText = oXmlDoc.CreateElement("EnumText");
-                    xEnumText.InnerText = sEnum.Text;
-                    xEnum.AppendChild(xEnumText);
-                }
+                            XmlElement xEnumVal = oXmlDoc.CreateElement("EnumValue");
+                            xEnumVal.InnerText = sEnum.Value.ToString();
+                            xEnum.AppendChild(xEnumVal);
+
+                            XmlElement xEnumText = oXmlDoc.CreateElement("EnumText");
+                            xEnumText.InnerText = sEnum.Text;
+                            xEnum.AppendChild(xEnumText);
+                        }
+                    }
+
+                    break;
+
+                case SignalValueFormat.Checkbox:
+                case SignalValueFormat.Button:
+
+                    if(sControlProperties.HasValue)
+                    {
+                        XmlElement xControlProps = oXmlDoc.CreateElement("ControlProperties");
+                        xSignalFormat.AppendChild(xControlProps);
+
+                        XmlElement xCtrlText = oXmlDoc.CreateElement("ControlText");
+                        xCtrlText.InnerText = sControlProperties.Value.Text;
+                        xControlProps.AppendChild(xCtrlText);
+
+                        XmlElement xCtrlOnValue = oXmlDoc.CreateElement("ControlOnValue");
+                        xCtrlOnValue.InnerText = sControlProperties.Value.On_Value.ToString();
+                        xControlProps.AppendChild(xCtrlOnValue);
+
+                        XmlElement xCtrlOffValue = oXmlDoc.CreateElement("ControlOffValue");
+                        xCtrlOffValue.InnerText = sControlProperties.Value.Off_Value.ToString();
+                        xControlProps.AppendChild(xCtrlOffValue);
+                    }
+
+                    break;
             }
 
             return (xSignalFormat);
@@ -373,49 +450,124 @@ namespace CANStream
                 return (false);
             }
 
-            XmlNode xFormatEnums = xSignalFormat.SelectSingleNode("FormatEnums");
-            if (!(xFormatEnums == null))
+            switch(FormatType)
             {
-                Enums = new List<EnumerationValue>();
+                case SignalValueFormat.Enum:
 
-                foreach (XmlNode xEnum in xFormatEnums.ChildNodes)
-                {
-                    EnumerationValue sEnum = new EnumerationValue();
-
-                    XmlNode xEnumVal = xEnum.SelectSingleNode("EnumValue");
-                    if (!(xEnumVal == null))
                     {
-                        int eVal;
-                        if (int.TryParse(xEnumVal.InnerText, out eVal))
+                        XmlNode xFormatEnums = xSignalFormat.SelectSingleNode("FormatEnums");
+                        if (!(xFormatEnums == null))
                         {
-                            sEnum.Value = eVal;
+                            Enums = new List<EnumerationValue>();
+
+                            foreach (XmlNode xEnum in xFormatEnums.ChildNodes)
+                            {
+                                EnumerationValue sEnum = new EnumerationValue();
+
+                                XmlNode xEnumVal = xEnum.SelectSingleNode("EnumValue");
+                                if (!(xEnumVal == null))
+                                {
+                                    int eVal;
+                                    if (int.TryParse(xEnumVal.InnerText, out eVal))
+                                    {
+                                        sEnum.Value = eVal;
+                                    }
+                                    else
+                                    {
+                                        return (false);
+                                    }
+                                }
+                                else
+                                {
+                                    return (false);
+                                }
+
+                                XmlNode xEnumText = xEnum.SelectSingleNode("EnumText");
+                                if (!(xEnumText == null))
+                                {
+                                    sEnum.Text = xEnumText.InnerText;
+                                }
+                                else
+                                {
+                                    return (false);
+                                }
+
+                                Enums.Add(sEnum);
+                            }
                         }
                         else
                         {
                             return (false);
                         }
                     }
-                    else
+
+                    break;
+
+                case SignalValueFormat.Checkbox:
+                case SignalValueFormat.Button:
+
                     {
-                        return (false);
+                        XmlNode xControlProps = xSignalFormat.SelectSingleNode("ControlProperties");
+                        if(!(xControlProps==null))
+                        {
+                            SignalControlFormatProperties sCtrlProps = new SignalControlFormatProperties();
+
+                            XmlNode xCtrlText = xControlProps.SelectSingleNode("ControlText");
+                            if (!(xCtrlText == null))
+                            {
+                                sCtrlProps.Text = xCtrlText.InnerText;
+                            }
+                            else
+                            {
+                                return (false);
+                            }
+
+                            XmlNode xCtrlOnValue = xControlProps.SelectSingleNode("ControlOnValue");
+                            if (!(xCtrlOnValue == null))
+                            {
+                                int Val = 0;
+                                if (int.TryParse(xCtrlOnValue.InnerText, out Val))
+                                {
+                                    sCtrlProps.On_Value = Val;
+                                }
+                                else
+                                {
+                                    return (false);
+                                }
+                            }
+                            else
+                            {
+                                return (false);
+                            }
+
+                            XmlNode xCtrlOffValue = xControlProps.SelectSingleNode("ControlOffValue");
+                            if (!(xCtrlOffValue == null))
+                            {
+                                int Val = 0;
+                                if (int.TryParse(xCtrlOffValue.InnerText, out Val))
+                                {
+                                    sCtrlProps.Off_Value = Val;
+                                }
+                                else
+                                {
+                                    return (false);
+                                }
+                            }
+                            else
+                            {
+                                return (false);
+                            }
+
+                            sControlProperties = new SignalControlFormatProperties();
+                            sControlProperties = sCtrlProps;
+                        }
+                        else
+                        {
+                            return (false);
+                        }
                     }
 
-                    XmlNode xEnumText = xEnum.SelectSingleNode("EnumText");
-                    if (!(xEnumText == null))
-                    {
-                        sEnum.Text = xEnumText.InnerText;
-                    }
-                    else
-                    {
-                        return (false);
-                    }
-
-                    Enums.Add(sEnum);
-                }
-            }
-            else
-            {
-                //Enumeration list may not exist if parameter isn't an enum
+                    break;
             }
 
             return (true);
