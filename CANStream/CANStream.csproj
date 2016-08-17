@@ -509,10 +509,6 @@
       <Project>{23726D07-E40C-42E4-B676-24837B2D8896}</Project>
       <Name>Ctrl_GraphWindow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SD_AppLicense\SD_AppLicence\SD_AppLicence.csproj">
-      <Project>{043ad182-2573-4289-8860-dfe9e3101074}</Project>
-      <Name>SD_AppLicence</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Flee_Lib\FLEE_Lib.vbproj">
       <Project>{28334152-7FB7-46A5-8639-68EB84A99BE0}</Project>
       <Name>FLEE_Lib</Name>

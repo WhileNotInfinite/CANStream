@@ -1,7 +1,0 @@
-BO_ 1845 TemperatureMsg: 8 Vector__XXX
- SG_ MultiplexIndexSignal M : 39|4@0+ (1,0) [0|0] "" Vector__XXX
- SG_ NormalSignalAlwaysPresent : 16|4@1- (1,0) [0|0] "" Vector__XXX
- SG_ TemperatureIndoorsMultiplexed m0 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
- SG_ TemperatureOutdoorsMultiplexed m3 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
- SG_ TemperatureUndergroundMultiplexed m11 : 7|16@0- (0.1,-40) [0|0] "degC" Vector__XXX
-

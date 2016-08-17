@@ -1,6 +1,0 @@
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\bin\Debug\NCalc.dll
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\bin\Debug\NCalc.pdb
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\bin\Debug\Antlr3.Runtime.dll
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\obj\Debug\ResolveAssemblyReference.cache
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\obj\Debug\NCalc.dll
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator\obj\Debug\NCalc.pdb

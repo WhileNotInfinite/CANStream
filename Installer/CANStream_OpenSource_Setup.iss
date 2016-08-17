@@ -8,8 +8,8 @@
 AppId={{8B3B1D1B-F323-4894-B04F-5EC315A37994}
 
 AppName=CANStream
-AppVerName=CANStream 2.2.0
-OutputDir=bin\Release_OpenSource
+AppVerName=CANStream 2.3.0
+OutputDir=bin\Release
 
 #ifdef WIN32
 OutputBaseFilename=CANStream_Setup_Win32
@@ -17,12 +17,14 @@ OutputBaseFilename=CANStream_Setup_Win32
 OutputBaseFilename=CANStream_Setup_x64
 #endif
 
-AppVersion=2.2.0
+AppVersion=2.3.0
 AppPublisher=Cobalt Solutions
+AppCopyright=Copyright (C) 2013-2016 Cobalt Solutions
 ChangesAssociations=yes
 DefaultDirName={pf}\CANStream
 DefaultGroupName=CANStream
 AllowNoIcons=yes
+LicenseFile=GNU General Public Lisence.txt
 InfoAfterFile=..\CANStream\bin\Release\CANStream Release notes.txt
 SetupIconFile=Icons\adept-installer-icone-6127.ico
 Compression=lzma
@@ -38,11 +40,12 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: ..\CANStream\bin\Release_OpenSource\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release_OpenSource\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release_OpenSource\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release_OpenSource\SD_AppLicence.dll; DestDir: "{app}"; Flags: ignoreversion
-Source: ..\CANStream\bin\Release_OpenSource\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\CANStream.exe; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ciloci.Flee.dll; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\bin\Release\Ctrl_GraphWindow.dll; DestDir: "{app}"; Flags: ignoreversion
+
+Source: ..\CANStream\bin\Release\CANStream Release notes.txt; DestDir: "{app}"; Flags: ignoreversion
+Source: ..\CANStream\GNU General Public Lisence.txt; DestDir: "{app}"; Flags: ignoreversion
 
 Source: ..\Documentation\Build\CANStream user guide.chm; DestDir: "{app}"; Flags: ignoreversion
 
