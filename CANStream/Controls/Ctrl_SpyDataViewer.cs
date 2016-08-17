@@ -1,11 +1,22 @@
 ﻿/*
- * Created by SharpDevelop.
- * User: VBrault
- * Date: 11/21/2014
- * Time: 4:40 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ *	This file is part of CANStream.
+ *
+ *	CANStream program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	CANStream Copyright © 2013-2016 whilenotinfinite@gmail.com
  */
+
 using System;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -417,78 +428,20 @@ namespace CANStream
 
         private void Grid_SpyEngineering_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == GRID_SPYENG_ENG_VALUE && e.RowIndex >= 0 && bCellValueChangedEventEnabled)
+            if (bCellValueChangedEventEnabled)
             {
-                bCellValueChangedEventEnabled = false;
-
-                DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                if (!(oCurrentCell.Tag == null))
+                if (!((Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell)
+                    || (Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewCheckBoxCell)))
                 {
-                    CANParameter oParam = (CANParameter)oCurrentCell.Tag;
-
-                    double EngVal = oParam.ValueFormat.SetSignalFormatedValue(oCurrentCell.Value.ToString());
-
-                    { //New context to not keep 'EngValRange' all the way through
-
-                        double[] EngValRange = oParam.GetParameterMinMax();
-
-                        if (EngVal < EngValRange[0] || EngVal > EngValRange[1])
-                        {
-                            MessageBox.Show("The value entered is out of " + oParam.Name + " signal range [" + EngValRange[0].ToString() + " - " + EngValRange[1].ToString() + "] !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
-                            bCellValueChangedEventEnabled = true;
-                            return;
-                        }
-                    }
-
-                    if (!(double.IsNaN(EngVal)))
+                    if (e.ColumnIndex == GRID_SPYENG_ENG_VALUE && e.RowIndex >= 0)
                     {
-                        if (oParam.DecodedValue != EngVal)
-                        {
-                            oParam.DecodedValue = EngVal;
+                        bCellValueChangedEventEnabled = false;
 
-                            Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngVal));
+                        Set_TxMessageValueFromGridCell(e.RowIndex, e.ColumnIndex, null);
 
-                            if (sAlarm.HasValue)
-                            {
-                                oCurrentCell.Style.BackColor = sAlarm.Value.BackColor;
-                                oCurrentCell.Style.ForeColor = sAlarm.Value.ForeColor;
-                            }
-                            else
-                            {
-                                oCurrentCell.Style.BackColor = Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_NAME].Style.BackColor;
-                                oCurrentCell.Style.ForeColor = Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_NAME].Style.ForeColor;
-                            }
-
-                            DataGridViewRow oMsgRow = ((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[e.RowIndex].Tag).GetRootRow();
-                            CANMessageEncoded oMsgEncoder = (CANMessageEncoded)oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag;
-                            oMsgEncoder.EncodeMessage();
-
-                            Grid_SpyEngineering.Rows[e.RowIndex].Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
-                            oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oMsgEncoder.GetMessageBytesString();
-
-                            //GridTxParameterValueChanged event firing
-                            GridTxParameterValueChangedEventArgs EvtArg = new GridTxParameterValueChangedEventArgs();
-
-                            EvtArg.MessageId = oMsgEncoder.uMessageId;
-                            EvtArg.ParameterName = oParam.Name;
-                            EvtArg.ParameterValue = oParam.DecodedValue;
-                            EvtArg.MultiplexerValue = oParam.MultiplexerValue;
-
-                            OnGridTxParameterValueChanged(EvtArg);
-                        }
+                        bCellValueChangedEventEnabled = true;
                     }
-                    else
-                    {
-                        MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
-                                            Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-
-                    oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
                 }
-
-                bCellValueChangedEventEnabled = true;
             }
         }
 
@@ -514,6 +467,103 @@ namespace CANStream
             }
         }
 
+        private void Grid_SpyEngineering_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (oCurrentCell is DataGridViewCheckBoxCell)
+            {
+                if (!(oCurrentCell.Tag == null))
+                {
+                    CANParameter oParam = (CANParameter)oCurrentCell.Tag;
+
+                    if (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Checkbox))
+                    {
+                        bCellValueChangedEventEnabled = false;
+
+                        DataGridViewCheckBoxCell oChkCell = oCurrentCell as DataGridViewCheckBoxCell;
+
+                        object DefVal = null;
+
+                        if ((bool)oChkCell.EditedFormattedValue == true)
+                        {
+                            DefVal = (object)oParam.ValueFormat.sControlProperties.Value.On_Value;
+                        }
+                        else
+                        {
+                            DefVal = (object)oParam.ValueFormat.sControlProperties.Value.Off_Value;
+                        }
+
+                        Set_TxMessageValueFromGridCell(e.RowIndex, e.ColumnIndex, DefVal);
+
+                        bCellValueChangedEventEnabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Format of CAN parameter " + oParam.Name + " is not set as a check box !", Application.ProductName,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void Grid_SpyEngineering_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (oCurrentCell is DataGridViewButtonCell)
+            {
+                if (!(oCurrentCell.Tag == null))
+                {
+                    CANParameter oParam = (CANParameter)oCurrentCell.Tag;
+
+                    if(oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Button))
+                    {
+                        bCellValueChangedEventEnabled = false;
+
+                        Set_TxMessageValueFromGridCell(e.RowIndex, e.ColumnIndex,
+                                                       oParam.ValueFormat.sControlProperties.Value.On_Value);
+
+                        bCellValueChangedEventEnabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Format of CAN parameter " + oParam.Name + " is not set as a push button !", Application.ProductName,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void Grid_SpyEngineering_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (oCurrentCell is DataGridViewButtonCell)
+            {
+                if (!(oCurrentCell.Tag == null))
+                {
+                    CANParameter oParam = (CANParameter)oCurrentCell.Tag;
+
+                    if (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Button))
+                    {
+                        bCellValueChangedEventEnabled = false;
+
+                        Set_TxMessageValueFromGridCell(e.RowIndex, e.ColumnIndex,
+                                                       oParam.ValueFormat.sControlProperties.Value.Off_Value);
+
+                        bCellValueChangedEventEnabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Format of CAN parameter " + oParam.Name + " is not set as a push button !", Application.ProductName,
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        
         #region EnumList
 
         private void EnumList_SelectedIndexChanged(object sender, EventArgs e)
@@ -831,7 +881,7 @@ namespace CANStream
             if (oEngParam.Signed)   oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = "Yes";
             else                    oRow.Cells[GRID_SPYENG_SIGNEDNESS].Value = "No";
 
-            //Init Min/Max cellse
+            //Init Min/Max cells
             oRow.Cells[GRID_SPYENG_MIN_VALUE].Tag = oEngParam.DecodedValue;
             oRow.Cells[GRID_SPYENG_MAX_VALUE].Tag = oEngParam.DecodedValue;
 
@@ -1108,6 +1158,42 @@ namespace CANStream
             }
         }
 
+        private void Create_SignalControlValue(int RowId,SignalFormatProperties oSigFormat)
+        {
+            switch(oSigFormat.FormatType)
+            {
+                case SignalValueFormat.Button:
+
+                    {
+                        Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_ENG_VALUE] = new DataGridViewButtonCell();
+                        DataGridViewButtonCell oBtnCell = Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_ENG_VALUE] as DataGridViewButtonCell;
+
+                        oBtnCell.Value = oSigFormat.sControlProperties.Value.Text;
+                    }
+
+                    break;
+
+                case SignalValueFormat.Checkbox:
+
+                    {
+                        Color CellColor = Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_ENG_VALUE].Style.BackColor;
+
+                        Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_ENG_VALUE] = new DataGridViewCheckBoxCell();
+                        DataGridViewCheckBoxCell oChkCell = Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_ENG_VALUE] as DataGridViewCheckBoxCell;
+
+                        oChkCell.Value = false;
+
+                        oChkCell.ValueType = typeof(int);
+                        oChkCell.TrueValue = oSigFormat.sControlProperties.Value.On_Value;
+                        oChkCell.FalseValue = oSigFormat.sControlProperties.Value.Off_Value;
+
+                        oChkCell.Style.BackColor = CellColor;
+                    }
+
+                    break;
+            }
+        }
+
         #region Data Tx grid methodes
 
         private void Enable_Disable_TxMessage(CANMessageEncoded oMsgEncoder, bool bEnable)
@@ -1176,6 +1262,93 @@ namespace CANStream
                             break;
                         }
                     }
+                }
+            }
+        }
+
+        private void Set_TxMessageValueFromGridCell(int RowId, int ColId, object DefaultValue)
+        {
+            DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[RowId].Cells[ColId];
+
+            if (!(oCurrentCell.Tag == null))
+            {
+                CANParameter oParam = (CANParameter)oCurrentCell.Tag;
+
+                double EngVal = double.NaN;
+
+                if (!(DefaultValue == null))
+                {
+                    EngVal = Convert.ToDouble(DefaultValue);
+                }
+                else
+                {
+                    EngVal = oParam.ValueFormat.SetSignalFormatedValue(oCurrentCell.Value.ToString());
+                }
+
+                if (!(double.IsNaN(EngVal)))
+                {
+                    { //New context to not keep 'EngValRange' all the way through
+
+                        double[] EngValRange = oParam.GetParameterMinMax();
+
+                        if (EngVal < EngValRange[0] || EngVal > EngValRange[1])
+                        {
+                            MessageBox.Show("The value entered is out of " + oParam.Name + " signal range [" + EngValRange[0].ToString() + " - " + EngValRange[1].ToString() + "] !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+                            bCellValueChangedEventEnabled = true;
+                            return;
+                        }
+                    }
+
+                    if (oParam.DecodedValue != EngVal)
+                    {
+                        oParam.DecodedValue = EngVal;
+
+                        if (oCurrentCell is DataGridViewTextBoxCell)
+                        {
+                            Nullable<SignalAlarmValue> sAlarm = oParam.Alarms.GetAlarmProperties(oParam.Alarms.ProcessAlarms(EngVal));
+
+                            if (sAlarm.HasValue)
+                            {
+                                oCurrentCell.Style.BackColor = sAlarm.Value.BackColor;
+                                oCurrentCell.Style.ForeColor = sAlarm.Value.ForeColor;
+                            }
+                            else
+                            {
+                                oCurrentCell.Style.BackColor = Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_NAME].Style.BackColor;
+                                oCurrentCell.Style.ForeColor = Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_NAME].Style.ForeColor;
+                            }
+                        }
+                        
+                        DataGridViewRow oMsgRow = ((CollapsableGridRowProperties)Grid_SpyEngineering.Rows[RowId].Tag).GetRootRow();
+                        CANMessageEncoded oMsgEncoder = (CANMessageEncoded)oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Tag;
+                        oMsgEncoder.EncodeMessage();
+
+                        Grid_SpyEngineering.Rows[RowId].Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
+                        oMsgRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oMsgEncoder.GetMessageBytesString();
+
+                        //GridTxParameterValueChanged event firing
+                        GridTxParameterValueChangedEventArgs EvtArg = new GridTxParameterValueChangedEventArgs();
+
+                        EvtArg.MessageId = oMsgEncoder.uMessageId;
+                        EvtArg.ParameterName = oParam.Name;
+                        EvtArg.ParameterValue = oParam.DecodedValue;
+                        EvtArg.MultiplexerValue = oParam.MultiplexerValue;
+
+                        OnGridTxParameterValueChanged(EvtArg);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(oParam.Name + " formating error !\nCheck value format properties.",
+                                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+                //Refresh grid cell with the correctly formated value (if user has set 1 instead 1.00)
+                if (!((oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Button))
+                    || (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Checkbox))))
+                {
+                    oCurrentCell.Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
                 }
             }
         }
@@ -1260,7 +1433,19 @@ namespace CANStream
 
                     //Set parameter formated and row values
                     oParamRow.Cells[GRID_SPYENG_RAW_VALUE].Value = oParam.RawValue;
-                    oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+
+                    if((oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Button))
+                        || (oParam.ValueFormat.FormatType.Equals(SignalValueFormat.Checkbox)))
+                    {
+                        if (oParam.ValueFormat.sControlProperties.HasValue)
+                        {
+                            Create_SignalControlValue(oParamRow.Index, oParam.ValueFormat);
+                        }
+                    }
+                    else
+                    {
+                        oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Value = oParam.ValueFormat.GetSignalFormatedValue(oParam.DecodedValue);
+                    }
 
                     //Set 'Value' cell tag
                     oParamRow.Cells[GRID_SPYENG_ENG_VALUE].Tag = oParam;

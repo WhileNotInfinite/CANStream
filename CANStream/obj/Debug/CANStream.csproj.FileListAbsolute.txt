@@ -284,3 +284,52 @@ C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\bin\Deb
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug\CANStream.exe
 C:\Users\Vincent\Documents\SharpDevelop Projects\Git\CANStream\CANStream\obj\Debug\CANStream.pdb
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitRepo\CANStream\CANStream\bin\Debug\CANStream.exe.config
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\CANStream.exe.config
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow Release note.txt
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\CANStream Release notes.txt
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\CANStream.exe
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\CANStream.pdb
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ciloci.Flee.dll
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.dll
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.pdb
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.xml
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ciloci.Flee.pdb
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\bin\Debug\Ciloci.Flee.xml
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.csprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CS_CAN_Bus.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordEventInformation.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordSessionInfo.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordUserInformations.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CANDataGrid.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Dlg_DBCTransmitterSelection.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Dlg_RxFrameInTxListWarning.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_About.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_BuiltInSignal.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration_SpecialPaste.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_ContextualList.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleDataAssociation.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleCreation.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleEdition.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleRecordImport.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_DataBrowser.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer_EventSession_Info.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_EventDetails.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_ParamControlFormatProperties.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_ParamEnumerationEdition.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordEventEdition.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordSessionEdition.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordEventSessionSelection.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_TrcFileSelection.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_VirtualChannel.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_VirtualChannelTest.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Icones.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.MainForm.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Properties.Resources.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.TextRessouces.resources
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.csproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.exe
+C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.pdb

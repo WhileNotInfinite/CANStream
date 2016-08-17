@@ -1,11 +1,22 @@
 ﻿/*
- * Created by SharpDevelop.
- * User: VBrault
- * Date: 4/29/2013
- * Time: 8:03 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ *	This file is part of CANStream.
+ *
+ *	CANStream program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	CANStream Copyright © 2013-2016 whilenotinfinite@gmail.com
  */
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel; //BackgroundWorker
@@ -15,8 +26,6 @@ using System.Text; //StringBuilder
 using System.Windows.Forms;
 
 using Microsoft.Win32;
-
-using SD_AppLicence;
 
 //PCANBasic includes
 using Peak.Can.Basic;
@@ -137,20 +146,8 @@ namespace CANStream
         
 		private void MainFormLoad(object sender, EventArgs e)
 		{
-			#if NO_LIC
-			Add_CANController();
-			#else
-			if (CheckLicence())
-			{
-				Add_CANController();
-			}
-			else
-			{
-				FrmMain_MenuStrip.Enabled = false;
-				Tab_CAN_Controllers.Enabled = false;
-			}
-			#endif
-		}
+            Add_CANController();
+        }
         
 		private void MainFormShown(object sender, EventArgs e)
 		{
@@ -326,15 +323,19 @@ namespace CANStream
         {
             if (ActiveCanBus != null)
             {
+                Cursor = Cursors.WaitCursor;
+
                 CANStreamCycle oCycle = new CANStreamCycle();
 
                 if (oCycle.ReadStreamCycle(((ToolStripItem)sender).Tag.ToString()))
                 {
                     ActiveCanBus.Set_Cycle(oCycle);
                     UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.Cycle);
+                    Cursor = Cursors.Default;
                 }
                 else
                 {
+                    Cursor = Cursors.Default;
                     MessageBox.Show("Cycle file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                     
@@ -1447,25 +1448,6 @@ namespace CANStream
         	}
         }
         
-        private bool CheckLicence()
-        {
-        	AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, CANSTREAM_APPID, Application.ProductVersion, TextRessouces.LicenseRequestEmail, true);
-        	
-        	if (oLicence.LicenseValid)
-        	{
-        		if (oLicence.ValidityDaysRemaining < 30)
-        		{
-        			MessageBox.Show("Your licence will expire in " 
-        			                + oLicence.ValidityDaysRemaining.ToString()
-        			                + " days (" + DateTime.Now.AddDays(oLicence.ValidityDaysRemaining).ToShortDateString()
-        			                + ")\nCheck the 'About' menu to request a new licence.",
-        			                Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        		}
-        	}
-        	
-        	return(oLicence.LicenseValid);
-        }
-
         #region CAN Config, Cycle & Data Viewers history
 
         private List<string> LoadElementsHistory(HistoryElements eHistoryItem)
@@ -2190,16 +2172,20 @@ namespace CANStream
         		
         		if(openFileDialog1.ShowDialog().Equals(DialogResult.OK))
         		{
-        			CANStreamCycle oCycle=new CANStreamCycle();
-        			
+                    Cursor = Cursors.WaitCursor;
+
+                    CANStreamCycle oCycle=new CANStreamCycle();
+
         			if(oCycle.ReadStreamCycle(openFileDialog1.FileName))
         			{
         				ActiveCanBus.Set_Cycle(oCycle);
                         UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.Cycle);
+                        Cursor = Cursors.Default;
                     }
         			else
         			{
-        				MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        Cursor = Cursors.Default;
+                        MessageBox.Show("Cycle file reading error !",Application.ProductName,MessageBoxButtons.OK,MessageBoxIcon.Error);
         			}
         		}
         	}

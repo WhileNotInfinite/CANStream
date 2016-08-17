@@ -1,11 +1,22 @@
 ﻿/*
- * Created by SharpDevelop.
- * User: VBrault
- * Date: 10/13/2014
- * Time: 14:45 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ *	This file is part of CANStream.
+ *
+ *	CANStream program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	CANStream Copyright © 2013-2016 whilenotinfinite@gmail.com
  */
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -3708,6 +3719,20 @@ namespace CANStream
                         GraphWindowProperties oGraphicProps = CANStreamTools.Get_CycleGraphicSetup(oCycle);
                         if (!((oGraphicProps == null) || (oCycleGraphData == null)))
                         {
+                            //Hide all not moving channels
+                            foreach (GW_DataChannel oCycleGraphChan in oCycleGraphData.Channels)
+                            {
+                                if (oCycleGraphChan.Min == oCycleGraphChan.Max)
+                                {
+                                    GraphSerieProperties oSerieProps = oGraphicProps.Get_SerieByName(oCycleGraphChan.Name);
+
+                                    if(!(oSerieProps==null))
+                                    {
+                                        oSerieProps.Visible = false;
+                                    }
+                                }
+                            }
+
                             Graph_Cycle.Set_DataFile(oCycleGraphData);
                             Graph_Cycle.Properties = oGraphicProps;
                             Graph_Cycle.Refresh_Graphic();

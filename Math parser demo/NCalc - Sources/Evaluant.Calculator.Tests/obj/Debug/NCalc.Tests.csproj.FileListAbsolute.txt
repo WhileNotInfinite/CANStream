@@ -1,1 +1,0 @@
-D:\users\vbrault\Documents\Tools\Visual Studio 2010\Projects\CANStream\Math parser demo\NCalc - Sources\Evaluant.Calculator.Tests\obj\Debug\ResolveAssemblyReference.cache
