@@ -1,16 +1,26 @@
 ﻿/*
- * Created by SharpDevelop.
- * User: VBrault
- * Date: 7/17/2013
- * Time: 12:47 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ *	This file is part of CANStream.
+ *
+ *	CANStream program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *	CANStream Copyright © 2013-2016 whilenotinfinite@gmail.com
  */
+
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-
-using SD_AppLicence;
 
 namespace CANStream
 {
@@ -35,81 +45,33 @@ namespace CANStream
 			ApplicationId = AppId;
 			
 			this.Text = "About " + Application.ProductName;
-			
-			#if DEMO
-			Txt_Product.Text = Application.ProductName + " DEMO Version";
-			#else
-			Txt_Product.Text = Application.ProductName;
-			#endif
-			
-			Txt_Release.Text = Application.ProductVersion;
+
+            Txt_Product.Text = Application.ProductName;
+            Txt_Release.Text = Application.ProductVersion;
 			Txt_Company.Text = Application.CompanyName;
-			
-			GetLicenceInformation();
 		}
 		
 		#region Control events
-		
-		private void Cmd_LicenceRequestClick(object sender, EventArgs e)
-		{
-			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion, TextRessouces.LicenseRequestEmail, false);
-
-            oLicence.EditorMailAddress = TextRessouces.LicenseRequestEmail;
-            oLicence.RequestLicence();
-		}
 		
 		private void Cmd_OKClick(object sender, EventArgs e)
 		{
 			this.Close();
 		}
-		
-		#endregion
-		
-		#region Private methods
-		
-		private void GetLicenceInformation()
-		{
-			AppLicenceObject oLicence = new AppLicenceObject(Application.StartupPath, ApplicationId, Application.ProductVersion, TextRessouces.LicenseRequestEmail, false);
 
-            if (oLicence.LicenseValid)
-			{
-				Txt_LicenceValid.Text = "Yes";	
-			}
-			else
-			{
-				Txt_LicenceValid.Text = "No";
-				Txt_LicenceValid.ForeColor = Color.Red;
-			}
-			
-			object[] Info = oLicence.GetLicenceInfo();
-			
-			DateTime StartDate = (DateTime)Info[1];
-			double Duration = Convert.ToDouble(Info[2]);
-			
-			if (Duration < 2000)
-			{
-				DateTime EndDate = StartDate.AddDays(Duration);
-				int RemainingDays = EndDate.Subtract(DateTime.Now).Days;
-				
-				Txt_LicenceExpiryDate.Text = EndDate.ToShortDateString();
-				Txt_LicenceDaysRemaining.Text = RemainingDays.ToString() + " days";
-				
-				if (RemainingDays < 30) Cmd_LicenceRequest.Enabled = true;
-				
-				if (EndDate.CompareTo(DateTime.Now) < 0)
-				{
-					Txt_LicenceExpiryDate.BackColor = Color.Tomato;
-					Txt_LicenceDaysRemaining.BackColor = Color.Tomato;
-				}
-			}
-			else
-			{
-				Txt_LicenceExpiryDate.Text =  "Never";
-				Txt_LicenceDaysRemaining.Text = "Infinity";
-			}
-			
-		}
-		
-		#endregion
-	}
+        private void LkLbl_HomePage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "http://canstream.hebergratuit.net/wp/";
+            p.Start();
+        }
+
+        private void LkLbl_GitHub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "https://github.com/WhileNotInfinite/CANStream";
+            p.Start();
+        }
+
+        #endregion
+    }
 }
