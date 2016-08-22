@@ -2,7 +2,29 @@
 #             CANStream release notes           #
 #################################################
 
-03/06/2015: VERSION 2.2.0.0
+08/17/2016: VERSION 2.3.0.0	[OPEN SOURCE GNU GPL]
+----------------------------
+	
+	New features
+		
+		#132: Switch to GPL Licence
+
+		#135: Cycle player graph should
+			  not show not moving data
+
+	Bug fixes
+
+		#131: Crash on data browser re-opening
+
+		#134: Cycle creator crashes at 
+			  the end of cycle creation
+
+	Known issues
+	
+		#38: Peak trace files have wrong 
+			 time offset
+
+03/06/2016: VERSION 2.2.0.0
 ----------------------------
 
 	New features
