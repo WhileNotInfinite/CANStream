@@ -2464,7 +2464,7 @@ namespace CANStream
         {
             for (int i = 0; i < DecodedMessages.Count; i++)
             {
-                if (DecodedMessages[i].Identifier.Equals(MsgId))
+                if (DecodedMessages[i].Identifier.ToUpper().Equals(MsgId.ToUpper()))
                 {
                     return (i);
                 }
