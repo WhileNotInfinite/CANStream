@@ -1831,13 +1831,16 @@ namespace CANStream
 
                                 if ((!oMsgEncod.HasVirtualParameters) || (oMsgEncod.HasVirtualParameters && bVirtualParamTx))
                                 {
-                                    if (SendMessage(oMsgEncod.GetPCANMessage()))
+                                    if (!bCycleRunning || oMsgEncod.HasVirtualParameters)
                                     {
-                                        if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
-
-                                        if (Chk_CycleMux.Checked)
+                                        if (SendMessage(oMsgEncod.GetPCANMessage()))
                                         {
-                                            oMsgEncod.SetMultiplexer();
+                                            if (!(oMsgEncod.TxCount == ulong.MaxValue)) oMsgEncod.TxCount++;
+
+                                            if (Chk_CycleMux.Checked)
+                                            {
+                                                oMsgEncod.SetMultiplexer();
+                                            }
                                         }
                                     }
                                 }
@@ -1847,7 +1850,7 @@ namespace CANStream
                 }
 
                 //Raw Message sending
-                if (!(TxRawMessages == null))
+                if (!(TxRawMessages == null) && !bCycleRunning)
                 {
                     foreach (CAN_RawMessageData oRawMsg in TxRawMessages.Messages)
                     {
