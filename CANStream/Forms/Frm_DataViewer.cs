@@ -687,15 +687,33 @@ namespace CANStream
 			if (!(DataFilePathes == null))
 			{
 				GW_DataFile[] oDataFiles = new GW_DataFile[DataFilePathes.Length];
-				
-				for (int iFile=0; iFile < DataFilePathes.Length; iFile++)
+                bool XmlDataFile = Path.GetExtension(DataFilePathes[0]).Equals(".xrdf");
+
+
+                for (int iFile=0; iFile < DataFilePathes.Length; iFile++)
 				{
 					oDataFiles[iFile] = new GW_DataFile();
-					oDataFiles[iFile].Load_DataFile(DataFilePathes[iFile]);
+
+                    if (XmlDataFile)
+                    {
+                        oDataFiles[iFile].Load_XmlDataFile(DataFilePathes[iFile], false);
+                    }
+                    else
+                    {
+                        oDataFiles[iFile].Load_DataFile(DataFilePathes[iFile]);
+                    }
 				}
-				
-				UpDate_PagesSeries(Concat_DataFiles(oDataFiles));
-				LastFilePath = Path.GetDirectoryName(DataFilePathes[DataFilePathes.Length -1]);
+
+                if (XmlDataFile)
+                {
+                    UpDate_PagesSeries(oDataFiles[0]);
+                }
+                else
+                {
+                    UpDate_PagesSeries(Concat_DataFiles(oDataFiles));
+                }
+
+                LastFilePath = Path.GetDirectoryName(DataFilePathes[DataFilePathes.Length -1]);
 			}
 		}
 		

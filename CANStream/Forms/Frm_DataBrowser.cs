@@ -423,7 +423,11 @@ namespace CANStream
 							{
 								iIcone = 2;
 							}
-							else if (oFile.Extension.Equals(".trc")) //Raw record file
+                            else if (oFile.Extension.Equals(".xrdf")) //XML Converted record file
+                            {
+                                iIcone = 4;
+                            }
+                            else if (oFile.Extension.Equals(".trc")) //Raw record file
 							{
 								iIcone = 3;
 							}
@@ -462,24 +466,35 @@ namespace CANStream
 				int Rem = 0;
 				Math.DivRem(iItem, 2, out Rem);
 				iItem++;
-				
-				if (Rem == 0)
+
+                object[] ItTags = (object[])It.Tag;
+                string FileExt = Path.GetExtension(ItTags[0].ToString());
+
+                if (Rem == 0)
 				{
-					object[] ItTags = (object[])It.Tag;
-					string FileExt = Path.GetExtension(ItTags[0].ToString());
-					
 					if (FileExt.Equals(".csv"))
 					{
 						It.BackColor = Color.PaleGreen;
 					}
-					else
+                    else if (FileExt.Equals(".xrdf"))
+                    {
+                        It.BackColor = Color.LightSkyBlue;
+                    }
+                    else
 					{
 						It.BackColor = Color.LightPink;
 					}
 				}
 				else
 				{
-					It.BackColor = LV_Files.BackColor;
+                    if (FileExt.Equals(".xrdf"))
+                    {
+                        It.BackColor = Color.LightCyan;
+                    }
+                    else
+                    {
+                        It.BackColor = LV_Files.BackColor;
+                    }
 				}
 			}
 		}
@@ -613,7 +628,8 @@ namespace CANStream
 			{
 				long TotalFilesSize = 0;
 				int FilesLoadedCount = 0;
-				
+                string FirstFileExtension = "";
+
 				ParentViewer.Reset_FileList(LV_Files.SelectedItems.Count);
 
                 for (int iFile=0; iFile < LV_Files.SelectedItems.Count; iFile++)
@@ -622,6 +638,20 @@ namespace CANStream
 					
 					FileInfo oFile = new FileInfo(FileTag[0].ToString());
 					TotalFilesSize += oFile.Length;
+
+                    if(iFile==0) //First file selected, store its extension
+                    {
+                        FirstFileExtension = oFile.Extension;
+                    }
+                    else
+                    {
+                        //Check whether the file has the same extension (.csv OR .xrdf) than the first file selected
+                        if (!(oFile.Extension.Equals(FirstFileExtension)))
+                        {
+                            MessageBox.Show("All selected files must be of the same type !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                    }
 					
 					if (TotalFilesSize <= CANStreamConstants.TextRecordDataFileSizeMax)
 					{
