@@ -221,20 +221,35 @@ namespace CANStream
 
         private void CanConfigHistoryItem_Click(object sender, EventArgs e)
         {
-            if (ActiveCanBus != null)
-            {
-                CANMessagesConfiguration oNewCfg = new CANMessagesConfiguration();
+            string FileExt = Path.GetExtension(((ToolStripItem)sender).Tag.ToString());
 
-                if (oNewCfg.ReadCANConfigurationFile(((ToolStripItem)sender).Tag.ToString()))
+            if (FileExt.Equals(".xcc"))
+            {
+                if (ActiveCanBus != null)
                 {
-                    ActiveCanBus.Set_BusCANConfiguration(oNewCfg);
-                    UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.CanConfiguration);
-                }
-                else
-                {
-                    MessageBox.Show("CAN Configuration file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CANMessagesConfiguration oNewCfg = new CANMessagesConfiguration();
+
+                    if (oNewCfg.ReadCANConfigurationFile(((ToolStripItem)sender).Tag.ToString()))
+                    {
+                        ActiveCanBus.Set_BusCANConfiguration(oNewCfg);
+                    }
+                    else
+                    {
+                        MessageBox.Show("CAN Configuration file reading error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
+            else if (FileExt.Equals(".mcb"))
+            {
+                Load_ControllersConfiguration(((ToolStripItem)sender).Tag.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Extension of the selected file is not supported !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            UpdateElementsHistory(((ToolStripItem)sender).Tag.ToString(), HistoryElements.CanConfiguration);
         }
 
         private void CANConfig_editToolStripMenuItemClick(object sender, EventArgs e)
@@ -2088,6 +2103,11 @@ namespace CANStream
         			{
         				Load_ControllersConfiguration(openFileDialog1.FileName);
         			}
+                    else
+                    {
+                        MessageBox.Show("Extension of the selected file is not supported !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                     UpdateElementsHistory(openFileDialog1.FileName, HistoryElements.CanConfiguration);
         		}
