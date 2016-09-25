@@ -310,7 +310,7 @@ namespace CANStream
 			TraceConversionOptions.OutputFileFolder = BasePath + CANStreamConstants.DataDirectory;
 			TraceConversionOptions.SourceFileBackUpFolder = BasePath + CANStreamConstants.RawDirectory;
 			TraceConversionOptions.TrcFileList = null;
-			TraceConversionOptions.OutputFileFormat = RecordConversionFormat.Text;
+            TraceConversionOptions.OutputFileFormat = RecordConversionFormat.Xml; //RecordConversionFormat.Text;
         }
         
         public static string GetScaledFileSize(long FileSize)

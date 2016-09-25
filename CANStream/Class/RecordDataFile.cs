@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using Ctrl_GraphWindow;
 using NumberBaseConversion;
 
 namespace CANStream
@@ -31,7 +32,8 @@ namespace CANStream
 	public enum RecordConversionFormat
 	{
 		Text=0,
-		Wintax=1,
+        Xml = 1,
+		Wintax=2,
 	}
 	
 	/// <summary>
@@ -287,6 +289,8 @@ namespace CANStream
 			{
 				case RecordConversionFormat.Text:
 					return(WriteTextRecordData(OutputFolder));
+                case RecordConversionFormat.Xml:
+                    return (WriteXmlRecordData(OutputFolder));
 				case RecordConversionFormat.Wintax:
 					return(WriteWintaxRecordData(OutputFolder));
 				default:
@@ -691,7 +695,239 @@ namespace CANStream
 			File.Delete(FilePath);
 			
 		}
-		
+
+        /// <summary>
+        /// Converts the decoded PCAN trace file into a XML data file
+        /// </summary>
+        /// <param name="OutputFolder">Output file folder</param>
+        /// <returns>Converion result (True: OK / False: Error)</returns>
+        private bool WriteXmlRecordData(string OutputFolder)
+        {
+            if (Channels.Count == 0)
+            {
+                return (false);
+            }
+
+            GW_DataFile oDataFile = new GW_DataFile();
+            oDataFile.DataSamplingMode = SamplingMode.MultipleRates;
+
+            //Set data file properties
+            oDataFile.DataStartTime = this.AbsDTStartTime;
+            oDataFile.UserComment = "Data file created "
+                                    + DateTime.Now.ToShortDateString()
+                                    + " "
+                                    + DateTime.Now.ToShortTimeString();
+
+            //Data file custom properties
+            GW_XmlDataFileCustomProperty oCustProp;
+
+            oCustProp = new GW_XmlDataFileCustomProperty();
+            oCustProp.Name = "Base PCAN Trc file";
+            oCustProp.PropertyValue = Path.GetFileName(this.BaseTrcFilePath);
+            oDataFile.XmlDataFileCustomProperties.Add(oCustProp);
+
+            oCustProp = new GW_XmlDataFileCustomProperty();
+            oCustProp.Name = "Data decode CAN Configuration";
+            oCustProp.PropertyValue = Path.GetFileName(this.oCanConfig.ConfigFilePath);
+            oDataFile.XmlDataFileCustomProperties.Add(oCustProp);
+
+            for (int i = 0; i < this.VCLibraries.Libraries.Count; i++)
+            {
+                oCustProp = new GW_XmlDataFileCustomProperty();
+                oCustProp.Name = "Data decode virtual channels library #" + (i + 1).ToString();
+                oCustProp.PropertyValue = Path.GetFileName(VCLibraries.Libraries[i].Name);
+                oDataFile.XmlDataFileCustomProperties.Add(oCustProp);
+            }
+
+            //Set data channels
+            foreach(RecordDataChannel oRecChan in Channels)
+            {
+                GW_DataChannel oDataChan = new GW_DataChannel(oRecChan.Name, SamplingMode.MultipleRates);
+
+                //Channel properties
+                CANParameter oCANSig = this.oCanConfig.GetCANParameter(oRecChan.Name);
+
+                if(!(oCANSig==null)) //A CAN parameter has been found, GW_DataChannel properties will be filled using properties of the CAN Parameter
+                {
+                    oDataChan.Description = oCANSig.Comment;
+                    oDataChan.Unit = oCANSig.Unit;
+                    oDataChan.GraphicFormat = Convert_CSSignalFormatToSerieValueFormat(oCANSig.ValueFormat);
+                    oDataChan.ChannelReferenceLines = Convert_CSAlarmsToSerieReferenceLines(oCANSig.Alarms);
+
+                }
+                else //No CAN parameter found, search among virtual channels
+                {
+                    CS_VirtualChannel oVirtual = null;
+
+                    foreach (CS_VirtualChannelsLibrary oVirtLib in this.VCLibraries.Libraries)
+                    {
+                        oVirtual = oVirtLib.GetVirtualChannel(oRecChan.Name);
+
+                        if (!(oVirtual==null))
+                        {
+                            break;
+                        }
+                    }
+
+                    if (!(oVirtual == null)) //A virtual channel has been found, GW_DataChannel properties will be filled using properties of the virtual channel
+                    {
+                        oDataChan.Description = oVirtual.Comment;
+                        oDataChan.Unit = oVirtual.Unit;
+                        oDataChan.GraphicFormat = Convert_CSSignalFormatToSerieValueFormat(oVirtual.ValueFormat);
+                        oDataChan.ChannelReferenceLines = Convert_CSAlarmsToSerieReferenceLines(oVirtual.Alarms);
+                    }
+                    else //No virtual channel found, GW_DataChannel will keeps its default properties values
+                    {
+                        //Nothing to do
+                    }
+                }
+
+                //Channel samples value
+                foreach(RecordDataSample oRecSample in oRecChan.Samples)
+                {
+                    SerieSample sDataSample = new SerieSample();
+
+                    sDataSample.SampleTime = oRecSample.TimeStamp / 1000;
+                    sDataSample.SampleValue = oRecSample.SampleValue;
+
+                    oDataChan.Samples.Add(sDataSample);
+                }
+
+                oDataFile.Channels.Add(oDataChan);
+            }
+            
+
+            string OutFilePath = BuildOutputFilePtah(OutputFolder, RecordConversionFormat.Xml);
+            oDataFile.Write_XmlDataFile(OutFilePath);
+
+            return (true);
+        }
+
+        /// <summary>
+        /// Convert a CANStream SignalFormatProperties class into a Ctrl_GraphWindow GraphSerieValueFormat class
+        /// </summary>
+        /// <param name="oSigFormat">CANStream SignalFormatProperties object to convert</param>
+        /// <returns>Ctrl_GraphWindow GraphSerieValueFormat object</returns>
+        private GraphSerieValueFormat Convert_CSSignalFormatToSerieValueFormat(SignalFormatProperties oSigFormat)
+        {
+            GraphSerieValueFormat oSerieFormat = new GraphSerieValueFormat();
+
+            switch (oSigFormat.FormatType)
+            {
+                case SignalValueFormat.Binary:
+
+                    oSerieFormat.Format = GraphSerieLegendFormats.Binary;
+                    break;
+
+                case SignalValueFormat.Decimal:
+
+                    oSerieFormat.Format = GraphSerieLegendFormats.Decimal;
+                    oSerieFormat.Decimals = oSigFormat.Decimals;
+                    break;
+
+                case SignalValueFormat.Enum:
+
+                    oSerieFormat.Format = GraphSerieLegendFormats.Enum;
+
+                    foreach(EnumerationValue sSigEnum in oSigFormat.Enums)
+                    {
+                        GraphSerieEnumValue sSerieEnum = new GraphSerieEnumValue();
+
+                        sSerieEnum.Value = sSigEnum.Value;
+                        sSerieEnum.Text = sSigEnum.Text;
+
+                        oSerieFormat.Enums.Add(sSerieEnum);
+                    }
+
+                    break;
+                case SignalValueFormat.Hexadecimal:
+
+                    oSerieFormat.Format = GraphSerieLegendFormats.Hexadecimal;
+                    break;
+
+                default:
+
+                    oSerieFormat.Format = GraphSerieLegendFormats.Auto;
+                    break;
+            }
+
+            return (oSerieFormat);
+        }
+
+        /// <summary>
+        /// Convert a CANStream SignalAlarmsProperties class into a list of Ctrl_GraphWindow GraphReferenceLine class
+        /// </summary>
+        /// <param name="oSigAlarms">CANStream SignalAlarmsProperties object to convert</param>
+        /// <returns>List of Ctrl_GraphWindow GraphReferenceLine class</returns>
+        private List<GraphReferenceLine> Convert_CSAlarmsToSerieReferenceLines(SignalAlarmsProperties oSigAlarms)
+        {
+            List<GraphReferenceLine> oSerieRefLines = new List<GraphReferenceLine>();
+
+            if(oSigAlarms.Enabled)
+            {
+                GraphReferenceLine oLine;
+                int iLineKey = 0;
+
+                if (oSigAlarms.AlarmLimitMin.Enabled)
+                {
+                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.AlarmLimitMin);
+                    oLine.ReferenceTitle = "Alarm Min";
+                    oLine.iKey = iLineKey;
+                    iLineKey++;
+
+                    oSerieRefLines.Add(oLine);
+                }
+
+                if (oSigAlarms.AlarmLimitMax.Enabled)
+                {
+                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.AlarmLimitMax);
+                    oLine.ReferenceTitle = "Alarm Max";
+                    oLine.iKey = iLineKey;
+                    iLineKey++;
+
+                    oSerieRefLines.Add(oLine);
+                }
+
+                if (oSigAlarms.WarningLimitMin.Enabled)
+                {
+                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.WarningLimitMin);
+                    oLine.ReferenceTitle = "Warning Min";
+                    oLine.iKey = iLineKey;
+                    iLineKey++;
+
+                    oSerieRefLines.Add(oLine);
+                }
+
+                if (oSigAlarms.WarningLimitMax.Enabled)
+                {
+                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.WarningLimitMax);
+                    oLine.ReferenceTitle = "Warning Max";
+                    oLine.iKey = iLineKey;
+                    iLineKey++;
+
+                    oSerieRefLines.Add(oLine);
+                }
+            }
+
+            return (oSerieRefLines);
+        }
+
+        /// <summary>
+        /// Convert a CANStream SignalAlarmValue structure into a Ctrl_GraphWindow GraphReferenceLine class
+        /// </summary>
+        /// <param name="sAlarm">CANStream SignalAlarmValue structure to convert</param>
+        /// <returns>Ctrl_GraphWindow GraphReferenceLine class</returns>
+        private GraphReferenceLine GetSerieReferenceLineFromAlarm(SignalAlarmValue sAlarm)
+        {
+            GraphReferenceLine oRefLine = new GraphReferenceLine();
+
+            oRefLine.ReferenceValue = sAlarm.Value;
+            oRefLine.ReferenceStyle.LineColor = sAlarm.BackColor;
+            oRefLine.ReferenceTitlePosition = ScreenPositions.Left;
+
+            return (oRefLine);
+        }
+
 		/// <summary>
 		/// Converts the decoded PCAN trace file into a Wintax data file
 		/// </summary>
@@ -743,7 +979,10 @@ namespace CANStream
 				case RecordConversionFormat.Text:
 					OutputFile=OutputFile+".csv";
 					break;
-				case RecordConversionFormat.Wintax:
+                case RecordConversionFormat.Xml:
+                    OutputFile = OutputFile + ".xrdf";
+                    break;
+                case RecordConversionFormat.Wintax:
 					OutputFile=OutputFile+".ztx";
 					break;
 				default:
