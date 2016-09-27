@@ -720,12 +720,33 @@ namespace CANStream
 	/// </summary>
 	public class CS_VirtualChannel
 	{
-		#region Public members
-		
-		/// <summary>
-		/// Virtual channel name
-		/// </summary>
-		public string Name;
+        #region Public properties
+
+        /// <summary>
+        /// List of variables used by the current virtual channel
+        /// </summary>
+        /// <permission cref="VarNameList">Read Only</permission>
+        public string[] ChannelVariables
+        {
+            get
+            {
+                return (VarNameList);
+            }
+
+            private set
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region Public members
+
+        /// <summary>
+        /// Virtual channel name
+        /// </summary>
+        public string Name;
 		
 		/// <summary>
 		/// Virtual channel description comment
@@ -1418,12 +1439,32 @@ namespace CANStream
 	/// </summary>
 	public class CS_VCLibrariesCollection
 	{
-		#region Public members
-		
-		/// <summary>
-		/// Collection of virtual channel libraries
-		/// </summary>
-		public List<CS_VirtualChannelsLibrary> Libraries;
+        #region Public Properties
+
+        /// <summary>
+        /// List of virtual channels to be computed sorted by computation order
+        /// </summary>
+        public CS_VirtualChannel[] ChannelsComputationList
+        {
+            get
+            {
+                return (VC_ComputationList);
+            }
+
+            private set
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region Public members
+
+        /// <summary>
+        /// Collection of virtual channel libraries
+        /// </summary>
+        public List<CS_VirtualChannelsLibrary> Libraries;
 		
 		/// <summary>
 		/// Flag indicating whether librairies computation has been initialized
@@ -1889,16 +1930,16 @@ namespace CANStream
 			
 			return(null);
 		}
-				
-		#endregion
-		
-		#endregion
-		
-		#region Private methods
-		
-		#region Virtual channels computation
-		
-		private int GetDependentFirstIndex(List<string> ComputeList, string[] DependentList)
+
+        #endregion
+
+        #endregion
+
+        #region Private methods
+
+        #region Virtual channels computation
+
+        private int GetDependentFirstIndex(List<string> ComputeList, string[] DependentList)
 		{
 			int iFirstDep = -1;
 			
@@ -1924,34 +1965,34 @@ namespace CANStream
 			
 			return(iFirstDep);
 		}
-		
-		private string[] GetDependentList(CS_VirtualChannel RefChannel)
-		{
-			List<string> DepList = new List<string>();
-			
-			foreach(CS_VirtualChannelsLibrary oLib in Libraries)
-			{
-				foreach(CS_VirtualChannel oChan in oLib.Channels)
-				{
-					if (oChan.ComputationReady)
-					{
-						if (oChan.IsDependantOfChannel(RefChannel.Name))
-						{
-							DepList.Add(oChan.Name);
-							RefChannel.HasDependent = true;
-						}
-					}
-				}
-			}
-			
-			return(DepList.ToArray());
-		}
-		
-		#endregion
-		
-		#region Variable element table management
-		
-		private void AddVariableValue(string Name, double Value)
+
+        private string[] GetDependentList(CS_VirtualChannel RefChannel)
+        {
+            List<string> DepList = new List<string>();
+
+            foreach (CS_VirtualChannelsLibrary oLib in Libraries)
+            {
+                foreach (CS_VirtualChannel oChan in oLib.Channels)
+                {
+                    if (oChan.ComputationReady)
+                    {
+                        if (oChan.IsDependantOfChannel(RefChannel.Name))
+                        {
+                            DepList.Add(oChan.Name);
+                            RefChannel.HasDependent = true;
+                        }
+                    }
+                }
+            }
+
+            return (DepList.ToArray());
+        }
+
+        #endregion
+
+        #region Variable element table management
+
+        private void AddVariableValue(string Name, double Value)
 		{				
 			//Create a new variable structure
 			if (!(Name == null))

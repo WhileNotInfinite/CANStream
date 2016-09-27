@@ -756,8 +756,8 @@ namespace CANStream
                 {
                     oDataChan.Description = oCANSig.Comment;
                     oDataChan.Unit = oCANSig.Unit;
-                    oDataChan.GraphicFormat = Convert_CSSignalFormatToSerieValueFormat(oCANSig.ValueFormat);
-                    oDataChan.ChannelReferenceLines = Convert_CSAlarmsToSerieReferenceLines(oCANSig.Alarms);
+                    oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oCANSig.ValueFormat);
+                    oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oCANSig.Alarms);
 
                 }
                 else //No CAN parameter found, search among virtual channels
@@ -778,8 +778,8 @@ namespace CANStream
                     {
                         oDataChan.Description = oVirtual.Comment;
                         oDataChan.Unit = oVirtual.Unit;
-                        oDataChan.GraphicFormat = Convert_CSSignalFormatToSerieValueFormat(oVirtual.ValueFormat);
-                        oDataChan.ChannelReferenceLines = Convert_CSAlarmsToSerieReferenceLines(oVirtual.Alarms);
+                        oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oVirtual.ValueFormat);
+                        oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oVirtual.Alarms);
                     }
                     else //No virtual channel found, GW_DataChannel will keeps its default properties values
                     {
@@ -806,131 +806,6 @@ namespace CANStream
             oDataFile.Write_XmlDataFile(OutFilePath);
 
             return (true);
-        }
-
-        /// <summary>
-        /// Convert a CANStream SignalFormatProperties class into a Ctrl_GraphWindow GraphSerieValueFormat class
-        /// </summary>
-        /// <param name="oSigFormat">CANStream SignalFormatProperties object to convert</param>
-        /// <returns>Ctrl_GraphWindow GraphSerieValueFormat object</returns>
-        private GraphSerieValueFormat Convert_CSSignalFormatToSerieValueFormat(SignalFormatProperties oSigFormat)
-        {
-            GraphSerieValueFormat oSerieFormat = new GraphSerieValueFormat();
-
-            switch (oSigFormat.FormatType)
-            {
-                case SignalValueFormat.Binary:
-
-                    oSerieFormat.Format = GraphSerieLegendFormats.Binary;
-                    break;
-
-                case SignalValueFormat.Decimal:
-
-                    oSerieFormat.Format = GraphSerieLegendFormats.Decimal;
-                    oSerieFormat.Decimals = oSigFormat.Decimals;
-                    break;
-
-                case SignalValueFormat.Enum:
-
-                    oSerieFormat.Format = GraphSerieLegendFormats.Enum;
-
-                    foreach(EnumerationValue sSigEnum in oSigFormat.Enums)
-                    {
-                        GraphSerieEnumValue sSerieEnum = new GraphSerieEnumValue();
-
-                        sSerieEnum.Value = sSigEnum.Value;
-                        sSerieEnum.Text = sSigEnum.Text;
-
-                        oSerieFormat.Enums.Add(sSerieEnum);
-                    }
-
-                    break;
-                case SignalValueFormat.Hexadecimal:
-
-                    oSerieFormat.Format = GraphSerieLegendFormats.Hexadecimal;
-                    break;
-
-                default:
-
-                    oSerieFormat.Format = GraphSerieLegendFormats.Auto;
-                    break;
-            }
-
-            return (oSerieFormat);
-        }
-
-        /// <summary>
-        /// Convert a CANStream SignalAlarmsProperties class into a list of Ctrl_GraphWindow GraphReferenceLine class
-        /// </summary>
-        /// <param name="oSigAlarms">CANStream SignalAlarmsProperties object to convert</param>
-        /// <returns>List of Ctrl_GraphWindow GraphReferenceLine class</returns>
-        private List<GraphReferenceLine> Convert_CSAlarmsToSerieReferenceLines(SignalAlarmsProperties oSigAlarms)
-        {
-            List<GraphReferenceLine> oSerieRefLines = new List<GraphReferenceLine>();
-
-            if(oSigAlarms.Enabled)
-            {
-                GraphReferenceLine oLine;
-                int iLineKey = 0;
-
-                if (oSigAlarms.AlarmLimitMin.Enabled)
-                {
-                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.AlarmLimitMin);
-                    oLine.ReferenceTitle = "Alarm Min";
-                    oLine.iKey = iLineKey;
-                    iLineKey++;
-
-                    oSerieRefLines.Add(oLine);
-                }
-
-                if (oSigAlarms.AlarmLimitMax.Enabled)
-                {
-                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.AlarmLimitMax);
-                    oLine.ReferenceTitle = "Alarm Max";
-                    oLine.iKey = iLineKey;
-                    iLineKey++;
-
-                    oSerieRefLines.Add(oLine);
-                }
-
-                if (oSigAlarms.WarningLimitMin.Enabled)
-                {
-                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.WarningLimitMin);
-                    oLine.ReferenceTitle = "Warning Min";
-                    oLine.iKey = iLineKey;
-                    iLineKey++;
-
-                    oSerieRefLines.Add(oLine);
-                }
-
-                if (oSigAlarms.WarningLimitMax.Enabled)
-                {
-                    oLine = GetSerieReferenceLineFromAlarm(oSigAlarms.WarningLimitMax);
-                    oLine.ReferenceTitle = "Warning Max";
-                    oLine.iKey = iLineKey;
-                    iLineKey++;
-
-                    oSerieRefLines.Add(oLine);
-                }
-            }
-
-            return (oSerieRefLines);
-        }
-
-        /// <summary>
-        /// Convert a CANStream SignalAlarmValue structure into a Ctrl_GraphWindow GraphReferenceLine class
-        /// </summary>
-        /// <param name="sAlarm">CANStream SignalAlarmValue structure to convert</param>
-        /// <returns>Ctrl_GraphWindow GraphReferenceLine class</returns>
-        private GraphReferenceLine GetSerieReferenceLineFromAlarm(SignalAlarmValue sAlarm)
-        {
-            GraphReferenceLine oRefLine = new GraphReferenceLine();
-
-            oRefLine.ReferenceValue = sAlarm.Value;
-            oRefLine.ReferenceStyle.LineColor = sAlarm.BackColor;
-            oRefLine.ReferenceTitlePosition = ScreenPositions.Left;
-
-            return (oRefLine);
         }
 
 		/// <summary>
