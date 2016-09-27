@@ -706,7 +706,7 @@ namespace CANStream
 
                 if (XmlDataFile)
                 {
-                    UpDate_PagesSeries(oDataFiles[0]);
+                    UpDate_PagesSeries(Concat_XmlDataFiles(oDataFiles));
                 }
                 else
                 {
@@ -866,6 +866,11 @@ namespace CANStream
 			return(oConcatData);
 		}
 		
+        private GW_DataFile Concat_XmlDataFiles(GW_DataFile[] oDataFiles)
+        {
+
+        }
+
 		private void UpDate_PagesSeries(GW_DataFile oData)
 		{
 			foreach (TabPage oPage in Tab_Viewers.TabPages)

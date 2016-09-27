@@ -93,13 +93,6 @@ namespace CANStream
 		public double SampleValue;
 		
 		#endregion
-		/*
-		public RecordDataSample()
-		{
-			TimeStamp=-1;
-			SampleValue=0;
-		}
-		*/
 	}
 	
 	/// <summary>
@@ -662,6 +655,10 @@ namespace CANStream
 			return(true);
 		}
 		
+        /// <summary>
+        /// Write the header of a text record data file
+        /// </summary>
+        /// <param name="SW">Stream Writer object handling the file to write</param>
 		private void WriteTextRecordDataHeader(StreamWriter SW)
 		{
 			string Line = "";
@@ -675,8 +672,16 @@ namespace CANStream
 			
 			SW.WriteLine(Line);
 		}
-		
-		private void RenameTextRecordDataFile(string FilePath)
+
+        /// <summary>
+        /// Copy and rename the text record data file given as argument
+        /// </summary>
+        /// <param name="FilePath">Path of the file to rename</param>
+        /// <remarks>
+        /// Use if the conversion of the base trace record file results in a file 
+        /// which has a size exceeding the TextRecordDataFileSizeMax constant value
+        /// </remarks>
+        private void RenameTextRecordDataFile(string FilePath)
 		{
 			string FolderPath = Path.GetDirectoryName(FilePath);
 			string BaseName = Path.GetFileNameWithoutExtension(FilePath);
