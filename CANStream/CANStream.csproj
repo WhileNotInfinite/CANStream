@@ -143,6 +143,7 @@
     <Compile Include="Class\CycleDataAssociation.cs" />
     <Compile Include="Class\CycleEditionConfiguration.cs" />
     <Compile Include="Class\GraphicSeries.cs" />
+    <Compile Include="Class\CS_RecordLoggingConfiguration.cs" />
     <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +155,12 @@
     </Compile>
     <Compile Include="Forms\Frm_ParamControlFormatProperties.Designer.cs">
       <DependentUpon>Frm_ParamControlFormatProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Frm_LogginChannelConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_LogginChannelConfig.Designer.cs">
+      <DependentUpon>Frm_LogginChannelConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="MicroSecondTimer\MicroSecondLibrary.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
@@ -481,6 +488,8 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\recycle-box-icone-7601-16.png" />
+    <None Include="Resources\tar-icone-3800-16.png" />
     <None Include="Resources\sender-mail-address-icone-8786-32.png" />
     <None Include="Resources\all-mail-address-icone-7791-32.png" />
     <None Include="Resources\ledgreen-icone-4983-48.png" />

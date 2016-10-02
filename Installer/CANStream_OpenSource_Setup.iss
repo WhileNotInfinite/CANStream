@@ -8,7 +8,7 @@
 AppId={{8B3B1D1B-F323-4894-B04F-5EC315A37994}
 
 AppName=CANStream
-AppVerName=CANStream 2.3.1
+AppVerName=CANStream 2.4.0
 OutputDir=bin\Release
 
 #ifdef WIN32
@@ -17,7 +17,7 @@ OutputBaseFilename=CANStream_Setup_Win32
 OutputBaseFilename=CANStream_Setup_x64
 #endif
 
-AppVersion=2.3.1
+AppVersion=2.4.0
 AppPublisher=Cobalt Solutions
 AppCopyright=Copyright (C) 2013-2016 Cobalt Solutions
 ChangesAssociations=yes
@@ -71,6 +71,7 @@ Source: ..\Ressources\Icones\MultipleBusCanConfig_mcb.ico; DestDir: "{app}\Resso
 Source: ..\Ressources\Icones\PCANTrace_trc.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion
 Source: ..\Ressources\Icones\VirtualChannelsLibrary_cvl.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion
 Source: ..\Ressources\Icones\XmlRecordDataFile.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion
+Source: ..\Ressources\Icones\ChannelLoggingConfiguration.ico; DestDir: "{app}\Ressources"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
@@ -168,6 +169,12 @@ Root: HKCR; Subkey: ".xrdf"; ValueType: string; ValueName: ""; ValueData: "CANSt
 Root: HKCR; Subkey: "CANStream.XmlRecordDataFile"; ValueType: string; ValueName: ""; ValueData: "CANStream XML Record data file"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "CANStream.XmlRecordDataFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Ressources\XmlRecordDataFile.ico"
 Root: HKCR; Subkey: "CANStream.XmlRecordDataFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CANStream.exe"" ""%1"""
+
+;  Logging channels configuration file (*.xrdf) file association
+Root: HKCR; Subkey: ".lcc"; ValueType: string; ValueName: ""; ValueData: "CANStream.LoggingChannelsConfig"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "CANStream.LoggingChannelsConfig"; ValueType: string; ValueName: ""; ValueData: "CANStream logging channels configuration"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "CANStream.LoggingChannelsConfig\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Ressources\ChannelLoggingConfiguration.ico"
+Root: HKCR; Subkey: "CANStream.LoggingChannelsConfig\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CANStream.exe"" ""%1"""
 
 [Run]
 Filename: "{app}\CANStream.exe"; Description: "{cm:LaunchProgram,CANStream}"; Flags: nowait postinstall skipifsilent

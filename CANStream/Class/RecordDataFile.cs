@@ -54,8 +54,12 @@ namespace CANStream
 		/// <remarks>
 		/// If null, all *.trc files of the source folder will be converted
 		/// </remarks>
-		//public string[] TrcFileList;
 		public PcanTrcFileInfo[] TrcFileList;
+
+        /// <summary>
+        /// Conversion logging configuration file path
+        /// </summary>
+        public string LoggingConfigurationFilePath;
 		
 		/// <summary>
 		/// Conversion output format (ASCII or Wintax or ....)
@@ -225,7 +229,12 @@ namespace CANStream
 		/// Graphic series of the record
 		/// </summary>
 		public GraphicSeries GraphSeries;
-		
+
+        /// <summary>
+        /// Record logging configuration object used to create the final record data file
+        /// </summary>
+        public CS_RecordLoggingConfiguration oLoggingConfig;
+
 		#endregion
 		
 		#region Private members
@@ -246,8 +255,10 @@ namespace CANStream
 			
 			oRecordEvent = null;
 			oRecordSession = null;
-			
-			if(bTrcLoaded)
+            oLoggingConfig = null;
+
+
+            if (bTrcLoaded)
 			{
                 if (!(oTrcInfo.TrcCanConfig == null))
                 {
@@ -745,65 +756,96 @@ namespace CANStream
             }
 
             //Set data channels
-            foreach(RecordDataChannel oRecChan in Channels)
+            foreach (RecordDataChannel oRecChan in Channels)
             {
-                GW_DataChannel oDataChan = new GW_DataChannel(oRecChan.Name, SamplingMode.MultipleRates);
-
-                //Channel properties
-                CANParameter oCANSig = this.oCanConfig.GetCANParameter(oRecChan.Name);
-
-                if(!(oCANSig==null)) //A CAN parameter has been found, GW_DataChannel properties will be filled using properties of the CAN Parameter
+                //Retrieve the LoggingChannelConfiguration for the curent RecordDataChannel
+                LoggingChannelConfiguration oChanLogConfig = null;
+                if (!(oLoggingConfig == null))
                 {
-                    oDataChan.Description = oCANSig.Comment;
-                    oDataChan.Unit = oCANSig.Unit;
-                    oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oCANSig.ValueFormat);
-                    oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oCANSig.Alarms);
-
+                    oChanLogConfig = oLoggingConfig.Get_LoggingChannel(oRecChan.Name);
                 }
-                else //No CAN parameter found, search among virtual channels
+
+                if (oChanLogConfig == null)
                 {
-                    CS_VirtualChannel oVirtual = null;
+                    //Channel logging confg has not been found
+                    //We create one just to have default properties
+                    oChanLogConfig = new LoggingChannelConfiguration();
+                }
 
-                    foreach (CS_VirtualChannelsLibrary oVirtLib in this.VCLibraries.Libraries)
+                if (oChanLogConfig.LoggingMode != ChannelLoggingMode.NotLogged)
+                {
+                    GW_DataChannel oDataChan = new GW_DataChannel(oRecChan.Name, SamplingMode.MultipleRates);
+
+                    //Channel properties
+                    CANParameter oCANSig = this.oCanConfig.GetCANParameter(oRecChan.Name);
+
+                    if (!(oCANSig == null)) //A CAN parameter has been found, GW_DataChannel properties will be filled using properties of the CAN Parameter
                     {
-                        oVirtual = oVirtLib.GetVirtualChannel(oRecChan.Name);
+                        oDataChan.Description = oCANSig.Comment;
+                        oDataChan.Unit = oCANSig.Unit;
+                        oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oCANSig.ValueFormat);
+                        oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oCANSig.Alarms);
 
-                        if (!(oVirtual==null))
+                    }
+                    else //No CAN parameter found, search among virtual channels
+                    {
+                        CS_VirtualChannel oVirtual = null;
+
+                        foreach (CS_VirtualChannelsLibrary oVirtLib in this.VCLibraries.Libraries)
                         {
-                            break;
+                            oVirtual = oVirtLib.GetVirtualChannel(oRecChan.Name);
+
+                            if (!(oVirtual == null))
+                            {
+                                break;
+                            }
+                        }
+
+                        if (!(oVirtual == null)) //A virtual channel has been found, GW_DataChannel properties will be filled using properties of the virtual channel
+                        {
+                            oDataChan.Description = oVirtual.Comment;
+                            oDataChan.Unit = oVirtual.Unit;
+                            oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oVirtual.ValueFormat);
+                            oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oVirtual.Alarms);
+                        }
+                        else //No virtual channel found, GW_DataChannel will keeps its default properties values
+                        {
+                            //Nothing to do
                         }
                     }
 
-                    if (!(oVirtual == null)) //A virtual channel has been found, GW_DataChannel properties will be filled using properties of the virtual channel
+                    //Channel samples value
+                    double SamplingTime = 0;
+                    if (oChanLogConfig.LoggingMode== ChannelLoggingMode.CustomFrequency)
                     {
-                        oDataChan.Description = oVirtual.Comment;
-                        oDataChan.Unit = oVirtual.Unit;
-                        oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oVirtual.ValueFormat);
-                        oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oVirtual.Alarms);
+                        if (oChanLogConfig.LoggingFrequency > 0)
+                        {
+                            SamplingTime = 1 / oChanLogConfig.LoggingFrequency;
+                        }
                     }
-                    else //No virtual channel found, GW_DataChannel will keeps its default properties values
+
+                    foreach (RecordDataSample oRecSample in oRecChan.Samples)
                     {
-                        //Nothing to do
+                        double TSample = oRecSample.TimeStamp / 1000;
+
+                        if ((TSample - oDataChan.Samples[oDataChan.Samples.Count - 1].SampleTime) >= SamplingTime)
+                        {
+                            SerieSample sDataSample = new SerieSample();
+
+                            sDataSample.SampleTime = TSample;
+                            sDataSample.SampleValue = oRecSample.SampleValue;
+
+                            oDataChan.Samples.Add(sDataSample);
+                        }
                     }
+
+                    oDataFile.Channels.Add(oDataChan);
                 }
 
-                //Channel samples value
-                foreach(RecordDataSample oRecSample in oRecChan.Samples)
-                {
-                    SerieSample sDataSample = new SerieSample();
 
-                    sDataSample.SampleTime = oRecSample.TimeStamp / 1000;
-                    sDataSample.SampleValue = oRecSample.SampleValue;
-
-                    oDataChan.Samples.Add(sDataSample);
-                }
-
-                oDataFile.Channels.Add(oDataChan);
+                string OutFilePath = BuildOutputFilePtah(OutputFolder, RecordConversionFormat.Xml);
+                oDataFile.Write_XmlDataFile(OutFilePath);
             }
-            
-
-            string OutFilePath = BuildOutputFilePtah(OutputFolder, RecordConversionFormat.Xml);
-            oDataFile.Write_XmlDataFile(OutFilePath);
 
             return (true);
         }

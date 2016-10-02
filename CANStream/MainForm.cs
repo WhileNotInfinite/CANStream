@@ -75,6 +75,7 @@ namespace CANStream
 		private Ctrl_CS_CAN_Bus ActiveCanBus;
 
 		private CS_RecordEvent oRecordEvent;
+        private string LoggingChannelsConfigFile;
 
 		private bool bConverting;
 		private DateTime TLastDiag;
@@ -113,9 +114,13 @@ namespace CANStream
 										        	        	
         	//Record event intialization
         	Get_LastRecordEventSession();
-        	
-        	//PCAN Trace file conversion option initialization
-        	CANStreamTools.Init_RecordConversionOption(CANStreamTools.MyDocumentPath);
+
+            //Get last record logging configuration file
+            Get_RegisterLoggingConfiguration();
+            Set_LoggingChannelsConfig(false);
+
+            //PCAN Trace file conversion option initialization
+            CANStreamTools.Init_RecordConversionOption(CANStreamTools.MyDocumentPath);
         	
         	TabPage_NewController.TabIndex = 9;
         	
@@ -200,7 +205,8 @@ namespace CANStream
 				Save_ControllerLayout();
 				Delete_AllControllerTmpBackUpFile();
 				Set_RegisterRecordEventSession();
-			}
+                Set_RegisterLoggingConfiguration();
+            }
 		}
                 
         #endregion
@@ -497,13 +503,51 @@ namespace CANStream
         		}
         	}
 		}
-        
+
         #endregion
-        
+
+        #region Logging channel configuration
+
+        private void loggingChannelsConfigurationToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            if(!(LoggingChannelsConfigFile.Equals("")))
+            {
+                resetLoggingChannelsConfigurationToolStripMenuItem.Enabled = true;
+                editLoggingChannelsConfigurationToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                resetLoggingChannelsConfigurationToolStripMenuItem.Enabled = false;
+                editLoggingChannelsConfigurationToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void newLoggingChannelConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Edit_LoggingChannelsConfig(true);
+        }
+
+        private void selectLoggingChannelConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Set_LoggingChannelsConfig(true);
+        }
+
+        private void resetLoggingChannelsConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reset_LoggingChannelsConfig();
+        }
+
+        private void editLoggingChannelsConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Edit_LoggingChannelsConfig(false);
+        }
+
         #endregion
-        
+
+        #endregion
+
         #region Tools
-        
+
         private void VirtualChannelsToolStripMenuItemClick(object sender, EventArgs e)
 		{
         	EditVirtualChannels(null);
@@ -2275,7 +2319,17 @@ namespace CANStream
         		{
         			VCLibCollectionFilePath = CANStreamTools.CsDataPath + "\\Libraries.xml";
         		}
-        		
+
+                CS_RecordLoggingConfiguration oRecordLogConfig = null;
+                if (!(CANStreamTools.TraceConversionOptions.LoggingConfigurationFilePath.Equals("")))
+                {
+                    oRecordLogConfig = new CS_RecordLoggingConfiguration();
+                    if (!(oRecordLogConfig.Read_LoggingConfigurationFile(CANStreamTools.TraceConversionOptions.LoggingConfigurationFilePath)))
+                    {
+                        oRecordLogConfig = null; //Reset record logging config to null if config file reading results to an error
+                    }
+                }
+
         		int Progress=0;
         		
         		for(int iFile=0;iFile< CANStreamTools.TraceConversionOptions.TrcFileList.Length;iFile++)
@@ -2287,6 +2341,7 @@ namespace CANStream
 
                     //PCAN Trace file reading
                     RecordDataFile oRecord = new RecordDataFile(CANStreamTools.TraceConversionOptions.TrcFileList[iFile], VCLibCollectionFilePath);
+                    oRecord.oLoggingConfig = oRecordLogConfig;
 
                     //Trace file conversion
                     object ErrorFile = null;
@@ -2388,8 +2443,31 @@ namespace CANStream
     		return(null);
         }
         
+        private void Set_RegisterLoggingConfiguration()
+        {
+            if (!(LoggingChannelsConfigFile.Equals("")))
+            {
+                string LoggingConfigRegKey = CANStreamConstants.CS_REG_KEY + "\\RecordLoggingConfiguration";
+                Registry.SetValue(LoggingConfigRegKey, "LoggingConfigFile", LoggingChannelsConfigFile);
+            }
+        }
+
+        private void Get_RegisterLoggingConfiguration()
+        {
+            object LoggingConfigRegKey = Registry.GetValue(CANStreamConstants.CS_REG_KEY + "\\RecordLoggingConfiguration", "LoggingConfigFile", "");
+
+            if (!(LoggingConfigRegKey == null))
+            {
+                LoggingChannelsConfigFile = (string)LoggingConfigRegKey;
+            }
+            else
+            {
+                LoggingChannelsConfigFile = "";
+            }
+        }
+
         #region Recording Event/Session management
-        
+
         private void Set_RegisterRecordEventSession()
         {
         	if (!(oRecordEvent == null))
@@ -2546,15 +2624,75 @@ namespace CANStream
         	
         	return(SessionDirectoryPath);
         } //Done
-        
+
         #endregion
-        
+
         #endregion
+
+        #region Logging channels configuration management
         
+        private void Set_LoggingChannelsConfig(bool GetFile)
+        {
+            if(GetFile)
+            {
+                openFileDialog1.FileName = "";
+                openFileDialog1.Filter = "logging channels configuration|*.lcc";
+                openFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Records";
+
+                if (openFileDialog1.ShowDialog().Equals(DialogResult.OK))
+                {
+                    LoggingChannelsConfigFile = openFileDialog1.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if(!(LoggingChannelsConfigFile.Equals("")))
+            {
+                SS_TS_Lbl_LoggingChannelConfig.Text = Path.GetFileNameWithoutExtension(LoggingChannelsConfigFile);
+                SS_TS_Lbl_LoggingChannelConfig.Visible = true;
+            }
+            else
+            {
+                SS_TS_Lbl_LoggingChannelConfig.Text = "";
+                SS_TS_Lbl_LoggingChannelConfig.Visible = false;
+            }
+        }
+
+        private void Reset_LoggingChannelsConfig()
+        {
+            DialogResult Rep = MessageBox.Show("Do you really want reset the logging channel configuration ?",
+                                                Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (Rep == DialogResult.Yes)
+            {
+                LoggingChannelsConfigFile = "";
+                Set_LoggingChannelsConfig(false);
+
+            }
+        }
+
+        private void Edit_LoggingChannelsConfig(bool NewConfig)
+        {
+            string BaseFile = "";
+
+            if(!NewConfig)
+            {
+                BaseFile = LoggingChannelsConfigFile;
+            }
+
+            Frm_LogginChannelConfig Frm = new Frm_LogginChannelConfig(BaseFile);
+            Frm.Show();
+        }
+
         #endregion
-        
+
+        #endregion
+
         #region Virtual Channels & Built-In Signals
-        
+
         private void EditVirtualChannels(CS_VirtualChannelsLibrary UserLib)
         {
         	Frm_VirtualChannel Frm = new Frm_VirtualChannel(this);
@@ -2883,6 +3021,7 @@ namespace CANStream
                 }
 
                 CANStreamTools.TraceConversionOptions.TrcFileList = oFileList.ToArray();
+                CANStreamTools.TraceConversionOptions.LoggingConfigurationFilePath = LoggingChannelsConfigFile;
                 oFileList = null;
 
                 //Start conversion

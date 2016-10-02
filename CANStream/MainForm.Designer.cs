@@ -101,6 +101,11 @@ namespace CANStream
             this.selectRecordsToConvertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopRecordConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.automaticRecordsConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loggingChannelsConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newLoggingChannelConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectLoggingChannelConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetLoggingChannelsConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editLoggingChannelsConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_TSMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.virtualChannelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.builtinSignalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,6 +202,7 @@ namespace CANStream
             this.TS_Lbl_CanCfgDesc = new System.Windows.Forms.ToolStripLabel();
             this.SS_TS_Lbl_RecordEvent = new System.Windows.Forms.ToolStripStatusLabel();
             this.SS_TS_Lbl_RecordSession = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SS_TS_Lbl_LoggingChannelConfig = new System.Windows.Forms.ToolStripStatusLabel();
             this.TS_Lbl_ConversionProgress = new System.Windows.Forms.ToolStripLabel();
             this.TS_PB_Conversion = new System.Windows.Forms.ToolStripProgressBar();
             this.TSSL_StopConversion = new System.Windows.Forms.ToolStripStatusLabel();
@@ -495,7 +501,8 @@ namespace CANStream
             this.recordingEventToolStripMenuItem,
             this.recordingSessionToolStripMenuItem,
             this.toolStripMenuItem4,
-            this.convertRecordsToolStripMenuItem});
+            this.convertRecordsToolStripMenuItem,
+            this.loggingChannelsConfigurationToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(73, 20);
             this.toolStripMenuItem2.Text = "Recording";
@@ -674,6 +681,51 @@ namespace CANStream
             this.automaticRecordsConversionToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.automaticRecordsConversionToolStripMenuItem.Text = "Automatic records conversion";
             this.automaticRecordsConversionToolStripMenuItem.Click += new System.EventHandler(this.AutomaticRecordsConversionToolStripMenuItemClick);
+            // 
+            // loggingChannelsConfigurationToolStripMenuItem
+            // 
+            this.loggingChannelsConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLoggingChannelConfigurationToolStripMenuItem,
+            this.selectLoggingChannelConfigurationToolStripMenuItem,
+            this.resetLoggingChannelsConfigurationToolStripMenuItem,
+            this.editLoggingChannelsConfigurationToolStripMenuItem});
+            this.loggingChannelsConfigurationToolStripMenuItem.Image = global::CANStream.Icones.LoggingChannelConfig_16;
+            this.loggingChannelsConfigurationToolStripMenuItem.Name = "loggingChannelsConfigurationToolStripMenuItem";
+            this.loggingChannelsConfigurationToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.loggingChannelsConfigurationToolStripMenuItem.Text = "Logging channels";
+            this.loggingChannelsConfigurationToolStripMenuItem.DropDownOpening += new System.EventHandler(this.loggingChannelsConfigurationToolStripMenuItem_DropDownOpening);
+            // 
+            // newLoggingChannelConfigurationToolStripMenuItem
+            // 
+            this.newLoggingChannelConfigurationToolStripMenuItem.Image = global::CANStream.Icones.LoggingChannelConfig_16;
+            this.newLoggingChannelConfigurationToolStripMenuItem.Name = "newLoggingChannelConfigurationToolStripMenuItem";
+            this.newLoggingChannelConfigurationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.newLoggingChannelConfigurationToolStripMenuItem.Text = "New logging channel config";
+            this.newLoggingChannelConfigurationToolStripMenuItem.Click += new System.EventHandler(this.newLoggingChannelConfigurationToolStripMenuItem_Click);
+            // 
+            // selectLoggingChannelConfigurationToolStripMenuItem
+            // 
+            this.selectLoggingChannelConfigurationToolStripMenuItem.Image = global::CANStream.Icones.User_Selection_16;
+            this.selectLoggingChannelConfigurationToolStripMenuItem.Name = "selectLoggingChannelConfigurationToolStripMenuItem";
+            this.selectLoggingChannelConfigurationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.selectLoggingChannelConfigurationToolStripMenuItem.Text = "Select logging channel config";
+            this.selectLoggingChannelConfigurationToolStripMenuItem.Click += new System.EventHandler(this.selectLoggingChannelConfigurationToolStripMenuItem_Click);
+            // 
+            // resetLoggingChannelsConfigurationToolStripMenuItem
+            // 
+            this.resetLoggingChannelsConfigurationToolStripMenuItem.Image = global::CANStream.Icones.LoggingChannelConfig_Reset_16;
+            this.resetLoggingChannelsConfigurationToolStripMenuItem.Name = "resetLoggingChannelsConfigurationToolStripMenuItem";
+            this.resetLoggingChannelsConfigurationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.resetLoggingChannelsConfigurationToolStripMenuItem.Text = "Reset logging channels config";
+            this.resetLoggingChannelsConfigurationToolStripMenuItem.Click += new System.EventHandler(this.resetLoggingChannelsConfigurationToolStripMenuItem_Click);
+            // 
+            // editLoggingChannelsConfigurationToolStripMenuItem
+            // 
+            this.editLoggingChannelsConfigurationToolStripMenuItem.Image = global::CANStream.Icones.Edit_16;
+            this.editLoggingChannelsConfigurationToolStripMenuItem.Name = "editLoggingChannelsConfigurationToolStripMenuItem";
+            this.editLoggingChannelsConfigurationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.editLoggingChannelsConfigurationToolStripMenuItem.Text = "Edit logging channels config";
+            this.editLoggingChannelsConfigurationToolStripMenuItem.Click += new System.EventHandler(this.editLoggingChannelsConfigurationToolStripMenuItem_Click);
             // 
             // Tools_TSMenuItem
             // 
@@ -1423,6 +1475,7 @@ namespace CANStream
             this.TS_Lbl_CanCfgDesc,
             this.SS_TS_Lbl_RecordEvent,
             this.SS_TS_Lbl_RecordSession,
+            this.SS_TS_Lbl_LoggingChannelConfig,
             this.TS_Lbl_ConversionProgress,
             this.TS_PB_Conversion,
             this.TSSL_StopConversion,
@@ -1468,6 +1521,13 @@ namespace CANStream
             this.SS_TS_Lbl_RecordSession.Name = "SS_TS_Lbl_RecordSession";
             this.SS_TS_Lbl_RecordSession.Size = new System.Drawing.Size(22, 17);
             this.SS_TS_Lbl_RecordSession.Text = "xxx";
+            // 
+            // SS_TS_Lbl_LoggingChannelConfig
+            // 
+            this.SS_TS_Lbl_LoggingChannelConfig.Name = "SS_TS_Lbl_LoggingChannelConfig";
+            this.SS_TS_Lbl_LoggingChannelConfig.Size = new System.Drawing.Size(22, 23);
+            this.SS_TS_Lbl_LoggingChannelConfig.Text = "xxx";
+            this.SS_TS_Lbl_LoggingChannelConfig.Visible = false;
             // 
             // TS_Lbl_ConversionProgress
             // 
@@ -1748,5 +1808,11 @@ namespace CANStream
         private System.Windows.Forms.ToolStripMenuItem CANConfig_recentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Cycle_recentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Tools_DataViewer_Recent_TSMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loggingChannelsConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newLoggingChannelConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectLoggingChannelConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetLoggingChannelsConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editLoggingChannelsConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel SS_TS_Lbl_LoggingChannelConfig;
     }
 }
