@@ -2,10 +2,54 @@
 #             CANStream release notes           #
 #################################################
 
+09/18/2016: VERSION 2.3.1.0
+----------------------------
+
+	New features
+	
+		None
+	
+	Bug fixes
+	
+		#38: Peak trace files have wrong 
+			 time offset
+	
+	Known issues
+	
+		None
+	
+09/18/2016: VERSION 2.3.0.1
+----------------------------
+
+	New features
+	
+		None
+	
+	Bug fixes
+	
+		#136: Frame Id is case senstive
+		
+		#137: Multiple buses CAN configuration
+			  are not supported in the recent
+			  configuration menu
+		
+		#138: Manual TX frames are sent 
+			  during cycle running
+	
+	Known issues
+	
+		#38: Peak trace files have wrong 
+			 time offset
+
+
 08/17/2016: VERSION 2.3.0.0	[OPEN SOURCE GNU GPL]
 ----------------------------
 	
 	New features
+		
+		#130: Use button and checkbox in
+			  the CAN data TX grid 
+			  for boolean value
 		
 		#132: Switch to GPL Licence
 
