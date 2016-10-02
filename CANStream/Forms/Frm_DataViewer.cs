@@ -687,15 +687,33 @@ namespace CANStream
 			if (!(DataFilePathes == null))
 			{
 				GW_DataFile[] oDataFiles = new GW_DataFile[DataFilePathes.Length];
-				
-				for (int iFile=0; iFile < DataFilePathes.Length; iFile++)
+                bool XmlDataFile = Path.GetExtension(DataFilePathes[0]).Equals(".xrdf");
+
+
+                for (int iFile=0; iFile < DataFilePathes.Length; iFile++)
 				{
 					oDataFiles[iFile] = new GW_DataFile();
-					oDataFiles[iFile].Load_DataFile(DataFilePathes[iFile]);
+
+                    if (XmlDataFile)
+                    {
+                        oDataFiles[iFile].Load_XmlDataFile(DataFilePathes[iFile], false);
+                    }
+                    else
+                    {
+                        oDataFiles[iFile].Load_DataFile(DataFilePathes[iFile]);
+                    }
 				}
-				
-				UpDate_PagesSeries(Concat_DataFiles(oDataFiles));
-				LastFilePath = Path.GetDirectoryName(DataFilePathes[DataFilePathes.Length -1]);
+
+                if (XmlDataFile)
+                {
+                    UpDate_PagesSeries(Concat_XmlDataFiles(oDataFiles));
+                }
+                else
+                {
+                    UpDate_PagesSeries(Concat_DataFiles(oDataFiles));
+                }
+
+                LastFilePath = Path.GetDirectoryName(DataFilePathes[DataFilePathes.Length -1]);
 			}
 		}
 		
@@ -848,7 +866,179 @@ namespace CANStream
 			return(oConcatData);
 		}
 		
-		private void UpDate_PagesSeries(GW_DataFile oData)
+        private GW_DataFile Concat_XmlDataFiles(GW_DataFile[] oDataFiles)
+        {
+            if (oDataFiles == null)
+            {
+                return (null);
+            }
+
+            //Concatened data file creation
+            oConcatData = new GW_DataFile();
+            oConcatData.DataSamplingMode = SamplingMode.MultipleRates;
+
+            //Complete channel list creation
+            foreach(GW_DataFile oFile in oDataFiles)
+            {
+                foreach(GW_DataChannel oChan in oFile.Channels)
+                {
+                    //Create the data channel into the concatenated data file if it does not exist already
+                    if (!(oConcatData.DataChannelExists(oChan.Name)))
+                    {
+                        GW_DataChannel oConcatChan = new GW_DataChannel(oChan.Name, SamplingMode.MultipleRates);
+
+                        //Copy XML data channel properties
+                        oConcatChan.Description = oChan.Description;
+                        oConcatChan.Unit = oChan.Unit;
+                        oConcatChan.GraphicFormat = oChan.GraphicFormat.Get_Clone();
+
+                        foreach (GraphReferenceLine oRefLine in oChan.ChannelReferenceLines)
+                        {
+                            oConcatChan.ChannelReferenceLines.Add(oRefLine.Get_Clone());
+                        }
+
+                        oConcatData.Channels.Add(oConcatChan);
+                    }
+                }
+            }
+
+            //Append current file channel samples to the concatenated data file channel
+            foreach(GW_DataChannel oConcatChan in oConcatData.Channels)
+            {
+                double Concat_T = 0;
+
+                foreach(GW_DataFile oFile in oDataFiles)
+                {
+                    GW_DataChannel oDataChan = oFile.Get_DataChannel(oConcatChan.Name);
+
+                    if(!(oDataChan==null))
+                    {
+                        if (oDataChan.Samples.Count > 1)
+                        {
+                            for (int iSample = 0; iSample < oDataChan.Samples.Count; iSample++)
+                            {
+                                if (oConcatChan.Samples.Count > 0)
+                                {
+                                    if (iSample > 0)
+                                    {
+                                        Concat_T += (oDataChan.Samples[iSample].SampleTime - oDataChan.Samples[iSample - 1].SampleTime);
+                                    }
+                                    else
+                                    {
+                                        Concat_T += (oDataChan.Samples[1].SampleTime - oDataChan.Samples[0].SampleTime);
+                                    }
+                                }
+
+                                SerieSample sNewSample = new SerieSample();
+                                sNewSample.SampleTime = Concat_T;
+                                sNewSample.SampleValue = oDataChan.Samples[iSample].SampleValue;
+
+                                oConcatChan.Samples.Add(sNewSample);
+
+                                if (oConcatChan.Samples.Count == 1)
+                                {
+                                    oConcatChan.Min = oDataChan.Samples[iSample].SampleValue;
+                                    oConcatChan.Max = oDataChan.Samples[iSample].SampleValue;
+                                }
+                                else
+                                {
+                                    if (oDataChan.Samples[iSample].SampleValue < oConcatChan.Min) oConcatChan.Min = oDataChan.Samples[iSample].SampleValue;
+                                    if (oDataChan.Samples[iSample].SampleValue > oConcatChan.Max) oConcatChan.Max = oDataChan.Samples[iSample].SampleValue;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Virtual channels computations
+            if (!(VCLibraries == null))
+            {
+                VCLibraries.InitLibrariesComputation(); //Virtual channels libraries initialization
+
+                foreach(CS_VirtualChannel oVirtChan in VCLibraries.ChannelsComputationList)
+                {
+                    bool bComputeVirtual = true;
+                    GW_DataChannel oCarrierChannel = null;
+
+                    foreach(string ChanVar in oVirtChan.ChannelVariables)
+                    {
+                        GW_DataChannel oDataChan = oConcatData.Get_DataChannel(ChanVar);
+
+                        if(!(oDataChan==null))
+                        {
+                            if(oCarrierChannel==null)
+                            {
+                                oCarrierChannel = oDataChan;
+                            }
+                            else
+                            {
+                                if (oDataChan.Samples.Count > oCarrierChannel.Samples.Count)
+                                {
+                                    oCarrierChannel = oDataChan;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            bComputeVirtual = false;
+                            break;
+                        }
+                    }
+
+                    if(oCarrierChannel!=null && bComputeVirtual)
+                    {
+                        GW_DataChannel oVirtualData = new GW_DataChannel(oVirtChan.Name, SamplingMode.MultipleRates);
+
+                        oVirtualData.Unit = oVirtChan.Unit;
+                        oVirtualData.Description = oVirtChan.Comment;
+                        oVirtualData.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oVirtChan.ValueFormat);
+                        oVirtualData.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oVirtChan.Alarms);
+
+                        foreach(SerieSample sCarrierSample in oCarrierChannel.Samples)
+                        {
+                            SerieSample sVirtSample = new SerieSample();
+
+                            sVirtSample.SampleTime = sCarrierSample.SampleTime;
+
+                            foreach (string ChanVar in oVirtChan.ChannelVariables)
+                            {
+                                VCLibraries.UpDateVariableElement(ChanVar, oConcatData.Get_ChannelValueAtTime(ChanVar, sVirtSample.SampleTime));
+                            }
+
+                            oVirtChan.ComputeChannelValue();
+
+                            if(oVirtChan.bComputed && oVirtChan.bNewValue)
+                            {
+                                sVirtSample.SampleValue = oVirtChan.Value;
+                                oVirtualData.Samples.Add(sVirtSample);
+
+                                if (oVirtualData.Samples.Count == 1)
+                                {
+                                    oVirtualData.Min = sVirtSample.SampleValue;
+                                    oVirtualData.Max = sVirtSample.SampleValue;
+                                }
+                                else
+                                {
+                                    if (sVirtSample.SampleValue < oVirtualData.Min) oVirtualData.Min = sVirtSample.SampleValue;
+                                    if (sVirtSample.SampleValue > oVirtualData.Max) oVirtualData.Max = sVirtSample.SampleValue;
+                                }
+                            }
+                        }
+
+                        if (oVirtualData.Samples.Count > 1)
+                        {
+                            oConcatData.Channels.Add(oVirtualData);
+                        }
+                    }
+                }
+            }
+
+            oDataFiles = null; //Free up memory
+            return (oConcatData);
+        }
+
+        private void UpDate_PagesSeries(GW_DataFile oData)
 		{
 			foreach (TabPage oPage in Tab_Viewers.TabPages)
 			{

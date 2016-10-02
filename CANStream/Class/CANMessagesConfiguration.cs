@@ -710,6 +710,26 @@ namespace CANStream
         }
 		
         /// <summary>
+        /// Returns the first CAN parameter found among CAN messages that has a name matching a given name
+        /// </summary>
+        /// <param name="ParameterName">Name of the parameter to search</param>
+        /// <returns>CAN Parameter found (null if not found)</returns>
+        public CANParameter GetCANParameter(string ParameterName)
+        {
+            foreach (CANMessage oMsg in Messages)
+            {
+                CANParameter oParam = oMsg.GetCANParameter(ParameterName, ParameterResearchOption.Name);
+
+                if (!(oParam == null))
+                {
+                    return (oParam);
+                }
+            }
+
+            return (null);
+        }
+
+        /// <summary>
 		/// Write the CAN configuration object into a XML file
 		/// </summary>
 		/// <param name="FilePath">Path of destination file</param>

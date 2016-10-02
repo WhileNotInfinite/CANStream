@@ -2369,8 +2369,14 @@ namespace CANStream
                                             if (oDataChan == null)
                                             {
                                                 oDataChan = new GW_DataChannel(oParam.Name, SamplingMode.MultipleRates);
+
+                                                oDataChan.Description = oParam.Comment;
+                                                oDataChan.Unit = oParam.Unit;
+                                                oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oParam.ValueFormat);
+                                                oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oParam.Alarms);
+
                                                 SpyGraphData.Channels.Add(oDataChan);
-                                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name);
+                                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name, oDataChan.Description);
                                             }
 
                                             //Add Spy graphic sample
@@ -3290,8 +3296,14 @@ namespace CANStream
                             if (oDataChan == null)
                             {
                                 oDataChan = new GW_DataChannel(VirtualChannel_GraphSerie_Name, SamplingMode.MultipleRates);
+
+                                oDataChan.Description = oVirtualChan.Comment;
+                                oDataChan.Unit = oVirtualChan.Unit;
+                                oDataChan.GraphicFormat = CANStreamTools.Convert_CSSignalFormatToSerieValueFormat(oVirtualChan.ValueFormat);
+                                oDataChan.ChannelReferenceLines = CANStreamTools.Convert_CSAlarmsToSerieReferenceLines(oVirtualChan.Alarms);
+
                                 SpyGraphData.Channels.Add(oDataChan);
-                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name);
+                                Graph_SpyData.Add_ChannelToChannelList(oDataChan.Name,oDataChan.Description);
                             }
 
                             //Add Spy graphic sample
