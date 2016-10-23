@@ -144,6 +144,12 @@
     <Compile Include="Class\CycleEditionConfiguration.cs" />
     <Compile Include="Class\GraphicSeries.cs" />
     <Compile Include="Class\CS_RecordLoggingConfiguration.cs" />
+    <Compile Include="Controls\Ctrl_CollapsableGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ctrl_CollapsableGrid.Designer.cs">
+      <DependentUpon>Ctrl_CollapsableGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +369,9 @@
     <Compile Include="Tools\NumberBaseConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\Ctrl_CollapsableGrid.resx">
+      <DependentUpon>Ctrl_CollapsableGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ctrl_CS_CAN_Bus.resx">
       <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
     </EmbeddedResource>
@@ -427,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_EventDetails.resx">
       <DependentUpon>Frm_EventDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_LogginChannelConfig.resx">
+      <DependentUpon>Frm_LogginChannelConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_ParamControlFormatProperties.resx">
       <DependentUpon>Frm_ParamControlFormatProperties.cs</DependentUpon>

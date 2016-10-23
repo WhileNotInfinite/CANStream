@@ -382,3 +382,5 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.csproj.GenerateResource.Cache
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.exe
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.pdb
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_LogginChannelConfig.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CollapsableGrid.resources
