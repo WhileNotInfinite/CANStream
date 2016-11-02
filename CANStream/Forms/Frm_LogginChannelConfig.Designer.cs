@@ -42,7 +42,7 @@
             this.TSB_VirtualChan = new System.Windows.Forms.ToolStripButton();
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
-            this.ctrl_CollapsableGrid1 = new CANStream.Ctrl_CollapsableGrid();
+            this.CGrid_Channels = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,22 +168,22 @@
             // 
             this.Dlg_OpenFile.FileName = "openFileDialog1";
             // 
-            // ctrl_CollapsableGrid1
+            // CGrid_Channels
             // 
-            this.ctrl_CollapsableGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CGrid_Channels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctrl_CollapsableGrid1.Location = new System.Drawing.Point(0, 42);
-            this.ctrl_CollapsableGrid1.Name = "ctrl_CollapsableGrid1";
-            this.ctrl_CollapsableGrid1.Size = new System.Drawing.Size(791, 360);
-            this.ctrl_CollapsableGrid1.TabIndex = 1;
+            this.CGrid_Channels.Location = new System.Drawing.Point(0, 42);
+            this.CGrid_Channels.Name = "CGrid_Channels";
+            this.CGrid_Channels.Size = new System.Drawing.Size(791, 360);
+            this.CGrid_Channels.TabIndex = 1;
             // 
             // Frm_LogginChannelConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 404);
-            this.Controls.Add(this.ctrl_CollapsableGrid1);
+            this.Controls.Add(this.CGrid_Channels);
             this.Controls.Add(this.TS_Main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_LogginChannelConfig";
@@ -210,6 +210,6 @@
         private System.Windows.Forms.ToolStripButton TSB_Delete;
         private System.Windows.Forms.OpenFileDialog Dlg_OpenFile;
         private System.Windows.Forms.SaveFileDialog Dlg_SaveFile;
-        private Ctrl_CollapsableGrid ctrl_CollapsableGrid1;
+        private Ctrl_CollapsableGrid CGrid_Channels;
     }
 }

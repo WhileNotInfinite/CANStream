@@ -316,6 +316,14 @@ namespace CANStream
             }
         }
 
+        public List<LoggingChannelGroup> Groups
+        {
+            get
+            {
+                return (oRootGroup.SubGroups);
+            }
+        }
+
         #endregion
 
         #region Private members

@@ -86,9 +86,19 @@ namespace CANStream
 
         private void Show_LoggingChannelConfig()
         {
-            //ctrl_CollapsableGrid1.Rows.Clear();
+            CGrid_Channels.Rows.Clear();
 
-            ctrl_CollapsableGrid1.Rows.Add();
+            foreach (LoggingChannelGroup oChanGrp in oLoggingConfig.Groups)
+            {
+                CollapsableGridRow oGroupRow = CGrid_Channels.Rows.Add();
+                oGroupRow.ThisRow.Cells[1].Value = oChanGrp.Name;
+
+                foreach(LoggingChannelConfiguration oChan in oChanGrp.LoggingChannels)
+                {
+                    CollapsableGridRow oChanRow = oGroupRow.Children.Add();
+                    //oChanRow.Cells[1].Value = oChan.Name;
+                }
+            }
         }
 
         private void Import_CanConfig()

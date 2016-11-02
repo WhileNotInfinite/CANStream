@@ -44,33 +44,22 @@ namespace CANStream
         {
             InitializeComponent();
 
-            GridRows = new CollapsableGridRowCollection();
-
-            //Rows collection events callback
-            GridRows.RowAdded += new EventHandler<CollapsableGridRowAddedEventArgs>(GridRowsAdded);
-            GridRows.RowsCleared += new EventHandler(GridRowsCleared);
+            GridRows = new CollapsableGridRowCollection(this.oGrid);
+            GridRows.ParentRow = null;
         }
-
-        #region Internal events callback
-
-        private void GridRowsAdded(object sender, CollapsableGridRowAddedEventArgs e)
-        {
-            int iRow = oGrid.Rows.Add(e.NewRow as DataGridViewRow);
-
-            oGrid.Rows[iRow].Cells[0].Value = Img_RowState.Images[1];
-        }
-
-        private void GridRowsCleared(object sender, EventArgs e)
-        {
-            oGrid.Rows.Clear();
-        }
-
-        #endregion
     }
 
-    public class CollapsableGridRow : DataGridViewRow
+    public class CollapsableGridRow
     {
         #region Public Properties
+
+        public DataGridViewRow ThisRow
+        {
+            get
+            {
+                return (GridRow);
+            }
+        }
 
         public CollapsableGridRow Parent
         {
@@ -97,6 +86,8 @@ namespace CANStream
 
         #region Private members
 
+        private DataGridViewRow GridRow;
+
         private CollapsableGridRow RowParent;
 
         private CollapsableGridRowCollection RowChildren;
@@ -107,8 +98,17 @@ namespace CANStream
 
         public CollapsableGridRow()
         {
+            GridRow = null;
             RowParent = null;
-            RowChildren = new CollapsableGridRowCollection();
+            RowChildren = new CollapsableGridRowCollection(null);
+            RowState = CollapsableGridRowState.NoChildren;
+        }
+
+        public CollapsableGridRow(DataGridViewRow DataGridRow)
+        {
+            GridRow = DataGridRow;
+            RowParent = null;
+            RowChildren = new CollapsableGridRowCollection(null);
             RowState = CollapsableGridRowState.NoChildren;
         }
 
@@ -121,7 +121,7 @@ namespace CANStream
                 foreach (CollapsableGridRow oChildRow in RowChildren)
                 {
                     oChildRow.Collapse();
-                    oChildRow.Visible = false;
+                    oChildRow.ThisRow.Visible = false;
                 }
 
                 RowState = CollapsableGridRowState.Collapsed;
@@ -134,7 +134,7 @@ namespace CANStream
             {
                 foreach(CollapsableGridRow oChildRow in RowChildren)
                 {
-                    oChildRow.Visible = true;
+                    oChildRow.ThisRow.Visible = true;
                 }
 
                 RowState = CollapsableGridRowState.Expanded;
@@ -147,7 +147,7 @@ namespace CANStream
             {
                 foreach (CollapsableGridRow oChildRow in RowChildren)
                 {
-                    oChildRow.Visible = true;
+                    oChildRow.ThisRow.Visible = true;
                     oChildRow.ExpandAll();
                 }
 
@@ -170,77 +170,56 @@ namespace CANStream
 
     public class CollapsableGridRowCollection : List<CollapsableGridRow>
     {
-        #region Internal Events
+        #region Internal members
 
-        internal event EventHandler<CollapsableGridRowAddedEventArgs> RowAdded;
-        internal event EventHandler RowsCleared;
+        internal CollapsableGridRow ParentRow;
+
+        #endregion
+
+        #region Private members
+
+        private DataGridView oRefGrid;
 
         #endregion
 
-        public CollapsableGridRowCollection()
+        public CollapsableGridRowCollection(DataGridView DataGridRef)
         {
-            
+            oRefGrid = DataGridRef;
+            ParentRow = null;
         }
-
-        #region Events handling methods
-
-        protected virtual void OnRowAdded(CollapsableGridRow oNewRow)
-        {
-            EventHandler<CollapsableGridRowAddedEventArgs> Handler = RowAdded;
-
-            if (Handler != null)
-            {
-                CollapsableGridRowAddedEventArgs RowAddedEvtArg = new CollapsableGridRowAddedEventArgs();
-                RowAddedEvtArg.NewRow = oNewRow;
-
-                Handler(this, RowAddedEvtArg);
-            }
-        }
-
-        protected virtual void OnRowsCleared()
-        {
-            EventHandler Handler = RowsCleared;
-
-            if (Handler != null)
-            {
-                Handler(this, new EventArgs());
-            }
-        }
-
-        #endregion
 
         #region Public methodes
 
         public CollapsableGridRow Add()
         {
-            CollapsableGridRow oRow = new CollapsableGridRow();
-            Add(oRow);
-            return (oRow);
-        }
+            CollapsableGridRow oNewRow = null;
 
-        public new void Add(CollapsableGridRow item)
-        {
-            base.Add(item);
-            OnRowAdded(item);
+            if (!(oRefGrid == null))
+            {
+                int iNewRow = oRefGrid.Rows.Add();
+
+                oNewRow = new CollapsableGridRow(oRefGrid.Rows[iNewRow]);
+                base.Add(oNewRow);
+
+                return (oNewRow);
+            }
+            else
+            {
+                return (null);
+            }
+            
         }
 
         public new void Clear()
         {
-            base.Clear();
-            OnRowsCleared();
+            if (!(oRefGrid == null))
+            {
+                oRefGrid.Rows.Clear();
+                base.Clear();
+            }
         }
 
         #endregion
-    }
-
-    public class CollapsableGridRowAddedEventArgs : EventArgs
-    {
-        public CollapsableGridRow NewRow { get; set; }
-
-        public CollapsableGridRowAddedEventArgs()
-        {
-            NewRow = null;
-        }
     }
 
     public enum CollapsableGridRowState
