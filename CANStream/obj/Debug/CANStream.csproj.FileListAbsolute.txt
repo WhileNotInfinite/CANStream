@@ -382,3 +382,55 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.csproj.GenerateResource.Cache
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.exe
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.pdb
+G:\Git\CANStream\CANStream\bin\Debug\CANStream.exe.config
+G:\Git\CANStream\CANStream\obj\Debug\CANStream.exe
+G:\Git\CANStream\CANStream\obj\Debug\CANStream.pdb
+F:\Git\CANStream\CANStream\bin\Debug\CANStream.exe.config
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.exe
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.pdb
+F:\Git\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow Release note.txt
+F:\Git\CANStream\CANStream\bin\Debug\CANStream Release notes.txt
+F:\Git\CANStream\CANStream\bin\Debug\CANStream.exe
+F:\Git\CANStream\CANStream\bin\Debug\CANStream.pdb
+F:\Git\CANStream\CANStream\bin\Debug\Ciloci.Flee.dll
+F:\Git\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.dll
+F:\Git\CANStream\CANStream\bin\Debug\stdole.dll
+F:\Git\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.pdb
+F:\Git\CANStream\CANStream\bin\Debug\Ctrl_GraphWindow.xml
+F:\Git\CANStream\CANStream\bin\Debug\Ciloci.Flee.pdb
+F:\Git\CANStream\CANStream\bin\Debug\Ciloci.Flee.xml
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.csprojResolveAssemblyReference.cache
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CS_CAN_Bus.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordEventInformation.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordSessionInfo.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Ctrl_RecordUserInformations.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CANDataGrid.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Dlg_DBCTransmitterSelection.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Dlg_RxFrameInTxListWarning.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_About.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_BuiltInSignal.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration_SpecialPaste.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CANConfiguration_VirtualChannelReference.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_ContextualList.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleDataAssociation.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleCreation.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleEdition.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_CycleRecordImport.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_DataBrowser.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer_EventSession_Info.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_EventDetails.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_ParamControlFormatProperties.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_ParamEnumerationEdition.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordEventEdition.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordSessionEdition.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_RecordEventSessionSelection.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_TrcFileSelection.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_VirtualChannel.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Frm_VirtualChannelTest.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Icones.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.MainForm.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.Properties.Resources.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.TextRessouces.resources
+F:\Git\CANStream\CANStream\obj\Debug\CANStream.csproj.GenerateResource.Cache

@@ -109,3 +109,14 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\Flee_Lib\o
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.dll
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.xml
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.pdb
+F:\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.dll
+F:\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.pdb
+F:\Git\CANStream\Flee_Lib\bin\Debug\Ciloci.Flee.xml
+F:\Git\CANStream\Flee_Lib\obj\Debug\FLEE_Lib.vbprojResolveAssemblyReference.cache
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.CompileErrors.resources
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.ElementNames.resources
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.GeneralErrors.resources
+F:\Git\CANStream\Flee_Lib\obj\Debug\FLEE_Lib.vbproj.GenerateResource.Cache
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.dll
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.xml
+F:\Git\CANStream\Flee_Lib\obj\Debug\Ciloci.Flee.pdb
