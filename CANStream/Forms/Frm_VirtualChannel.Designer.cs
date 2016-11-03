@@ -93,6 +93,31 @@ namespace CANStream
             this.Txt_LibName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Tab_ChannelProperties = new System.Windows.Forms.TabPage();
+            this.Grp_Alarms = new System.Windows.Forms.GroupBox();
+            this.Pic_AlarmMax_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMax_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMin_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_AlarmMin_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Pic_WarningMax_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Pic_WarningMax_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Chk_AlarmMax = new System.Windows.Forms.CheckBox();
+            this.Chk_AlarmMin = new System.Windows.Forms.CheckBox();
+            this.Chk_WarningMax = new System.Windows.Forms.CheckBox();
+            this.Txt_AlarmMax = new System.Windows.Forms.TextBox();
+            this.Txt_AlarmMin = new System.Windows.Forms.TextBox();
+            this.Txt_WarningMax = new System.Windows.Forms.TextBox();
+            this.Lbl_Alarms_Forecolor = new System.Windows.Forms.Label();
+            this.Pic_WarningMin_Forecolor = new System.Windows.Forms.PictureBox();
+            this.Chk_WarningMin = new System.Windows.Forms.CheckBox();
+            this.Chk_AlarmsEnabled = new System.Windows.Forms.CheckBox();
+            this.Pic_WarningMin_Backcolor = new System.Windows.Forms.PictureBox();
+            this.Lbl_Alarms_Backcolor = new System.Windows.Forms.Label();
+            this.Txt_WarningMin = new System.Windows.Forms.TextBox();
+            this.Cmd_EnumDefinition = new System.Windows.Forms.Button();
+            this.Txt_Decimals = new System.Windows.Forms.TextBox();
+            this.Lbl_Decimals = new System.Windows.Forms.Label();
+            this.Cmb_ValueFormat = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.Chk_ChanComputationEnabled = new System.Windows.Forms.CheckBox();
             this.Txt_ChanValDef = new System.Windows.Forms.TextBox();
@@ -116,31 +141,6 @@ namespace CANStream
             this.ToolTip_CmdOperators = new System.Windows.Forms.ToolTip(this.components);
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
-            this.Cmd_EnumDefinition = new System.Windows.Forms.Button();
-            this.Txt_Decimals = new System.Windows.Forms.TextBox();
-            this.Lbl_Decimals = new System.Windows.Forms.Label();
-            this.Cmb_ValueFormat = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.Grp_Alarms = new System.Windows.Forms.GroupBox();
-            this.Pic_AlarmMax_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMax_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMin_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Pic_AlarmMin_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Pic_WarningMax_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Pic_WarningMax_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Chk_AlarmMax = new System.Windows.Forms.CheckBox();
-            this.Chk_AlarmMin = new System.Windows.Forms.CheckBox();
-            this.Chk_WarningMax = new System.Windows.Forms.CheckBox();
-            this.Txt_AlarmMax = new System.Windows.Forms.TextBox();
-            this.Txt_AlarmMin = new System.Windows.Forms.TextBox();
-            this.Txt_WarningMax = new System.Windows.Forms.TextBox();
-            this.Lbl_Alarms_Forecolor = new System.Windows.Forms.Label();
-            this.Pic_WarningMin_Forecolor = new System.Windows.Forms.PictureBox();
-            this.Chk_WarningMin = new System.Windows.Forms.CheckBox();
-            this.Chk_AlarmsEnabled = new System.Windows.Forms.CheckBox();
-            this.Pic_WarningMin_Backcolor = new System.Windows.Forms.PictureBox();
-            this.Lbl_Alarms_Backcolor = new System.Windows.Forms.Label();
-            this.Txt_WarningMin = new System.Windows.Forms.TextBox();
             this.Dlg_SelectColor = new System.Windows.Forms.ColorDialog();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -181,7 +181,7 @@ namespace CANStream
             this.TSB_LoadObjectFile});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(544, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(725, 39);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -314,6 +314,7 @@ namespace CANStream
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 39);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -323,8 +324,9 @@ namespace CANStream
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.TabCtrl_PropertiesEdit);
-            this.splitContainer1.Size = new System.Drawing.Size(544, 475);
-            this.splitContainer1.SplitterDistance = 181;
+            this.splitContainer1.Size = new System.Drawing.Size(725, 594);
+            this.splitContainer1.SplitterDistance = 241;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
             // TV_Libraries
@@ -335,16 +337,18 @@ namespace CANStream
             this.TV_Libraries.ContextMenuStrip = this.Context_TVLibraries;
             this.TV_Libraries.ImageIndex = 0;
             this.TV_Libraries.ImageList = this.Img_TVLibraries;
-            this.TV_Libraries.Location = new System.Drawing.Point(3, 3);
+            this.TV_Libraries.Location = new System.Drawing.Point(4, 4);
+            this.TV_Libraries.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TV_Libraries.Name = "TV_Libraries";
             this.TV_Libraries.SelectedImageIndex = 0;
-            this.TV_Libraries.Size = new System.Drawing.Size(175, 469);
+            this.TV_Libraries.Size = new System.Drawing.Size(232, 585);
             this.TV_Libraries.TabIndex = 0;
             this.TV_Libraries.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_LibrariesAfterSelect);
             this.TV_Libraries.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TV_LibrariesKeyDown);
             // 
             // Context_TVLibraries
             // 
+            this.Context_TVLibraries.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Context_TVLibraries.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newLibraryToolStripMenuItem,
             this.openToolStripMenuItem,
@@ -360,7 +364,7 @@ namespace CANStream
             this.expandAllToolStripMenuItem,
             this.collapseAllToolStripMenuItem});
             this.Context_TVLibraries.Name = "Ne";
-            this.Context_TVLibraries.Size = new System.Drawing.Size(135, 242);
+            this.Context_TVLibraries.Size = new System.Drawing.Size(162, 282);
             // 
             // newLibraryToolStripMenuItem
             // 
@@ -369,14 +373,14 @@ namespace CANStream
             this.virtualChannelToolStripMenuItem});
             this.newLibraryToolStripMenuItem.Image = global::CANStream.Icones.Item_Add_16;
             this.newLibraryToolStripMenuItem.Name = "newLibraryToolStripMenuItem";
-            this.newLibraryToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.newLibraryToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.newLibraryToolStripMenuItem.Text = "New";
             // 
             // libraryToolStripMenuItem
             // 
             this.libraryToolStripMenuItem.Image = global::CANStream.Icones.library_16;
             this.libraryToolStripMenuItem.Name = "libraryToolStripMenuItem";
-            this.libraryToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.libraryToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.libraryToolStripMenuItem.Text = "Library";
             this.libraryToolStripMenuItem.Click += new System.EventHandler(this.LibraryToolStripMenuItemClick);
             // 
@@ -384,7 +388,7 @@ namespace CANStream
             // 
             this.virtualChannelToolStripMenuItem.Image = global::CANStream.Icones.Virtual_Channel_16;
             this.virtualChannelToolStripMenuItem.Name = "virtualChannelToolStripMenuItem";
-            this.virtualChannelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.virtualChannelToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.virtualChannelToolStripMenuItem.Text = "Virtual channel";
             this.virtualChannelToolStripMenuItem.Click += new System.EventHandler(this.VirtualChannelToolStripMenuItemClick);
             // 
@@ -392,7 +396,7 @@ namespace CANStream
             // 
             this.openToolStripMenuItem.Image = global::CANStream.Icones.File_Open_16;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
@@ -400,7 +404,7 @@ namespace CANStream
             // 
             this.saveToolStripMenuItem.Image = global::CANStream.Icones.File_Save_16;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
@@ -408,20 +412,20 @@ namespace CANStream
             // 
             this.saveAllToolStripMenuItem.Image = global::CANStream.Icones.File_SaveAll_16;
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.saveAllToolStripMenuItem.Text = "Save all";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItemClick);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Image = global::CANStream.Icones.Cut_16;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.CutToolStripMenuItemClick);
             // 
@@ -429,7 +433,7 @@ namespace CANStream
             // 
             this.copyToolStripMenuItem.Image = global::CANStream.Icones.Copy_16;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItemClick);
             // 
@@ -437,39 +441,39 @@ namespace CANStream
             // 
             this.pasteToolStripMenuItem.Image = global::CANStream.Icones.Paste_16;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItemClick);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(158, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = global::CANStream.Icones.Delete_16;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItemClick);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(158, 6);
             // 
             // expandAllToolStripMenuItem
             // 
             this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
-            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.expandAllToolStripMenuItem.Text = "Expand all";
             this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.ExpandAllToolStripMenuItemClick);
             // 
             // collapseAllToolStripMenuItem
             // 
             this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
-            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
             this.collapseAllToolStripMenuItem.Text = "Collapse all";
             this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.CollapseAllToolStripMenuItemClick);
             // 
@@ -487,10 +491,11 @@ namespace CANStream
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabCtrl_PropertiesEdit.Controls.Add(this.Tab_LibProperties);
             this.TabCtrl_PropertiesEdit.Controls.Add(this.Tab_ChannelProperties);
-            this.TabCtrl_PropertiesEdit.Location = new System.Drawing.Point(3, 3);
+            this.TabCtrl_PropertiesEdit.Location = new System.Drawing.Point(4, 4);
+            this.TabCtrl_PropertiesEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TabCtrl_PropertiesEdit.Name = "TabCtrl_PropertiesEdit";
             this.TabCtrl_PropertiesEdit.SelectedIndex = 0;
-            this.TabCtrl_PropertiesEdit.Size = new System.Drawing.Size(353, 469);
+            this.TabCtrl_PropertiesEdit.Size = new System.Drawing.Size(471, 586);
             this.TabCtrl_PropertiesEdit.TabIndex = 0;
             // 
             // Tab_LibProperties
@@ -504,19 +509,21 @@ namespace CANStream
             this.Tab_LibProperties.Controls.Add(this.label2);
             this.Tab_LibProperties.Controls.Add(this.Txt_LibName);
             this.Tab_LibProperties.Controls.Add(this.label1);
-            this.Tab_LibProperties.Location = new System.Drawing.Point(4, 22);
+            this.Tab_LibProperties.Location = new System.Drawing.Point(4, 25);
+            this.Tab_LibProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Tab_LibProperties.Name = "Tab_LibProperties";
-            this.Tab_LibProperties.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_LibProperties.Size = new System.Drawing.Size(345, 305);
+            this.Tab_LibProperties.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Tab_LibProperties.Size = new System.Drawing.Size(463, 557);
             this.Tab_LibProperties.TabIndex = 0;
             this.Tab_LibProperties.Text = "Library properties";
             // 
             // Chk_LibEnabled
             // 
             this.Chk_LibEnabled.AutoSize = true;
-            this.Chk_LibEnabled.Location = new System.Drawing.Point(9, 184);
+            this.Chk_LibEnabled.Location = new System.Drawing.Point(12, 226);
+            this.Chk_LibEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_LibEnabled.Name = "Chk_LibEnabled";
-            this.Chk_LibEnabled.Size = new System.Drawing.Size(65, 17);
+            this.Chk_LibEnabled.Size = new System.Drawing.Size(82, 21);
             this.Chk_LibEnabled.TabIndex = 17;
             this.Chk_LibEnabled.Text = "Enabled";
             this.Chk_LibEnabled.UseVisualStyleBackColor = true;
@@ -524,9 +531,10 @@ namespace CANStream
             // Cmd_LibCancel
             // 
             this.Cmd_LibCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_LibCancel.Location = new System.Drawing.Point(182, 260);
+            this.Cmd_LibCancel.Location = new System.Drawing.Point(243, 329);
+            this.Cmd_LibCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Cmd_LibCancel.Name = "Cmd_LibCancel";
-            this.Cmd_LibCancel.Size = new System.Drawing.Size(75, 23);
+            this.Cmd_LibCancel.Size = new System.Drawing.Size(100, 28);
             this.Cmd_LibCancel.TabIndex = 16;
             this.Cmd_LibCancel.Text = "Cancel";
             this.Cmd_LibCancel.UseVisualStyleBackColor = true;
@@ -535,9 +543,10 @@ namespace CANStream
             // Cmd_LibCreate
             // 
             this.Cmd_LibCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_LibCreate.Location = new System.Drawing.Point(265, 260);
+            this.Cmd_LibCreate.Location = new System.Drawing.Point(353, 329);
+            this.Cmd_LibCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Cmd_LibCreate.Name = "Cmd_LibCreate";
-            this.Cmd_LibCreate.Size = new System.Drawing.Size(75, 23);
+            this.Cmd_LibCreate.Size = new System.Drawing.Size(100, 28);
             this.Cmd_LibCreate.TabIndex = 15;
             this.Cmd_LibCreate.Text = "Create";
             this.Cmd_LibCreate.UseVisualStyleBackColor = true;
@@ -545,41 +554,46 @@ namespace CANStream
             // 
             // Chk_LibReadOnly
             // 
-            this.Chk_LibReadOnly.Location = new System.Drawing.Point(80, 180);
+            this.Chk_LibReadOnly.Location = new System.Drawing.Point(107, 222);
+            this.Chk_LibReadOnly.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_LibReadOnly.Name = "Chk_LibReadOnly";
-            this.Chk_LibReadOnly.Size = new System.Drawing.Size(104, 24);
+            this.Chk_LibReadOnly.Size = new System.Drawing.Size(139, 30);
             this.Chk_LibReadOnly.TabIndex = 4;
             this.Chk_LibReadOnly.Text = "Read only";
             this.Chk_LibReadOnly.UseVisualStyleBackColor = true;
             // 
             // rTxt_LibComment
             // 
-            this.rTxt_LibComment.Location = new System.Drawing.Point(6, 82);
+            this.rTxt_LibComment.Location = new System.Drawing.Point(8, 101);
+            this.rTxt_LibComment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rTxt_LibComment.Name = "rTxt_LibComment";
-            this.rTxt_LibComment.Size = new System.Drawing.Size(333, 96);
+            this.rTxt_LibComment.Size = new System.Drawing.Size(443, 117);
             this.rTxt_LibComment.TabIndex = 3;
             this.rTxt_LibComment.Text = "";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(6, 64);
+            this.label2.Location = new System.Drawing.Point(8, 79);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 15);
+            this.label2.Size = new System.Drawing.Size(133, 18);
             this.label2.TabIndex = 2;
             this.label2.Text = "Comment";
             // 
             // Txt_LibName
             // 
-            this.Txt_LibName.Location = new System.Drawing.Point(6, 31);
+            this.Txt_LibName.Location = new System.Drawing.Point(8, 38);
+            this.Txt_LibName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_LibName.Name = "Txt_LibName";
-            this.Txt_LibName.Size = new System.Drawing.Size(333, 20);
+            this.Txt_LibName.Size = new System.Drawing.Size(443, 22);
             this.Txt_LibName.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(6, 13);
+            this.label1.Location = new System.Drawing.Point(8, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
+            this.label1.Size = new System.Drawing.Size(133, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Library name";
             // 
@@ -610,230 +624,13 @@ namespace CANStream
             this.Tab_ChannelProperties.Controls.Add(this.label4);
             this.Tab_ChannelProperties.Controls.Add(this.Txt_ChanName);
             this.Tab_ChannelProperties.Controls.Add(this.label3);
-            this.Tab_ChannelProperties.Location = new System.Drawing.Point(4, 22);
+            this.Tab_ChannelProperties.Location = new System.Drawing.Point(4, 25);
+            this.Tab_ChannelProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Tab_ChannelProperties.Name = "Tab_ChannelProperties";
-            this.Tab_ChannelProperties.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_ChannelProperties.Size = new System.Drawing.Size(345, 443);
+            this.Tab_ChannelProperties.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Tab_ChannelProperties.Size = new System.Drawing.Size(463, 557);
             this.Tab_ChannelProperties.TabIndex = 1;
             this.Tab_ChannelProperties.Text = "Channel properties";
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(145, 66);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 18);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "(For CAN Tx)";
-            // 
-            // Chk_ChanComputationEnabled
-            // 
-            this.Chk_ChanComputationEnabled.Location = new System.Drawing.Point(274, 34);
-            this.Chk_ChanComputationEnabled.Name = "Chk_ChanComputationEnabled";
-            this.Chk_ChanComputationEnabled.Size = new System.Drawing.Size(66, 24);
-            this.Chk_ChanComputationEnabled.TabIndex = 18;
-            this.Chk_ChanComputationEnabled.Text = "Enabled";
-            this.Chk_ChanComputationEnabled.UseVisualStyleBackColor = true;
-            // 
-            // Txt_ChanValDef
-            // 
-            this.Txt_ChanValDef.Location = new System.Drawing.Point(78, 63);
-            this.Txt_ChanValDef.Name = "Txt_ChanValDef";
-            this.Txt_ChanValDef.Size = new System.Drawing.Size(61, 20);
-            this.Txt_ChanValDef.TabIndex = 17;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(6, 66);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 18);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Default value:";
-            // 
-            // Cmd_ChannelTest
-            // 
-            this.Cmd_ChannelTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Cmd_ChannelTest.Location = new System.Drawing.Point(6, 417);
-            this.Cmd_ChannelTest.Name = "Cmd_ChannelTest";
-            this.Cmd_ChannelTest.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_ChannelTest.TabIndex = 15;
-            this.Cmd_ChannelTest.Text = "Test";
-            this.Cmd_ChannelTest.UseVisualStyleBackColor = true;
-            this.Cmd_ChannelTest.Click += new System.EventHandler(this.Cmd_ChannelTestClick);
-            // 
-            // Cmd_ChanCancel
-            // 
-            this.Cmd_ChanCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_ChanCancel.Location = new System.Drawing.Point(182, 417);
-            this.Cmd_ChanCancel.Name = "Cmd_ChanCancel";
-            this.Cmd_ChanCancel.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_ChanCancel.TabIndex = 14;
-            this.Cmd_ChanCancel.Text = "Cancel";
-            this.Cmd_ChanCancel.UseVisualStyleBackColor = true;
-            this.Cmd_ChanCancel.Click += new System.EventHandler(this.Cmd_ChanCancelClick);
-            // 
-            // Cmd_ChanCreate
-            // 
-            this.Cmd_ChanCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_ChanCreate.Location = new System.Drawing.Point(265, 417);
-            this.Cmd_ChanCreate.Name = "Cmd_ChanCreate";
-            this.Cmd_ChanCreate.Size = new System.Drawing.Size(75, 23);
-            this.Cmd_ChanCreate.TabIndex = 13;
-            this.Cmd_ChanCreate.Text = "Create";
-            this.Cmd_ChanCreate.UseVisualStyleBackColor = true;
-            this.Cmd_ChanCreate.Click += new System.EventHandler(this.Cmd_ChanCreateClick);
-            // 
-            // Cmd_ChannelList
-            // 
-            this.Cmd_ChannelList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_ChannelList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Cmd_ChannelList.Image = global::CANStream.Icones.Virtual_Channel_Element_16;
-            this.Cmd_ChannelList.Location = new System.Drawing.Point(273, 233);
-            this.Cmd_ChannelList.Name = "Cmd_ChannelList";
-            this.Cmd_ChannelList.Size = new System.Drawing.Size(22, 22);
-            this.Cmd_ChannelList.TabIndex = 12;
-            this.Cmd_ChannelList.UseVisualStyleBackColor = true;
-            this.Cmd_ChannelList.Click += new System.EventHandler(this.Cmd_ChannelListClick);
-            // 
-            // Cmd_Functions
-            // 
-            this.Cmd_Functions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_Functions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Cmd_Functions.Image = global::CANStream.Icones.Virtual_Channel_Function_16;
-            this.Cmd_Functions.Location = new System.Drawing.Point(295, 233);
-            this.Cmd_Functions.Name = "Cmd_Functions";
-            this.Cmd_Functions.Size = new System.Drawing.Size(22, 22);
-            this.Cmd_Functions.TabIndex = 11;
-            this.Cmd_Functions.UseVisualStyleBackColor = true;
-            this.Cmd_Functions.Click += new System.EventHandler(this.Cmd_FunctionsClick);
-            // 
-            // Cmd_Operators
-            // 
-            this.Cmd_Operators.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cmd_Operators.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Cmd_Operators.Image = global::CANStream.Icones.Virtual_Channel_Operator_16;
-            this.Cmd_Operators.Location = new System.Drawing.Point(317, 233);
-            this.Cmd_Operators.Name = "Cmd_Operators";
-            this.Cmd_Operators.Size = new System.Drawing.Size(22, 22);
-            this.Cmd_Operators.TabIndex = 10;
-            this.Cmd_Operators.UseVisualStyleBackColor = true;
-            this.Cmd_Operators.Click += new System.EventHandler(this.Cmd_OperatorsClick);
-            // 
-            // rTxt_ChanExpression
-            // 
-            this.rTxt_ChanExpression.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rTxt_ChanExpression.Location = new System.Drawing.Point(5, 187);
-            this.rTxt_ChanExpression.Name = "rTxt_ChanExpression";
-            this.rTxt_ChanExpression.Size = new System.Drawing.Size(334, 45);
-            this.rTxt_ChanExpression.TabIndex = 9;
-            this.rTxt_ChanExpression.Text = "";
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(5, 166);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 18);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Expression";
-            // 
-            // rTxt_ChanComment
-            // 
-            this.rTxt_ChanComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rTxt_ChanComment.Location = new System.Drawing.Point(78, 117);
-            this.rTxt_ChanComment.Name = "rTxt_ChanComment";
-            this.rTxt_ChanComment.Size = new System.Drawing.Size(261, 46);
-            this.rTxt_ChanComment.TabIndex = 7;
-            this.rTxt_ChanComment.Text = "";
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(2, 117);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 18);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Comment:";
-            // 
-            // Txt_ChanUnit
-            // 
-            this.Txt_ChanUnit.Location = new System.Drawing.Point(78, 36);
-            this.Txt_ChanUnit.Name = "Txt_ChanUnit";
-            this.Txt_ChanUnit.Size = new System.Drawing.Size(61, 20);
-            this.Txt_ChanUnit.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(6, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 18);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Unit:";
-            // 
-            // Txt_ChanName
-            // 
-            this.Txt_ChanName.Location = new System.Drawing.Point(78, 11);
-            this.Txt_ChanName.Name = "Txt_ChanName";
-            this.Txt_ChanName.Size = new System.Drawing.Size(261, 20);
-            this.Txt_ChanName.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(6, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 18);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Name:";
-            // 
-            // Cmd_EnumDefinition
-            // 
-            this.Cmd_EnumDefinition.Enabled = false;
-            this.Cmd_EnumDefinition.Image = global::CANStream.Icones.Enumeration_Edit_16;
-            this.Cmd_EnumDefinition.Location = new System.Drawing.Point(314, 88);
-            this.Cmd_EnumDefinition.Name = "Cmd_EnumDefinition";
-            this.Cmd_EnumDefinition.Size = new System.Drawing.Size(25, 25);
-            this.Cmd_EnumDefinition.TabIndex = 50;
-            this.Cmd_EnumDefinition.UseVisualStyleBackColor = true;
-            this.Cmd_EnumDefinition.Click += new System.EventHandler(this.Cmd_EnumDefinition_Click);
-            // 
-            // Txt_Decimals
-            // 
-            this.Txt_Decimals.Enabled = false;
-            this.Txt_Decimals.Location = new System.Drawing.Point(263, 88);
-            this.Txt_Decimals.Name = "Txt_Decimals";
-            this.Txt_Decimals.Size = new System.Drawing.Size(45, 20);
-            this.Txt_Decimals.TabIndex = 49;
-            // 
-            // Lbl_Decimals
-            // 
-            this.Lbl_Decimals.AutoSize = true;
-            this.Lbl_Decimals.Enabled = false;
-            this.Lbl_Decimals.Location = new System.Drawing.Point(207, 91);
-            this.Lbl_Decimals.Name = "Lbl_Decimals";
-            this.Lbl_Decimals.Size = new System.Drawing.Size(50, 13);
-            this.Lbl_Decimals.TabIndex = 52;
-            this.Lbl_Decimals.Text = "Decimals";
-            // 
-            // Cmb_ValueFormat
-            // 
-            this.Cmb_ValueFormat.FormattingEnabled = true;
-            this.Cmb_ValueFormat.Items.AddRange(new object[] {
-            "MSBFirst",
-            "LSBFirst"});
-            this.Cmb_ValueFormat.Location = new System.Drawing.Point(78, 88);
-            this.Cmb_ValueFormat.Name = "Cmb_ValueFormat";
-            this.Cmb_ValueFormat.Size = new System.Drawing.Size(117, 21);
-            this.Cmb_ValueFormat.TabIndex = 48;
-            this.Cmb_ValueFormat.SelectedValueChanged += new System.EventHandler(this.Cmb_ValueFormat_SelectedValueChanged);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(5, 92);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(39, 13);
-            this.label21.TabIndex = 51;
-            this.label21.Text = "Format";
             // 
             // Grp_Alarms
             // 
@@ -857,9 +654,11 @@ namespace CANStream
             this.Grp_Alarms.Controls.Add(this.Pic_WarningMin_Backcolor);
             this.Grp_Alarms.Controls.Add(this.Lbl_Alarms_Backcolor);
             this.Grp_Alarms.Controls.Add(this.Txt_WarningMin);
-            this.Grp_Alarms.Location = new System.Drawing.Point(5, 261);
+            this.Grp_Alarms.Location = new System.Drawing.Point(7, 330);
+            this.Grp_Alarms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grp_Alarms.Name = "Grp_Alarms";
-            this.Grp_Alarms.Size = new System.Drawing.Size(334, 144);
+            this.Grp_Alarms.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Grp_Alarms.Size = new System.Drawing.Size(445, 177);
             this.Grp_Alarms.TabIndex = 53;
             this.Grp_Alarms.TabStop = false;
             this.Grp_Alarms.Text = "Warnings and alarms";
@@ -868,9 +667,10 @@ namespace CANStream
             // 
             this.Pic_AlarmMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_AlarmMax_Forecolor.Enabled = false;
-            this.Pic_AlarmMax_Forecolor.Location = new System.Drawing.Point(269, 117);
+            this.Pic_AlarmMax_Forecolor.Location = new System.Drawing.Point(359, 144);
+            this.Pic_AlarmMax_Forecolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_AlarmMax_Forecolor.Name = "Pic_AlarmMax_Forecolor";
-            this.Pic_AlarmMax_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMax_Forecolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_AlarmMax_Forecolor.TabIndex = 73;
             this.Pic_AlarmMax_Forecolor.TabStop = false;
             this.Pic_AlarmMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Forecolor_DoubleClick);
@@ -879,9 +679,10 @@ namespace CANStream
             // 
             this.Pic_AlarmMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_AlarmMax_Backcolor.Enabled = false;
-            this.Pic_AlarmMax_Backcolor.Location = new System.Drawing.Point(206, 117);
+            this.Pic_AlarmMax_Backcolor.Location = new System.Drawing.Point(275, 144);
+            this.Pic_AlarmMax_Backcolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_AlarmMax_Backcolor.Name = "Pic_AlarmMax_Backcolor";
-            this.Pic_AlarmMax_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMax_Backcolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_AlarmMax_Backcolor.TabIndex = 72;
             this.Pic_AlarmMax_Backcolor.TabStop = false;
             this.Pic_AlarmMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMax_Backcolor_DoubleClick);
@@ -890,9 +691,10 @@ namespace CANStream
             // 
             this.Pic_AlarmMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_AlarmMin_Forecolor.Enabled = false;
-            this.Pic_AlarmMin_Forecolor.Location = new System.Drawing.Point(269, 39);
+            this.Pic_AlarmMin_Forecolor.Location = new System.Drawing.Point(359, 48);
+            this.Pic_AlarmMin_Forecolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_AlarmMin_Forecolor.Name = "Pic_AlarmMin_Forecolor";
-            this.Pic_AlarmMin_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMin_Forecolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_AlarmMin_Forecolor.TabIndex = 71;
             this.Pic_AlarmMin_Forecolor.TabStop = false;
             this.Pic_AlarmMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Forecolor_DoubleClick);
@@ -901,9 +703,10 @@ namespace CANStream
             // 
             this.Pic_AlarmMin_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_AlarmMin_Backcolor.Enabled = false;
-            this.Pic_AlarmMin_Backcolor.Location = new System.Drawing.Point(206, 39);
+            this.Pic_AlarmMin_Backcolor.Location = new System.Drawing.Point(275, 48);
+            this.Pic_AlarmMin_Backcolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_AlarmMin_Backcolor.Name = "Pic_AlarmMin_Backcolor";
-            this.Pic_AlarmMin_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_AlarmMin_Backcolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_AlarmMin_Backcolor.TabIndex = 70;
             this.Pic_AlarmMin_Backcolor.TabStop = false;
             this.Pic_AlarmMin_Backcolor.DoubleClick += new System.EventHandler(this.Pic_AlarmMin_Backcolor_DoubleClick);
@@ -912,9 +715,10 @@ namespace CANStream
             // 
             this.Pic_WarningMax_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_WarningMax_Forecolor.Enabled = false;
-            this.Pic_WarningMax_Forecolor.Location = new System.Drawing.Point(269, 90);
+            this.Pic_WarningMax_Forecolor.Location = new System.Drawing.Point(359, 111);
+            this.Pic_WarningMax_Forecolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_WarningMax_Forecolor.Name = "Pic_WarningMax_Forecolor";
-            this.Pic_WarningMax_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMax_Forecolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_WarningMax_Forecolor.TabIndex = 69;
             this.Pic_WarningMax_Forecolor.TabStop = false;
             this.Pic_WarningMax_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Forecolor_DoubleClick);
@@ -923,9 +727,10 @@ namespace CANStream
             // 
             this.Pic_WarningMax_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_WarningMax_Backcolor.Enabled = false;
-            this.Pic_WarningMax_Backcolor.Location = new System.Drawing.Point(206, 90);
+            this.Pic_WarningMax_Backcolor.Location = new System.Drawing.Point(275, 111);
+            this.Pic_WarningMax_Backcolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_WarningMax_Backcolor.Name = "Pic_WarningMax_Backcolor";
-            this.Pic_WarningMax_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMax_Backcolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_WarningMax_Backcolor.TabIndex = 68;
             this.Pic_WarningMax_Backcolor.TabStop = false;
             this.Pic_WarningMax_Backcolor.DoubleClick += new System.EventHandler(this.Pic_WarningMax_Backcolor_DoubleClick);
@@ -934,9 +739,10 @@ namespace CANStream
             // 
             this.Chk_AlarmMax.AutoSize = true;
             this.Chk_AlarmMax.Enabled = false;
-            this.Chk_AlarmMax.Location = new System.Drawing.Point(13, 120);
+            this.Chk_AlarmMax.Location = new System.Drawing.Point(17, 148);
+            this.Chk_AlarmMax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_AlarmMax.Name = "Chk_AlarmMax";
-            this.Chk_AlarmMax.Size = new System.Drawing.Size(94, 17);
+            this.Chk_AlarmMax.Size = new System.Drawing.Size(123, 21);
             this.Chk_AlarmMax.TabIndex = 41;
             this.Chk_AlarmMax.Text = "Alarm limit max";
             this.Chk_AlarmMax.UseVisualStyleBackColor = true;
@@ -946,9 +752,10 @@ namespace CANStream
             // 
             this.Chk_AlarmMin.AutoSize = true;
             this.Chk_AlarmMin.Enabled = false;
-            this.Chk_AlarmMin.Location = new System.Drawing.Point(13, 41);
+            this.Chk_AlarmMin.Location = new System.Drawing.Point(17, 50);
+            this.Chk_AlarmMin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_AlarmMin.Name = "Chk_AlarmMin";
-            this.Chk_AlarmMin.Size = new System.Drawing.Size(91, 17);
+            this.Chk_AlarmMin.Size = new System.Drawing.Size(120, 21);
             this.Chk_AlarmMin.TabIndex = 35;
             this.Chk_AlarmMin.Text = "Alarm limit min";
             this.Chk_AlarmMin.UseVisualStyleBackColor = true;
@@ -958,9 +765,10 @@ namespace CANStream
             // 
             this.Chk_WarningMax.AutoSize = true;
             this.Chk_WarningMax.Enabled = false;
-            this.Chk_WarningMax.Location = new System.Drawing.Point(13, 92);
+            this.Chk_WarningMax.Location = new System.Drawing.Point(17, 113);
+            this.Chk_WarningMax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_WarningMax.Name = "Chk_WarningMax";
-            this.Chk_WarningMax.Size = new System.Drawing.Size(108, 17);
+            this.Chk_WarningMax.Size = new System.Drawing.Size(140, 21);
             this.Chk_WarningMax.TabIndex = 39;
             this.Chk_WarningMax.Text = "Warning limit max";
             this.Chk_WarningMax.UseVisualStyleBackColor = true;
@@ -969,33 +777,37 @@ namespace CANStream
             // Txt_AlarmMax
             // 
             this.Txt_AlarmMax.Enabled = false;
-            this.Txt_AlarmMax.Location = new System.Drawing.Point(124, 117);
+            this.Txt_AlarmMax.Location = new System.Drawing.Point(165, 144);
+            this.Txt_AlarmMax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_AlarmMax.Name = "Txt_AlarmMax";
-            this.Txt_AlarmMax.Size = new System.Drawing.Size(76, 20);
+            this.Txt_AlarmMax.Size = new System.Drawing.Size(100, 22);
             this.Txt_AlarmMax.TabIndex = 42;
             // 
             // Txt_AlarmMin
             // 
             this.Txt_AlarmMin.Enabled = false;
-            this.Txt_AlarmMin.Location = new System.Drawing.Point(124, 39);
+            this.Txt_AlarmMin.Location = new System.Drawing.Point(165, 48);
+            this.Txt_AlarmMin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_AlarmMin.Name = "Txt_AlarmMin";
-            this.Txt_AlarmMin.Size = new System.Drawing.Size(76, 20);
+            this.Txt_AlarmMin.Size = new System.Drawing.Size(100, 22);
             this.Txt_AlarmMin.TabIndex = 36;
             // 
             // Txt_WarningMax
             // 
             this.Txt_WarningMax.Enabled = false;
-            this.Txt_WarningMax.Location = new System.Drawing.Point(124, 90);
+            this.Txt_WarningMax.Location = new System.Drawing.Point(165, 111);
+            this.Txt_WarningMax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_WarningMax.Name = "Txt_WarningMax";
-            this.Txt_WarningMax.Size = new System.Drawing.Size(76, 20);
+            this.Txt_WarningMax.Size = new System.Drawing.Size(100, 22);
             this.Txt_WarningMax.TabIndex = 40;
             // 
             // Lbl_Alarms_Forecolor
             // 
             this.Lbl_Alarms_Forecolor.Enabled = false;
-            this.Lbl_Alarms_Forecolor.Location = new System.Drawing.Point(269, 19);
+            this.Lbl_Alarms_Forecolor.Location = new System.Drawing.Point(359, 23);
+            this.Lbl_Alarms_Forecolor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Alarms_Forecolor.Name = "Lbl_Alarms_Forecolor";
-            this.Lbl_Alarms_Forecolor.Size = new System.Drawing.Size(55, 13);
+            this.Lbl_Alarms_Forecolor.Size = new System.Drawing.Size(73, 16);
             this.Lbl_Alarms_Forecolor.TabIndex = 61;
             this.Lbl_Alarms_Forecolor.Text = "Forecolor";
             this.Lbl_Alarms_Forecolor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1004,9 +816,10 @@ namespace CANStream
             // 
             this.Pic_WarningMin_Forecolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_WarningMin_Forecolor.Enabled = false;
-            this.Pic_WarningMin_Forecolor.Location = new System.Drawing.Point(269, 65);
+            this.Pic_WarningMin_Forecolor.Location = new System.Drawing.Point(359, 80);
+            this.Pic_WarningMin_Forecolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_WarningMin_Forecolor.Name = "Pic_WarningMin_Forecolor";
-            this.Pic_WarningMin_Forecolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMin_Forecolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_WarningMin_Forecolor.TabIndex = 60;
             this.Pic_WarningMin_Forecolor.TabStop = false;
             this.Pic_WarningMin_Forecolor.DoubleClick += new System.EventHandler(this.Pic_WarningMin_Forecolor_DoubleClick);
@@ -1015,9 +828,10 @@ namespace CANStream
             // 
             this.Chk_WarningMin.AutoSize = true;
             this.Chk_WarningMin.Enabled = false;
-            this.Chk_WarningMin.Location = new System.Drawing.Point(13, 67);
+            this.Chk_WarningMin.Location = new System.Drawing.Point(17, 82);
+            this.Chk_WarningMin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_WarningMin.Name = "Chk_WarningMin";
-            this.Chk_WarningMin.Size = new System.Drawing.Size(105, 17);
+            this.Chk_WarningMin.Size = new System.Drawing.Size(137, 21);
             this.Chk_WarningMin.TabIndex = 37;
             this.Chk_WarningMin.Text = "Warning limit min";
             this.Chk_WarningMin.UseVisualStyleBackColor = true;
@@ -1026,9 +840,10 @@ namespace CANStream
             // Chk_AlarmsEnabled
             // 
             this.Chk_AlarmsEnabled.AutoSize = true;
-            this.Chk_AlarmsEnabled.Location = new System.Drawing.Point(6, 19);
+            this.Chk_AlarmsEnabled.Location = new System.Drawing.Point(8, 23);
+            this.Chk_AlarmsEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Chk_AlarmsEnabled.Name = "Chk_AlarmsEnabled";
-            this.Chk_AlarmsEnabled.Size = new System.Drawing.Size(158, 17);
+            this.Chk_AlarmsEnabled.Size = new System.Drawing.Size(208, 21);
             this.Chk_AlarmsEnabled.TabIndex = 34;
             this.Chk_AlarmsEnabled.Text = "Enable warnings and alarms";
             this.Chk_AlarmsEnabled.UseVisualStyleBackColor = true;
@@ -1038,9 +853,10 @@ namespace CANStream
             // 
             this.Pic_WarningMin_Backcolor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pic_WarningMin_Backcolor.Enabled = false;
-            this.Pic_WarningMin_Backcolor.Location = new System.Drawing.Point(206, 65);
+            this.Pic_WarningMin_Backcolor.Location = new System.Drawing.Point(275, 80);
+            this.Pic_WarningMin_Backcolor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Pic_WarningMin_Backcolor.Name = "Pic_WarningMin_Backcolor";
-            this.Pic_WarningMin_Backcolor.Size = new System.Drawing.Size(55, 20);
+            this.Pic_WarningMin_Backcolor.Size = new System.Drawing.Size(73, 24);
             this.Pic_WarningMin_Backcolor.TabIndex = 52;
             this.Pic_WarningMin_Backcolor.TabStop = false;
             this.Pic_WarningMin_Backcolor.DoubleClick += new System.EventHandler(this.Pic_WarningMin_Backcolor_DoubleClick);
@@ -1048,9 +864,10 @@ namespace CANStream
             // Lbl_Alarms_Backcolor
             // 
             this.Lbl_Alarms_Backcolor.Enabled = false;
-            this.Lbl_Alarms_Backcolor.Location = new System.Drawing.Point(205, 19);
+            this.Lbl_Alarms_Backcolor.Location = new System.Drawing.Point(273, 23);
+            this.Lbl_Alarms_Backcolor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Alarms_Backcolor.Name = "Lbl_Alarms_Backcolor";
-            this.Lbl_Alarms_Backcolor.Size = new System.Drawing.Size(55, 13);
+            this.Lbl_Alarms_Backcolor.Size = new System.Drawing.Size(73, 16);
             this.Lbl_Alarms_Backcolor.TabIndex = 50;
             this.Lbl_Alarms_Backcolor.Text = "Backcolor";
             this.Lbl_Alarms_Backcolor.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1058,20 +875,263 @@ namespace CANStream
             // Txt_WarningMin
             // 
             this.Txt_WarningMin.Enabled = false;
-            this.Txt_WarningMin.Location = new System.Drawing.Point(124, 65);
+            this.Txt_WarningMin.Location = new System.Drawing.Point(165, 80);
+            this.Txt_WarningMin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Txt_WarningMin.Name = "Txt_WarningMin";
-            this.Txt_WarningMin.Size = new System.Drawing.Size(76, 20);
+            this.Txt_WarningMin.Size = new System.Drawing.Size(100, 22);
             this.Txt_WarningMin.TabIndex = 38;
+            // 
+            // Cmd_EnumDefinition
+            // 
+            this.Cmd_EnumDefinition.Enabled = false;
+            this.Cmd_EnumDefinition.Image = global::CANStream.Icones.Enumeration_Edit_16;
+            this.Cmd_EnumDefinition.Location = new System.Drawing.Point(419, 108);
+            this.Cmd_EnumDefinition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_EnumDefinition.Name = "Cmd_EnumDefinition";
+            this.Cmd_EnumDefinition.Size = new System.Drawing.Size(33, 31);
+            this.Cmd_EnumDefinition.TabIndex = 50;
+            this.Cmd_EnumDefinition.UseVisualStyleBackColor = true;
+            this.Cmd_EnumDefinition.Click += new System.EventHandler(this.Cmd_EnumDefinition_Click);
+            // 
+            // Txt_Decimals
+            // 
+            this.Txt_Decimals.Enabled = false;
+            this.Txt_Decimals.Location = new System.Drawing.Point(351, 108);
+            this.Txt_Decimals.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_Decimals.Name = "Txt_Decimals";
+            this.Txt_Decimals.Size = new System.Drawing.Size(59, 22);
+            this.Txt_Decimals.TabIndex = 49;
+            // 
+            // Lbl_Decimals
+            // 
+            this.Lbl_Decimals.AutoSize = true;
+            this.Lbl_Decimals.Enabled = false;
+            this.Lbl_Decimals.Location = new System.Drawing.Point(276, 112);
+            this.Lbl_Decimals.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lbl_Decimals.Name = "Lbl_Decimals";
+            this.Lbl_Decimals.Size = new System.Drawing.Size(65, 17);
+            this.Lbl_Decimals.TabIndex = 52;
+            this.Lbl_Decimals.Text = "Decimals";
+            // 
+            // Cmb_ValueFormat
+            // 
+            this.Cmb_ValueFormat.FormattingEnabled = true;
+            this.Cmb_ValueFormat.Items.AddRange(new object[] {
+            "MSBFirst",
+            "LSBFirst"});
+            this.Cmb_ValueFormat.Location = new System.Drawing.Point(104, 108);
+            this.Cmb_ValueFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmb_ValueFormat.Name = "Cmb_ValueFormat";
+            this.Cmb_ValueFormat.Size = new System.Drawing.Size(155, 24);
+            this.Cmb_ValueFormat.TabIndex = 48;
+            this.Cmb_ValueFormat.SelectedValueChanged += new System.EventHandler(this.Cmb_ValueFormat_SelectedValueChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 113);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(52, 17);
+            this.label21.TabIndex = 51;
+            this.label21.Text = "Format";
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(193, 81);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 22);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "(For CAN Tx)";
+            // 
+            // Chk_ChanComputationEnabled
+            // 
+            this.Chk_ChanComputationEnabled.Location = new System.Drawing.Point(365, 42);
+            this.Chk_ChanComputationEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Chk_ChanComputationEnabled.Name = "Chk_ChanComputationEnabled";
+            this.Chk_ChanComputationEnabled.Size = new System.Drawing.Size(88, 30);
+            this.Chk_ChanComputationEnabled.TabIndex = 18;
+            this.Chk_ChanComputationEnabled.Text = "Enabled";
+            this.Chk_ChanComputationEnabled.UseVisualStyleBackColor = true;
+            // 
+            // Txt_ChanValDef
+            // 
+            this.Txt_ChanValDef.Location = new System.Drawing.Point(104, 78);
+            this.Txt_ChanValDef.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_ChanValDef.Name = "Txt_ChanValDef";
+            this.Txt_ChanValDef.Size = new System.Drawing.Size(80, 22);
+            this.Txt_ChanValDef.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(8, 81);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 22);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Default value:";
+            // 
+            // Cmd_ChannelTest
+            // 
+            this.Cmd_ChannelTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Cmd_ChannelTest.Location = new System.Drawing.Point(8, 522);
+            this.Cmd_ChannelTest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_ChannelTest.Name = "Cmd_ChannelTest";
+            this.Cmd_ChannelTest.Size = new System.Drawing.Size(100, 28);
+            this.Cmd_ChannelTest.TabIndex = 15;
+            this.Cmd_ChannelTest.Text = "Test";
+            this.Cmd_ChannelTest.UseVisualStyleBackColor = true;
+            this.Cmd_ChannelTest.Click += new System.EventHandler(this.Cmd_ChannelTestClick);
+            // 
+            // Cmd_ChanCancel
+            // 
+            this.Cmd_ChanCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmd_ChanCancel.Location = new System.Drawing.Point(243, 522);
+            this.Cmd_ChanCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_ChanCancel.Name = "Cmd_ChanCancel";
+            this.Cmd_ChanCancel.Size = new System.Drawing.Size(100, 28);
+            this.Cmd_ChanCancel.TabIndex = 14;
+            this.Cmd_ChanCancel.Text = "Cancel";
+            this.Cmd_ChanCancel.UseVisualStyleBackColor = true;
+            this.Cmd_ChanCancel.Click += new System.EventHandler(this.Cmd_ChanCancelClick);
+            // 
+            // Cmd_ChanCreate
+            // 
+            this.Cmd_ChanCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmd_ChanCreate.Location = new System.Drawing.Point(353, 522);
+            this.Cmd_ChanCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_ChanCreate.Name = "Cmd_ChanCreate";
+            this.Cmd_ChanCreate.Size = new System.Drawing.Size(100, 28);
+            this.Cmd_ChanCreate.TabIndex = 13;
+            this.Cmd_ChanCreate.Text = "Create";
+            this.Cmd_ChanCreate.UseVisualStyleBackColor = true;
+            this.Cmd_ChanCreate.Click += new System.EventHandler(this.Cmd_ChanCreateClick);
+            // 
+            // Cmd_ChannelList
+            // 
+            this.Cmd_ChannelList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmd_ChannelList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Cmd_ChannelList.Image = global::CANStream.Icones.Virtual_Channel_Element_16;
+            this.Cmd_ChannelList.Location = new System.Drawing.Point(364, 296);
+            this.Cmd_ChannelList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_ChannelList.Name = "Cmd_ChannelList";
+            this.Cmd_ChannelList.Size = new System.Drawing.Size(29, 27);
+            this.Cmd_ChannelList.TabIndex = 12;
+            this.Cmd_ChannelList.UseVisualStyleBackColor = true;
+            this.Cmd_ChannelList.Click += new System.EventHandler(this.Cmd_ChannelListClick);
+            // 
+            // Cmd_Functions
+            // 
+            this.Cmd_Functions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmd_Functions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Cmd_Functions.Image = global::CANStream.Icones.Virtual_Channel_Function_16;
+            this.Cmd_Functions.Location = new System.Drawing.Point(393, 296);
+            this.Cmd_Functions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_Functions.Name = "Cmd_Functions";
+            this.Cmd_Functions.Size = new System.Drawing.Size(29, 27);
+            this.Cmd_Functions.TabIndex = 11;
+            this.Cmd_Functions.UseVisualStyleBackColor = true;
+            this.Cmd_Functions.Click += new System.EventHandler(this.Cmd_FunctionsClick);
+            // 
+            // Cmd_Operators
+            // 
+            this.Cmd_Operators.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cmd_Operators.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Cmd_Operators.Image = global::CANStream.Icones.Virtual_Channel_Operator_16;
+            this.Cmd_Operators.Location = new System.Drawing.Point(423, 296);
+            this.Cmd_Operators.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Cmd_Operators.Name = "Cmd_Operators";
+            this.Cmd_Operators.Size = new System.Drawing.Size(29, 27);
+            this.Cmd_Operators.TabIndex = 10;
+            this.Cmd_Operators.UseVisualStyleBackColor = true;
+            this.Cmd_Operators.Click += new System.EventHandler(this.Cmd_OperatorsClick);
+            // 
+            // rTxt_ChanExpression
+            // 
+            this.rTxt_ChanExpression.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rTxt_ChanExpression.Location = new System.Drawing.Point(7, 230);
+            this.rTxt_ChanExpression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTxt_ChanExpression.Name = "rTxt_ChanExpression";
+            this.rTxt_ChanExpression.Size = new System.Drawing.Size(444, 63);
+            this.rTxt_ChanExpression.TabIndex = 9;
+            this.rTxt_ChanExpression.Text = "";
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(7, 204);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 22);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Expression";
+            // 
+            // rTxt_ChanComment
+            // 
+            this.rTxt_ChanComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rTxt_ChanComment.Location = new System.Drawing.Point(104, 144);
+            this.rTxt_ChanComment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTxt_ChanComment.Name = "rTxt_ChanComment";
+            this.rTxt_ChanComment.Size = new System.Drawing.Size(347, 56);
+            this.rTxt_ChanComment.TabIndex = 7;
+            this.rTxt_ChanComment.Text = "";
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(3, 144);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(84, 22);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Comment:";
+            // 
+            // Txt_ChanUnit
+            // 
+            this.Txt_ChanUnit.Location = new System.Drawing.Point(104, 44);
+            this.Txt_ChanUnit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_ChanUnit.Name = "Txt_ChanUnit";
+            this.Txt_ChanUnit.Size = new System.Drawing.Size(80, 22);
+            this.Txt_ChanUnit.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(8, 49);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 22);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Unit:";
+            // 
+            // Txt_ChanName
+            // 
+            this.Txt_ChanName.Location = new System.Drawing.Point(104, 14);
+            this.Txt_ChanName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Txt_ChanName.Name = "Txt_ChanName";
+            this.Txt_ChanName.Size = new System.Drawing.Size(347, 22);
+            this.Txt_ChanName.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(8, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 22);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Name:";
             // 
             // Frm_VirtualChannel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 514);
+            this.ClientSize = new System.Drawing.Size(725, 633);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = global::CANStream.Icones.CANStream_Icone;
-            this.MinimumSize = new System.Drawing.Size(560, 414);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(741, 499);
             this.Name = "Frm_VirtualChannel";
             this.Text = "Virtual channels editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_VirtualChannelFormClosing);
