@@ -1519,7 +1519,7 @@ namespace CANStream
             this.Graph_SpyData.Size = new System.Drawing.Size(655, 380);
             this.Graph_SpyData.SnapShotEnabled = false;
             this.Graph_SpyData.TabIndex = 0;
-            this.Graph_SpyData.ToolBarVisible = false;
+            this.Graph_SpyData.ToolBarVisible = true;
             this.Graph_SpyData.ZoomEnabled = false;
             // 
             // Cycle_SpyDataViewer

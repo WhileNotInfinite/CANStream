@@ -2,6 +2,24 @@
 #             CANStream release notes           #
 #################################################
 
+11/03/2016: VERSION 2.3.1.1
+----------------------------
+
+New features
+	
+		None
+	
+	Bug fixes
+		
+		#144: Crash on CAN bus control creation
+
+		#145: Controls are not correctly
+			  sized on the window
+	
+	Known issues
+	
+		None
+
 09/18/2016: VERSION 2.3.1.0
 ----------------------------
 
