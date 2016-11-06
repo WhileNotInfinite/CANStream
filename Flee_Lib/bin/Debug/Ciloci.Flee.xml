@@ -66,7 +66,7 @@ Ciloci.Flee
 <member name="M:Ciloci.Flee.CalcEngine.BatchLoader.Contains(System.String)">
  <summary>
       Determines if the loader contains an expression with a given name.
-    </summary><!--warning BC42307: XML comment parameter 'name' does not match a parameter on the corresponding 'function' statement.--><param name="name">The name of the expression to look up</param><returns>True if the loader has an expression with the name; False otherwise</returns><remarks>
+    </summary><!--warning BC42307: Le paramètre de commentaire XML 'name' ne correspond pas à un paramètre pour l'instruction 'function' correspondante.--><param name="name">The name of the expression to look up</param><returns>True if the loader has an expression with the name; False otherwise</returns><remarks>
       Use this method to determine if the loader contains an expression with a given name.
     </remarks>
 </member>
@@ -594,7 +594,7 @@ result = eGeneric.Evaluate();</code>
       </example><exception cref="T:System.ArgumentException">The imported type is not accessible</exception>	
 </member>
 <member name="M:Ciloci.Flee.ExpressionImports.AddType(System.Type)">
- <!--warning BC42320: Unable to include XML fragment 'DocComments/ExpressionImports/Addtype2/*' of file 'Resources/DocComments.xml'.-->	
+ <!--warning BC42320: Impossible d'inclure le fragment XML 'DocComments/ExpressionImports/Addtype2/*' du fichier 'Resources/DocComments.xml'.-->	
 </member>
 <member name="M:Ciloci.Flee.ExpressionImports.AddMethod(System.String,System.Type,System.String)">
  <overloads>Imports a single public and static method into an expression.</overloads><summary>Imports a public and static method of a type into a given namespace and makes it available to an expression.</summary><param name="methodName">The name of the method to import</param><param name="t">The type on which to lookup the method</param><param name="ns">The namespace to import the method into -or- the empty string to import into the default namespace</param><remarks>
@@ -2651,10 +2651,10 @@ couldn't be initialized correctly</exception>
  <summary>Removes a variable from the collection.</summary><param name="name">The name of the variable</param><remarks>Use this method to remove a variable from the collection</remarks>
 </member>
 <member name="M:Ciloci.Flee.VariableCollection.TryGetValue(System.String,System.Object@)">
- <summary>Gets the value of a variable in the collection.</summary><!--warning BC42307: XML comment parameter 'name' does not match a parameter on the corresponding 'function' statement.--><param name="name">The name of the variable</param><param name="value">The location to store the value of the variable</param><returns>True if the collection contains a variable with the given name; False otherwise</returns><remarks>Use this method to get the value of a variable in the collection</remarks>
+ <summary>Gets the value of a variable in the collection.</summary><!--warning BC42307: Le paramètre de commentaire XML 'name' ne correspond pas à un paramètre pour l'instruction 'function' correspondante.--><param name="name">The name of the variable</param><param name="value">The location to store the value of the variable</param><returns>True if the collection contains a variable with the given name; False otherwise</returns><remarks>Use this method to get the value of a variable in the collection</remarks>
 </member>
 <member name="M:Ciloci.Flee.VariableCollection.TrySetValue(System.String,System.Object)">
- <!--warning BC42320: Unable to include XML fragment 'DocComments/VariableCollection/TrySetValue/*' of file 'Resources/DocComments.xml'.-->
+ <!--warning BC42320: Impossible d'inclure le fragment XML 'DocComments/VariableCollection/TrySetValue/*' du fichier 'Resources/DocComments.xml'.-->
 </member>
 <member name="P:Ciloci.Flee.VariableCollection.Count">
  <summary>Gets the number of variables defined in the collection.</summary><returns>The number of variables in the collection</returns><remarks>Use this method to get a count of the number of variables in the collection</remarks>

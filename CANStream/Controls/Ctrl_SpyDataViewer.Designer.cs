@@ -152,11 +152,11 @@ namespace CANStream
             this.Grid_Eng_DLC,
             this.SpyEng_Comment});
             this.Grid_SpyEngineering.ContextMenuStrip = this.Context_SpyEngGrid;
-            this.Grid_SpyEngineering.Location = new System.Drawing.Point(1, 17);
+            this.Grid_SpyEngineering.Location = new System.Drawing.Point(1, 21);
             this.Grid_SpyEngineering.Margin = new System.Windows.Forms.Padding(1);
             this.Grid_SpyEngineering.Name = "Grid_SpyEngineering";
             this.Grid_SpyEngineering.RowHeadersVisible = false;
-            this.Grid_SpyEngineering.Size = new System.Drawing.Size(746, 300);
+            this.Grid_SpyEngineering.Size = new System.Drawing.Size(1086, 369);
             this.Grid_SpyEngineering.TabIndex = 12;
             this.Grid_SpyEngineering.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_SpyEngineering_CellBeginEdit);
             this.Grid_SpyEngineering.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_SpyEngineering_CellContentClick);
@@ -355,6 +355,7 @@ namespace CANStream
             // 
             // Context_SpyEngGrid
             // 
+            this.Context_SpyEngGrid.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Context_SpyEngGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ContextSpyEng_ResetTSMenuItem,
             this.toolStripSeparator1,
@@ -365,26 +366,26 @@ namespace CANStream
             this.toolStripMenuItem11,
             this.ContextSpyEng_columnsToolStripMenuItem});
             this.Context_SpyEngGrid.Name = "Context_SpyEngGrid";
-            this.Context_SpyEngGrid.Size = new System.Drawing.Size(163, 132);
+            this.Context_SpyEngGrid.Size = new System.Drawing.Size(197, 152);
             // 
             // ContextSpyEng_ResetTSMenuItem
             // 
             this.ContextSpyEng_ResetTSMenuItem.Image = global::CANStream.Icones.Refresh_CAN_Controllers;
             this.ContextSpyEng_ResetTSMenuItem.Name = "ContextSpyEng_ResetTSMenuItem";
-            this.ContextSpyEng_ResetTSMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ContextSpyEng_ResetTSMenuItem.Size = new System.Drawing.Size(196, 26);
             this.ContextSpyEng_ResetTSMenuItem.Text = "Reset";
             this.ContextSpyEng_ResetTSMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ResetTSMenuItemClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // ContextSpyEng_CollapseRowsTSMenuItem
             // 
             this.ContextSpyEng_CollapseRowsTSMenuItem.Image = global::CANStream.Icones.Collapse_16;
             this.ContextSpyEng_CollapseRowsTSMenuItem.Name = "ContextSpyEng_CollapseRowsTSMenuItem";
-            this.ContextSpyEng_CollapseRowsTSMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ContextSpyEng_CollapseRowsTSMenuItem.Size = new System.Drawing.Size(196, 26);
             this.ContextSpyEng_CollapseRowsTSMenuItem.Text = "Collapse all rows";
             this.ContextSpyEng_CollapseRowsTSMenuItem.Click += new System.EventHandler(this.ContextSpyEng_CollapseRowsTSMenuItem_Click);
             // 
@@ -392,14 +393,14 @@ namespace CANStream
             // 
             this.ContextSpyEng_ExpandRowsTSMenuItem.Image = global::CANStream.Icones.Expand_16;
             this.ContextSpyEng_ExpandRowsTSMenuItem.Name = "ContextSpyEng_ExpandRowsTSMenuItem";
-            this.ContextSpyEng_ExpandRowsTSMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ContextSpyEng_ExpandRowsTSMenuItem.Size = new System.Drawing.Size(196, 26);
             this.ContextSpyEng_ExpandRowsTSMenuItem.Text = "Expand all rows";
             this.ContextSpyEng_ExpandRowsTSMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ExpandRowsTSMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(193, 6);
             // 
             // ContextSpyEng_FilterTSMenuItem
             // 
@@ -407,20 +408,20 @@ namespace CANStream
             this.ContextSpyEng_FiltetTSComboBox});
             this.ContextSpyEng_FilterTSMenuItem.Image = global::CANStream.Icones.Filter_16;
             this.ContextSpyEng_FilterTSMenuItem.Name = "ContextSpyEng_FilterTSMenuItem";
-            this.ContextSpyEng_FilterTSMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ContextSpyEng_FilterTSMenuItem.Size = new System.Drawing.Size(196, 26);
             this.ContextSpyEng_FilterTSMenuItem.Text = "Filter";
             // 
             // ContextSpyEng_FiltetTSComboBox
             // 
             this.ContextSpyEng_FiltetTSComboBox.Name = "ContextSpyEng_FiltetTSComboBox";
-            this.ContextSpyEng_FiltetTSComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ContextSpyEng_FiltetTSComboBox.Size = new System.Drawing.Size(121, 28);
             this.ContextSpyEng_FiltetTSComboBox.SelectedIndexChanged += new System.EventHandler(this.ContextSpyEng_FiltetTSComboBoxSelectedIndexChanged);
             this.ContextSpyEng_FiltetTSComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContextSpyEng_FiltetTSComboBoxKeyDown);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(159, 6);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(193, 6);
             // 
             // ContextSpyEng_columnsToolStripMenuItem
             // 
@@ -447,144 +448,144 @@ namespace CANStream
             this.ContextSpyEng_commentToolStripMenuItem});
             this.ContextSpyEng_columnsToolStripMenuItem.Image = global::CANStream.Icones.Columns_16;
             this.ContextSpyEng_columnsToolStripMenuItem.Name = "ContextSpyEng_columnsToolStripMenuItem";
-            this.ContextSpyEng_columnsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ContextSpyEng_columnsToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.ContextSpyEng_columnsToolStripMenuItem.Text = "Columns";
             // 
             // ContextSpyEng_showAllToolStripMenuItem
             // 
             this.ContextSpyEng_showAllToolStripMenuItem.Name = "ContextSpyEng_showAllToolStripMenuItem";
-            this.ContextSpyEng_showAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_showAllToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_showAllToolStripMenuItem.Text = "Show All";
             this.ContextSpyEng_showAllToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_showAllToolStripMenuItemClick);
             // 
             // ContextSpyEng_hideAllToolStripMenuItem
             // 
             this.ContextSpyEng_hideAllToolStripMenuItem.Name = "ContextSpyEng_hideAllToolStripMenuItem";
-            this.ContextSpyEng_hideAllToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_hideAllToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_hideAllToolStripMenuItem.Text = "Hide All";
             this.ContextSpyEng_hideAllToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_hideAllToolStripMenuItemClick);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(155, 6);
             // 
             // ContextSpyEng_iDToolStripMenuItem
             // 
             this.ContextSpyEng_iDToolStripMenuItem.Name = "ContextSpyEng_iDToolStripMenuItem";
-            this.ContextSpyEng_iDToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_iDToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_iDToolStripMenuItem.Text = "ID";
             this.ContextSpyEng_iDToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_iDToolStripMenuItemClick);
             // 
             // ContextSpyEng_RxTxToolStripMenuItem
             // 
             this.ContextSpyEng_RxTxToolStripMenuItem.Name = "ContextSpyEng_RxTxToolStripMenuItem";
-            this.ContextSpyEng_RxTxToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_RxTxToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_RxTxToolStripMenuItem.Text = "RxTx";
             this.ContextSpyEng_RxTxToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_RxTxToolStripMenuItem_Click);
             // 
             // ContextSpyEng_valueToolStripMenuItem
             // 
             this.ContextSpyEng_valueToolStripMenuItem.Name = "ContextSpyEng_valueToolStripMenuItem";
-            this.ContextSpyEng_valueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_valueToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_valueToolStripMenuItem.Text = "Value";
             this.ContextSpyEng_valueToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_valueToolStripMenuItemClick);
             // 
             // ContextSpyEng_rawValueToolStripMenuItem
             // 
             this.ContextSpyEng_rawValueToolStripMenuItem.Name = "ContextSpyEng_rawValueToolStripMenuItem";
-            this.ContextSpyEng_rawValueToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_rawValueToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_rawValueToolStripMenuItem.Text = "Raw value";
             this.ContextSpyEng_rawValueToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_rawValueToolStripMenuItemClick);
             // 
             // ContextSpyEng_minToolStripMenuItem
             // 
             this.ContextSpyEng_minToolStripMenuItem.Name = "ContextSpyEng_minToolStripMenuItem";
-            this.ContextSpyEng_minToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_minToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_minToolStripMenuItem.Text = "Min";
             this.ContextSpyEng_minToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_minToolStripMenuItemClick);
             // 
             // ContextSpyEng_maxToolStripMenuItem
             // 
             this.ContextSpyEng_maxToolStripMenuItem.Name = "ContextSpyEng_maxToolStripMenuItem";
-            this.ContextSpyEng_maxToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_maxToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_maxToolStripMenuItem.Text = "Max";
             this.ContextSpyEng_maxToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_maxToolStripMenuItemClick);
             // 
             // ContextSpyEng_unitToolStripMenuItem
             // 
             this.ContextSpyEng_unitToolStripMenuItem.Name = "ContextSpyEng_unitToolStripMenuItem";
-            this.ContextSpyEng_unitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_unitToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_unitToolStripMenuItem.Text = "Unit";
             this.ContextSpyEng_unitToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_unitToolStripMenuItemClick);
             // 
             // ContextSpyEng_periodToolStripMenuItem
             // 
             this.ContextSpyEng_periodToolStripMenuItem.Name = "ContextSpyEng_periodToolStripMenuItem";
-            this.ContextSpyEng_periodToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_periodToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_periodToolStripMenuItem.Text = "Period";
             this.ContextSpyEng_periodToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_periodToolStripMenuItem_Click);
             // 
             // ContextSpyEng_StartToolStripMenuItem
             // 
             this.ContextSpyEng_StartToolStripMenuItem.Name = "ContextSpyEng_StartToolStripMenuItem";
-            this.ContextSpyEng_StartToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_StartToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_StartToolStripMenuItem.Text = "Start";
             this.ContextSpyEng_StartToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_StartToolStripMenuItem_Click);
             // 
             // ContextSpyEng_LengthToolStripMenuItem
             // 
             this.ContextSpyEng_LengthToolStripMenuItem.Name = "ContextSpyEng_LengthToolStripMenuItem";
-            this.ContextSpyEng_LengthToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_LengthToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_LengthToolStripMenuItem.Text = "Length";
             this.ContextSpyEng_LengthToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_LengthToolStripMenuItem_Click);
             // 
             // ContextSpyEng_EndianessToolStripMenuItem
             // 
             this.ContextSpyEng_EndianessToolStripMenuItem.Name = "ContextSpyEng_EndianessToolStripMenuItem";
-            this.ContextSpyEng_EndianessToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_EndianessToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_EndianessToolStripMenuItem.Text = "Endianess";
             this.ContextSpyEng_EndianessToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_EndianessToolStripMenuItem_Click);
             // 
             // ContextSpyEng_SignedToolStripMenuItem
             // 
             this.ContextSpyEng_SignedToolStripMenuItem.Name = "ContextSpyEng_SignedToolStripMenuItem";
-            this.ContextSpyEng_SignedToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_SignedToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_SignedToolStripMenuItem.Text = "Signedness";
             this.ContextSpyEng_SignedToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_SignedToolStripMenuItem_Click);
             // 
             // ContextSpyEng_GainToolStripMenuItem
             // 
             this.ContextSpyEng_GainToolStripMenuItem.Name = "ContextSpyEng_GainToolStripMenuItem";
-            this.ContextSpyEng_GainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_GainToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_GainToolStripMenuItem.Text = "Gain";
             this.ContextSpyEng_GainToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_GainToolStripMenuItem_Click);
             // 
             // ContextSpyEng_ZeroToolStripMenuItem
             // 
             this.ContextSpyEng_ZeroToolStripMenuItem.Name = "ContextSpyEng_ZeroToolStripMenuItem";
-            this.ContextSpyEng_ZeroToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_ZeroToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_ZeroToolStripMenuItem.Text = "Zero";
             this.ContextSpyEng_ZeroToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_ZeroToolStripMenuItem_Click);
             // 
             // ContextSpyEng_countToolStripMenuItem
             // 
             this.ContextSpyEng_countToolStripMenuItem.Name = "ContextSpyEng_countToolStripMenuItem";
-            this.ContextSpyEng_countToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_countToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_countToolStripMenuItem.Text = "Count";
             this.ContextSpyEng_countToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_countToolStripMenuItem_Click);
             // 
             // ContextSpyEng_dlcToolStripMenuItem
             // 
             this.ContextSpyEng_dlcToolStripMenuItem.Name = "ContextSpyEng_dlcToolStripMenuItem";
-            this.ContextSpyEng_dlcToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_dlcToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_dlcToolStripMenuItem.Text = "DLC";
             this.ContextSpyEng_dlcToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_dlcToolStripMenuItem_Click);
             // 
             // ContextSpyEng_commentToolStripMenuItem
             // 
             this.ContextSpyEng_commentToolStripMenuItem.Name = "ContextSpyEng_commentToolStripMenuItem";
-            this.ContextSpyEng_commentToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ContextSpyEng_commentToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.ContextSpyEng_commentToolStripMenuItem.Text = "Comment";
             this.ContextSpyEng_commentToolStripMenuItem.Click += new System.EventHandler(this.ContextSpyEng_commentToolStripMenuItemClick);
             // 
@@ -595,18 +596,19 @@ namespace CANStream
             this.Lbl_GridTitle.Location = new System.Drawing.Point(0, 0);
             this.Lbl_GridTitle.Margin = new System.Windows.Forms.Padding(0);
             this.Lbl_GridTitle.Name = "Lbl_GridTitle";
-            this.Lbl_GridTitle.Size = new System.Drawing.Size(100, 14);
+            this.Lbl_GridTitle.Size = new System.Drawing.Size(133, 17);
             this.Lbl_GridTitle.TabIndex = 13;
             this.Lbl_GridTitle.Text = "Data Received";
             // 
             // Ctrl_CANDataGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Lbl_GridTitle);
             this.Controls.Add(this.Grid_SpyEngineering);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Ctrl_CANDataGrid";
-            this.Size = new System.Drawing.Size(748, 318);
+            this.Size = new System.Drawing.Size(1088, 391);
             this.Load += new System.EventHandler(this.Ctrl_CANDataGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_SpyEngineering)).EndInit();
             this.Context_SpyEngGrid.ResumeLayout(false);

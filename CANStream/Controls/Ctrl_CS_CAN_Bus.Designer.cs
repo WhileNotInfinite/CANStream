@@ -78,7 +78,6 @@ namespace CANStream
             this.TabPg_SpyAndManual = new System.Windows.Forms.TabPage();
             this.Split_RxTx = new System.Windows.Forms.SplitContainer();
             this.Split_Tx_EngRaw = new System.Windows.Forms.SplitContainer();
-            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
             this.Grid_CANRawData = new System.Windows.Forms.DataGridView();
             this.GridCol_Raw_Tx_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GridCol_Raw_Tx_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,23 +100,6 @@ namespace CANStream
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.Ctxt_TxRaw_Save_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctxt_TxRaw_Open_TSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.Split_Rx_DataGraph = new System.Windows.Forms.SplitContainer();
-            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
-            this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
-            this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
-            this.Graph_SpyData = new Ctrl_GraphWindow.Ctrl_WaveForm();
-            this.Tab_SpyHistory_Data = new System.Windows.Forms.TabPage();
-            this.Lst_SpyDataHistory = new System.Windows.Forms.ListBox();
-            this.TS_SpyDataHistory = new System.Windows.Forms.ToolStrip();
-            this.TSB_FreezeHistory = new System.Windows.Forms.ToolStripButton();
-            this.TSB_ResumeHistory = new System.Windows.Forms.ToolStripButton();
-            this.TSB_ClearHistory = new System.Windows.Forms.ToolStripButton();
-            this.TSB_ExportHistory = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.TSLbl_IdFilterFrom = new System.Windows.Forms.ToolStripLabel();
-            this.TSTxt_IdFilterFrom = new System.Windows.Forms.ToolStripTextBox();
-            this.TSLbl_IdFilterTo = new System.Windows.Forms.ToolStripLabel();
-            this.TSTxt_IdFilterTo = new System.Windows.Forms.ToolStripTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Cmd_RxOnly = new System.Windows.Forms.Button();
             this.Pic_ManualRunning = new System.Windows.Forms.PictureBox();
@@ -137,8 +119,6 @@ namespace CANStream
             this.TabPg_Cycle = new System.Windows.Forms.TabPage();
             this.Panel_Cycle = new System.Windows.Forms.Panel();
             this.Split_Cycle_VirtualSig_Graph = new System.Windows.Forms.SplitContainer();
-            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
-            this.Graph_Cycle = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Chk_CycleVirtualParamTxEnabled = new System.Windows.Forms.CheckBox();
@@ -170,6 +150,26 @@ namespace CANStream
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Timer_NoRx = new System.Windows.Forms.Timer(this.components);
             this.ToolTip_CmdRxOnly = new System.Windows.Forms.ToolTip(this.components);
+            this.Split_Rx_DataGraph = new System.Windows.Forms.SplitContainer();
+            this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
+            this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
+            this.Tab_SpyHistory_Data = new System.Windows.Forms.TabPage();
+            this.Lst_SpyDataHistory = new System.Windows.Forms.ListBox();
+            this.TS_SpyDataHistory = new System.Windows.Forms.ToolStrip();
+            this.TSB_FreezeHistory = new System.Windows.Forms.ToolStripButton();
+            this.TSB_ResumeHistory = new System.Windows.Forms.ToolStripButton();
+            this.TSB_ClearHistory = new System.Windows.Forms.ToolStripButton();
+            this.TSB_ExportHistory = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.TSLbl_IdFilterFrom = new System.Windows.Forms.ToolStripLabel();
+            this.TSTxt_IdFilterFrom = new System.Windows.Forms.ToolStripTextBox();
+            this.TSLbl_IdFilterTo = new System.Windows.Forms.ToolStripLabel();
+            this.TSTxt_IdFilterTo = new System.Windows.Forms.ToolStripTextBox();
+            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
+            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
+            this.Graph_SpyData = new Ctrl_GraphWindow.Ctrl_WaveForm();
+            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
+            this.Graph_Cycle = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -183,14 +183,6 @@ namespace CANStream
             this.Split_Tx_EngRaw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).BeginInit();
             this.Context_ManualRawGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).BeginInit();
-            this.Split_Rx_DataGraph.Panel1.SuspendLayout();
-            this.Split_Rx_DataGraph.Panel2.SuspendLayout();
-            this.Split_Rx_DataGraph.SuspendLayout();
-            this.Tab_SpyHistory.SuspendLayout();
-            this.Tab_SpyHistory_Graph.SuspendLayout();
-            this.Tab_SpyHistory_Data.SuspendLayout();
-            this.TS_SpyDataHistory.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_ManualRunning)).BeginInit();
             this.TabPg_Cycle.SuspendLayout();
@@ -202,10 +194,19 @@ namespace CANStream
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).BeginInit();
+            this.Split_Rx_DataGraph.Panel1.SuspendLayout();
+            this.Split_Rx_DataGraph.Panel2.SuspendLayout();
+            this.Split_Rx_DataGraph.SuspendLayout();
+            this.Tab_SpyHistory.SuspendLayout();
+            this.Tab_SpyHistory_Graph.SuspendLayout();
+            this.Tab_SpyHistory_Data.SuspendLayout();
+            this.TS_SpyDataHistory.SuspendLayout();
             this.SuspendLayout();
             // 
             // CtrlMain_ToolStrip
             // 
+            this.CtrlMain_ToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.CtrlMain_ToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSB_Refresh_USB_CAN_Device,
             this.TS_Cmb_PCAN_USB_Devices,
@@ -220,7 +221,7 @@ namespace CANStream
             this.TSSB_View});
             this.CtrlMain_ToolStrip.Location = new System.Drawing.Point(0, 0);
             this.CtrlMain_ToolStrip.Name = "CtrlMain_ToolStrip";
-            this.CtrlMain_ToolStrip.Size = new System.Drawing.Size(978, 25);
+            this.CtrlMain_ToolStrip.Size = new System.Drawing.Size(1304, 28);
             this.CtrlMain_ToolStrip.TabIndex = 7;
             this.CtrlMain_ToolStrip.Text = "toolStrip1";
             // 
@@ -230,7 +231,7 @@ namespace CANStream
             this.TSB_Refresh_USB_CAN_Device.Image = global::CANStream.Icones.Refresh_CAN_Controllers;
             this.TSB_Refresh_USB_CAN_Device.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_Refresh_USB_CAN_Device.Name = "TSB_Refresh_USB_CAN_Device";
-            this.TSB_Refresh_USB_CAN_Device.Size = new System.Drawing.Size(23, 22);
+            this.TSB_Refresh_USB_CAN_Device.Size = new System.Drawing.Size(24, 25);
             this.TSB_Refresh_USB_CAN_Device.Text = "toolStripButton4";
             this.TSB_Refresh_USB_CAN_Device.ToolTipText = "Refresh PCAN USB Devices list";
             this.TSB_Refresh_USB_CAN_Device.Click += new System.EventHandler(this.TSB_Refresh_USB_CAN_DeviceClick);
@@ -241,14 +242,14 @@ namespace CANStream
             this.TS_Cmb_PCAN_USB_Devices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TS_Cmb_PCAN_USB_Devices.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.TS_Cmb_PCAN_USB_Devices.Name = "TS_Cmb_PCAN_USB_Devices";
-            this.TS_Cmb_PCAN_USB_Devices.Size = new System.Drawing.Size(121, 25);
+            this.TS_Cmb_PCAN_USB_Devices.Size = new System.Drawing.Size(160, 28);
             this.TS_Cmb_PCAN_USB_Devices.SelectedIndexChanged += new System.EventHandler(this.TS_Cmb_PCAN_USB_DevicesSelectedIndexChanged);
             // 
             // TS_Lbl_CanSpeed
             // 
             this.TS_Lbl_CanSpeed.Enabled = false;
             this.TS_Lbl_CanSpeed.Name = "TS_Lbl_CanSpeed";
-            this.TS_Lbl_CanSpeed.Size = new System.Drawing.Size(88, 22);
+            this.TS_Lbl_CanSpeed.Size = new System.Drawing.Size(110, 25);
             this.TS_Lbl_CanSpeed.Text = "CAN Baud rate:";
             // 
             // TSB_CAN_LinkOff
@@ -257,7 +258,7 @@ namespace CANStream
             this.TSB_CAN_LinkOff.Image = global::CANStream.Icones.CAN_Link_Off;
             this.TSB_CAN_LinkOff.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_CAN_LinkOff.Name = "TSB_CAN_LinkOff";
-            this.TSB_CAN_LinkOff.Size = new System.Drawing.Size(23, 22);
+            this.TSB_CAN_LinkOff.Size = new System.Drawing.Size(24, 25);
             this.TSB_CAN_LinkOff.Text = "toolStripButton4";
             this.TSB_CAN_LinkOff.ToolTipText = "Start connection";
             this.TSB_CAN_LinkOff.Click += new System.EventHandler(this.TSB_CAN_LinkOffClick);
@@ -268,7 +269,7 @@ namespace CANStream
             this.TSB_CAN_LinkOn.Image = global::CANStream.Icones.CAN_Link_On;
             this.TSB_CAN_LinkOn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_CAN_LinkOn.Name = "TSB_CAN_LinkOn";
-            this.TSB_CAN_LinkOn.Size = new System.Drawing.Size(23, 22);
+            this.TSB_CAN_LinkOn.Size = new System.Drawing.Size(24, 25);
             this.TSB_CAN_LinkOn.Text = "toolStripButton5";
             this.TSB_CAN_LinkOn.ToolTipText = "Stop connection";
             this.TSB_CAN_LinkOn.Visible = false;
@@ -277,7 +278,7 @@ namespace CANStream
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
             // TSB_StartCANTraceRecording
             // 
@@ -286,7 +287,7 @@ namespace CANStream
             this.TSB_StartCANTraceRecording.Image = global::CANStream.Icones.Start_Record;
             this.TSB_StartCANTraceRecording.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_StartCANTraceRecording.Name = "TSB_StartCANTraceRecording";
-            this.TSB_StartCANTraceRecording.Size = new System.Drawing.Size(23, 22);
+            this.TSB_StartCANTraceRecording.Size = new System.Drawing.Size(24, 25);
             this.TSB_StartCANTraceRecording.Text = "toolStripButton4";
             this.TSB_StartCANTraceRecording.ToolTipText = "Start stream recording";
             this.TSB_StartCANTraceRecording.Click += new System.EventHandler(this.TSB_StartCANTraceRecordingClick);
@@ -298,7 +299,7 @@ namespace CANStream
             this.TSB_StopCANTraceRecording.Image = global::CANStream.Icones.Stop_Recording;
             this.TSB_StopCANTraceRecording.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_StopCANTraceRecording.Name = "TSB_StopCANTraceRecording";
-            this.TSB_StopCANTraceRecording.Size = new System.Drawing.Size(23, 22);
+            this.TSB_StopCANTraceRecording.Size = new System.Drawing.Size(24, 25);
             this.TSB_StopCANTraceRecording.Text = "toolStripButton5";
             this.TSB_StopCANTraceRecording.ToolTipText = "Stop stream recording";
             this.TSB_StopCANTraceRecording.Click += new System.EventHandler(this.TSB_StopCANTraceRecordingClick);
@@ -309,7 +310,7 @@ namespace CANStream
             this.TSB_RecordSelection.Image = global::CANStream.Icones.Run_Process_16;
             this.TSB_RecordSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSB_RecordSelection.Name = "TSB_RecordSelection";
-            this.TSB_RecordSelection.Size = new System.Drawing.Size(23, 22);
+            this.TSB_RecordSelection.Size = new System.Drawing.Size(24, 25);
             this.TSB_RecordSelection.Text = "TSB_RecordSelection";
             this.TSB_RecordSelection.ToolTipText = "Select record to convert";
             this.TSB_RecordSelection.Click += new System.EventHandler(this.TSB_RecordSelection_Click);
@@ -317,7 +318,7 @@ namespace CANStream
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // TSSB_View
             // 
@@ -330,7 +331,7 @@ namespace CANStream
             this.TSSB_View.Image = global::CANStream.Icones.Controller_Layout;
             this.TSSB_View.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSSB_View.Name = "TSSB_View";
-            this.TSSB_View.Size = new System.Drawing.Size(32, 22);
+            this.TSSB_View.Size = new System.Drawing.Size(39, 25);
             this.TSSB_View.Text = "toolStripSplitButton1";
             this.TSSB_View.ToolTipText = "View";
             // 
@@ -341,7 +342,7 @@ namespace CANStream
             this.TSMI_RxMessages});
             this.TSMI_SpyManual.Image = ((System.Drawing.Image)(resources.GetObject("TSMI_SpyManual.Image")));
             this.TSMI_SpyManual.Name = "TSMI_SpyManual";
-            this.TSMI_SpyManual.Size = new System.Drawing.Size(159, 22);
+            this.TSMI_SpyManual.Size = new System.Drawing.Size(190, 26);
             this.TSMI_SpyManual.Text = "Spy and Manual";
             // 
             // TSMI_TxMessages
@@ -353,7 +354,7 @@ namespace CANStream
             this.TSMI_TxMessages_Raw});
             this.TSMI_TxMessages.Image = global::CANStream.Icones.Message_Tx;
             this.TSMI_TxMessages.Name = "TSMI_TxMessages";
-            this.TSMI_TxMessages.Size = new System.Drawing.Size(140, 22);
+            this.TSMI_TxMessages.Size = new System.Drawing.Size(168, 26);
             this.TSMI_TxMessages.Text = "Messages Tx";
             this.TSMI_TxMessages.ToolTipText = "Show/Hide CAN Transmission control";
             this.TSMI_TxMessages.Click += new System.EventHandler(this.TSMI_TxMessagesClick);
@@ -364,7 +365,7 @@ namespace CANStream
             this.TSMI_TxMessages_Eng.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_TxMessages_Eng.Image = global::CANStream.Icones.Engineering_Data;
             this.TSMI_TxMessages_Eng.Name = "TSMI_TxMessages_Eng";
-            this.TSMI_TxMessages_Eng.Size = new System.Drawing.Size(191, 22);
+            this.TSMI_TxMessages_Eng.Size = new System.Drawing.Size(231, 26);
             this.TSMI_TxMessages_Eng.Text = "Engineering messages";
             this.TSMI_TxMessages_Eng.Click += new System.EventHandler(this.TSMI_TxMessages_EngClick);
             // 
@@ -374,7 +375,7 @@ namespace CANStream
             this.TSMI_TxMessages_Raw.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_TxMessages_Raw.Image = global::CANStream.Icones.Raw_Data;
             this.TSMI_TxMessages_Raw.Name = "TSMI_TxMessages_Raw";
-            this.TSMI_TxMessages_Raw.Size = new System.Drawing.Size(191, 22);
+            this.TSMI_TxMessages_Raw.Size = new System.Drawing.Size(231, 26);
             this.TSMI_TxMessages_Raw.Text = "Raw messages";
             this.TSMI_TxMessages_Raw.Click += new System.EventHandler(this.TSMI_TxMessages_RawClick);
             // 
@@ -387,7 +388,7 @@ namespace CANStream
             this.TSMI_RxMessages_Graph});
             this.TSMI_RxMessages.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_RxMessages.Name = "TSMI_RxMessages";
-            this.TSMI_RxMessages.Size = new System.Drawing.Size(140, 22);
+            this.TSMI_RxMessages.Size = new System.Drawing.Size(168, 26);
             this.TSMI_RxMessages.Text = "Messages Rx";
             this.TSMI_RxMessages.ToolTipText = "Show/Hide CAN Spy control";
             this.TSMI_RxMessages.Click += new System.EventHandler(this.TSMI_RxMessagesClick);
@@ -398,7 +399,7 @@ namespace CANStream
             this.TSMI_RxMessages_Data.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_RxMessages_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_RxMessages_Data.Name = "TSMI_RxMessages_Data";
-            this.TSMI_RxMessages_Data.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_RxMessages_Data.Size = new System.Drawing.Size(124, 26);
             this.TSMI_RxMessages_Data.Text = "Data";
             this.TSMI_RxMessages_Data.ToolTipText = "Show/Hide CAN Spy control data";
             this.TSMI_RxMessages_Data.Click += new System.EventHandler(this.TSMI_RxMessages_DataClick);
@@ -409,7 +410,7 @@ namespace CANStream
             this.TSMI_RxMessages_Graph.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_RxMessages_Graph.Image = global::CANStream.Icones.Graph;
             this.TSMI_RxMessages_Graph.Name = "TSMI_RxMessages_Graph";
-            this.TSMI_RxMessages_Graph.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_RxMessages_Graph.Size = new System.Drawing.Size(124, 26);
             this.TSMI_RxMessages_Graph.Text = "Graph";
             this.TSMI_RxMessages_Graph.ToolTipText = "Show/Hide CAN Spy control graph";
             this.TSMI_RxMessages_Graph.Click += new System.EventHandler(this.TSMI_RxMessages_GraphClick);
@@ -422,7 +423,7 @@ namespace CANStream
             this.TSMI_CyclePlayer.Enabled = false;
             this.TSMI_CyclePlayer.Image = global::CANStream.Icones.Cycle_16;
             this.TSMI_CyclePlayer.Name = "TSMI_CyclePlayer";
-            this.TSMI_CyclePlayer.Size = new System.Drawing.Size(159, 22);
+            this.TSMI_CyclePlayer.Size = new System.Drawing.Size(190, 26);
             this.TSMI_CyclePlayer.Text = "Cycle player";
             // 
             // TSMI_CyclePlayer_Data
@@ -431,7 +432,7 @@ namespace CANStream
             this.TSMI_CyclePlayer_Data.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_CyclePlayer_Data.Image = global::CANStream.Icones.Message_Rx;
             this.TSMI_CyclePlayer_Data.Name = "TSMI_CyclePlayer_Data";
-            this.TSMI_CyclePlayer_Data.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_CyclePlayer_Data.Size = new System.Drawing.Size(124, 26);
             this.TSMI_CyclePlayer_Data.Text = "Data";
             this.TSMI_CyclePlayer_Data.Click += new System.EventHandler(this.TSMI_CyclePlayer_DataClick);
             // 
@@ -441,20 +442,20 @@ namespace CANStream
             this.TSMI_CyclePlayer_Graph.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_CyclePlayer_Graph.Image = global::CANStream.Icones.Graph;
             this.TSMI_CyclePlayer_Graph.Name = "TSMI_CyclePlayer_Graph";
-            this.TSMI_CyclePlayer_Graph.Size = new System.Drawing.Size(106, 22);
+            this.TSMI_CyclePlayer_Graph.Size = new System.Drawing.Size(124, 26);
             this.TSMI_CyclePlayer_Graph.Text = "Graph";
             this.TSMI_CyclePlayer_Graph.Click += new System.EventHandler(this.TSMI_CyclePlayer_GraphClick);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(156, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(187, 6);
             // 
             // TSMI_ResetLayout
             // 
             this.TSMI_ResetLayout.Image = global::CANStream.Icones.Controller_Layout;
             this.TSMI_ResetLayout.Name = "TSMI_ResetLayout";
-            this.TSMI_ResetLayout.Size = new System.Drawing.Size(159, 22);
+            this.TSMI_ResetLayout.Size = new System.Drawing.Size(190, 26);
             this.TSMI_ResetLayout.Text = "Reset";
             this.TSMI_ResetLayout.ToolTipText = "Reset layout to default";
             this.TSMI_ResetLayout.Click += new System.EventHandler(this.TSMI_ResetLayoutClick);
@@ -467,10 +468,11 @@ namespace CANStream
             this.tabControl1.Controls.Add(this.TabPg_SpyAndManual);
             this.tabControl1.Controls.Add(this.TabPg_Cycle);
             this.tabControl1.ImageList = this.Img_TabControl;
-            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Location = new System.Drawing.Point(0, 34);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(975, 637);
+            this.tabControl1.Size = new System.Drawing.Size(1300, 784);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1SelectedIndexChanged);
             this.tabControl1.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabControl1Deselecting);
@@ -481,9 +483,10 @@ namespace CANStream
             this.TabPg_SpyAndManual.Controls.Add(this.Split_RxTx);
             this.TabPg_SpyAndManual.Controls.Add(this.groupBox4);
             this.TabPg_SpyAndManual.ImageIndex = 0;
-            this.TabPg_SpyAndManual.Location = new System.Drawing.Point(4, 23);
+            this.TabPg_SpyAndManual.Location = new System.Drawing.Point(4, 25);
+            this.TabPg_SpyAndManual.Margin = new System.Windows.Forms.Padding(4);
             this.TabPg_SpyAndManual.Name = "TabPg_SpyAndManual";
-            this.TabPg_SpyAndManual.Size = new System.Drawing.Size(967, 610);
+            this.TabPg_SpyAndManual.Size = new System.Drawing.Size(1292, 755);
             this.TabPg_SpyAndManual.TabIndex = 4;
             this.TabPg_SpyAndManual.Tag = "1";
             this.TabPg_SpyAndManual.Text = "Spy & Manual";
@@ -493,7 +496,8 @@ namespace CANStream
             this.Split_RxTx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Split_RxTx.Location = new System.Drawing.Point(0, 72);
+            this.Split_RxTx.Location = new System.Drawing.Point(0, 89);
+            this.Split_RxTx.Margin = new System.Windows.Forms.Padding(4);
             this.Split_RxTx.Name = "Split_RxTx";
             // 
             // Split_RxTx.Panel1
@@ -503,14 +507,16 @@ namespace CANStream
             // Split_RxTx.Panel2
             // 
             this.Split_RxTx.Panel2.Controls.Add(this.Split_Rx_DataGraph);
-            this.Split_RxTx.Size = new System.Drawing.Size(967, 538);
-            this.Split_RxTx.SplitterDistance = 449;
+            this.Split_RxTx.Size = new System.Drawing.Size(1289, 662);
+            this.Split_RxTx.SplitterDistance = 598;
+            this.Split_RxTx.SplitterWidth = 5;
             this.Split_RxTx.TabIndex = 3;
             // 
             // Split_Tx_EngRaw
             // 
             this.Split_Tx_EngRaw.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Split_Tx_EngRaw.Location = new System.Drawing.Point(0, 0);
+            this.Split_Tx_EngRaw.Margin = new System.Windows.Forms.Padding(4);
             this.Split_Tx_EngRaw.Name = "Split_Tx_EngRaw";
             this.Split_Tx_EngRaw.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -521,25 +527,10 @@ namespace CANStream
             // Split_Tx_EngRaw.Panel2
             // 
             this.Split_Tx_EngRaw.Panel2.Controls.Add(this.Grid_CANRawData);
-            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(449, 538);
-            this.Split_Tx_EngRaw.SplitterDistance = 410;
+            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(598, 662);
+            this.Split_Tx_EngRaw.SplitterDistance = 504;
+            this.Split_Tx_EngRaw.SplitterWidth = 5;
             this.Split_Tx_EngRaw.TabIndex = 0;
-            // 
-            // Grid_ManualDataWriter
-            // 
-            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataWriter.DataMode = CANStream.GridDataMode.DataTx;
-            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(0, 0);
-            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
-            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(444, 410);
-            this.Grid_ManualDataWriter.TabIndex = 9;
-            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
-            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
-            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
-            this.Grid_ManualDataWriter.GridTxParameterValueChanged += new System.EventHandler<CANStream.GridTxParameterValueChangedEventArgs>(this.Grid_ManualDataWriter_GridTxParameterValueChanged);
             // 
             // Grid_CANRawData
             // 
@@ -567,11 +558,12 @@ namespace CANStream
             this.GridCol_Raw_Tx_B6,
             this.GridCol_Raw_Tx_B7});
             this.Grid_CANRawData.ContextMenuStrip = this.Context_ManualRawGrid;
-            this.Grid_CANRawData.Location = new System.Drawing.Point(3, 0);
+            this.Grid_CANRawData.Location = new System.Drawing.Point(4, 0);
+            this.Grid_CANRawData.Margin = new System.Windows.Forms.Padding(4);
             this.Grid_CANRawData.Name = "Grid_CANRawData";
             this.Grid_CANRawData.RowHeadersVisible = false;
             this.Grid_CANRawData.RowHeadersWidth = 40;
-            this.Grid_CANRawData.Size = new System.Drawing.Size(446, 124);
+            this.Grid_CANRawData.Size = new System.Drawing.Size(594, 152);
             this.Grid_CANRawData.TabIndex = 8;
             this.Grid_CANRawData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANRawData_CellBeginEdit);
             this.Grid_CANRawData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellClick);
@@ -683,6 +675,7 @@ namespace CANStream
             // 
             // Context_ManualRawGrid
             // 
+            this.Context_ManualRawGrid.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Context_ManualRawGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Ctxt_TxRaw_Add_TSMI,
             this.Ctxt_TxRaw_Del_TSMI,
@@ -691,13 +684,13 @@ namespace CANStream
             this.Ctxt_TxRaw_Save_TSMI,
             this.Ctxt_TxRaw_Open_TSMI});
             this.Context_ManualRawGrid.Name = "Context_ManualRawGrid";
-            this.Context_ManualRawGrid.Size = new System.Drawing.Size(171, 120);
+            this.Context_ManualRawGrid.Size = new System.Drawing.Size(206, 140);
             // 
             // Ctxt_TxRaw_Add_TSMI
             // 
             this.Ctxt_TxRaw_Add_TSMI.Image = global::CANStream.Icones.Item_Add_16;
             this.Ctxt_TxRaw_Add_TSMI.Name = "Ctxt_TxRaw_Add_TSMI";
-            this.Ctxt_TxRaw_Add_TSMI.Size = new System.Drawing.Size(170, 22);
+            this.Ctxt_TxRaw_Add_TSMI.Size = new System.Drawing.Size(205, 26);
             this.Ctxt_TxRaw_Add_TSMI.Text = "Add message";
             this.Ctxt_TxRaw_Add_TSMI.Click += new System.EventHandler(this.Ctxt_TxRaw_Add_TSMIClick);
             // 
@@ -705,7 +698,7 @@ namespace CANStream
             // 
             this.Ctxt_TxRaw_Del_TSMI.Image = global::CANStream.Icones.Item_Del_16;
             this.Ctxt_TxRaw_Del_TSMI.Name = "Ctxt_TxRaw_Del_TSMI";
-            this.Ctxt_TxRaw_Del_TSMI.Size = new System.Drawing.Size(170, 22);
+            this.Ctxt_TxRaw_Del_TSMI.Size = new System.Drawing.Size(205, 26);
             this.Ctxt_TxRaw_Del_TSMI.Text = "Del message";
             this.Ctxt_TxRaw_Del_TSMI.Click += new System.EventHandler(this.Ctxt_TxRaw_Del_TSMIClick);
             // 
@@ -713,20 +706,20 @@ namespace CANStream
             // 
             this.Ctxt_TxRaw_Clear_TSMI.Image = global::CANStream.Icones.Item_Clear_16;
             this.Ctxt_TxRaw_Clear_TSMI.Name = "Ctxt_TxRaw_Clear_TSMI";
-            this.Ctxt_TxRaw_Clear_TSMI.Size = new System.Drawing.Size(170, 22);
+            this.Ctxt_TxRaw_Clear_TSMI.Size = new System.Drawing.Size(205, 26);
             this.Ctxt_TxRaw_Clear_TSMI.Text = "Clear messages";
             this.Ctxt_TxRaw_Clear_TSMI.Click += new System.EventHandler(this.Ctxt_TxRaw_Clear_TSMIClick);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(167, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(202, 6);
             // 
             // Ctxt_TxRaw_Save_TSMI
             // 
             this.Ctxt_TxRaw_Save_TSMI.Image = global::CANStream.Icones.File_Save_16;
             this.Ctxt_TxRaw_Save_TSMI.Name = "Ctxt_TxRaw_Save_TSMI";
-            this.Ctxt_TxRaw_Save_TSMI.Size = new System.Drawing.Size(170, 22);
+            this.Ctxt_TxRaw_Save_TSMI.Size = new System.Drawing.Size(205, 26);
             this.Ctxt_TxRaw_Save_TSMI.Text = "Save message list";
             this.Ctxt_TxRaw_Save_TSMI.Click += new System.EventHandler(this.Ctxt_TxRaw_Save_TSMIClick);
             // 
@@ -734,213 +727,9 @@ namespace CANStream
             // 
             this.Ctxt_TxRaw_Open_TSMI.Image = global::CANStream.Icones.File_Open_16;
             this.Ctxt_TxRaw_Open_TSMI.Name = "Ctxt_TxRaw_Open_TSMI";
-            this.Ctxt_TxRaw_Open_TSMI.Size = new System.Drawing.Size(170, 22);
+            this.Ctxt_TxRaw_Open_TSMI.Size = new System.Drawing.Size(205, 26);
             this.Ctxt_TxRaw_Open_TSMI.Text = "Open message list";
             this.Ctxt_TxRaw_Open_TSMI.Click += new System.EventHandler(this.Ctxt_TxRaw_Open_TSMIClick);
-            // 
-            // Split_Rx_DataGraph
-            // 
-            this.Split_Rx_DataGraph.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Split_Rx_DataGraph.Location = new System.Drawing.Point(0, 0);
-            this.Split_Rx_DataGraph.Name = "Split_Rx_DataGraph";
-            this.Split_Rx_DataGraph.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // Split_Rx_DataGraph.Panel1
-            // 
-            this.Split_Rx_DataGraph.Panel1.Controls.Add(this.Grid_ManualDataViewer);
-            // 
-            // Split_Rx_DataGraph.Panel2
-            // 
-            this.Split_Rx_DataGraph.Panel2.Controls.Add(this.Tab_SpyHistory);
-            this.Split_Rx_DataGraph.Size = new System.Drawing.Size(514, 538);
-            this.Split_Rx_DataGraph.SplitterDistance = 215;
-            this.Split_Rx_DataGraph.TabIndex = 0;
-            // 
-            // Grid_ManualDataViewer
-            // 
-            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataViewer.DataMode = CANStream.GridDataMode.DataRx;
-            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(0, 0);
-            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
-            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(511, 215);
-            this.Grid_ManualDataViewer.TabIndex = 0;
-            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
-            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
-            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
-            // 
-            // Tab_SpyHistory
-            // 
-            this.Tab_SpyHistory.Alignment = System.Windows.Forms.TabAlignment.Right;
-            this.Tab_SpyHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Graph);
-            this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Data);
-            this.Tab_SpyHistory.Location = new System.Drawing.Point(2, 3);
-            this.Tab_SpyHistory.Multiline = true;
-            this.Tab_SpyHistory.Name = "Tab_SpyHistory";
-            this.Tab_SpyHistory.SelectedIndex = 0;
-            this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 317);
-            this.Tab_SpyHistory.TabIndex = 10;
-            this.Tab_SpyHistory.SelectedIndexChanged += new System.EventHandler(this.Tab_SpyHistory_SelectedIndexChanged);
-            // 
-            // Tab_SpyHistory_Graph
-            // 
-            this.Tab_SpyHistory_Graph.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_SpyHistory_Graph.Controls.Add(this.Graph_SpyData);
-            this.Tab_SpyHistory_Graph.Location = new System.Drawing.Point(4, 4);
-            this.Tab_SpyHistory_Graph.Name = "Tab_SpyHistory_Graph";
-            this.Tab_SpyHistory_Graph.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(485, 309);
-            this.Tab_SpyHistory_Graph.TabIndex = 0;
-            this.Tab_SpyHistory_Graph.Tag = "Graph";
-            this.Tab_SpyHistory_Graph.Text = "Graphic";
-            // 
-            // Graph_SpyData
-            // 
-            this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_SpyData.ChannelListEnabled = true;
-            this.Graph_SpyData.CursorEnabled = false;
-            this.Graph_SpyData.EditGraphicConfigurationEnable = false;
-            this.Graph_SpyData.LegendEnabled = false;
-            this.Graph_SpyData.Location = new System.Drawing.Point(0, 0);
-            this.Graph_SpyData.Name = "Graph_SpyData";
-            this.Graph_SpyData.OpenFileVisible = false;
-            this.Graph_SpyData.PrintEnabled = false;
-            this.Graph_SpyData.RealTimeGraphic = true;
-            this.Graph_SpyData.ShortcutKeysEnabled = false;
-            this.Graph_SpyData.Size = new System.Drawing.Size(485, 309);
-            this.Graph_SpyData.SnapShotEnabled = false;
-            this.Graph_SpyData.TabIndex = 0;
-            this.Graph_SpyData.ToolBarVisible = true;
-            this.Graph_SpyData.ZoomEnabled = false;
-            // 
-            // Tab_SpyHistory_Data
-            // 
-            this.Tab_SpyHistory_Data.BackColor = System.Drawing.SystemColors.Control;
-            this.Tab_SpyHistory_Data.Controls.Add(this.Lst_SpyDataHistory);
-            this.Tab_SpyHistory_Data.Controls.Add(this.TS_SpyDataHistory);
-            this.Tab_SpyHistory_Data.Location = new System.Drawing.Point(4, 4);
-            this.Tab_SpyHistory_Data.Name = "Tab_SpyHistory_Data";
-            this.Tab_SpyHistory_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(485, 309);
-            this.Tab_SpyHistory_Data.TabIndex = 1;
-            this.Tab_SpyHistory_Data.Tag = "Data";
-            this.Tab_SpyHistory_Data.Text = "Data";
-            // 
-            // Lst_SpyDataHistory
-            // 
-            this.Lst_SpyDataHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lst_SpyDataHistory.FormattingEnabled = true;
-            this.Lst_SpyDataHistory.Location = new System.Drawing.Point(3, 31);
-            this.Lst_SpyDataHistory.Name = "Lst_SpyDataHistory";
-            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(479, 264);
-            this.Lst_SpyDataHistory.TabIndex = 1;
-            // 
-            // TS_SpyDataHistory
-            // 
-            this.TS_SpyDataHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSB_FreezeHistory,
-            this.TSB_ResumeHistory,
-            this.TSB_ClearHistory,
-            this.TSB_ExportHistory,
-            this.toolStripSeparator3,
-            this.TSLbl_IdFilterFrom,
-            this.TSTxt_IdFilterFrom,
-            this.TSLbl_IdFilterTo,
-            this.TSTxt_IdFilterTo});
-            this.TS_SpyDataHistory.Location = new System.Drawing.Point(3, 3);
-            this.TS_SpyDataHistory.Name = "TS_SpyDataHistory";
-            this.TS_SpyDataHistory.Size = new System.Drawing.Size(479, 25);
-            this.TS_SpyDataHistory.TabIndex = 0;
-            this.TS_SpyDataHistory.Text = "toolStrip1";
-            // 
-            // TSB_FreezeHistory
-            // 
-            this.TSB_FreezeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_FreezeHistory.Image = global::CANStream.Icones.Pause_16;
-            this.TSB_FreezeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_FreezeHistory.Name = "TSB_FreezeHistory";
-            this.TSB_FreezeHistory.Size = new System.Drawing.Size(23, 22);
-            this.TSB_FreezeHistory.Text = "toolStripButton1";
-            this.TSB_FreezeHistory.ToolTipText = "Freeze";
-            this.TSB_FreezeHistory.Click += new System.EventHandler(this.TSB_FreezeHistory_Click);
-            // 
-            // TSB_ResumeHistory
-            // 
-            this.TSB_ResumeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_ResumeHistory.Image = global::CANStream.Icones.Play_16;
-            this.TSB_ResumeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_ResumeHistory.Name = "TSB_ResumeHistory";
-            this.TSB_ResumeHistory.Size = new System.Drawing.Size(23, 22);
-            this.TSB_ResumeHistory.Text = "toolStripButton2";
-            this.TSB_ResumeHistory.ToolTipText = "Resume";
-            this.TSB_ResumeHistory.Visible = false;
-            this.TSB_ResumeHistory.Click += new System.EventHandler(this.TSB_ResumeHistory_Click);
-            // 
-            // TSB_ClearHistory
-            // 
-            this.TSB_ClearHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_ClearHistory.Image = global::CANStream.Icones.Delete_16;
-            this.TSB_ClearHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_ClearHistory.Name = "TSB_ClearHistory";
-            this.TSB_ClearHistory.Size = new System.Drawing.Size(23, 22);
-            this.TSB_ClearHistory.Text = "toolStripButton3";
-            this.TSB_ClearHistory.ToolTipText = "Clear history";
-            this.TSB_ClearHistory.Click += new System.EventHandler(this.TSB_ClearHistory_Click);
-            // 
-            // TSB_ExportHistory
-            // 
-            this.TSB_ExportHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSB_ExportHistory.Image = global::CANStream.Icones.Export_File_16;
-            this.TSB_ExportHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TSB_ExportHistory.Name = "TSB_ExportHistory";
-            this.TSB_ExportHistory.Size = new System.Drawing.Size(23, 22);
-            this.TSB_ExportHistory.Text = "toolStripButton4";
-            this.TSB_ExportHistory.ToolTipText = "Export history";
-            this.TSB_ExportHistory.Click += new System.EventHandler(this.TSB_ExportHistory_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // TSLbl_IdFilterFrom
-            // 
-            this.TSLbl_IdFilterFrom.Name = "TSLbl_IdFilterFrom";
-            this.TSLbl_IdFilterFrom.Size = new System.Drawing.Size(106, 22);
-            this.TSLbl_IdFilterFrom.Text = "CAN Id filter: From";
-            // 
-            // TSTxt_IdFilterFrom
-            // 
-            this.TSTxt_IdFilterFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TSTxt_IdFilterFrom.Name = "TSTxt_IdFilterFrom";
-            this.TSTxt_IdFilterFrom.Size = new System.Drawing.Size(50, 25);
-            this.TSTxt_IdFilterFrom.Text = "000";
-            this.TSTxt_IdFilterFrom.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TSTxt_IdFilterFrom.TextChanged += new System.EventHandler(this.TSTxt_IdFilterFrom_TextChanged);
-            // 
-            // TSLbl_IdFilterTo
-            // 
-            this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
-            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(20, 22);
-            this.TSLbl_IdFilterTo.Text = "To";
-            // 
-            // TSTxt_IdFilterTo
-            // 
-            this.TSTxt_IdFilterTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TSTxt_IdFilterTo.Name = "TSTxt_IdFilterTo";
-            this.TSTxt_IdFilterTo.Size = new System.Drawing.Size(50, 25);
-            this.TSTxt_IdFilterTo.Text = "7FF";
-            this.TSTxt_IdFilterTo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TSTxt_IdFilterTo.TextChanged += new System.EventHandler(this.TSTxt_IdFilterTo_TextChanged);
             // 
             // groupBox4
             // 
@@ -961,9 +750,11 @@ namespace CANStream
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.Cmd_StopSpy);
             this.groupBox4.Controls.Add(this.Cmd_StartSpy);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Location = new System.Drawing.Point(4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(961, 65);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(1281, 80);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             // 
@@ -971,9 +762,10 @@ namespace CANStream
             // 
             this.Cmd_RxOnly.Enabled = false;
             this.Cmd_RxOnly.Image = global::CANStream.Icones.RXTX_32;
-            this.Cmd_RxOnly.Location = new System.Drawing.Point(585, 14);
+            this.Cmd_RxOnly.Location = new System.Drawing.Point(780, 17);
+            this.Cmd_RxOnly.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_RxOnly.Name = "Cmd_RxOnly";
-            this.Cmd_RxOnly.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_RxOnly.Size = new System.Drawing.Size(60, 55);
             this.Cmd_RxOnly.TabIndex = 23;
             this.Cmd_RxOnly.UseVisualStyleBackColor = true;
             this.Cmd_RxOnly.Click += new System.EventHandler(this.Cmd_RxOnly_Click);
@@ -981,9 +773,10 @@ namespace CANStream
             // Pic_ManualRunning
             // 
             this.Pic_ManualRunning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pic_ManualRunning.Location = new System.Drawing.Point(907, 10);
+            this.Pic_ManualRunning.Location = new System.Drawing.Point(1209, 12);
+            this.Pic_ManualRunning.Margin = new System.Windows.Forms.Padding(4);
             this.Pic_ManualRunning.Name = "Pic_ManualRunning";
-            this.Pic_ManualRunning.Size = new System.Drawing.Size(48, 48);
+            this.Pic_ManualRunning.Size = new System.Drawing.Size(64, 59);
             this.Pic_ManualRunning.TabIndex = 22;
             this.Pic_ManualRunning.TabStop = false;
             this.Pic_ManualRunning.Visible = false;
@@ -991,9 +784,10 @@ namespace CANStream
             // Chk_VirtualParamTxEnabled
             // 
             this.Chk_VirtualParamTxEnabled.Enabled = false;
-            this.Chk_VirtualParamTxEnabled.Location = new System.Drawing.Point(451, 36);
+            this.Chk_VirtualParamTxEnabled.Location = new System.Drawing.Point(601, 44);
+            this.Chk_VirtualParamTxEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.Chk_VirtualParamTxEnabled.Name = "Chk_VirtualParamTxEnabled";
-            this.Chk_VirtualParamTxEnabled.Size = new System.Drawing.Size(128, 22);
+            this.Chk_VirtualParamTxEnabled.Size = new System.Drawing.Size(171, 27);
             this.Chk_VirtualParamTxEnabled.TabIndex = 21;
             this.Chk_VirtualParamTxEnabled.Text = "Virtual parameters Tx";
             this.Chk_VirtualParamTxEnabled.UseVisualStyleBackColor = true;
@@ -1002,9 +796,10 @@ namespace CANStream
             // Chk_CycleMux
             // 
             this.Chk_CycleMux.Enabled = false;
-            this.Chk_CycleMux.Location = new System.Drawing.Point(451, 14);
+            this.Chk_CycleMux.Location = new System.Drawing.Point(601, 17);
+            this.Chk_CycleMux.Margin = new System.Windows.Forms.Padding(4);
             this.Chk_CycleMux.Name = "Chk_CycleMux";
-            this.Chk_CycleMux.Size = new System.Drawing.Size(112, 22);
+            this.Chk_CycleMux.Size = new System.Drawing.Size(149, 27);
             this.Chk_CycleMux.TabIndex = 20;
             this.Chk_CycleMux.Text = "Cycle Multiplexers";
             this.Chk_CycleMux.UseVisualStyleBackColor = true;
@@ -1016,59 +811,66 @@ namespace CANStream
             this.Cmb_SpyCANRate.Items.AddRange(new object[] {
             "500 kBit/s",
             "1000 kBit/s"});
-            this.Cmb_SpyCANRate.Location = new System.Drawing.Point(108, 32);
+            this.Cmb_SpyCANRate.Location = new System.Drawing.Point(144, 39);
+            this.Cmb_SpyCANRate.Margin = new System.Windows.Forms.Padding(4);
             this.Cmb_SpyCANRate.Name = "Cmb_SpyCANRate";
-            this.Cmb_SpyCANRate.Size = new System.Drawing.Size(80, 21);
+            this.Cmb_SpyCANRate.Size = new System.Drawing.Size(105, 24);
             this.Cmb_SpyCANRate.TabIndex = 17;
             this.Cmb_SpyCANRate.SelectedIndexChanged += new System.EventHandler(this.Cmb_SpyCANRateSelectedIndexChanged);
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(108, 14);
+            this.label8.Location = new System.Drawing.Point(144, 17);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 16);
+            this.label8.Size = new System.Drawing.Size(79, 20);
             this.label8.TabIndex = 16;
             this.label8.Text = "CAN Rate";
             // 
             // Txt_SpyIdFilterMax
             // 
-            this.Txt_SpyIdFilterMax.Location = new System.Drawing.Point(396, 32);
+            this.Txt_SpyIdFilterMax.Location = new System.Drawing.Point(528, 39);
+            this.Txt_SpyIdFilterMax.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_SpyIdFilterMax.Name = "Txt_SpyIdFilterMax";
-            this.Txt_SpyIdFilterMax.Size = new System.Drawing.Size(40, 20);
+            this.Txt_SpyIdFilterMax.Size = new System.Drawing.Size(52, 22);
             this.Txt_SpyIdFilterMax.TabIndex = 15;
             this.Txt_SpyIdFilterMax.Text = "7FF";
             this.Txt_SpyIdFilterMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(370, 35);
+            this.label7.Location = new System.Drawing.Point(493, 43);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 16);
+            this.label7.Size = new System.Drawing.Size(27, 20);
             this.label7.TabIndex = 14;
             this.label7.Text = "To";
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(288, 35);
+            this.label6.Location = new System.Drawing.Point(384, 43);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(30, 16);
+            this.label6.Size = new System.Drawing.Size(40, 20);
             this.label6.TabIndex = 13;
             this.label6.Text = "From";
             // 
             // Txt_SpyIdFilterMin
             // 
-            this.Txt_SpyIdFilterMin.Location = new System.Drawing.Point(324, 32);
+            this.Txt_SpyIdFilterMin.Location = new System.Drawing.Point(432, 39);
+            this.Txt_SpyIdFilterMin.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_SpyIdFilterMin.Name = "Txt_SpyIdFilterMin";
-            this.Txt_SpyIdFilterMin.Size = new System.Drawing.Size(40, 20);
+            this.Txt_SpyIdFilterMin.Size = new System.Drawing.Size(52, 22);
             this.Txt_SpyIdFilterMin.TabIndex = 12;
             this.Txt_SpyIdFilterMin.Text = "000";
             this.Txt_SpyIdFilterMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(335, 12);
+            this.label5.Location = new System.Drawing.Point(447, 15);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 16);
+            this.label5.Size = new System.Drawing.Size(123, 20);
             this.label5.TabIndex = 11;
             this.label5.Text = "CAN Id filter (hex)";
             // 
@@ -1076,17 +878,19 @@ namespace CANStream
             // 
             this.Cmb_SpyCANRxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Cmb_SpyCANRxMode.FormattingEnabled = true;
-            this.Cmb_SpyCANRxMode.Location = new System.Drawing.Point(198, 32);
+            this.Cmb_SpyCANRxMode.Location = new System.Drawing.Point(264, 39);
+            this.Cmb_SpyCANRxMode.Margin = new System.Windows.Forms.Padding(4);
             this.Cmb_SpyCANRxMode.Name = "Cmb_SpyCANRxMode";
-            this.Cmb_SpyCANRxMode.Size = new System.Drawing.Size(80, 21);
+            this.Cmb_SpyCANRxMode.Size = new System.Drawing.Size(105, 24);
             this.Cmb_SpyCANRxMode.TabIndex = 9;
             this.Cmb_SpyCANRxMode.SelectedIndexChanged += new System.EventHandler(this.Cmb_SpyCANRxModeSelectedIndexChanged);
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(198, 12);
+            this.label4.Location = new System.Drawing.Point(264, 15);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 16);
+            this.label4.Size = new System.Drawing.Size(99, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "CAN Rx mode";
             // 
@@ -1094,9 +898,10 @@ namespace CANStream
             // 
             this.Cmd_StopSpy.Enabled = false;
             this.Cmd_StopSpy.Image = global::CANStream.Icones.Stop_32;
-            this.Cmd_StopSpy.Location = new System.Drawing.Point(57, 14);
+            this.Cmd_StopSpy.Location = new System.Drawing.Point(76, 17);
+            this.Cmd_StopSpy.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_StopSpy.Name = "Cmd_StopSpy";
-            this.Cmd_StopSpy.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_StopSpy.Size = new System.Drawing.Size(60, 55);
             this.Cmd_StopSpy.TabIndex = 1;
             this.Cmd_StopSpy.UseVisualStyleBackColor = true;
             this.Cmd_StopSpy.Click += new System.EventHandler(this.Cmd_StopSpyClick);
@@ -1105,9 +910,10 @@ namespace CANStream
             // 
             this.Cmd_StartSpy.Enabled = false;
             this.Cmd_StartSpy.Image = global::CANStream.Icones.Play_32;
-            this.Cmd_StartSpy.Location = new System.Drawing.Point(6, 14);
+            this.Cmd_StartSpy.Location = new System.Drawing.Point(8, 17);
+            this.Cmd_StartSpy.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_StartSpy.Name = "Cmd_StartSpy";
-            this.Cmd_StartSpy.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_StartSpy.Size = new System.Drawing.Size(60, 55);
             this.Cmd_StartSpy.TabIndex = 0;
             this.Cmd_StartSpy.UseVisualStyleBackColor = true;
             this.Cmd_StartSpy.Click += new System.EventHandler(this.Cmd_StartSpyClick);
@@ -1119,10 +925,11 @@ namespace CANStream
             this.TabPg_Cycle.Controls.Add(this.groupBox2);
             this.TabPg_Cycle.Controls.Add(this.groupBox1);
             this.TabPg_Cycle.ImageIndex = 1;
-            this.TabPg_Cycle.Location = new System.Drawing.Point(4, 23);
+            this.TabPg_Cycle.Location = new System.Drawing.Point(4, 25);
+            this.TabPg_Cycle.Margin = new System.Windows.Forms.Padding(4);
             this.TabPg_Cycle.Name = "TabPg_Cycle";
-            this.TabPg_Cycle.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPg_Cycle.Size = new System.Drawing.Size(967, 610);
+            this.TabPg_Cycle.Padding = new System.Windows.Forms.Padding(4);
+            this.TabPg_Cycle.Size = new System.Drawing.Size(1292, 755);
             this.TabPg_Cycle.TabIndex = 0;
             this.TabPg_Cycle.Tag = "2";
             this.TabPg_Cycle.Text = "Cycle";
@@ -1133,15 +940,17 @@ namespace CANStream
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel_Cycle.Controls.Add(this.Split_Cycle_VirtualSig_Graph);
-            this.Panel_Cycle.Location = new System.Drawing.Point(6, 82);
+            this.Panel_Cycle.Location = new System.Drawing.Point(8, 101);
+            this.Panel_Cycle.Margin = new System.Windows.Forms.Padding(4);
             this.Panel_Cycle.Name = "Panel_Cycle";
-            this.Panel_Cycle.Size = new System.Drawing.Size(961, 439);
+            this.Panel_Cycle.Size = new System.Drawing.Size(1281, 540);
             this.Panel_Cycle.TabIndex = 3;
             // 
             // Split_Cycle_VirtualSig_Graph
             // 
             this.Split_Cycle_VirtualSig_Graph.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Split_Cycle_VirtualSig_Graph.Location = new System.Drawing.Point(0, 0);
+            this.Split_Cycle_VirtualSig_Graph.Margin = new System.Windows.Forms.Padding(4);
             this.Split_Cycle_VirtualSig_Graph.Name = "Split_Cycle_VirtualSig_Graph";
             // 
             // Split_Cycle_VirtualSig_Graph.Panel1
@@ -1151,52 +960,16 @@ namespace CANStream
             // Split_Cycle_VirtualSig_Graph.Panel2
             // 
             this.Split_Cycle_VirtualSig_Graph.Panel2.Controls.Add(this.Graph_Cycle);
-            this.Split_Cycle_VirtualSig_Graph.Size = new System.Drawing.Size(961, 439);
-            this.Split_Cycle_VirtualSig_Graph.SplitterDistance = 302;
+            this.Split_Cycle_VirtualSig_Graph.Size = new System.Drawing.Size(1281, 540);
+            this.Split_Cycle_VirtualSig_Graph.SplitterDistance = 402;
+            this.Split_Cycle_VirtualSig_Graph.SplitterWidth = 5;
             this.Split_Cycle_VirtualSig_Graph.TabIndex = 0;
-            // 
-            // Cycle_SpyDataViewer
-            // 
-            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cycle_SpyDataViewer.DataMode = CANStream.GridDataMode.DataRx;
-            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
-            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
-            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
-            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(301, 437);
-            this.Cycle_SpyDataViewer.TabIndex = 0;
-            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
-            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
-            // 
-            // Graph_Cycle
-            // 
-            this.Graph_Cycle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_Cycle.ChannelListEnabled = false;
-            this.Graph_Cycle.ContextMenuStrip = this.Context_CycleGraph;
-            this.Graph_Cycle.CursorEnabled = true;
-            this.Graph_Cycle.EditGraphicConfigurationEnable = false;
-            this.Graph_Cycle.LegendEnabled = false;
-            this.Graph_Cycle.Location = new System.Drawing.Point(3, 3);
-            this.Graph_Cycle.Name = "Graph_Cycle";
-            this.Graph_Cycle.OpenFileVisible = false;
-            this.Graph_Cycle.PrintEnabled = false;
-            this.Graph_Cycle.RealTimeGraphic = false;
-            this.Graph_Cycle.ShortcutKeysEnabled = false;
-            this.Graph_Cycle.Size = new System.Drawing.Size(646, 430);
-            this.Graph_Cycle.SnapShotEnabled = false;
-            this.Graph_Cycle.TabIndex = 0;
-            this.Graph_Cycle.ToolBarVisible = false;
-            this.Graph_Cycle.ZoomEnabled = false;
-            this.Graph_Cycle.ControlPreviewKeyDown += new System.EventHandler<System.Windows.Forms.PreviewKeyDownEventArgs>(this.Graph_Cycle_ControlPreviewKeyDown);
             // 
             // Context_CycleGraph
             // 
+            this.Context_CycleGraph.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Context_CycleGraph.Name = "Context_CycleGraph";
-            this.Context_CycleGraph.Size = new System.Drawing.Size(61, 4);
+            this.Context_CycleGraph.Size = new System.Drawing.Size(67, 4);
             // 
             // groupBox2
             // 
@@ -1219,9 +992,11 @@ namespace CANStream
             this.groupBox2.Controls.Add(this.Cmd_StopCycle);
             this.groupBox2.Controls.Add(this.Cmd_BreakCycle);
             this.groupBox2.Controls.Add(this.Cmd_PlayCycle);
-            this.groupBox2.Location = new System.Drawing.Point(6, 6);
+            this.groupBox2.Location = new System.Drawing.Point(8, 7);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(955, 70);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(1273, 86);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cycle control";
@@ -1229,9 +1004,10 @@ namespace CANStream
             // Chk_CycleVirtualParamTxEnabled
             // 
             this.Chk_CycleVirtualParamTxEnabled.Enabled = false;
-            this.Chk_CycleVirtualParamTxEnabled.Location = new System.Drawing.Point(307, 40);
+            this.Chk_CycleVirtualParamTxEnabled.Location = new System.Drawing.Point(409, 49);
+            this.Chk_CycleVirtualParamTxEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.Chk_CycleVirtualParamTxEnabled.Name = "Chk_CycleVirtualParamTxEnabled";
-            this.Chk_CycleVirtualParamTxEnabled.Size = new System.Drawing.Size(129, 22);
+            this.Chk_CycleVirtualParamTxEnabled.Size = new System.Drawing.Size(172, 27);
             this.Chk_CycleVirtualParamTxEnabled.TabIndex = 22;
             this.Chk_CycleVirtualParamTxEnabled.Text = "Virtual parameters Tx";
             this.Chk_CycleVirtualParamTxEnabled.UseVisualStyleBackColor = true;
@@ -1240,36 +1016,40 @@ namespace CANStream
             // Txt_CycleEnd
             // 
             this.Txt_CycleEnd.Enabled = false;
-            this.Txt_CycleEnd.Location = new System.Drawing.Point(473, 43);
+            this.Txt_CycleEnd.Location = new System.Drawing.Point(631, 53);
+            this.Txt_CycleEnd.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_CycleEnd.Name = "Txt_CycleEnd";
-            this.Txt_CycleEnd.Size = new System.Drawing.Size(47, 20);
+            this.Txt_CycleEnd.Size = new System.Drawing.Size(61, 22);
             this.Txt_CycleEnd.TabIndex = 16;
             this.Txt_CycleEnd.TextChanged += new System.EventHandler(this.Txt_CycleEndTextChanged);
             // 
             // Txt_CycleStart
             // 
             this.Txt_CycleStart.Enabled = false;
-            this.Txt_CycleStart.Location = new System.Drawing.Point(473, 17);
+            this.Txt_CycleStart.Location = new System.Drawing.Point(631, 21);
+            this.Txt_CycleStart.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_CycleStart.Name = "Txt_CycleStart";
-            this.Txt_CycleStart.Size = new System.Drawing.Size(47, 20);
+            this.Txt_CycleStart.Size = new System.Drawing.Size(61, 22);
             this.Txt_CycleStart.TabIndex = 15;
             this.Txt_CycleStart.TextChanged += new System.EventHandler(this.Txt_CycleStartTextChanged);
             // 
             // Lbl_CycleEnd
             // 
             this.Lbl_CycleEnd.Enabled = false;
-            this.Lbl_CycleEnd.Location = new System.Drawing.Point(436, 46);
+            this.Lbl_CycleEnd.Location = new System.Drawing.Point(581, 57);
+            this.Lbl_CycleEnd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CycleEnd.Name = "Lbl_CycleEnd";
-            this.Lbl_CycleEnd.Size = new System.Drawing.Size(31, 15);
+            this.Lbl_CycleEnd.Size = new System.Drawing.Size(41, 18);
             this.Lbl_CycleEnd.TabIndex = 14;
             this.Lbl_CycleEnd.Text = "End";
             // 
             // Lbl_CycleStart
             // 
             this.Lbl_CycleStart.Enabled = false;
-            this.Lbl_CycleStart.Location = new System.Drawing.Point(436, 20);
+            this.Lbl_CycleStart.Location = new System.Drawing.Point(581, 25);
+            this.Lbl_CycleStart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CycleStart.Name = "Lbl_CycleStart";
-            this.Lbl_CycleStart.Size = new System.Drawing.Size(31, 17);
+            this.Lbl_CycleStart.Size = new System.Drawing.Size(41, 21);
             this.Lbl_CycleStart.TabIndex = 13;
             this.Lbl_CycleStart.Text = "Start";
             // 
@@ -1277,9 +1057,10 @@ namespace CANStream
             // 
             this.Chk_InfinitePlay.Enabled = false;
             this.Chk_InfinitePlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Chk_InfinitePlay.Location = new System.Drawing.Point(307, 14);
+            this.Chk_InfinitePlay.Location = new System.Drawing.Point(409, 17);
+            this.Chk_InfinitePlay.Margin = new System.Windows.Forms.Padding(4);
             this.Chk_InfinitePlay.Name = "Chk_InfinitePlay";
-            this.Chk_InfinitePlay.Size = new System.Drawing.Size(155, 28);
+            this.Chk_InfinitePlay.Size = new System.Drawing.Size(207, 34);
             this.Chk_InfinitePlay.TabIndex = 11;
             this.Chk_InfinitePlay.Text = "Infinite play";
             this.Chk_InfinitePlay.UseVisualStyleBackColor = true;
@@ -1287,9 +1068,10 @@ namespace CANStream
             // 
             // Lbl_TotalProgress
             // 
-            this.Lbl_TotalProgress.Location = new System.Drawing.Point(716, 39);
+            this.Lbl_TotalProgress.Location = new System.Drawing.Point(955, 48);
+            this.Lbl_TotalProgress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_TotalProgress.Name = "Lbl_TotalProgress";
-            this.Lbl_TotalProgress.Size = new System.Drawing.Size(64, 23);
+            this.Lbl_TotalProgress.Size = new System.Drawing.Size(85, 28);
             this.Lbl_TotalProgress.TabIndex = 9;
             this.Lbl_TotalProgress.Text = "Total";
             this.Lbl_TotalProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1299,10 +1081,11 @@ namespace CANStream
             // 
             this.Txt_CurrentCycleNum.BackColor = System.Drawing.SystemColors.Control;
             this.Txt_CurrentCycleNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_CurrentCycleNum.Location = new System.Drawing.Point(624, 19);
+            this.Txt_CurrentCycleNum.Location = new System.Drawing.Point(832, 23);
+            this.Txt_CurrentCycleNum.Margin = new System.Windows.Forms.Padding(4);
             this.Txt_CurrentCycleNum.Name = "Txt_CurrentCycleNum";
             this.Txt_CurrentCycleNum.ReadOnly = true;
-            this.Txt_CurrentCycleNum.Size = new System.Drawing.Size(87, 44);
+            this.Txt_CurrentCycleNum.Size = new System.Drawing.Size(115, 53);
             this.Txt_CurrentCycleNum.TabIndex = 8;
             this.Txt_CurrentCycleNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Txt_CurrentCycleNum.Visible = false;
@@ -1310,9 +1093,10 @@ namespace CANStream
             // Lbl_CurrentCycleNum
             // 
             this.Lbl_CurrentCycleNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_CurrentCycleNum.Location = new System.Drawing.Point(526, 19);
+            this.Lbl_CurrentCycleNum.Location = new System.Drawing.Point(701, 23);
+            this.Lbl_CurrentCycleNum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CurrentCycleNum.Name = "Lbl_CurrentCycleNum";
-            this.Lbl_CurrentCycleNum.Size = new System.Drawing.Size(92, 44);
+            this.Lbl_CurrentCycleNum.Size = new System.Drawing.Size(123, 54);
             this.Lbl_CurrentCycleNum.TabIndex = 7;
             this.Lbl_CurrentCycleNum.Text = "Cycle #";
             this.Lbl_CurrentCycleNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1322,9 +1106,10 @@ namespace CANStream
             // 
             this.PB_TotalProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PB_TotalProgress.Location = new System.Drawing.Point(797, 41);
+            this.PB_TotalProgress.Location = new System.Drawing.Point(1063, 50);
+            this.PB_TotalProgress.Margin = new System.Windows.Forms.Padding(4);
             this.PB_TotalProgress.Name = "PB_TotalProgress";
-            this.PB_TotalProgress.Size = new System.Drawing.Size(152, 23);
+            this.PB_TotalProgress.Size = new System.Drawing.Size(203, 28);
             this.PB_TotalProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.PB_TotalProgress.TabIndex = 6;
             this.PB_TotalProgress.Visible = false;
@@ -1333,18 +1118,20 @@ namespace CANStream
             // 
             this.PB_CurrentProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PB_CurrentProgress.Location = new System.Drawing.Point(797, 16);
+            this.PB_CurrentProgress.Location = new System.Drawing.Point(1063, 20);
+            this.PB_CurrentProgress.Margin = new System.Windows.Forms.Padding(4);
             this.PB_CurrentProgress.Name = "PB_CurrentProgress";
-            this.PB_CurrentProgress.Size = new System.Drawing.Size(152, 23);
+            this.PB_CurrentProgress.Size = new System.Drawing.Size(203, 28);
             this.PB_CurrentProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.PB_CurrentProgress.TabIndex = 2;
             this.PB_CurrentProgress.Visible = false;
             // 
             // Lbl_CurrentProgress
             // 
-            this.Lbl_CurrentProgress.Location = new System.Drawing.Point(716, 16);
+            this.Lbl_CurrentProgress.Location = new System.Drawing.Point(955, 20);
+            this.Lbl_CurrentProgress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CurrentProgress.Name = "Lbl_CurrentProgress";
-            this.Lbl_CurrentProgress.Size = new System.Drawing.Size(75, 23);
+            this.Lbl_CurrentProgress.Size = new System.Drawing.Size(100, 28);
             this.Lbl_CurrentProgress.TabIndex = 5;
             this.Lbl_CurrentProgress.Text = "Current cycle";
             this.Lbl_CurrentProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1354,9 +1141,10 @@ namespace CANStream
             // 
             this.Lbl_CycleCount.Enabled = false;
             this.Lbl_CycleCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_CycleCount.Location = new System.Drawing.Point(159, 20);
+            this.Lbl_CycleCount.Location = new System.Drawing.Point(212, 25);
+            this.Lbl_CycleCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CycleCount.Name = "Lbl_CycleCount";
-            this.Lbl_CycleCount.Size = new System.Drawing.Size(81, 44);
+            this.Lbl_CycleCount.Size = new System.Drawing.Size(108, 54);
             this.Lbl_CycleCount.TabIndex = 4;
             this.Lbl_CycleCount.Text = "Count";
             this.Lbl_CycleCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1365,9 +1153,10 @@ namespace CANStream
             // 
             this.NumUpDown_CycleCount.Enabled = false;
             this.NumUpDown_CycleCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumUpDown_CycleCount.Location = new System.Drawing.Point(246, 20);
+            this.NumUpDown_CycleCount.Location = new System.Drawing.Point(328, 25);
+            this.NumUpDown_CycleCount.Margin = new System.Windows.Forms.Padding(4);
             this.NumUpDown_CycleCount.Name = "NumUpDown_CycleCount";
-            this.NumUpDown_CycleCount.Size = new System.Drawing.Size(55, 44);
+            this.NumUpDown_CycleCount.Size = new System.Drawing.Size(73, 53);
             this.NumUpDown_CycleCount.TabIndex = 3;
             this.NumUpDown_CycleCount.Value = new decimal(new int[] {
             1,
@@ -1379,9 +1168,10 @@ namespace CANStream
             // 
             this.Cmd_StopCycle.Enabled = false;
             this.Cmd_StopCycle.Image = global::CANStream.Icones.Stop_32;
-            this.Cmd_StopCycle.Location = new System.Drawing.Point(108, 19);
+            this.Cmd_StopCycle.Location = new System.Drawing.Point(144, 23);
+            this.Cmd_StopCycle.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_StopCycle.Name = "Cmd_StopCycle";
-            this.Cmd_StopCycle.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_StopCycle.Size = new System.Drawing.Size(60, 55);
             this.Cmd_StopCycle.TabIndex = 2;
             this.Cmd_StopCycle.UseVisualStyleBackColor = true;
             this.Cmd_StopCycle.Click += new System.EventHandler(this.Cmd_StopCycleClick);
@@ -1390,9 +1180,10 @@ namespace CANStream
             // 
             this.Cmd_BreakCycle.Enabled = false;
             this.Cmd_BreakCycle.Image = global::CANStream.Icones.Pause_32;
-            this.Cmd_BreakCycle.Location = new System.Drawing.Point(57, 19);
+            this.Cmd_BreakCycle.Location = new System.Drawing.Point(76, 23);
+            this.Cmd_BreakCycle.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_BreakCycle.Name = "Cmd_BreakCycle";
-            this.Cmd_BreakCycle.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_BreakCycle.Size = new System.Drawing.Size(60, 55);
             this.Cmd_BreakCycle.TabIndex = 1;
             this.Cmd_BreakCycle.UseVisualStyleBackColor = true;
             this.Cmd_BreakCycle.Click += new System.EventHandler(this.Cmd_BreakCycleClick);
@@ -1401,9 +1192,10 @@ namespace CANStream
             // 
             this.Cmd_PlayCycle.Enabled = false;
             this.Cmd_PlayCycle.Image = global::CANStream.Icones.Play_32;
-            this.Cmd_PlayCycle.Location = new System.Drawing.Point(6, 19);
+            this.Cmd_PlayCycle.Location = new System.Drawing.Point(8, 23);
+            this.Cmd_PlayCycle.Margin = new System.Windows.Forms.Padding(4);
             this.Cmd_PlayCycle.Name = "Cmd_PlayCycle";
-            this.Cmd_PlayCycle.Size = new System.Drawing.Size(45, 45);
+            this.Cmd_PlayCycle.Size = new System.Drawing.Size(60, 55);
             this.Cmd_PlayCycle.TabIndex = 0;
             this.Cmd_PlayCycle.UseVisualStyleBackColor = true;
             this.Cmd_PlayCycle.Click += new System.EventHandler(this.Cmd_PlayCycleClick);
@@ -1416,9 +1208,11 @@ namespace CANStream
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.Lbl_CanConfig);
             this.groupBox1.Controls.Add(this.Lbl_CycleFile);
-            this.groupBox1.Location = new System.Drawing.Point(6, 522);
+            this.groupBox1.Location = new System.Drawing.Point(8, 642);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(955, 85);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1273, 105);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -1427,10 +1221,11 @@ namespace CANStream
             this.rTxt_CycleComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rTxt_CycleComments.BackColor = System.Drawing.SystemColors.Control;
-            this.rTxt_CycleComments.Location = new System.Drawing.Point(86, 46);
+            this.rTxt_CycleComments.Location = new System.Drawing.Point(115, 57);
+            this.rTxt_CycleComments.Margin = new System.Windows.Forms.Padding(4);
             this.rTxt_CycleComments.Name = "rTxt_CycleComments";
             this.rTxt_CycleComments.ReadOnly = true;
-            this.rTxt_CycleComments.Size = new System.Drawing.Size(863, 33);
+            this.rTxt_CycleComments.Size = new System.Drawing.Size(1149, 40);
             this.rTxt_CycleComments.TabIndex = 3;
             this.rTxt_CycleComments.Text = "";
             // 
@@ -1438,9 +1233,10 @@ namespace CANStream
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(28, 46);
+            this.label1.Location = new System.Drawing.Point(37, 57);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(444, 13);
+            this.label1.Size = new System.Drawing.Size(592, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Comments:";
             // 
@@ -1448,9 +1244,10 @@ namespace CANStream
             // 
             this.Lbl_CanConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lbl_CanConfig.Location = new System.Drawing.Point(28, 28);
+            this.Lbl_CanConfig.Location = new System.Drawing.Point(37, 34);
+            this.Lbl_CanConfig.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CanConfig.Name = "Lbl_CanConfig";
-            this.Lbl_CanConfig.Size = new System.Drawing.Size(921, 18);
+            this.Lbl_CanConfig.Size = new System.Drawing.Size(1228, 22);
             this.Lbl_CanConfig.TabIndex = 1;
             this.Lbl_CanConfig.Text = "CAN Configuration:";
             // 
@@ -1458,9 +1255,10 @@ namespace CANStream
             // 
             this.Lbl_CycleFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Lbl_CycleFile.Location = new System.Drawing.Point(28, 12);
+            this.Lbl_CycleFile.Location = new System.Drawing.Point(37, 15);
+            this.Lbl_CycleFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_CycleFile.Name = "Lbl_CycleFile";
-            this.Lbl_CycleFile.Size = new System.Drawing.Size(921, 15);
+            this.Lbl_CycleFile.Size = new System.Drawing.Size(1228, 18);
             this.Lbl_CycleFile.TabIndex = 0;
             this.Lbl_CycleFile.Text = "Cycle file:";
             // 
@@ -1493,14 +1291,285 @@ namespace CANStream
             this.Timer_NoRx.Interval = 200;
             this.Timer_NoRx.Tick += new System.EventHandler(this.Timer_NoRx_Tick);
             // 
+            // Split_Rx_DataGraph
+            // 
+            this.Split_Rx_DataGraph.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Split_Rx_DataGraph.Location = new System.Drawing.Point(0, 0);
+            this.Split_Rx_DataGraph.Margin = new System.Windows.Forms.Padding(4);
+            this.Split_Rx_DataGraph.Name = "Split_Rx_DataGraph";
+            this.Split_Rx_DataGraph.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // Split_Rx_DataGraph.Panel1
+            // 
+            this.Split_Rx_DataGraph.Panel1.Controls.Add(this.Grid_ManualDataViewer);
+            // 
+            // Split_Rx_DataGraph.Panel2
+            // 
+            this.Split_Rx_DataGraph.Panel2.Controls.Add(this.Tab_SpyHistory);
+            this.Split_Rx_DataGraph.Size = new System.Drawing.Size(686, 662);
+            this.Split_Rx_DataGraph.SplitterDistance = 264;
+            this.Split_Rx_DataGraph.SplitterWidth = 5;
+            this.Split_Rx_DataGraph.TabIndex = 0;
+            // 
+            // Tab_SpyHistory
+            // 
+            this.Tab_SpyHistory.Alignment = System.Windows.Forms.TabAlignment.Right;
+            this.Tab_SpyHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Graph);
+            this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Data);
+            this.Tab_SpyHistory.Location = new System.Drawing.Point(3, 4);
+            this.Tab_SpyHistory.Margin = new System.Windows.Forms.Padding(4);
+            this.Tab_SpyHistory.Multiline = true;
+            this.Tab_SpyHistory.Name = "Tab_SpyHistory";
+            this.Tab_SpyHistory.SelectedIndex = 0;
+            this.Tab_SpyHistory.Size = new System.Drawing.Size(684, 388);
+            this.Tab_SpyHistory.TabIndex = 10;
+            this.Tab_SpyHistory.SelectedIndexChanged += new System.EventHandler(this.Tab_SpyHistory_SelectedIndexChanged);
+            // 
+            // Tab_SpyHistory_Graph
+            // 
+            this.Tab_SpyHistory_Graph.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_SpyHistory_Graph.Controls.Add(this.Graph_SpyData);
+            this.Tab_SpyHistory_Graph.Location = new System.Drawing.Point(4, 4);
+            this.Tab_SpyHistory_Graph.Margin = new System.Windows.Forms.Padding(4);
+            this.Tab_SpyHistory_Graph.Name = "Tab_SpyHistory_Graph";
+            this.Tab_SpyHistory_Graph.Padding = new System.Windows.Forms.Padding(4);
+            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(655, 380);
+            this.Tab_SpyHistory_Graph.TabIndex = 0;
+            this.Tab_SpyHistory_Graph.Tag = "Graph";
+            this.Tab_SpyHistory_Graph.Text = "Graphic";
+            // 
+            // Tab_SpyHistory_Data
+            // 
+            this.Tab_SpyHistory_Data.BackColor = System.Drawing.SystemColors.Control;
+            this.Tab_SpyHistory_Data.Controls.Add(this.Lst_SpyDataHistory);
+            this.Tab_SpyHistory_Data.Controls.Add(this.TS_SpyDataHistory);
+            this.Tab_SpyHistory_Data.Location = new System.Drawing.Point(4, 4);
+            this.Tab_SpyHistory_Data.Margin = new System.Windows.Forms.Padding(4);
+            this.Tab_SpyHistory_Data.Name = "Tab_SpyHistory_Data";
+            this.Tab_SpyHistory_Data.Padding = new System.Windows.Forms.Padding(4);
+            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(655, 380);
+            this.Tab_SpyHistory_Data.TabIndex = 1;
+            this.Tab_SpyHistory_Data.Tag = "Data";
+            this.Tab_SpyHistory_Data.Text = "Data";
+            // 
+            // Lst_SpyDataHistory
+            // 
+            this.Lst_SpyDataHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Lst_SpyDataHistory.FormattingEnabled = true;
+            this.Lst_SpyDataHistory.ItemHeight = 16;
+            this.Lst_SpyDataHistory.Location = new System.Drawing.Point(4, 38);
+            this.Lst_SpyDataHistory.Margin = new System.Windows.Forms.Padding(4);
+            this.Lst_SpyDataHistory.Name = "Lst_SpyDataHistory";
+            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(636, 340);
+            this.Lst_SpyDataHistory.TabIndex = 1;
+            // 
+            // TS_SpyDataHistory
+            // 
+            this.TS_SpyDataHistory.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.TS_SpyDataHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSB_FreezeHistory,
+            this.TSB_ResumeHistory,
+            this.TSB_ClearHistory,
+            this.TSB_ExportHistory,
+            this.toolStripSeparator3,
+            this.TSLbl_IdFilterFrom,
+            this.TSTxt_IdFilterFrom,
+            this.TSLbl_IdFilterTo,
+            this.TSTxt_IdFilterTo});
+            this.TS_SpyDataHistory.Location = new System.Drawing.Point(4, 4);
+            this.TS_SpyDataHistory.Name = "TS_SpyDataHistory";
+            this.TS_SpyDataHistory.Size = new System.Drawing.Size(647, 27);
+            this.TS_SpyDataHistory.TabIndex = 0;
+            this.TS_SpyDataHistory.Text = "toolStrip1";
+            // 
+            // TSB_FreezeHistory
+            // 
+            this.TSB_FreezeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_FreezeHistory.Image = global::CANStream.Icones.Pause_16;
+            this.TSB_FreezeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_FreezeHistory.Name = "TSB_FreezeHistory";
+            this.TSB_FreezeHistory.Size = new System.Drawing.Size(24, 24);
+            this.TSB_FreezeHistory.Text = "toolStripButton1";
+            this.TSB_FreezeHistory.ToolTipText = "Freeze";
+            this.TSB_FreezeHistory.Click += new System.EventHandler(this.TSB_FreezeHistory_Click);
+            // 
+            // TSB_ResumeHistory
+            // 
+            this.TSB_ResumeHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_ResumeHistory.Image = global::CANStream.Icones.Play_16;
+            this.TSB_ResumeHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_ResumeHistory.Name = "TSB_ResumeHistory";
+            this.TSB_ResumeHistory.Size = new System.Drawing.Size(24, 24);
+            this.TSB_ResumeHistory.Text = "toolStripButton2";
+            this.TSB_ResumeHistory.ToolTipText = "Resume";
+            this.TSB_ResumeHistory.Visible = false;
+            this.TSB_ResumeHistory.Click += new System.EventHandler(this.TSB_ResumeHistory_Click);
+            // 
+            // TSB_ClearHistory
+            // 
+            this.TSB_ClearHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_ClearHistory.Image = global::CANStream.Icones.Delete_16;
+            this.TSB_ClearHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_ClearHistory.Name = "TSB_ClearHistory";
+            this.TSB_ClearHistory.Size = new System.Drawing.Size(24, 24);
+            this.TSB_ClearHistory.Text = "toolStripButton3";
+            this.TSB_ClearHistory.ToolTipText = "Clear history";
+            this.TSB_ClearHistory.Click += new System.EventHandler(this.TSB_ClearHistory_Click);
+            // 
+            // TSB_ExportHistory
+            // 
+            this.TSB_ExportHistory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_ExportHistory.Image = global::CANStream.Icones.Export_File_16;
+            this.TSB_ExportHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_ExportHistory.Name = "TSB_ExportHistory";
+            this.TSB_ExportHistory.Size = new System.Drawing.Size(24, 24);
+            this.TSB_ExportHistory.Text = "toolStripButton4";
+            this.TSB_ExportHistory.ToolTipText = "Export history";
+            this.TSB_ExportHistory.Click += new System.EventHandler(this.TSB_ExportHistory_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            // 
+            // TSLbl_IdFilterFrom
+            // 
+            this.TSLbl_IdFilterFrom.Name = "TSLbl_IdFilterFrom";
+            this.TSLbl_IdFilterFrom.Size = new System.Drawing.Size(132, 24);
+            this.TSLbl_IdFilterFrom.Text = "CAN Id filter: From";
+            // 
+            // TSTxt_IdFilterFrom
+            // 
+            this.TSTxt_IdFilterFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TSTxt_IdFilterFrom.Name = "TSTxt_IdFilterFrom";
+            this.TSTxt_IdFilterFrom.Size = new System.Drawing.Size(66, 27);
+            this.TSTxt_IdFilterFrom.Text = "000";
+            this.TSTxt_IdFilterFrom.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TSTxt_IdFilterFrom.TextChanged += new System.EventHandler(this.TSTxt_IdFilterFrom_TextChanged);
+            // 
+            // TSLbl_IdFilterTo
+            // 
+            this.TSLbl_IdFilterTo.Name = "TSLbl_IdFilterTo";
+            this.TSLbl_IdFilterTo.Size = new System.Drawing.Size(26, 24);
+            this.TSLbl_IdFilterTo.Text = "To";
+            // 
+            // TSTxt_IdFilterTo
+            // 
+            this.TSTxt_IdFilterTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TSTxt_IdFilterTo.Name = "TSTxt_IdFilterTo";
+            this.TSTxt_IdFilterTo.Size = new System.Drawing.Size(66, 27);
+            this.TSTxt_IdFilterTo.Text = "7FF";
+            this.TSTxt_IdFilterTo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TSTxt_IdFilterTo.TextChanged += new System.EventHandler(this.TSTxt_IdFilterTo_TextChanged);
+            // 
+            // Grid_ManualDataWriter
+            // 
+            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataWriter.DataMode = CANStream.GridDataMode.DataTx;
+            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(1, 0);
+            this.Grid_ManualDataWriter.Margin = new System.Windows.Forms.Padding(5);
+            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
+            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(596, 506);
+            this.Grid_ManualDataWriter.TabIndex = 9;
+            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
+            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
+            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
+            this.Grid_ManualDataWriter.GridTxParameterValueChanged += new System.EventHandler<CANStream.GridTxParameterValueChangedEventArgs>(this.Grid_ManualDataWriter_GridTxParameterValueChanged);
+            // 
+            // Grid_ManualDataViewer
+            // 
+            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(0, 0);
+            this.Grid_ManualDataViewer.Margin = new System.Windows.Forms.Padding(5);
+            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
+            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(682, 264);
+            this.Grid_ManualDataViewer.TabIndex = 0;
+            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
+            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
+            // 
+            // Graph_SpyData
+            // 
+            this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Graph_SpyData.ChannelListEnabled = true;
+            this.Graph_SpyData.CursorEnabled = false;
+            this.Graph_SpyData.EditGraphicConfigurationEnable = false;
+            this.Graph_SpyData.LegendEnabled = false;
+            this.Graph_SpyData.Location = new System.Drawing.Point(0, 0);
+            this.Graph_SpyData.Margin = new System.Windows.Forms.Padding(5);
+            this.Graph_SpyData.Name = "Graph_SpyData";
+            this.Graph_SpyData.OpenFileVisible = false;
+            this.Graph_SpyData.PrintEnabled = false;
+            this.Graph_SpyData.RealTimeGraphic = true;
+            this.Graph_SpyData.ShortcutKeysEnabled = false;
+            this.Graph_SpyData.Size = new System.Drawing.Size(655, 380);
+            this.Graph_SpyData.SnapShotEnabled = false;
+            this.Graph_SpyData.TabIndex = 0;
+            this.Graph_SpyData.ToolBarVisible = true;
+            this.Graph_SpyData.ZoomEnabled = false;
+            // 
+            // Cycle_SpyDataViewer
+            // 
+            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cycle_SpyDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(0, 1);
+            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
+            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
+            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(400, 539);
+            this.Cycle_SpyDataViewer.TabIndex = 0;
+            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
+            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
+            // 
+            // Graph_Cycle
+            // 
+            this.Graph_Cycle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Graph_Cycle.ChannelListEnabled = false;
+            this.Graph_Cycle.ContextMenuStrip = this.Context_CycleGraph;
+            this.Graph_Cycle.CursorEnabled = true;
+            this.Graph_Cycle.EditGraphicConfigurationEnable = false;
+            this.Graph_Cycle.LegendEnabled = false;
+            this.Graph_Cycle.Location = new System.Drawing.Point(4, 4);
+            this.Graph_Cycle.Margin = new System.Windows.Forms.Padding(5);
+            this.Graph_Cycle.Name = "Graph_Cycle";
+            this.Graph_Cycle.OpenFileVisible = false;
+            this.Graph_Cycle.PrintEnabled = false;
+            this.Graph_Cycle.RealTimeGraphic = false;
+            this.Graph_Cycle.ShortcutKeysEnabled = false;
+            this.Graph_Cycle.Size = new System.Drawing.Size(861, 536);
+            this.Graph_Cycle.SnapShotEnabled = false;
+            this.Graph_Cycle.TabIndex = 0;
+            this.Graph_Cycle.ToolBarVisible = false;
+            this.Graph_Cycle.ZoomEnabled = false;
+            this.Graph_Cycle.ControlPreviewKeyDown += new System.EventHandler<System.Windows.Forms.PreviewKeyDownEventArgs>(this.Graph_Cycle_ControlPreviewKeyDown);
+            // 
             // Ctrl_CS_CAN_Bus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.CtrlMain_ToolStrip);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Ctrl_CS_CAN_Bus";
-            this.Size = new System.Drawing.Size(978, 665);
+            this.Size = new System.Drawing.Size(1304, 818);
             this.CtrlMain_ToolStrip.ResumeLayout(false);
             this.CtrlMain_ToolStrip.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1515,16 +1584,6 @@ namespace CANStream
             this.Split_Tx_EngRaw.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).EndInit();
             this.Context_ManualRawGrid.ResumeLayout(false);
-            this.Split_Rx_DataGraph.Panel1.ResumeLayout(false);
-            this.Split_Rx_DataGraph.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).EndInit();
-            this.Split_Rx_DataGraph.ResumeLayout(false);
-            this.Tab_SpyHistory.ResumeLayout(false);
-            this.Tab_SpyHistory_Graph.ResumeLayout(false);
-            this.Tab_SpyHistory_Data.ResumeLayout(false);
-            this.Tab_SpyHistory_Data.PerformLayout();
-            this.TS_SpyDataHistory.ResumeLayout(false);
-            this.TS_SpyDataHistory.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_ManualRunning)).EndInit();
@@ -1538,6 +1597,16 @@ namespace CANStream
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.Split_Rx_DataGraph.Panel1.ResumeLayout(false);
+            this.Split_Rx_DataGraph.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).EndInit();
+            this.Split_Rx_DataGraph.ResumeLayout(false);
+            this.Tab_SpyHistory.ResumeLayout(false);
+            this.Tab_SpyHistory_Graph.ResumeLayout(false);
+            this.Tab_SpyHistory_Data.ResumeLayout(false);
+            this.Tab_SpyHistory_Data.PerformLayout();
+            this.TS_SpyDataHistory.ResumeLayout(false);
+            this.TS_SpyDataHistory.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

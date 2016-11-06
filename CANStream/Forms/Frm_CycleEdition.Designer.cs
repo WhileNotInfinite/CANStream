@@ -120,7 +120,7 @@ namespace CANStream
             this.TSB_StopMakeCycle});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(849, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(1132, 39);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -225,40 +225,43 @@ namespace CANStream
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLbl_ActionCaption,
             this.StatusLbl_Action,
             this.Status_Progress});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 462);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 574);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(849, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1132, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // StatusLbl_ActionCaption
             // 
             this.StatusLbl_ActionCaption.Name = "StatusLbl_ActionCaption";
-            this.StatusLbl_ActionCaption.Size = new System.Drawing.Size(60, 17);
+            this.StatusLbl_ActionCaption.Size = new System.Drawing.Size(76, 21);
             this.StatusLbl_ActionCaption.Text = "Operation";
             this.StatusLbl_ActionCaption.Visible = false;
             // 
             // StatusLbl_Action
             // 
             this.StatusLbl_Action.Name = "StatusLbl_Action";
-            this.StatusLbl_Action.Size = new System.Drawing.Size(22, 17);
+            this.StatusLbl_Action.Size = new System.Drawing.Size(30, 21);
             this.StatusLbl_Action.Text = "xxx";
             this.StatusLbl_Action.Visible = false;
             // 
             // Status_Progress
             // 
             this.Status_Progress.Name = "Status_Progress";
-            this.Status_Progress.Size = new System.Drawing.Size(500, 16);
+            this.Status_Progress.Size = new System.Drawing.Size(667, 20);
             this.Status_Progress.Visible = false;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 39);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -268,8 +271,9 @@ namespace CANStream
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.Grp_Graph);
-            this.splitContainer1.Size = new System.Drawing.Size(849, 423);
-            this.splitContainer1.SplitterDistance = 405;
+            this.splitContainer1.Size = new System.Drawing.Size(1132, 535);
+            this.splitContainer1.SplitterDistance = 540;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 2;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer1SplitterMoved);
             // 
@@ -287,9 +291,11 @@ namespace CANStream
             this.Grp_Elements.Controls.Add(this.Grid_CycleProperties);
             this.Grp_Elements.Controls.Add(this.Grid_PreCycleProperties);
             this.Grp_Elements.Controls.Add(this.Grid_CycleElements);
-            this.Grp_Elements.Location = new System.Drawing.Point(3, 3);
+            this.Grp_Elements.Location = new System.Drawing.Point(4, 4);
+            this.Grp_Elements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grp_Elements.Name = "Grp_Elements";
-            this.Grp_Elements.Size = new System.Drawing.Size(399, 417);
+            this.Grp_Elements.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Grp_Elements.Size = new System.Drawing.Size(532, 527);
             this.Grp_Elements.TabIndex = 0;
             this.Grp_Elements.TabStop = false;
             this.Grp_Elements.Text = "Cycle elements";
@@ -297,9 +303,10 @@ namespace CANStream
             // Lbl_PropDataFile
             // 
             this.Lbl_PropDataFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lbl_PropDataFile.Location = new System.Drawing.Point(6, 60);
+            this.Lbl_PropDataFile.Location = new System.Drawing.Point(8, 74);
+            this.Lbl_PropDataFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_PropDataFile.Name = "Lbl_PropDataFile";
-            this.Lbl_PropDataFile.Size = new System.Drawing.Size(47, 25);
+            this.Lbl_PropDataFile.Size = new System.Drawing.Size(62, 30);
             this.Lbl_PropDataFile.TabIndex = 8;
             this.Lbl_PropDataFile.Text = "Data file";
             this.Lbl_PropDataFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -307,9 +314,10 @@ namespace CANStream
             // Lbl_PropTimeLen
             // 
             this.Lbl_PropTimeLen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lbl_PropTimeLen.Location = new System.Drawing.Point(6, 37);
+            this.Lbl_PropTimeLen.Location = new System.Drawing.Point(8, 46);
+            this.Lbl_PropTimeLen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_PropTimeLen.Name = "Lbl_PropTimeLen";
-            this.Lbl_PropTimeLen.Size = new System.Drawing.Size(47, 25);
+            this.Lbl_PropTimeLen.Size = new System.Drawing.Size(62, 30);
             this.Lbl_PropTimeLen.TabIndex = 7;
             this.Lbl_PropTimeLen.Text = "Time length";
             this.Lbl_PropTimeLen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -317,9 +325,10 @@ namespace CANStream
             // Lbl_PostCycle
             // 
             this.Lbl_PostCycle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lbl_PostCycle.Location = new System.Drawing.Point(389, 16);
+            this.Lbl_PostCycle.Location = new System.Drawing.Point(519, 20);
+            this.Lbl_PostCycle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_PostCycle.Name = "Lbl_PostCycle";
-            this.Lbl_PostCycle.Size = new System.Drawing.Size(171, 18);
+            this.Lbl_PostCycle.Size = new System.Drawing.Size(227, 22);
             this.Lbl_PostCycle.TabIndex = 6;
             this.Lbl_PostCycle.Text = "Post Cycle";
             this.Lbl_PostCycle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -327,9 +336,10 @@ namespace CANStream
             // Lbl_Cycle
             // 
             this.Lbl_Cycle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lbl_Cycle.Location = new System.Drawing.Point(221, 16);
+            this.Lbl_Cycle.Location = new System.Drawing.Point(295, 20);
+            this.Lbl_Cycle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Cycle.Name = "Lbl_Cycle";
-            this.Lbl_Cycle.Size = new System.Drawing.Size(171, 18);
+            this.Lbl_Cycle.Size = new System.Drawing.Size(227, 22);
             this.Lbl_Cycle.TabIndex = 5;
             this.Lbl_Cycle.Text = "Cycle";
             this.Lbl_Cycle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -337,9 +347,10 @@ namespace CANStream
             // Lbl_PreCycle
             // 
             this.Lbl_PreCycle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Lbl_PreCycle.Location = new System.Drawing.Point(54, 16);
+            this.Lbl_PreCycle.Location = new System.Drawing.Point(72, 20);
+            this.Lbl_PreCycle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_PreCycle.Name = "Lbl_PreCycle";
-            this.Lbl_PreCycle.Size = new System.Drawing.Size(171, 18);
+            this.Lbl_PreCycle.Size = new System.Drawing.Size(227, 22);
             this.Lbl_PreCycle.TabIndex = 4;
             this.Lbl_PreCycle.Text = "Pre Cycle";
             this.Lbl_PreCycle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -353,10 +364,11 @@ namespace CANStream
             this.Grid_PostCycleProperties.ColumnHeadersVisible = false;
             this.Grid_PostCycleProperties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2});
-            this.Grid_PostCycleProperties.Location = new System.Drawing.Point(389, 37);
+            this.Grid_PostCycleProperties.Location = new System.Drawing.Point(519, 46);
+            this.Grid_PostCycleProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grid_PostCycleProperties.Name = "Grid_PostCycleProperties";
             this.Grid_PostCycleProperties.RowHeadersVisible = false;
-            this.Grid_PostCycleProperties.Size = new System.Drawing.Size(171, 48);
+            this.Grid_PostCycleProperties.Size = new System.Drawing.Size(228, 59);
             this.Grid_PostCycleProperties.TabIndex = 3;
             this.Grid_PostCycleProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_PostCyclePropertiesCellClick);
             this.Grid_PostCycleProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_PostCyclePropertiesCellValueChanged);
@@ -376,10 +388,11 @@ namespace CANStream
             this.Grid_CycleProperties.ColumnHeadersVisible = false;
             this.Grid_CycleProperties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
-            this.Grid_CycleProperties.Location = new System.Drawing.Point(221, 37);
+            this.Grid_CycleProperties.Location = new System.Drawing.Point(295, 46);
+            this.Grid_CycleProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grid_CycleProperties.Name = "Grid_CycleProperties";
             this.Grid_CycleProperties.RowHeadersVisible = false;
-            this.Grid_CycleProperties.Size = new System.Drawing.Size(171, 48);
+            this.Grid_CycleProperties.Size = new System.Drawing.Size(228, 59);
             this.Grid_CycleProperties.TabIndex = 2;
             this.Grid_CycleProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CyclePropertiesCellClick);
             this.Grid_CycleProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CyclePropertiesCellValueChanged);
@@ -399,10 +412,11 @@ namespace CANStream
             this.Grid_PreCycleProperties.ColumnHeadersVisible = false;
             this.Grid_PreCycleProperties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Value});
-            this.Grid_PreCycleProperties.Location = new System.Drawing.Point(54, 37);
+            this.Grid_PreCycleProperties.Location = new System.Drawing.Point(72, 46);
+            this.Grid_PreCycleProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grid_PreCycleProperties.Name = "Grid_PreCycleProperties";
             this.Grid_PreCycleProperties.RowHeadersVisible = false;
-            this.Grid_PreCycleProperties.Size = new System.Drawing.Size(171, 48);
+            this.Grid_PreCycleProperties.Size = new System.Drawing.Size(228, 59);
             this.Grid_PreCycleProperties.TabIndex = 1;
             this.Grid_PreCycleProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_PreCyclePropertiesCellClick);
             this.Grid_PreCycleProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_PreCyclePropertiesCellValueChanged);
@@ -429,9 +443,10 @@ namespace CANStream
             this.Cycle_Data,
             this.PostCycle_Source,
             this.PostCycle_Data});
-            this.Grid_CycleElements.Location = new System.Drawing.Point(6, 91);
+            this.Grid_CycleElements.Location = new System.Drawing.Point(8, 111);
+            this.Grid_CycleElements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grid_CycleElements.Name = "Grid_CycleElements";
-            this.Grid_CycleElements.Size = new System.Drawing.Size(387, 320);
+            this.Grid_CycleElements.Size = new System.Drawing.Size(516, 408);
             this.Grid_CycleElements.TabIndex = 0;
             this.Grid_CycleElements.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CycleElementsCellClick);
             this.Grid_CycleElements.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CycleElementsCellValueChanged);
@@ -480,9 +495,11 @@ namespace CANStream
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grp_Graph.Controls.Add(this.CycleGraphicCtrl);
-            this.Grp_Graph.Location = new System.Drawing.Point(3, 3);
+            this.Grp_Graph.Location = new System.Drawing.Point(4, 4);
+            this.Grp_Graph.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Grp_Graph.Name = "Grp_Graph";
-            this.Grp_Graph.Size = new System.Drawing.Size(434, 417);
+            this.Grp_Graph.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Grp_Graph.Size = new System.Drawing.Size(579, 527);
             this.Grp_Graph.TabIndex = 0;
             this.Grp_Graph.TabStop = false;
             this.Grp_Graph.Text = "Graph";
@@ -496,12 +513,14 @@ namespace CANStream
             this.CycleGraphicCtrl.CursorEnabled = true;
             this.CycleGraphicCtrl.EditGraphicConfigurationEnable = false;
             this.CycleGraphicCtrl.LegendEnabled = true;
-            this.CycleGraphicCtrl.Location = new System.Drawing.Point(6, 19);
+            this.CycleGraphicCtrl.Location = new System.Drawing.Point(8, 23);
+            this.CycleGraphicCtrl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.CycleGraphicCtrl.Name = "CycleGraphicCtrl";
             this.CycleGraphicCtrl.OpenFileVisible = false;
             this.CycleGraphicCtrl.PrintEnabled = false;
+            this.CycleGraphicCtrl.RealTimeGraphic = false;
             this.CycleGraphicCtrl.ShortcutKeysEnabled = true;
-            this.CycleGraphicCtrl.Size = new System.Drawing.Size(418, 392);
+            this.CycleGraphicCtrl.Size = new System.Drawing.Size(557, 496);
             this.CycleGraphicCtrl.SnapShotEnabled = false;
             this.CycleGraphicCtrl.TabIndex = 0;
             this.CycleGraphicCtrl.ToolBarVisible = true;
@@ -525,13 +544,14 @@ namespace CANStream
             // 
             // Frm_CycleEdition
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 484);
+            this.ClientSize = new System.Drawing.Size(1132, 596);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = global::CANStream.Icones.CANStream_Icone;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Frm_CycleEdition";
             this.Text = "Cycle edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_CycleEditionFormClosing);
