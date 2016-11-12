@@ -96,7 +96,7 @@ namespace CANStream
                 foreach(LoggingChannelConfiguration oChan in oChanGrp.LoggingChannels)
                 {
                     CollapsableGridRow oChanRow = oGroupRow.Children.Add();
-                    //oChanRow.Cells[1].Value = oChan.Name;
+                    oChanRow.ThisRow.Cells[1].Value = oChan.Name;
                 }
             }
         }

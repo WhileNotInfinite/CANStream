@@ -53,6 +53,7 @@
             this.oGrid.RowHeadersVisible = false;
             this.oGrid.Size = new System.Drawing.Size(457, 210);
             this.oGrid.TabIndex = 0;
+            this.oGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.oGrid_CellDoubleClick);
             // 
             // CollapsedStatusColumn
             // 
@@ -71,8 +72,8 @@
             this.Img_RowState.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("Img_RowState.ImageStream")));
             this.Img_RowState.TransparentColor = System.Drawing.Color.Transparent;
             this.Img_RowState.Images.SetKeyName(0, "Grid_NoAction2.png");
-            this.Img_RowState.Images.SetKeyName(1, "toggle-bullet-plus-icone-6017-16.png");
-            this.Img_RowState.Images.SetKeyName(2, "toggle-bullet-moins-icone-6601-16.png");
+            this.Img_RowState.Images.SetKeyName(1, "1478993774_toggle-small-expand.ico");
+            this.Img_RowState.Images.SetKeyName(2, "1478993842_toggle_small_collapse.ico");
             // 
             // Ctrl_CollapsableGrid
             // 

@@ -34,6 +34,26 @@ namespace CANStream
 
         #endregion
 
+        #region Internal properties
+
+        internal DataGridView DataGrid
+        {
+            get
+            {
+                return (this.oGrid);
+            }
+        }
+
+        internal ImageList Img_RowStates
+        {
+            get
+            {
+                return (Img_RowState);
+            }
+        }
+
+        #endregion
+
         #region Private members
 
         private CollapsableGridRowCollection GridRows;
@@ -44,14 +64,75 @@ namespace CANStream
         {
             InitializeComponent();
 
-            GridRows = new CollapsableGridRowCollection(this.oGrid);
-            GridRows.ParentRow = null;
+            GridRows = new CollapsableGridRowCollection(this);
         }
+
+        #region Control events
+
+        private void oGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                CollapsableGridRow oRow = Get_GridRow(e.RowIndex);
+
+                if (!(oRow == null))
+                {
+                    if (!(oRow.RowState == CollapsableGridRowState.NoChildren))
+                    {
+                        if (oRow.RowState == CollapsableGridRowState.Collapsed)
+                        {
+                            oRow.Expand();
+                        }
+                        else
+                        {
+                            oRow.Collapse();
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Private methodes
+
+        private CollapsableGridRow Get_GridRow(int RowIndex)
+        {
+            if (RowIndex >= 0 && RowIndex < oGrid.Rows.Count)
+            {
+                foreach (CollapsableGridRow oRow in Rows)
+                {
+                    CollapsableGridRow oRowFound = oRow.Get_ChildRowAtIndex(RowIndex);
+
+                    if (!(oRowFound == null))
+                    {
+                        return (oRowFound);
+                    }
+                }
+            }
+
+            return (null);
+        }
+
+        #endregion
     }
 
     public class CollapsableGridRow
     {
         #region Public Properties
+
+        public Ctrl_CollapsableGrid CollapsableGrid
+        {
+            get
+            {
+                return (oCollapsableGrid);
+            }
+
+            internal set
+            {
+                oCollapsableGrid = value;
+            }
+        }
 
         public DataGridViewRow ThisRow
         {
@@ -82,9 +163,46 @@ namespace CANStream
             }
         }
 
+        public CollapsableGridRowState RowState
+        {
+            get
+            {
+                return (eRowState);
+            }
+
+            set
+            {
+                if ((value != eRowState) || (ThisRow.Cells[0].Value == null))
+                {
+                    eRowState = value;
+
+                    switch (eRowState)
+                    {
+                        case CollapsableGridRowState.Collapsed:
+
+                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[1];
+                            break;
+
+                        case CollapsableGridRowState.Expanded:
+
+                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[2];
+                            break;
+
+                        default:
+
+                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[0];
+                            break;
+
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Private members
+
+        private Ctrl_CollapsableGrid oCollapsableGrid;
 
         private DataGridViewRow GridRow;
 
@@ -92,25 +210,64 @@ namespace CANStream
 
         private CollapsableGridRowCollection RowChildren;
 
-        private CollapsableGridRowState RowState;
+        private CollapsableGridRowState eRowState;
 
         #endregion
 
+        #region Constructors
+
         public CollapsableGridRow()
         {
+            oCollapsableGrid = null;
             GridRow = null;
             RowParent = null;
             RowChildren = new CollapsableGridRowCollection(null);
-            RowState = CollapsableGridRowState.NoChildren;
+            eRowState = CollapsableGridRowState.NoChildren;
         }
 
         public CollapsableGridRow(DataGridViewRow DataGridRow)
         {
             GridRow = DataGridRow;
             RowParent = null;
-            RowChildren = new CollapsableGridRowCollection(null);
-            RowState = CollapsableGridRowState.NoChildren;
+            RowChildren = new CollapsableGridRowCollection(this);
+            eRowState = CollapsableGridRowState.NoChildren;
         }
+
+        #endregion
+
+        #region Internal methodes
+
+        internal CollapsableGridRow Get_ChildRowAtIndex(int RowIndex)
+        {
+            if (this.ThisRow.Index == RowIndex)
+            {
+                return (this);
+            }
+
+            foreach (CollapsableGridRow oChildRow in Children)
+            {
+                if (oChildRow.ThisRow.Index == RowIndex)
+                {
+                    return (oChildRow);
+                }
+                else
+                {
+                    if (oChildRow.Children.Count > 0)
+                    {
+                        CollapsableGridRow oGranChildRow = oChildRow.Get_ChildRowAtIndex(RowIndex);
+
+                        if (!(oGranChildRow == null))
+                        {
+                            return (oGranChildRow);
+                        }
+                    }
+                }
+            }
+
+            return (null);
+        }
+
+        #endregion
 
         #region Public methodes
 
@@ -124,7 +281,7 @@ namespace CANStream
                     oChildRow.ThisRow.Visible = false;
                 }
 
-                RowState = CollapsableGridRowState.Collapsed;
+                this.RowState = CollapsableGridRowState.Collapsed;
             }
         }
 
@@ -132,12 +289,12 @@ namespace CANStream
         {
             if (this.RowChildren.Count > 0)
             {
-                foreach(CollapsableGridRow oChildRow in RowChildren)
+                foreach (CollapsableGridRow oChildRow in RowChildren)
                 {
                     oChildRow.ThisRow.Visible = true;
                 }
 
-                RowState = CollapsableGridRowState.Expanded;
+                this.RowState = CollapsableGridRowState.Expanded;
             }
         }
 
@@ -151,17 +308,7 @@ namespace CANStream
                     oChildRow.ExpandAll();
                 }
 
-                RowState = CollapsableGridRowState.Expanded;
-            }
-        }
-
-        public void AddChild(CollapsableGridRow oChildRow)
-        {
-            if (!(oChildRow == null))
-            {
-                oChildRow.Parent = this;
-                this.Children.Add(oChildRow);
-                this.Expand();
+                this.RowState = CollapsableGridRowState.Expanded;
             }
         }
 
@@ -170,51 +317,64 @@ namespace CANStream
 
     public class CollapsableGridRowCollection : List<CollapsableGridRow>
     {
-        #region Internal members
-
-        internal CollapsableGridRow ParentRow;
-
-        #endregion
-
         #region Private members
 
-        private DataGridView oRefGrid;
+        private object oContainerObject;
 
         #endregion
 
-        public CollapsableGridRowCollection(DataGridView DataGridRef)
+        public CollapsableGridRowCollection(object Container)
         {
-            oRefGrid = DataGridRef;
-            ParentRow = null;
+            oContainerObject = Container;
         }
 
         #region Public methodes
 
         public CollapsableGridRow Add()
         {
-            CollapsableGridRow oNewRow = null;
-
-            if (!(oRefGrid == null))
+            if (oContainerObject.GetType().Equals(typeof(Ctrl_CollapsableGrid)))
             {
-                int iNewRow = oRefGrid.Rows.Add();
+                DataGridView oGrid = ((Ctrl_CollapsableGrid)oContainerObject).DataGrid;
 
-                oNewRow = new CollapsableGridRow(oRefGrid.Rows[iNewRow]);
+                int iNewRow = oGrid.Rows.Add();
+
+                CollapsableGridRow oNewRow = new CollapsableGridRow(oGrid.Rows[iNewRow]);
+                oNewRow.CollapsableGrid = (Ctrl_CollapsableGrid)oContainerObject;
+                oNewRow.RowState = CollapsableGridRowState.NoChildren;
                 base.Add(oNewRow);
 
                 return (oNewRow);
+            }
+            else if (oContainerObject.GetType().Equals(typeof(CollapsableGridRow)))
+            {
+                CollapsableGridRow oRowContainer = (CollapsableGridRow)oContainerObject;
+
+                int iNewRow = oRowContainer.ThisRow.Index + oRowContainer.Children.Count + 1;
+                oRowContainer.ThisRow.DataGridView.Rows.Insert(iNewRow, 1);
+
+                CollapsableGridRow oNewRow = new CollapsableGridRow(oRowContainer.ThisRow.DataGridView.Rows[iNewRow]);
+                oNewRow.CollapsableGrid = oRowContainer.CollapsableGrid;
+                oNewRow.Parent = oRowContainer;
+                oRowContainer.RowState = CollapsableGridRowState.Expanded;
+                oNewRow.RowState = CollapsableGridRowState.NoChildren;
+                base.Add(oNewRow);
+
+                return (oNewRow);
+
             }
             else
             {
                 return (null);
             }
-            
         }
 
         public new void Clear()
         {
-            if (!(oRefGrid == null))
+            if (oContainerObject.GetType().Equals(typeof(DataGridView)))
             {
-                oRefGrid.Rows.Clear();
+                DataGridView oGrid = (DataGridView)oContainerObject;
+
+                oGrid.Rows.Clear();
                 base.Clear();
             }
         }
