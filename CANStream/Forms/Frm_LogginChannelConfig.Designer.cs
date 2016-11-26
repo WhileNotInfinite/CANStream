@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_LogginChannelConfig));
             this.TS_Main = new System.Windows.Forms.ToolStrip();
             this.TSB_New = new System.Windows.Forms.ToolStripButton();
@@ -43,7 +44,11 @@
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
             this.CGrid_Channels = new CANStream.Ctrl_CollapsableGrid();
+            this.Context_Grid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Context_Grid_CollapseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.Context_Grid_ExpandAll = new System.Windows.Forms.ToolStripMenuItem();
             this.TS_Main.SuspendLayout();
+            this.Context_Grid.SuspendLayout();
             this.SuspendLayout();
             // 
             // TS_Main
@@ -173,10 +178,35 @@
             this.CGrid_Channels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CGrid_Channels.ContextMenuStrip = this.Context_Grid;
             this.CGrid_Channels.Location = new System.Drawing.Point(0, 42);
             this.CGrid_Channels.Name = "CGrid_Channels";
             this.CGrid_Channels.Size = new System.Drawing.Size(791, 360);
             this.CGrid_Channels.TabIndex = 1;
+            // 
+            // Context_Grid
+            // 
+            this.Context_Grid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Context_Grid_CollapseAll,
+            this.Context_Grid_ExpandAll});
+            this.Context_Grid.Name = "Context_Grid";
+            this.Context_Grid.Size = new System.Drawing.Size(135, 48);
+            // 
+            // Context_Grid_CollapseAll
+            // 
+            this.Context_Grid_CollapseAll.Image = global::CANStream.Icones.Collapse_16;
+            this.Context_Grid_CollapseAll.Name = "Context_Grid_CollapseAll";
+            this.Context_Grid_CollapseAll.Size = new System.Drawing.Size(134, 22);
+            this.Context_Grid_CollapseAll.Text = "Collapse all";
+            this.Context_Grid_CollapseAll.Click += new System.EventHandler(this.Context_Grid_CollapseAll_Click);
+            // 
+            // Context_Grid_ExpandAll
+            // 
+            this.Context_Grid_ExpandAll.Image = global::CANStream.Icones.Expand_16;
+            this.Context_Grid_ExpandAll.Name = "Context_Grid_ExpandAll";
+            this.Context_Grid_ExpandAll.Size = new System.Drawing.Size(134, 22);
+            this.Context_Grid_ExpandAll.Text = "Expand all";
+            this.Context_Grid_ExpandAll.Click += new System.EventHandler(this.Context_Grid_ExpandAll_Click);
             // 
             // Frm_LogginChannelConfig
             // 
@@ -190,6 +220,7 @@
             this.Text = "Logging channels configuration";
             this.TS_Main.ResumeLayout(false);
             this.TS_Main.PerformLayout();
+            this.Context_Grid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,5 +242,8 @@
         private System.Windows.Forms.OpenFileDialog Dlg_OpenFile;
         private System.Windows.Forms.SaveFileDialog Dlg_SaveFile;
         private Ctrl_CollapsableGrid CGrid_Channels;
+        private System.Windows.Forms.ContextMenuStrip Context_Grid;
+        private System.Windows.Forms.ToolStripMenuItem Context_Grid_CollapseAll;
+        private System.Windows.Forms.ToolStripMenuItem Context_Grid_ExpandAll;
     }
 }

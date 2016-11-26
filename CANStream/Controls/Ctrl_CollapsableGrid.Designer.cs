@@ -54,12 +54,15 @@
             this.oGrid.Size = new System.Drawing.Size(457, 210);
             this.oGrid.TabIndex = 0;
             this.oGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.oGrid_CellDoubleClick);
+            this.oGrid.Resize += new System.EventHandler(this.oGrid_Resize);
             // 
             // CollapsedStatusColumn
             // 
             this.CollapsedStatusColumn.HeaderText = "";
+            this.CollapsedStatusColumn.MinimumWidth = 21;
             this.CollapsedStatusColumn.Name = "CollapsedStatusColumn";
             this.CollapsedStatusColumn.ReadOnly = true;
+            this.CollapsedStatusColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.CollapsedStatusColumn.Width = 21;
             // 
             // Column2
@@ -90,8 +93,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView oGrid;
+        private System.Windows.Forms.ImageList Img_RowState;
         private System.Windows.Forms.DataGridViewImageColumn CollapsedStatusColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.ImageList Img_RowState;
     }
 }

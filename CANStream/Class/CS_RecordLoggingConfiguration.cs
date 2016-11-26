@@ -33,9 +33,7 @@ namespace CANStream
         /// <summary>Name of the logging channel</summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Full path of the current LoggingChannelConfiguration within the group hierarchy
-        /// </summary>
+        /// <summary> Full path of the current LoggingChannelConfiguration within the group hierarchy</summary>
         public string Path { get; set; }
 
         /// <summary>Logging mode of the logging channel</summary>
@@ -43,6 +41,12 @@ namespace CANStream
 
         /// <summary>Logging frequency of the logging channel</summary>
         public double LoggingFrequency { get; set; }
+
+        /// <summary>Default Logging frequency of the logging channel</summary>
+        public double DefaultFrequency { get; set; }
+
+        /// <summary>Description of the logging channel</summary>
+        public string Comment { get; set; }
 
         #endregion
 
@@ -55,6 +59,8 @@ namespace CANStream
             Path = "";
             LoggingMode = ChannelLoggingMode.DefaultFrequency;
             LoggingFrequency = 0;
+            DefaultFrequency = 0;
+            Comment = "";
         }
     }
 
@@ -76,6 +82,11 @@ namespace CANStream
         public string FullPath { get; set; }
 
         /// <summary>
+        /// Description of the logging channel
+        /// </summary>
+        public string Comment { get; set; }
+
+        /// <summary>
         /// Logging channels contained in the current group
         /// </summary>
         public List<LoggingChannelConfiguration> LoggingChannels { get; set; }
@@ -94,6 +105,7 @@ namespace CANStream
         {
             Name = "";
             FullPath = "";
+            Comment = "";
             LoggingChannels = new List<LoggingChannelConfiguration>();
             SubGroups = new List<LoggingChannelGroup>();
         }
@@ -523,6 +535,21 @@ namespace CANStream
                 foreach(string SubGroupPath in SubGroupHierarchy)
                 {
                     XmlElement xGroup = oXDoc.CreateElement("GroupPath");
+
+                    LoggingChannelGroup oSubGroup = oRootGroup.Get_GroupAtPath(SubGroupPath);
+                    XmlAttribute xAtrGrpComment = oXDoc.CreateAttribute("Comment");
+
+                    if(!(oSubGroup==null))
+                    {
+                        xAtrGrpComment.Value = oSubGroup.Comment;
+                    }
+                    else
+                    {
+                        xAtrGrpComment.Value ="";
+                    }
+
+                    xGroup.Attributes.Append(xAtrGrpComment);
+
                     xGroup.InnerText = SubGroupPath;
                     xRootGroup.AppendChild(xGroup);
                 }
@@ -551,6 +578,14 @@ namespace CANStream
 
                     xProp = oXDoc.CreateElement("LoggingFrequency");
                     xProp.InnerText = oChannel.LoggingFrequency.ToString();
+                    xChan.AppendChild(xProp);
+
+                    xProp = oXDoc.CreateElement("DefaultLoggingFrequency");
+                    xProp.InnerText = oChannel.DefaultFrequency.ToString();
+                    xChan.AppendChild(xProp);
+
+                    xProp = oXDoc.CreateElement("Comment");
+                    xProp.InnerText = oChannel.Comment;
                     xChan.AppendChild(xProp);
 
                     xChannels.AppendChild(xChan);
@@ -596,7 +631,19 @@ namespace CANStream
 
                     if(!(GroupName.Equals("") || ParentPath.Equals("")))
                     {
-                        Add_LoggingChannelGroup(GroupName, ParentPath);
+                        if (Add_LoggingChannelGroup(GroupName, ParentPath))
+                        {
+                            XmlAttribute xAtrComment = xSubGroup.Attributes["Comment"];
+
+                            if (!(xAtrComment == null))
+                            {
+                                LoggingChannelGroup oAddedGroup = oRootGroup.Get_GroupAtPath(xSubGroup.InnerText);
+
+                                if (!(oAddedGroup == null))
+                                {
+                                    oAddedGroup.Comment = xAtrComment.Value;                                }
+                            }
+                        }
                     }
 
                 }
@@ -615,6 +662,12 @@ namespace CANStream
 
                     xProp = xChan.SelectSingleNode("LoggingFrequency");
                     oChannel.LoggingFrequency = double.Parse(xProp.InnerText);
+
+                    xProp = xChan.SelectSingleNode("DefaultLoggingFrequency");
+                    oChannel.DefaultFrequency = double.Parse(xProp.InnerText);
+
+                    xProp = xChan.SelectSingleNode("Comment");
+                    oChannel.Comment = xProp.InnerText;
 
                     xProp = xChan.SelectSingleNode("GroupPath");
 

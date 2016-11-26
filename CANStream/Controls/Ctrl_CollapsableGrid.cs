@@ -32,6 +32,15 @@ namespace CANStream
             }
         }
 
+        [Browsable(false)]
+        public DataGridView Grid
+        {
+            get
+            {
+                return (this.oGrid);
+            }
+        }
+
         #endregion
 
         #region Internal properties
@@ -68,6 +77,14 @@ namespace CANStream
         }
 
         #region Control events
+
+        private void oGrid_Resize(object sender, EventArgs e)
+        {
+            if (oGrid.Columns.Count > 1)
+            {
+                oGrid.Columns.GetLastColumn(DataGridViewElementStates.None, DataGridViewElementStates.None).Width = oGrid.Width - 500;
+            }
+        }
 
         private void oGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -112,6 +129,26 @@ namespace CANStream
             }
 
             return (null);
+        }
+
+        #endregion
+
+        #region Public methodes
+
+        public void ExpandAllRows()
+        {
+            foreach (CollapsableGridRow oRow in Rows)
+            {
+                oRow.ExpandAll();
+            }
+        }
+
+        public void CollapseAllRows()
+        {
+            foreach(CollapsableGridRow oRow in Rows)
+            {
+                oRow.Collapse();
+            }
         }
 
         #endregion
@@ -266,6 +303,18 @@ namespace CANStream
 
             return (null);
         }
+        
+        internal int Get_LastChildIndex()
+        {
+            int LastIndex = this.ThisRow.Index;
+
+            if(this.Children.Count>0)
+            {
+                LastIndex = this.Children.Last().Get_LastChildIndex();
+            }
+
+            return (LastIndex);
+        }
 
         #endregion
 
@@ -349,7 +398,8 @@ namespace CANStream
             {
                 CollapsableGridRow oRowContainer = (CollapsableGridRow)oContainerObject;
 
-                int iNewRow = oRowContainer.ThisRow.Index + oRowContainer.Children.Count + 1;
+                //int iNewRow = oRowContainer.ThisRow.Index + oRowContainer.Children.Count + 1;
+                int iNewRow = oRowContainer.Get_LastChildIndex() + 1;
                 oRowContainer.ThisRow.DataGridView.Rows.Insert(iNewRow, 1);
 
                 CollapsableGridRow oNewRow = new CollapsableGridRow(oRowContainer.ThisRow.DataGridView.Rows[iNewRow]);

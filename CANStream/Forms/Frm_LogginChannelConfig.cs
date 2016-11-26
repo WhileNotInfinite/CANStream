@@ -12,6 +12,15 @@ namespace CANStream
 {
     public partial class Frm_LogginChannelConfig : Form
     {
+        #region Private constants
+
+        private const int GRID_COL_NAME = 1;
+        private const int GRID_COL_LOG_MODE = 2;
+        private const int GRID_COL_LOG_FREQ = 3;
+        private const int GRID_COL_COMMENT = 4;
+
+        #endregion
+
         #region Private members
 
         private CS_RecordLoggingConfiguration oLoggingConfig;
@@ -25,8 +34,25 @@ namespace CANStream
             InitializeComponent();
 
             oLoggingConfig = new CS_RecordLoggingConfiguration();
-
             bConfigModified = false;
+
+            CGrid_Channels.Columns[GRID_COL_NAME].HeaderText = "Channel Name";
+            CGrid_Channels.Columns.Add("oCol_LoggingMode", "Logging Mode");
+            CGrid_Channels.Columns.Add("oCol_LoggingFreq", "Logging Frequency");
+            CGrid_Channels.Columns.Add("oCol_Comment", "Comment");
+
+            CGrid_Channels.Columns[GRID_COL_NAME].Width = 150;
+            CGrid_Channels.Columns[GRID_COL_LOG_MODE].Width = 150;
+            CGrid_Channels.Columns[GRID_COL_LOG_FREQ].Width = 150;
+            CGrid_Channels.Columns[GRID_COL_COMMENT].Width = CGrid_Channels.Width - 500;
+
+            CGrid_Channels.Columns[GRID_COL_LOG_MODE].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            CGrid_Channels.Columns[GRID_COL_LOG_FREQ].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            CGrid_Channels.Columns[GRID_COL_LOG_MODE].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            CGrid_Channels.Columns[GRID_COL_LOG_FREQ].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
         }
 
         #region Control events
@@ -75,6 +101,127 @@ namespace CANStream
 
         #endregion
 
+        #region Context_Grid
+
+        private void Context_Grid_CollapseAll_Click(object sender, EventArgs e)
+        {
+            CollapseAllGridRows();
+        }
+
+        private void Context_Grid_ExpandAll_Click(object sender, EventArgs e)
+        {
+            ExpandAllGridRows();
+        }
+
+        #endregion
+
+        #region CGrid_Channels
+
+        private void Grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > 0)
+            {
+                LoggingChannelConfiguration oLogChanCfg = (LoggingChannelConfiguration)CGrid_Channels.Grid.Rows[e.RowIndex].Tag;
+
+                switch (e.ColumnIndex)
+                {
+                    case GRID_COL_LOG_MODE:
+                        {
+                            if (!(oLogChanCfg == null))
+                            {
+                                CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+
+                                ChannelLoggingMode eLogMode = (ChannelLoggingMode)(Enum.Parse(typeof(ChannelLoggingMode),
+                                    CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()));
+
+                                switch (eLogMode)
+                                {
+                                    case ChannelLoggingMode.CustomFrequency:
+
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].Value = oLogChanCfg.LoggingFrequency.ToString();
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].ReadOnly = false;
+                                        break;
+
+                                    case ChannelLoggingMode.NotLogged:
+
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].Value = "0";
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].ReadOnly = true;
+                                        break;
+
+                                    default: //ChannelLoggingMode.DefaultFrequency:
+
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].Value = oLogChanCfg.DefaultFrequency.ToString();
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[GRID_COL_LOG_FREQ].ReadOnly = true;
+                                        break;
+                                }
+
+                                oLogChanCfg.LoggingMode = eLogMode;
+
+                                CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+                            }
+                        }
+                        break;
+
+                    case GRID_COL_LOG_FREQ:
+                        {
+                            if (!(oLogChanCfg == null))
+                            {
+                                CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+
+                                double FreqSet = 0;
+
+                                string sFreqSet = CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                                if (double.TryParse(sFreqSet, out FreqSet))
+                                {
+                                    if (FreqSet >= 0 && FreqSet <= 1000)
+                                    {
+                                        oLogChanCfg.LoggingFrequency = Math.Round(FreqSet, 0);
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oLogChanCfg.LoggingFrequency.ToString();
+
+                                        if(oLogChanCfg.LoggingFrequency!= FreqSet)
+                                        {
+                                            MessageBox.Show("Logging frequency has been rounded to " + oLogChanCfg.LoggingFrequency.ToString(), 
+                                                            Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Logging frequency must be contained between 0 Hz and 1000 Hz !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oLogChanCfg.LoggingFrequency.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Logging frequency value should be a numerical value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oLogChanCfg.LoggingFrequency.ToString();
+                                }
+
+                                CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+                            }
+                        }
+                        break;
+
+                    case GRID_COL_COMMENT:
+
+                        {
+                            if (!(oLogChanCfg == null))
+                            {
+                                oLogChanCfg.Comment = CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                            }
+                        }
+                        break;
+
+                    default:
+
+                        //Nothing to do
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Private methodes
@@ -86,18 +233,103 @@ namespace CANStream
 
         private void Show_LoggingChannelConfig()
         {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+
             CGrid_Channels.Rows.Clear();
 
             foreach (LoggingChannelGroup oChanGrp in oLoggingConfig.Groups)
             {
                 CollapsableGridRow oGroupRow = CGrid_Channels.Rows.Add();
-                oGroupRow.ThisRow.Cells[1].Value = oChanGrp.Name;
+                oGroupRow.ThisRow.Cells[GRID_COL_NAME].Value = oChanGrp.Name;
+                oGroupRow.ThisRow.Cells[GRID_COL_COMMENT].Value = oChanGrp.Comment;
+                oGroupRow.ThisRow.ReadOnly = true;
 
-                foreach(LoggingChannelConfiguration oChan in oChanGrp.LoggingChannels)
+                Color_GridRow(oGroupRow.ThisRow, Color.MidnightBlue, Color.White);
+
+                //Channels of the group
+                int iChan = 0;
+                foreach (LoggingChannelConfiguration oChan in oChanGrp.LoggingChannels)
                 {
                     CollapsableGridRow oChanRow = oGroupRow.Children.Add();
-                    oChanRow.ThisRow.Cells[1].Value = oChan.Name;
+                    Set_LoggingModeCells(oChanRow.ThisRow);
+
+                    oChanRow.ThisRow.Tag = oChan;
+
+                    oChanRow.ThisRow.Cells[GRID_COL_NAME].Value = oChan.Name;
+                    oChanRow.ThisRow.Cells[GRID_COL_NAME].ReadOnly = true;
+
+                    oChanRow.ThisRow.Cells[GRID_COL_LOG_MODE].Value = oChan.LoggingMode.ToString();
+                    oChanRow.ThisRow.Cells[GRID_COL_LOG_MODE].ReadOnly = false;
+
+                    oChanRow.ThisRow.Cells[GRID_COL_LOG_FREQ].Value = oChan.LoggingFrequency.ToString();
+                    oChanRow.ThisRow.Cells[GRID_COL_LOG_FREQ].ReadOnly = !(oChan.LoggingMode == ChannelLoggingMode.CustomFrequency);
+
+                    oChanRow.ThisRow.Cells[GRID_COL_COMMENT].Value = oChan.Comment;
+                    oChanRow.ThisRow.Cells[GRID_COL_NAME].ReadOnly = false;
+
+                    if (iChan % 2 != 0)
+                    {
+                        Color_GridRow(oChanRow.ThisRow, Color.LightCyan, Color.Black);
+                    }
+
+                    iChan++;
                 }
+
+                //Sub groups of the group
+                foreach(LoggingChannelGroup oSubGroup in oChanGrp.SubGroups)
+                {
+                    CollapsableGridRow oSubGroupRow = oGroupRow.Children.Add();
+                    oSubGroupRow.ThisRow.Cells[GRID_COL_NAME].Value = oSubGroup.Name;
+                    oSubGroupRow.ThisRow.ReadOnly = true;
+
+                    Color_GridRow(oSubGroupRow.ThisRow, Color.LightSkyBlue, Color.Black);
+
+                    int iSubChan = 0;
+                    foreach (LoggingChannelConfiguration oSubGroupChan in oSubGroup.LoggingChannels)
+                    {
+                        CollapsableGridRow oSubChanRow = oSubGroupRow.Children.Add();
+                        Set_LoggingModeCells(oSubChanRow.ThisRow);
+
+                        oSubChanRow.ThisRow.Cells[GRID_COL_NAME].Value = oSubGroupChan.Name;
+                        oSubChanRow.ThisRow.Cells[GRID_COL_NAME].ReadOnly = true;
+
+                        oSubChanRow.ThisRow.Cells[GRID_COL_LOG_MODE].Value = oSubGroupChan.LoggingMode.ToString();
+                        oSubChanRow.ThisRow.Cells[GRID_COL_LOG_MODE].ReadOnly = false;
+
+                        oSubChanRow.ThisRow.Cells[GRID_COL_LOG_FREQ].Value = oSubGroupChan.LoggingFrequency.ToString();
+                        oSubChanRow.ThisRow.Cells[GRID_COL_LOG_FREQ].ReadOnly = !(oSubGroupChan.LoggingMode == ChannelLoggingMode.CustomFrequency);
+
+                        oSubChanRow.ThisRow.Cells[GRID_COL_COMMENT].Value = oSubGroupChan.Comment;
+                        oSubChanRow.ThisRow.Cells[GRID_COL_NAME].ReadOnly = false;
+
+                        if (iSubChan % 2 != 0)
+                        {
+                            Color_GridRow(oSubChanRow.ThisRow, Color.LightCyan, Color.Black);
+                        }
+
+                        iSubChan++;
+                    }
+                }
+            }
+
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+        }
+
+        private void Set_LoggingModeCells(DataGridViewRow oRow)
+        {
+            oRow.Cells[GRID_COL_LOG_MODE] = new DataGridViewComboBoxCell();
+            DataGridViewComboBoxCell oCmbCell = oRow.Cells[GRID_COL_LOG_MODE] as DataGridViewComboBoxCell;
+
+            oCmbCell.Items.Clear();
+            oCmbCell.Items.AddRange(Enum.GetNames(typeof(ChannelLoggingMode)));
+        }
+
+        private void Color_GridRow(DataGridViewRow oRow, Color BackColor,Color ForeColor)
+        {
+            for (int i = 1; i < oRow.Cells.Count; i++)
+            {
+                oRow.Cells[i].Style.BackColor = BackColor;
+                oRow.Cells[i].Style.ForeColor = ForeColor;
             }
         }
 
@@ -161,23 +393,28 @@ namespace CANStream
 
                     if (!(oMsgGroup == null))
                     {
+                        oMsgGroup.Comment = oMsg.Comment;
+
                         foreach (CANParameter oParam in oMsg.Parameters)
                         {
                             LoggingChannelConfiguration oChanCfg = new LoggingChannelConfiguration();
 
                             oChanCfg.Name = oParam.Name;
+                            oChanCfg.Comment = oParam.Comment;
                             oChanCfg.LoggingMode = ChannelLoggingMode.DefaultFrequency;
 
                             if (oMsg.Period != 0)
                             {
-                                oChanCfg.LoggingFrequency = 1 / ((double)oMsg.Period / 1000);
+                                oChanCfg.DefaultFrequency = 1 / ((double)oMsg.Period / 1000);
                             }
                             else
                             {
                                 oChanCfg.LoggingFrequency = 1;
                             }
 
-                            if(oParam.IsMultiplexed)
+                            oChanCfg.LoggingFrequency = oChanCfg.DefaultFrequency;
+
+                            if (oParam.IsMultiplexed)
                             {
                                 string MuxName = "Mux: " + oMsg.MultiplexerName + " = " + oParam.MultiplexerValue.ToString();
                                 LoggingChannelGroup oMuxGroup = oLoggingConfig.Get_LoggingChannelGroup(MuxName);
@@ -202,6 +439,20 @@ namespace CANStream
                     }
                 }
             }
+        }
+
+        private void CollapseAllGridRows()
+        {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+            CGrid_Channels.CollapseAllRows();
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+        }
+
+        private void ExpandAllGridRows()
+        {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+            CGrid_Channels.ExpandAllRows();
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
         }
 
         #endregion
