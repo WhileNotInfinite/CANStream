@@ -142,9 +142,13 @@ namespace CANStream
             string[] GroupNames = GroupPath.Split('\\');
             LoggingChannelGroup oCurrentGroup = this;
 
-            if (GroupNames.Length > 0)
+            if (GroupNames.Length == 1)
             {
-                for (int i = 0; i < GroupNames.Length; i++)
+                return (oCurrentGroup);
+            }
+            else if (GroupNames.Length > 1)
+            {
+                for (int i = 1 ; i < GroupNames.Length; i++)
                 {
                     LoggingChannelGroup oSubGroup = oCurrentGroup.Get_SubGroup(GroupNames[i]);
 
@@ -623,7 +627,7 @@ namespace CANStream
                     string GroupName = GroupParents.Last();
                     string ParentPath = "";
 
-                    for (int i = 0; i < GroupParents.Length - 2; i++)
+                    for (int i = 0; i < GroupParents.Length - 1; i++)
                     {
                         ParentPath += GroupParents[i];
                         if (i < GroupParents.Length - 2) ParentPath += "\\";
@@ -641,7 +645,8 @@ namespace CANStream
 
                                 if (!(oAddedGroup == null))
                                 {
-                                    oAddedGroup.Comment = xAtrComment.Value;                                }
+                                    oAddedGroup.Comment = xAtrComment.Value;
+                                }
                             }
                         }
                     }

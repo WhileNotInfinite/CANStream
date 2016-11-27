@@ -61,17 +61,17 @@ namespace CANStream
 
         private void TSB_New_Click(object sender, EventArgs e)
         {
-
+            New_LoggingChannelConfig();
         }
 
         private void TSB_Open_Click(object sender, EventArgs e)
         {
-
+            Open_LoggingChannelCondig();
         }
 
         private void TSB_Save_Click(object sender, EventArgs e)
         {
-
+            Save_LoggingChannelConfig();
         }
 
         private void TSB_Copy_Click(object sender, EventArgs e)
@@ -156,6 +156,7 @@ namespace CANStream
                                 }
 
                                 oLogChanCfg.LoggingMode = eLogMode;
+                                bConfigModified = true;
 
                                 CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
                             }
@@ -178,8 +179,9 @@ namespace CANStream
                                     {
                                         oLogChanCfg.LoggingFrequency = Math.Round(FreqSet, 0);
                                         CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = oLogChanCfg.LoggingFrequency.ToString();
+                                        bConfigModified = true;
 
-                                        if(oLogChanCfg.LoggingFrequency!= FreqSet)
+                                        if (oLogChanCfg.LoggingFrequency!= FreqSet)
                                         {
                                             MessageBox.Show("Logging frequency has been rounded to " + oLogChanCfg.LoggingFrequency.ToString(), 
                                                             Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -208,6 +210,7 @@ namespace CANStream
                             if (!(oLogChanCfg == null))
                             {
                                 oLogChanCfg.Comment = CGrid_Channels.Grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                                bConfigModified = true;
                             }
                         }
                         break;
@@ -226,16 +229,59 @@ namespace CANStream
 
         #region Private methodes
 
+        private void New_LoggingChannelConfig()
+        {
+            if (!(Verify_ConfigurationModified())) return;
+
+            oLoggingConfig = new CS_RecordLoggingConfiguration();
+            Clear_LoggingChannelConfig();
+            bConfigModified = false;
+        }
+
         private void Save_LoggingChannelConfig()
         {
+            Dlg_SaveFile.FileName = "";
+            Dlg_SaveFile.Filter = "Logging Channels Configuration file|*.lcc";
+            Dlg_SaveFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Logging Channels Configuration";
 
+            if (this.Dlg_SaveFile.ShowDialog() == DialogResult.OK)
+            {
+                oLoggingConfig.Write_LoggingConfigurationFile(Dlg_SaveFile.FileName);
+                bConfigModified = false;
+            }
+        }
+
+        private void Open_LoggingChannelCondig()
+        {
+            if (!(Verify_ConfigurationModified())) return;
+
+            Dlg_OpenFile.FileName = "";
+            Dlg_OpenFile.Filter = "Logging Channels Configuration file|*.lcc";
+            Dlg_OpenFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Logging Channels Configuration";
+
+            if (this.Dlg_OpenFile.ShowDialog()==DialogResult.OK)
+            {
+                oLoggingConfig = new CS_RecordLoggingConfiguration();
+
+                if(oLoggingConfig.Read_LoggingConfigurationFile(Dlg_OpenFile.FileName))
+                {
+                    Show_LoggingChannelConfig();
+                }
+                else
+                {
+                    MessageBox.Show("An occured while reading the logging channel configuration file !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear_LoggingChannelConfig();
+                }
+
+                bConfigModified = false;
+            }
         }
 
         private void Show_LoggingChannelConfig()
         {
             CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
 
-            CGrid_Channels.Rows.Clear();
+            //CGrid_Channels.Rows.Clear();
 
             foreach (LoggingChannelGroup oChanGrp in oLoggingConfig.Groups)
             {
@@ -315,6 +361,13 @@ namespace CANStream
             CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
         }
 
+        private void Clear_LoggingChannelConfig()
+        {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+            CGrid_Channels.Rows.Clear();
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+        }
+
         private void Set_LoggingModeCells(DataGridViewRow oRow)
         {
             oRow.Cells[GRID_COL_LOG_MODE] = new DataGridViewComboBoxCell();
@@ -335,28 +388,7 @@ namespace CANStream
 
         private void Import_CanConfig()
         {
-            if (bConfigModified)
-            {
-                DialogResult Rep = MessageBox.Show("The current logging channels configuration has been modified.\nDo you want save changes ?",
-                                                    Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                switch(Rep)
-                {
-                    case DialogResult.Yes:
-
-                        Save_LoggingChannelConfig();
-                        break;
-
-                    case DialogResult.Cancel:
-
-                        return;
-
-                    default:
-
-                        break;
-                }
-
-            }
+            if (!(Verify_ConfigurationModified())) return;
 
             Dlg_OpenFile.FileName = "";
             Dlg_OpenFile.Filter = "CAN Configuration|*.xcc"; //"CAN Configuration|*.xcc|Multiple CAN bus Configuration|*.mcb"
@@ -370,6 +402,7 @@ namespace CANStream
                 {
                     Set_CanConfiguration(oCanCfg);
                     Show_LoggingChannelConfig();
+                    bConfigModified = true;
                 }
                 else
                 {
@@ -453,6 +486,35 @@ namespace CANStream
             CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
             CGrid_Channels.ExpandAllRows();
             CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
+        }
+
+        private bool Verify_ConfigurationModified()
+        {
+            if (bConfigModified)
+            {
+                DialogResult Rep = MessageBox.Show("The current logging channels configuration has been modified.\nDo you want save changes ?",
+                                                    Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                switch (Rep)
+                {
+                    case DialogResult.Yes:
+
+                        Save_LoggingChannelConfig();
+                        return (true);
+
+                    case DialogResult.Cancel:
+
+                        return (false);
+
+                    default:
+
+                        break;
+                }
+
+                return (true);
+            }
+
+            return (true);
         }
 
         #endregion

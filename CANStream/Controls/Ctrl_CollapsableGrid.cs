@@ -420,6 +420,27 @@ namespace CANStream
 
         public new void Clear()
         {
+            if (oContainerObject.GetType().Equals(typeof(Ctrl_CollapsableGrid)))
+            {
+                DataGridView oGrid = ((Ctrl_CollapsableGrid)oContainerObject).DataGrid;
+
+                oGrid.Rows.Clear();
+                base.Clear();
+            }
+            else if (oContainerObject.GetType().Equals(typeof(CollapsableGridRow)))
+            {
+                CollapsableGridRow oRowContainer = (CollapsableGridRow)oContainerObject;
+
+                foreach(CollapsableGridRow oChildRow in oRowContainer.Children)
+                {
+                    oChildRow.Children.Clear();
+                }
+
+                oRowContainer.CollapsableGrid.Grid.Rows.Remove(oRowContainer.ThisRow);
+            }
+            
+            //TODO: Remove old code
+            /*
             if (oContainerObject.GetType().Equals(typeof(DataGridView)))
             {
                 DataGridView oGrid = (DataGridView)oContainerObject;
@@ -427,6 +448,7 @@ namespace CANStream
                 oGrid.Rows.Clear();
                 base.Clear();
             }
+            */
         }
 
         #endregion

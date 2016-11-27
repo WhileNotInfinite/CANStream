@@ -171,7 +171,11 @@
             // 
             // Dlg_OpenFile
             // 
-            this.Dlg_OpenFile.FileName = "openFileDialog1";
+            this.Dlg_OpenFile.Filter = "Logging Channels Configuration file|*.lcc";
+            // 
+            // Dlg_SaveFile
+            // 
+            this.Dlg_SaveFile.Filter = "Logging Channels Configuration file|*.lcc";
             // 
             // CGrid_Channels
             // 

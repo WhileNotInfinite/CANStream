@@ -2781,6 +2781,7 @@ namespace CANStream
         		CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Built-In Signals libraries");
         		CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Data Viewers");
         		CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Record User Information");
+                CANStreamTools.CreateFolderIfItDoesNotExist(CANStreamTools.MyDocumentPath + "\\CANStream\\Logging Channels Configuration");
         }
         
         private void UpdateGridsColumnsStates(CANControllerGrid eGrid, GridCANData_ColumnsEnum eColVisible)
