@@ -67,6 +67,8 @@ namespace CANStream
 
         private CollapsableGridRowCollection GridRows;
 
+        private List<CollapsableGridRowState> RowsCollapsingContext;
+
         #endregion
 
         public Ctrl_CollapsableGrid()
@@ -74,6 +76,7 @@ namespace CANStream
             InitializeComponent();
 
             GridRows = new CollapsableGridRowCollection(this);
+            RowsCollapsingContext = new List<CollapsableGridRowState>();
         }
 
         #region Control events
@@ -149,6 +152,16 @@ namespace CANStream
             {
                 oRow.Collapse();
             }
+        }
+
+        public void SaveRowsCollapsingContext()
+        {
+            RowsCollapsingContext = this.Rows.GetRowCollapsingContext();
+        }
+
+        public void RestoreRowsCollapsingContext()
+        {
+            this.Rows.RestoreRowCollapsingContext(RowsCollapsingContext);
         }
 
         #endregion
@@ -376,6 +389,60 @@ namespace CANStream
         {
             oContainerObject = Container;
         }
+
+        #region Internal methodes
+
+        internal List<CollapsableGridRowState> GetRowCollapsingContext()
+        {
+            List<CollapsableGridRowState> CollapsingContext = new List<CollapsableGridRowState>();
+
+            foreach(CollapsableGridRow oCRow in this)
+            {
+                CollapsingContext.Add(oCRow.RowState);
+
+                if(oCRow.Children.Count>0)
+                {
+                    CollapsingContext.AddRange(oCRow.Children.GetRowCollapsingContext());
+                }
+            }
+
+            return (CollapsingContext);
+        }
+
+        internal void RestoreRowCollapsingContext(List<CollapsableGridRowState>Context)
+        {
+            foreach(CollapsableGridRow oCRow in this)
+            {
+                if (oCRow.ThisRow.Index < Context.Count)
+                {
+                    oCRow.RowState = Context[oCRow.ThisRow.Index];
+
+                    switch(oCRow.RowState)
+                    {
+                        case CollapsableGridRowState.Collapsed:
+
+                            oCRow.Collapse();
+                            break;
+
+                        case CollapsableGridRowState.Expanded:
+
+                            oCRow.Expand();
+                            break;
+
+                        default: //CollapsableGridRowState.NoChildren
+
+                            break;
+                    }
+
+                    if (oCRow.Children.Count > 0)
+                    {
+                        oCRow.Children.RestoreRowCollapsingContext(Context);
+                    }
+                }
+            }
+        }
+
+        #endregion
 
         #region Public methodes
 

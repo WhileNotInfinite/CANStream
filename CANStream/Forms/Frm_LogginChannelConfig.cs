@@ -124,10 +124,10 @@ namespace CANStream
 
         private void Grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+
             if (e.RowIndex > 0 && e.ColumnIndex > 0 && bGroupModification == false)
             {
-                CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
-
                 if (CGrid_Channels.Grid.Rows[e.RowIndex].Tag.GetType() == typeof(LoggingChannelConfiguration))
                 {
                     LoggingChannelConfiguration oLogChanCfg = (LoggingChannelConfiguration)CGrid_Channels.Grid.Rows[e.RowIndex].Tag;
@@ -183,15 +183,17 @@ namespace CANStream
                                 }
                             }
 
+                            CGrid_Channels.SaveRowsCollapsingContext();
                             Show_LoggingChannelConfig();
+                            CGrid_Channels.RestoreRowsCollapsingContext();
                         }
                     }
 
                     bGroupModification = false;
                 }
-
-                CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
             }
+
+            CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
         }
 
         #endregion
