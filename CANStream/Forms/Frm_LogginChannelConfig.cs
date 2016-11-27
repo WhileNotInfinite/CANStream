@@ -332,6 +332,8 @@ namespace CANStream
                         CollapsableGridRow oSubChanRow = oSubGroupRow.Children.Add();
                         Set_LoggingModeCells(oSubChanRow.ThisRow);
 
+                        oSubChanRow.ThisRow.Tag = oSubGroupChan;
+
                         Show_LoggingConfigurationItem(
                                                         oSubChanRow.ThisRow,
                                                         oSubGroupChan.Name,
