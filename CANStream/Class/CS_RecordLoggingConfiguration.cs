@@ -82,6 +82,21 @@ namespace CANStream
         public string FullPath { get; set; }
 
         /// <summary>
+        /// Logging mode set for all logging channels and sub group of the current group
+        /// </summary>
+        public ChannelLoggingMode GroupLoggingMode { get; set; }
+
+        /// <summary>
+        /// Logging frequency set for all logging channels and sub group of the current group
+        /// </summary>
+        public double GroupLoggingFrequency { get; set; }
+
+        /// <summary>
+        /// Default logging frequency set for all logging channels and sub group of the current group
+        /// </summary>
+        public double GroupDefaultFrequency { get; set; }
+
+        /// <summary>
         /// Description of the logging channel
         /// </summary>
         public string Comment { get; set; }
@@ -105,6 +120,9 @@ namespace CANStream
         {
             Name = "";
             FullPath = "";
+            GroupLoggingMode = ChannelLoggingMode.DefaultFrequency;
+            GroupLoggingFrequency = 0;
+            GroupDefaultFrequency = 0;
             Comment = "";
             LoggingChannels = new List<LoggingChannelConfiguration>();
             SubGroups = new List<LoggingChannelGroup>();
@@ -542,17 +560,30 @@ namespace CANStream
 
                     LoggingChannelGroup oSubGroup = oRootGroup.Get_GroupAtPath(SubGroupPath);
                     XmlAttribute xAtrGrpComment = oXDoc.CreateAttribute("Comment");
+                    XmlAttribute xAtrGrpLogMode = oXDoc.CreateAttribute("GroupLoggingMode");
+                    XmlAttribute xAtrGrpLogFreq = oXDoc.CreateAttribute("GroupLoggingFrequency");
+                    XmlAttribute xAtrGrpDefLogFreq = oXDoc.CreateAttribute("GroupDefaultLoggingFrequency");
 
-                    if(!(oSubGroup==null))
+                    if (!(oSubGroup==null))
                     {
                         xAtrGrpComment.Value = oSubGroup.Comment;
+                        xAtrGrpLogMode.Value = oSubGroup.GroupLoggingMode.ToString();
+                        xAtrGrpLogFreq.Value = oSubGroup.GroupLoggingFrequency.ToString();
+                        xAtrGrpDefLogFreq.Value = oSubGroup.GroupDefaultFrequency.ToString();
+
                     }
                     else
                     {
                         xAtrGrpComment.Value ="";
+                        xAtrGrpLogMode.Value = ChannelLoggingMode.DefaultFrequency.ToString(); //Default value
+                        xAtrGrpLogFreq.Value = "0"; //Default 
+                        xAtrGrpDefLogFreq.Value = "0"; //Default value
                     }
 
                     xGroup.Attributes.Append(xAtrGrpComment);
+                    xGroup.Attributes.Append(xAtrGrpLogMode);
+                    xGroup.Attributes.Append(xAtrGrpLogFreq);
+                    xGroup.Attributes.Append(xAtrGrpDefLogFreq);
 
                     xGroup.InnerText = SubGroupPath;
                     xRootGroup.AppendChild(xGroup);
@@ -638,14 +669,32 @@ namespace CANStream
                         if (Add_LoggingChannelGroup(GroupName, ParentPath))
                         {
                             XmlAttribute xAtrComment = xSubGroup.Attributes["Comment"];
+                            XmlAttribute xAtrGrpLogMode = xSubGroup.Attributes["GroupLoggingMode"];
+                            XmlAttribute xAtrGrpLogFreq = xSubGroup.Attributes["GroupLoggingFrequency"];
+                            XmlAttribute xAtrGrpDefLogFreq = xSubGroup.Attributes["GroupDefaultLoggingFrequency"];
 
-                            if (!(xAtrComment == null))
+                            LoggingChannelGroup oAddedGroup = oRootGroup.Get_GroupAtPath(xSubGroup.InnerText);
+
+                            if (!(oAddedGroup == null))
                             {
-                                LoggingChannelGroup oAddedGroup = oRootGroup.Get_GroupAtPath(xSubGroup.InnerText);
-
-                                if (!(oAddedGroup == null))
+                                if (!(xAtrComment == null))
                                 {
                                     oAddedGroup.Comment = xAtrComment.Value;
+                                }
+
+                                if (!(xAtrGrpLogMode == null))
+                                {
+                                    oAddedGroup.GroupLoggingMode= (ChannelLoggingMode)(Enum.Parse(typeof(ChannelLoggingMode), xAtrGrpLogMode.Value));
+                                }
+
+                                if (!(xAtrGrpLogFreq == null))
+                                {
+                                    oAddedGroup.GroupLoggingFrequency = double.Parse(xAtrGrpLogFreq.Value);
+                                }
+
+                                if (!(xAtrGrpDefLogFreq == null))
+                                {
+                                    oAddedGroup.GroupDefaultFrequency = double.Parse(xAtrGrpDefLogFreq.Value);
                                 }
                             }
                         }

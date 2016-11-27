@@ -451,6 +451,31 @@ namespace CANStream
             */
         }
 
+        public CollapsableGridRow GetCollapsableRowAtGridRowIndex(int RowIndex)
+        {
+            foreach (CollapsableGridRow oCRow in this)
+            {
+                if(oCRow.ThisRow.Index==RowIndex)
+                {
+                    return (oCRow);
+                }
+                else
+                {
+                    if(oCRow.Children.Count>0)
+                    {
+                        CollapsableGridRow oRowFound = oCRow.Children.GetCollapsableRowAtGridRowIndex(RowIndex);
+
+                        if(!(oRowFound==null))
+                        {
+                            return (oRowFound);
+                        }
+                    }
+                }
+            }
+
+            return (null);
+        }
+
         #endregion
     }
 
