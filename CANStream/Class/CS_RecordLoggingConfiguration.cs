@@ -26,6 +26,7 @@ namespace CANStream
     /// <summary>
     /// Record data file channel logging configuration class
     /// </summary>
+    [Serializable]
     public class LoggingChannelConfiguration
     {
         #region Public properties
@@ -62,11 +63,34 @@ namespace CANStream
             DefaultFrequency = 0;
             Comment = "";
         }
+
+        #region Public methodes
+
+        /// <summary>
+        /// Returns a clone of the current LoggingChannelConfiguration object
+        /// </summary>
+        /// <returns>Clone of the current LoggingChannelConfiguration object</returns>
+        public LoggingChannelConfiguration Clone()
+        {
+            LoggingChannelConfiguration oClone = new LoggingChannelConfiguration();
+
+            oClone.Comment = this.Comment;
+            oClone.DefaultFrequency = this.DefaultFrequency;
+            oClone.LoggingFrequency = this.LoggingFrequency;
+            oClone.LoggingMode = this.LoggingMode;
+            oClone.Name = this.Name;
+            oClone.Path = this.Path;
+
+            return (oClone);
+        }
+
+        #endregion
     }
 
     /// <summary>
     /// Channel logging configuration group class
     /// </summary>
+    [Serializable]
     public class LoggingChannelGroup
     {
         #region Public properties
@@ -328,6 +352,34 @@ namespace CANStream
             }
 
             return (ChannelsCount);
+        }
+
+        /// <summary>
+        /// Returns a clone of the current LoggingChannelGroup object
+        /// </summary>
+        /// <returns>Clone of the current LoggingChannelGroup object</returns>
+        public LoggingChannelGroup Clone()
+        {
+            LoggingChannelGroup oClone = new LoggingChannelGroup();
+
+            oClone.Comment = this.Comment;
+            oClone.FullPath = this.FullPath;
+            oClone.GroupDefaultFrequency = this.GroupDefaultFrequency;
+            oClone.GroupLoggingFrequency = this.GroupLoggingFrequency;
+            oClone.GroupLoggingMode = this.GroupLoggingMode;
+            oClone.Name = this.Name;
+
+            foreach(LoggingChannelGroup oSubGroup in this.SubGroups)
+            {
+                oClone.SubGroups.Add(oSubGroup.Clone());
+            }
+
+            foreach(LoggingChannelConfiguration oChan in this.LoggingChannels)
+            {
+                oClone.LoggingChannels.Add(oChan.Clone());
+            }
+
+            return (oClone);
         }
 
         #endregion

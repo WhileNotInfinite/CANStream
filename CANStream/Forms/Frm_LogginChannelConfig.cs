@@ -81,12 +81,12 @@ namespace CANStream
 
         private void TSB_Copy_Click(object sender, EventArgs e)
         {
-
+            Copy_LoggingItemProperties();
         }
 
         private void TSB_Paste_Click(object sender, EventArgs e)
         {
-
+            Paste_LoggingItemProperties();
         }
 
         private void TSB_Delete_Click(object sender, EventArgs e)
@@ -118,6 +118,16 @@ namespace CANStream
             ExpandAllGridRows();
         }
 
+        private void Context_Grid_Copy_Click(object sender, EventArgs e)
+        {
+            Copy_LoggingItemProperties();
+        }
+
+        private void Context_Grid_Paste_Click(object sender, EventArgs e)
+        {
+            Paste_LoggingItemProperties();
+        }
+
         #endregion
 
         #region CGrid_Channels
@@ -126,7 +136,7 @@ namespace CANStream
         {
             CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
 
-            if (e.RowIndex > 0 && e.ColumnIndex > 0 && bGroupModification == false)
+            if (e.RowIndex > 0 && e.ColumnIndex > GRID_COL_NAME && bGroupModification == false)
             {
                 if (CGrid_Channels.Grid.Rows[e.RowIndex].Tag.GetType() == typeof(LoggingChannelConfiguration))
                 {
@@ -358,6 +368,8 @@ namespace CANStream
 
         private void Show_LoggingConfigurationItem(DataGridViewRow oRow, string ItemName, ChannelLoggingMode ItemLoggingMode, double ItemLoggingFreq, double ItemDefaultFreq, string ItemComment)
         {
+            CGrid_Channels.Grid.CellValueChanged -= Grid_CellValueChanged;
+
             oRow.Cells[GRID_COL_NAME].Value = ItemName;
             oRow.Cells[GRID_COL_LOG_MODE].Value = ItemLoggingMode.ToString();
 
@@ -500,14 +512,21 @@ namespace CANStream
 
         private bool Set_LoggingItemProperties(DataGridViewRow oRow, int ModifiedColId, object oLogItem)
         {
-            bool Ret = Set_LoggingItemProperties(
-                                                    oRow,
-                                                    ModifiedColId,
-                                                    oLogItem,
-                                                    oRow.Cells[GRID_COL_LOG_MODE].Value.ToString(),
-                                                    oRow.Cells[GRID_COL_LOG_FREQ].Value.ToString(),
-                                                    oRow.Cells[GRID_COL_COMMENT].Value.ToString()
+            bool Ret = false;
+
+            if (!(oRow.Cells[GRID_COL_LOG_MODE].Value == null ||
+                  oRow.Cells[GRID_COL_LOG_FREQ].Value == null ||
+                  oRow.Cells[GRID_COL_COMMENT].Value == null))
+            {
+                Ret = Set_LoggingItemProperties(
+                                                oRow,
+                                                ModifiedColId,
+                                                oLogItem,
+                                                oRow.Cells[GRID_COL_LOG_MODE].Value.ToString(),
+                                                oRow.Cells[GRID_COL_LOG_FREQ].Value.ToString(),
+                                                oRow.Cells[GRID_COL_COMMENT].Value.ToString()
                                                 );
+            }
 
             return (Ret);
         }
@@ -738,6 +757,121 @@ namespace CANStream
             }
 
             return (true);
+        }
+
+        private void Copy_LoggingItemProperties()
+        {
+            DataFormats.Format oFormat;
+            IDataObject ClipDataObj;
+
+            if (!(CGrid_Channels.Grid.SelectedCells == null))
+            {
+                int iSelectedRow = CGrid_Channels.Grid.SelectedCells[0].RowIndex;
+
+                if (!(CGrid_Channels.Grid.Rows[iSelectedRow].Tag == null))
+                {
+                    object oSelectedObject = CGrid_Channels.Grid.Rows[iSelectedRow].Tag;
+
+                    if(oSelectedObject.GetType()==typeof(LoggingChannelConfiguration))
+                    {
+                        oFormat = DataFormats.GetFormat(typeof(LoggingChannelConfiguration).FullName);
+                        ClipDataObj = new DataObject();
+                        ClipDataObj.SetData(oFormat.Name, false, oSelectedObject as LoggingChannelConfiguration);
+                        Clipboard.SetDataObject(ClipDataObj, false);
+                    }
+                    else if (oSelectedObject.GetType() == typeof(LoggingChannelGroup))
+                    {
+                        oFormat = DataFormats.GetFormat(typeof(LoggingChannelGroup).FullName);
+                        ClipDataObj = new DataObject();
+                        ClipDataObj.SetData(oFormat.Name, false, oSelectedObject as LoggingChannelGroup);
+                        Clipboard.SetDataObject(ClipDataObj, false);
+                    }
+                    else
+                    {
+                        Clipboard.Clear();
+                    }
+                }
+            }
+        }
+
+        private void Paste_LoggingItemProperties()
+        {
+            if (!(CGrid_Channels.Grid.SelectedCells == null))
+            {
+                object oClipObject = null;
+                IDataObject ClipDataObj = Clipboard.GetDataObject();
+
+                string sChannelFormat = typeof(LoggingChannelConfiguration).FullName;
+                string sGroupFormat = typeof(LoggingChannelGroup).FullName;
+
+                if (ClipDataObj.GetDataPresent(sChannelFormat))
+                {
+                    oClipObject = ClipDataObj.GetData(sChannelFormat);
+
+                    if (!(oClipObject == null))
+                    {
+                        Set_LoggingItemPropertiesFromClipboard(oClipObject);
+                    }
+                }
+                else if (ClipDataObj.GetDataPresent(sGroupFormat))
+                {
+                    oClipObject = ClipDataObj.GetData(sGroupFormat);
+
+                    if (!(oClipObject == null))
+                    {
+                        Set_LoggingItemPropertiesFromClipboard(oClipObject);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Clipboard does not contain any logging channel configuration object !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+        private void Set_LoggingItemPropertiesFromClipboard(object oClipboardObject)
+        {
+            ChannelLoggingMode eClipObjLoggingMode;
+            double ClipObjLoggingFrequency;
+
+            if (oClipboardObject.GetType() == typeof(LoggingChannelConfiguration))
+            {
+                eClipObjLoggingMode = ((LoggingChannelConfiguration)oClipboardObject).LoggingMode;
+                ClipObjLoggingFrequency = ((LoggingChannelConfiguration)oClipboardObject).LoggingFrequency;
+            }
+            else if (oClipboardObject.GetType() == typeof(LoggingChannelGroup))
+            {
+                eClipObjLoggingMode = ((LoggingChannelGroup)oClipboardObject).GroupLoggingMode;
+                ClipObjLoggingFrequency = ((LoggingChannelGroup)oClipboardObject).GroupLoggingFrequency;
+            }
+            else
+            {
+                return;
+            }
+
+            int iPrevRowId = -1;
+            foreach (DataGridViewCell oCell in CGrid_Channels.Grid.SelectedCells)
+            {
+                if (oCell.RowIndex != iPrevRowId)
+                {
+                    iPrevRowId = oCell.RowIndex;
+
+                    if (CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag.GetType() == typeof(LoggingChannelConfiguration))
+                    {
+                        ((LoggingChannelConfiguration)CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag).LoggingMode = eClipObjLoggingMode;
+                        ((LoggingChannelConfiguration)CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag).LoggingFrequency = ClipObjLoggingFrequency;
+                    }
+                    else if (CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag.GetType() == typeof(LoggingChannelGroup))
+                    {
+                        ((LoggingChannelGroup)CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag).GroupLoggingMode = eClipObjLoggingMode;
+                        ((LoggingChannelGroup)CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag).GroupLoggingFrequency = ClipObjLoggingFrequency;
+                    }
+                }
+            }
+
+            CGrid_Channels.SaveRowsCollapsingContext();
+            Show_LoggingChannelConfig();
+            CGrid_Channels.RestoreRowsCollapsingContext();
         }
 
         #endregion

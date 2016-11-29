@@ -43,10 +43,13 @@
             this.TSB_VirtualChan = new System.Windows.Forms.ToolStripButton();
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
-            this.CGrid_Channels = new CANStream.Ctrl_CollapsableGrid();
             this.Context_Grid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Context_Grid_CollapseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.Context_Grid_ExpandAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Context_Grid_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.Context_Grid_Paste = new System.Windows.Forms.ToolStripMenuItem();
+            this.CGrid_Channels = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.Context_Grid.SuspendLayout();
             this.SuspendLayout();
@@ -177,6 +180,56 @@
             // 
             this.Dlg_SaveFile.Filter = "Logging Channels Configuration file|*.lcc";
             // 
+            // Context_Grid
+            // 
+            this.Context_Grid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Context_Grid_CollapseAll,
+            this.Context_Grid_ExpandAll,
+            this.toolStripMenuItem1,
+            this.Context_Grid_Copy,
+            this.Context_Grid_Paste});
+            this.Context_Grid.Name = "Context_Grid";
+            this.Context_Grid.Size = new System.Drawing.Size(145, 98);
+            // 
+            // Context_Grid_CollapseAll
+            // 
+            this.Context_Grid_CollapseAll.Image = global::CANStream.Icones.Collapse_16;
+            this.Context_Grid_CollapseAll.Name = "Context_Grid_CollapseAll";
+            this.Context_Grid_CollapseAll.Size = new System.Drawing.Size(144, 22);
+            this.Context_Grid_CollapseAll.Text = "Collapse all";
+            this.Context_Grid_CollapseAll.Click += new System.EventHandler(this.Context_Grid_CollapseAll_Click);
+            // 
+            // Context_Grid_ExpandAll
+            // 
+            this.Context_Grid_ExpandAll.Image = global::CANStream.Icones.Expand_16;
+            this.Context_Grid_ExpandAll.Name = "Context_Grid_ExpandAll";
+            this.Context_Grid_ExpandAll.Size = new System.Drawing.Size(144, 22);
+            this.Context_Grid_ExpandAll.Text = "Expand all";
+            this.Context_Grid_ExpandAll.Click += new System.EventHandler(this.Context_Grid_ExpandAll_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 6);
+            // 
+            // Context_Grid_Copy
+            // 
+            this.Context_Grid_Copy.Image = global::CANStream.Icones.Copy_16;
+            this.Context_Grid_Copy.Name = "Context_Grid_Copy";
+            this.Context_Grid_Copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.Context_Grid_Copy.Size = new System.Drawing.Size(144, 22);
+            this.Context_Grid_Copy.Text = "Copy";
+            this.Context_Grid_Copy.Click += new System.EventHandler(this.Context_Grid_Copy_Click);
+            // 
+            // Context_Grid_Paste
+            // 
+            this.Context_Grid_Paste.Image = global::CANStream.Icones.Paste_16;
+            this.Context_Grid_Paste.Name = "Context_Grid_Paste";
+            this.Context_Grid_Paste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.Context_Grid_Paste.Size = new System.Drawing.Size(144, 22);
+            this.Context_Grid_Paste.Text = "Paste";
+            this.Context_Grid_Paste.Click += new System.EventHandler(this.Context_Grid_Paste_Click);
+            // 
             // CGrid_Channels
             // 
             this.CGrid_Channels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -187,30 +240,6 @@
             this.CGrid_Channels.Name = "CGrid_Channels";
             this.CGrid_Channels.Size = new System.Drawing.Size(791, 360);
             this.CGrid_Channels.TabIndex = 1;
-            // 
-            // Context_Grid
-            // 
-            this.Context_Grid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Context_Grid_CollapseAll,
-            this.Context_Grid_ExpandAll});
-            this.Context_Grid.Name = "Context_Grid";
-            this.Context_Grid.Size = new System.Drawing.Size(135, 48);
-            // 
-            // Context_Grid_CollapseAll
-            // 
-            this.Context_Grid_CollapseAll.Image = global::CANStream.Icones.Collapse_16;
-            this.Context_Grid_CollapseAll.Name = "Context_Grid_CollapseAll";
-            this.Context_Grid_CollapseAll.Size = new System.Drawing.Size(134, 22);
-            this.Context_Grid_CollapseAll.Text = "Collapse all";
-            this.Context_Grid_CollapseAll.Click += new System.EventHandler(this.Context_Grid_CollapseAll_Click);
-            // 
-            // Context_Grid_ExpandAll
-            // 
-            this.Context_Grid_ExpandAll.Image = global::CANStream.Icones.Expand_16;
-            this.Context_Grid_ExpandAll.Name = "Context_Grid_ExpandAll";
-            this.Context_Grid_ExpandAll.Size = new System.Drawing.Size(134, 22);
-            this.Context_Grid_ExpandAll.Text = "Expand all";
-            this.Context_Grid_ExpandAll.Click += new System.EventHandler(this.Context_Grid_ExpandAll_Click);
             // 
             // Frm_LogginChannelConfig
             // 
@@ -249,5 +278,8 @@
         private System.Windows.Forms.ContextMenuStrip Context_Grid;
         private System.Windows.Forms.ToolStripMenuItem Context_Grid_CollapseAll;
         private System.Windows.Forms.ToolStripMenuItem Context_Grid_ExpandAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem Context_Grid_Copy;
+        private System.Windows.Forms.ToolStripMenuItem Context_Grid_Paste;
     }
 }
