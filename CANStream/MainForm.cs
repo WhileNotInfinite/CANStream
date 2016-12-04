@@ -2637,7 +2637,7 @@ namespace CANStream
             {
                 openFileDialog1.FileName = "";
                 openFileDialog1.Filter = "logging channels configuration|*.lcc";
-                openFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Records";
+                openFileDialog1.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Logging Channels Configuration";
 
                 if (openFileDialog1.ShowDialog().Equals(DialogResult.OK))
                 {
@@ -2651,7 +2651,7 @@ namespace CANStream
 
             if(!(LoggingChannelsConfigFile.Equals("")))
             {
-                SS_TS_Lbl_LoggingChannelConfig.Text = Path.GetFileNameWithoutExtension(LoggingChannelsConfigFile);
+                SS_TS_Lbl_LoggingChannelConfig.Text = "Logging channels config: " + Path.GetFileNameWithoutExtension(LoggingChannelsConfigFile);
                 SS_TS_Lbl_LoggingChannelConfig.Visible = true;
             }
             else

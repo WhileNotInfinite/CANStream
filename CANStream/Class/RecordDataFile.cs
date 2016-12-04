@@ -816,11 +816,19 @@ namespace CANStream
 
                     //Channel samples value
                     double SamplingTime = 0;
+
                     if (oChanLogConfig.LoggingMode== ChannelLoggingMode.CustomFrequency)
                     {
                         if (oChanLogConfig.LoggingFrequency > 0)
                         {
                             SamplingTime = 1 / oChanLogConfig.LoggingFrequency;
+                        }
+                    }
+                    else if (oChanLogConfig.LoggingMode == ChannelLoggingMode.DefaultFrequency)
+                    {
+                        if (oChanLogConfig.DefaultFrequency > 0)
+                        {
+                            SamplingTime = 1 / oChanLogConfig.DefaultFrequency;
                         }
                     }
 

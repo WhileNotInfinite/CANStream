@@ -59,6 +59,14 @@ namespace CANStream
 
             CGrid_Channels.Grid.CellValueChanged += Grid_CellValueChanged;
 
+            if (!(LoggingChannelConfigFile.Equals("")))
+            {
+                if (oLoggingConfig.Read_LoggingConfigurationFile(LoggingChannelConfigFile))
+                {
+                    Show_LoggingChannelConfig();
+                }
+            }
+
             bGroupModification = false;
         }
 

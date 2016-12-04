@@ -537,6 +537,8 @@ namespace CANStream
 
         private void Grid_SpyEngineering_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1) return;
+
             DataGridViewCell oCurrentCell = Grid_SpyEngineering.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
             if (oCurrentCell is DataGridViewButtonCell)
