@@ -77,6 +77,23 @@ namespace CANStream
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TabPg_SpyAndManual = new System.Windows.Forms.TabPage();
             this.Split_RxTx = new System.Windows.Forms.SplitContainer();
+            this.Split_Tx_EngRaw = new System.Windows.Forms.SplitContainer();
+            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
+            this.Grid_CANRawData = new System.Windows.Forms.DataGridView();
+            this.GridCol_Raw_Tx_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_Period = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_Sent = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.GridCol_Raw_Tx_BtnTx = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.GridCol_Raw_Tx_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GridCol_Raw_Tx_B7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Context_ManualRawGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Ctxt_TxRaw_Add_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctxt_TxRaw_Del_TSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,8 +102,10 @@ namespace CANStream
             this.Ctxt_TxRaw_Save_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctxt_TxRaw_Open_TSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Split_Rx_DataGraph = new System.Windows.Forms.SplitContainer();
+            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
             this.Tab_SpyHistory = new System.Windows.Forms.TabControl();
             this.Tab_SpyHistory_Graph = new System.Windows.Forms.TabPage();
+            this.Graph_SpyData = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Tab_SpyHistory_Data = new System.Windows.Forms.TabPage();
             this.Lst_SpyDataHistory = new System.Windows.Forms.ListBox();
             this.TS_SpyDataHistory = new System.Windows.Forms.ToolStrip();
@@ -118,6 +137,8 @@ namespace CANStream
             this.TabPg_Cycle = new System.Windows.Forms.TabPage();
             this.Panel_Cycle = new System.Windows.Forms.Panel();
             this.Split_Cycle_VirtualSig_Graph = new System.Windows.Forms.SplitContainer();
+            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
+            this.Graph_Cycle = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.Context_CycleGraph = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Chk_CycleVirtualParamTxEnabled = new System.Windows.Forms.CheckBox();
@@ -149,27 +170,6 @@ namespace CANStream
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Timer_NoRx = new System.Windows.Forms.Timer(this.components);
             this.ToolTip_CmdRxOnly = new System.Windows.Forms.ToolTip(this.components);
-            this.Split_Tx_EngRaw = new System.Windows.Forms.SplitContainer();
-            this.Grid_ManualDataWriter = new CANStream.Ctrl_CANDataGrid();
-            this.Grid_CANRawData = new System.Windows.Forms.DataGridView();
-            this.GridCol_Raw_Tx_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_DLC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_Period = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_Sent = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.GridCol_Raw_Tx_BtnTx = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.GridCol_Raw_Tx_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GridCol_Raw_Tx_B7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grid_ManualDataViewer = new CANStream.Ctrl_CANDataGrid();
-            this.Graph_SpyData = new Ctrl_GraphWindow.Ctrl_WaveForm();
-            this.Cycle_SpyDataViewer = new CANStream.Ctrl_CANDataGrid();
-            this.Graph_Cycle = new Ctrl_GraphWindow.Ctrl_WaveForm();
             this.CtrlMain_ToolStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TabPg_SpyAndManual.SuspendLayout();
@@ -177,6 +177,11 @@ namespace CANStream
             this.Split_RxTx.Panel1.SuspendLayout();
             this.Split_RxTx.Panel2.SuspendLayout();
             this.Split_RxTx.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Split_Tx_EngRaw)).BeginInit();
+            this.Split_Tx_EngRaw.Panel1.SuspendLayout();
+            this.Split_Tx_EngRaw.Panel2.SuspendLayout();
+            this.Split_Tx_EngRaw.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).BeginInit();
             this.Context_ManualRawGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Split_Rx_DataGraph)).BeginInit();
             this.Split_Rx_DataGraph.Panel1.SuspendLayout();
@@ -197,11 +202,6 @@ namespace CANStream
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Split_Tx_EngRaw)).BeginInit();
-            this.Split_Tx_EngRaw.Panel1.SuspendLayout();
-            this.Split_Tx_EngRaw.Panel2.SuspendLayout();
-            this.Split_Tx_EngRaw.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).BeginInit();
             this.SuspendLayout();
             // 
             // CtrlMain_ToolStrip
@@ -507,6 +507,182 @@ namespace CANStream
             this.Split_RxTx.SplitterDistance = 449;
             this.Split_RxTx.TabIndex = 3;
             // 
+            // Split_Tx_EngRaw
+            // 
+            this.Split_Tx_EngRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Split_Tx_EngRaw.Location = new System.Drawing.Point(0, 0);
+            this.Split_Tx_EngRaw.Name = "Split_Tx_EngRaw";
+            this.Split_Tx_EngRaw.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // Split_Tx_EngRaw.Panel1
+            // 
+            this.Split_Tx_EngRaw.Panel1.Controls.Add(this.Grid_ManualDataWriter);
+            // 
+            // Split_Tx_EngRaw.Panel2
+            // 
+            this.Split_Tx_EngRaw.Panel2.Controls.Add(this.Grid_CANRawData);
+            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(449, 538);
+            this.Split_Tx_EngRaw.SplitterDistance = 410;
+            this.Split_Tx_EngRaw.TabIndex = 0;
+            // 
+            // Grid_ManualDataWriter
+            // 
+            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataWriter.DataMode = CANStream.GridDataMode.DataTx;
+            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(3, 3);
+            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
+            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(443, 404);
+            this.Grid_ManualDataWriter.TabIndex = 9;
+            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
+            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
+            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
+            this.Grid_ManualDataWriter.GridTxParameterValueChanged += new System.EventHandler<CANStream.GridTxParameterValueChangedEventArgs>(this.Grid_ManualDataWriter_GridTxParameterValueChanged);
+            // 
+            // Grid_CANRawData
+            // 
+            this.Grid_CANRawData.AllowUserToAddRows = false;
+            this.Grid_CANRawData.AllowUserToDeleteRows = false;
+            this.Grid_CANRawData.AllowUserToResizeColumns = false;
+            this.Grid_CANRawData.AllowUserToResizeRows = false;
+            this.Grid_CANRawData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_CANRawData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Grid_CANRawData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GridCol_Raw_Tx_Id,
+            this.GridCol_Raw_Tx_DLC,
+            this.GridCol_Raw_Tx_Period,
+            this.GridCol_Raw_Tx_Sent,
+            this.GridCol_Raw_Tx_BtnTx,
+            this.GridCol_Raw_Tx_Count,
+            this.GridCol_Raw_Tx_B0,
+            this.GridCol_Raw_Tx_B1,
+            this.GridCol_Raw_Tx_B2,
+            this.GridCol_Raw_Tx_B3,
+            this.GridCol_Raw_Tx_B4,
+            this.GridCol_Raw_Tx_B5,
+            this.GridCol_Raw_Tx_B6,
+            this.GridCol_Raw_Tx_B7});
+            this.Grid_CANRawData.ContextMenuStrip = this.Context_ManualRawGrid;
+            this.Grid_CANRawData.Location = new System.Drawing.Point(3, 3);
+            this.Grid_CANRawData.Name = "Grid_CANRawData";
+            this.Grid_CANRawData.RowHeadersVisible = false;
+            this.Grid_CANRawData.RowHeadersWidth = 40;
+            this.Grid_CANRawData.Size = new System.Drawing.Size(443, 118);
+            this.Grid_CANRawData.TabIndex = 8;
+            this.Grid_CANRawData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANRawData_CellBeginEdit);
+            this.Grid_CANRawData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellClick);
+            this.Grid_CANRawData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellValueChanged);
+            this.Grid_CANRawData.SizeChanged += new System.EventHandler(this.Grid_CANRawDataSizeChanged);
+            this.Grid_CANRawData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Grid_CANRawData_PreviewKeyDown);
+            // 
+            // GridCol_Raw_Tx_Id
+            // 
+            this.GridCol_Raw_Tx_Id.HeaderText = "ID";
+            this.GridCol_Raw_Tx_Id.MinimumWidth = 40;
+            this.GridCol_Raw_Tx_Id.Name = "GridCol_Raw_Tx_Id";
+            this.GridCol_Raw_Tx_Id.Width = 50;
+            // 
+            // GridCol_Raw_Tx_DLC
+            // 
+            this.GridCol_Raw_Tx_DLC.HeaderText = "DLC";
+            this.GridCol_Raw_Tx_DLC.MinimumWidth = 20;
+            this.GridCol_Raw_Tx_DLC.Name = "GridCol_Raw_Tx_DLC";
+            this.GridCol_Raw_Tx_DLC.Width = 40;
+            // 
+            // GridCol_Raw_Tx_Period
+            // 
+            this.GridCol_Raw_Tx_Period.HeaderText = "Period";
+            this.GridCol_Raw_Tx_Period.MinimumWidth = 20;
+            this.GridCol_Raw_Tx_Period.Name = "GridCol_Raw_Tx_Period";
+            this.GridCol_Raw_Tx_Period.Width = 40;
+            // 
+            // GridCol_Raw_Tx_Sent
+            // 
+            this.GridCol_Raw_Tx_Sent.HeaderText = "Send";
+            this.GridCol_Raw_Tx_Sent.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_Sent.Name = "GridCol_Raw_Tx_Sent";
+            this.GridCol_Raw_Tx_Sent.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridCol_Raw_Tx_Sent.Width = 40;
+            // 
+            // GridCol_Raw_Tx_BtnTx
+            // 
+            this.GridCol_Raw_Tx_BtnTx.HeaderText = "Tx";
+            this.GridCol_Raw_Tx_BtnTx.Name = "GridCol_Raw_Tx_BtnTx";
+            this.GridCol_Raw_Tx_BtnTx.Text = "Tx";
+            this.GridCol_Raw_Tx_BtnTx.ToolTipText = "Send frame now";
+            // 
+            // GridCol_Raw_Tx_Count
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.GridCol_Raw_Tx_Count.DefaultCellStyle = dataGridViewCellStyle1;
+            this.GridCol_Raw_Tx_Count.HeaderText = "Count";
+            this.GridCol_Raw_Tx_Count.MinimumWidth = 20;
+            this.GridCol_Raw_Tx_Count.Name = "GridCol_Raw_Tx_Count";
+            this.GridCol_Raw_Tx_Count.ReadOnly = true;
+            this.GridCol_Raw_Tx_Count.Width = 40;
+            // 
+            // GridCol_Raw_Tx_B0
+            // 
+            this.GridCol_Raw_Tx_B0.HeaderText = "B0";
+            this.GridCol_Raw_Tx_B0.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B0.Name = "GridCol_Raw_Tx_B0";
+            this.GridCol_Raw_Tx_B0.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B1
+            // 
+            this.GridCol_Raw_Tx_B1.HeaderText = "B1";
+            this.GridCol_Raw_Tx_B1.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B1.Name = "GridCol_Raw_Tx_B1";
+            this.GridCol_Raw_Tx_B1.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B2
+            // 
+            this.GridCol_Raw_Tx_B2.HeaderText = "B2";
+            this.GridCol_Raw_Tx_B2.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B2.Name = "GridCol_Raw_Tx_B2";
+            this.GridCol_Raw_Tx_B2.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B3
+            // 
+            this.GridCol_Raw_Tx_B3.HeaderText = "B3";
+            this.GridCol_Raw_Tx_B3.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B3.Name = "GridCol_Raw_Tx_B3";
+            this.GridCol_Raw_Tx_B3.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B4
+            // 
+            this.GridCol_Raw_Tx_B4.HeaderText = "B4";
+            this.GridCol_Raw_Tx_B4.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B4.Name = "GridCol_Raw_Tx_B4";
+            this.GridCol_Raw_Tx_B4.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B5
+            // 
+            this.GridCol_Raw_Tx_B5.HeaderText = "B5";
+            this.GridCol_Raw_Tx_B5.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B5.Name = "GridCol_Raw_Tx_B5";
+            this.GridCol_Raw_Tx_B5.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B6
+            // 
+            this.GridCol_Raw_Tx_B6.HeaderText = "B6";
+            this.GridCol_Raw_Tx_B6.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B6.Name = "GridCol_Raw_Tx_B6";
+            this.GridCol_Raw_Tx_B6.Width = 30;
+            // 
+            // GridCol_Raw_Tx_B7
+            // 
+            this.GridCol_Raw_Tx_B7.HeaderText = "B7";
+            this.GridCol_Raw_Tx_B7.MinimumWidth = 30;
+            this.GridCol_Raw_Tx_B7.Name = "GridCol_Raw_Tx_B7";
+            this.GridCol_Raw_Tx_B7.Width = 30;
+            // 
             // Context_ManualRawGrid
             // 
             this.Context_ManualRawGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -584,6 +760,21 @@ namespace CANStream
             this.Split_Rx_DataGraph.SplitterDistance = 215;
             this.Split_Rx_DataGraph.TabIndex = 0;
             // 
+            // Grid_ManualDataViewer
+            // 
+            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grid_ManualDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(6, 3);
+            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
+            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(505, 209);
+            this.Grid_ManualDataViewer.TabIndex = 0;
+            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
+            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
+            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
+            // 
             // Tab_SpyHistory
             // 
             this.Tab_SpyHistory.Alignment = System.Windows.Forms.TabAlignment.Right;
@@ -592,11 +783,11 @@ namespace CANStream
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Graph);
             this.Tab_SpyHistory.Controls.Add(this.Tab_SpyHistory_Data);
-            this.Tab_SpyHistory.Location = new System.Drawing.Point(2, 3);
+            this.Tab_SpyHistory.Location = new System.Drawing.Point(6, 3);
             this.Tab_SpyHistory.Multiline = true;
             this.Tab_SpyHistory.Name = "Tab_SpyHistory";
             this.Tab_SpyHistory.SelectedIndex = 0;
-            this.Tab_SpyHistory.Size = new System.Drawing.Size(512, 317);
+            this.Tab_SpyHistory.Size = new System.Drawing.Size(505, 313);
             this.Tab_SpyHistory.TabIndex = 10;
             this.Tab_SpyHistory.SelectedIndexChanged += new System.EventHandler(this.Tab_SpyHistory_SelectedIndexChanged);
             // 
@@ -607,10 +798,31 @@ namespace CANStream
             this.Tab_SpyHistory_Graph.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Graph.Name = "Tab_SpyHistory_Graph";
             this.Tab_SpyHistory_Graph.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(485, 309);
+            this.Tab_SpyHistory_Graph.Size = new System.Drawing.Size(478, 305);
             this.Tab_SpyHistory_Graph.TabIndex = 0;
             this.Tab_SpyHistory_Graph.Tag = "Graph";
             this.Tab_SpyHistory_Graph.Text = "Graphic";
+            // 
+            // Graph_SpyData
+            // 
+            this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Graph_SpyData.ChannelListEnabled = true;
+            this.Graph_SpyData.CursorEnabled = false;
+            this.Graph_SpyData.EditGraphicConfigurationEnable = false;
+            this.Graph_SpyData.LegendEnabled = false;
+            this.Graph_SpyData.Location = new System.Drawing.Point(3, 3);
+            this.Graph_SpyData.Name = "Graph_SpyData";
+            this.Graph_SpyData.OpenFileVisible = false;
+            this.Graph_SpyData.PrintEnabled = false;
+            this.Graph_SpyData.RealTimeGraphic = true;
+            this.Graph_SpyData.ShortcutKeysEnabled = false;
+            this.Graph_SpyData.Size = new System.Drawing.Size(479, 303);
+            this.Graph_SpyData.SnapShotEnabled = false;
+            this.Graph_SpyData.TabIndex = 0;
+            this.Graph_SpyData.ToolBarVisible = false;
+            this.Graph_SpyData.ZoomEnabled = false;
             // 
             // Tab_SpyHistory_Data
             // 
@@ -620,7 +832,7 @@ namespace CANStream
             this.Tab_SpyHistory_Data.Location = new System.Drawing.Point(4, 4);
             this.Tab_SpyHistory_Data.Name = "Tab_SpyHistory_Data";
             this.Tab_SpyHistory_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(485, 309);
+            this.Tab_SpyHistory_Data.Size = new System.Drawing.Size(478, 305);
             this.Tab_SpyHistory_Data.TabIndex = 1;
             this.Tab_SpyHistory_Data.Tag = "Data";
             this.Tab_SpyHistory_Data.Text = "Data";
@@ -633,7 +845,7 @@ namespace CANStream
             this.Lst_SpyDataHistory.FormattingEnabled = true;
             this.Lst_SpyDataHistory.Location = new System.Drawing.Point(3, 31);
             this.Lst_SpyDataHistory.Name = "Lst_SpyDataHistory";
-            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(479, 264);
+            this.Lst_SpyDataHistory.Size = new System.Drawing.Size(472, 264);
             this.Lst_SpyDataHistory.TabIndex = 1;
             // 
             // TS_SpyDataHistory
@@ -650,7 +862,7 @@ namespace CANStream
             this.TSTxt_IdFilterTo});
             this.TS_SpyDataHistory.Location = new System.Drawing.Point(3, 3);
             this.TS_SpyDataHistory.Name = "TS_SpyDataHistory";
-            this.TS_SpyDataHistory.Size = new System.Drawing.Size(479, 25);
+            this.TS_SpyDataHistory.Size = new System.Drawing.Size(472, 25);
             this.TS_SpyDataHistory.TabIndex = 0;
             this.TS_SpyDataHistory.Text = "toolStrip1";
             // 
@@ -948,6 +1160,44 @@ namespace CANStream
             this.Split_Cycle_VirtualSig_Graph.Size = new System.Drawing.Size(961, 439);
             this.Split_Cycle_VirtualSig_Graph.SplitterDistance = 302;
             this.Split_Cycle_VirtualSig_Graph.TabIndex = 0;
+            // 
+            // Cycle_SpyDataViewer
+            // 
+            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cycle_SpyDataViewer.DataMode = CANStream.GridDataMode.DataRx;
+            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
+            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(6, 3);
+            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
+            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
+            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(295, 430);
+            this.Cycle_SpyDataViewer.TabIndex = 0;
+            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
+            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
+            // 
+            // Graph_Cycle
+            // 
+            this.Graph_Cycle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Graph_Cycle.ChannelListEnabled = false;
+            this.Graph_Cycle.ContextMenuStrip = this.Context_CycleGraph;
+            this.Graph_Cycle.CursorEnabled = true;
+            this.Graph_Cycle.EditGraphicConfigurationEnable = false;
+            this.Graph_Cycle.LegendEnabled = false;
+            this.Graph_Cycle.Location = new System.Drawing.Point(3, 3);
+            this.Graph_Cycle.Name = "Graph_Cycle";
+            this.Graph_Cycle.OpenFileVisible = false;
+            this.Graph_Cycle.PrintEnabled = false;
+            this.Graph_Cycle.RealTimeGraphic = false;
+            this.Graph_Cycle.ShortcutKeysEnabled = false;
+            this.Graph_Cycle.Size = new System.Drawing.Size(646, 430);
+            this.Graph_Cycle.SnapShotEnabled = false;
+            this.Graph_Cycle.TabIndex = 0;
+            this.Graph_Cycle.ToolBarVisible = false;
+            this.Graph_Cycle.ZoomEnabled = false;
+            this.Graph_Cycle.ControlPreviewKeyDown += new System.EventHandler<System.Windows.Forms.PreviewKeyDownEventArgs>(this.Graph_Cycle_ControlPreviewKeyDown);
             // 
             // Context_CycleGraph
             // 
@@ -1249,256 +1499,6 @@ namespace CANStream
             this.Timer_NoRx.Interval = 200;
             this.Timer_NoRx.Tick += new System.EventHandler(this.Timer_NoRx_Tick);
             // 
-            // Split_Tx_EngRaw
-            // 
-            this.Split_Tx_EngRaw.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Split_Tx_EngRaw.Location = new System.Drawing.Point(0, 0);
-            this.Split_Tx_EngRaw.Name = "Split_Tx_EngRaw";
-            this.Split_Tx_EngRaw.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // Split_Tx_EngRaw.Panel1
-            // 
-            this.Split_Tx_EngRaw.Panel1.Controls.Add(this.Grid_ManualDataWriter);
-            // 
-            // Split_Tx_EngRaw.Panel2
-            // 
-            this.Split_Tx_EngRaw.Panel2.Controls.Add(this.Grid_CANRawData);
-            this.Split_Tx_EngRaw.Size = new System.Drawing.Size(449, 538);
-            this.Split_Tx_EngRaw.SplitterDistance = 410;
-            this.Split_Tx_EngRaw.TabIndex = 0;
-            // 
-            // Grid_ManualDataWriter
-            // 
-            this.Grid_ManualDataWriter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataWriter.DataMode = CANStream.GridDataMode.DataTx;
-            this.Grid_ManualDataWriter.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataWriter.Location = new System.Drawing.Point(3, 3);
-            this.Grid_ManualDataWriter.Name = "Grid_ManualDataWriter";
-            this.Grid_ManualDataWriter.Size = new System.Drawing.Size(443, 404);
-            this.Grid_ManualDataWriter.TabIndex = 9;
-            this.Grid_ManualDataWriter.VirtualChannelsVisible = true;
-            this.Grid_ManualDataWriter.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Grid_ManualDataWriter_GridColumnsVisibleChanged);
-            this.Grid_ManualDataWriter.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Grid_ManualDataWriter_GridDataReseted);
-            this.Grid_ManualDataWriter.GridTxParameterValueChanged += new System.EventHandler<CANStream.GridTxParameterValueChangedEventArgs>(this.Grid_ManualDataWriter_GridTxParameterValueChanged);
-            // 
-            // Grid_CANRawData
-            // 
-            this.Grid_CANRawData.AllowUserToAddRows = false;
-            this.Grid_CANRawData.AllowUserToDeleteRows = false;
-            this.Grid_CANRawData.AllowUserToResizeColumns = false;
-            this.Grid_CANRawData.AllowUserToResizeRows = false;
-            this.Grid_CANRawData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_CANRawData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid_CANRawData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.GridCol_Raw_Tx_Id,
-            this.GridCol_Raw_Tx_DLC,
-            this.GridCol_Raw_Tx_Period,
-            this.GridCol_Raw_Tx_Sent,
-            this.GridCol_Raw_Tx_BtnTx,
-            this.GridCol_Raw_Tx_Count,
-            this.GridCol_Raw_Tx_B0,
-            this.GridCol_Raw_Tx_B1,
-            this.GridCol_Raw_Tx_B2,
-            this.GridCol_Raw_Tx_B3,
-            this.GridCol_Raw_Tx_B4,
-            this.GridCol_Raw_Tx_B5,
-            this.GridCol_Raw_Tx_B6,
-            this.GridCol_Raw_Tx_B7});
-            this.Grid_CANRawData.ContextMenuStrip = this.Context_ManualRawGrid;
-            this.Grid_CANRawData.Location = new System.Drawing.Point(3, 3);
-            this.Grid_CANRawData.Name = "Grid_CANRawData";
-            this.Grid_CANRawData.RowHeadersVisible = false;
-            this.Grid_CANRawData.RowHeadersWidth = 40;
-            this.Grid_CANRawData.Size = new System.Drawing.Size(443, 118);
-            this.Grid_CANRawData.TabIndex = 8;
-            this.Grid_CANRawData.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.Grid_CANRawData_CellBeginEdit);
-            this.Grid_CANRawData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellClick);
-            this.Grid_CANRawData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_CANRawDataCellValueChanged);
-            this.Grid_CANRawData.SizeChanged += new System.EventHandler(this.Grid_CANRawDataSizeChanged);
-            this.Grid_CANRawData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Grid_CANRawData_PreviewKeyDown);
-            // 
-            // GridCol_Raw_Tx_Id
-            // 
-            this.GridCol_Raw_Tx_Id.HeaderText = "ID";
-            this.GridCol_Raw_Tx_Id.MinimumWidth = 40;
-            this.GridCol_Raw_Tx_Id.Name = "GridCol_Raw_Tx_Id";
-            this.GridCol_Raw_Tx_Id.Width = 50;
-            // 
-            // GridCol_Raw_Tx_DLC
-            // 
-            this.GridCol_Raw_Tx_DLC.HeaderText = "DLC";
-            this.GridCol_Raw_Tx_DLC.MinimumWidth = 20;
-            this.GridCol_Raw_Tx_DLC.Name = "GridCol_Raw_Tx_DLC";
-            this.GridCol_Raw_Tx_DLC.Width = 40;
-            // 
-            // GridCol_Raw_Tx_Period
-            // 
-            this.GridCol_Raw_Tx_Period.HeaderText = "Period";
-            this.GridCol_Raw_Tx_Period.MinimumWidth = 20;
-            this.GridCol_Raw_Tx_Period.Name = "GridCol_Raw_Tx_Period";
-            this.GridCol_Raw_Tx_Period.Width = 40;
-            // 
-            // GridCol_Raw_Tx_Sent
-            // 
-            this.GridCol_Raw_Tx_Sent.HeaderText = "Send";
-            this.GridCol_Raw_Tx_Sent.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_Sent.Name = "GridCol_Raw_Tx_Sent";
-            this.GridCol_Raw_Tx_Sent.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridCol_Raw_Tx_Sent.Width = 40;
-            // 
-            // GridCol_Raw_Tx_BtnTx
-            // 
-            this.GridCol_Raw_Tx_BtnTx.HeaderText = "Tx";
-            this.GridCol_Raw_Tx_BtnTx.Name = "GridCol_Raw_Tx_BtnTx";
-            this.GridCol_Raw_Tx_BtnTx.Text = "Tx";
-            this.GridCol_Raw_Tx_BtnTx.ToolTipText = "Send frame now";
-            // 
-            // GridCol_Raw_Tx_Count
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.GridCol_Raw_Tx_Count.DefaultCellStyle = dataGridViewCellStyle1;
-            this.GridCol_Raw_Tx_Count.HeaderText = "Count";
-            this.GridCol_Raw_Tx_Count.MinimumWidth = 20;
-            this.GridCol_Raw_Tx_Count.Name = "GridCol_Raw_Tx_Count";
-            this.GridCol_Raw_Tx_Count.ReadOnly = true;
-            this.GridCol_Raw_Tx_Count.Width = 40;
-            // 
-            // GridCol_Raw_Tx_B0
-            // 
-            this.GridCol_Raw_Tx_B0.HeaderText = "B0";
-            this.GridCol_Raw_Tx_B0.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B0.Name = "GridCol_Raw_Tx_B0";
-            this.GridCol_Raw_Tx_B0.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B1
-            // 
-            this.GridCol_Raw_Tx_B1.HeaderText = "B1";
-            this.GridCol_Raw_Tx_B1.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B1.Name = "GridCol_Raw_Tx_B1";
-            this.GridCol_Raw_Tx_B1.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B2
-            // 
-            this.GridCol_Raw_Tx_B2.HeaderText = "B2";
-            this.GridCol_Raw_Tx_B2.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B2.Name = "GridCol_Raw_Tx_B2";
-            this.GridCol_Raw_Tx_B2.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B3
-            // 
-            this.GridCol_Raw_Tx_B3.HeaderText = "B3";
-            this.GridCol_Raw_Tx_B3.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B3.Name = "GridCol_Raw_Tx_B3";
-            this.GridCol_Raw_Tx_B3.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B4
-            // 
-            this.GridCol_Raw_Tx_B4.HeaderText = "B4";
-            this.GridCol_Raw_Tx_B4.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B4.Name = "GridCol_Raw_Tx_B4";
-            this.GridCol_Raw_Tx_B4.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B5
-            // 
-            this.GridCol_Raw_Tx_B5.HeaderText = "B5";
-            this.GridCol_Raw_Tx_B5.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B5.Name = "GridCol_Raw_Tx_B5";
-            this.GridCol_Raw_Tx_B5.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B6
-            // 
-            this.GridCol_Raw_Tx_B6.HeaderText = "B6";
-            this.GridCol_Raw_Tx_B6.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B6.Name = "GridCol_Raw_Tx_B6";
-            this.GridCol_Raw_Tx_B6.Width = 30;
-            // 
-            // GridCol_Raw_Tx_B7
-            // 
-            this.GridCol_Raw_Tx_B7.HeaderText = "B7";
-            this.GridCol_Raw_Tx_B7.MinimumWidth = 30;
-            this.GridCol_Raw_Tx_B7.Name = "GridCol_Raw_Tx_B7";
-            this.GridCol_Raw_Tx_B7.Width = 30;
-            // 
-            // Grid_ManualDataViewer
-            // 
-            this.Grid_ManualDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_ManualDataViewer.DataMode = CANStream.GridDataMode.DataRx;
-            this.Grid_ManualDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Grid_ManualDataViewer.Location = new System.Drawing.Point(6, 3);
-            this.Grid_ManualDataViewer.Name = "Grid_ManualDataViewer";
-            this.Grid_ManualDataViewer.Size = new System.Drawing.Size(505, 209);
-            this.Grid_ManualDataViewer.TabIndex = 0;
-            this.Grid_ManualDataViewer.VirtualChannelsVisible = true;
-            this.Grid_ManualDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Manual_SpyDataViewerEngGridColumnsVisibleChanged);
-            this.Grid_ManualDataViewer.GridDataReseted += new System.EventHandler<System.EventArgs>(this.Manual_SpyDataViewer_GridDataReseted);
-            // 
-            // Graph_SpyData
-            // 
-            this.Graph_SpyData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_SpyData.ChannelListEnabled = true;
-            this.Graph_SpyData.CursorEnabled = false;
-            this.Graph_SpyData.EditGraphicConfigurationEnable = false;
-            this.Graph_SpyData.LegendEnabled = false;
-            this.Graph_SpyData.Location = new System.Drawing.Point(0, 0);
-            this.Graph_SpyData.Name = "Graph_SpyData";
-            this.Graph_SpyData.OpenFileVisible = false;
-            this.Graph_SpyData.PrintEnabled = false;
-            this.Graph_SpyData.RealTimeGraphic = true;
-            this.Graph_SpyData.ShortcutKeysEnabled = false;
-            this.Graph_SpyData.Size = new System.Drawing.Size(485, 309);
-            this.Graph_SpyData.SnapShotEnabled = false;
-            this.Graph_SpyData.TabIndex = 0;
-            this.Graph_SpyData.ToolBarVisible = false;
-            this.Graph_SpyData.ZoomEnabled = false;
-            // 
-            // Cycle_SpyDataViewer
-            // 
-            this.Cycle_SpyDataViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cycle_SpyDataViewer.DataMode = CANStream.GridDataMode.DataRx;
-            this.Cycle_SpyDataViewer.eGridColumnsVisible = CANStream.GridCANData_ColumnsEnum.Default;
-            this.Cycle_SpyDataViewer.Location = new System.Drawing.Point(6, 3);
-            this.Cycle_SpyDataViewer.Margin = new System.Windows.Forms.Padding(1);
-            this.Cycle_SpyDataViewer.Name = "Cycle_SpyDataViewer";
-            this.Cycle_SpyDataViewer.Size = new System.Drawing.Size(295, 430);
-            this.Cycle_SpyDataViewer.TabIndex = 0;
-            this.Cycle_SpyDataViewer.VirtualChannelsVisible = true;
-            this.Cycle_SpyDataViewer.GridColumnsVisibleChanged += new System.EventHandler<CANStream.GridColVisibleChangedEventArgs>(this.Cycle_SpyDataViewerEngGridColumnsVisibleChanged);
-            // 
-            // Graph_Cycle
-            // 
-            this.Graph_Cycle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Graph_Cycle.ChannelListEnabled = false;
-            this.Graph_Cycle.ContextMenuStrip = this.Context_CycleGraph;
-            this.Graph_Cycle.CursorEnabled = true;
-            this.Graph_Cycle.EditGraphicConfigurationEnable = false;
-            this.Graph_Cycle.LegendEnabled = false;
-            this.Graph_Cycle.Location = new System.Drawing.Point(3, 3);
-            this.Graph_Cycle.Name = "Graph_Cycle";
-            this.Graph_Cycle.OpenFileVisible = false;
-            this.Graph_Cycle.PrintEnabled = false;
-            this.Graph_Cycle.RealTimeGraphic = false;
-            this.Graph_Cycle.ShortcutKeysEnabled = false;
-            this.Graph_Cycle.Size = new System.Drawing.Size(646, 430);
-            this.Graph_Cycle.SnapShotEnabled = false;
-            this.Graph_Cycle.TabIndex = 0;
-            this.Graph_Cycle.ToolBarVisible = false;
-            this.Graph_Cycle.ZoomEnabled = false;
-            this.Graph_Cycle.ControlPreviewKeyDown += new System.EventHandler<System.Windows.Forms.PreviewKeyDownEventArgs>(this.Graph_Cycle_ControlPreviewKeyDown);
-            // 
             // Ctrl_CS_CAN_Bus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1515,6 +1515,11 @@ namespace CANStream
             this.Split_RxTx.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Split_RxTx)).EndInit();
             this.Split_RxTx.ResumeLayout(false);
+            this.Split_Tx_EngRaw.Panel1.ResumeLayout(false);
+            this.Split_Tx_EngRaw.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Split_Tx_EngRaw)).EndInit();
+            this.Split_Tx_EngRaw.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).EndInit();
             this.Context_ManualRawGrid.ResumeLayout(false);
             this.Split_Rx_DataGraph.Panel1.ResumeLayout(false);
             this.Split_Rx_DataGraph.Panel2.ResumeLayout(false);
@@ -1539,11 +1544,6 @@ namespace CANStream
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumUpDown_CycleCount)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.Split_Tx_EngRaw.Panel1.ResumeLayout(false);
-            this.Split_Tx_EngRaw.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Split_Tx_EngRaw)).EndInit();
-            this.Split_Tx_EngRaw.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_CANRawData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1665,8 +1665,8 @@ namespace CANStream
         private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_B6;
         private System.Windows.Forms.DataGridViewTextBoxColumn GridCol_Raw_Tx_B7;
         private Ctrl_GraphWindow.Ctrl_WaveForm Graph_Cycle;
-        private Ctrl_GraphWindow.Ctrl_WaveForm Graph_SpyData;
         private System.Windows.Forms.Button Cmd_RxOnly;
         private System.Windows.Forms.ToolTip ToolTip_CmdRxOnly;
+        private Ctrl_GraphWindow.Ctrl_WaveForm Graph_SpyData;
     }
 }
