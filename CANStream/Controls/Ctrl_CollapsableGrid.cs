@@ -501,21 +501,13 @@ namespace CANStream
                 foreach(CollapsableGridRow oChildRow in oRowContainer.Children)
                 {
                     oChildRow.Children.Clear();
+
+                    if (!(oChildRow.ThisRow.Index == -1))
+                    {
+                        oRowContainer.CollapsableGrid.Grid.Rows.Remove(oChildRow.ThisRow);
+                    }
                 }
-
-                oRowContainer.CollapsableGrid.Grid.Rows.Remove(oRowContainer.ThisRow);
             }
-            
-            //TODO: Remove old code
-            /*
-            if (oContainerObject.GetType().Equals(typeof(DataGridView)))
-            {
-                DataGridView oGrid = (DataGridView)oContainerObject;
-
-                oGrid.Rows.Clear();
-                base.Clear();
-            }
-            */
         }
 
         public CollapsableGridRow GetCollapsableRowAtGridRowIndex(int RowIndex)
@@ -541,6 +533,38 @@ namespace CANStream
             }
 
             return (null);
+        }
+
+        public void Delete(int RowIndex)
+        {
+            CollapsableGridRow oCRow = GetCollapsableRowAtGridRowIndex(RowIndex);
+
+            if (!(oCRow == null))
+            {
+                if(oCRow.Children.Count>0)
+                {
+                    oCRow.Children.Clear();
+                }
+
+                if (oContainerObject.GetType().Equals(typeof(Ctrl_CollapsableGrid)))
+                {
+                    DataGridView oGrid = ((Ctrl_CollapsableGrid)oContainerObject).DataGrid;
+
+                    if (!(oCRow.ThisRow == null))
+                    {
+                        oGrid.Rows.Remove(oCRow.ThisRow);
+                    }
+                }
+                else if (oContainerObject.GetType().Equals(typeof(CollapsableGridRow)))
+                {
+                    CollapsableGridRow oRowContainer = (CollapsableGridRow)oContainerObject;
+
+                    if (!(oCRow.ThisRow == null))
+                    {
+                        oRowContainer.CollapsableGrid.Grid.Rows.Remove(oCRow.ThisRow);
+                    }
+                }
+            }
         }
 
         #endregion

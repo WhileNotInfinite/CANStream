@@ -438,6 +438,53 @@ namespace CANStream
             oRootGroup.FullPath = "Root";
         }
 
+        #region Private methodes
+
+        /// <summary>
+        /// Returns the path of the parent object from the child object path given as argument
+        /// </summary>
+        /// <param name="ChildPath">Child object path</param>
+        /// <returns>Path of the parent object</returns>
+        /// <remarks>Returns an empty string if the path of the parent is not found</remarks>
+        private string Get_ParentPath(string ChildPath)
+        {
+            if (!(ChildPath.Equals("")))
+            {
+                int i = ChildPath.LastIndexOf(Char.Parse("\\"));
+
+                if (i > 0)
+                {
+                    return (ChildPath.Substring(0, i));
+                }
+            }
+
+            return ("");
+        }
+
+        /// <summary>
+        /// Returns the name of an object from its path
+        /// </summary>
+        /// <param name="ObjectPath">Path of the object</param>
+        /// <returns>Name of the object</returns>
+        /// <remarks>Returns an empty string if the object name is not found</remarks>
+        private string Get_ObjectNameFromPath(string ObjectPath)
+        {
+            if (!(ObjectPath.Equals("")))
+            {
+                int i = ObjectPath.LastIndexOf('\\', 0);
+
+                if (i > 0)
+                {
+                    i += 1;
+                    return (ObjectPath.Substring(i, ObjectPath.Length - i));
+                }
+            }
+
+            return ("");
+        }
+
+        #endregion
+
         #region Public methodes
 
         #region Logging channels management
@@ -501,6 +548,33 @@ namespace CANStream
         public LoggingChannelConfiguration Get_LoggingChannel(string ChannelName)
         {
             return (oRootGroup.Get_TreeLoggingChannel(ChannelName));
+        }
+
+        /// <summary>
+        /// Delete the LoggingChannelConfiguration object at the path given as argument
+        /// </summary>
+        /// <param name="ChannelPath">Path of the LoggingChannelConfiguration object to delete</param>
+        /// <param name="ChannelName">Name of the LoggingChannelConfiguration object to delete</param>
+        /// <returns>Error flag: True: No error /False: Error</returns>
+        public bool Delete_LoggingChannel(string ChannelPath, string ChannelName)
+        {
+            if (!(ChannelPath.Equals("") || ChannelName.Equals("")))
+            {
+                LoggingChannelGroup oParentGroup = oRootGroup.Get_GroupAtPath(ChannelPath);
+
+                if (!(oParentGroup == null))
+                {
+                    LoggingChannelConfiguration oChan = oParentGroup.Get_LoggingChannel(ChannelName);
+
+                    if (!(oChan == null))
+                    {
+                        oParentGroup.LoggingChannels.Remove(oChan);
+                        return (true);
+                    }
+                }
+            }
+
+            return (false);
         }
 
         #endregion
@@ -568,6 +642,33 @@ namespace CANStream
         public LoggingChannelGroup Get_LoggingChannelGroup(string GroupName)
         {
             return (oRootGroup.Get_TreeSubGroup(GroupName));
+        }
+
+        /// <summary>
+        /// Delete the LoggingChannelGroup object at the path given as argument
+        /// </summary>
+        /// <param name="GroupPath">Path of the LoggingChannelGroup object to delete</param>
+        /// <param name="GroupName">Name of the LoggingChannelGroup object to delete</param>
+        /// <returns>Error flag: True: No error /False: Error</returns>
+        public bool Delete_LoggingChannelGroup(string GroupPath,string GroupName)
+        {
+            if (!(GroupPath.Equals("") || GroupName.Equals("")))
+            {
+                LoggingChannelGroup oParentGroup = oRootGroup.Get_GroupAtPath(Get_ParentPath(GroupPath));
+
+                if (!(oParentGroup == null))
+                {
+                    LoggingChannelGroup oGroup = oParentGroup.Get_SubGroup(GroupName);
+
+                    if (!(oGroup == null))
+                    {
+                        oParentGroup.SubGroups.Remove(oGroup);
+                        return (true);
+                    }
+                }
+            }
+
+            return (false);
         }
 
         #endregion

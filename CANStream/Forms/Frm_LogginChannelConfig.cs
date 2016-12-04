@@ -91,7 +91,7 @@ namespace CANStream
 
         private void TSB_Delete_Click(object sender, EventArgs e)
         {
-
+            Delete_GridRow();
         }
 
         private void TSB_CanConfig_Click(object sender, EventArgs e)
@@ -126,6 +126,11 @@ namespace CANStream
         private void Context_Grid_Paste_Click(object sender, EventArgs e)
         {
             Paste_LoggingItemProperties();
+        }
+
+        private void Context_Grid_Delete_Click(object sender, EventArgs e)
+        {
+            Delete_GridRow();
         }
 
         #endregion
@@ -872,6 +877,37 @@ namespace CANStream
             CGrid_Channels.SaveRowsCollapsingContext();
             Show_LoggingChannelConfig();
             CGrid_Channels.RestoreRowsCollapsingContext();
+        }
+
+        private void Delete_GridRow()
+        {
+            if (!(CGrid_Channels.Grid.SelectedCells == null))
+            {
+                int iPrevRow = -1;
+
+                foreach (DataGridViewCell oCell in CGrid_Channels.Grid.SelectedCells)
+                {
+                    if (oCell.RowIndex != iPrevRow && oCell.RowIndex != -1)
+                    {
+                        iPrevRow = oCell.RowIndex;
+
+                        object oRowTag = CGrid_Channels.Grid.Rows[oCell.RowIndex].Tag;
+
+                        if (oRowTag.GetType() == typeof(LoggingChannelConfiguration))
+                        {
+                            oLoggingConfig.Delete_LoggingChannel(((LoggingChannelConfiguration)oRowTag).Path,
+                                                                 ((LoggingChannelConfiguration)oRowTag).Name);
+                        }
+                        else if (oRowTag.GetType() == typeof(LoggingChannelGroup))
+                        {
+                            oLoggingConfig.Delete_LoggingChannelGroup(((LoggingChannelGroup)oRowTag).FullPath,
+                                                                      ((LoggingChannelGroup)oRowTag).Name);
+                        }
+
+                        CGrid_Channels.Rows.Delete(oCell.RowIndex);
+                    }
+                }
+            }
         }
 
         #endregion
