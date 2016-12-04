@@ -19,6 +19,8 @@ namespace CANStream
         private const int GRID_COL_LOG_FREQ = 3;
         private const int GRID_COL_COMMENT = 4;
 
+        private const double DEFAULT_VIRTUAL_CHAN_FREQ = 1000;
+
         #endregion
 
         #region Private members
@@ -101,7 +103,7 @@ namespace CANStream
 
         private void TSB_VirtualChan_Click(object sender, EventArgs e)
         {
-
+            Import_VirtualChannelsLibrary();
         }
 
         #endregion
@@ -515,6 +517,69 @@ namespace CANStream
             }
         }
 
+        private void Import_VirtualChannelsLibrary()
+        {
+            Dlg_OpenFile.FileName = "";
+            Dlg_OpenFile.Filter = "CANStream Virtual channel library | *.cvl";
+            Dlg_OpenFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\Virtual Channels libraries";
+
+            if (Dlg_OpenFile.ShowDialog().Equals(DialogResult.OK))
+            {
+                CS_VirtualChannelsLibrary oVirtualLib = new CS_VirtualChannelsLibrary();
+
+                if (oVirtualLib.ReadLibraryFile(Dlg_OpenFile.FileName))
+                {
+                    Set_VirtualChannelsLibrary(oVirtualLib);
+
+                    CGrid_Channels.SaveRowsCollapsingContext();
+                    Show_LoggingChannelConfig();
+                    CGrid_Channels.RestoreRowsCollapsingContext();
+
+                    bConfigModified = true;
+                }
+                else
+                {
+                    MessageBox.Show("CAN Configuration file read error !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void Set_VirtualChannelsLibrary(CS_VirtualChannelsLibrary oVirtualChannelsLibrary)
+        {
+            if (!(oVirtualChannelsLibrary == null))
+            {
+                if (oLoggingConfig == null)
+                {
+                    oLoggingConfig = new CS_RecordLoggingConfiguration();
+                }
+
+                string ChannelGroupName = "Virtual Channels lib: " + oVirtualChannelsLibrary.Name;
+                oLoggingConfig.Add_LoggingChannelGroup(ChannelGroupName);
+
+                LoggingChannelGroup oMsgGroup = oLoggingConfig.Get_LoggingChannelGroup(ChannelGroupName);
+
+                if (!(oMsgGroup == null))
+                {
+                    oMsgGroup.GroupLoggingMode = ChannelLoggingMode.DefaultFrequency;
+                    oMsgGroup.GroupLoggingFrequency = DEFAULT_VIRTUAL_CHAN_FREQ;
+                    oMsgGroup.GroupDefaultFrequency = DEFAULT_VIRTUAL_CHAN_FREQ;
+
+                    foreach (CS_VirtualChannel oVirtualChan in oVirtualChannelsLibrary.Channels)
+                    {
+                        LoggingChannelConfiguration oChanCfg = new LoggingChannelConfiguration();
+
+                        oChanCfg.Name = oVirtualChan.Name;
+                        oChanCfg.Comment = oVirtualChan.Comment;
+                        oChanCfg.LoggingMode = ChannelLoggingMode.DefaultFrequency;
+                        oChanCfg.DefaultFrequency = DEFAULT_VIRTUAL_CHAN_FREQ;
+                        oChanCfg.LoggingFrequency = DEFAULT_VIRTUAL_CHAN_FREQ;
+
+                        oLoggingConfig.Add_LoggingChannel(oChanCfg, oMsgGroup);
+                    }
+                }
+            }
+        }
+
         private bool Set_LoggingItemProperties(DataGridViewRow oRow, int ModifiedColId, object oLogItem)
         {
             bool Ret = false;
@@ -816,6 +881,7 @@ namespace CANStream
                     if (!(oClipObject == null))
                     {
                         Set_LoggingItemPropertiesFromClipboard(oClipObject);
+                        bConfigModified = true;
                     }
                 }
                 else if (ClipDataObj.GetDataPresent(sGroupFormat))
@@ -825,6 +891,7 @@ namespace CANStream
                     if (!(oClipObject == null))
                     {
                         Set_LoggingItemPropertiesFromClipboard(oClipObject);
+                        bConfigModified = true;
                     }
                 }
                 else
@@ -907,6 +974,8 @@ namespace CANStream
                         CGrid_Channels.Rows.Delete(oCell.RowIndex);
                     }
                 }
+
+                bConfigModified = true;
             }
         }
 
