@@ -155,7 +155,26 @@ namespace CANStream
         /// <param name="ChannelName">Name of the channel to show</param>
         private void Show_DataChannelProperties(string ChannelName)
         {
+            GV_DataChannelProperties.Rows.Clear();
 
+            GW_DataChannel oChan = oDataFile.Get_DataChannel(ChannelName);
+
+            if (!(oChan == null))
+            {
+                GV_DataChannelProperties.Rows.Add(4);
+
+                GV_DataChannelProperties.Rows[0].Cells[0].Value = "Unit";
+                GV_DataChannelProperties.Rows[0].Cells[1].Value = oChan.Unit;
+
+                GV_DataChannelProperties.Rows[1].Cells[0].Value = "Description";
+                GV_DataChannelProperties.Rows[1].Cells[1].Value = oChan.Description;
+
+                GV_DataChannelProperties.Rows[2].Cells[0].Value = "Format";
+                GV_DataChannelProperties.Rows[2].Cells[1].Value = "ToDo";
+
+                GV_DataChannelProperties.Rows[3].Cells[0].Value = "Reference lines";
+                GV_DataChannelProperties.Rows[3].Cells[1].Value = "ToDo";
+            }
         }
 
         #endregion
