@@ -384,3 +384,5 @@ C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.pdb
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_LogginChannelConfig.resources
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_CollapsableGrid.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_DataFileInformation.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer_DataFile_Info_Edition.resources

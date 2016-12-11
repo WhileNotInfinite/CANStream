@@ -195,12 +195,21 @@ namespace CANStream
 				Frm.Show();
 			}
 		}
-		
-		#endregion
-		
-		#region Context_TabViewers
-		
-		private void TSMI_CtxtTab_RenameClick(object sender, EventArgs e)
+
+        private void TSB_EditDataFileInfo_Click(object sender, EventArgs e)
+        {
+            if (!(DataFilePathes == null))
+            {
+                Frm_DataViewer_DataFile_Info_Edition Frm = new Frm_DataViewer_DataFile_Info_Edition(DataFilePathes);
+                Frm.Show();
+            }
+        }
+
+        #endregion
+
+        #region Context_TabViewers
+
+        private void TSMI_CtxtTab_RenameClick(object sender, EventArgs e)
 		{
 			if (!(ContextTabPage == null))
 			{
@@ -1234,7 +1243,7 @@ namespace CANStream
 				}
 			}
 		}
-		
-		#endregion
-	}
+
+        #endregion
+    }
 }
