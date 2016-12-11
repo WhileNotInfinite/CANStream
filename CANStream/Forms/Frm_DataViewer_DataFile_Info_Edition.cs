@@ -42,7 +42,10 @@ namespace CANStream
             {
                 foreach (string sFilePath in FilePathes)
                 {
-                    Add_FileTab(sFilePath);
+                    if (Path.GetExtension(sFilePath).Equals(".xrdf"))
+                    {
+                        Add_FileTab(sFilePath);
+                    }
                 }
             }
         }
