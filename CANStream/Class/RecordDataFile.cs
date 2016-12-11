@@ -836,21 +836,22 @@ namespace CANStream
                     {
                         double TSample = oRecSample.TimeStamp / 1000;
 
-                        if ((TSample - oDataChan.Samples[oDataChan.Samples.Count - 1].SampleTime) >= SamplingTime)
+                        if (oDataChan.Samples.Count < 1) //First sample
                         {
-                            SerieSample sDataSample = new SerieSample();
-
-                            sDataSample.SampleTime = TSample;
-                            sDataSample.SampleValue = oRecSample.SampleValue;
-
-                            oDataChan.Samples.Add(sDataSample);
+                            AddChannelSample(oDataChan, oRecSample, TSample);
+                        }
+                        else if ((TSample - oDataChan.Samples[oDataChan.Samples.Count - 1].SampleTime) >= SamplingTime) //Not the first sample
+                        {
+                            AddChannelSample(oDataChan, oRecSample, TSample);
                         }
                     }
 
                     oDataFile.Channels.Add(oDataChan);
                 }
+            }
 
-
+            if (oDataFile.Channels.Count > 0)
+            {
                 string OutFilePath = BuildOutputFilePtah(OutputFolder, RecordConversionFormat.Xml);
                 oDataFile.Write_XmlDataFile(OutFilePath);
             }
@@ -858,12 +859,28 @@ namespace CANStream
             return (true);
         }
 
-		/// <summary>
-		/// Converts the decoded PCAN trace file into a Wintax data file
-		/// </summary>
-		/// <param name="OutputFolder">Output file folder</param>
-		/// <returns>Converion result (True: OK / False: Error)</returns>
-		private bool WriteWintaxRecordData(string OutputFolder)
+        /// <summary>
+        /// Create a data sample and add it to the GW_DataChannel object given as argument
+        /// </summary>
+        /// <param name="oDataChan">GW_DataChannel object in which the sample will be added</param>
+        /// <param name="oRecSample">RecordDataSample containing the sample value</param>
+        /// <param name="TSample">Timestamp of the sample</param>
+        private static void AddChannelSample(GW_DataChannel oDataChan, RecordDataSample oRecSample, double TSample)
+        {
+            SerieSample sDataSample = new SerieSample();
+
+            sDataSample.SampleTime = TSample;
+            sDataSample.SampleValue = oRecSample.SampleValue;
+
+            oDataChan.Samples.Add(sDataSample);
+        }
+
+        /// <summary>
+        /// Converts the decoded PCAN trace file into a Wintax data file
+        /// </summary>
+        /// <param name="OutputFolder">Output file folder</param>
+        /// <returns>Converion result (True: OK / False: Error)</returns>
+        private bool WriteWintaxRecordData(string OutputFolder)
 		{
 			return(false);
 		}
