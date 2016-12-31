@@ -54,6 +54,7 @@ namespace CANStream
             this.CANConfig_openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CANConfig_recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CANConfig_editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CANConfig_compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.importDBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rawMessagesTxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -241,6 +242,7 @@ namespace CANStream
             this.CANConfig_openToolStripMenuItem,
             this.CANConfig_recentToolStripMenuItem,
             this.CANConfig_editToolStripMenuItem,
+            this.CANConfig_compareToolStripMenuItem,
             this.toolStripMenuItem5,
             this.importDBCToolStripMenuItem,
             this.rawMessagesTxToolStripMenuItem});
@@ -277,6 +279,14 @@ namespace CANStream
             this.CANConfig_editToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.CANConfig_editToolStripMenuItem.Text = "Edit";
             this.CANConfig_editToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_editToolStripMenuItemClick);
+            // 
+            // CANConfig_compareToolStripMenuItem
+            // 
+            this.CANConfig_compareToolStripMenuItem.Image = global::CANStream.Icones.CAN_Cfg_Compar_16;
+            this.CANConfig_compareToolStripMenuItem.Name = "CANConfig_compareToolStripMenuItem";
+            this.CANConfig_compareToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.CANConfig_compareToolStripMenuItem.Text = "Compare";
+            this.CANConfig_compareToolStripMenuItem.Click += new System.EventHandler(this.CANConfig_compareToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -1814,5 +1824,6 @@ namespace CANStream
         private System.Windows.Forms.ToolStripMenuItem resetLoggingChannelsConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editLoggingChannelsConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel SS_TS_Lbl_LoggingChannelConfig;
+        private System.Windows.Forms.ToolStripMenuItem CANConfig_compareToolStripMenuItem;
     }
 }

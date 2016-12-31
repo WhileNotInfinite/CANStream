@@ -123,6 +123,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CAN_Cfg_Compar_16 {
+            get {
+                object obj = ResourceManager.GetObject("CAN_Cfg_Compar_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CAN_Link_Off {
             get {
                 object obj = ResourceManager.GetObject("CAN_Link_Off", resourceCulture);
@@ -166,6 +176,226 @@ namespace CANStream {
         internal static System.Drawing.Bitmap Cancel_16 {
             get {
                 object obj = ResourceManager.GetObject("Cancel_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileA_Open16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileA_Open16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileA_Open32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileA_Open32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileA_Save_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileA_Save_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileA_Save_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileA_Save_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileB_Open16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileB_Open16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileB_Open32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileB_Open32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileB_Save_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileB_Save_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_FileB_Save_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_FileB_Save_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Filter_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Filter_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Filter_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Filter_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Merge_A2B_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Merge_A2B_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Merge_A2B_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Merge_A2B_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Merge_B2A_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Merge_B2A_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_Merge_B2A_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_Merge_B2A_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_MergeAll_A2B_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_MergeAll_A2B_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_MergeAll_A2B_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_MergeAll_A2B_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_MergeAll_B2A_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_MergeAll_B2A_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_MergeAll_B2A_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_MergeAll_B2A_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_NextDiff_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_NextDiff_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_NextDiff_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_NextDiff_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_PrevDiff_16 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_PrevDiff_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CanCfg_Compar_PrevDiff_32 {
+            get {
+                object obj = ResourceManager.GetObject("CanCfg_Compar_PrevDiff_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
