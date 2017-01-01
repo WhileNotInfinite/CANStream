@@ -48,10 +48,17 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.TS_Btn_Merge_A_to_B = new System.Windows.Forms.ToolStripButton();
             this.TS_Btn_MergeAll_A_to_B = new System.Windows.Forms.ToolStripButton();
-            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.TS_DropBtn_Filter = new System.Windows.Forms.ToolStripDropDownButton();
+            this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
+            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBar_Lbl_FileA = new System.Windows.Forms.ToolStripStatusLabel();
             this.TS_Main.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TS_Main
@@ -99,6 +106,7 @@
             this.TS_Btn_FileA_Open.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_FileA_Open.Text = "toolStripButton1";
             this.TS_Btn_FileA_Open.ToolTipText = "Open comparison file A";
+            this.TS_Btn_FileA_Open.Click += new System.EventHandler(this.TS_Btn_FileA_Open_Click);
             // 
             // TS_Btn_FileA_Save
             // 
@@ -130,6 +138,7 @@
             this.TS_Btn_FileB_Open.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_FileB_Open.Text = "toolStripButton3";
             this.TS_Btn_FileB_Open.ToolTipText = "Open comparison file B";
+            this.TS_Btn_FileB_Open.Click += new System.EventHandler(this.TS_Btn_FileB_Open_Click);
             // 
             // TS_Btn_FileB_Save
             // 
@@ -231,16 +240,6 @@
             this.TS_Btn_MergeAll_A_to_B.Text = "toolStripButton11";
             this.TS_Btn_MergeAll_A_to_B.ToolTipText = "Merge all differences from file A to file B";
             // 
-            // CGrid_Comparison
-            // 
-            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
-            this.CGrid_Comparison.Name = "CGrid_Comparison";
-            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 451);
-            this.CGrid_Comparison.TabIndex = 1;
-            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
@@ -256,11 +255,62 @@
             this.TS_DropBtn_Filter.Text = "toolStripDropDownButton1";
             this.TS_DropBtn_Filter.ToolTipText = "Properties comparison filter";
             // 
+            // Dlg_OpenFile
+            // 
+            this.Dlg_OpenFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
+            // 
+            // Dlg_SaveFile
+            // 
+            this.Dlg_SaveFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
+            // 
+            // CGrid_Comparison
+            // 
+            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
+            this.CGrid_Comparison.Name = "CGrid_Comparison";
+            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
+            this.CGrid_Comparison.TabIndex = 1;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusBar_Lbl_FileA,
+            this.StatusBar_Lbl_FileB,
+            this.StatusBar_Progress});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 473);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(946, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // StatusBar_Progress
+            // 
+            this.StatusBar_Progress.Name = "StatusBar_Progress";
+            this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
+            this.StatusBar_Progress.Visible = false;
+            // 
+            // StatusBar_Lbl_FileB
+            // 
+            this.StatusBar_Lbl_FileB.Name = "StatusBar_Lbl_FileB";
+            this.StatusBar_Lbl_FileB.Size = new System.Drawing.Size(118, 17);
+            this.StatusBar_Lbl_FileB.Text = "toolStripStatusLabel1";
+            this.StatusBar_Lbl_FileB.Visible = false;
+            // 
+            // StatusBar_Lbl_FileA
+            // 
+            this.StatusBar_Lbl_FileA.Name = "StatusBar_Lbl_FileA";
+            this.StatusBar_Lbl_FileA.Size = new System.Drawing.Size(118, 17);
+            this.StatusBar_Lbl_FileA.Text = "toolStripStatusLabel2";
+            this.StatusBar_Lbl_FileA.Visible = false;
+            // 
             // Frm_CAN_Config_Compar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 495);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.CGrid_Comparison);
             this.Controls.Add(this.TS_Main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -268,6 +318,8 @@
             this.Text = "CAN Configuration compare";
             this.TS_Main.ResumeLayout(false);
             this.TS_Main.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,5 +349,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripDropDownButton TS_DropBtn_Filter;
+        private System.Windows.Forms.OpenFileDialog Dlg_OpenFile;
+        private System.Windows.Forms.SaveFileDialog Dlg_SaveFile;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_FileA;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_FileB;
+        private System.Windows.Forms.ToolStripProgressBar StatusBar_Progress;
     }
 }
