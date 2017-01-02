@@ -509,6 +509,23 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\agt-forward-icone-7994-16.png" />
+    <None Include="Resources\agt-back-icone-4409-16.png" />
+    <None Include="Resources\viewmag-icone-5693-16.png" />
+    <None Include="Resources\search-icone-7211-16.png" />
+    <None Include="Resources\previous-icone-6035-16.png" />
+    <None Include="Resources\next-icone-8941-16.png" />
+    <None Include="Resources\to-low-icone-6238-16.png" />
+    <None Include="Resources\to-top-icone-8782-16.png" />
+    <None Include="Resources\agt-back-icone-4409-32.png" />
+    <None Include="Resources\previous-icone-6035-32.png" />
+    <None Include="Resources\next-icone-8941-32.png" />
+    <None Include="Resources\to-low-icone-6238-32.png" />
+    <None Include="Resources\to-top-icone-8782-32.png" />
+    <None Include="Resources\agt-forward-icone-7994-32.png" />
+    <None Include="Resources\search-icone-7211-32.png" />
+    <None Include="Resources\viewmag-icone-5693-32.png" />
+    <None Include="Resources\agt-refresh-reload-icone-6616-32.png" />
     <None Include="Resources\1483192893_filter.png" />
     <None Include="Resources\1483192887_filter.png" />
     <None Include="Resources\arrow-up-icone-3965-16.png" />

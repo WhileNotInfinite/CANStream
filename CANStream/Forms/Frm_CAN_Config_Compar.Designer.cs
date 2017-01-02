@@ -50,13 +50,15 @@
             this.TS_Btn_MergeAll_A_to_B = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.TS_DropBtn_Filter = new System.Windows.Forms.ToolStripDropDownButton();
+            this.TS_Btn_View = new System.Windows.Forms.ToolStripButton();
+            this.TS_Btn_Refresh = new System.Windows.Forms.ToolStripButton();
             this.Dlg_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.Dlg_SaveFile = new System.Windows.Forms.SaveFileDialog();
-            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
-            this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_FileA = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +86,9 @@
             this.TS_Btn_Merge_A_to_B,
             this.TS_Btn_MergeAll_A_to_B,
             this.toolStripSeparator6,
-            this.TS_DropBtn_Filter});
+            this.TS_DropBtn_Filter,
+            this.TS_Btn_View,
+            this.TS_Btn_Refresh});
             this.TS_Main.Location = new System.Drawing.Point(0, 0);
             this.TS_Main.Name = "TS_Main";
             this.TS_Main.Size = new System.Drawing.Size(946, 39);
@@ -198,7 +202,7 @@
             // TS_Btn_Next_Diff
             // 
             this.TS_Btn_Next_Diff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TS_Btn_Next_Diff.Image = global::CANStream.Icones.CanCfg_Compar_NextDiff_32;
+            this.TS_Btn_Next_Diff.Image = ((System.Drawing.Image)(resources.GetObject("TS_Btn_Next_Diff.Image")));
             this.TS_Btn_Next_Diff.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_Next_Diff.Name = "TS_Btn_Next_Diff";
             this.TS_Btn_Next_Diff.Size = new System.Drawing.Size(36, 36);
@@ -208,7 +212,7 @@
             // TS_Btn_Prev_Diff
             // 
             this.TS_Btn_Prev_Diff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TS_Btn_Prev_Diff.Image = global::CANStream.Icones.CanCfg_Compar_PrevDiff_32;
+            this.TS_Btn_Prev_Diff.Image = ((System.Drawing.Image)(resources.GetObject("TS_Btn_Prev_Diff.Image")));
             this.TS_Btn_Prev_Diff.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_Prev_Diff.Name = "TS_Btn_Prev_Diff";
             this.TS_Btn_Prev_Diff.Size = new System.Drawing.Size(36, 36);
@@ -255,6 +259,27 @@
             this.TS_DropBtn_Filter.Text = "toolStripDropDownButton1";
             this.TS_DropBtn_Filter.ToolTipText = "Properties comparison filter";
             // 
+            // TS_Btn_View
+            // 
+            this.TS_Btn_View.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_View.Image = global::CANStream.Icones.View_Filtered_32;
+            this.TS_Btn_View.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TS_Btn_View.Name = "TS_Btn_View";
+            this.TS_Btn_View.Size = new System.Drawing.Size(36, 36);
+            this.TS_Btn_View.Text = "toolStripButton1";
+            this.TS_Btn_View.ToolTipText = "Show only differences";
+            this.TS_Btn_View.Click += new System.EventHandler(this.TS_Btn_View_Click);
+            // 
+            // TS_Btn_Refresh
+            // 
+            this.TS_Btn_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_Refresh.Image = global::CANStream.Icones.Refresh_CAN_Controllers_32;
+            this.TS_Btn_Refresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TS_Btn_Refresh.Name = "TS_Btn_Refresh";
+            this.TS_Btn_Refresh.Size = new System.Drawing.Size(36, 36);
+            this.TS_Btn_Refresh.Text = "toolStripButton2";
+            this.TS_Btn_Refresh.ToolTipText = "Refresh comparison";
+            // 
             // Dlg_OpenFile
             // 
             this.Dlg_OpenFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
@@ -262,16 +287,6 @@
             // Dlg_SaveFile
             // 
             this.Dlg_SaveFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
-            // 
-            // CGrid_Comparison
-            // 
-            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
-            this.CGrid_Comparison.Name = "CGrid_Comparison";
-            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
-            this.CGrid_Comparison.TabIndex = 1;
             // 
             // statusStrip1
             // 
@@ -285,11 +300,12 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // StatusBar_Progress
+            // StatusBar_Lbl_FileA
             // 
-            this.StatusBar_Progress.Name = "StatusBar_Progress";
-            this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
-            this.StatusBar_Progress.Visible = false;
+            this.StatusBar_Lbl_FileA.Name = "StatusBar_Lbl_FileA";
+            this.StatusBar_Lbl_FileA.Size = new System.Drawing.Size(118, 17);
+            this.StatusBar_Lbl_FileA.Text = "toolStripStatusLabel2";
+            this.StatusBar_Lbl_FileA.Visible = false;
             // 
             // StatusBar_Lbl_FileB
             // 
@@ -298,12 +314,21 @@
             this.StatusBar_Lbl_FileB.Text = "toolStripStatusLabel1";
             this.StatusBar_Lbl_FileB.Visible = false;
             // 
-            // StatusBar_Lbl_FileA
+            // StatusBar_Progress
             // 
-            this.StatusBar_Lbl_FileA.Name = "StatusBar_Lbl_FileA";
-            this.StatusBar_Lbl_FileA.Size = new System.Drawing.Size(118, 17);
-            this.StatusBar_Lbl_FileA.Text = "toolStripStatusLabel2";
-            this.StatusBar_Lbl_FileA.Visible = false;
+            this.StatusBar_Progress.Name = "StatusBar_Progress";
+            this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
+            this.StatusBar_Progress.Visible = false;
+            // 
+            // CGrid_Comparison
+            // 
+            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
+            this.CGrid_Comparison.Name = "CGrid_Comparison";
+            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
+            this.CGrid_Comparison.TabIndex = 1;
             // 
             // Frm_CAN_Config_Compar
             // 
@@ -355,5 +380,7 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_FileA;
         private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_FileB;
         private System.Windows.Forms.ToolStripProgressBar StatusBar_Progress;
+        private System.Windows.Forms.ToolStripButton TS_Btn_View;
+        private System.Windows.Forms.ToolStripButton TS_Btn_Refresh;
     }
 }

@@ -1153,6 +1153,16 @@ namespace CANStream {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Refresh_CAN_Controllers_32 {
+            get {
+                object obj = ResourceManager.GetObject("Refresh_CAN_Controllers_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Rename_16 {
             get {
                 object obj = ResourceManager.GetObject("Rename_16", resourceCulture);
@@ -1356,6 +1366,46 @@ namespace CANStream {
         internal static System.Drawing.Bitmap User_Selection_Off_16 {
             get {
                 object obj = ResourceManager.GetObject("User_Selection_Off_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View_All_16 {
+            get {
+                object obj = ResourceManager.GetObject("View_All_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View_All_32 {
+            get {
+                object obj = ResourceManager.GetObject("View_All_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View_Filtered_16 {
+            get {
+                object obj = ResourceManager.GetObject("View_Filtered_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View_Filtered_32 {
+            get {
+                object obj = ResourceManager.GetObject("View_Filtered_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

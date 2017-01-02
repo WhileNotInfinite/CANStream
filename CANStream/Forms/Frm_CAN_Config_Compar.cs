@@ -33,10 +33,37 @@ namespace CANStream
 
         #endregion
 
+        #region Private properties
+
+        private bool ShowOnlyDiff
+        {
+            get
+            {
+                return (mShowOnlyDiff);
+            }
+
+            set
+            {
+                mShowOnlyDiff = value;
+
+                if(mShowOnlyDiff)
+                {
+                    TS_Btn_View.Image = Icones.View_Filtered_32;
+                }
+                else
+                {
+                    TS_Btn_View.Image = Icones.View_All_32;
+                }
+            }
+        }
+
+        #endregion
+
         #region Private members
 
         private bool FileALoaded;
         private bool FileBLoaded;
+        private bool mShowOnlyDiff;
 
         private CANMessagesConfiguration SingleBus_CANCfg_A;
         private CANMessagesConfiguration SingleBus_CANCfg_B;
@@ -59,6 +86,8 @@ namespace CANStream
             MultipleBus_CANCfg_A = null;
             MultipleBus_CANCfg_B = null;
 
+            ShowOnlyDiff = false;
+
             Init_ComparisonGrid();
         }
 
@@ -74,6 +103,11 @@ namespace CANStream
         private void TS_Btn_FileB_Open_Click(object sender, EventArgs e)
         {
             Open_ComparisonFile(ComparisonFile.FileB);
+        }
+
+        private void TS_Btn_View_Click(object sender, EventArgs e)
+        {
+            ShowOnlyDiff = !ShowOnlyDiff;
         }
 
         #endregion
@@ -309,184 +343,158 @@ namespace CANStream
 
         private void Compare_SingleBusConfiguration()
         {
-            CollapsableGridRow oParentRow = null;
-            CollapsableGridRow oChildRow = null;
-
-            Type CANConfig_T = typeof(CANMessagesConfiguration);
-
-            oParentRow = CGrid_Comparison.Rows.Add();
-            oParentRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = CANConfig_T.Name.ToString();
-
-            //CAN Configuration properties
-            foreach(FieldInfo oField in CANConfig_T.GetFields())
+            if (SingleBus_CANCfg_A != null && SingleBus_CANCfg_B != null)
             {
-                if(oField.FieldType.Namespace.Equals("System")) //Type is generic
-                {
-                    object ValueA = CANConfig_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SingleBus_CANCfg_A, null);
-                    object ValueB = CANConfig_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SingleBus_CANCfg_B, null);
+                CollapsableGridRow oCfgRow = CGrid_Comparison.Rows.Add();
 
-                    oChildRow = oParentRow.Children.Add();
-                    oChildRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name.ToString();
-                    oChildRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ValueA.ToString();
-                    oChildRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ValueB.ToString();
-                    Color_GridRow(oChildRow.ThisRow);
-                }
-                else //Type is a custom class
-                {
-                    if (!(oField.FieldType.Namespace.Equals("System.Collections.Generic"))) //Type is a custom class and not a List<T>
-                    {
-                        //TODO: Compare custom class
-                    }
-                }
-            }
+                oCfgRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Configuration";
+                oCfgRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Path.GetFileName(SingleBus_CANCfg_A.ConfigFilePath);
+                oCfgRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Path.GetFileName(SingleBus_CANCfg_B.ConfigFilePath);
 
-            //CAN Frames comparison
-            int iFrame = 0;
-
-            foreach(CANMessage oFrame in SingleBus_CANCfg_A.Messages)
-            {
-                oChildRow = oParentRow.Children.Add();
-                oChildRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Frame";
-                Compare_Frame(oChildRow, oFrame, SingleBus_CANCfg_B.GetCANMessage(oFrame.Identifier, MessageResearchOption.Identifier));
-                oChildRow.Collapse();
-
-                iFrame++;
-                StatusBar_Progress.Value = (iFrame * 100 / SingleBus_CANCfg_A.Messages.Count);
+                Compare_Objects(typeof(CANMessagesConfiguration), SingleBus_CANCfg_A, SingleBus_CANCfg_B, oCfgRow);
             }
         }
 
-        private void Compare_Frame(CollapsableGridRow oBaseRow, CANMessage FrameA, CANMessage FrameB)
+        private void Compare_Objects(Type oObjType, object ObjA, object ObjB, CollapsableGridRow oBaseRow)
         {
-            if (!(FrameA == null && FrameB == null))
+            if (!(oObjType == null))
             {
-                CollapsableGridRow oPropRow = null;
-
-                Type CANFrame_T = typeof(CANMessage);
-
-                //CAN Frame properties
-                foreach (FieldInfo oField in CANFrame_T.GetFields())
+                foreach(FieldInfo oField in oObjType.GetFields())
                 {
-                    if (oField.FieldType.Namespace.Equals("System")) //Type is generic
+                    if(oField.FieldType.Namespace.Equals("System"))
                     {
-                        oPropRow = oBaseRow.Children.Add();
-                        oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
-
-                        if (!(FrameA == null || FrameB == null))
-                        {
-                            object ValueA = CANFrame_T.InvokeMember(oField.Name, BindingFlags.GetField, null, FrameA, null);
-                            object ValueB = CANFrame_T.InvokeMember(oField.Name, BindingFlags.GetField, null, FrameB, null);
-
-                            oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ValueA.ToString();
-                            oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ValueB.ToString();
-                            Color_GridRow(oPropRow.ThisRow);
-                        }
-                        else
-                        {
-                            if (FrameA == null)
-                            {
-                                object ValueB = CANFrame_T.InvokeMember(oField.Name, BindingFlags.GetField, null, FrameB, null);
-                                oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ValueB.ToString();
-                            }
-
-                            if (FrameB == null)
-                            {
-                                object ValueA = CANFrame_T.InvokeMember(oField.Name, BindingFlags.GetField, null, FrameA, null);
-                                oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ValueA.ToString();
-                            }
-                        }
+                        Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
                     }
-                    else  //Type is a custom class and not a List<T>
+                    else if(oField.FieldType.BaseType==typeof(Enum))
                     {
-                        if (!(oField.FieldType.Namespace.Equals("System.Collections.Generic"))) //Type is generic
-                        {
-                            //TODO: Compare custom class
-                        }
+                        Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
+                    }
+                    else if(oField.FieldType.Namespace.Equals("System.Collections.Generic"))
+                    {
+                        CollapsableGridRow oListRow = oBaseRow.Children.Add();
+                        oListRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+
+                        Compar_List_Field(oField, ObjA, ObjB, oListRow);
+
+                        oListRow.Collapse();
+                    }
+                    else if(oField.FieldType.BaseType==typeof(object))
+                    {
+                        CollapsableGridRow oObjRow = oBaseRow.Children.Add();
+                        oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+
+                        Compare_Objects(oField.FieldType, 
+                                        oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
+                                        oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                                        oObjRow);
+
+                        oObjRow.Collapse();
+                    }
+                }
+            }
+        }
+
+        private void Compar_List_Field(FieldInfo oListField, object ObjA, object ObjB, CollapsableGridRow oBaseRow)
+        {
+            if (oListField.FieldType.GetGenericTypeDefinition().Name.Equals("List`1"))
+            {
+                object ListA = null;
+                object ListB = null;
+
+                int CountA = -1;
+                int CountB = -1;
+
+                if (!(ObjA == null))
+                {
+                    ListA = oListField.GetValue(ObjA);
+
+                    if (!(ListA == null))
+                    {
+                        CountA = (int)ListA.GetType().GetProperty("Count").GetValue(ListA);
                     }
                 }
 
-                //CAN Signals comparison
-                if(!(FrameA==null || FrameB==null))
+                if (!(ObjB == null))
                 {
-                    foreach (CANParameter oSignal in FrameA.Parameters)
+                    ListB = oListField.GetValue(ObjB);
+
+                    if(!(ListB==null))
                     {
-                        oPropRow = oBaseRow.Children.Add();
-                        oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Signal";
-                        Compare_CANSignal(oPropRow, oSignal, FrameB.GetCANParameter(oSignal.Name, ParameterResearchOption.Name));
-                        oPropRow.Collapse();
+                        CountB = (int)ListA.GetType().GetProperty("Count").GetValue(ListB);
+                    }
+                }
+
+                for (int i = 0; i < CountA; i++)
+                {
+                    object[] Index = { i };
+
+                    object ItemA = ListA.GetType().GetProperty("Item").GetValue(ListA, Index);
+                    object ItemB = null;
+
+                    if(i<CountB)
+                    {
+                        ItemB = ListB.GetType().GetProperty("Item").GetValue(ListB, Index);
+                    }
+
+                    CollapsableGridRow oItemRow = oBaseRow.Children.Add();
+                    oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemA.GetType().Name + " #" + (i + 1).ToString();  
+
+                    Compare_Objects(ItemA.GetType(), ItemA, ItemB, oItemRow);
+                }
+            }
+        }
+
+        private void Compar_BasicType_Field(Type oObjType, string FieldName, object ObjA, object ObjB, CollapsableGridRow oBaseRow)
+        {
+            if (!(FieldName.Equals("")))
+            {
+                string sValA = "Null";
+                string sValB = "Null";
+
+                if (ObjA != null && ObjB != null)
+                {
+                    object ValA = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjA, null);
+
+                    if (ValA != null)
+                    {
+                        sValA = ValA.ToString();
+                    }
+
+                    object ValB = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjB, null);
+
+                    if (ValB != null)
+                    {
+                        sValB = ValB.ToString();
                     }
                 }
                 else
                 {
-                    if (FrameA == null)
+                    if (ObjA == null)
                     {
-                        foreach(CANParameter oSignal in FrameB.Parameters)
+                        object ValB = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjB, null);
+
+                        if (ValB != null)
                         {
-                            oPropRow = oBaseRow.Children.Add();
-                            oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Signal";
-                            Compare_CANSignal(oPropRow, null, oSignal);
-                            oPropRow.Collapse();
+                            sValB = ValB.ToString();
                         }
                     }
 
-                    if (FrameB == null)
+                    if (ObjB == null)
                     {
-                        foreach (CANParameter oSignal in FrameA.Parameters)
+                        object ValA = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjA, null);
+
+                        if (ValA != null)
                         {
-                            oPropRow = oBaseRow.Children.Add();
-                            oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Signal";
-                            Compare_CANSignal(oPropRow, oSignal, null);
-                            oPropRow.Collapse();
+                            sValA = ValA.ToString();
                         }
                     }
                 }
-            }
-        }
 
-        private void Compare_CANSignal(CollapsableGridRow oBaseRow, CANParameter SignalA, CANParameter SignalB)
-        {
-            if(!(SignalA==null && SignalB==null))
-            {
-                CollapsableGridRow oPropRow = null;
-
-                Type CANSignal_T = typeof(CANParameter);
-
-                //CAN Signal properties
-                foreach(FieldInfo oField in CANSignal_T.GetFields())
-                {
-                    if(oField.FieldType.Namespace.Equals("System")) //Type is generic
-                    {
-                        oPropRow = oBaseRow.Children.Add();
-                        oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
-
-                        if (!(SignalA == null || SignalB == null))
-                        {
-                            object ValueA = CANSignal_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SignalA, null);
-                            object ValueB = CANSignal_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SignalB, null);
-
-                            oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ValueA.ToString();
-                            oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ValueB.ToString();
-                            Color_GridRow(oPropRow.ThisRow);
-                        }
-                        else
-                        {
-                            if (SignalA == null)
-                            {
-                                object ValueB = CANSignal_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SignalB, null);
-                                oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ValueB.ToString();
-                            }
-
-                            if (SignalB == null)
-                            {
-                                object ValueA = CANSignal_T.InvokeMember(oField.Name, BindingFlags.GetField, null, SignalA, null);
-                                oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ValueA.ToString();
-                            }
-                        }
-                    }
-                    else //Type is not generic
-                    {
-                        //TODO
-                    }
-                }
+                CollapsableGridRow oPropRow = oBaseRow.Children.Add();
+                oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
+                oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
+                oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
+                Color_GridRow(oPropRow.ThisRow);
             }
         }
 
