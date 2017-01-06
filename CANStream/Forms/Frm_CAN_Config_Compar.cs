@@ -361,36 +361,83 @@ namespace CANStream
             {
                 foreach(FieldInfo oField in oObjType.GetFields())
                 {
-                    if(oField.FieldType.Namespace.Equals("System"))
+                    if (!(oField.IsInitOnly))
                     {
-                        Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
-                    }
-                    else if(oField.FieldType.BaseType==typeof(Enum))
-                    {
-                        Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
-                    }
-                    else if(oField.FieldType.Namespace.Equals("System.Collections.Generic"))
-                    {
-                        CollapsableGridRow oListRow = oBaseRow.Children.Add();
-                        oListRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+                        if (oField.FieldType.Name == "Nullable`1")
+                        {
+                            object oFieldA = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null);
+                            object oFieldB = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null);
 
-                        Compar_List_Field(oField, ObjA, ObjB, oListRow);
+                            if (!(oFieldA == null && oFieldB == null))
+                            {
+                                Type oNullableType = Nullable.GetUnderlyingType(oField.FieldType);
 
-                        oListRow.Collapse();
-                    }
-                    else if(oField.FieldType.BaseType==typeof(object))
-                    {
-                        CollapsableGridRow oObjRow = oBaseRow.Children.Add();
-                        oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+                                CollapsableGridRow oNullableObjRow = oBaseRow.Children.Add();
+                                oNullableObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
 
-                        Compare_Objects(oField.FieldType, 
-                                        oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
-                                        oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
-                                        oObjRow);
+                                Compare_Objects(oNullableType, oFieldA, oFieldB, oNullableObjRow);
 
-                        oObjRow.Collapse();
+                                if(oNullableObjRow.Children.Count==0)
+                                {
+                                    oBaseRow.Children.Delete(oNullableObjRow.ThisRow.Index);
+                                }
+                            }
+                        }
+                        else if (oField.FieldType.Namespace.Equals("System"))
+                        {
+                            Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
+                        }
+                        else if (oField.FieldType.BaseType == typeof(Enum))
+                        {
+                            Compar_BasicType_Field(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
+                        }
+                        else if (oField.FieldType == typeof(Color))
+                        {
+                            Compar_ColorField(
+                                               (Color) oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
+                                               (Color) oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                                               oField.Name,
+                                               oBaseRow
+                                              );
+                        }
+                        else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
+                        {
+                            CollapsableGridRow oListRow = oBaseRow.Children.Add();
+                            oListRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+
+                            Compar_List_Field(oField, ObjA, ObjB, oListRow);
+
+                            if (oListRow.Children.Count == 0)
+                            {
+                                oBaseRow.Children.Delete(oListRow.ThisRow.Index);
+                            }
+                        }
+                        else if (oField.FieldType.BaseType == typeof(System.ValueType)) //Structure
+                        {
+                            Compare_CustomType(oObjType, ObjA, ObjB, oBaseRow, oField);
+                        }
+                        else if (oField.FieldType.BaseType == typeof(object))
+                        {
+                            Compare_CustomType(oObjType, ObjA, ObjB, oBaseRow, oField);
+                        }
                     }
                 }
+            }
+        }
+
+        private void Compare_CustomType(Type oObjType, object ObjA, object ObjB, CollapsableGridRow oBaseRow, FieldInfo oField)
+        {
+            CollapsableGridRow oObjRow = oBaseRow.Children.Add();
+            oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+
+            Compare_Objects(oField.FieldType,
+                            oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
+                            oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                            oObjRow);
+
+            if (oObjRow.Children.Count == 0)
+            {
+                oBaseRow.Children.Delete(oObjRow.ThisRow.Index);
             }
         }
 
@@ -440,6 +487,11 @@ namespace CANStream
                     oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemA.GetType().Name + " #" + (i + 1).ToString();  
 
                     Compare_Objects(ItemA.GetType(), ItemA, ItemB, oItemRow);
+
+                    if (oItemRow.Children.Count == 0)
+                    {
+                        oBaseRow.Children.Delete(oItemRow.ThisRow.Index);
+                    }
                 }
             }
         }
@@ -490,41 +542,39 @@ namespace CANStream
                     }
                 }
 
-                CollapsableGridRow oPropRow = oBaseRow.Children.Add();
-                oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
-                oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
-                oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
-                Color_GridRow(oPropRow.ThisRow);
+                if (sValA != sValB)
+                {
+                    CollapsableGridRow oPropRow = oBaseRow.Children.Add();
+                    oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
+                    oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
+                    oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
+                    Color_GridRow(oPropRow.ThisRow);
+                }
+            }
+        }
+
+        private void Compar_ColorField(Color ColorA, Color ColorB, string FieldName, CollapsableGridRow oBaseRow)
+        {
+            if (ColorA.ToArgb() != ColorB.ToArgb())
+            {
+                CollapsableGridRow oColorRow = oBaseRow.Children.Add();
+                oColorRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ColorA.ToKnownColor().ToString();
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ColorB.ToKnownColor().ToString();
             }
         }
 
         private void Color_GridRow(DataGridViewRow oRow)
         {
-            Color EQUAL_BACKCOLOR = Color.LightGreen;
             Color DIFF_BACKCOLOR = Color.Tomato;
-            Color EQUAL_FORECOLOR = Color.Black;
             Color DIFF_FORECOLOR = Color.Black;
 
             if(!(oRow==null))
             {
-                Color BackColor = Color.Empty;
-                Color ForeColor = Color.Empty;
-
-                if(oRow.Cells[GRID_COL_FILE_A].Value.ToString().Equals(oRow.Cells[GRID_COL_FILE_B].Value.ToString()))
-                {
-                    BackColor = EQUAL_BACKCOLOR;
-                    ForeColor = EQUAL_FORECOLOR;
-                }
-                else
-                {
-                    BackColor = DIFF_BACKCOLOR;
-                    ForeColor = DIFF_FORECOLOR;
-                }
-
                 for (int i = 1; i < oRow.Cells.Count; i++)
                 {
-                    oRow.Cells[i].Style.BackColor = BackColor;
-                    oRow.Cells[i].Style.ForeColor = ForeColor;
+                    oRow.Cells[i].Style.BackColor = DIFF_BACKCOLOR;
+                    oRow.Cells[i].Style.ForeColor = DIFF_FORECOLOR;
                 }
             }
         }

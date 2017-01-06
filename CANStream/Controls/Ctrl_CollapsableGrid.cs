@@ -317,6 +317,18 @@ namespace CANStream
             return (null);
         }
         
+        internal void Remove_ChildRowAtIndex(int RowIndex)
+        {
+            for (int iRow = 0; iRow < Children.Count; iRow++)
+            {
+                if (Children[iRow].ThisRow.Index == RowIndex)
+                {
+                    Children.RemoveAt(iRow);
+                    return;
+                }
+            }
+        }
+
         internal int Get_LastChildIndex()
         {
             int LastIndex = this.ThisRow.Index;
@@ -561,6 +573,7 @@ namespace CANStream
 
                     if (!(oCRow.ThisRow == null))
                     {
+                        oRowContainer.Remove_ChildRowAtIndex(oCRow.ThisRow.Index);
                         oRowContainer.CollapsableGrid.Grid.Rows.Remove(oCRow.ThisRow);
                     }
                 }
