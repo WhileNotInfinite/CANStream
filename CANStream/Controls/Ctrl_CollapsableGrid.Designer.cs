@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ctrl_CollapsableGrid));
             this.oGrid = new System.Windows.Forms.DataGridView();
-            this.CollapsedStatusColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Img_RowState = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.oGrid)).BeginInit();
             this.SuspendLayout();
@@ -41,13 +39,11 @@
             // 
             this.oGrid.AllowUserToAddRows = false;
             this.oGrid.AllowUserToDeleteRows = false;
+            this.oGrid.AllowUserToResizeRows = false;
             this.oGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.oGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.oGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CollapsedStatusColumn,
-            this.Column2});
             this.oGrid.Location = new System.Drawing.Point(3, 3);
             this.oGrid.Name = "oGrid";
             this.oGrid.RowHeadersVisible = false;
@@ -55,20 +51,6 @@
             this.oGrid.TabIndex = 0;
             this.oGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.oGrid_CellDoubleClick);
             this.oGrid.Resize += new System.EventHandler(this.oGrid_Resize);
-            // 
-            // CollapsedStatusColumn
-            // 
-            this.CollapsedStatusColumn.HeaderText = "";
-            this.CollapsedStatusColumn.MinimumWidth = 21;
-            this.CollapsedStatusColumn.Name = "CollapsedStatusColumn";
-            this.CollapsedStatusColumn.ReadOnly = true;
-            this.CollapsedStatusColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CollapsedStatusColumn.Width = 21;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
             // 
             // Img_RowState
             // 
@@ -94,7 +76,5 @@
 
         private System.Windows.Forms.DataGridView oGrid;
         private System.Windows.Forms.ImageList Img_RowState;
-        private System.Windows.Forms.DataGridViewImageColumn CollapsedStatusColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

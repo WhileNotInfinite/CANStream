@@ -27,9 +27,9 @@ namespace CANStream
 
         #region Private constants
 
-        private const int GRID_COL_PROP_NAME = 1;
-        private const int GRID_COL_FILE_A = 2;
-        private const int GRID_COL_FILE_B = 3;
+        private const int GRID_COL_PROP_NAME = 0;
+        private const int GRID_COL_FILE_A = 1;
+        private const int GRID_COL_FILE_B = 2;
 
         #endregion
 
@@ -94,18 +94,18 @@ namespace CANStream
             CGrid_Comparison.Columns[GRID_COL_FILE_A].ReadOnly = true;
             CGrid_Comparison.Columns[GRID_COL_FILE_B].ReadOnly = true;
 
-            CGrid_Comparison.Columns[GRID_COL_PROP_NAME].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            CGrid_Comparison.Columns[GRID_COL_FILE_A].SortMode = DataGridViewColumnSortMode.NotSortable;
+            CGrid_Comparison.Columns[GRID_COL_FILE_B].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            CGrid_Comparison.Columns[GRID_COL_PROP_NAME].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             CGrid_Comparison.Columns[GRID_COL_FILE_A].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             CGrid_Comparison.Columns[GRID_COL_FILE_B].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            CGrid_Comparison.Columns[GRID_COL_PROP_NAME].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             CGrid_Comparison.Columns[GRID_COL_FILE_A].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             CGrid_Comparison.Columns[GRID_COL_FILE_B].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
             int GridWith = CGrid_Comparison.Width - CGrid_Comparison.Columns[0].Width - 25;
-            CGrid_Comparison.Columns[GRID_COL_PROP_NAME].Width = GridWith / 4;
 
-            GridWith -= CGrid_Comparison.Columns[GRID_COL_PROP_NAME].Width;
             CGrid_Comparison.Columns[GRID_COL_FILE_A].Width = GridWith / 2;
             CGrid_Comparison.Columns[GRID_COL_FILE_B].Width = GridWith / 2;
         }
