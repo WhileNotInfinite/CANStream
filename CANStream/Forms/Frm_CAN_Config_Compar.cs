@@ -6,6 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +33,35 @@ namespace CANStream
         private const int GRID_COL_FILE_A = 1;
         private const int GRID_COL_FILE_B = 2;
 
+        private const int COLOR_T_SIZE = 4 * sizeof(byte);
+
+        #endregion
+
+        #region Private properties
+
+        private long ComparedDataSize
+        {
+            get
+            {
+                return (mComparedDataSize);
+            }
+
+            set
+            {
+                mComparedDataSize = value;
+
+                int Perc = Math.Min(
+                                    (int)(mComparedDataSize * 100 / TotalDataSizeToCompare),
+                                    (int)(this.StatusBar_Progress.Maximum)
+                                    );
+
+                if (this.StatusBar_Progress.Value != Perc)
+                {
+                    this.StatusBar_Progress.Value = Perc;
+                }
+            }
+        }
+
         #endregion
 
         #region Private members
@@ -43,6 +74,9 @@ namespace CANStream
 
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_A;
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_B;
+
+        private long TotalDataSizeToCompare;
+        private long mComparedDataSize;
 
         #endregion
 
@@ -317,6 +351,9 @@ namespace CANStream
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Path.GetFileName(SingleBus_CANCfg_A.ConfigFilePath);
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Path.GetFileName(SingleBus_CANCfg_B.ConfigFilePath);
 
+                TotalDataSizeToCompare = Math.Max(Get_ObjectSize(SingleBus_CANCfg_A), Get_ObjectSize(SingleBus_CANCfg_B));
+                ComparedDataSize = 0;
+
                 Compare_Objects(typeof(CANMessagesConfiguration), SingleBus_CANCfg_A, SingleBus_CANCfg_B, oCfgRow);
             }
         }
@@ -365,6 +402,8 @@ namespace CANStream
                                                oField.Name,
                                                oBaseRow
                                               );
+
+                            ComparedDataSize += COLOR_T_SIZE;
                         }
                         else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
                         {
@@ -469,6 +508,8 @@ namespace CANStream
                 string sValA = "Null";
                 string sValB = "Null";
 
+                long FieldSize = 0;
+
                 if (ObjA != null && ObjB != null)
                 {
                     object ValA = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjA, null);
@@ -476,6 +517,7 @@ namespace CANStream
                     if (ValA != null)
                     {
                         sValA = ValA.ToString();
+                        FieldSize = Get_FieldSize(ValA.GetType(), ValA);
                     }
 
                     object ValB = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjB, null);
@@ -483,6 +525,11 @@ namespace CANStream
                     if (ValB != null)
                     {
                         sValB = ValB.ToString();
+
+                        if (FieldSize == 0)
+                        {
+                            FieldSize = Get_ObjectSize(ValB);
+                        }
                     }
                 }
                 else
@@ -494,6 +541,7 @@ namespace CANStream
                         if (ValB != null)
                         {
                             sValB = ValB.ToString();
+                            FieldSize = Get_ObjectSize(ValB);
                         }
                     }
 
@@ -504,6 +552,7 @@ namespace CANStream
                         if (ValA != null)
                         {
                             sValA = ValA.ToString();
+                            FieldSize = Get_ObjectSize(ValA);
                         }
                     }
                 }
@@ -515,6 +564,11 @@ namespace CANStream
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
                     Color_GridRow(oPropRow.ThisRow);
+                }
+
+                if(FieldSize!=0)
+                {
+                    ComparedDataSize += FieldSize;
                 }
             }
         }
@@ -543,6 +597,56 @@ namespace CANStream
                     oRow.Cells[i].Style.ForeColor = DIFF_FORECOLOR;
                 }
             }
+        }
+
+        private long Get_ObjectSize(object oSizeOfObj)
+        {
+            long ObjSize = 0;
+
+            if (!(oSizeOfObj == null))
+            {
+                Stream s = new MemoryStream();
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(s, oSizeOfObj);
+                ObjSize = s.Length;
+            }
+
+            return (ObjSize);
+        }
+
+        private long Get_FieldSize(Type FieldType, object FieldValue)
+        {
+            long FieldSize = 0;
+
+            if(FieldType==typeof(string))
+            {
+                FieldSize = sizeof(char) * ((FieldValue as string).Length);
+            }
+            else if(FieldType==typeof(int))
+            {
+                FieldSize = sizeof(int);
+            }
+            else if (FieldType == typeof(Int64))
+            {
+                FieldSize = sizeof(Int64);
+            }
+            else if (FieldType.BaseType == typeof(Enum))
+            {
+                FieldSize = sizeof(int);
+            }
+            else if (FieldType == typeof(double))
+            {
+                FieldSize = sizeof(double);
+            }
+            else if (FieldType == typeof(bool))
+            {
+                FieldSize = sizeof(bool);
+            }
+            else
+            {
+                FieldSize = 0;
+            }
+            return (FieldSize);
         }
 
         #endregion
