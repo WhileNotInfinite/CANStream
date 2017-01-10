@@ -54,6 +54,8 @@
             this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
+            this.StatusBar_Lbl_DiffCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBar_Lbl_MergeCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.TS_Main.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -242,6 +244,8 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusBar_Lbl_FileA,
             this.StatusBar_Lbl_FileB,
+            this.StatusBar_Lbl_DiffCount,
+            this.StatusBar_Lbl_MergeCount,
             this.StatusBar_Progress});
             this.statusStrip1.Location = new System.Drawing.Point(0, 473);
             this.statusStrip1.Name = "statusStrip1";
@@ -278,6 +282,20 @@
             this.CGrid_Comparison.Name = "CGrid_Comparison";
             this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
             this.CGrid_Comparison.TabIndex = 1;
+            // 
+            // StatusBar_Lbl_DiffCount
+            // 
+            this.StatusBar_Lbl_DiffCount.Name = "StatusBar_Lbl_DiffCount";
+            this.StatusBar_Lbl_DiffCount.Size = new System.Drawing.Size(118, 17);
+            this.StatusBar_Lbl_DiffCount.Text = "toolStripStatusLabel1";
+            this.StatusBar_Lbl_DiffCount.Visible = false;
+            // 
+            // StatusBar_Lbl_MergeCount
+            // 
+            this.StatusBar_Lbl_MergeCount.Name = "StatusBar_Lbl_MergeCount";
+            this.StatusBar_Lbl_MergeCount.Size = new System.Drawing.Size(118, 17);
+            this.StatusBar_Lbl_MergeCount.Text = "toolStripStatusLabel2";
+            this.StatusBar_Lbl_MergeCount.Visible = false;
             // 
             // Frm_CAN_Config_Compar
             // 
@@ -326,5 +344,7 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_FileB;
         private System.Windows.Forms.ToolStripProgressBar StatusBar_Progress;
         private System.Windows.Forms.ToolStripButton TS_Btn_RefreshCompar;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_DiffCount;
+        private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_MergeCount;
     }
 }

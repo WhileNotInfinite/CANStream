@@ -33,32 +33,47 @@ namespace CANStream
         private const int GRID_COL_FILE_A = 1;
         private const int GRID_COL_FILE_B = 2;
 
-        private const int COLOR_T_SIZE = 4 * sizeof(byte);
-
         #endregion
 
         #region Private properties
 
-        private long ComparedDataSize
+        private int ComparedParamatersCount
         {
             get
             {
-                return (mComparedDataSize);
+                return (mComparedParamatersCount);
             }
 
             set
             {
-                mComparedDataSize = value;
+                mComparedParamatersCount = value;
 
-                int Perc = Math.Min(
-                                    (int)(mComparedDataSize * 100 / TotalDataSizeToCompare),
-                                    (int)(this.StatusBar_Progress.Maximum)
-                                    );
+                int Perc = 0;
 
-                if (this.StatusBar_Progress.Value != Perc)
+                if (ParametersToCompareCount > 0)
                 {
-                    this.StatusBar_Progress.Value = Perc;
+                    Perc = Math.Min((mComparedParamatersCount * 100 / ParametersToCompareCount), 100);
+
+                    if (this.StatusBar_Progress.Value != Perc)
+                    {
+                        this.StatusBar_Progress.Value = Perc;
+                    }
                 }
+            }
+        }
+
+        private int MergeCount
+        {
+            get
+            {
+                return (mMergeCount);
+            }
+
+            set
+            {
+                mMergeCount = value;
+
+                this.StatusBar_Lbl_MergeCount.Text = mMergeCount.ToString() + " Elements merged";
             }
         }
 
@@ -75,8 +90,11 @@ namespace CANStream
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_A;
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_B;
 
-        private long TotalDataSizeToCompare;
-        private long mComparedDataSize;
+        private int ParametersToCompareCount;
+        private int mComparedParamatersCount;
+
+        private int NDifferenceFound;
+        private int mMergeCount;
 
         #endregion
 
@@ -92,6 +110,8 @@ namespace CANStream
 
             MultipleBus_CANCfg_A = null;
             MultipleBus_CANCfg_B = null;
+
+            ParametersToCompareCount = 0;
 
             Init_ComparisonGrid();
         }
@@ -184,7 +204,7 @@ namespace CANStream
                                 }
 
                                 StatusBar_Lbl_FileA.Visible = true;
-                                StatusBar_Lbl_FileA.Text = Path.GetFileName(Dlg_OpenFile.FileName);
+                                StatusBar_Lbl_FileA.Text = "File A: " + Path.GetFileName(Dlg_OpenFile.FileName);
 
                                 Show_Comparison();
                             }
@@ -217,7 +237,7 @@ namespace CANStream
                                 }
 
                                 StatusBar_Lbl_FileB.Visible = true;
-                                StatusBar_Lbl_FileB.Text = Path.GetFileName(Dlg_OpenFile.FileName);
+                                StatusBar_Lbl_FileB.Text = "File B: " + Path.GetFileName(Dlg_OpenFile.FileName);
 
                                 Show_Comparison();
                             }
@@ -351,10 +371,19 @@ namespace CANStream
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Path.GetFileName(SingleBus_CANCfg_A.ConfigFilePath);
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Path.GetFileName(SingleBus_CANCfg_B.ConfigFilePath);
 
-                TotalDataSizeToCompare = Math.Max(Get_ObjectSize(SingleBus_CANCfg_A), Get_ObjectSize(SingleBus_CANCfg_B));
-                ComparedDataSize = 0;
+                ParametersToCompareCount = Math.Max(SingleBus_CANCfg_A.GetParameterCount(), SingleBus_CANCfg_B.GetParameterCount());
+                ComparedParamatersCount = 0;
+                NDifferenceFound = 0;
+                MergeCount = 0;
+
+                StatusBar_Lbl_MergeCount.Visible = false;
 
                 Compare_Objects(typeof(CANMessagesConfiguration), SingleBus_CANCfg_A, SingleBus_CANCfg_B, oCfgRow);
+
+                StatusBar_Lbl_DiffCount.Visible = true;
+                StatusBar_Lbl_DiffCount.Text = NDifferenceFound.ToString() + " Differences found";
+
+                StatusBar_Lbl_MergeCount.Visible = true;
             }
         }
 
@@ -368,8 +397,18 @@ namespace CANStream
                     {
                         if (oField.FieldType.Name == "Nullable`1")
                         {
-                            object oFieldA = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null);
-                            object oFieldB = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null);
+                            object oFieldA = null;
+                            object oFieldB = null;
+
+                            if (!(ObjA == null))
+                            {
+                                oFieldA = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null);
+                            }
+
+                            if(!(ObjB==null))
+                            {
+                                oFieldB = oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null);
+                            }
 
                             if (!(oFieldA == null && oFieldB == null))
                             {
@@ -396,14 +435,26 @@ namespace CANStream
                         }
                         else if (oField.FieldType == typeof(Color))
                         {
+                            Color ColorA = Color.Empty;
+                            Color ColorB = Color.Empty;
+
+                            if(!(ObjA==null))
+                            {
+                                ColorA = (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null);
+                            }
+
+                            if(!(ObjB==null))
+                            {
+                                ColorB = (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null);
+                            }
+
                             Compar_ColorField(
-                                               (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
-                                               (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                                               ColorA,
+                                               ColorB,
                                                oField.Name,
                                                oBaseRow
                                               );
 
-                            ComparedDataSize += COLOR_T_SIZE;
                         }
                         else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
                         {
@@ -435,10 +486,31 @@ namespace CANStream
             CollapsableGridRow oObjRow = oBaseRow.Children.Add();
             oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
 
-            Compare_Objects(oField.FieldType,
-                            oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
-                            oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
-                            oObjRow);
+            if (!(ObjA == null || ObjB == null))
+            {
+                Compare_Objects(oField.FieldType,
+                                oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
+                                oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                                oObjRow);
+            }
+            else
+            {
+                if(ObjA==null)
+                {
+                    Compare_Objects(oField.FieldType,
+                                null,
+                                oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null),
+                                oObjRow);
+                }
+
+                if(ObjB==null)
+                {
+                    Compare_Objects(oField.FieldType,
+                                oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null),
+                                null,
+                                oObjRow);
+                }
+            }
 
             if (oObjRow.Children.Count == 0)
             {
@@ -476,6 +548,7 @@ namespace CANStream
                     }
                 }
 
+                //Compare all items of ListA
                 for (int i = 0; i < CountA; i++)
                 {
                     object[] Index = { i };
@@ -491,11 +564,46 @@ namespace CANStream
                     CollapsableGridRow oItemRow = oBaseRow.Children.Add();
                     oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemA.GetType().Name + " #" + (i + 1).ToString();
 
-                    Compare_Objects(ItemA.GetType(), ItemA, ItemB, oItemRow);
-
-                    if (oItemRow.Children.Count == 0)
+                    if (!(ItemB == null)) //An item exists at the current index in ListB
                     {
-                        oBaseRow.Children.Delete(oItemRow.ThisRow.Index);
+                        Compare_Objects(ItemA.GetType(), ItemA, ItemB, oItemRow);
+
+                        if (oItemRow.Children.Count == 0)
+                        {
+                            oBaseRow.Children.Delete(oItemRow.ThisRow.Index);
+                        }
+                    }
+                    else //No item in ListB at the current index
+                    {
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ItemA.GetType().Name; //TODO: Get something more representative of the item such as its name or identifier
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = "Null";
+                        Color_GridRow(oItemRow.ThisRow);
+                    }
+
+                    if (ItemA.GetType() == typeof(CANParameter))
+                    {
+                        ComparedParamatersCount++;
+                    }
+                }
+
+                //Compare remaining ListB items if any
+                if (CountB > CountA)
+                {
+                    object[] Index = { 0 };
+                    object ItemB = ListB.GetType().GetProperty("Item").GetValue(ListB, Index);
+
+                    for (int i = CountA; i < CountB; i++)
+                    {
+                        CollapsableGridRow oItemRow = oBaseRow.Children.Add();
+                        oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemB.GetType().Name + " #" + (i + 1).ToString();
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = "Null";
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ItemB.GetType().Name; //TODO: Get something more representative of the item such as its name or identifier
+                        Color_GridRow(oItemRow.ThisRow);
+
+                        if (ItemB.GetType() == typeof(CANParameter))
+                        {
+                            ComparedParamatersCount++;
+                        }
                     }
                 }
             }
@@ -508,8 +616,6 @@ namespace CANStream
                 string sValA = "Null";
                 string sValB = "Null";
 
-                long FieldSize = 0;
-
                 if (ObjA != null && ObjB != null)
                 {
                     object ValA = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjA, null);
@@ -517,7 +623,6 @@ namespace CANStream
                     if (ValA != null)
                     {
                         sValA = ValA.ToString();
-                        FieldSize = Get_FieldSize(ValA.GetType(), ValA);
                     }
 
                     object ValB = oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjB, null);
@@ -525,11 +630,6 @@ namespace CANStream
                     if (ValB != null)
                     {
                         sValB = ValB.ToString();
-
-                        if (FieldSize == 0)
-                        {
-                            FieldSize = Get_ObjectSize(ValB);
-                        }
                     }
                 }
                 else
@@ -541,7 +641,6 @@ namespace CANStream
                         if (ValB != null)
                         {
                             sValB = ValB.ToString();
-                            FieldSize = Get_ObjectSize(ValB);
                         }
                     }
 
@@ -552,7 +651,6 @@ namespace CANStream
                         if (ValA != null)
                         {
                             sValA = ValA.ToString();
-                            FieldSize = Get_ObjectSize(ValA);
                         }
                     }
                 }
@@ -564,11 +662,7 @@ namespace CANStream
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
                     Color_GridRow(oPropRow.ThisRow);
-                }
-
-                if(FieldSize!=0)
-                {
-                    ComparedDataSize += FieldSize;
+                    NDifferenceFound++;
                 }
             }
         }
@@ -581,6 +675,7 @@ namespace CANStream
                 oColorRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
                 oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ColorA.ToKnownColor().ToString();
                 oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ColorB.ToKnownColor().ToString();
+                NDifferenceFound++;
             }
         }
 
@@ -597,56 +692,6 @@ namespace CANStream
                     oRow.Cells[i].Style.ForeColor = DIFF_FORECOLOR;
                 }
             }
-        }
-
-        private long Get_ObjectSize(object oSizeOfObj)
-        {
-            long ObjSize = 0;
-
-            if (!(oSizeOfObj == null))
-            {
-                Stream s = new MemoryStream();
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(s, oSizeOfObj);
-                ObjSize = s.Length;
-            }
-
-            return (ObjSize);
-        }
-
-        private long Get_FieldSize(Type FieldType, object FieldValue)
-        {
-            long FieldSize = 0;
-
-            if(FieldType==typeof(string))
-            {
-                FieldSize = sizeof(char) * ((FieldValue as string).Length);
-            }
-            else if(FieldType==typeof(int))
-            {
-                FieldSize = sizeof(int);
-            }
-            else if (FieldType == typeof(Int64))
-            {
-                FieldSize = sizeof(Int64);
-            }
-            else if (FieldType.BaseType == typeof(Enum))
-            {
-                FieldSize = sizeof(int);
-            }
-            else if (FieldType == typeof(double))
-            {
-                FieldSize = sizeof(double);
-            }
-            else if (FieldType == typeof(bool))
-            {
-                FieldSize = sizeof(bool);
-            }
-            else
-            {
-                FieldSize = 0;
-            }
-            return (FieldSize);
         }
 
         #endregion
