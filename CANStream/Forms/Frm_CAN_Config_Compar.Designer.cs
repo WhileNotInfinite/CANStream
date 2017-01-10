@@ -53,9 +53,9 @@
             this.StatusBar_Lbl_FileA = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
-            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.StatusBar_Lbl_DiffCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_MergeCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -230,6 +230,7 @@
             this.TS_Btn_RefreshCompar.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_RefreshCompar.Text = "toolStripButton1";
             this.TS_Btn_RefreshCompar.ToolTipText = "Refresh comparison";
+            this.TS_Btn_RefreshCompar.Click += new System.EventHandler(this.TS_Btn_RefreshCompar_Click);
             // 
             // Dlg_OpenFile
             // 
@@ -273,16 +274,6 @@
             this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
             this.StatusBar_Progress.Visible = false;
             // 
-            // CGrid_Comparison
-            // 
-            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
-            this.CGrid_Comparison.Name = "CGrid_Comparison";
-            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
-            this.CGrid_Comparison.TabIndex = 1;
-            // 
             // StatusBar_Lbl_DiffCount
             // 
             this.StatusBar_Lbl_DiffCount.Name = "StatusBar_Lbl_DiffCount";
@@ -296,6 +287,16 @@
             this.StatusBar_Lbl_MergeCount.Size = new System.Drawing.Size(118, 17);
             this.StatusBar_Lbl_MergeCount.Text = "toolStripStatusLabel2";
             this.StatusBar_Lbl_MergeCount.Visible = false;
+            // 
+            // CGrid_Comparison
+            // 
+            this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
+            this.CGrid_Comparison.Name = "CGrid_Comparison";
+            this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
+            this.CGrid_Comparison.TabIndex = 1;
             // 
             // Frm_CAN_Config_Compar
             // 

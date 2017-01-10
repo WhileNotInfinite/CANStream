@@ -130,6 +130,11 @@ namespace CANStream
             Open_ComparisonFile(ComparisonFile.FileB);
         }
 
+        private void TS_Btn_RefreshCompar_Click(object sender, EventArgs e)
+        {
+            Show_Comparison();
+        }
+
         #endregion
 
         #endregion
