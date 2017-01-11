@@ -890,15 +890,15 @@ namespace CANStream
                     object[] Index = { i };
 
                     object ItemA = ListA.GetType().GetProperty("Item").GetValue(ListA, Index);
-                    object ItemB = null;
-
-                    if (i < CountB)
-                    {
-                        ItemB = ListB.GetType().GetProperty("Item").GetValue(ListB, Index);
-                    }
+                    object ItemB = Find_ItemInList(ItemA, ListB);
 
                     CollapsableGridRow oItemRow = oBaseRow.Children.Add();
                     oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemA.GetType().Name + " #" + (i + 1).ToString();
+
+                    string Item_KeyFielName = Get_ObjetKeyFieldName(ItemA);
+                    string ItemA_KeyFieldValue = ItemA.GetType().GetField(Item_KeyFielName).GetValue(ItemA).ToString();
+                    oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Item_KeyFielName + ": " + ItemA_KeyFieldValue;
+
                     oItemRow.ThisRow.Tag = false;
 
                     oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = "Item #" + i.ToString();
@@ -907,6 +907,9 @@ namespace CANStream
 
                     if (!(ItemB == null)) //An item exists at the current index in ListB
                     {
+                        string ItemB_KeyFieldValue = ItemB.GetType().GetField(Item_KeyFielName).GetValue(ItemB).ToString();
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Item_KeyFielName + ": " + ItemB_KeyFieldValue;
+
                         Compare_Objects(ItemA.GetType(), ItemA, ItemB, oItemRow);
 
                         if (oItemRow.Children.Count == 0)
@@ -916,8 +919,8 @@ namespace CANStream
                     }
                     else //No item in ListB at the current index
                     {
-                        oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ItemA.GetType().Name; //TODO: Get something more representative of the item such as its name or identifier
                         oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = "Null";
+                        oItemRow.ThisRow.Tag = true;
                         Color_GridRow(oItemRow.ThisRow);
                     }
 
@@ -928,19 +931,28 @@ namespace CANStream
                 }
 
                 //Compare remaining ListB items if any
-                if (CountB > CountA)
+                for (int i = 0; i < CountB; i++)
                 {
-                    object[] Index = { 0 };
+                    object[] Index = { i };
                     object ItemB = ListB.GetType().GetProperty("Item").GetValue(ListB, Index);
 
-                    for (int i = CountA; i < CountB; i++)
+                    object ItemA = Find_ItemInList(ItemB, ListA);
+
+                    if (ItemA == null) //Otherwise it has been compared already in the 1st loop
                     {
+                        string Item_KeyFielName = Get_ObjetKeyFieldName(ItemB);
+                        string ItemB_KeyFieldValue = ItemB.GetType().GetField(Item_KeyFielName).GetValue(ItemB).ToString();
+
                         CollapsableGridRow oItemRow = oBaseRow.Children.Add();
                         oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemB.GetType().Name + " #" + (i + 1).ToString();
-                        oItemRow.ThisRow.Tag = false;
+                        oItemRow.ThisRow.Tag = true;
+
+                        oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = "Item #" + i.ToString();
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Tag = ListA;
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Tag = ListB;
 
                         oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = "Null";
-                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ItemB.GetType().Name; //TODO: Get something more representative of the item such as its name or identifier
+                        oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Item_KeyFielName + ": " + ItemB_KeyFieldValue;
                         Color_GridRow(oItemRow.ThisRow);
 
                         if (ItemB.GetType() == typeof(CANParameter))
@@ -948,8 +960,52 @@ namespace CANStream
                             ComparedParamatersCount++;
                         }
                     }
+                }                
+            }
+        }
+
+        public string Get_ObjetKeyFieldName(object Obj)
+        {
+            string KeyFieldName = "";
+
+            if (Obj.GetType() == typeof(CANMessage))
+            {
+                KeyFieldName = "Identifier";
+            }
+            else if (Obj.GetType() == typeof(CANParameter))
+            {
+                KeyFieldName = "Name";
+            }
+            else if (Obj.GetType() == typeof(EnumerationValue))
+            {
+                KeyFieldName = "Value";
+            }
+
+            return (KeyFieldName);
+        }
+
+        private object Find_ItemInList(object Item, object List)
+        {
+            Type oItemType = Item.GetType();
+            string KeyFieldName = Get_ObjetKeyFieldName(Item);
+
+            object KeyFieldValue = oItemType.GetField(KeyFieldName).GetValue(Item);
+
+            Type oListType = List.GetType();
+            int ListCount = (int)(oListType.GetProperty("Count").GetValue(List));
+
+            for (int i = 0; i < ListCount; i++)
+            {
+                object[] Index = { i };
+                object oListIt = oListType.GetProperty("Item").GetValue(List, Index);
+
+                if (oItemType.GetField(KeyFieldName).GetValue(oListIt).ToString().Equals(KeyFieldValue.ToString()))
+                {
+                    return (oListIt);
                 }
             }
+
+            return (null);
         }
 
         private void Compar_BasicType_Field(Type oObjType, string FieldName, object ObjA, object ObjB, CollapsableGridRow oBaseRow)
@@ -1086,47 +1142,138 @@ namespace CANStream
 
                 if (ObjType == ObjB.GetType()) //Source and destination objects are of the same type
                 {
-                    object PropA = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjA, null);
-                    object PropB = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjB, null);
-
-                    if (!(PropA == null && PropB == null)) //Field name exists in the object type
+                    if (!(PropName.StartsWith("Item"))) //Current object is not an item of a list
                     {
-                        switch (eMergeDirection)
+                        object PropA = null;
+                        object PropB = null;
+
+                        PropA = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjA, null);
+                        PropB = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjB, null);
+
+                        if (!(PropA == null && PropB == null)) //Field name exists in the object type
+                        {
+                            switch (eMergeDirection)
+                            {
+                                case MergeDirection.From_A_To_B:
+                                    {
+                                        ObjType.GetField(PropName).SetValue(ObjB, PropA);
+                                        FileBModified = true;
+
+                                        oRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ObjType.GetField(PropName).GetValue(ObjB).ToString();
+                                        Color_GridRow(oRow.ThisRow);
+                                    }
+                                    break;
+
+                                case MergeDirection.From_B_To_A:
+                                    {
+                                        ObjType.GetField(PropName).SetValue(ObjA, PropB);
+                                        FileAModified = true;
+
+                                        oRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ObjType.GetField(PropName).GetValue(ObjA).ToString();
+                                        Color_GridRow(oRow.ThisRow);
+                                    }
+                                    break;
+
+                                default:
+                                    return;
+                            }
+
+                            if (ObjType.BaseType == typeof(System.ValueType))
+                            {
+                                if (eMergeDirection == MergeDirection.From_A_To_B)
+                                {
+                                    Set_ParentObject(ObjB, oRow, GRID_COL_FILE_B);
+                                }
+                                else
+                                {
+                                    Set_ParentObject(ObjA, oRow, GRID_COL_FILE_A);
+                                }
+                            }
+                        }
+                    }
+                    else //Current object is an item of a list
+                    {
+                        object ListA = oRow.ThisRow.Cells[GRID_COL_FILE_A].Tag;
+                        object ListB = oRow.ThisRow.Cells[GRID_COL_FILE_B].Tag;
+
+                        object ItemA = null;
+                        object ItemB = null;
+
+                        int ItemIndex = Get_ListItemIndex(PropName);
+                        object[] ObjItemIndex = { ItemIndex };
+
+                        if(!(oRow.ThisRow.Cells[GRID_COL_FILE_A].Value.ToString().Equals("Null")))
+                        {
+                            ItemA = ListA.GetType().GetProperty("Item").GetValue(ListA, ObjItemIndex);
+                        }
+
+                        if (!(oRow.ThisRow.Cells[GRID_COL_FILE_B].Value.ToString().Equals("Null")))
+                        {
+                            ItemB = ListA.GetType().GetProperty("Item").GetValue(ListB, ObjItemIndex);
+                        }
+
+                        switch(eMergeDirection)
                         {
                             case MergeDirection.From_A_To_B:
                                 {
-                                    ObjType.GetField(PropName).SetValue(ObjB, PropA);
-                                    FileBModified = true;
+                                    if(ItemA!=null)
+                                    {
+                                        int ListBCount = (int)ListB.GetType().GetProperty("Count").GetValue(ListB);
 
-                                    oRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ObjType.GetField(PropName).GetValue(ObjB).ToString();
-                                    Color_GridRow(oRow.ThisRow);
+                                        if (ItemIndex < ListBCount)
+                                        {
+                                            object[] InsertArgs = { ((object)ItemIndex), ItemA };
+                                            ListB.GetType().InvokeMember("Insert", BindingFlags.InvokeMethod, null, ListB, InsertArgs);
+                                        }
+                                        else
+                                        {
+                                            object[] AddArgs = { ItemA };
+                                            ListB.GetType().InvokeMember("Add", BindingFlags.InvokeMethod, null, ListB, AddArgs);
+                                        }
+
+                                        FileBModified = true;
+                                        oRow.ThisRow.Cells[GRID_COL_FILE_B].Value = oRow.ThisRow.Cells[GRID_COL_FILE_A].Value;
+                                        Color_GridRow(oRow.ThisRow);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Cannot merge a null value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        return;
+                                    }
                                 }
                                 break;
 
                             case MergeDirection.From_B_To_A:
                                 {
-                                    ObjType.GetField(PropName).SetValue(ObjA, PropB);
-                                    FileAModified = true;
+                                    if(ItemB!=null)
+                                    {
+                                        int ListACount = (int)ListB.GetType().GetProperty("Count").GetValue(ListA);
 
-                                    oRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ObjType.GetField(PropName).GetValue(ObjA).ToString();
-                                    Color_GridRow(oRow.ThisRow);
+                                        if (ItemIndex < ListACount)
+                                        {
+                                            object[] InsertArgs = { ((object)ItemIndex), ItemB };
+                                            ListA.GetType().InvokeMember("Insert", BindingFlags.InvokeMethod, null, ListA, InsertArgs);
+                                        }
+                                        else
+                                        {
+                                            object[] AddArgs = { ItemB };
+                                            ListA.GetType().InvokeMember("Add", BindingFlags.InvokeMethod, null, ListA, AddArgs);
+                                        }
+
+                                        FileAModified = true;
+                                        oRow.ThisRow.Cells[GRID_COL_FILE_A].Value = oRow.ThisRow.Cells[GRID_COL_FILE_B].Value;
+                                        Color_GridRow(oRow.ThisRow);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Cannot merge a null value !", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        return;
+                                    }
                                 }
                                 break;
 
                             default:
                                 return;
-                        }
-
-                        if (ObjType.BaseType == typeof(System.ValueType))
-                        {
-                            if (eMergeDirection == MergeDirection.From_A_To_B)
-                            {
-                                Set_ParentObject(ObjB, oRow, GRID_COL_FILE_B);
-                            }
-                            else
-                            {
-                                Set_ParentObject(ObjA, oRow, GRID_COL_FILE_A);
-                            }
                         }
                     }
 
@@ -1144,11 +1291,7 @@ namespace CANStream
 
             if (PropName.StartsWith("Item")) //Parent object is an item of a list
             {
-                int IndexStart = PropName.IndexOf("#") + 1;
-                string sIndex = PropName.Substring(IndexStart, PropName.Length - IndexStart);
-
-                object[] ItemIndex = { int.Parse(sIndex) };
-
+                object[] ItemIndex = { Get_ListItemIndex(PropName) };
                 oParentType.GetProperty("Item").SetValue(oParentObject, oMergedObj, ItemIndex);
             }
             else //Parent object is a single field of an object
@@ -1160,6 +1303,14 @@ namespace CANStream
             {
                 Set_ParentObject(oParentObject, oRow.Parent, ColId);
             }
+        }
+
+        private int Get_ListItemIndex(string PropName)
+        {
+            int IndexStart = PropName.IndexOf("#") + 1;
+            string sIndex = PropName.Substring(IndexStart, PropName.Length - IndexStart);
+
+            return (int.Parse(sIndex));
         }
 
         #endregion
