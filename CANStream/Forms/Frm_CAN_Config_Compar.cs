@@ -25,6 +25,13 @@ namespace CANStream
             FileB = 2,
         }
 
+        private enum MergeDirection
+        {
+            None = 0,
+            From_A_To_B = 1,
+            From_B_To_A = 2,
+        }
+
         #endregion
 
         #region Private constants
@@ -62,6 +69,34 @@ namespace CANStream
             }
         }
 
+        private int NDifferenceFound
+        {
+            get
+            {
+                return (mNDifferenceFound);
+            }
+
+            set
+            {
+                mNDifferenceFound = value;
+
+                StatusBar_Lbl_DiffCount.Text = mNDifferenceFound.ToString() + " Differences found";
+
+                if (mNDifferenceFound > 0)
+                {
+                    TS_Btn_MergeAll_A_to_B.Enabled = true;
+                    TS_Btn_MergeAll_B_to_A.Enabled = true;
+                    StatusBar_Lbl_DiffCount.ForeColor = Color.Red;
+                }
+                else
+                {
+                    TS_Btn_MergeAll_A_to_B.Enabled = false;
+                    TS_Btn_MergeAll_B_to_A.Enabled = false;
+                    StatusBar_Lbl_DiffCount.ForeColor = Color.Green;
+                }
+            }
+        }
+
         private int MergeCount
         {
             get
@@ -74,6 +109,53 @@ namespace CANStream
                 mMergeCount = value;
 
                 this.StatusBar_Lbl_MergeCount.Text = mMergeCount.ToString() + " Elements merged";
+            }
+        }
+
+        private bool MergeEnabled
+        {
+            get
+            {
+                return (mMergeEnabled);
+            }
+
+            set
+            {
+                mMergeEnabled = value;
+
+                TS_Btn_Merge_A_to_B.Enabled = mMergeEnabled;
+                TS_Btn_Merge_B_to_A.Enabled = mMergeEnabled;
+            }
+        }
+
+        private bool FileAModified
+        {
+            get
+            {
+                return (mFileAModified);
+            }
+
+            set
+            {
+                mFileAModified = value;
+
+                TS_Btn_FileA_Save.Enabled = mFileAModified;
+                TS_Btn_SaveAll.Enabled = (mFileAModified && FileBModified);
+            }
+        }
+
+        private bool FileBModified
+        {
+            get
+            {
+                return (mFileBModified);
+            }
+
+            set
+            {
+                mFileBModified = value;
+                TS_Btn_SaveAll.Enabled = (FileAModified && mFileBModified);
+                TS_Btn_FileB_Save.Enabled = mFileBModified;
             }
         }
 
@@ -93,8 +175,12 @@ namespace CANStream
         private int ParametersToCompareCount;
         private int mComparedParamatersCount;
 
-        private int NDifferenceFound;
+        private int mNDifferenceFound;
         private int mMergeCount;
+
+        private bool mMergeEnabled;
+        private bool mFileAModified;
+        private bool mFileBModified;
 
         #endregion
 
@@ -118,6 +204,53 @@ namespace CANStream
 
         #region Control events
 
+        #region Form
+
+        private void Frm_CAN_Config_Compar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(FileAModified)
+            {
+                DialogResult Rep = MessageBox.Show("Comparison file A has been modified\nDo you want save modifications prior to close the comparison ?",
+                                                    Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                switch(Rep)
+                {
+                    case DialogResult.Yes:
+                        Save_ComparisonFile(ComparisonFile.FileA, false);
+                        break;
+
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+
+                    default: //No
+                        break;
+                }
+            }
+
+            if(FileBModified)
+            {
+                DialogResult Rep = MessageBox.Show("Comparison file B has been modified\nDo you want save modifications prior to close the comparison ?",
+                                                    Application.ProductName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                switch (Rep)
+                {
+                    case DialogResult.Yes:
+                        Save_ComparisonFile(ComparisonFile.FileB, false);
+                        break;
+
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+
+                    default: //No
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
         #region TS_Main
 
         private void TS_Btn_FileA_Open_Click(object sender, EventArgs e)
@@ -125,14 +258,87 @@ namespace CANStream
             Open_ComparisonFile(ComparisonFile.FileA);
         }
 
+        private void TS_Btn_FileA_Save_Click(object sender, EventArgs e)
+        {
+            Save_ComparisonFile(ComparisonFile.FileA);
+        }
+
         private void TS_Btn_FileB_Open_Click(object sender, EventArgs e)
         {
             Open_ComparisonFile(ComparisonFile.FileB);
         }
 
+        private void TS_Btn_FileB_Save_Click(object sender, EventArgs e)
+        {
+            Save_ComparisonFile(ComparisonFile.FileB);
+        }
+
+        private void TS_Btn_SaveAll_Click(object sender, EventArgs e)
+        {
+            Save_AllFiles();
+        }
+
+        private void TS_Btn_MergeAll_B_to_A_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you really want merge all differences from the file B to the file A ?",
+                               Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_B_To_A);
+            }
+        }
+
+        private void TS_Btn_Merge_B_to_A_Click(object sender, EventArgs e)
+        {
+            if (!(CGrid_Comparison.Grid.SelectedCells == null))
+            {
+                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
+
+                if (!(oCRow == null))
+                {
+                    Merge_Property(oCRow, MergeDirection.From_B_To_A);
+                }
+            }
+        }
+
+        private void TS_Btn_Merge_A_to_B_Click(object sender, EventArgs e)
+        {
+            if (!(CGrid_Comparison.Grid.SelectedCells == null))
+            {
+                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
+
+                if (!(oCRow == null))
+                {
+                    Merge_Property(oCRow, MergeDirection.From_A_To_B);
+                }
+            }
+        }
+
+        private void TS_Btn_MergeAll_A_to_B_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you really want merge all differences from the file A to the file B ?",
+                               Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_A_To_B);
+            }
+        }
+
         private void TS_Btn_RefreshCompar_Click(object sender, EventArgs e)
         {
             Show_Comparison();
+        }
+
+        #endregion
+
+        #region Grid
+
+        private void CGrid_Comparison_SelectedRowChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow oRow = CGrid_Comparison.Grid.Rows[e.RowIndex];
+
+            if(!(oRow.Tag==null))
+            {
+                MergeEnabled = (bool)oRow.Tag;
+            }
         }
 
         #endregion
@@ -332,6 +538,122 @@ namespace CANStream
             }
         }
 
+        private void Save_ComparisonFile(ComparisonFile eCompFile)
+        {
+            Save_ComparisonFile(eCompFile, true);
+        }
+
+        private void Save_ComparisonFile(ComparisonFile eCompFile, bool RefreshComparison)
+        {
+            bool bMultipleBusCfg;
+            string OriginalConfigPath;
+            string BackupConfigPath;
+
+            CANMessagesConfiguration oSingleBusConfig = null;
+            MultipleContollerCANConfiguration oMultipleBusConfig = null;
+            
+            Dlg_SaveFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
+
+            if (MultipleBus_CANCfg_A != null) //Comparison of multiple buses CAN configurations
+            {
+                Dlg_SaveFile.Filter = "Multiple CAN bus configuration|*.mcb";
+                bMultipleBusCfg = true;
+            }
+            else //Comparison of single CAN configurations
+            {
+                Dlg_SaveFile.Filter = "CAN Configuration file|*.xcc";
+                bMultipleBusCfg = false;
+            }
+
+            switch (eCompFile)
+            {
+                case ComparisonFile.FileA:
+                    {
+                        if(bMultipleBusCfg)
+                        {
+                            oMultipleBusConfig = MultipleBus_CANCfg_A;
+                            OriginalConfigPath = MultipleBus_CANCfg_A.FilePath;
+                        }
+                        else
+                        {
+                            oSingleBusConfig = SingleBus_CANCfg_A;
+                            OriginalConfigPath = SingleBus_CANCfg_A.ConfigFilePath;
+                        }
+                    }
+                    break;
+
+                case ComparisonFile.FileB:
+                    {
+                        if (bMultipleBusCfg)
+                        {
+                            oMultipleBusConfig = MultipleBus_CANCfg_B;
+                            OriginalConfigPath = MultipleBus_CANCfg_B.FilePath;
+                        }
+                        else
+                        {
+                            oSingleBusConfig = SingleBus_CANCfg_B;
+                            OriginalConfigPath = SingleBus_CANCfg_B.ConfigFilePath;
+                        }
+                    }
+                    break;
+
+                default:
+                    return;
+            }
+
+            if (!(oMultipleBusConfig == null && oSingleBusConfig == null))
+            {
+                Dlg_SaveFile.FileName = Path.GetFileNameWithoutExtension(OriginalConfigPath);
+
+                if (Dlg_SaveFile.ShowDialog() == DialogResult.OK)
+                {
+                    BackupConfigPath = Get_BackupFilePath(OriginalConfigPath);
+
+                    File.Copy(OriginalConfigPath, BackupConfigPath, true);
+
+                    if (oMultipleBusConfig != null)
+                    {
+                        oMultipleBusConfig.WriteControllersConfiguration(Dlg_SaveFile.FileName);
+                    }
+                    else
+                    {
+                        oSingleBusConfig.WriteCANConfigurationFile(Dlg_SaveFile.FileName);
+                    }
+
+                    if (eCompFile == ComparisonFile.FileA)
+                    {
+                        FileAModified = false;
+                    }
+                    else
+                    {
+                        FileBModified = false;
+                    }
+
+                    if (RefreshComparison)
+                    {
+                        Show_Comparison();
+                    }
+                }
+            }
+        }
+
+        private void Save_AllFiles()
+        {
+            Save_ComparisonFile(ComparisonFile.FileA, false);
+            Save_ComparisonFile(ComparisonFile.FileB, true);
+        }
+
+        private string Get_BackupFilePath(string OriginalFilePath)
+        {
+            string BackupFileName = Path.GetFileNameWithoutExtension(OriginalFilePath);
+
+            string sDate = DateTime.Now.ToShortDateString().Replace("/", "");
+            string sTime = DateTime.Now.ToShortTimeString().Replace(":", "");
+            BackupFileName += ("_" + sDate + "_" + sTime);
+
+            return (Path.GetDirectoryName(OriginalFilePath) + "\\" + BackupFileName + ".bak");
+        }
+
         #endregion
 
         #region Files comparison
@@ -375,20 +697,21 @@ namespace CANStream
                 oCfgRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "CAN Configuration";
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Path.GetFileName(SingleBus_CANCfg_A.ConfigFilePath);
                 oCfgRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Path.GetFileName(SingleBus_CANCfg_B.ConfigFilePath);
+                oCfgRow.ThisRow.Tag = false;
 
                 ParametersToCompareCount = Math.Max(SingleBus_CANCfg_A.GetParameterCount(), SingleBus_CANCfg_B.GetParameterCount());
                 ComparedParamatersCount = 0;
                 NDifferenceFound = 0;
                 MergeCount = 0;
 
+                StatusBar_Lbl_DiffCount.Visible = false;
                 StatusBar_Lbl_MergeCount.Visible = false;
 
                 Compare_Objects(typeof(CANMessagesConfiguration), SingleBus_CANCfg_A, SingleBus_CANCfg_B, oCfgRow);
 
                 StatusBar_Lbl_DiffCount.Visible = true;
-                StatusBar_Lbl_DiffCount.Text = NDifferenceFound.ToString() + " Differences found";
-
                 StatusBar_Lbl_MergeCount.Visible = true;
+                TS_Btn_RefreshCompar.Enabled = true;
             }
         }
 
@@ -421,6 +744,7 @@ namespace CANStream
 
                                 CollapsableGridRow oNullableObjRow = oBaseRow.Children.Add();
                                 oNullableObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+                                oNullableObjRow.ThisRow.Tag = false;
 
                                 Compare_Objects(oNullableType, oFieldA, oFieldB, oNullableObjRow);
 
@@ -465,6 +789,7 @@ namespace CANStream
                         {
                             CollapsableGridRow oListRow = oBaseRow.Children.Add();
                             oListRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+                            oListRow.ThisRow.Tag = false;
 
                             Compar_List_Field(oField, ObjA, ObjB, oListRow);
 
@@ -490,6 +815,12 @@ namespace CANStream
         {
             CollapsableGridRow oObjRow = oBaseRow.Children.Add();
             oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = oField.Name;
+
+            oObjRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = oField.Name;
+            oObjRow.ThisRow.Cells[GRID_COL_FILE_A].Tag = ObjA;
+            oObjRow.ThisRow.Cells[GRID_COL_FILE_B].Tag = ObjB;
+
+            oObjRow.ThisRow.Tag = false;
 
             if (!(ObjA == null || ObjB == null))
             {
@@ -568,6 +899,11 @@ namespace CANStream
 
                     CollapsableGridRow oItemRow = oBaseRow.Children.Add();
                     oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemA.GetType().Name + " #" + (i + 1).ToString();
+                    oItemRow.ThisRow.Tag = false;
+
+                    oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = "Item #" + i.ToString();
+                    oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Tag = ListA;
+                    oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Tag = ListB;
 
                     if (!(ItemB == null)) //An item exists at the current index in ListB
                     {
@@ -601,6 +937,8 @@ namespace CANStream
                     {
                         CollapsableGridRow oItemRow = oBaseRow.Children.Add();
                         oItemRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = ItemB.GetType().Name + " #" + (i + 1).ToString();
+                        oItemRow.ThisRow.Tag = false;
+
                         oItemRow.ThisRow.Cells[GRID_COL_FILE_A].Value = "Null";
                         oItemRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ItemB.GetType().Name; //TODO: Get something more representative of the item such as its name or identifier
                         Color_GridRow(oItemRow.ThisRow);
@@ -664,8 +1002,15 @@ namespace CANStream
                 {
                     CollapsableGridRow oPropRow = oBaseRow.Children.Add();
                     oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
+                    oPropRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = FieldName;
+                    oPropRow.ThisRow.Tag = true;
+
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Value = sValA;
                     oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Value = sValB;
+
+                    oPropRow.ThisRow.Cells[GRID_COL_FILE_A].Tag = ObjA;
+                    oPropRow.ThisRow.Cells[GRID_COL_FILE_B].Tag = ObjB;
+
                     Color_GridRow(oPropRow.ThisRow);
                     NDifferenceFound++;
                 }
@@ -678,6 +1023,8 @@ namespace CANStream
             {
                 CollapsableGridRow oColorRow = oBaseRow.Children.Add();
                 oColorRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
+                oColorRow.ThisRow.Tag = true;
+
                 oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ColorA.ToKnownColor().ToString();
                 oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ColorB.ToKnownColor().ToString();
                 NDifferenceFound++;
@@ -688,14 +1035,130 @@ namespace CANStream
         {
             Color DIFF_BACKCOLOR = Color.Tomato;
             Color DIFF_FORECOLOR = Color.Black;
+            Color EQUAL_BACKCOLOR = Color.LightGreen;
+            Color EQUAL_FORECOLOR = Color.Black;
 
             if (!(oRow == null))
             {
+                Color BackColor = EQUAL_BACKCOLOR;
+                Color ForeColor = EQUAL_FORECOLOR;
+
+                if (oRow.Cells[GRID_COL_FILE_A].Value.ToString() != oRow.Cells[GRID_COL_FILE_B].Value.ToString())
+                {
+                    BackColor = DIFF_BACKCOLOR;
+                    ForeColor = DIFF_FORECOLOR;
+                }
+
                 for (int i = 1; i < oRow.Cells.Count; i++)
                 {
-                    oRow.Cells[i].Style.BackColor = DIFF_BACKCOLOR;
-                    oRow.Cells[i].Style.ForeColor = DIFF_FORECOLOR;
+                    oRow.Cells[i].Style.BackColor = BackColor;
+                    oRow.Cells[i].Style.ForeColor = ForeColor;
                 }
+            }
+        }
+
+        #endregion
+
+        #region Properties merge
+
+        private void Merge_AllProperties(CollapsableGridRow oBaseRow, MergeDirection eMergeDirection)
+        {
+            if ((bool)(oBaseRow.ThisRow.Tag) == true)
+            {
+                Merge_Property(oBaseRow, eMergeDirection);
+            }
+
+            foreach(CollapsableGridRow oChildRow in oBaseRow.Children)
+            {
+                Merge_AllProperties(oChildRow, eMergeDirection);
+            }
+        }
+
+        private void Merge_Property(CollapsableGridRow oRow, MergeDirection eMergeDirection)
+        {
+            string PropName = oRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag.ToString();
+            object ObjA = oRow.ThisRow.Cells[GRID_COL_FILE_A].Tag;
+            object ObjB = oRow.ThisRow.Cells[GRID_COL_FILE_B].Tag;
+
+            if (!(ObjA == null || ObjB == null)) //Source and destination objects are not null
+            {
+                Type ObjType = ObjA.GetType();
+
+                if (ObjType == ObjB.GetType()) //Source and destination objects are of the same type
+                {
+                    object PropA = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjA, null);
+                    object PropB = ObjType.InvokeMember(PropName, BindingFlags.GetField, null, ObjB, null);
+
+                    if (!(PropA == null && PropB == null)) //Field name exists in the object type
+                    {
+                        switch (eMergeDirection)
+                        {
+                            case MergeDirection.From_A_To_B:
+                                {
+                                    ObjType.GetField(PropName).SetValue(ObjB, PropA);
+                                    FileBModified = true;
+
+                                    oRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ObjType.GetField(PropName).GetValue(ObjB).ToString();
+                                    Color_GridRow(oRow.ThisRow);
+                                }
+                                break;
+
+                            case MergeDirection.From_B_To_A:
+                                {
+                                    ObjType.GetField(PropName).SetValue(ObjA, PropB);
+                                    FileAModified = true;
+
+                                    oRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ObjType.GetField(PropName).GetValue(ObjA).ToString();
+                                    Color_GridRow(oRow.ThisRow);
+                                }
+                                break;
+
+                            default:
+                                return;
+                        }
+
+                        if (ObjType.BaseType == typeof(System.ValueType))
+                        {
+                            if (eMergeDirection == MergeDirection.From_A_To_B)
+                            {
+                                Set_ParentObject(ObjB, oRow, GRID_COL_FILE_B);
+                            }
+                            else
+                            {
+                                Set_ParentObject(ObjA, oRow, GRID_COL_FILE_A);
+                            }
+                        }
+                    }
+
+                    MergeCount++;
+                    NDifferenceFound--;
+                }
+            }
+        }
+
+        private void Set_ParentObject(object oMergedObj, CollapsableGridRow oRow, int ColId)
+        {
+            object oParentObject = oRow.Parent.ThisRow.Cells[ColId].Tag;
+            Type oParentType = oParentObject.GetType();
+            string PropName = oRow.Parent.ThisRow.Cells[GRID_COL_PROP_NAME].Tag.ToString();
+
+            if (PropName.StartsWith("Item")) //Parent object is an item of a list
+            {
+                int IndexStart = PropName.IndexOf("#") + 1;
+                string sIndex = PropName.Substring(IndexStart, PropName.Length - IndexStart);
+
+                object[] ItemIndex = { int.Parse(sIndex) };
+
+                oParentType.GetProperty("Item").SetValue(oParentObject, oMergedObj, ItemIndex);
+            }
+            else //Parent object is a single field of an object
+            {
+                oParentType.GetField(PropName).SetValue(oParentObject, oMergedObj);
+            }
+
+            if (oParentType.BaseType == typeof(System.ValueType))
+            {
+                Set_ParentObject(oParentObject, oRow.Parent, ColId);
             }
         }
 

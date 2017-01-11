@@ -52,9 +52,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusBar_Lbl_FileA = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_FileB = new System.Windows.Forms.ToolStripStatusLabel();
-            this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.StatusBar_Lbl_DiffCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_MergeCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
             this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -107,12 +107,14 @@
             // TS_Btn_FileA_Save
             // 
             this.TS_Btn_FileA_Save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_FileA_Save.Enabled = false;
             this.TS_Btn_FileA_Save.Image = global::CANStream.Icones.CanCfg_Compar_FileA_Save_2_32;
             this.TS_Btn_FileA_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_FileA_Save.Name = "TS_Btn_FileA_Save";
             this.TS_Btn_FileA_Save.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_FileA_Save.Text = "toolStripButton2";
             this.TS_Btn_FileA_Save.ToolTipText = "Save comparison file A";
+            this.TS_Btn_FileA_Save.Click += new System.EventHandler(this.TS_Btn_FileA_Save_Click);
             // 
             // toolStripSeparator1
             // 
@@ -139,12 +141,14 @@
             // TS_Btn_FileB_Save
             // 
             this.TS_Btn_FileB_Save.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_FileB_Save.Enabled = false;
             this.TS_Btn_FileB_Save.Image = global::CANStream.Icones.CanCfg_Compar_FileB_Save_2_32;
             this.TS_Btn_FileB_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_FileB_Save.Name = "TS_Btn_FileB_Save";
             this.TS_Btn_FileB_Save.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_FileB_Save.Text = "toolStripButton4";
             this.TS_Btn_FileB_Save.ToolTipText = "Save comparison file B";
+            this.TS_Btn_FileB_Save.Click += new System.EventHandler(this.TS_Btn_FileB_Save_Click);
             // 
             // toolStripSeparator2
             // 
@@ -154,12 +158,14 @@
             // TS_Btn_SaveAll
             // 
             this.TS_Btn_SaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_SaveAll.Enabled = false;
             this.TS_Btn_SaveAll.Image = global::CANStream.Icones.File_SaveAll_32;
             this.TS_Btn_SaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_SaveAll.Name = "TS_Btn_SaveAll";
             this.TS_Btn_SaveAll.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_SaveAll.Text = "toolStripButton5";
             this.TS_Btn_SaveAll.ToolTipText = "Save both comparison files";
+            this.TS_Btn_SaveAll.Click += new System.EventHandler(this.TS_Btn_SaveAll_Click);
             // 
             // toolStripSeparator3
             // 
@@ -169,42 +175,50 @@
             // TS_Btn_MergeAll_B_to_A
             // 
             this.TS_Btn_MergeAll_B_to_A.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_MergeAll_B_to_A.Enabled = false;
             this.TS_Btn_MergeAll_B_to_A.Image = global::CANStream.Icones.CanCfg_Compar_MergeAll_B2A_2_32;
             this.TS_Btn_MergeAll_B_to_A.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_MergeAll_B_to_A.Name = "TS_Btn_MergeAll_B_to_A";
             this.TS_Btn_MergeAll_B_to_A.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_MergeAll_B_to_A.Text = "toolStripButton6";
             this.TS_Btn_MergeAll_B_to_A.ToolTipText = "Merge all differences from file B to file A";
+            this.TS_Btn_MergeAll_B_to_A.Click += new System.EventHandler(this.TS_Btn_MergeAll_B_to_A_Click);
             // 
             // TS_Btn_Merge_B_to_A
             // 
             this.TS_Btn_Merge_B_to_A.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_Merge_B_to_A.Enabled = false;
             this.TS_Btn_Merge_B_to_A.Image = global::CANStream.Icones.CanCfg_Compar_Merge_B2A_2_32;
             this.TS_Btn_Merge_B_to_A.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_Merge_B_to_A.Name = "TS_Btn_Merge_B_to_A";
             this.TS_Btn_Merge_B_to_A.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_Merge_B_to_A.Text = "toolStripButton7";
             this.TS_Btn_Merge_B_to_A.ToolTipText = "Merge value from file B to file A";
+            this.TS_Btn_Merge_B_to_A.Click += new System.EventHandler(this.TS_Btn_Merge_B_to_A_Click);
             // 
             // TS_Btn_Merge_A_to_B
             // 
             this.TS_Btn_Merge_A_to_B.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_Merge_A_to_B.Enabled = false;
             this.TS_Btn_Merge_A_to_B.Image = global::CANStream.Icones.CanCfg_Compar_Merge_A2B_2_32;
             this.TS_Btn_Merge_A_to_B.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_Merge_A_to_B.Name = "TS_Btn_Merge_A_to_B";
             this.TS_Btn_Merge_A_to_B.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_Merge_A_to_B.Text = "toolStripButton10";
             this.TS_Btn_Merge_A_to_B.ToolTipText = "Merge value from file A to file B";
+            this.TS_Btn_Merge_A_to_B.Click += new System.EventHandler(this.TS_Btn_Merge_A_to_B_Click);
             // 
             // TS_Btn_MergeAll_A_to_B
             // 
             this.TS_Btn_MergeAll_A_to_B.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_MergeAll_A_to_B.Enabled = false;
             this.TS_Btn_MergeAll_A_to_B.Image = global::CANStream.Icones.CanCfg_Compar_MergeAll_A2B_2_32;
             this.TS_Btn_MergeAll_A_to_B.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_MergeAll_A_to_B.Name = "TS_Btn_MergeAll_A_to_B";
             this.TS_Btn_MergeAll_A_to_B.Size = new System.Drawing.Size(36, 36);
             this.TS_Btn_MergeAll_A_to_B.Text = "toolStripButton11";
             this.TS_Btn_MergeAll_A_to_B.ToolTipText = "Merge all differences from file A to file B";
+            this.TS_Btn_MergeAll_A_to_B.Click += new System.EventHandler(this.TS_Btn_MergeAll_A_to_B_Click);
             // 
             // toolStripSeparator6
             // 
@@ -224,6 +238,7 @@
             // TS_Btn_RefreshCompar
             // 
             this.TS_Btn_RefreshCompar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TS_Btn_RefreshCompar.Enabled = false;
             this.TS_Btn_RefreshCompar.Image = global::CANStream.Icones.Refresh_CAN_Controllers_32_2;
             this.TS_Btn_RefreshCompar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TS_Btn_RefreshCompar.Name = "TS_Btn_RefreshCompar";
@@ -235,10 +250,6 @@
             // Dlg_OpenFile
             // 
             this.Dlg_OpenFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
-            // 
-            // Dlg_SaveFile
-            // 
-            this.Dlg_SaveFile.Filter = "CAN Configuration file|*.xcc|Multiple CAN bus configuration|*.mcb";
             // 
             // statusStrip1
             // 
@@ -268,12 +279,6 @@
             this.StatusBar_Lbl_FileB.Text = "toolStripStatusLabel1";
             this.StatusBar_Lbl_FileB.Visible = false;
             // 
-            // StatusBar_Progress
-            // 
-            this.StatusBar_Progress.Name = "StatusBar_Progress";
-            this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
-            this.StatusBar_Progress.Visible = false;
-            // 
             // StatusBar_Lbl_DiffCount
             // 
             this.StatusBar_Lbl_DiffCount.Name = "StatusBar_Lbl_DiffCount";
@@ -288,6 +293,12 @@
             this.StatusBar_Lbl_MergeCount.Text = "toolStripStatusLabel2";
             this.StatusBar_Lbl_MergeCount.Visible = false;
             // 
+            // StatusBar_Progress
+            // 
+            this.StatusBar_Progress.Name = "StatusBar_Progress";
+            this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
+            this.StatusBar_Progress.Visible = false;
+            // 
             // CGrid_Comparison
             // 
             this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -297,6 +308,7 @@
             this.CGrid_Comparison.Name = "CGrid_Comparison";
             this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
             this.CGrid_Comparison.TabIndex = 1;
+            this.CGrid_Comparison.SelectedRowChanged += new System.EventHandler<System.Windows.Forms.DataGridViewCellEventArgs>(this.CGrid_Comparison_SelectedRowChanged);
             // 
             // Frm_CAN_Config_Compar
             // 
@@ -309,6 +321,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_CAN_Config_Compar";
             this.Text = "CAN Configuration compare";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_CAN_Config_Compar_FormClosing);
             this.TS_Main.ResumeLayout(false);
             this.TS_Main.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

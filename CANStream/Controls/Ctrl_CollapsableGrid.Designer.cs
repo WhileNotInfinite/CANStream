@@ -50,6 +50,7 @@
             this.oGrid.Size = new System.Drawing.Size(457, 210);
             this.oGrid.TabIndex = 0;
             this.oGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.oGrid_CellDoubleClick);
+            this.oGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.oGrid_RowEnter);
             this.oGrid.Resize += new System.EventHandler(this.oGrid_Resize);
             // 
             // Img_RowState

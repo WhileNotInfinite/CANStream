@@ -43,6 +43,12 @@ namespace CANStream
 
         #endregion
 
+        #region Public events
+
+        public event EventHandler<DataGridViewCellEventArgs> SelectedRowChanged;
+
+        #endregion
+
         #region Internal properties
 
         internal DataGridView DataGrid
@@ -117,6 +123,11 @@ namespace CANStream
             }
         }
 
+        private void oGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            OnSelectedRowChanged(e);
+        }
+
         #endregion
 
         #region Private methodes
@@ -137,6 +148,19 @@ namespace CANStream
             }
 
             return (null);
+        }
+
+        #endregion
+
+        #region Event handling methodes
+
+        protected virtual void OnSelectedRowChanged(DataGridViewCellEventArgs e)
+        {
+            EventHandler<DataGridViewCellEventArgs> Handler = SelectedRowChanged;
+            if (Handler != null)
+            {
+                Handler(this, e);
+            }
         }
 
         #endregion
