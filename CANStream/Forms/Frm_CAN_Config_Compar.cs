@@ -16,6 +16,86 @@ namespace CANStream
 {
     public partial class Frm_CAN_Config_Compar : Form
     {
+        #region Private classes
+
+        private class PropertyFilterItem
+        {
+            #region Public members
+
+            public string ObjectName;
+            public string PropertyName;
+            public bool Value;
+            public bool Visible;
+            public List<PropertyFilterItem> SubItems;
+
+            #endregion
+
+            public PropertyFilterItem()
+            {
+                SubItems = new List<PropertyFilterItem>();
+            }
+        }
+
+        private class PropertiesComparisonFilter
+        {
+            #region Public members
+
+            public List<PropertyFilterItem> PropertiesFilter;
+
+            #endregion
+
+            public PropertiesComparisonFilter()
+            {
+                PropertiesFilter = new List<PropertyFilterItem>();
+            }
+
+            public PropertiesComparisonFilter(Type oBaseType)
+            {
+                PropertiesFilter = new List<PropertyFilterItem>();
+                Create_PropertiesList(oBaseType, PropertiesFilter);
+            }
+
+            #region Private methodes
+
+            private void Create_PropertiesList(Type ObjType, List<PropertyFilterItem> oItemList)
+            {
+                foreach (FieldInfo oField in ObjType.GetFields())
+                {
+                    PropertyFilterItem sProp = new PropertyFilterItem();
+
+                    sProp.ObjectName = ObjType.Name;
+                    sProp.PropertyName = oField.Name;
+                    sProp.Value = true;
+                    sProp.Visible = true;
+
+                    oItemList.Add(sProp);
+
+                    if (oField.FieldType.Name == "Nullable`1")
+                    {
+                        Type NullableType = Nullable.GetUnderlyingType(oField.FieldType);
+                        Create_PropertiesList(NullableType, sProp.SubItems);
+                    }
+                    else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
+                    {
+                        Type ListItemType = oField.FieldType.GetProperty("Item").PropertyType;
+                        Create_PropertiesList(ListItemType, sProp.SubItems);
+                    }
+                    else if (oField.FieldType.BaseType == typeof(System.ValueType)) //Structure
+                    {
+                        Create_PropertiesList(oField.FieldType, sProp.SubItems);
+                    }
+                    else if (oField.FieldType.BaseType == typeof(object))
+                    {
+                        Create_PropertiesList(oField.FieldType, sProp.SubItems);
+                    }
+                }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
         #region Private enums
 
         private enum ComparisonFile
@@ -182,6 +262,8 @@ namespace CANStream
         private bool mFileAModified;
         private bool mFileBModified;
 
+        private PropertiesComparisonFilter oPropertiesFilter;
+
         #endregion
 
         public Frm_CAN_Config_Compar()
@@ -200,6 +282,8 @@ namespace CANStream
             ParametersToCompareCount = 0;
 
             Init_ComparisonGrid();
+
+            oPropertiesFilter = new PropertiesComparisonFilter(typeof(CANMessagesConfiguration));
         }
 
         #region Control events
@@ -1112,6 +1196,12 @@ namespace CANStream
                 }
             }
         }
+
+        #endregion
+
+        #region Properties comparison filter
+
+
 
         #endregion
 
