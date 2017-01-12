@@ -764,26 +764,7 @@ namespace CANStream
                         }
                         else if (oField.FieldType == typeof(Color))
                         {
-                            Color ColorA = Color.Empty;
-                            Color ColorB = Color.Empty;
-
-                            if(!(ObjA==null))
-                            {
-                                ColorA = (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjA, null);
-                            }
-
-                            if(!(ObjB==null))
-                            {
-                                ColorB = (Color)oObjType.InvokeMember(oField.Name, BindingFlags.GetField, null, ObjB, null);
-                            }
-
-                            Compar_ColorField(
-                                               ColorA,
-                                               ColorB,
-                                               oField.Name,
-                                               oBaseRow
-                                              );
-
+                            Compar_ColorField(oObjType, oField.Name, ObjA, ObjB, oBaseRow);
                         }
                         else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
                         {
@@ -1073,16 +1054,35 @@ namespace CANStream
             }
         }
 
-        private void Compar_ColorField(Color ColorA, Color ColorB, string FieldName, CollapsableGridRow oBaseRow)
+        private void Compar_ColorField(Type oObjType, string FieldName, object ObjA, object ObjB, CollapsableGridRow oBaseRow)
         {
+            Color ColorA = Color.Empty;
+            Color ColorB = Color.Empty;
+
+            if (!(ObjA == null))
+            {
+                ColorA = (Color)oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjA, null);
+            }
+
+            if (!(ObjB == null))
+            {
+                ColorB = (Color)oObjType.InvokeMember(FieldName, BindingFlags.GetField, null, ObjB, null);
+            }
+
             if (ColorA.ToArgb() != ColorB.ToArgb())
             {
                 CollapsableGridRow oColorRow = oBaseRow.Children.Add();
                 oColorRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = FieldName;
                 oColorRow.ThisRow.Tag = true;
 
-                oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ColorA.ToKnownColor().ToString();
-                oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ColorB.ToKnownColor().ToString();
+                oColorRow.ThisRow.Cells[GRID_COL_PROP_NAME].Tag = FieldName;
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Tag = ObjA;
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Tag = ObjB;
+
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_A].Value = ColorA.ToString();
+                oColorRow.ThisRow.Cells[GRID_COL_FILE_B].Value = ColorB.ToString();
+                Color_GridRow(oColorRow.ThisRow);
+
                 NDifferenceFound++;
             }
         }
