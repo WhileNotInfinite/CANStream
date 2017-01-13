@@ -54,6 +54,16 @@ namespace CANStream
 
         #endregion
 
+        #region Private enums
+
+        private enum ControlEditType
+        {
+            Format = 0,
+            ReferenceLines=1,
+        }
+
+        #endregion
+
         #region Private members
 
         private GW_DataFile oDataFile;
@@ -82,6 +92,74 @@ namespace CANStream
         private void cCL_FileChannelList_DataChannelSelectionChanged(object sender, ChannelSelectionChangedEventArgs e)
         {
             Show_DataChannelProperties(e.ChannelName);
+        }
+
+        #endregion
+
+        #region GV_DataChannelProperties
+
+        private void GV_DataChannelProperties_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex==1)
+            {
+                DataGridViewCell oCell = GV_DataChannelProperties.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                switch(e.RowIndex)
+                {
+                    case 2: //Format
+                        {
+                            Create_EditCommand(oCell, ControlEditType.Format);
+                        }
+                        break;
+
+                    case 3: //Reference lines
+                        {
+                            Create_EditCommand(oCell, ControlEditType.ReferenceLines);
+                        }
+                        break;
+
+                    default:
+
+                        //Nothing to do
+                        break;
+                }
+            }
+        }
+
+        private void GV_DataChannelProperties_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                switch (e.RowIndex)
+                {
+                    case 2: //Format
+                        {
+                            GV_DataChannelProperties.Controls.RemoveByKey("Cmd_EditFormat");
+                        }
+                        break;
+
+                    case 3: //Reference lines
+                        {
+                            GV_DataChannelProperties.Controls.RemoveByKey("Cmd_EditReferenceLines");
+                        }
+                        break;
+
+                    default:
+
+                        //Nothing to do
+                        break;
+                }
+            }
+        }
+
+        private void Cmd_Edit_ChannelFormat_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Cmd_Edit_ChannelReferenceLines_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -170,11 +248,56 @@ namespace CANStream
                 GV_DataChannelProperties.Rows[1].Cells[1].Value = oChan.Description;
 
                 GV_DataChannelProperties.Rows[2].Cells[0].Value = "Format";
-                GV_DataChannelProperties.Rows[2].Cells[1].Value = "ToDo";
+                GV_DataChannelProperties.Rows[2].Cells[1].Value = oChan.GraphicFormat.Get_StringValueFormat();
+                GV_DataChannelProperties.Rows[2].Cells[1].ReadOnly = true;
 
                 GV_DataChannelProperties.Rows[3].Cells[0].Value = "Reference lines";
-                GV_DataChannelProperties.Rows[3].Cells[1].Value = "ToDo";
+
+                if(oChan.ChannelReferenceLines.Count>0)
+                {
+                    GV_DataChannelProperties.Rows[3].Cells[1].Value = "Reference lines";
+                }
+                else
+                {
+                    GV_DataChannelProperties.Rows[3].Cells[1].Value = "No reference lines";
+                }
+
+                GV_DataChannelProperties.Rows[3].Cells[1].ReadOnly = true;
             }
+        }
+
+        private void Create_EditCommand(DataGridViewCell oCell, ControlEditType EditType)
+        {
+            Button Btn = new Button();
+            string CmdName;
+
+            switch (EditType)
+            {
+                case ControlEditType.Format:
+
+                    Btn.Name = "Cmd_EditFormat";
+                    Btn.Click += Cmd_Edit_ChannelFormat_Click;
+                    break;
+
+                case ControlEditType.ReferenceLines:
+
+                    Btn.Name = "Cmd_EditReferenceLines";
+                    Btn.Click += Cmd_Edit_ChannelReferenceLines_Click;
+                    break;
+
+                default: //Unknown property type
+
+                    return;
+            }
+
+            Btn.Text = "...";
+            Btn.Width = oCell.Size.Height;
+            Btn.Height = oCell.Size.Height;
+
+            Rectangle sCellRec = GV_DataChannelProperties.g(oCell.RowIndex, oCell.ColumnIndex, true);
+            GV_DataChannelProperties.Controls.Add(Btn);
+            Btn.Left = sCellRec.Right - Btn.Width;
+            Btn.Top = sCellRec.Top;
         }
 
         #endregion
