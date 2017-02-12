@@ -294,7 +294,7 @@ namespace CANStream
             Btn.Width = oCell.Size.Height;
             Btn.Height = oCell.Size.Height;
 
-            Rectangle sCellRec = GV_DataChannelProperties.g(oCell.RowIndex, oCell.ColumnIndex, true);
+            Rectangle sCellRec = GV_DataChannelProperties.GetCellDisplayRectangle(oCell.RowIndex, oCell.ColumnIndex, true);
             GV_DataChannelProperties.Controls.Add(Btn);
             Btn.Left = sCellRec.Right - Btn.Width;
             Btn.Top = sCellRec.Top;

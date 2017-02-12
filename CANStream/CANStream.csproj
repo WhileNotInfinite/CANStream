@@ -173,13 +173,13 @@
     </Compile>
     <Compile Include="Forms\Frm_LogginChannelConfig.Designer.cs">
       <DependentUpon>Frm_LogginChannelConfig.cs</DependentUpon>
-
+    </Compile>
     <Compile Include="Forms\Frm_CAN_Config_Compar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Frm_CAN_Config_Compar.Designer.cs">
       <DependentUpon>Frm_CAN_Config_Compar.cs</DependentUpon>
-    </Compile
+    </Compile>
     <Compile Include="Forms\Frm_DataViewer_DataFile_Info_Edition.cs">
       <SubType>Form</SubType>
     </Compile>
