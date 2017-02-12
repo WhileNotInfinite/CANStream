@@ -202,6 +202,11 @@ namespace CANStream
             SaveConfiguration();
         }
 
+        private void TSB_Compar_Click(object sender, EventArgs e)
+        {
+            CompareConfiguration();
+        }
+
         private void TSB_Cut_Click(object sender, EventArgs e)
         {
             CopyItem(true);
@@ -957,6 +962,27 @@ namespace CANStream
             }
         }
 		
+        private void CompareConfiguration()
+        {
+            Frm_CAN_Config_Compar Frm;
+
+            if (oMultipleControllersCfg != null)
+            {
+                Frm = new Frm_CAN_Config_Compar();
+                Frm.Set_ComparisonObjectA((object)oMultipleControllersCfg);
+                Frm.Show();
+            }
+            else
+            {
+                if (oCANConfig.Messages.Count > 0)
+                {
+                    Frm = new Frm_CAN_Config_Compar();
+                    Frm.Set_ComparisonObjectA((object)oCANConfig);
+                    Frm.Show();
+                }
+            }
+        }
+
         private void ShowConfiguration()
         {
         	ShowConfiguration("");

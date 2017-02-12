@@ -39,7 +39,7 @@ namespace CANStream
             oLoggingConfig = new CS_RecordLoggingConfiguration();
             bConfigModified = false;
 
-            CGrid_Channels.Columns[GRID_COL_NAME].HeaderText = "Channel Name";
+            CGrid_Channels.Columns.Add("oCol_ChanName", "Channel Name");
             CGrid_Channels.Columns.Add("oCol_LoggingMode", "Logging Mode");
             CGrid_Channels.Columns.Add("oCol_LoggingFreq", "Logging Frequency");
             CGrid_Channels.Columns.Add("oCol_Comment", "Comment");

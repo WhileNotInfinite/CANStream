@@ -9497,4 +9497,52 @@
   <data name="LoggingChannelConfig_Reset_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\recycle-box-icone-7601-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CAN_Cfg_Compar_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\s-icone-5908-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_FileA_Open_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\fileopen-icone-7760-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_FileA_Save_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\filesave-icone-8383-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_FileB_Open_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bleu-dossier-icone-9310-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_FileB_Save_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\3floppy-demontez-icone-7221-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_Filter_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\kcmkicker-icone-7683-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_MergeAll_A2B_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\suivant-icone-9262-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_MergeAll_B2A_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\precedent-icone-5813-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_Merge_A2B_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\agt-en-avant-icone-5361-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_Merge_B2A_2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\agt-dos-icone-6033-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Refresh_CAN_Controllers_32_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\refresh-reload-icone-8719-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_MergeAll_A2B_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\suivant-icone-9262-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_MergeAll_B2A_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\precedent-icone-5813-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_Merge_A2B_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\agt-en-avant-icone-5361-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CanCfg_Compar_Merge_B2A_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\agt-dos-icone-6033-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAN_Cfg_Compar_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\s-icone-5908-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

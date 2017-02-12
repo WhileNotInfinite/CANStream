@@ -173,7 +173,13 @@
     </Compile>
     <Compile Include="Forms\Frm_LogginChannelConfig.Designer.cs">
       <DependentUpon>Frm_LogginChannelConfig.cs</DependentUpon>
+
+    <Compile Include="Forms\Frm_CAN_Config_Compar.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\Frm_CAN_Config_Compar.Designer.cs">
+      <DependentUpon>Frm_CAN_Config_Compar.cs</DependentUpon>
+    </Compile
     <Compile Include="Forms\Frm_DataViewer_DataFile_Info_Edition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +431,9 @@
     <EmbeddedResource Include="Forms\Frm_CANConfiguration_VirtualChannelReference.resx">
       <DependentUpon>Frm_CANConfiguration_VirtualChannelReference.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_CAN_Config_Compar.resx">
+      <DependentUpon>Frm_CAN_Config_Compar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_ContextualList.resx">
       <DependentUpon>Frm_ContextualList.cs</DependentUpon>
     </EmbeddedResource>
@@ -518,6 +527,44 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\s-icone-5908-32.png" />
+    <None Include="Resources\agt-en-avant-icone-5361-16.png" />
+    <None Include="Resources\agt-dos-icone-6033-16.png" />
+    <None Include="Resources\suivant-icone-9262-16.png" />
+    <None Include="Resources\precedent-icone-5813-16.png" />
+    <None Include="Resources\3floppy-demontez-icone-7221-32.png" />
+    <None Include="Resources\filesave-icone-8383-32.png" />
+    <None Include="Resources\fileopen-icone-7760-32.png" />
+    <None Include="Resources\bleu-dossier-icone-9310-32.png" />
+    <None Include="Resources\refresh-reload-icone-8719-32.png" />
+    <None Include="Resources\kcmkicker-icone-7683-32.png" />
+    <None Include="Resources\agt-en-avant-icone-5361-32.png" />
+    <None Include="Resources\agt-dos-icone-6033-32.png" />
+    <None Include="Resources\suivant-icone-9262-32.png" />
+    <None Include="Resources\precedent-icone-5813-32.png" />
+    <None Include="Resources\1483192893_filter.png" />
+    <None Include="Resources\1483192887_filter.png" />
+    <None Include="Resources\arrow-up-icone-3965-16.png" />
+    <None Include="Resources\arrow-down-icone-4079-32.png" />
+    <None Include="Resources\arrow-down-icone-4079-16.png" />
+    <None Include="Resources\right-icone-8518-32.png" />
+    <None Include="Resources\right-icone-8518-16.png" />
+    <None Include="Resources\left-arrow-icone-7188-32.png" />
+    <None Include="Resources\left-arrow-icone-7188-16.png" />
+    <None Include="Resources\green-double-arrow-right-icone-7729-32.png" />
+    <None Include="Resources\green-double-arrow-right-icone-7729-16.png" />
+    <None Include="Resources\double-arrow-left-icone-6285-32.png" />
+    <None Include="Resources\double-arrow-left-icone-6285-16.png" />
+    <None Include="Resources\arrow-up-icone-3965-32.png" />
+    <None Include="Resources\1483190633_downloads_folder.png" />
+    <None Include="Resources\1483190627_downloads_folder.png" />
+    <None Include="Resources\1483190674_downloads_folder.png" />
+    <None Include="Resources\1483190670_downloads_folder.png" />
+    <None Include="Resources\1483190661_save.png" />
+    <None Include="Resources\1483190657_save.png" />
+    <None Include="Resources\1483190647_save.png" />
+    <None Include="Resources\1483190642_save.png" />
+    <None Include="Resources\s-icone-5908-16.png" />
     <None Include="Resources\recycle-box-icone-7601-16.png" />
     <None Include="Resources\tar-icone-3800-16.png" />
     <None Include="Resources\sender-mail-address-icone-8786-32.png" />

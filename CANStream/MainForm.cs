@@ -262,7 +262,13 @@ namespace CANStream
 		{
         	EditCurrentCanConfiguration();
 		}
-        
+
+        private void CANConfig_compareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_CAN_Config_Compar Frm = new Frm_CAN_Config_Compar();
+            Frm.Show();
+        }
+
         private void ImportDBCToolStripMenuItemClick(object sender, EventArgs e)
 		{
         	ImportDBCFile();

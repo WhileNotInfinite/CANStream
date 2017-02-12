@@ -43,6 +43,12 @@ namespace CANStream
 
         #endregion
 
+        #region Public events
+
+        public event EventHandler<DataGridViewCellEventArgs> SelectedRowChanged;
+
+        #endregion
+
         #region Internal properties
 
         internal DataGridView DataGrid
@@ -74,6 +80,11 @@ namespace CANStream
         public Ctrl_CollapsableGrid()
         {
             InitializeComponent();
+
+            DataGridViewPictureAndTextColumn oPicTxtColumn = new DataGridViewPictureAndTextColumn();
+            oPicTxtColumn.Width = 21;
+            oPicTxtColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.oGrid.Columns.Add(oPicTxtColumn);
 
             GridRows = new CollapsableGridRowCollection(this);
             RowsCollapsingContext = new List<CollapsableGridRowState>();
@@ -112,6 +123,11 @@ namespace CANStream
             }
         }
 
+        private void oGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            OnSelectedRowChanged(e);
+        }
+
         #endregion
 
         #region Private methodes
@@ -132,6 +148,19 @@ namespace CANStream
             }
 
             return (null);
+        }
+
+        #endregion
+
+        #region Event handling methodes
+
+        protected virtual void OnSelectedRowChanged(DataGridViewCellEventArgs e)
+        {
+            EventHandler<DataGridViewCellEventArgs> Handler = SelectedRowChanged;
+            if (Handler != null)
+            {
+                Handler(this, e);
+            }
         }
 
         #endregion
@@ -213,6 +242,21 @@ namespace CANStream
             }
         }
 
+        public int Level
+        {
+            get
+            {
+                return (mLevel);
+            }
+
+            internal set
+            {
+                mLevel = value;
+
+                this.ThisRow.Cells[0].Style.Padding = new Padding(5 + (mLevel * 15), 0, 0, 5);
+            }
+        }
+
         public CollapsableGridRowState RowState
         {
             get
@@ -226,21 +270,23 @@ namespace CANStream
                 {
                     eRowState = value;
 
+                    DataGridViewPictureAndTextCell oPicTxtCell = this.ThisRow.Cells[0] as DataGridViewPictureAndTextCell;
+
                     switch (eRowState)
                     {
                         case CollapsableGridRowState.Collapsed:
 
-                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[1];
+                            oPicTxtCell.Picture = this.CollapsableGrid.Img_RowStates.Images[1];
                             break;
 
                         case CollapsableGridRowState.Expanded:
 
-                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[2];
+                            oPicTxtCell.Picture = this.CollapsableGrid.Img_RowStates.Images[2];
                             break;
 
                         default:
 
-                            this.ThisRow.Cells[0].Value = this.CollapsableGrid.Img_RowStates.Images[0];
+                            oPicTxtCell.Picture = this.CollapsableGrid.Img_RowStates.Images[0];
                             break;
 
                     }
@@ -261,6 +307,8 @@ namespace CANStream
         private CollapsableGridRowCollection RowChildren;
 
         private CollapsableGridRowState eRowState;
+
+        private int mLevel;
 
         #endregion
 
@@ -327,6 +375,18 @@ namespace CANStream
             }
 
             return (LastIndex);
+        }
+
+        internal void Remove_ChildRowAtIndex(int RowIndex)
+        {
+            for (int iRow = 0; iRow < Children.Count; iRow++)
+            {
+                if (Children[iRow].ThisRow.Index == RowIndex)
+                {
+                    Children.RemoveAt(iRow);
+                    return;
+                }
+            }
         }
 
         #endregion
@@ -448,6 +508,11 @@ namespace CANStream
 
         public CollapsableGridRow Add()
         {
+            return (Add(""));
+        }
+
+        public CollapsableGridRow Add(string RowHeaderText)
+        {
             if (oContainerObject.GetType().Equals(typeof(Ctrl_CollapsableGrid)))
             {
                 DataGridView oGrid = ((Ctrl_CollapsableGrid)oContainerObject).DataGrid;
@@ -456,8 +521,12 @@ namespace CANStream
 
                 CollapsableGridRow oNewRow = new CollapsableGridRow(oGrid.Rows[iNewRow]);
                 oNewRow.CollapsableGrid = (Ctrl_CollapsableGrid)oContainerObject;
+                oNewRow.ThisRow.Cells[0].Value = RowHeaderText;
+                oNewRow.Level = 0;
                 oNewRow.RowState = CollapsableGridRowState.NoChildren;
                 base.Add(oNewRow);
+
+                oGrid.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
                 return (oNewRow);
             }
@@ -473,8 +542,12 @@ namespace CANStream
                 oNewRow.CollapsableGrid = oRowContainer.CollapsableGrid;
                 oNewRow.Parent = oRowContainer;
                 oRowContainer.RowState = CollapsableGridRowState.Expanded;
+                oNewRow.ThisRow.Cells[0].Value = RowHeaderText;
+                oNewRow.Level = oRowContainer.Level + 1;
                 oNewRow.RowState = CollapsableGridRowState.NoChildren;
                 base.Add(oNewRow);
+
+                oRowContainer.CollapsableGrid.DataGrid.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
                 return (oNewRow);
 
@@ -561,6 +634,7 @@ namespace CANStream
 
                     if (!(oCRow.ThisRow == null))
                     {
+                        oRowContainer.Remove_ChildRowAtIndex(oCRow.ThisRow.Index);
                         oRowContainer.CollapsableGrid.Grid.Rows.Remove(oCRow.ThisRow);
                     }
                 }
@@ -568,6 +642,78 @@ namespace CANStream
         }
 
         #endregion
+    }
+
+    public class DataGridViewPictureAndTextColumn : DataGridViewTextBoxColumn
+    {
+        public DataGridViewPictureAndTextColumn() : base()
+        {
+            this.CellTemplate = new DataGridViewPictureAndTextCell();
+            this.ReadOnly = true;
+        }
+    }
+
+    public class DataGridViewPictureAndTextCell : DataGridViewTextBoxCell
+    {
+        public Image Picture { get; set; }
+
+        public int CellContentWidth { get; private set; }
+
+        public DataGridViewPictureAndTextCell() : base()
+        {
+            Picture = null;
+            this.Style.Alignment = DataGridViewContentAlignment.NotSet;
+            this.Style.WrapMode = DataGridViewTriState.False;
+            this.Style.Padding = new Padding(5, 0, 0, 0);
+        }
+
+        protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+        {
+            const float SpacerWidth = 5;
+
+            base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, "", errorText, cellStyle, advancedBorderStyle, paintParts);
+
+            string CellText = "";
+            if (!(value == null))
+            {
+                CellText = value.ToString();
+            }
+
+            PointF Ptf = new PointF(
+                                    (float)cellStyle.Padding.Left,
+                                    0F
+                                    );
+
+            CellContentWidth = cellStyle.Padding.Left;
+
+            if (!(Picture == null))
+            {
+                Ptf.Y = (float)(cellBounds.Y + ((cellBounds.Height / 2) - (Picture.Height / 2)));
+                graphics.DrawImage(Picture, Ptf);
+                CellContentWidth += Picture.Width;
+
+                Ptf.X += ((float)Picture.Width + (float)SpacerWidth);
+            }
+
+            if (!(CellText == ""))
+            {
+                SizeF TxtSize = graphics.MeasureString(CellText, cellStyle.Font);
+
+                Ptf.Y = (float)(cellBounds.Y + ((cellBounds.Height / 2) - (TxtSize.Height / 2)));
+
+                Color TextColor = cellStyle.ForeColor;
+                if ((cellState & DataGridViewElementStates.Selected)== DataGridViewElementStates.Selected)
+                {
+                    TextColor = cellStyle.SelectionForeColor;
+                }
+
+                Brush b = new SolidBrush(TextColor);
+
+                graphics.DrawString(CellText, cellStyle.Font, b, Ptf);
+
+                CellContentWidth += (int)(SpacerWidth + TxtSize.Width);
+            }
+        }
     }
 
     public enum CollapsableGridRowState

@@ -1581,8 +1581,9 @@ namespace CANStream
 			try
 			{
 				oXDoc.Load(fPath);
-				
-				XmlNode xControllersCfg = oXDoc.SelectSingleNode("MultipleContollerCANConfiguration");
+                FilePath = fPath;
+
+                XmlNode xControllersCfg = oXDoc.SelectSingleNode("MultipleContollerCANConfiguration");
 				Name = xControllersCfg.Attributes["Name"].Value;
 				
 				XmlNode xControllers = xControllersCfg.SelectSingleNode("Controllers");
@@ -1654,8 +1655,20 @@ namespace CANStream
 			return(false);
 		}
 		
-		#endregion
-	}
+        public int GetCANParametersCount()
+        {
+            int Count = 0;
+
+            foreach(CANBusContoller oController in Controllers)
+            {
+                Count += oController.GetParameterCount();
+            }
+
+            return (Count);
+        }
+
+        #endregion
+    }
 
 	#endregion
 	
