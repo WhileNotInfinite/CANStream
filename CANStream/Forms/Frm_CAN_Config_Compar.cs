@@ -34,10 +34,61 @@ namespace CANStream
             {
                 SubItems = new List<PropertyFilterItem>();
             }
+
+            public PropertyFilterItem(string ObjName, string PropName, bool FilterValue, bool FilterVisible)
+            {
+                ObjectName = ObjName;
+                PropertyName = PropName;
+                Value = FilterValue;
+                Visible = FilterVisible;
+
+                SubItems = new List<PropertyFilterItem>();
+            }
+
+            #region Public methodes
+
+            public PropertyFilterItem Get_SubItem(string ObjName, string PropName)
+            {
+                if (SubItems.Count > 0)
+                {
+                    foreach (PropertyFilterItem oSubItem in SubItems)
+                    {
+                        if(oSubItem.ObjectName.Equals(ObjName) && oSubItem.PropertyName.Equals(PropName))
+                        {
+                            return (oSubItem);
+                        }
+
+                        if(oSubItem.SubItems.Count>0)
+                        {
+                            PropertyFilterItem oSubItemSubItem = oSubItem.Get_SubItem(ObjName, PropName);
+
+                            if(!(oSubItemSubItem==null))
+                            {
+                                return (oSubItemSubItem);
+                            }
+                        }
+                    }
+                }
+
+                return (null);
+            }
+
+            #endregion
         }
 
         private class PropertiesComparisonFilter
         {
+            #region Private constants
+
+            private readonly PropertyFilterItem[] SystemFilters = {
+                                                                        new PropertyFilterItem("CANMessagesConfiguration", "ConfigFilePath", false, false),
+                                                                        new PropertyFilterItem("CANParameter", "DecodedValue", false, false),
+                                                                        new PropertyFilterItem("CANParameter", "RawValue", false, false),
+                                                                        new PropertyFilterItem("CANParameter", "IsVirtual", false, false),
+                                                                  };
+
+            #endregion
+
             #region Public members
 
             public List<PropertyFilterItem> PropertiesFilter;
@@ -61,34 +112,98 @@ namespace CANStream
             {
                 foreach (FieldInfo oField in ObjType.GetFields())
                 {
-                    PropertyFilterItem sProp = new PropertyFilterItem();
+                    bool SetFilter = true;
 
-                    sProp.ObjectName = ObjType.Name;
-                    sProp.PropertyName = oField.Name;
-                    sProp.Value = true;
-                    sProp.Visible = true;
+                    PropertyFilterItem oSysPropFilter = GetSystemPropertyFilter(ObjType.Name, oField.Name);
 
-                    oItemList.Add(sProp);
+                    if(!(oSysPropFilter==null))
+                    {
+                        SetFilter = oSysPropFilter.Value;
+                    }
 
-                    if (oField.FieldType.Name == "Nullable`1")
+                    if (SetFilter)
                     {
-                        Type NullableType = Nullable.GetUnderlyingType(oField.FieldType);
-                        Create_PropertiesList(NullableType, sProp.SubItems);
-                    }
-                    else if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
-                    {
-                        Type ListItemType = oField.FieldType.GetProperty("Item").PropertyType;
-                        Create_PropertiesList(ListItemType, sProp.SubItems);
-                    }
-                    else if (oField.FieldType.BaseType == typeof(System.ValueType)) //Structure
-                    {
-                        Create_PropertiesList(oField.FieldType, sProp.SubItems);
-                    }
-                    else if (oField.FieldType.BaseType == typeof(object))
-                    {
-                        Create_PropertiesList(oField.FieldType, sProp.SubItems);
+                        PropertyFilterItem sProp = new PropertyFilterItem();
+
+                        sProp.ObjectName = ObjType.Name;
+                        sProp.PropertyName = oField.Name;
+                        sProp.Value = true;
+                        sProp.Visible = true;
+
+                        oItemList.Add(sProp);
+
+                        if (oField.FieldType.Name == "Nullable`1")
+                        {
+                            Type NullableType = Nullable.GetUnderlyingType(oField.FieldType);
+                            Create_PropertiesList(NullableType, sProp.SubItems);
+                        }
+                        else if (oField.FieldType.BaseType == typeof(object))
+                        {
+                            if (oField.FieldType.Namespace.Equals("System.Collections.Generic"))
+                            {
+                                Type ListItemType = oField.FieldType.GetProperty("Item").PropertyType;
+                                Create_PropertiesList(ListItemType, sProp.SubItems);
+                            }
+                            else if (!(oField.FieldType.Namespace.Equals("System")))
+                            {
+                                Create_PropertiesList(oField.FieldType, sProp.SubItems);
+                            }
+                        }
+                        else if (oField.FieldType.BaseType == typeof(System.ValueType)) //Structure
+                        {
+                            if (!(oField.FieldType == typeof(System.Drawing.Color) || oField.FieldType.Namespace.Equals("System")))
+                            {
+                                Create_PropertiesList(oField.FieldType, sProp.SubItems);
+                            }
+                        }
                     }
                 }
+            }
+
+            private PropertyFilterItem GetSystemPropertyFilter(string ObjName, string PropName)
+            {
+                foreach (PropertyFilterItem oPropFilter in SystemFilters)
+                {
+                    if(oPropFilter.ObjectName.Equals(ObjName) && oPropFilter.PropertyName.Equals(PropName))
+                    {
+                        return (oPropFilter);
+                    }
+                }
+
+                return (null);
+            }
+
+            #endregion
+
+            #region Public methodes
+
+            public bool IsFilteredProperty(string ObjName, string PropName)
+            {
+                //Look in system filers
+                PropertyFilterItem oSysFilter = GetSystemPropertyFilter(ObjName, PropName);
+                if(!(oSysFilter==null))
+                {
+                    return (oSysFilter.Value);
+                }
+
+                //Look in user filters
+                foreach (PropertyFilterItem oUserFilter in PropertiesFilter)
+                {
+                    if(oUserFilter.ObjectName.Equals(ObjName) && oUserFilter.PropertyName.Equals(PropName))
+                    {
+                        return (oUserFilter.Value);
+                    }
+
+                    PropertyFilterItem oFilterSubItem = oUserFilter.Get_SubItem(ObjName, PropName);
+
+                    if(!(oFilterSubItem==null))
+                    {
+                        return (oFilterSubItem.Value);
+                    }
+                }
+
+                //Property not found (not supposed to happen)
+                return (true);
             }
 
             #endregion
@@ -284,6 +399,7 @@ namespace CANStream
             Init_ComparisonGrid();
 
             oPropertiesFilter = new PropertiesComparisonFilter(typeof(CANMessagesConfiguration));
+            Show_PropertiesFilter(TS_DropBtn_Filter.DropDownItems, oPropertiesFilter.PropertiesFilter);
         }
 
         #region Control events
@@ -403,6 +519,31 @@ namespace CANStream
                                Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_A_To_B);
+            }
+        }
+
+        private void TS_DropBtn_FilterItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem oItem = sender as ToolStripMenuItem;
+            oItem.Checked = !oItem.Checked;
+        }
+
+        private void TS_DropBtn_FilterItem_CheckedChanged(object sender, EventArgs e)
+        {
+            ToolStripMenuItem oItem = sender as ToolStripMenuItem;
+
+            if (oItem.Tag != null)
+            {
+                PropertyFilterItem oFilter = oItem.Tag as PropertyFilterItem;
+                oFilter.Value = oItem.Checked;
+            }
+
+            if (oItem.DropDownItems.Count > 0)
+            {
+                foreach (ToolStripMenuItem oSubItem in oItem.DropDownItems)
+                {
+                    oSubItem.Checked = oItem.Checked;
+                }
             }
         }
 
@@ -805,7 +946,7 @@ namespace CANStream
             {
                 foreach (FieldInfo oField in oObjType.GetFields())
                 {
-                    if (!(oField.IsInitOnly))
+                    if ((!oField.IsInitOnly) && (oPropertiesFilter.IsFilteredProperty(oObjType.Name, oField.Name)))
                     {
                         if (oField.FieldType.Name == "Nullable`1")
                         {
@@ -1201,7 +1342,33 @@ namespace CANStream
 
         #region Properties comparison filter
 
+        private void Show_PropertiesFilter(ToolStripItemCollection oItemCollection, List<PropertyFilterItem> FilterItems)
+        {
+            oItemCollection.Clear();
 
+            foreach(PropertyFilterItem oFilter in FilterItems)
+            {
+                if (oFilter.Visible)
+                {
+                    ToolStripMenuItem oTS_Item = new ToolStripMenuItem();
+
+                    oTS_Item.Text = oFilter.PropertyName;
+                    oTS_Item.ImageScaling = ToolStripItemImageScaling.None;
+                    oTS_Item.Checked = oFilter.Value;
+                    oTS_Item.Tag = oFilter;
+
+                    oTS_Item.Click += TS_DropBtn_FilterItem_Click;
+                    oTS_Item.CheckedChanged += TS_DropBtn_FilterItem_CheckedChanged;
+
+                    if (oFilter.SubItems.Count > 0)
+                    {
+                        Show_PropertiesFilter(oTS_Item.DropDownItems, oFilter.SubItems);
+                    }
+
+                    oItemCollection.Add(oTS_Item);
+                }
+            }
+        }
 
         #endregion
 
