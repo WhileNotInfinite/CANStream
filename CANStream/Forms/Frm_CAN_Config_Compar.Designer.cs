@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_CAN_Config_Compar));
             this.TS_Main = new System.Windows.Forms.ToolStrip();
             this.TS_Lbl_FileA = new System.Windows.Forms.ToolStripLabel();
@@ -55,9 +56,20 @@
             this.StatusBar_Lbl_DiffCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Lbl_MergeCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusBar_Progress = new System.Windows.Forms.ToolStripProgressBar();
+            this.Context_CGrid_Comparison = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TSMI_ExpandAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_CollapseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TSMI_SingleMerge_A2B = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_SingleMerge_B2A = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_MergeAll_A2B = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_MergeAll_B2A = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.TSMI_Refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.CGrid_Comparison = new CANStream.Ctrl_CollapsableGrid();
             this.TS_Main.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.Context_CGrid_Comparison.SuspendLayout();
             this.SuspendLayout();
             // 
             // TS_Main
@@ -299,11 +311,100 @@
             this.StatusBar_Progress.Size = new System.Drawing.Size(400, 16);
             this.StatusBar_Progress.Visible = false;
             // 
+            // Context_CGrid_Comparison
+            // 
+            this.Context_CGrid_Comparison.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_ExpandAll,
+            this.TSMI_CollapseAll,
+            this.toolStripMenuItem1,
+            this.TSMI_SingleMerge_A2B,
+            this.TSMI_SingleMerge_B2A,
+            this.TSMI_MergeAll_A2B,
+            this.TSMI_MergeAll_B2A,
+            this.toolStripMenuItem2,
+            this.TSMI_Refresh});
+            this.Context_CGrid_Comparison.Name = "Context_CGrid_Comparison";
+            this.Context_CGrid_Comparison.Size = new System.Drawing.Size(244, 170);
+            // 
+            // TSMI_ExpandAll
+            // 
+            this.TSMI_ExpandAll.Enabled = false;
+            this.TSMI_ExpandAll.Image = global::CANStream.Icones.Expand_16;
+            this.TSMI_ExpandAll.Name = "TSMI_ExpandAll";
+            this.TSMI_ExpandAll.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_ExpandAll.Text = "Expand all";
+            this.TSMI_ExpandAll.Click += new System.EventHandler(this.TSMI_ExpandAll_Click);
+            // 
+            // TSMI_CollapseAll
+            // 
+            this.TSMI_CollapseAll.Enabled = false;
+            this.TSMI_CollapseAll.Image = global::CANStream.Icones.Collapse_16;
+            this.TSMI_CollapseAll.Name = "TSMI_CollapseAll";
+            this.TSMI_CollapseAll.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_CollapseAll.Text = "Collapse all";
+            this.TSMI_CollapseAll.Click += new System.EventHandler(this.TSMI_CollapseAll_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(240, 6);
+            // 
+            // TSMI_SingleMerge_A2B
+            // 
+            this.TSMI_SingleMerge_A2B.Enabled = false;
+            this.TSMI_SingleMerge_A2B.Image = global::CANStream.Icones.CanCfg_Compar_Merge_A2B_2_16;
+            this.TSMI_SingleMerge_A2B.Name = "TSMI_SingleMerge_A2B";
+            this.TSMI_SingleMerge_A2B.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_SingleMerge_A2B.Text = "Merge property from A to B";
+            this.TSMI_SingleMerge_A2B.Click += new System.EventHandler(this.TSMI_SingleMerge_A2B_Click);
+            // 
+            // TSMI_SingleMerge_B2A
+            // 
+            this.TSMI_SingleMerge_B2A.Enabled = false;
+            this.TSMI_SingleMerge_B2A.Image = global::CANStream.Icones.CanCfg_Compar_Merge_B2A_2_16;
+            this.TSMI_SingleMerge_B2A.Name = "TSMI_SingleMerge_B2A";
+            this.TSMI_SingleMerge_B2A.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_SingleMerge_B2A.Text = "Merge property form B to A";
+            this.TSMI_SingleMerge_B2A.Click += new System.EventHandler(this.TSMI_SingleMerge_B2A_Click);
+            // 
+            // TSMI_MergeAll_A2B
+            // 
+            this.TSMI_MergeAll_A2B.Enabled = false;
+            this.TSMI_MergeAll_A2B.Image = global::CANStream.Icones.CanCfg_Compar_MergeAll_A2B_2_16;
+            this.TSMI_MergeAll_A2B.Name = "TSMI_MergeAll_A2B";
+            this.TSMI_MergeAll_A2B.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_MergeAll_A2B.Text = "Merge all properties from A to B";
+            this.TSMI_MergeAll_A2B.Click += new System.EventHandler(this.TSMI_MergeAll_A2B_Click);
+            // 
+            // TSMI_MergeAll_B2A
+            // 
+            this.TSMI_MergeAll_B2A.Enabled = false;
+            this.TSMI_MergeAll_B2A.Image = global::CANStream.Icones.CanCfg_Compar_MergeAll_B2A_2_16;
+            this.TSMI_MergeAll_B2A.Name = "TSMI_MergeAll_B2A";
+            this.TSMI_MergeAll_B2A.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_MergeAll_B2A.Text = "Merge all properties from B to A";
+            this.TSMI_MergeAll_B2A.Click += new System.EventHandler(this.TSMI_MergeAll_B2A_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(240, 6);
+            // 
+            // TSMI_Refresh
+            // 
+            this.TSMI_Refresh.Enabled = false;
+            this.TSMI_Refresh.Image = global::CANStream.Icones.Refresh_CAN_Controllers;
+            this.TSMI_Refresh.Name = "TSMI_Refresh";
+            this.TSMI_Refresh.Size = new System.Drawing.Size(243, 22);
+            this.TSMI_Refresh.Text = "Refresh comparison";
+            this.TSMI_Refresh.Click += new System.EventHandler(this.TSMI_Refresh_Click);
+            // 
             // CGrid_Comparison
             // 
             this.CGrid_Comparison.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CGrid_Comparison.ContextMenuStrip = this.Context_CGrid_Comparison;
             this.CGrid_Comparison.Location = new System.Drawing.Point(0, 42);
             this.CGrid_Comparison.Name = "CGrid_Comparison";
             this.CGrid_Comparison.Size = new System.Drawing.Size(946, 428);
@@ -322,10 +423,12 @@
             this.Name = "Frm_CAN_Config_Compar";
             this.Text = "CAN Configuration compare";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_CAN_Config_Compar_FormClosing);
+            this.Shown += new System.EventHandler(this.Frm_CAN_Config_Compar_Shown);
             this.TS_Main.ResumeLayout(false);
             this.TS_Main.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.Context_CGrid_Comparison.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,5 +463,15 @@
         private System.Windows.Forms.ToolStripButton TS_Btn_RefreshCompar;
         private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_DiffCount;
         private System.Windows.Forms.ToolStripStatusLabel StatusBar_Lbl_MergeCount;
+        private System.Windows.Forms.ContextMenuStrip Context_CGrid_Comparison;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_ExpandAll;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_CollapseAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_SingleMerge_A2B;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_SingleMerge_B2A;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_MergeAll_A2B;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_MergeAll_B2A;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Refresh;
     }
 }

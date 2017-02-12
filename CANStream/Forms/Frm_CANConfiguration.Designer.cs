@@ -186,6 +186,7 @@ namespace CANStream
             this.TSB_New = new System.Windows.Forms.ToolStripButton();
             this.TSB_Open = new System.Windows.Forms.ToolStripButton();
             this.TSB_Save = new System.Windows.Forms.ToolStripButton();
+            this.TSB_Compar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TSB_Cut = new System.Windows.Forms.ToolStripButton();
             this.TSB_Copy = new System.Windows.Forms.ToolStripButton();
@@ -1621,6 +1622,7 @@ namespace CANStream
             this.TSB_New,
             this.TSB_Open,
             this.TSB_Save,
+            this.TSB_Compar,
             this.toolStripSeparator1,
             this.TSB_Cut,
             this.TSB_Copy,
@@ -1671,6 +1673,17 @@ namespace CANStream
             this.TSB_Save.Text = "toolStripButton3";
             this.TSB_Save.ToolTipText = "Save CAN Configuration";
             this.TSB_Save.Click += new System.EventHandler(this.TSB_Save_Click);
+            // 
+            // TSB_Compar
+            // 
+            this.TSB_Compar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSB_Compar.Image = global::CANStream.Icones.CAN_Cfg_Compar_32;
+            this.TSB_Compar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSB_Compar.Name = "TSB_Compar";
+            this.TSB_Compar.Size = new System.Drawing.Size(36, 36);
+            this.TSB_Compar.Text = "toolStripButton1";
+            this.TSB_Compar.ToolTipText = "Compare current CAN configuration";
+            this.TSB_Compar.Click += new System.EventHandler(this.TSB_Compar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -2005,5 +2018,6 @@ namespace CANStream
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox Txt_MsgDLC;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ToolStripButton TSB_Compar;
     }
 }

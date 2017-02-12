@@ -509,6 +509,11 @@
   <ItemGroup>
     <Content Include="ProfilingSessions\Session20130621_162517.sdps" />
     <Content Include="ProfilingSessions\Session20130912_164224.sdps" />
+    <None Include="Resources\s-icone-5908-32.png" />
+    <None Include="Resources\agt-en-avant-icone-5361-16.png" />
+    <None Include="Resources\agt-dos-icone-6033-16.png" />
+    <None Include="Resources\suivant-icone-9262-16.png" />
+    <None Include="Resources\precedent-icone-5813-16.png" />
     <None Include="Resources\3floppy-demontez-icone-7221-32.png" />
     <None Include="Resources\filesave-icone-8383-32.png" />
     <None Include="Resources\fileopen-icone-7760-32.png" />

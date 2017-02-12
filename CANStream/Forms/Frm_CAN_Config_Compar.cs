@@ -81,6 +81,7 @@ namespace CANStream
             #region Private constants
 
             private readonly PropertyFilterItem[] SystemFilters = {
+                                                                        new PropertyFilterItem("MultipleContollerCANConfiguration", "FilePath", false, false),
                                                                         new PropertyFilterItem("CANMessagesConfiguration", "ConfigFilePath", false, false),
                                                                         new PropertyFilterItem("CANParameter", "DecodedValue", false, false),
                                                                         new PropertyFilterItem("CANParameter", "RawValue", false, false),
@@ -220,6 +221,13 @@ namespace CANStream
             FileB = 2,
         }
 
+        private enum ComparisonType
+        {
+            Unknown = 0,
+            SingleBus = 1,
+            MultipleBuses = 2,
+        }
+
         private enum MergeDirection
         {
             None = 0,
@@ -281,12 +289,20 @@ namespace CANStream
                 {
                     TS_Btn_MergeAll_A_to_B.Enabled = true;
                     TS_Btn_MergeAll_B_to_A.Enabled = true;
+
+                    TSMI_MergeAll_A2B.Enabled = true;
+                    TSMI_MergeAll_B2A.Enabled = true;
+
                     StatusBar_Lbl_DiffCount.ForeColor = Color.Red;
                 }
                 else
                 {
                     TS_Btn_MergeAll_A_to_B.Enabled = false;
                     TS_Btn_MergeAll_B_to_A.Enabled = false;
+
+                    TSMI_MergeAll_A2B.Enabled = false;
+                    TSMI_MergeAll_B2A.Enabled = false;
+
                     StatusBar_Lbl_DiffCount.ForeColor = Color.Green;
                 }
             }
@@ -320,6 +336,8 @@ namespace CANStream
 
                 TS_Btn_Merge_A_to_B.Enabled = mMergeEnabled;
                 TS_Btn_Merge_B_to_A.Enabled = mMergeEnabled;
+                TSMI_SingleMerge_A2B.Enabled = mMergeEnabled;
+                TSMI_SingleMerge_B2A.Enabled = mMergeEnabled;
             }
         }
 
@@ -367,6 +385,8 @@ namespace CANStream
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_A;
         private MultipleContollerCANConfiguration MultipleBus_CANCfg_B;
 
+        private ComparisonType eObjectsComparisonType;
+
         private int ParametersToCompareCount;
         private int mComparedParamatersCount;
 
@@ -394,17 +414,32 @@ namespace CANStream
             MultipleBus_CANCfg_A = null;
             MultipleBus_CANCfg_B = null;
 
+            eObjectsComparisonType = ComparisonType.Unknown;
+
             ParametersToCompareCount = 0;
 
             Init_ComparisonGrid();
 
-            oPropertiesFilter = new PropertiesComparisonFilter(typeof(CANMessagesConfiguration));
-            Show_PropertiesFilter(TS_DropBtn_Filter.DropDownItems, oPropertiesFilter.PropertiesFilter);
+            Set_PropertiesFilter(typeof(CANMessagesConfiguration));
         }
 
         #region Control events
 
         #region Form
+
+        private void Frm_CAN_Config_Compar_Shown(object sender, EventArgs e)
+        {
+            if (SingleBus_CANCfg_A != null)
+            {
+                eObjectsComparisonType = ComparisonType.SingleBus;
+                Open_ComparisonFile(ComparisonFile.FileB);
+            }
+            else if (MultipleBus_CANCfg_A != null)
+            {
+                eObjectsComparisonType = ComparisonType.MultipleBuses;
+                Open_ComparisonFile(ComparisonFile.FileB);
+            }
+        }
 
         private void Frm_CAN_Config_Compar_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -480,46 +515,22 @@ namespace CANStream
 
         private void TS_Btn_MergeAll_B_to_A_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you really want merge all differences from the file B to the file A ?",
-                               Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_B_To_A);
-            }
+            MergeAll_B2A();
         }
 
         private void TS_Btn_Merge_B_to_A_Click(object sender, EventArgs e)
         {
-            if (!(CGrid_Comparison.Grid.SelectedCells == null))
-            {
-                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
-
-                if (!(oCRow == null))
-                {
-                    Merge_Property(oCRow, MergeDirection.From_B_To_A);
-                }
-            }
+            SingleMerge_B2A();
         }
 
         private void TS_Btn_Merge_A_to_B_Click(object sender, EventArgs e)
         {
-            if (!(CGrid_Comparison.Grid.SelectedCells == null))
-            {
-                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
-
-                if (!(oCRow == null))
-                {
-                    Merge_Property(oCRow, MergeDirection.From_A_To_B);
-                }
-            }
+            SingleMerge_A2B();
         }
 
         private void TS_Btn_MergeAll_A_to_B_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you really want merge all differences from the file A to the file B ?",
-                               Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_A_To_B);
-            }
+            MergeAll_A2B();
         }
 
         private void TS_DropBtn_FilterItem_Click(object sender, EventArgs e)
@@ -548,6 +559,45 @@ namespace CANStream
         }
 
         private void TS_Btn_RefreshCompar_Click(object sender, EventArgs e)
+        {
+            Show_Comparison();
+        }
+
+        #endregion
+
+        #region Context_CGrid_Comparison
+
+        private void TSMI_ExpandAll_Click(object sender, EventArgs e)
+        {
+            CGrid_Comparison.ExpandAllRows();
+        }
+
+        private void TSMI_CollapseAll_Click(object sender, EventArgs e)
+        {
+            CGrid_Comparison.CollapseAllRows();
+        }
+
+        private void TSMI_SingleMerge_A2B_Click(object sender, EventArgs e)
+        {
+            SingleMerge_A2B();
+        }
+
+        private void TSMI_SingleMerge_B2A_Click(object sender, EventArgs e)
+        {
+            SingleMerge_B2A();
+        }
+
+        private void TSMI_MergeAll_A2B_Click(object sender, EventArgs e)
+        {
+            MergeAll_A2B();
+        }
+
+        private void TSMI_MergeAll_B2A_Click(object sender, EventArgs e)
+        {
+            MergeAll_B2A();
+        }
+
+        private void TSMI_Refresh_Click(object sender, EventArgs e)
         {
             Show_Comparison();
         }
@@ -609,7 +659,16 @@ namespace CANStream
             if (!(eCompFile == ComparisonFile.None))
             {
                 Dlg_OpenFile.FileName = "";
-                Dlg_OpenFile.FilterIndex = 1;
+
+                if (eObjectsComparisonType == ComparisonType.MultipleBuses)
+                {
+                    Dlg_OpenFile.FilterIndex = 2;
+                }
+                else
+                {
+                    Dlg_OpenFile.FilterIndex = 1;
+                }
+
                 Dlg_OpenFile.InitialDirectory = CANStreamTools.MyDocumentPath + "\\CANStream\\CAN Configuration";
 
                 if(Dlg_OpenFile.ShowDialog().Equals(DialogResult.OK))
@@ -618,7 +677,13 @@ namespace CANStream
 
                     if(FileExt.Equals(".xcc")) //Single bus CAN configuration file
                     {
-                        if(eCompFile== ComparisonFile.FileA) //Loading comparison file A
+                        if (eObjectsComparisonType != ComparisonType.SingleBus)
+                        {
+                            eObjectsComparisonType = ComparisonType.SingleBus;
+                            Set_PropertiesFilter(typeof(CANMessagesConfiguration));
+                        }
+
+                        if (eCompFile== ComparisonFile.FileA) //Loading comparison file A
                         {
                             SingleBus_CANCfg_A = new CANMessagesConfiguration();
                             MultipleBus_CANCfg_A = null;
@@ -687,6 +752,12 @@ namespace CANStream
                     }
                     else if(FileExt.Equals(".mcb")) //Multiple bus CAN configuration file
                     {
+                        if (eObjectsComparisonType != ComparisonType.MultipleBuses)
+                        {
+                            eObjectsComparisonType = ComparisonType.MultipleBuses;
+                            Set_PropertiesFilter(typeof(MultipleContollerCANConfiguration));
+                        }
+
                         if (eCompFile == ComparisonFile.FileA) //Loading comparison file A
                         {
                             SingleBus_CANCfg_A = null;
@@ -904,13 +975,40 @@ namespace CANStream
                 //Nothing to do
             }
 
+            TSMI_ExpandAll.Enabled = true;
+            TSMI_CollapseAll.Enabled = true;
+
             StatusBar_Progress.Visible = false;
             Cursor = Cursors.Default;
         }
 
         private void Compare_MultipleBusConfiguration()
         {
+            if (MultipleBus_CANCfg_A != null && MultipleBus_CANCfg_B != null)
+            {
+                CollapsableGridRow oCfgRow = CGrid_Comparison.Rows.Add();
 
+                oCfgRow.ThisRow.Cells[GRID_COL_PROP_NAME].Value = "Multiple buses CAN Configuration";
+                oCfgRow.ThisRow.Cells[GRID_COL_FILE_A].Value = Path.GetFileName(MultipleBus_CANCfg_A.FilePath);
+                oCfgRow.ThisRow.Cells[GRID_COL_FILE_B].Value = Path.GetFileName(MultipleBus_CANCfg_B.FilePath);
+                oCfgRow.ThisRow.Tag = false;
+
+                ParametersToCompareCount = Math.Max(MultipleBus_CANCfg_A.GetCANParametersCount(), MultipleBus_CANCfg_B.GetCANParametersCount());
+                ComparedParamatersCount = 0;
+                NDifferenceFound = 0;
+                MergeCount = 0;
+
+                StatusBar_Lbl_DiffCount.Visible = false;
+                StatusBar_Lbl_MergeCount.Visible = false;
+
+                Compare_Objects(typeof(MultipleContollerCANConfiguration), MultipleBus_CANCfg_A, MultipleBus_CANCfg_B, oCfgRow);
+
+                StatusBar_Lbl_DiffCount.Visible = true;
+                StatusBar_Lbl_MergeCount.Visible = true;
+
+                TS_Btn_RefreshCompar.Enabled = true;
+                TSMI_Refresh.Enabled = true;
+            }
         }
 
         private void Compare_SingleBusConfiguration()
@@ -936,7 +1034,9 @@ namespace CANStream
 
                 StatusBar_Lbl_DiffCount.Visible = true;
                 StatusBar_Lbl_MergeCount.Visible = true;
+
                 TS_Btn_RefreshCompar.Enabled = true;
+                TSMI_Refresh.Enabled = true;
             }
         }
 
@@ -1186,6 +1286,10 @@ namespace CANStream
             {
                 KeyFieldName = "Value";
             }
+            else if (Obj.GetType() == typeof(CANBusContoller))
+            {
+                KeyFieldName = "ControllerName";
+            }
 
             return (KeyFieldName);
         }
@@ -1342,6 +1446,12 @@ namespace CANStream
 
         #region Properties comparison filter
 
+        private void Set_PropertiesFilter(Type BaseObjectType)
+        {
+            oPropertiesFilter = new PropertiesComparisonFilter(BaseObjectType);
+            Show_PropertiesFilter(TS_DropBtn_Filter.DropDownItems, oPropertiesFilter.PropertiesFilter);
+        }
+
         private void Show_PropertiesFilter(ToolStripItemCollection oItemCollection, List<PropertyFilterItem> FilterItems)
         {
             oItemCollection.Clear();
@@ -1373,6 +1483,50 @@ namespace CANStream
         #endregion
 
         #region Properties merge
+
+        private void SingleMerge_A2B()
+        {
+            if (!(CGrid_Comparison.Grid.SelectedCells == null))
+            {
+                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
+
+                if (!(oCRow == null))
+                {
+                    Merge_Property(oCRow, MergeDirection.From_A_To_B);
+                }
+            }
+        }
+
+        private void SingleMerge_B2A()
+        {
+            if (!(CGrid_Comparison.Grid.SelectedCells == null))
+            {
+                CollapsableGridRow oCRow = CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(CGrid_Comparison.Grid.SelectedCells[0].RowIndex);
+
+                if (!(oCRow == null))
+                {
+                    Merge_Property(oCRow, MergeDirection.From_B_To_A);
+                }
+            }
+        }
+
+        private void MergeAll_A2B()
+        {
+            if (MessageBox.Show("Do you really want merge all differences from the file A to the file B ?",
+                                           Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_A_To_B);
+            }
+        }
+
+        private void MergeAll_B2A()
+        {
+            if (MessageBox.Show("Do you really want merge all differences from the file B to the file A ?",
+                                           Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Merge_AllProperties(CGrid_Comparison.Rows.GetCollapsableRowAtGridRowIndex(0), MergeDirection.From_B_To_A);
+            }
+        }
 
         private void Merge_AllProperties(CollapsableGridRow oBaseRow, MergeDirection eMergeDirection)
         {
@@ -1571,6 +1725,22 @@ namespace CANStream
         }
 
         #endregion
+
+        #endregion
+
+        #region Public methodes
+
+        public void Set_ComparisonObjectA(object ComparisonObjectA)
+        {
+            if (ComparisonObjectA.GetType().Equals(typeof(CANMessagesConfiguration)))
+            {
+                SingleBus_CANCfg_A = (CANMessagesConfiguration)ComparisonObjectA;
+            }
+            else if (ComparisonObjectA.GetType().Equals(typeof(MultipleContollerCANConfiguration)))
+            {
+                MultipleBus_CANCfg_A = (MultipleContollerCANConfiguration)ComparisonObjectA;
+            }
+        }
 
         #endregion
     }
