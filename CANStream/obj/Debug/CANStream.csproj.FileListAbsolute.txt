@@ -388,3 +388,5 @@ C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_C
 C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_LogginChannelConfig.resources
 C:\Users\Vincent\Documents\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CAN_Config_Compar.resources
 C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_CAN_Config_Compar.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Ctrl_DataFileInformation.resources
+C:\Users\Marti\Documents\Visual Studio 2015\Projects\GitHub\CANStream\CANStream\obj\Debug\CANStream.Frm_DataViewer_DataFile_Info_Edition.resources

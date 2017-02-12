@@ -150,6 +150,12 @@
     <Compile Include="Controls\Ctrl_CollapsableGrid.Designer.cs">
       <DependentUpon>Ctrl_CollapsableGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Ctrl_DataFileInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Ctrl_DataFileInformation.Designer.cs">
+      <DependentUpon>Ctrl_DataFileInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Dlg_RxFrameInTxListWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,12 +173,18 @@
     </Compile>
     <Compile Include="Forms\Frm_LogginChannelConfig.Designer.cs">
       <DependentUpon>Frm_LogginChannelConfig.cs</DependentUpon>
-    </Compile>
+
     <Compile Include="Forms\Frm_CAN_Config_Compar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Frm_CAN_Config_Compar.Designer.cs">
       <DependentUpon>Frm_CAN_Config_Compar.cs</DependentUpon>
+    </Compile
+    <Compile Include="Forms\Frm_DataViewer_DataFile_Info_Edition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_DataViewer_DataFile_Info_Edition.Designer.cs">
+      <DependentUpon>Frm_DataViewer_DataFile_Info_Edition.cs</DependentUpon>
     </Compile>
     <Compile Include="MicroSecondTimer\MicroSecondLibrary.cs" />
     <Compile Include="Class\PcanTrcFile.cs" />
@@ -381,6 +393,9 @@
     <EmbeddedResource Include="Controls\Ctrl_CS_CAN_Bus.resx">
       <DependentUpon>Ctrl_CS_CAN_Bus.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Ctrl_DataFileInformation.resx">
+      <DependentUpon>Ctrl_DataFileInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Ctrl_RecordEventInformation.resx">
       <DependentUpon>Ctrl_RecordEventInformation.cs</DependentUpon>
     </EmbeddedResource>
@@ -439,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_DataViewer.resx">
       <DependentUpon>Frm_DataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_DataViewer_DataFile_Info_Edition.resx">
+      <DependentUpon>Frm_DataViewer_DataFile_Info_Edition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_DataViewer_EventSession_Info.resx">
       <DependentUpon>Frm_DataViewer_EventSession_Info.cs</DependentUpon>
